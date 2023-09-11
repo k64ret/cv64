@@ -1,3 +1,8 @@
+asm/
+bin/
+assets/
+build/
+
 *.log
 *.[nvz]64
 *.ld
