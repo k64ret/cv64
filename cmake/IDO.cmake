@@ -3,37 +3,32 @@ set(IDO_DOWNLOAD_VERSION "latest")
 
 if(WIN32)
   set(IDO_DETECTED_OS "windows")
-  set(IDO_DOWNLOAD_OS "${IDO_DETECTED_OS}-${IDO_DOWNLOAD_VERSION}")
 elseif(APPLE)
   set(IDO_DETECTED_OS "macos")
-  set(IDO_DOWNLOAD_OS "${IDO_DETECTED_OS}-${IDO_DOWNLOAD_VERSION}")
-else(#[[ UNIX ]])
-  set(IDO_DETECTED_OS "ubuntu")
-  # For some reason, this platform is stuck on `20.04`??
-  set(IDO_DOWNLOAD_OS "${IDO_DETECTED_OS}-20.04")
+else(#[[ UNIX ]]
+)
+  set(IDO_DETECTED_OS "linux")
 endif()
 
 set(IDO_5_3_DOWNLOAD_URL
-    "https://github.com/decompals/ido-static-recomp/releases/${IDO_DOWNLOAD_VERSION}/download/ido-5.3-recomp-${IDO_DOWNLOAD_OS}.tar.gz"
+    "https://github.com/decompals/ido-static-recomp/releases/${IDO_DOWNLOAD_VERSION}/download/ido-5.3-recomp-${IDO_DETECTED_OS}.tar.gz"
 )
 set(IDO_7_1_DOWNLOAD_URL
-    "https://github.com/decompals/ido-static-recomp/releases/${IDO_DOWNLOAD_VERSION}/download/ido-7.1-recomp-${IDO_DOWNLOAD_OS}.tar.gz"
+    "https://github.com/decompals/ido-static-recomp/releases/${IDO_DOWNLOAD_VERSION}/download/ido-7.1-recomp-${IDO_DETECTED_OS}.tar.gz"
 )
 
 set(IDO_DOWNLOAD_URLS ${IDO_5_3_DOWNLOAD_URL} ${IDO_7_1_DOWNLOAD_URL})
 
 set(IDO_5_3_DOWNLOAD_LOCATION
-    "${CMAKE_SOURCE_DIR}/tools/ido/ido-5.3-recomp-${IDO_DOWNLOAD_OS}.tar.gz")
+    "${CMAKE_BINARY_DIR}/ido/ido-5.3-recomp-${IDO_DETECTED_OS}.tar.gz")
 set(IDO_7_1_DOWNLOAD_LOCATION
-    "${CMAKE_SOURCE_DIR}/tools/ido/ido-7.1-recomp-${IDO_DOWNLOAD_OS}.tar.gz")
+    "${CMAKE_BINARY_DIR}/ido/ido-7.1-recomp-${IDO_DETECTED_OS}.tar.gz")
 
 set(IDO_DOWNLOAD_LOCATIONS ${IDO_5_3_DOWNLOAD_LOCATION}
                            ${IDO_7_1_DOWNLOAD_LOCATION})
 
-set(IDO_5_3_EXTRACT_LOCATION
-    "${CMAKE_SOURCE_DIR}/tools/ido/${IDO_DETECTED_OS}/5.3/")
-set(IDO_7_1_EXTRACT_LOCATION
-    "${CMAKE_SOURCE_DIR}/tools/ido/${IDO_DETECTED_OS}/7.1/")
+set(IDO_5_3_EXTRACT_LOCATION "${CMAKE_BINARY_DIR}/ido/${IDO_DETECTED_OS}/5.3/")
+set(IDO_7_1_EXTRACT_LOCATION "${CMAKE_BINARY_DIR}/ido/${IDO_DETECTED_OS}/7.1/")
 
 set(IDO_EXTRACT_LOCATIONS ${IDO_5_3_EXTRACT_LOCATION}
                           ${IDO_7_1_EXTRACT_LOCATION})

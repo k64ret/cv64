@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+set -xe
+
+#
+# Generate tools first
+#
+cmake                 \
+  -G "Unix Makefiles" \
+  -S ./tools          \
+  -B ./build/tools
+
+#
+# ...then generate main project with appropriate compiler flag
+#
+cmake                                                     \
+  -D CMAKE_C_COMPILER=$(pwd)/build/tools/ido/linux/7.1/cc \
+  -G "Unix Makefiles"                                     \
+  -S .                                                    \
+  -B ./build
