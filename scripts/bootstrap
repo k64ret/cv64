@@ -15,6 +15,7 @@ cmake                 \
 #
 cmake                                                     \
   -D CMAKE_C_COMPILER=$(pwd)/build/tools/ido/linux/7.1/cc \
+  -D CMAKE_ASM_COMPILER=mips-linux-gnu-as                 \
   -G "Unix Makefiles"                                     \
   -S .                                                    \
   -B ./build
