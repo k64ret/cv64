@@ -3,6 +3,11 @@
 set -xe
 
 #
+# Install Git hooks
+#
+pre-commit install
+
+#
 # Generate tools first
 #
 cmake                 \
