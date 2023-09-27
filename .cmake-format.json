@@ -19,12 +19,12 @@
   },
   "format": {
     "disable": false,
-    "line_width": 80,
+    "line_width": 120,
     "tab_size": 2,
     "use_tabchars": false,
     "fractional_tab_policy": "use-space",
     "max_subgroups_hwrap": 2,
-    "max_pargs_hwrap": 6,
+    "max_pargs_hwrap": 3,
     "max_rows_cmdline": 2,
     "separate_ctrl_name_with_space": false,
     "separate_fn_name_with_space": false,
@@ -62,33 +62,11 @@
     "internal_var_pattern": "_[A-Z][0-9A-Z_]+",
     "local_var_pattern": "[a-z][a-z0-9_]+",
     "private_var_pattern": "_[0-9a-z_]+",
-    "_help_public_var_pattern": [
-      "regular expression pattern describing valid names for public",
-      "directory variables"
-    ],
     "public_var_pattern": "[A-Z][0-9A-Z_]+",
-    "_help_argument_var_pattern": [
-      "regular expression pattern describing valid names for",
-      "function/macro arguments and loop variables."
-    ],
     "argument_var_pattern": "[a-z][a-z0-9_]+",
-    "_help_keyword_pattern": [
-      "regular expression pattern describing valid names for",
-      "keywords used in functions or macros"
-    ],
     "keyword_pattern": "[A-Z][0-9A-Z_]+",
-    "_help_max_conditionals_custom_parser": [
-      "In the heuristic for C0201, how many conditionals to match",
-      "within a loop in before considering the loop a parser."
-    ],
     "max_conditionals_custom_parser": 2,
-    "_help_min_statement_spacing": [
-      "Require at least this many newlines between statements"
-    ],
     "min_statement_spacing": 1,
-    "_help_max_statement_spacing": [
-      "Require no more than this many newlines between statements"
-    ],
     "max_statement_spacing": 2,
     "max_returns": 6,
     "max_branches": 12,

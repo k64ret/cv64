@@ -1,0 +1,3 @@
+-r tools/splat/requirements.txt
+pre-commit
+spimdisasm

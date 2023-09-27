@@ -5,7 +5,7 @@
 ### Requirements
 
 - Your own (legally obtained) copy of Castlevania for the Nintendo 64
-- CMake
+- CMake (3.22 or higher)
 - Make (Unix or MinGW)
 - Git
 
@@ -19,7 +19,9 @@
 
 - MinGW
 
-Once you have CMake installed, you can run the
+### Bootstrapping
+
+Once you have the requirements, you can run the
 following command to bootstrap your environment-
 specific build system of choice.
 
@@ -28,20 +30,18 @@ chmod +x ./scripts/bootstrap
 ./scripts/bootstrap
 ```
 
-Or on Windows...
+### Building
 
-```dosbatch
-.\scripts\bootstrap
-```
-
-On UNIX-like systems, the default generator creates
-Makefiles, so you should be able to build simply.
+CMake can run your build system for you.
 
 ```sh
-cd build/
-make all
-cd tools/
-make all
+cmake --build ./build
+```
+
+Or if you need to rebuild the tools.
+
+```sh
+cmake --build ./build/tools
 ```
 
 [rtx]: https://github.com/jdx/rtx

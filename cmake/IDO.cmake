@@ -10,39 +10,42 @@ else(#[[ UNIX ]]
   set(IDO_DETECTED_OS "linux")
 endif()
 
-set(IDO_5_3_DOWNLOAD_URL
-    "https://github.com/decompals/ido-static-recomp/releases/${IDO_DOWNLOAD_VERSION}/download/ido-5.3-recomp-${IDO_DETECTED_OS}.tar.gz"
-)
-set(IDO_7_1_DOWNLOAD_URL
-    "https://github.com/decompals/ido-static-recomp/releases/${IDO_DOWNLOAD_VERSION}/download/ido-7.1-recomp-${IDO_DETECTED_OS}.tar.gz"
-)
+string(CONCAT IDO_5_3_DOWNLOAD_URL "https://github.com/decompals/ido-static-recomp/releases"
+              "/${IDO_DOWNLOAD_VERSION}/download/ido-5.3-recomp-${IDO_DETECTED_OS}.tar.gz")
+string(CONCAT IDO_7_1_DOWNLOAD_URL "https://github.com/decompals/ido-static-recomp/releases"
+              "/${IDO_DOWNLOAD_VERSION}/download/ido-7.1-recomp-${IDO_DETECTED_OS}.tar.gz")
 
 set(IDO_DOWNLOAD_URLS ${IDO_5_3_DOWNLOAD_URL} ${IDO_7_1_DOWNLOAD_URL})
 
-set(IDO_5_3_DOWNLOAD_LOCATION
-    "${CMAKE_BINARY_DIR}/ido/ido-5.3-recomp-${IDO_DETECTED_OS}.tar.gz")
-set(IDO_7_1_DOWNLOAD_LOCATION
-    "${CMAKE_BINARY_DIR}/ido/ido-7.1-recomp-${IDO_DETECTED_OS}.tar.gz")
+set(IDO_5_3_DOWNLOAD_LOCATION "${CMAKE_BINARY_DIR}/ido/ido-5.3-recomp-${IDO_DETECTED_OS}.tar.gz")
+set(IDO_7_1_DOWNLOAD_LOCATION "${CMAKE_BINARY_DIR}/ido/ido-7.1-recomp-${IDO_DETECTED_OS}.tar.gz")
 
-set(IDO_DOWNLOAD_LOCATIONS ${IDO_5_3_DOWNLOAD_LOCATION}
-                           ${IDO_7_1_DOWNLOAD_LOCATION})
+set(IDO_DOWNLOAD_LOCATIONS ${IDO_5_3_DOWNLOAD_LOCATION} ${IDO_7_1_DOWNLOAD_LOCATION})
 
 set(IDO_5_3_EXTRACT_LOCATION "${CMAKE_BINARY_DIR}/ido/${IDO_DETECTED_OS}/5.3/")
 set(IDO_7_1_EXTRACT_LOCATION "${CMAKE_BINARY_DIR}/ido/${IDO_DETECTED_OS}/7.1/")
 
-set(IDO_EXTRACT_LOCATIONS ${IDO_5_3_EXTRACT_LOCATION}
-                          ${IDO_7_1_EXTRACT_LOCATION})
+set(IDO_EXTRACT_LOCATIONS ${IDO_5_3_EXTRACT_LOCATION} ${IDO_7_1_EXTRACT_LOCATION})
 
+# Downloads prebuilt IDO 5.3/7.1 binaries for your OS
 function(download_ido_release_artifact url to)
   message(STATUS "Downloading ${url}")
   file(DOWNLOAD ${url} ${to})
 endfunction()
 
+# Extracts IDO binaries from the containing archive
 function(extract_ido_archive archive destination)
   message(STATUS "Extracting ${archive} to ${destination}")
-  file(ARCHIVE_EXTRACT INPUT ${archive} DESTINATION ${destination})
+  # cmake-lint: disable=E1126
+  file(
+    ARCHIVE_EXTRACT
+    INPUT
+    ${archive}
+    DESTINATION
+    ${destination})
 endfunction()
 
+# Make IDO 5.3/7.1 binaries available for use in main build
 function(download_and_extract_ido)
   foreach(
     url

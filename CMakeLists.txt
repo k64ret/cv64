@@ -20,10 +20,15 @@ add_custom_command(
          ${CMAKE_CURRENT_SOURCE_DIR}/assets/A87C0.bin
          ${CMAKE_CURRENT_SOURCE_DIR}/assets/boot.bin
   DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/castlevania.yaml
-  COMMAND python3 ARGS ${CMAKE_CURRENT_SOURCE_DIR}/tools/splat/split.py
-          ${CMAKE_CURRENT_SOURCE_DIR}/castlevania.yaml)
+  COMMAND python3 ARGS ${CMAKE_CURRENT_SOURCE_DIR}/tools/splat/split.py ${CMAKE_CURRENT_SOURCE_DIR}/castlevania.yaml
+  COMMENT "Generate assembly")
 
-add_executable(castlevania asm/header.s asm/1000.s asm/1060.s
-                           asm/data/90CA0.data.s asm/data/A87C0.bss.s)
+add_executable(
+  castlevania
+  asm/header.s
+  asm/1000.s
+  asm/1060.s
+  asm/data/90CA0.data.s
+  asm/data/A87C0.bss.s)
 
 # add_subdirectory(tools)

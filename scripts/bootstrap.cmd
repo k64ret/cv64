@@ -1,4 +1,14 @@
 @rem
+@rem Install pip dependencies
+@rem
+pip install --requirement requirements.txt
+
+@rem
+@rem Install Git hooks
+@rem
+pre-commit install
+
+@rem
 @rem Generate tools first
 @rem
 cmake                  ^
