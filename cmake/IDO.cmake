@@ -10,10 +10,20 @@ else(#[[ UNIX ]]
   set(IDO_DETECTED_OS "linux")
 endif()
 
-string(CONCAT IDO_5_3_DOWNLOAD_URL "https://github.com/decompals/ido-static-recomp/releases"
-              "/${IDO_DOWNLOAD_VERSION}/download/ido-5.3-recomp-${IDO_DETECTED_OS}.tar.gz")
-string(CONCAT IDO_7_1_DOWNLOAD_URL "https://github.com/decompals/ido-static-recomp/releases"
-              "/${IDO_DOWNLOAD_VERSION}/download/ido-7.1-recomp-${IDO_DETECTED_OS}.tar.gz")
+string(
+  CONCAT IDO_5_3_DOWNLOAD_URL
+         "https://github.com" # GitHub
+         "/decompals/ido-static-recomp" # repository
+         "/releases/${IDO_DOWNLOAD_VERSION}" # release version
+         "/download/ido-5.3-recomp-${IDO_DETECTED_OS}.tar.gz" # artifact
+)
+string(
+  CONCAT IDO_7_1_DOWNLOAD_URL
+         "https://github.com" # GitHub
+         "/decompals/ido-static-recomp" # repository
+         "/releases/${IDO_DOWNLOAD_VERSION}" # release version
+         "/download/ido-7.1-recomp-${IDO_DETECTED_OS}.tar.gz" # artifact
+)
 
 set(IDO_DOWNLOAD_URLS ${IDO_5_3_DOWNLOAD_URL} ${IDO_7_1_DOWNLOAD_URL})
 
