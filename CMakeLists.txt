@@ -21,7 +21,9 @@ add_custom_command(
          ${CMAKE_CURRENT_SOURCE_DIR}/assets/boot.bin
   DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/castlevania.yaml
   COMMAND python3 ARGS ${CMAKE_CURRENT_SOURCE_DIR}/tools/splat/split.py ${CMAKE_CURRENT_SOURCE_DIR}/castlevania.yaml
-  COMMENT "Generate assembly")
+          --stdout-only --disassemble-all
+  COMMENT "Generate assembly"
+  VERBATIM)
 
 add_executable(
   castlevania

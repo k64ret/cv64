@@ -1,23 +1,17 @@
 #!/usr/bin/env bash
 
-set -xe
-
-# Install pip dependencies
-pip install --requirement requirements.txt
-
-# Install Git hooks
-pre-commit install
+set -e
 
 # Generate tools first
-cmake                 \
+cmake \
   -G "Unix Makefiles" \
-  -S ./tools          \
+  -S ./tools \
   -B ./build/tools
 
 # ...then generate main project with appropriate compiler flag
-cmake                                                     \
+cmake \
   -D CMAKE_C_COMPILER=$(pwd)/build/tools/ido/linux/7.1/cc \
-  -D CMAKE_ASM_COMPILER=mips-linux-gnu-as                 \
-  -G "Unix Makefiles"                                     \
-  -S .                                                    \
+  -D CMAKE_ASM_COMPILER=mips-linux-gnu-as \
+  -G "Unix Makefiles" \
+  -S . \
   -B ./build
