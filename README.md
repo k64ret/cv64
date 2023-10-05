@@ -14,8 +14,7 @@ There is a Dockerfile for convenience. If you want to have your
 development environment on your system, continue to [Linux](#linux-debianubuntu-offshoots)
 or [Windows](#windows).
 
-> **info**
->
+> **Note**
 > You may need to prefix `docker` commands with `sudo`
 > if your user is not part of the docker user group.
 
