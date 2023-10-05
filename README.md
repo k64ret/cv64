@@ -15,6 +15,7 @@ development environment on your system, continue to [Linux](#linux-debianubuntu-
 or [Windows](#windows).
 
 > **info**
+>
 > You may need to prefix `docker` commands with `sudo`
 > if your user is not part of the docker user group.
 
