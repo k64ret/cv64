@@ -12,7 +12,7 @@ options:
   build_path: build
   # create_asm_dependencies: True
 
-  ld_script_path: castlevania.ld
+  ld_script_path: linker_scripts/castlevania.ld
 
   find_file_boundaries: True
   header_encoding: ASCII
@@ -30,8 +30,8 @@ options:
 
   symbol_addrs_path:
     - symbol_addrs.txt
-  undefined_funcs_auto_path: undefined_funcs_auto.txt
-  undefined_syms_auto_path: undefined_syms_auto.txt
+  undefined_funcs_auto_path: linker_scripts/auto/undefined_funcs_auto.ld
+  undefined_syms_auto_path: linker_scripts/auto/undefined_syms_auto.ld
   reloc_addrs_path:
     - reloc_addrs.txt
 
