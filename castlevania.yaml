@@ -28,12 +28,12 @@ options:
   # section_order: [".text", ".data", ".rodata", ".bss"]
   # auto_all_sections: [".data", ".rodata", ".bss"]
 
-  symbol_addrs_path:
-    - symbol_addrs.txt
+  # symbol_addrs_path:
+  #   - symbol_addrs.txt
   undefined_funcs_auto_path: linker_scripts/auto/undefined_funcs_auto.ld
   undefined_syms_auto_path: linker_scripts/auto/undefined_syms_auto.ld
-  reloc_addrs_path:
-    - reloc_addrs.txt
+  # reloc_addrs_path:
+  #   - reloc_addrs.txt
 
   extensions_path: tools/splat_ext
 

@@ -11,7 +11,7 @@ cmake \
 # ...then generate main project with appropriate compiler flag
 cmake \
   -D CMAKE_C_COMPILER=$(pwd)/build/tools/ido/linux/7.1/cc \
-  -D CMAKE_ASM_COMPILER=mips-linux-gnu-as \
+  -D CMAKE_ASM_COMPILER=mips-linux-gnu-gcc \
   -G "Unix Makefiles" \
   -S . \
   -B ./build

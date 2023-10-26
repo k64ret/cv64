@@ -32,7 +32,7 @@ add_executable(
   asm/1060.s
   asm/data/90CA0.data.s
   asm/data/A87C0.bss.s)
-target_compile_options(castlevania PRIVATE -march=vr4300)
+target_compile_options(castlevania PRIVATE -Wa,-march=vr4300,-G0,-EB,-mips2,-32)
 target_include_directories(castlevania PRIVATE include)
 target_link_options(
   castlevania
