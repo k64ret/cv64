@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-
-n64sym ./baserom.z64 -s -f splat -o n64sym_symbol_addrs.txt
