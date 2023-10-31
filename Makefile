@@ -13,6 +13,7 @@ SHELL = /bin/sh -e
 $(VERBOSE).SILENT:
 
 all:
+	$(MAKE) $(MAKESILENT) -f scripts/ido.make all
 	$(MAKE) $(MAKESILENT) -f scripts/build.make all
 .PHONY: all
 
@@ -21,6 +22,7 @@ split:
 .PHONY: split
 
 clean:
+	$(MAKE) $(MAKESILENT) -f scripts/ido.make clean
 	$(MAKE) $(MAKESILENT) -f scripts/build.make clean
 .PHONY: clean
 

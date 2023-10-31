@@ -8,6 +8,7 @@ RUN apt update && apt install -y \
   make \
   python3 \
   python3-pip \
+  wget \
   && rm -rf /var/lib/apt/lists/*
 
 COPY requirements.txt tools/splat/requirements.txt /tmp/

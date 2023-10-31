@@ -19,13 +19,11 @@ ROM       := $(BUILD_DIR)/$(TARGET).z64
 ELF       := $(BUILD_DIR)/$(TARGET).elf
 LD_SCRIPT := linker_scripts/$(TARGET).ld
 
-UNAME_S := $(shell uname -s)
-ifeq ($(OS),Windows_NT)
+include scripts/platform.make
+
+ifeq ($(DETECTED_OS),windows)
 	$(error Native Windows is currently unsupported - please use Windows Subsystem for Linux instead...)
-else ifeq ($(UNAME_S),Linux)
-	DETECTED_OS = linux
-else ifeq ($(UNAME_S),Darwin)
-	DETECTED_OS = macos
+else ifeq ($(DETECTED_OS),macos)
 	MAKE = gmake
 	CPPFLAGS += -xc++
 endif
@@ -42,7 +40,7 @@ OBJDUMP := $(CROSS)-objdump
 OBJCOPY := $(CROSS)-objcopy
 STRIP   := $(CROSS)-strip
 
-SPLAT_FLAGS      = --stdout-only --disassemble-all
+SPLAT_FLAGS      = --disassemble-all
 SPLAT_TIMESTAMP := $(BUILD_DIR)/.splat_timestamp
 
 ASM_DEFINES  =
