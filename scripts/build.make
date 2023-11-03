@@ -1,23 +1,40 @@
 # vim:ft=make
 
+# $(VERBOSE)MAKESILENT = -s
+# $(VERBOSE).SILENT:
+
+-include .make_options
+
 MAKEFLAGS += --no-builtin-rules
 
+# Don't delete intermediate files
 .SECONDARY:
 
-COMPARE ?= 1
+### Defaults ###
 
-BASEROM = baserom.z64
-TARGET  = castlevania
+COMPARE              ?= 1
+MIPS_BINUTILS_PREFIX ?= mips-linux-gnu-
+PYTHON               ?= python3
+
+################
+
+TOOLS_DIR      = tools
+LD_SCRIPTS_DIR = linker_scripts
+
+# A real "chicken before the egg" scenario here with the yaml
+BUILD_HELPER := $(PYTHON) $(TOOLS_DIR)/splat_objects.py castlevania.yaml
+BUILD_DIR    := $(shell $(BUILD_HELPER) build_dir)
+BASEROM      := $(shell $(BUILD_HELPER) baserom)
+TARGET       := $(shell $(BUILD_HELPER) target)
 
 # Fail early
 ifeq ($(wildcard $(BASEROM)),)
 	$(error $(BASEROM) not found.)
 endif
 
-BUILD_DIR  = build
 ROM       := $(BUILD_DIR)/$(TARGET).z64
 ELF       := $(BUILD_DIR)/$(TARGET).elf
-LD_SCRIPT := linker_scripts/$(TARGET).ld
+LD_SCRIPT := $(LD_SCRIPTS_DIR)/$(TARGET).ld
 
 include scripts/platform.make
 
@@ -28,17 +45,25 @@ else ifeq ($(DETECTED_OS),macos)
 	CPPFLAGS += -xc++
 endif
 
-PYTHON      = python3
 SPLAT_YAML := $(TARGET).yaml
-SPLAT      := $(PYTHON) tools/splat/split.py $(SPLAT_YAML)
+SPLAT      := $(PYTHON) $(TOOLS_DIR)/splat/split.py $(SPLAT_YAML)
+ASM_PROC   := $(PYTHON) $(TOOLS_DIR)/asm-processor/build.py
 DIFF        = diff
 
-CROSS    = mips-linux-gnu
-AS      := $(CROSS)-as
-LD      := $(CROSS)-ld
-OBJDUMP := $(CROSS)-objdump
-OBJCOPY := $(CROSS)-objcopy
-STRIP   := $(CROSS)-strip
+# CC     := $(TOOLS_DIR)/ido/$(DETECTED_OS)/7.1/cc
+CC     := $(TOOLS_DIR)/ido/$(DETECTED_OS)/5.3/cc
+
+# CC_DEFINES =
+CC_INCLUDES = -I./include
+# Original suggested flags from here: https://github.com/simonlindholm/asm-processor#usage
+# CC_FLAGS = -Wab,-r4300_mul -non_shared -G 0 -Xcpluscomm -g
+CC_FLAGS = -Wab,-r4300_mul -non_shared -G 0 -Xcpluscomm -mips2 -O2 -verbose -fullwarn
+
+AS      := $(MIPS_BINUTILS_PREFIX)as
+LD      := $(MIPS_BINUTILS_PREFIX)ld
+OBJDUMP := $(MIPS_BINUTILS_PREFIX)objdump
+OBJCOPY := $(MIPS_BINUTILS_PREFIX)objcopy
+STRIP   := $(MIPS_BINUTILS_PREFIX)strip
 
 SPLAT_FLAGS      = --disassemble-all
 SPLAT_TIMESTAMP := $(BUILD_DIR)/.splat_timestamp
@@ -47,28 +72,20 @@ ASM_DEFINES  =
 ASM_INCLUDES = -I./include
 ASM_FLAGS    = -march=vr4300 -EB
 
-LD_FLAGS    := -T linker_scripts/auto/undefined_syms_auto.ld \
-               -T linker_scripts/auto/undefined_funcs_auto.ld \
-               -T linker_scripts/undefined_funcs.ld \
+LD_FLAGS    := -T $(LD_SCRIPTS_DIR)/auto/undefined_syms_auto.ld \
+               -T $(LD_SCRIPTS_DIR)/auto/undefined_funcs_auto.ld \
+               -T $(LD_SCRIPTS_DIR)/undefined_funcs.ld \
                -T $(LD_SCRIPT) \
                --no-check-sections
 
-# SRC_DIRS  := $(shell find src -type d)
-# ASM_DIRS  := $(shell find asm -type d -not -path "asm/nonmatchings/*" -not -path "asm/lib/*")
-# BIN_DIRS  := $(shell find assets -type d)
-#
-# C_FILES   := $(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.c))
-# ASM_FILES := $(foreach dir,$(ASM_DIRS),$(wildcard $(dir)/*.s))
-# BIN_FILES := $(foreach dir,$(BIN_DIRS),$(wildcard $(dir)/*.bin))
-#
-# O_FILES   := $(foreach file,$(C_FILES:.c=.o),$(BUILD_DIR)/$(file)) \
-#              $(foreach file,$(ASM_FILES:.s=.o),$(BUILD_DIR)/$(file)) \
-#              $(foreach file,$(BIN_FILES:.bin=.o),$(BUILD_DIR)/$(file))
-
-O_FILES := $(shell $(PYTHON) tools/splat_objects.py $(SPLAT_YAML))
-DEP_FILES := $(O_FILES:.o=.d)
+O_FILES   := $(shell $(BUILD_HELPER) objects)
+DEP_FILES := $(O_FILES:.o=.d) \
+             $(O_FILES:.o=.asmproc.d)
 
 -include $(DEP_FILES)
+
+$(BUILD_DIR)/src/%.o: \
+	CC := $(ASM_PROC) $(ASM_PROC_FLAGS) $(CC) -- $(AS) $(ASM_DEFINES) $(ASM_INCLUDES) $(ASM_FLAGS) --
 
 all: $(ROM)
 .PHONY: all
@@ -101,6 +118,10 @@ $(BUILD_DIR)/asm/%.o: asm/%.s | $(BUILD_DIR)
 $(BUILD_DIR)/assets/%.o: assets/%.bin | $(BUILD_DIR)
 	@mkdir -p $(shell dirname $@)
 	$(LD) -r -b binary -o $@ $<
+
+$(BUILD_DIR)/src/%.o: src/%.c | $(BUILD_DIR)
+	@mkdir -p $(shell dirname $@)
+	$(CC) $(CC_FLAGS) $(CC_DEFINES) $(CC_INCLUDES) -o $@ $<
 
 # Link the .o object files into an .elf file
 $(ELF): $(O_FILES)

@@ -3,6 +3,7 @@ bin/
 assets/
 build/
 
+.make_options
 *.log
 *.[nvz]64
 *.hex
