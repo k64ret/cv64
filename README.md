@@ -40,28 +40,18 @@ docker run --rm -ti -v $(pwd):/c64 c64
 
 - MinGW
 
-### Bootstrapping
-
-Once you have the requirements, you can run the following command to
-bootstrap your environment-specific build system of choice.
-
-```sh
-chmod +x ./scripts/bootstrap
-./scripts/bootstrap
-```
-
 ### Building
 
-CMake can run your build system for you.
+Run, the following... It's that simple (supposed to be, anyway).
 
 ```sh
-cmake --build ./build
+make
 ```
 
-Or if you need to rebuild the tools.
+See available rules:
 
 ```sh
-cmake --build ./build/tools
+make help
 ```
 
 [rtx]: https://github.com/jdx/rtx
