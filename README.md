@@ -4,7 +4,7 @@
 
 ### Requirements
 
-- Your own (legally obtained) copy of Castlevania for the Nintendo 64
+- Your own (legally obtained) copy of Castlevania for the Nintendo 64 (USA v1.0) (`sha1: 989A28782ED6B0BC489A1BBBD7BEC355D8F2707E`)
 - CMake (3.22 or higher)
 - Git
 
