@@ -130,7 +130,7 @@ $(ELF): $(O_FILES)
 # Convert the .elf file into the final .z64 ROM file
 $(ROM): $(ELF)
 	$(OBJCOPY) $< $@ -O binary
-	$(OBJCOPY) -O binary --gap-fill 0xFF --pad-to 0x1000000 $< $@
+	$(OBJCOPY) -O binary --gap-fill 0x00 --pad-to 0xC00000 $< $@
 ifeq ($(COMPARE),1)
 	diff $(BASEROM) $(ROM) \
 		&& echo OK \

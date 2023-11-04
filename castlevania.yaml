@@ -1,5 +1,5 @@
 name: Castlevania (North America)
-sha1: ba23d0fb480b9885f0d847f7f3d67b249177c8c4
+sha1: 989a28782ed6b0bc489a1bbbd7bec355d8f2707e
 options:
   basename: castlevania
   target_path: baserom.z64
@@ -33,7 +33,7 @@ options:
   undefined_funcs_auto_path: linker_scripts/auto/undefined_funcs_auto.ld
   undefined_syms_auto_path: linker_scripts/auto/undefined_syms_auto.ld
   # reloc_addrs_path:
-  #   - reloc_addrs.txt
+  #   - linker_scripts/reloc_addrs.txt
 
   extensions_path: tools/splat_ext
 
@@ -43,7 +43,7 @@ options:
   data_string_guesser_level: 2
   # libultra_symbols: True
   # hardware_regs: True
-  # gfx_ucode: # one of [f3d, f3db, f3dex, f3dexb, f3dex2]
+  gfx_ucode: f3dex2
 segments:
   - name: header
     type: header
@@ -67,7 +67,8 @@ segments:
     follows_vram: entry
     bss_size: 0x7DA10
     subsegments:
-      - [0x1060, asm]
+      - [0x1060, asm]       # gamestate
+      - [0x1370, asm]       # memory
       # - [0x1370, asm]
       # - [0x2280, asm]
       # - [0x3550, asm]
@@ -301,6 +302,7 @@ segments:
       # - [0x90AF0, asm]
       # - [0x90BA0, asm]
       # - [0x90C50, asm]
+      - [0x908D0, bin]
       - [0x90CA0, data]
       - { start: 0xA87C0, type: bss, vram: 0x800A7BC0 }
 
