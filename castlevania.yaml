@@ -302,11 +302,12 @@ segments:
       # - [0x90AF0, asm]
       # - [0x90BA0, asm]
       # - [0x90C50, asm]
-      - [0x908D0, bin]
-      - [0x90CA0, data]
-      - { start: 0xA87C0, type: bss, vram: 0x800A7BC0 }
+      # - [0x908D0, bin]
+      - [0x90920, data]
+      # - [0xA3430, rodata]
+      - { start: 0xA8420, type: bss, vram: 0x800A7820 }
 
   - type: bin
-    start: 0xA87C0
+    start: 0xA8420
     follows_vram: main
   - [0xC00000]

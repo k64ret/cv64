@@ -50,8 +50,8 @@ SPLAT      := $(PYTHON) $(TOOLS_DIR)/splat/split.py $(SPLAT_YAML)
 ASM_PROC   := $(PYTHON) $(TOOLS_DIR)/asm-processor/build.py
 DIFF        = diff
 
-# CC     := $(TOOLS_DIR)/ido/$(DETECTED_OS)/7.1/cc
-CC     := $(TOOLS_DIR)/ido/$(DETECTED_OS)/5.3/cc
+CC     := $(TOOLS_DIR)/ido/$(DETECTED_OS)/7.1/cc
+# CC     := $(TOOLS_DIR)/ido/$(DETECTED_OS)/5.3/cc
 
 # CC_DEFINES =
 CC_INCLUDES = -I./include
@@ -121,7 +121,7 @@ $(BUILD_DIR)/assets/%.o: assets/%.bin | $(BUILD_DIR)
 
 $(BUILD_DIR)/src/%.o: src/%.c | $(BUILD_DIR)
 	@mkdir -p $(shell dirname $@)
-	$(CC) $(CC_FLAGS) $(CC_DEFINES) $(CC_INCLUDES) -o $@ $<
+	$(CC) $(CC_FLAGS) $(CC_DEFINES) $(CC_INCLUDES) -c -o $@ $<
 
 # Link the .o object files into an .elf file
 $(ELF): $(O_FILES)
@@ -132,7 +132,7 @@ $(ROM): $(ELF)
 	$(OBJCOPY) $< $@ -O binary
 	$(OBJCOPY) -O binary --gap-fill 0x00 --pad-to 0xC00000 $< $@
 ifeq ($(COMPARE),1)
-	diff $(BASEROM) $(ROM) \
+	@diff $(BASEROM) $(ROM) \
 		&& echo OK \
 		|| (echo FAILED\ \($(ROM)\ built,\ but\ differs\ from\ $(BASEROM)\) && false)
 endif
