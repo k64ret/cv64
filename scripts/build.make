@@ -54,7 +54,7 @@ CC     := $(TOOLS_DIR)/ido/$(DETECTED_OS)/7.1/cc
 # CC     := $(TOOLS_DIR)/ido/$(DETECTED_OS)/5.3/cc
 
 # CC_DEFINES =
-CC_INCLUDES = -I./include
+CC_INCLUDES = -I./include -I./include/ultra64 -I./include/game
 # Original suggested flags from here: https://github.com/simonlindholm/asm-processor#usage
 # CC_FLAGS = -Wab,-r4300_mul -non_shared -G 0 -Xcpluscomm -g
 CC_FLAGS = -Wab,-r4300_mul -non_shared -G 0 -Xcpluscomm -mips2 -O2 -verbose -fullwarn

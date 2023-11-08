@@ -42,7 +42,7 @@ docker run --rm -ti -v $(pwd):/c64 c64
 
 ### Building
 
-Run, the following... It's that simple (supposed to be, anyway).
+Place a Castlevania 64 (USA v1.0) ROM in the root of the project, and rename it to `baserom.z64`. Then run, the following... It's that simple (supposed to be, anyway).
 
 ```sh
 make

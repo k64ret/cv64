@@ -67,7 +67,7 @@ segments:
     follows_vram: entry
     bss_size: 0x7DA10
     subsegments:
-      - [0x1060, asm]       # gamestate
+      - [0x1060, c, gamestate]       # gamestate
       - [0x1370, asm]       # memory
       # - [0x1370, asm]
       # - [0x2280, asm]
