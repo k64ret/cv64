@@ -7,7 +7,7 @@
 void createGameState(s32 game_state) {
     // Set target framerate
     code_execution_max_delay = gameState_settings[game_state - 1].code_execution_max_delay;
-    
+
     // This is inside a loop to make it so that
     // the game softlocks in case GameStateMgr
     // could not be created
@@ -30,10 +30,10 @@ void changeGameState(s32 game_state) {
 
 void func_80000534() {}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/gamestate/GameStateMgr_calc.s")
+#pragma GLOBAL_ASM("../asm/nonmatchings/gamestate/GameStateMgr_calc.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/gamestate/gameState_init.s")
+#pragma GLOBAL_ASM("../asm/nonmatchings/gamestate/gameState_init.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/gamestate/setup_frame.s")
+#pragma GLOBAL_ASM("../asm/nonmatchings/gamestate/setup_frame.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/gamestate/end_frame.s")
+#pragma GLOBAL_ASM("../asm/nonmatchings/gamestate/end_frame.s")

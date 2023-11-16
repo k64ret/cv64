@@ -1,0 +1,122 @@
+cmake_minimum_required(VERSION 3.22)
+
+find_package(Python REQUIRED COMPONENTS Interpreter)
+# find_package(Git) if(Git_FOUND) execute_process(COMMAND ${Git_EXECUTABLE} ARGS submodule update --init --recursive
+# WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}) endif()
+
+set(CROSS mips-linux-gnu-)
+
+find_program(
+  OBJCOPY_EXECUTABLE
+  NAMES ${CROSS}objcopy
+  DOC "objcopy executable location")
+
+set(ELF ${CMAKE_BINARY_DIR}/castlevania.elf)
+set(ROM ${CMAKE_BINARY_DIR}/castlevania.z64)
+set(BASEROM ${CMAKE_SOURCE_DIR}/baserom.z64)
+set(SPLAT ${CMAKE_SOURCE_DIR}/tools/splat/split.py)
+set(SPLAT_CONFIG ${CMAKE_SOURCE_DIR}/castlevania.yaml)
+
+set(CMAKE_ASM_COMPILER ${CROSS}as)
+set(CMAKE_ASM_COMPILE_OBJECT "<CMAKE_ASM_COMPILER> <DEFINES> <INCLUDES> <FLAGS> -o <OBJECT> <SOURCE>")
+set(CMAKE_C_COMPILER_LAUNCHER ${Python_EXECUTABLE} ${CMAKE_SOURCE_DIR}/tools/asm-processor/build.py)
+set(CMAKE_C_COMPILER
+    ${CMAKE_SOURCE_DIR}/tools/ido/linux/7.1/cc
+    --
+    ${CMAKE_ASM_COMPILER}
+    -I${CMAKE_SOURCE_DIR}/include
+    -march=vr4300
+    -EB
+    --)
+set(CMAKE_C_COMPILER_WORKS TRUE)
+set(CMAKE_C_LINK_EXECUTABLE "${CROSS}ld <LINK_FLAGS> <OBJECTS> -o <TARGET>.elf")
+
+set(CMAKE_TRY_COMPILE_TARGET_TYPE "STATIC_LIBRARY")
+
+project(
+  Castlevania
+  VERSION 0.0.1
+  LANGUAGES C ASM
+  DESCRIPTION "Decompilation of Castlevania for the Nintendo 64"
+  HOMEPAGE_URL "https://github.com/blazkowolf/c64")
+
+# include(cmake/PreventInSourceBuilds.cmake)
+
+set(GENERATED_ASM_SOURCES
+    ${CMAKE_CURRENT_SOURCE_DIR}/asm/header.s
+    ${CMAKE_CURRENT_SOURCE_DIR}/asm/1000.s
+    # ${CMAKE_CURRENT_SOURCE_DIR}/asm/1370.s
+    ${CMAKE_CURRENT_SOURCE_DIR}/asm/data/90920.data.s
+    ${CMAKE_CURRENT_SOURCE_DIR}/asm/data/A8420.bss.s)
+set(C_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/src/gamestate.c ${CMAKE_CURRENT_SOURCE_DIR}/src/1370.c)
+set(GENERATED_BINS ${CMAKE_CURRENT_SOURCE_DIR}/assets/A8420.bin ${CMAKE_CURRENT_SOURCE_DIR}/assets/boot.bin)
+
+add_custom_command(
+  OUTPUT ${GENERATED_ASM_SOURCES} ${C_SOURCES} ${GENERATED_BINS}
+  DEPENDS ${SPLAT_CONFIG}
+  WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+  COMMAND ${Python_EXECUTABLE} ARGS ${SPLAT} ${SPLAT_CONFIG} --disassemble-all > ${CMAKE_BINARY_DIR}/splat.log
+  COMMENT "Split ${BASEROM}"
+  VERBATIM)
+
+file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/CMakeFiles/castlevania.dir/assets)
+set(BIN_OBJECTS)
+foreach(bin IN LISTS GENERATED_BINS)
+  file(
+    RELATIVE_PATH
+    RELATIVE_BIN_FILE
+    ${CMAKE_SOURCE_DIR}
+    ${bin})
+  set(BIN_OBJECT ${CMAKE_CURRENT_BINARY_DIR}/CMakeFiles/castlevania.dir/${RELATIVE_BIN_FILE}.o)
+  add_custom_command(
+    OUTPUT ${BIN_OBJECT}
+    DEPENDS ${bin}
+    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+    COMMAND ${CROSS}ld ARGS -r -b binary -o ${BIN_OBJECT} ${bin}
+    COMMENT "Create binary object file ${BIN_OBJECT}"
+    VERBATIM)
+  list(APPEND BIN_OBJECTS ${BIN_OBJECT})
+endforeach()
+
+set_source_files_properties(${BIN_OBJECTS} PROPERTIES EXTERNAL_OBJECT TRUE GENERATED TRUE)
+
+add_executable(castlevania ${GENERATED_ASM_SOURCES} ${C_SOURCES} ${BIN_OBJECTS})
+
+add_custom_command(
+  TARGET castlevania
+  POST_BUILD
+  COMMAND ${OBJCOPY_EXECUTABLE} ARGS ${ELF} ${ROM} -O binary
+  COMMAND ${OBJCOPY_EXECUTABLE} ARGS -O binary --gap-fill 0x00 --pad-to 0xC00000 ${ELF} ${ROM}
+  COMMENT "Convert ${ELF} into final ${ROM} ROM file"
+  VERBATIM)
+
+# add_custom_command( TARGET castlevania POST_BUILD COMMAND ${CMAKE_COMMAND} -E compare_files ${BASEROM} ${ROM} COMMENT
+# "Compare final ${ROM} ROM file to ${BASEROM}" VERBATIM)
+
+target_compile_options(
+  castlevania
+  PRIVATE $<$<COMPILE_LANGUAGE:ASM>:-march=vr4300
+          -EB>
+          $<$<COMPILE_LANGUAGE:C>:-Wab,-r4300_mul
+          -non_shared
+          -G0
+          -Xcpluscomm
+          -mips2
+          -O2
+          -verbose
+          -fullwarn>)
+
+target_include_directories(
+  castlevania
+  PRIVATE $<$<COMPILE_LANGUAGE:ASM>:${CMAKE_SOURCE_DIR}/include>
+          $<$<COMPILE_LANGUAGE:C>:${CMAKE_SOURCE_DIR}/include
+          ${CMAKE_SOURCE_DIR}/include/ultra64
+          ${CMAKE_SOURCE_DIR}/include/game>)
+
+target_link_options(
+  castlevania
+  PRIVATE
+  -T${CMAKE_SOURCE_DIR}/linker_scripts/castlevania.ld
+  -T${CMAKE_SOURCE_DIR}/linker_scripts/undefined_funcs.ld
+  -T${CMAKE_SOURCE_DIR}/linker_scripts/auto/undefined_funcs_auto.ld
+  -T${CMAKE_SOURCE_DIR}/linker_scripts/auto/undefined_syms_auto.ld)

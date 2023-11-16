@@ -14,8 +14,5 @@ indent_size = 2
 indent_size = 4
 
 # Tab indentation (no size specified)
-[Makefile]
-indent_style = tab
-
-[*.make]
+[{Makefile,*.make}]
 indent_style = tab

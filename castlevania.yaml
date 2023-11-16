@@ -2,22 +2,31 @@ name: Castlevania (North America)
 sha1: 989a28782ed6b0bc489a1bbbd7bec355d8f2707e
 options:
   basename: castlevania
-  target_path: baserom.z64
-  base_path: .
   platform: n64
   compiler: IDO
 
+  # Paths
+  base_path: .
+  target_path: baserom.z64
   asm_path: asm
+  asset_path: assets
   src_path: src
-  build_path: build
-  # create_asm_dependencies: True
-
+  # Used to generate values within the `castlevania.ld` linker script
+  build_path: CMakeFiles/castlevania.dir
   ld_script_path: linker_scripts/castlevania.ld
+  undefined_funcs_auto_path: linker_scripts/auto/undefined_funcs_auto.ld
+  undefined_syms_auto_path: linker_scripts/auto/undefined_syms_auto.ld
+  extensions_path: tools/splat_ext
+  symbol_addrs_path:
+    - linker_scripts/symbol_addrs.txt
+  # reloc_addrs_path:
+  #   - linker_scripts/reloc_addrs.txt
 
+  # create_asm_dependencies: True
   find_file_boundaries: True
   header_encoding: ASCII
 
-  o_as_suffix: True
+  o_as_suffix: False
   use_legacy_include_asm: False
   mips_abi_float_regs: o32
 
@@ -27,15 +36,6 @@ options:
 
   # section_order: [".text", ".data", ".rodata", ".bss"]
   # auto_all_sections: [".data", ".rodata", ".bss"]
-
-  symbol_addrs_path:
-    - linker_scripts/symbol_addrs.txt
-  undefined_funcs_auto_path: linker_scripts/auto/undefined_funcs_auto.ld
-  undefined_syms_auto_path: linker_scripts/auto/undefined_syms_auto.ld
-  # reloc_addrs_path:
-  #   - linker_scripts/reloc_addrs.txt
-
-  extensions_path: tools/splat_ext
 
   # string_encoding: ASCII
   # data_string_encoding: ASCII
