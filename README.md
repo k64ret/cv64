@@ -5,6 +5,7 @@
 ### Requirements
 
 - Your own (legally obtained) copy of Castlevania for the Nintendo 64 (USA v1.0) (`sha1: 989A28782ED6B0BC489A1BBBD7BEC355D8F2707E`)
+- CMake
 - Git
 - GNU Make
 
@@ -42,16 +43,12 @@ docker run --rm -ti -v $(pwd):/c64 c64
 
 ### Building
 
-Place a Castlevania 64 (USA v1.0) ROM in the root of the project, and rename it to `baserom.z64`. Then run, the following... It's that simple (supposed to be, anyway).
+Place a Castlevania 64 (USA v1.0) ROM in the root of the project, and rename it to `baserom.z64`.
+Then run, the following... It's that simple (supposed to be, anyway).
 
 ```sh
-make
-```
-
-See available rules:
-
-```sh
-make help
+cmake -S . -B build
+cmake --build build
 ```
 
 [rtx]: https://github.com/jdx/rtx

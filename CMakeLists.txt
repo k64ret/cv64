@@ -45,10 +45,10 @@ project(
 set(GENERATED_ASM_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/asm/header.s
     ${CMAKE_CURRENT_SOURCE_DIR}/asm/1000.s
-    # ${CMAKE_CURRENT_SOURCE_DIR}/asm/1370.s
+    ${CMAKE_CURRENT_SOURCE_DIR}/asm/1370.s
     ${CMAKE_CURRENT_SOURCE_DIR}/asm/data/90920.data.s
     ${CMAKE_CURRENT_SOURCE_DIR}/asm/data/A8420.bss.s)
-set(C_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/src/gamestate.c ${CMAKE_CURRENT_SOURCE_DIR}/src/1370.c)
+set(C_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/src/gamestate.c)
 set(GENERATED_BINS ${CMAKE_CURRENT_SOURCE_DIR}/assets/A8420.bin ${CMAKE_CURRENT_SOURCE_DIR}/assets/boot.bin)
 
 add_custom_command(
