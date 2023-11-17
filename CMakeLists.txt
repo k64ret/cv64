@@ -1,8 +1,20 @@
 cmake_minimum_required(VERSION 3.22)
 
 find_package(Python REQUIRED COMPONENTS Interpreter)
-# find_package(Git) if(Git_FOUND) execute_process(COMMAND ${Git_EXECUTABLE} ARGS submodule update --init --recursive
-# WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}) endif()
+if(Python_FOUND)
+  execute_process(COMMAND ${Python_EXECUTABLE} -m pip install -r ${CMAKE_SOURCE_DIR}/requirements.txt
+                  WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
+  execute_process(COMMAND pre-commit install WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
+else()
+  message(FATAL_ERROR "Python is required!")
+endif()
+
+find_package(Git REQUIRED)
+if(Git_FOUND)
+  execute_process(COMMAND ${Git_EXECUTABLE} submodule update --init --recursive WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
+else()
+  message(FATAL_ERROR "Git is required!")
+endif()
 
 set(CROSS mips-linux-gnu-)
 

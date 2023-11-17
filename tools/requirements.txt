@@ -1,0 +1,4 @@
+-r splat/requirements.txt
+spimdisasm
+numpy
+numba

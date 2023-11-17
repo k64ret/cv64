@@ -8,3 +8,5 @@ build/
 *.[nvz]64
 *.hex
 *.ld
+*.bin
+*.zip
