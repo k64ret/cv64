@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 3.22)
 
+# Ensure Python is installed and install required development packages
 find_package(Python REQUIRED COMPONENTS Interpreter)
 if(Python_FOUND)
   execute_process(COMMAND ${Python_EXECUTABLE} -m pip install -r ${CMAKE_SOURCE_DIR}/requirements.txt
@@ -9,12 +10,16 @@ else()
   message(FATAL_ERROR "Python is required!")
 endif()
 
+# Ensure Git is installed and update all submodules
 find_package(Git REQUIRED)
 if(Git_FOUND)
   execute_process(COMMAND ${Git_EXECUTABLE} submodule update --init --recursive WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
 else()
   message(FATAL_ERROR "Git is required!")
 endif()
+
+# Install IDO compilers
+execute_process(COMMAND ${CMAKE_COMMAND} -P ${CMAKE_SOURCE_DIR}/cmake/IDO.cmake WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
 
 set(CROSS mips-linux-gnu-)
 
@@ -52,7 +57,7 @@ project(
   DESCRIPTION "Decompilation of Castlevania for the Nintendo 64"
   HOMEPAGE_URL "https://github.com/blazkowolf/c64")
 
-# include(cmake/PreventInSourceBuilds.cmake)
+include(cmake/PreventInSourceBuilds.cmake)
 
 set(GENERATED_ASM_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/asm/header.s
