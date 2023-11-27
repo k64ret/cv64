@@ -1,11 +1,21 @@
 cmake_minimum_required(VERSION 3.22)
 
+set(ELF ${CMAKE_BINARY_DIR}/castlevania.elf)
+set(ROM ${CMAKE_BINARY_DIR}/castlevania.z64)
+set(BASEROM ${CMAKE_SOURCE_DIR}/baserom.z64)
+set(SPLAT ${CMAKE_SOURCE_DIR}/tools/splat/split.py)
+set(SPLAT_CONFIG ${CMAKE_SOURCE_DIR}/castlevania.yaml)
+
 # Ensure Python is installed and install required development packages
 find_package(Python REQUIRED COMPONENTS Interpreter)
 if(Python_FOUND)
   execute_process(COMMAND ${Python_EXECUTABLE} -m pip install -r ${CMAKE_SOURCE_DIR}/requirements.txt
                   WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
   execute_process(COMMAND pre-commit install WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
+  execute_process(
+    COMMAND ${Python_EXECUTABLE} ${SPLAT} ${SPLAT_CONFIG} --disassemble-all
+    OUTPUT_FILE ${CMAKE_BINARY_DIR}/splat.log
+    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
 else()
   message(FATAL_ERROR "Python is required!")
 endif()
@@ -28,12 +38,6 @@ find_program(
   NAMES ${CROSS}objcopy
   DOC "objcopy executable location")
 
-set(ELF ${CMAKE_BINARY_DIR}/castlevania.elf)
-set(ROM ${CMAKE_BINARY_DIR}/castlevania.z64)
-set(BASEROM ${CMAKE_SOURCE_DIR}/baserom.z64)
-set(SPLAT ${CMAKE_SOURCE_DIR}/tools/splat/split.py)
-set(SPLAT_CONFIG ${CMAKE_SOURCE_DIR}/castlevania.yaml)
-
 set(CMAKE_ASM_COMPILER ${CROSS}as)
 set(CMAKE_ASM_COMPILE_OBJECT "<CMAKE_ASM_COMPILER> <DEFINES> <INCLUDES> <FLAGS> -o <OBJECT> <SOURCE>")
 set(CMAKE_C_COMPILER_LAUNCHER ${Python_EXECUTABLE} ${CMAKE_SOURCE_DIR}/tools/asm-processor/build.py)
@@ -48,7 +52,7 @@ set(CMAKE_C_COMPILER
 set(CMAKE_C_COMPILER_WORKS TRUE)
 set(CMAKE_C_LINK_EXECUTABLE "${CROSS}ld <LINK_FLAGS> <OBJECTS> -o <TARGET>.elf")
 
-set(CMAKE_TRY_COMPILE_TARGET_TYPE "STATIC_LIBRARY")
+# set(CMAKE_TRY_COMPILE_TARGET_TYPE "STATIC_LIBRARY")
 
 project(
   Castlevania
@@ -59,22 +63,37 @@ project(
 
 include(cmake/PreventInSourceBuilds.cmake)
 
-set(GENERATED_ASM_SOURCES
-    ${CMAKE_CURRENT_SOURCE_DIR}/asm/header.s
-    ${CMAKE_CURRENT_SOURCE_DIR}/asm/1000.s
-    ${CMAKE_CURRENT_SOURCE_DIR}/asm/1370.s
-    ${CMAKE_CURRENT_SOURCE_DIR}/asm/data/90920.data.s
-    ${CMAKE_CURRENT_SOURCE_DIR}/asm/data/A8420.bss.s)
-set(C_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/src/gamestate.c)
-set(GENERATED_BINS ${CMAKE_CURRENT_SOURCE_DIR}/assets/A8420.bin ${CMAKE_CURRENT_SOURCE_DIR}/assets/boot.bin)
+# set(GENERATED_ASM_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/asm/header.s ${CMAKE_CURRENT_SOURCE_DIR}/asm/1000.s
+# ${CMAKE_CURRENT_SOURCE_DIR}/asm/1370.s ${CMAKE_CURRENT_SOURCE_DIR}/asm/data/90920.data.s
+# ${CMAKE_CURRENT_SOURCE_DIR}/asm/data/A8420.bss.s) set(C_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/src/gamestate.c)
+# set(GENERATED_BINS ${CMAKE_CURRENT_SOURCE_DIR}/assets/A8420.bin ${CMAKE_CURRENT_SOURCE_DIR}/assets/boot.bin)
 
-add_custom_command(
-  OUTPUT ${GENERATED_ASM_SOURCES} ${C_SOURCES} ${GENERATED_BINS}
-  DEPENDS ${SPLAT_CONFIG}
-  WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-  COMMAND ${Python_EXECUTABLE} ARGS ${SPLAT} ${SPLAT_CONFIG} --disassemble-all > ${CMAKE_BINARY_DIR}/splat.log
-  COMMENT "Split ${BASEROM}"
-  VERBATIM)
+file(
+  GLOB_RECURSE
+  GENERATED_ASM_SOURCES
+  CONFIGURE_DEPENDS
+  ${CMAKE_CURRENT_SOURCE_DIR}/asm/*.s)
+file(
+  GLOB_RECURSE
+  C_SOURCES
+  CONFIGURE_DEPENDS
+  ${CMAKE_CURRENT_SOURCE_DIR}/src/*.c)
+file(
+  GLOB_RECURSE
+  GENERATED_BINS
+  CONFIGURE_DEPENDS
+  ${CMAKE_CURRENT_SOURCE_DIR}/assets/*.bin)
+
+list(
+  FILTER
+  GENERATED_ASM_SOURCES
+  EXCLUDE
+  REGEX
+  "^${CMAKE_CURRENT_SOURCE_DIR}/asm/nonmatchings/.*\\.s$")
+
+# add_custom_command( OUTPUT ${GENERATED_ASM_SOURCES} ${C_SOURCES} ${GENERATED_BINS} DEPENDS ${SPLAT_CONFIG}
+# WORKING_DIRECTORY ${CMAKE_SOURCE_DIR} COMMAND ${Python_EXECUTABLE} ARGS ${SPLAT} ${SPLAT_CONFIG} --disassemble-all >
+# ${CMAKE_BINARY_DIR}/splat.log COMMENT "Split ${BASEROM}" VERBATIM)
 
 file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/CMakeFiles/castlevania.dir/assets)
 set(BIN_OBJECTS)
@@ -90,7 +109,7 @@ foreach(bin IN LISTS GENERATED_BINS)
     DEPENDS ${bin}
     WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
     COMMAND ${CROSS}ld ARGS -r -b binary -o ${BIN_OBJECT} ${bin}
-    COMMENT "Create binary object file ${BIN_OBJECT}"
+    COMMENT "Creating binary object file ${BIN_OBJECT}"
     VERBATIM)
   list(APPEND BIN_OBJECTS ${BIN_OBJECT})
 endforeach()
