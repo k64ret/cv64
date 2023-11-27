@@ -13,8 +13,8 @@ typedef struct {
 } gameState_info;
 
 typedef struct {
-    // Max delay before most of the code can be executed. Used for framerate timing.
-    // 0 = 60fps, 1 = 30fps. Update rate.
+    // Max delay before most of the code can be executed. Used for framerate
+    // timing. 0 = 60fps, 1 = 30fps. Update rate.
     u32 code_execution_max_delay;
     void (*init_function)();
     gameState_info info;
@@ -35,7 +35,7 @@ typedef struct {
     u8 field10_0xd;
     u8 field11_0xe;
     u8 field12_0xf;
-    void* (*destroy)(struct GameStateMgr*);
+    void *(*destroy)(struct GameStateMgr *);
     u8 field14_0x14;
     u8 field15_0x15;
     u8 field16_0x16;
@@ -44,7 +44,7 @@ typedef struct {
     u8 field19_0x19;
     u8 field20_0x1a;
     u8 field21_0x1b;
-    void* next;
+    void *next;
     u8 field23_0x20;
     u8 field24_0x21;
     u8 field25_0x22;
@@ -65,8 +65,8 @@ typedef struct {
     gameState_info current_game_state_info;
 } GameStateMgr;
 
-extern GameStateMgr* ptr_GameStateMgr;
-extern void GameStateMgr_destroy(GameStateMgr* self);
+extern GameStateMgr *ptr_GameStateMgr;
+extern void GameStateMgr_destroy(GameStateMgr *self);
 extern gameState_settings_struct gameState_settings[12];
 
 #endif

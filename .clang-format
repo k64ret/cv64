@@ -2,6 +2,10 @@
 BasedOnStyle: LLVM
 IndentWidth: 4
 ---
+Language: Cpp
+AlignConsecutiveMacros: true
+AlignConsecutiveAssignments: true
+---
 Language: Json
 # Don't format JSON files
 DisableFormat: true
