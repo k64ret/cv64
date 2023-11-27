@@ -9,7 +9,9 @@ insert_final_newline = true
 indent_style = space
 indent_size = 2
 
-# 4 space indentation
+[{*.c,*.h}]
+indent_size = 4
+
 [*.py]
 indent_size = 4
 

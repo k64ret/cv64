@@ -1,0 +1,8 @@
+---
+BasedOnStyle: LLVM
+IndentWidth: 4
+---
+Language: Json
+# Don't format JSON files
+DisableFormat: true
+...
