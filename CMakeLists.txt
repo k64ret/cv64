@@ -109,7 +109,7 @@ foreach(bin IN LISTS GENERATED_BINS)
     DEPENDS ${bin}
     WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
     COMMAND ${CROSS}ld ARGS -r -b binary -o ${BIN_OBJECT} ${bin}
-    COMMENT "Creating binary object file ${BIN_OBJECT}"
+    COMMENT "Building binary object ${BIN_OBJECT}"
     VERBATIM)
   list(APPEND BIN_OBJECTS ${BIN_OBJECT})
 endforeach()
@@ -123,7 +123,7 @@ add_custom_command(
   POST_BUILD
   COMMAND ${OBJCOPY_EXECUTABLE} ARGS ${ELF} ${ROM} -O binary
   COMMAND ${OBJCOPY_EXECUTABLE} ARGS -O binary --gap-fill 0x00 --pad-to 0xC00000 ${ELF} ${ROM}
-  COMMENT "Convert ${ELF} into final ${ROM} ROM file"
+  COMMENT "Converting ${ELF} executable into final ${ROM} ROM"
   VERBATIM)
 
 # add_custom_command( TARGET castlevania POST_BUILD COMMAND ${CMAKE_COMMAND} -E compare_files ${BASEROM} ${ROM} COMMENT

@@ -1,10 +1,10 @@
-#include "common.h"
+#include "c64.h"
 #include "memory.h"
 #include "module.h"
 #include "module_ID.h"
 #include "modules/engine/GameStateMgr.h"
 
-void createGameState(s32 game_state) {
+void gamestate_create(s32 game_state) {
     // Set target framerate
     code_execution_max_delay =
         gameState_settings[game_state - 1].code_execution_max_delay;
@@ -27,7 +27,7 @@ void createGameState(s32 game_state) {
                 sizeof(gameState_info));
 }
 
-void changeGameState(s32 game_state) {
+void gamestate_change(s32 game_state) {
     ptr_GameStateMgr->current_game_state = -game_state;
     ptr_GameStateMgr->exitingGameState   = TRUE;
 }
@@ -36,7 +36,7 @@ void func_80000534() {}
 
 #pragma GLOBAL_ASM("../asm/nonmatchings/gamestate/GameStateMgr_calc.s")
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/gamestate/gameState_init.s")
+#pragma GLOBAL_ASM("../asm/nonmatchings/gamestate/gamestate_init.s")
 
 #pragma GLOBAL_ASM("../asm/nonmatchings/gamestate/setup_frame.s")
 

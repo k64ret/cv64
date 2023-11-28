@@ -1,5 +1,6 @@
-createGameState = 0x80000460;
-changeGameState = 0x80000510;
+// vim:ft=ld
+gamestate_create = 0x80000460; // type:func
+gamestate_change = 0x80000510; // type:func
 memory_clear = 0x80000770;
 memory_copy = 0x800008d0;
 heap_init = 0x80000c28;
@@ -563,7 +564,7 @@ PlayerMgr_803d3df0 = 0x803d3df0;
 PlayerMgr_803d41fc = 0x803d41fc;
 PlayerMgr_testBreak = 0x803d6578;
 GameStateMgr_calc = 0x8000053c;
-gameState_init = 0x800005dc;
+gamestate_init = 0x800005dc; // type:func
 code_execution_max_delay = 0x80387AD0;
 end_frame = 0x8000072c;
 heap_writebackDCache = 0x80000c94;

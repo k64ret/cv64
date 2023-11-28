@@ -1,12 +1,12 @@
 #ifndef MODULE_H
 #define MODULE_H
 
-#include <ultra64.h>
+#include "c64.h"
 
 #define MODULE_SIZE        0x74
 #define MODULE_HEADER_SIZE 0x20
 
-enum module_execution_flags { PAUSE = (1 << 14), TOP = (1 << 15) };
+enum module_execution_flags { PAUSE = C64_BIT(14), TOP = C64_BIT(15) };
 
 typedef struct {
     u8 timer;    // Could also be "number of accesses to function"
@@ -68,4 +68,4 @@ extern void func_8000E860(ModuleHeader *self);
     curFunc = &self->header.current_function[self->header.functionInfo_ID];    \
     curFunc->timer++, functions_array[curFunc->function](self);
 
-#endif
+#endif // MODULE_H

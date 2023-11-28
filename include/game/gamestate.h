@@ -17,8 +17,8 @@ enum gameState_ID {
     CREDITS         = 11
 };
 
-extern void createGameState(s32 game_state);
-extern void changeGameState(s32 game_state);
-extern void gameState_init();
+extern void gamestate_create(s32 game_state);
+extern void gamestate_change(s32 game_state);
+extern void gamestate_init();
 
 #endif
