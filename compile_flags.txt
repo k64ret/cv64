@@ -1,0 +1,3 @@
+-Iinclude
+-Iinclude/ultra64
+-Iinclude/game
