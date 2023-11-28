@@ -13,14 +13,14 @@ options:
   src_path: src
   # Used to generate values within the `castlevania.ld` linker script
   build_path: CMakeFiles/castlevania.dir
-  ld_script_path: linker_scripts/castlevania.ld
-  undefined_funcs_auto_path: linker_scripts/auto/undefined_funcs_auto.ld
-  undefined_syms_auto_path: linker_scripts/auto/undefined_syms_auto.ld
+  ld_script_path: linker/castlevania.ld
+  undefined_funcs_auto_path: linker/auto/undefined_funcs_auto.ld
+  undefined_syms_auto_path: linker/auto/undefined_syms_auto.ld
   extensions_path: tools/splat_ext
   symbol_addrs_path:
-    - linker_scripts/symbol_addrs.txt
+    - linker/symbol_addrs.txt
   # reloc_addrs_path:
-  #   - linker_scripts/reloc_addrs.txt
+  #   - linker/reloc_addrs.txt
 
   # create_asm_dependencies: True
   find_file_boundaries: True
