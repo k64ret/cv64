@@ -1,0 +1,3 @@
+test_grid_txt = 0x06000000;  // segment:test_grid
+test_grid_tlut = 0x06000800; // segment:test_grid
+test_grid_vtx = 0x06000820;  // segment:test_grid rom:0xBD96E0 size:0x780

@@ -1,5 +1,5 @@
 name: Castlevania (North America)
-sha1: 989a28782ed6b0bc489a1bbbd7bec355d8f2707e
+sha1: c176c2493d90e12d0a2b6873cfcbc611a9bea245
 options:
   basename: castlevania
   platform: n64
@@ -7,7 +7,7 @@ options:
 
   # Paths
   base_path: .
-  target_path: baserom.z64
+  target_path: baserom_uncompressed.z64
   asm_path: asm
   asset_path: assets
   src_path: src
@@ -19,12 +19,16 @@ options:
   extensions_path: tools/splat_ext
   symbol_addrs_path:
     - linker/symbol_addrs.txt
+    - linker/symbol_addrs_assets.txt
   # reloc_addrs_path:
   #   - linker/reloc_addrs.txt
 
   # create_asm_dependencies: True
   find_file_boundaries: True
   header_encoding: ASCII
+
+  generated_c_preamble: |
+    #include "c64.h"
 
   o_as_suffix: False
   use_legacy_include_asm: False
@@ -47,267 +51,67 @@ options:
 segments:
   - name: header
     type: header
-    start: 0x0
+    start: 0x00000000
 
   - name: boot
-    type: bin
-    start: 0x40
+    type: code
+    start: 0x0040
+    vram: 0xA4000040
+    exclusive_ram_id: ipl3
+    subsegments:
+      - [0x0040, bin, ipl3]
+      - [0x0B70, bin, ipl3font]
 
-  - name: entry
+  - name: entrypoint
     type: code
     start: 0x1000
     vram: 0x80000400
     subsegments:
-      - [0x1000, hasm]
+      - [0x1000, hasm, entrypoint]
 
   - name: main
     type: code
     start: 0x1060
     vram: 0x80000460
-    follows_vram: entry
+    follows_vram: entrypoint
     bss_size: 0x7DA10
     subsegments:
-      - [0x1060, c, gamestate]       # gamestate
-      - [0x1370, asm]       # memory
-      # - [0x1370, asm]
-      # - [0x2280, asm]
-      # - [0x3550, asm]
-      # - [0x4BC0, asm]
-      # - [0x4D80, asm]
-      # - [0x4FE0, asm]
-      # - [0xD270, asm]
-      # - [0xDD70, asm]
-      # - [0xF190, asm]
-      # - [0xF460, asm]
-      # - [0xF960, asm]
-      # - [0x10100, asm]
-      # - [0x101C0, asm]
-      # - [0x113D0, asm]
-      # - [0x11F10, asm]
-      # - [0x12700, asm]
-      # - [0x12900, asm]
-      # - [0x15AE0, asm]
-      # - [0x16510, asm]
-      # - [0x16640, asm]
-      # - [0x166A0, asm]
-      # - [0x17040, asm]
-      # - [0x172F0, asm]
-      # - [0x17660, asm]
-      # - [0x18310, asm]
-      # - [0x18430, asm]
-      # - [0x18590, asm]
-      # - [0x1A160, asm]
-      # - [0x1A7C0, asm]
-      # - [0x1AE50, asm]
-      # - [0x1AF80, asm]
-      # - [0x1B7D0, asm]
-      # - [0x1C830, asm]
-      # - [0x22430, asm]
-      # - [0x260E0, asm]
-      # - [0x26F10, asm]
-      # - [0x2B610, asm]
-      # - [0x2BE10, asm]
-      # - [0x2FCA0, asm]
-      # - [0x327D0, asm]
-      # - [0x336D0, asm]
-      # - [0x39610, asm]
-      # - [0x3F6E0, asm]
-      # - [0x3FB50, asm]
-      # - [0x40A90, asm]
-      # - [0x41450, asm]
-      # - [0x454A0, asm]
-      # - [0x45BA0, asm]
-      # - [0x45F60, asm]
-      # - [0x46420, asm]
-      # - [0x46800, asm]
-      # - [0x47D80, asm]
-      # - [0x482B0, asm]
-      # - [0x48680, asm]
-      # - [0x48A60, asm]
-      # - [0x48E20, asm]
-      # - [0x493E0, asm]
-      # - [0x4A060, asm]
-      # - [0x4A5F0, asm]
-      # - [0x4B090, asm]
-      # - [0x4B910, asm]
-      # - [0x4C380, asm]
-      # - [0x4CA80, asm]
-      # - [0x4D0C0, asm]
-      # - [0x4D750, asm]
-      # - [0x4DE00, asm]
-      # - [0x4E1A0, asm]
-      # - [0x4F6A0, asm]
-      # - [0x4F8C0, asm]
-      # - [0x51F90, asm]
-      # - [0x529F0, asm]
-      # - [0x52BF0, asm]
-      # - [0x53030, asm]
-      # - [0x55150, asm]
-      # - [0x55330, asm]
-      # - [0x555D0, asm]
-      # - [0x557B0, asm]
-      # - [0x55990, asm]
-      # - [0x55B70, asm]
-      # - [0x55F70, asm]
-      # - [0x56150, asm]
-      # - [0x56770, asm]
-      # - [0x569B0, asm]
-      # - [0x56E40, asm]
-      # - [0x57330, asm]
-      # - [0x577A0, asm]
-      # - [0x5B900, asm]
-      # - [0x5BAC0, asm]
-      # - [0x5BDA0, asm]
-      # - [0x5BE80, asm]
-      # - [0x613D0, asm]
-      # - [0x63D40, asm]
-      # - [0x6A780, asm]
-      # - [0x6AC70, asm]
-      # - [0x6B150, asm]
-      # - [0x6C390, asm]
-      # - [0x6CE20, asm]
-      # - [0x70740, asm]
-      # - [0x70F70, asm]
-      # - [0x71460, asm]
-      # - [0x72340, asm]
-      # - [0x729E0, asm]
-      # - [0x73070, asm]
-      # - [0x73080, asm]
-      # - [0x73090, asm]
-      # - [0x740F0, asm]
-      # - [0x75420, asm]
-      # - [0x75AA0, asm]
-      # - [0x76E50, asm]
-      # - [0x79EE0, asm]
-      # - [0x7A810, asm]
-      # - [0x7CF20, asm]
-      # - [0x7E3F0, asm]
-      # - [0x803A0, asm]
-      # - [0x80540, asm]
-      # - [0x807D0, asm]
-      # - [0x80910, asm]
-      # - [0x80C60, asm]
-      # - [0x80F40, asm]
-      # - [0x81230, asm]
-      # - [0x812F0, asm]
-      # - [0x81D40, asm]
-      # - [0x81D80, asm]
-      # - [0x82180, asm]
-      # - [0x82390, asm]
-      # - [0x82570, asm]
-      # - [0x829D0, asm]
-      # - [0x82C00, asm]
-      # - [0x82C80, asm]
-      # - [0x82D00, asm]
-      # - [0x83050, asm]
-      # - [0x83410, asm]
-      # - [0x83430, asm]
-      # - [0x83540, asm]
-      # - [0x835D0, asm]
-      # - [0x83680, asm]
-      # - [0x83740, asm]
-      # - [0x83790, asm]
-      # - [0x83C00, asm]
-      # - [0x83E30, asm]
-      # - [0x840A0, asm]
-      # - [0x84110, asm]
-      # - [0x84960, asm]
-      # - [0x84D30, asm]
-      # - [0x84DF0, asm]
-      # - [0x85440, asm]
-      # - [0x854D0, asm]
-      # - [0x854E0, asm]
-      # - [0x86060, asm]
-      # - [0x86170, asm]
-      # - [0x86340, asm]
-      # - [0x869C0, asm]
-      # - [0x87170, asm]
-      # - [0x87F20, asm]
-      # - [0x88030, asm]
-      # - [0x88CB0, asm]
-      # - [0x88FB0, asm]
-      # - [0x89B00, asm]
-      # - [0x89BC0, asm]
-      # - [0x89BD0, asm]
-      # - [0x89CA0, asm]
-      # - [0x89CD0, asm]
-      # - [0x89D10, asm]
-      # - [0x8A9D0, asm]
-      # - [0x8A9F0, asm]
-      # - [0x8ABB0, asm]
-      # - [0x8AC00, asm]
-      # - [0x8ACE0, asm]
-      # - [0x8AD20, asm]
-      # - [0x8ADC0, asm]
-      # - [0x8AE40, asm]
-      # - [0x8AE70, asm]
-      # - [0x8AF20, asm]
-      # - [0x8AFC0, asm]
-      # - [0x8B0E0, asm]
-      # - [0x8B160, asm]
-      # - [0x8B190, asm]
-      # - [0x8B1C0, asm]
-      # - [0x8B260, asm]
-      # - [0x8B4B0, asm]
-      # - [0x8B610, asm]
-      # - [0x8BBB0, asm]
-      # - [0x8BF30, asm]
-      # - [0x8BFC0, asm]
-      # - [0x8C410, asm]
-      # - [0x8C560, asm]
-      # - [0x8C5F0, asm]
-      # - [0x8C600, asm]
-      # - [0x8C990, asm]
-      # - [0x8C9F0, asm]
-      # - [0x8CC60, asm]
-      # - [0x8CCF0, asm]
-      # - [0x8CE30, asm]
-      # - [0x8D130, asm]
-      # - [0x8D160, asm]
-      # - [0x8D2D0, asm]
-      # - [0x8D460, asm]
-      # - [0x8D4D0, asm]
-      # - [0x8D650, asm]
-      # - [0x8D7B0, asm]
-      # - [0x8D830, asm]
-      # - [0x8DA20, asm]
-      # - [0x8DD30, asm]
-      # - [0x8E6E0, asm]
-      # - [0x8E720, asm]
-      # - [0x8E780, asm]
-      # - [0x8E7D0, asm]
-      # - [0x8E8C0, asm]
-      # - [0x8EB10, asm]
-      # - [0x8ED40, asm]
-      # - [0x8EEB0, asm]
-      # - [0x8F010, asm]
-      # - [0x8F0F0, asm]
-      # - [0x8FBB0, asm]
-      # - [0x8FD40, asm]
-      # - [0x8FFE0, asm]
-      # - [0x90030, asm]
-      # - [0x90080, asm]
-      # - [0x90090, asm]
-      # - [0x900A0, asm]
-      # - [0x903B0, asm]
-      # - [0x903C0, asm]
-      # - [0x903F0, asm]
-      # - [0x90450, asm]
-      # - [0x90460, asm]
-      # - [0x90600, asm]
-      # - [0x90810, asm]
-      # - [0x909C0, asm]
-      # - [0x90A60, asm]
-      # - [0x90AE0, asm]
-      # - [0x90AF0, asm]
-      # - [0x90BA0, asm]
-      # - [0x90C50, asm]
-      # - [0x908D0, bin]
+      - [0x1060, c, gamestate] # gamestate
+      - [0x1370, asm]          # memory
       - [0x90920, data]
-      # - [0xA3430, rodata]
       - { start: 0xA8420, type: bss, vram: 0x800A7820 }
 
   - type: bin
     start: 0xA8420
     follows_vram: main
-  - [0xC00000]
+
+  - name: test_grid
+    type: code
+    vram: 0x06000000
+    start: 0xBD8EC0
+    subsegments:
+      # - [0xBD8EC0, bin]
+      - { start: 0xBD8EC0, type: ci4, name: img/levels/test_grid/test_grid_txt.ci4, width: 64, height: 64 }
+      - [0xBD96C0, palette, img/levels/test_grid/test_grid_txt.ci4]
+
+      - { start: 0xBD96E0, type: vtx, data_only: true, name: data/levels/test_grid/test_grid }
+
+      - { start: 0xBD9E60, type: gfx, data_only: true, name: data/levels/test_grid/test_grid_1 }
+      - { start: 0xBD9F98, type: gfx, data_only: true, name: data/levels/test_grid/test_grid_2 }
+      - { start: 0xBDA0B0, type: gfx, data_only: true, name: data/levels/test_grid/test_grid_3 }
+      - { start: 0xBDA1C8, type: gfx, data_only: true, name: data/levels/test_grid/test_grid_4 }
+      - { start: 0xBDA2A0, type: gfx, data_only: true, name: data/levels/test_grid/test_grid_5 }
+      - { start: 0xBDA3B8, type: gfx, data_only: true, name: data/levels/test_grid/test_grid_6 }
+      - { start: 0xBDA4B0, type: gfx, data_only: true, name: data/levels/test_grid/test_grid_7 }
+      - { start: 0xBDA5A8, type: gfx, data_only: true, name: data/levels/test_grid/test_grid_8 }
+      - { start: 0xBDA680, type: gfx, data_only: true, name: data/levels/test_grid/test_grid_9 }
+      - { start: 0xBDA798, type: gfx, data_only: true, name: data/levels/test_grid/test_grid_10 }
+      - { start: 0xBDA890, type: gfx, data_only: true, name: data/levels/test_grid/test_grid_11 }
+      - { start: 0xBDA988, type: gfx, data_only: true, name: data/levels/test_grid/test_grid_12 }
+      - { start: 0xBDAA60, type: gfx, data_only: true, name: data/levels/test_grid/test_grid_13 }
+      - { start: 0xBDAB38, type: gfx, data_only: true, name: data/levels/test_grid/test_grid_14 }
+      - { start: 0xBDAC10, type: gfx, data_only: true, name: data/levels/test_grid/test_grid_15 }
+
+  - [0xBDACF0]
+
+  - [0x1000000]

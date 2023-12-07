@@ -1,3 +1,5 @@
+-D_LANGUAGE_C
 -Iinclude
 -Iinclude/ultra64
 -Iinclude/game
+-Iassets

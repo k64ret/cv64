@@ -5,13 +5,20 @@ set(ROM ${CMAKE_BINARY_DIR}/castlevania.z64)
 set(BASEROM ${CMAKE_SOURCE_DIR}/baserom.z64)
 set(SPLAT ${CMAKE_SOURCE_DIR}/tools/splat/split.py)
 set(SPLAT_CONFIG ${CMAKE_SOURCE_DIR}/castlevania.yaml)
+set(DECOMPRESS ${CMAKE_SOURCE_DIR}/tools/decompress.py)
 
 # Ensure Python is installed and install required development packages
 find_package(Python REQUIRED COMPONENTS Interpreter)
 if(Python_FOUND)
-  execute_process(COMMAND ${Python_EXECUTABLE} -m pip install -r ${CMAKE_SOURCE_DIR}/requirements.txt
-                  WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
+  execute_process(
+    COMMAND ${Python_EXECUTABLE} -m pip install -r ${CMAKE_SOURCE_DIR}/requirements.txt
+    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+    OUTPUT_FILE ${CMAKE_BINARY_DIR}/pip.log)
   execute_process(COMMAND pre-commit install WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
+  execute_process(
+    COMMAND ${Python_EXECUTABLE} ${DECOMPRESS} ${BASEROM} ${CMAKE_SOURCE_DIR}/baserom_uncompressed.z64
+    OUTPUT_FILE ${CMAKE_BINARY_DIR}/decompress.log
+    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
   execute_process(
     COMMAND ${Python_EXECUTABLE} ${SPLAT} ${SPLAT_CONFIG} --disassemble-all
     OUTPUT_FILE ${CMAKE_BINARY_DIR}/splat.log
@@ -82,7 +89,8 @@ file(
   GLOB_RECURSE
   GENERATED_BINS
   CONFIGURE_DEPENDS
-  ${CMAKE_CURRENT_SOURCE_DIR}/assets/*.bin)
+  ${CMAKE_CURRENT_SOURCE_DIR}/assets/*.bin
+  ${CMAKE_CURRENT_SOURCE_DIR}/assets/*.png)
 
 list(
   FILTER
@@ -95,7 +103,7 @@ list(
 # WORKING_DIRECTORY ${CMAKE_SOURCE_DIR} COMMAND ${Python_EXECUTABLE} ARGS ${SPLAT} ${SPLAT_CONFIG} --disassemble-all >
 # ${CMAKE_BINARY_DIR}/splat.log COMMENT "Split ${BASEROM}" VERBATIM)
 
-file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/CMakeFiles/castlevania.dir/assets)
+file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/CMakeFiles/castlevania.dir/assets/img/levels/test_grid)
 set(BIN_OBJECTS)
 foreach(bin IN LISTS GENERATED_BINS)
   file(
@@ -122,7 +130,7 @@ add_custom_command(
   TARGET castlevania
   POST_BUILD
   COMMAND ${OBJCOPY_EXECUTABLE} ARGS ${ELF} ${ROM} -O binary
-  COMMAND ${OBJCOPY_EXECUTABLE} ARGS -O binary --gap-fill 0x00 --pad-to 0xC00000 ${ELF} ${ROM}
+  COMMAND ${OBJCOPY_EXECUTABLE} ARGS -O binary --gap-fill 0x00 --pad-to 0x1000000 ${ELF} ${ROM}
   COMMENT "Converting ${ELF} executable into final ${ROM} ROM"
   VERBATIM)
 
@@ -152,7 +160,7 @@ target_include_directories(
 target_link_options(
   castlevania
   PRIVATE
-  -T${CMAKE_SOURCE_DIR}/linker_scripts/castlevania.ld
-  -T${CMAKE_SOURCE_DIR}/linker_scripts/undefined_funcs.ld
-  -T${CMAKE_SOURCE_DIR}/linker_scripts/auto/undefined_funcs_auto.ld
-  -T${CMAKE_SOURCE_DIR}/linker_scripts/auto/undefined_syms_auto.ld)
+  -T${CMAKE_SOURCE_DIR}/linker/castlevania.ld
+  -T${CMAKE_SOURCE_DIR}/linker/undefined_funcs.ld
+  -T${CMAKE_SOURCE_DIR}/linker/auto/undefined_funcs_auto.ld
+  -T${CMAKE_SOURCE_DIR}/linker/auto/undefined_syms_auto.ld)
