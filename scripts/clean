@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+rm baserom_uncompressed.z64
+rm -rf build assets
+rm -rf asm/nonmatchings
+rm -rf asm/data
+rm asm/*.s

@@ -3,7 +3,9 @@
 
 #define C64_BIT(num) (1 << (num))
 
-#include <ultra64.h>
+#include "ultratypes.h"
+
+typedef u8 Addr[];
 
 extern s16 code_execution_max_delay; // Maybe put this in another header
 

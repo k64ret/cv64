@@ -98,12 +98,44 @@ list(
   EXCLUDE
   REGEX
   "^${CMAKE_CURRENT_SOURCE_DIR}/asm/nonmatchings/.*\\.s$")
+list(
+  FILTER
+  C_SOURCES
+  EXCLUDE
+  REGEX
+  "^${CMAKE_CURRENT_SOURCE_DIR}/src/data/.*\\.c$")
 
 # add_custom_command( OUTPUT ${GENERATED_ASM_SOURCES} ${C_SOURCES} ${GENERATED_BINS} DEPENDS ${SPLAT_CONFIG}
 # WORKING_DIRECTORY ${CMAKE_SOURCE_DIR} COMMAND ${Python_EXECUTABLE} ARGS ${SPLAT} ${SPLAT_CONFIG} --disassemble-all >
 # ${CMAKE_BINARY_DIR}/splat.log COMMENT "Split ${BASEROM}" VERBATIM)
 
-file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/CMakeFiles/castlevania.dir/assets/img/levels/test_grid)
+file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/CMakeFiles/castlevania.dir/assets)
+file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/CMakeFiles/castlevania.dir/assets/nisitenma_ichigo)
+file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/CMakeFiles/castlevania.dir/assets/nisitenma_ichigo/code)
+file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/CMakeFiles/castlevania.dir/assets/nisitenma_ichigo/map)
+file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/CMakeFiles/castlevania.dir/assets/nisitenma_ichigo/map/castle_center)
+file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/CMakeFiles/castlevania.dir/assets/nisitenma_ichigo/map/castle_keep)
+file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/CMakeFiles/castlevania.dir/assets/nisitenma_ichigo/map/castle_wall)
+file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/CMakeFiles/castlevania.dir/assets/nisitenma_ichigo/map/clock_tower)
+file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/CMakeFiles/castlevania.dir/assets/nisitenma_ichigo/map/dracula_desert)
+file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/CMakeFiles/castlevania.dir/assets/nisitenma_ichigo/map/duel_tower)
+file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/CMakeFiles/castlevania.dir/assets/nisitenma_ichigo/map/ending)
+file(MAKE_DIRECTORY
+     ${CMAKE_CURRENT_BINARY_DIR}/CMakeFiles/castlevania.dir/assets/nisitenma_ichigo/map/forest_of_silence)
+file(MAKE_DIRECTORY
+     ${CMAKE_CURRENT_BINARY_DIR}/CMakeFiles/castlevania.dir/assets/nisitenma_ichigo/map/intro_narration_cutscene)
+file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/CMakeFiles/castlevania.dir/assets/nisitenma_ichigo/map/room_of_clocks)
+file(MAKE_DIRECTORY
+     ${CMAKE_CURRENT_BINARY_DIR}/CMakeFiles/castlevania.dir/assets/nisitenma_ichigo/map/rose_actrise_meet_room)
+file(MAKE_DIRECTORY
+     ${CMAKE_CURRENT_BINARY_DIR}/CMakeFiles/castlevania.dir/assets/nisitenma_ichigo/map/tower_of_execution)
+file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/CMakeFiles/castlevania.dir/assets/nisitenma_ichigo/map/tower_of_science)
+file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/CMakeFiles/castlevania.dir/assets/nisitenma_ichigo/map/tower_of_sorcery)
+file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/CMakeFiles/castlevania.dir/assets/nisitenma_ichigo/map/tunnel)
+file(MAKE_DIRECTORY
+     ${CMAKE_CURRENT_BINARY_DIR}/CMakeFiles/castlevania.dir/assets/nisitenma_ichigo/map/underground_waterway)
+file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/CMakeFiles/castlevania.dir/assets/nisitenma_ichigo/map/villa)
+file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/CMakeFiles/castlevania.dir/assets/nisitenma_ichigo/overlay)
 set(BIN_OBJECTS)
 foreach(bin IN LISTS GENERATED_BINS)
   file(
@@ -130,12 +162,14 @@ add_custom_command(
   TARGET castlevania
   POST_BUILD
   COMMAND ${OBJCOPY_EXECUTABLE} ARGS ${ELF} ${ROM} -O binary
-  COMMAND ${OBJCOPY_EXECUTABLE} ARGS -O binary --gap-fill 0x00 --pad-to 0x1000000 ${ELF} ${ROM}
+  COMMAND ${OBJCOPY_EXECUTABLE} ARGS -O binary --gap-fill 0x00 --pad-to 0xC00000 ${ELF} ${ROM}
   COMMENT "Converting ${ELF} executable into final ${ROM} ROM"
   VERBATIM)
 
 # add_custom_command( TARGET castlevania POST_BUILD COMMAND ${CMAKE_COMMAND} -E compare_files ${BASEROM} ${ROM} COMMENT
 # "Compare final ${ROM} ROM file to ${BASEROM}" VERBATIM)
+
+target_compile_definitions(castlevania PRIVATE $<$<COMPILE_LANGUAGE:C>:_LANGUAGE_C>)
 
 target_compile_options(
   castlevania
@@ -148,14 +182,17 @@ target_compile_options(
           -mips2
           -O2
           -verbose
-          -fullwarn>)
+          -fullwarn
+          -woff
+          513,649,838>)
 
 target_include_directories(
   castlevania
   PRIVATE $<$<COMPILE_LANGUAGE:ASM>:${CMAKE_SOURCE_DIR}/include>
           $<$<COMPILE_LANGUAGE:C>:${CMAKE_SOURCE_DIR}/include
           ${CMAKE_SOURCE_DIR}/include/ultra64
-          ${CMAKE_SOURCE_DIR}/include/game>)
+          ${CMAKE_SOURCE_DIR}/include/game
+          ${CMAKE_SOURCE_DIR}/assets>)
 
 target_link_options(
   castlevania
