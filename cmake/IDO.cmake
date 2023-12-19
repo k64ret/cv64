@@ -27,13 +27,13 @@ string(
 
 set(IDO_DOWNLOAD_URLS ${IDO_5_3_DOWNLOAD_URL} ${IDO_7_1_DOWNLOAD_URL})
 
-set(IDO_5_3_DOWNLOAD_LOCATION "tools/ido/ido-5.3-recomp-${IDO_DETECTED_OS}.tar.gz")
-set(IDO_7_1_DOWNLOAD_LOCATION "tools/ido/ido-7.1-recomp-${IDO_DETECTED_OS}.tar.gz")
+set(IDO_5_3_DOWNLOAD_LOCATION "${CMAKE_SOURCE_DIR}/tools/ido/ido-5.3-recomp-${IDO_DETECTED_OS}.tar.gz")
+set(IDO_7_1_DOWNLOAD_LOCATION "${CMAKE_SOURCE_DIR}/tools/ido/ido-7.1-recomp-${IDO_DETECTED_OS}.tar.gz")
 
 set(IDO_DOWNLOAD_LOCATIONS ${IDO_5_3_DOWNLOAD_LOCATION} ${IDO_7_1_DOWNLOAD_LOCATION})
 
-set(IDO_5_3_EXTRACT_LOCATION "tools/ido/${IDO_DETECTED_OS}/5.3/")
-set(IDO_7_1_EXTRACT_LOCATION "tools/ido/${IDO_DETECTED_OS}/7.1/")
+set(IDO_5_3_EXTRACT_LOCATION "${CMAKE_SOURCE_DIR}/tools/ido/${IDO_DETECTED_OS}/5.3/")
+set(IDO_7_1_EXTRACT_LOCATION "${CMAKE_SOURCE_DIR}/tools/ido/${IDO_DETECTED_OS}/7.1/")
 
 set(IDO_EXTRACT_LOCATIONS ${IDO_5_3_EXTRACT_LOCATION} ${IDO_7_1_EXTRACT_LOCATION})
 
@@ -72,4 +72,8 @@ function(download_and_extract_ido)
   file(REMOVE ${IDO_DOWNLOAD_LOCATIONS})
 endfunction()
 
-download_and_extract_ido()
+if(NOT EXISTS "${IDO_5_3_EXTRACT_LOCATION}/cc" OR NOT EXISTS "${IDO_7_1_EXTRACT_LOCATION}/cc")
+  download_and_extract_ido()
+else()
+  message(STATUS "Ido compilers exist")
+endif()

@@ -25,6 +25,7 @@ options:
   # ld_symbol_header_path: include/ld_symbols.h
 
   # create_asm_dependencies: True
+  migrate_rodata_to_functions: False
   find_file_boundaries: True
   header_encoding: ASCII
 
@@ -57,43 +58,44 @@ segments:
 
   - name: boot
     type: code
-    start: 0x0040
+    start: 0x00000040
     vram: 0xA4000040
-    exclusive_ram_id: ipl3
+    # exclusive_ram_id: ipl3
     subsegments:
-      - [0x0040, hasm, ipl3]
-      - [0x0B70, bin, ipl3font]
+      - [0x00000040, hasm, ipl3]
+      - [0x00000B70, bin, ipl3font]
 
   - name: entrypoint
     type: code
-    start: 0x1000
+    start: 0x00001000
     vram: 0x80000400
     subsegments:
-      - [0x1000, hasm, entrypoint]
+      - [0x00001000, hasm, entrypoint]
 
   - name: main
     type: code
-    start: 0x1060
+    start: 0x00001060
     vram: 0x80000460
     follows_vram: entrypoint
     bss_size: 0x7DA10
     subsegments:
-      - [0x1060, c, gamestate]
-      - [0x1370, c, memory]
-      - [0x2280, c, module]
+      # - [0x1060, c, gamestate]
+      - [0x1060, asm, gamestate]
+      # - [0x1370, c, memory]
+      - [0x1370, asm, memory]
+      # - [0x2280, c, module]
+      - [0x2280, asm, module]
 
-      - [0x3550]
-      # - [0x3550, asm]
+      - [0x3550, asm]
       # - [0x4BC0, asm]
       # - [0x4D80, asm]
       # - [0x4FE0, asm]
       # - [0xD270, asm]
       # - [0xDD70, asm]
       #
-      - { start: 0xF190, type: c, name: fade, vram: 0x8000E590 }
+      - { start: 0xF190, type: asm, name: fade, vram: 0x8000E590 }
 
-      - [0xF460]
-      # - [0xF460, asm]
+      - [0xF460, asm]
       # - [0xF960, asm]
       # - [0x10100, asm]
       # - [0x101C0, asm]
@@ -318,12 +320,14 @@ segments:
       # - [0x90820, asm]
       # - [0x908D0, asm]
       - [0x90920, data]
-      - { start: 0x92B50, type: .data, name: gamestate, vram: 0x80091F50 }
-      - { start: 0x92E70, type: .data, name: module, vram: 0x80092270 }
-      - { start: 0x93F70, type: .data, name: fade, vram: 0x80093370 }
-      - { start: 0xA33B0, type: .rodata, name: fade, vram: 0x800A27B0 }
+      # - { start: 0x92B50, type: .data, name: gamestate, vram: 0x80091F50 }
+      - [0x92B50, asm]
+      # - { start: 0x92E70, type: .data, name: module, vram: 0x80092270 }
+      - [0x92E70, asm]
+      - { start: 0x93F70, type: data, name: fade, vram: 0x80093370 }
+      - { start: 0xA33B0, type: rodata, name: fade, vram: 0x800A27B0 }
 
-      - [0xA3410]
+      - [0xA3410, asm]
       # - [0xA3410, rodata]
       # - [0xA3430, rodata, 0x12900]
       # - [0xA34A0, rodata, 0x17660]
