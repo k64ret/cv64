@@ -376,6 +376,161 @@ segments:
     start: 0x000A8420
     follows_vram: main
 
+  # - name: code_80125230
+  #   type: code
+  #   start: 0x000A8420
+  #   vram: 0x80125230
+  #   subsegments:
+  #     - [0x000A8420, asm]
+
+  - name: assets_10FC40                         # Related to audio?
+    type: bin
+    start: 0x0010FC40
+    vram: 0x80389F10
+    subsegments:
+      - [0x0010FC40, bin]
+
+  - name: soundfonts_ctl
+    type: bin
+    start: 0x00116210
+    subsegments:
+      - [0x00116210, bin, soundfont1.ctl]         # Bank: Instruments
+      - [0x0011BA20, bin, soundfont2.ctl]         # Bank: Most sound effects, character voices
+      - [0x00123AA0, bin, soundfont3.ctl]         # Bank: Opening piano / violin, narrator and Malus voice
+
+  - name: soundfonts_tbl
+    type: bin
+    start: 0x00126590
+    subsegments:
+      - [0x00126590, bin, soundfont1.tbl]         # Raw sounds: Instruments
+      - [0x002FB290, bin, soundfont2.tbl]         # Raw sounds: Most sound effects, character voices
+      - [0x00532130, bin, soundfont3.tbl]         # Raw sounds: Opening piano / violin, narrator and Malus voice
+
+  - name: sequences
+    type: bin
+    start: 0x0064FED0
+    subsegments:
+      - [0x0064FED0, bin]
+      - [0x006503B0, bin]
+      - [0x00650C80, bin]
+      - [0x00651470, bin]
+      - [0x00651690, bin]
+      - [0x006517E0, bin]
+      - [0x006517E0, bin]
+      - [0x00652480, bin]
+      - [0x00652950, bin]
+      - [0x00652CC0, bin]
+      - [0x00653100, bin]
+      - [0x006536F0, bin]
+      - [0x00653D50, bin]
+      - [0x00653E40, bin]
+      - [0x00654380, bin]
+      - [0x00654620, bin]
+      - [0x006549A0, bin]
+      - [0x00654AD0, bin]
+      - [0x00654D50, bin]
+      - [0x00654FF0, bin]
+      - [0x006552B0, bin]
+      - [0x00655420, bin]
+      - [0x00655630, bin]
+      - [0x006558E0, bin]
+      - [0x00656220, bin]
+      - [0x00656650, bin]
+      - [0x00656B90, bin]
+      - [0x00656F30, bin]
+      - [0x00657200, bin]
+      - [0x00657520, bin]
+      - [0x00657AD0, bin]
+      - [0x00657DD0, bin]
+      - [0x00658080, bin]
+      - [0x006584A0, bin]
+      - [0x00658740, bin]
+      - [0x006589F0, bin]
+      - [0x00659930, bin]
+      - [0x00659970, bin]
+      - [0x00659E30, bin]
+      - [0x0065A250, bin]
+      - [0x0065A8C0, bin]
+      - [0x0065AB40, bin]
+      - [0x0065AD00, bin]
+      - [0x0065B100, bin]
+      - [0x0065B780, bin]
+      - [0x0065B870, bin]
+      - [0x0065B9A0, bin]
+      - [0x0065BC80, bin]
+      - [0x0065C090, bin]
+      - [0x0065C390, bin]
+      - [0x0065CC20, bin]
+      - [0x0065D090, bin]
+      - [0x0065D690, bin]
+      - [0x0065DC90, bin]
+      - [0x0065E1D0, bin]
+      - [0x0065E500, bin]
+      - [0x0065E670, bin]
+      - [0x0065EDD0, bin]
+      - [0x0065F2F0, bin]
+      - [0x0065F400, bin]
+      - [0x0065F5B0, bin]
+      - [0x0065F740, bin]
+      - [0x0065F8D0, bin]
+      - [0x0065FA70, bin]
+      - [0x00660090, bin]
+      - [0x00660670, bin]
+      - [0x00660C50, bin]
+      - [0x00660F80, bin]
+      - [0x00661320, bin]
+      - [0x00662040, bin]
+      - [0x006621D0, bin]
+      - [0x00662760, bin]
+      - [0x00662B80, bin]
+      - [0x006630B0, bin]
+      - [0x006633F0, bin]
+      - [0x006639F0, bin]
+      - [0x00663C60, bin]
+      - [0x00664000, bin]
+      - [0x00664320, bin]
+      - [0x00664670, bin]
+      - [0x00664910, bin]
+      - [0x006650B0, bin]
+      - [0x006658D0, bin]
+      - [0x00665FB0, bin]
+      - [0x006664F0, bin]
+      - [0x006666B0, bin]
+      - [0x006668D0, bin]
+      - [0x00666A80, bin]
+      - [0x00666C80, bin]
+      - [0x006670E0, bin]
+      - [0x00667770, bin]
+      - [0x00668490, bin]
+      - [0x00668B80, bin]
+      - [0x00668BF0, bin]
+      - [0x00668DA0, bin]
+      - [0x00669390, bin]
+      - [0x006695B0, bin]
+      - [0x006697C0, bin]
+      - [0x006698A0, bin]
+      - [0x0066A8C0, bin]
+      - [0x0066AD00, bin]
+      - [0x0066B1B0, bin]
+      - [0x0066B380, bin]
+      - [0x0066B450, bin]
+      - [0x0066BF60, bin]
+      - [0x0066C110, bin]
+
+  - name: assets_66C3D0                     # Appears to contain animations
+    type: bin
+    start: 0x0066C3D0
+    vram: 0x803A6770
+    subsegments:
+      - [0x0066C3D0, bin]
+
+  - name: player_animations
+    type: bin
+    start: 0x67D7B0
+    vram: 0x803B7B50
+    subsegments:
+      - [0x67D7B0, bin]
+
   # Uncompressed overlays
   - name: reinhardt
     type: bin
