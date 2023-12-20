@@ -80,7 +80,7 @@ segments:
     bss_size: 0x7DA10
     subsegments:
       - [0x00001060, c, gamestate]
-      - [0x00001370, asm, memory]
+      - [0x00001370, c, memory]
       - [0x00002280, asm, module]
       - [0x00003550, asm]
       - [0x00004BC0, asm]
