@@ -309,7 +309,7 @@ segments:
       - [0x00090760, asm]
       - [0x00090770, asm]
       - [0x00090820, asm]
-      - [0x000908D0, asm]
+      - [0x000908D0, bin]
       - [0x00090920, data]
       - { start: 0x00092B50, type: data, name: gamestate, vram: 0x80091F50 }
       - { start: 0x00092E70, type: data, name: object, vram: 0x80092270 }

@@ -74,7 +74,6 @@ ASM_FLAGS    = -march=vr4300 -EB
 
 LD_FLAGS    := -T $(LD_SCRIPTS_DIR)/auto/undefined_syms_auto.ld \
                -T $(LD_SCRIPTS_DIR)/auto/undefined_funcs_auto.ld \
-               -T $(LD_SCRIPTS_DIR)/undefined_funcs.ld \
                -T $(LD_SCRIPT) \
                --no-check-sections
 

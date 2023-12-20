@@ -82,6 +82,5 @@ target_link_options(
   ${TARGET}
   PRIVATE
   -T${CMAKE_SOURCE_DIR}/linker/${TARGET}.ld
-  -T${CMAKE_SOURCE_DIR}/linker/undefined_funcs.ld
   -T${CMAKE_SOURCE_DIR}/linker/auto/undefined_funcs_auto.ld
   -T${CMAKE_SOURCE_DIR}/linker/auto/undefined_syms_auto.ld)

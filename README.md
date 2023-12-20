@@ -51,4 +51,12 @@ cmake -S . -B build
 cmake --build build
 ```
 
+### Cleaning
+
+Run the following to clean up the build artifacts.
+
+```sh
+./scripts/clean
+```
+
 [rtx]: https://github.com/jdx/rtx
