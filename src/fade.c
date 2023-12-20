@@ -22,7 +22,7 @@ typedef union {
 enum fade_flags {
     FADE_WITH_OUTLINE =
         0x0001, // Shows a black outline in the edges of all models while fading
-    FADE_IN  = 0x4000,
+    FADE_IN = 0x4000,
     FADE_OUT = 0x8000
 };
 
@@ -307,7 +307,7 @@ void fade_setColor(u8 R, u8 G, u8 B) {
 }
 
 void fade_setSettings(s16 flags, u16 fade_time, u8 R, u8 G, u8 B) {
-    D_80383AB8.fade_settings.flags    = flags;
+    D_80383AB8.fade_settings.flags = flags;
     D_80383AB8.fade_settings.max_time = fade_time;
 
     if (flags & FADE_OUT) {
@@ -348,7 +348,7 @@ u32 fade_isFading() {
     }
 }
 
-// #pragma GLOBAL_ASM("../asm/nonmatchings/fade/fade_calc.s")
+#pragma GLOBAL_ASM("../asm/nonmatchings/fade/fade_calc.s")
 
 // 0x8000E6C4 (Matched by anon. Original scratch:
 // https://decomp.me/scratch/j0Te1)
