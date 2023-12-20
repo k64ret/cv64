@@ -16,6 +16,7 @@ options:
   undefined_funcs_auto_path: linker/auto/undefined_funcs_auto.ld
   undefined_syms_auto_path: linker/auto/undefined_syms_auto.ld
   extensions_path: tools/splat_ext
+  # Disambiguates default symbol names sharing same VRAM address in separate overlays
   symbol_name_format: $VRAM_$ROM
   symbol_addrs_path:
     - linker/symbol_addrs.txt
