@@ -1,0 +1,13 @@
+file(
+  GLOB_RECURSE
+  C_SOURCES
+  CONFIGURE_DEPENDS
+  ${CMAKE_CURRENT_SOURCE_DIR}/*.c)
+list(
+  FILTER
+  C_SOURCES
+  EXCLUDE
+  REGEX
+  "^${CMAKE_CURRENT_SOURCE_DIR}/data/.*\\.c$")
+
+target_sources(${TARGET} PRIVATE ${C_SOURCES})
