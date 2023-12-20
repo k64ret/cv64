@@ -10,26 +10,7 @@ set(SPLAT ${CMAKE_SOURCE_DIR}/tools/splat/split.py)
 set(SPLAT_CONFIG ${CMAKE_SOURCE_DIR}/${TARGET}.yaml)
 set(DECOMPRESS ${CMAKE_SOURCE_DIR}/tools/decompress.py)
 
-# Install Python dependencies
-execute_process(
-  COMMAND ${PYTHON_EXECUTABLE} -m pip install -r ${CMAKE_SOURCE_DIR}/requirements.txt
-  WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-  OUTPUT_FILE ${CMAKE_BINARY_DIR}/pip.log)
-
-# Install pre-commit hooks
-execute_process(COMMAND pre-commit install WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
-
-# Decompress baserom
-execute_process(
-  COMMAND ${PYTHON_EXECUTABLE} ${DECOMPRESS} ${BASEROM} ${CMAKE_SOURCE_DIR}/baserom_uncompressed.z64
-  OUTPUT_FILE ${CMAKE_BINARY_DIR}/decompress.log
-  WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
-
-# Run Splat
-execute_process(
-  COMMAND ${PYTHON_EXECUTABLE} ${SPLAT} ${SPLAT_CONFIG} --disassemble-all
-  OUTPUT_FILE ${CMAKE_BINARY_DIR}/splat.log
-  WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
+include(cmake/Prerequisites.cmake)
 
 project(
   ${TARGET}

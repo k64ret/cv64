@@ -47,7 +47,7 @@ Place a Castlevania 64 (USA v1.0) ROM in the root of the project, and rename it 
 Then run, the following... It's that simple (supposed to be, anyway).
 
 ```sh
-cmake -S . -B build --toolchain cmake/toolchain.cmake
+cmake -S . -B build
 cmake --build build
 ```
 

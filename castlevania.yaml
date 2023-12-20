@@ -93,7 +93,7 @@ segments:
       # - [0xD270, asm]
       # - [0xDD70, asm]
       #
-      - { start: 0xF190, type: asm, name: fade, vram: 0x8000E590 }
+      - { start: 0xF190, type: c, name: fade, vram: 0x8000E590 }
 
       - [0xF460, asm]
       # - [0xF960, asm]
