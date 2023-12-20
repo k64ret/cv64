@@ -9,8 +9,8 @@
 
 // clang-format off
 typedef enum module_exec_flag {
-    PAUSE = C64_BIT(14),
-    TOP   = C64_BIT(15)
+    PAUSE = CV64_BIT(14),
+    TOP   = CV64_BIT(15)
 } module_exec_flag_t;
 // clang-format on
 
