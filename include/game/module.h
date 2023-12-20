@@ -1,7 +1,7 @@
 #ifndef MODULE_H
 #define MODULE_H
 
-#include "c64.h"
+#include "cv64.h"
 #include "module_ID.h"
 
 #define MODULE_SIZE        0x74

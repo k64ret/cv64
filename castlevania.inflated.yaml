@@ -4,7 +4,6 @@ options:
   basename: castlevania
   platform: n64
   compiler: IDO
-
   # Paths
   base_path: .
   # target_path: baserom_uncompressed.z64
@@ -24,26 +23,20 @@ options:
   # reloc_addrs_path:
   #   - linker/reloc_addrs.txt
   # ld_symbol_header_path: include/ld_symbols.h
-
   # create_asm_dependencies: True
   find_file_boundaries: True
   header_encoding: ASCII
-
   generated_c_preamble: |
     #include <ultra64.h>
-    #include "c64.h"
-
+    #include "cv64.h"
   o_as_suffix: False
   use_legacy_include_asm: False
   mips_abi_float_regs: o32
-
   asm_function_macro: glabel
   asm_jtbl_label_macro: jlabel
   asm_data_macro: dlabel
-
   # section_order: [".text", ".data", ".rodata", ".bss"]
   # auto_all_sections: [".data", ".rodata", ".bss"]
-
   # string_encoding: ASCII
   # data_string_encoding: ASCII
   rodata_string_guesser_level: 2

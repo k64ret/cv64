@@ -17,7 +17,7 @@ project(
   VERSION 0.0.1
   LANGUAGES C ASM
   DESCRIPTION "Decompilation of Castlevania for the Nintendo 64"
-  HOMEPAGE_URL "https://github.com/blazkowolf/c64")
+  HOMEPAGE_URL "https://github.com/blazkowolf/cv64")
 
 include(cmake/PreventInSourceBuilds.cmake)
 include(cmake/CreateBinaryObjects.cmake)

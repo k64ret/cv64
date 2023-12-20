@@ -1,4 +1,4 @@
-#include "c64.h"
+#include "cv64.h"
 #include <ultra64.h>
 
 typedef struct {

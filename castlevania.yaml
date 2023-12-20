@@ -29,7 +29,7 @@ options:
   find_file_boundaries: True
   header_encoding: ASCII
   generated_c_preamble: |
-    #include "c64.h"
+    #include "cv64.h"
     #include <ultra64.h>
   o_as_suffix: False
   use_legacy_include_asm: False

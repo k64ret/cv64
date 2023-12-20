@@ -35,8 +35,8 @@ RUN pip install --no-cache-dir --requirement /tmp/requirements.txt
 
 FROM base AS workspace
 
-RUN mkdir /c64
+RUN mkdir /cv64
 
-WORKDIR /c64
+WORKDIR /cv64
 
 ENTRYPOINT ["/bin/bash"]
