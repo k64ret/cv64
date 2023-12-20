@@ -2,11 +2,17 @@
 #define MODULE_H
 
 #include "c64.h"
+#include "module_ID.h"
 
 #define MODULE_SIZE        0x74
 #define MODULE_HEADER_SIZE 0x20
 
-enum module_execution_flags { PAUSE = C64_BIT(14), TOP = C64_BIT(15) };
+// clang-format off
+typedef enum module_exec_flag {
+    PAUSE = C64_BIT(14),
+    TOP   = C64_BIT(15)
+} module_exec_flag_t;
+// clang-format on
 
 typedef struct {
     u8 timer;         // Could also be "number of accesses to function"
@@ -26,8 +32,8 @@ typedef struct {
     struct module_header_t *child;
 } module_header_t; // Size = 0x20
 
-extern void *module_create(void *parent, s32 ID);
-extern void *module_createAndSetChild(void *parent, s32 ID);
+extern void *module_create(void *parent, module_t ID);
+extern void *module_createAndSetChild(void *parent, module_t ID);
 extern void goToNextFunc(u16 current_functionInfo[], s16 *functionInfo_ID);
 extern void goToFunc(u16 current_functionInfo[], s16 *functionInfo_ID,
                      s32 function);
@@ -45,7 +51,7 @@ extern void func_8000E860(module_header_t *self);
 // Commas at the end of statements needed for matching
 #define ENTER(self, functions_array)                                           \
     s16 funcID;                                                                \
-    funcID                       = self->header.functionInfo_ID + 1;           \
+    funcID = self->header.functionInfo_ID + 1;                                 \
     self->header.functionInfo_ID = funcID,                                     \
     self->header.current_function[funcID].timer++;                             \
     functions_array[self->header.current_function[funcID].function](self);     \
