@@ -3,7 +3,7 @@
 
 #include <ultra64.h>
 
-typedef struct save_state {
+typedef struct cv64_save_state {
     u32 event_flags[16];
     u32 flags;
     u16 week;
@@ -65,6 +65,6 @@ typedef struct save_state {
     s16 field79_0xd4;
     s32 field83_0xd8;
     u32 money_spent_on_Renon;
-} save_state_t;
+} cv64_save_state_t;
 
 #endif

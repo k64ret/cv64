@@ -3,7 +3,8 @@
 
 #include <ultra64.h>
 
-enum gameState_ID {
+// clang-format off
+typedef enum cv64_gamestate_id {
     KONAMI_LOGO     = 1,
     GAMEPLAY        = 2,
     GAME_OVER       = 3,
@@ -15,10 +16,11 @@ enum gameState_ID {
     TITLE_DEMO      = 9,
     GAMENOTE_DELETE = 10,
     CREDITS         = 11
-};
+} cv64_gamestate_id_t;
+// clang-format on
 
-extern void gamestate_create(s32 game_state);
-extern void gamestate_change(s32 game_state);
+extern void gamestate_create(s32 gamestate_id);
+extern void gamestate_change(s32 gamestate_id);
 extern void gamestate_init();
 
 #endif

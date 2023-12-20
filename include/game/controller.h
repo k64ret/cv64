@@ -3,7 +3,7 @@
 
 #include <ultra64.h>
 
-typedef struct controller_state {
+typedef struct cv64_controller_state {
     u16 is_connected;
     u16 buttons_held;
     u16 buttons_pressed;
@@ -11,6 +11,6 @@ typedef struct controller_state {
     s16 joystick_y;
     s16 joystick_angle;
     s16 joystick_held; // TODO: Maybe search another name for this variable.
-} controller_state_t;
+} cv64_controller_state_t;
 
 #endif

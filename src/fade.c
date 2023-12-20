@@ -1,3 +1,4 @@
+#include "fade.h"
 #include "cv64.h"
 #include "unknown_struct.h"
 #include <ultra64.h>
@@ -54,15 +55,22 @@ void fade_setColor(u8 R, u8 G, u8 B) {
     D_80383AB8.fade_settings.color.color_u8.B = B;
 }
 
+// The cleaner version
+// void fade_setSettings(s16 flags, u16 fade_time, u8 R, u8 G, u8 B) {
+//     fade_setAllFlags(flags);
+//     D_80383AB8.fade_settings.max_time = fade_time;
+//     D_80383AB8.fade_settings.current_time =
+//         (flags & FADE_OUT) ? 1 : fade_time - 1;
+//     fade_setColor(R, G, B);
+// }
+
+// The matching version
 void fade_setSettings(s16 flags, u16 fade_time, u8 R, u8 G, u8 B) {
     D_80383AB8.fade_settings.flags = flags;
     D_80383AB8.fade_settings.max_time = fade_time;
 
-    if (flags & FADE_OUT) {
-        D_80383AB8.fade_settings.current_time = 1;
-    } else {
-        D_80383AB8.fade_settings.current_time = fade_time - 1;
-    }
+    D_80383AB8.fade_settings.current_time =
+        (flags & FADE_OUT) ? 1 : fade_time - 1;
 
     D_80383AB8.fade_settings.color.color_u8.R = R;
     D_80383AB8.fade_settings.color.color_u8.G = G;
