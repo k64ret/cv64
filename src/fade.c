@@ -260,8 +260,9 @@ extern unknown_struct D_80383AB8;
 //     gsDPPipeSync(),
 //     gsDPSetCycleType(G_CYC_1CYCLE),
 //     gsSPClearGeometryMode(G_ZBUFFER | G_SHADE | G_CULL_BOTH | G_FOG |
-//     G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR | G_LOD |
-//     G_SHADING_SMOOTH), gsDPSetRenderMode(G_RM_CLD_SURF, G_RM_CLD_SURF2),
+//                           G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR |
+//                           G_LOD | G_SHADING_SMOOTH),
+//     gsDPSetRenderMode(G_RM_CLD_SURF, G_RM_CLD_SURF2),
 //     gsDPSetCombineMode(G_CC_PRIMITIVE, G_CC_PRIMITIVE),
 //     gsDPSetPrimDepth(-1, -1),
 //     gsDPSetDepthSource(G_ZS_PRIM),
@@ -276,12 +277,15 @@ extern unknown_struct D_80383AB8;
 //     gsDPPipeSync(),
 //     gsDPSetCycleType(G_CYC_2CYCLE),
 //     gsSPClearGeometryMode(G_ZBUFFER | G_SHADE | G_CULL_BOTH | G_FOG |
-//     G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR | G_LOD |
-//     G_SHADING_SMOOTH), gsDPSetRenderMode(IM_RD | CVG_DST_SAVE | ZMODE_OPA |
-//     FORCE_BL | GBL_c1(G_BL_CLR_IN, G_BL_0, G_BL_CLR_FOG, G_BL_A_MEM), IM_RD |
-//     CVG_DST_SAVE | ZMODE_OPA | FORCE_BL | GBL_c2(G_BL_CLR_IN, G_BL_A_FOG,
-//     G_BL_CLR_MEM, G_BL_1MA)), gsDPSetCombineLERP(0, 0, 0, 0, 0, 0, 0, 0, 0,
-//     0, 0, 0, 0, 0, 0, 0), gsDPSetPrimDepth(-1, -1),
+//                           G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR |
+//                           G_LOD | G_SHADING_SMOOTH),
+//     gsDPSetRenderMode(
+//         IM_RD | CVG_DST_SAVE | ZMODE_OPA | FORCE_BL |
+//             GBL_c1(G_BL_CLR_IN, G_BL_0, G_BL_CLR_FOG, G_BL_A_MEM),
+//         IM_RD | CVG_DST_SAVE | ZMODE_OPA | FORCE_BL |
+//             GBL_c2(G_BL_CLR_IN, G_BL_A_FOG, G_BL_CLR_MEM, G_BL_1MA)),
+//     gsDPSetCombineLERP(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+//     gsDPSetPrimDepth(-1, -1),
 //     gsDPSetDepthSource(G_ZS_PRIM),
 //     gsDPSetAlphaCompare(G_AC_NONE),
 //     gsDPSetColorDither(G_CD_MAGICSQ),
@@ -354,12 +358,12 @@ u32 fade_isFading() {
 //     s32 flags = D_80383AB8.fade_settings.flags;
 //
 //     if ((flags != 0) && (D_80383AB8.fade_settings.current_time)) {
-//         alpha = (f32) D_80383AB8.fade_settings.current_time /
-//         D_80383AB8.fade_settings.max_time;
+//         alpha = (f32)D_80383AB8.fade_settings.current_time /
+//                 D_80383AB8.fade_settings.max_time;
 //
 //         if (flags & FADE_OUT) {
 //             if (D_80383AB8.fade_settings.current_time <
-//             D_80383AB8.fade_settings.max_time) {
+//                 D_80383AB8.fade_settings.max_time) {
 //                 D_80383AB8.fade_settings.current_time++;
 //             }
 //         } else {
@@ -369,21 +373,21 @@ u32 fade_isFading() {
 //             }
 //         }
 //
-//         D_80383AB8.fade_settings.color.color_u8.A = (s32) (alpha * 255.9999);
+//         D_80383AB8.fade_settings.color.color_u8.A = (s32)(alpha * 255.9999);
 //
 //         if (flags & FADE_WITH_OUTLINE) {
 //             gDPSetFogColor(gDisplayListHead++,
-//             D_80383AB8.fade_settings.color.color_u8.R,
-//             D_80383AB8.fade_settings.color.color_u8.G,
-//             D_80383AB8.fade_settings.color.color_u8.B,
-//             D_80383AB8.fade_settings.color.color_u8.A);
+//                            D_80383AB8.fade_settings.color.color_u8.R,
+//                            D_80383AB8.fade_settings.color.color_u8.G,
+//                            D_80383AB8.fade_settings.color.color_u8.B,
+//                            D_80383AB8.fade_settings.color.color_u8.A);
 //             gSPDisplayList(gDisplayListHead++, &DL_fade_with_outline);
 //         } else {
 //             gDPSetPrimColor(gDisplayListHead++, 0, 0,
-//             D_80383AB8.fade_settings.color.color_u8.R,
-//             D_80383AB8.fade_settings.color.color_u8.G,
-//             D_80383AB8.fade_settings.color.color_u8.B,
-//             D_80383AB8.fade_settings.color.color_u8.A);
+//                             D_80383AB8.fade_settings.color.color_u8.R,
+//                             D_80383AB8.fade_settings.color.color_u8.G,
+//                             D_80383AB8.fade_settings.color.color_u8.B,
+//                             D_80383AB8.fade_settings.color.color_u8.A);
 //             gSPDisplayList(gDisplayListHead++, &DL_fade_normal);
 //         }
 //     }
