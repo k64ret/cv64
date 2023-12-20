@@ -13,9 +13,9 @@
 
 #pragma GLOBAL_ASM("../asm/nonmatchings/memory/initHeaps.s")
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/memory/func_80000D68.s")
+#pragma GLOBAL_ASM("../asm/nonmatchings/memory/func_80000D68_1968.s")
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/memory/func_80000D74.s")
+#pragma GLOBAL_ASM("../asm/nonmatchings/memory/func_80000D74_1974.s")
 
 #pragma GLOBAL_ASM("../asm/nonmatchings/memory/heap_alloc.s")
 
@@ -23,35 +23,35 @@
 
 #pragma GLOBAL_ASM("../asm/nonmatchings/memory/heapBlock_updateBlockMaxSize.s")
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/memory/func_80001008.s")
+#pragma GLOBAL_ASM("../asm/nonmatchings/memory/func_80001008_1C08.s")
 
 #pragma GLOBAL_ASM("../asm/nonmatchings/memory/heapBlock_free.s")
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/memory/func_80001080.s")
+#pragma GLOBAL_ASM("../asm/nonmatchings/memory/func_80001080_1C80.s")
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/memory/func_800010A0.s")
+#pragma GLOBAL_ASM("../asm/nonmatchings/memory/func_800010A0_1CA0.s")
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/memory/func_800010C8.s")
+#pragma GLOBAL_ASM("../asm/nonmatchings/memory/func_800010C8_1CC8.s")
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/memory/func_80001110.s")
+#pragma GLOBAL_ASM("../asm/nonmatchings/memory/func_80001110_1D10.s")
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/memory/func_80001148.s")
+#pragma GLOBAL_ASM("../asm/nonmatchings/memory/func_80001148_1D48.s")
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/memory/func_800011AC.s")
+#pragma GLOBAL_ASM("../asm/nonmatchings/memory/func_800011AC_1DAC.s")
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/memory/func_800011DC.s")
+#pragma GLOBAL_ASM("../asm/nonmatchings/memory/func_800011DC_1DDC.s")
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/memory/func_80001228.s")
+#pragma GLOBAL_ASM("../asm/nonmatchings/memory/func_80001228_1E28.s")
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/memory/func_80001260.s")
+#pragma GLOBAL_ASM("../asm/nonmatchings/memory/func_80001260_1E60.s")
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/memory/func_800012C0.s")
+#pragma GLOBAL_ASM("../asm/nonmatchings/memory/func_800012C0_1EC0.s")
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/memory/func_800012D8.s")
+#pragma GLOBAL_ASM("../asm/nonmatchings/memory/func_800012D8_1ED8.s")
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/memory/func_800012F4.s")
+#pragma GLOBAL_ASM("../asm/nonmatchings/memory/func_800012F4_1EF4.s")
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/memory/func_80001338.s")
+#pragma GLOBAL_ASM("../asm/nonmatchings/memory/func_80001338_1F38.s")
 
 #pragma GLOBAL_ASM("../asm/nonmatchings/memory/module_curLevel_goToNextFunc.s")
 
