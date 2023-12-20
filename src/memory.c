@@ -53,32 +53,32 @@
 
 #pragma GLOBAL_ASM("../asm/nonmatchings/memory/func_80001338_1F38.s")
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/memory/module_curLevel_goToNextFunc.s")
+#pragma GLOBAL_ASM("../asm/nonmatchings/memory/object_curLevel_goToNextFunc.s")
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/memory/module_prevLevel_goToNextFunc.s")
+#pragma GLOBAL_ASM("../asm/nonmatchings/memory/object_prevLevel_goToNextFunc.s")
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/memory/module_nextLevel_goToNextFunc.s")
-
-// clang-format off
-#pragma GLOBAL_ASM("../asm/nonmatchings/memory/module_curLevel_goToNextFuncAndClearTimer.s")
-// clang-format on
-
-#pragma GLOBAL_ASM("../asm/nonmatchings/memory/module_curLevel_goToPrevFunc.s")
-
-#pragma GLOBAL_ASM("../asm/nonmatchings/memory/module_prevLevel_goToPrevFunc.s")
-
-#pragma GLOBAL_ASM("../asm/nonmatchings/memory/module_nextLevel_goToPrevFunc.s")
+#pragma GLOBAL_ASM("../asm/nonmatchings/memory/object_nextLevel_goToNextFunc.s")
 
 // clang-format off
-#pragma GLOBAL_ASM("../asm/nonmatchings/memory/module_curLevel_goToPrevFuncAndClearTimer.s")
+#pragma GLOBAL_ASM("../asm/nonmatchings/memory/object_curLevel_goToNextFuncAndClearTimer.s")
 // clang-format on
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/memory/module_curLevel_goToFunc.s")
+#pragma GLOBAL_ASM("../asm/nonmatchings/memory/object_curLevel_goToPrevFunc.s")
+
+#pragma GLOBAL_ASM("../asm/nonmatchings/memory/object_prevLevel_goToPrevFunc.s")
+
+#pragma GLOBAL_ASM("../asm/nonmatchings/memory/object_nextLevel_goToPrevFunc.s")
 
 // clang-format off
-#pragma GLOBAL_ASM("../asm/nonmatchings/memory/module_curLevel_goToFuncInLevel.s")
+#pragma GLOBAL_ASM("../asm/nonmatchings/memory/object_curLevel_goToPrevFuncAndClearTimer.s")
 // clang-format on
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/memory/module_prevLevel_goToFunc.s")
+#pragma GLOBAL_ASM("../asm/nonmatchings/memory/object_curLevel_goToFunc.s")
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/memory/module_nextLevel_goToFunc.s")
+// clang-format off
+#pragma GLOBAL_ASM("../asm/nonmatchings/memory/object_curLevel_goToFuncInLevel.s")
+// clang-format on
+
+#pragma GLOBAL_ASM("../asm/nonmatchings/memory/object_prevLevel_goToFunc.s")
+
+#pragma GLOBAL_ASM("../asm/nonmatchings/memory/object_nextLevel_goToFunc.s")

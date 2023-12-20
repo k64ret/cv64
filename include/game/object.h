@@ -1,51 +1,51 @@
-#ifndef MODULE_H
-#define MODULE_H
+#ifndef OBJECT_H
+#define OBJECT_H
 
 #include "cv64.h"
-#include "module_ID.h"
+#include "object_ID.h"
 
-#define MODULE_SIZE        0x74
-#define MODULE_HEADER_SIZE 0x20
+#define OBJECT_SIZE        0x74
+#define OBJECT_HEADER_SIZE 0x20
 
 // clang-format off
-typedef enum module_exec_flag {
+typedef enum object_exec_flag {
     PAUSE = CV64_BIT(14),
     TOP   = CV64_BIT(15)
-} module_exec_flag_t;
+} object_exec_flag_t;
 // clang-format on
 
-typedef struct {
+typedef struct object_func_info {
     u8 timer;         // Could also be "number of accesses to function"
     u8 function;      // ID within the functions array
-} module_func_info_t; // Size = 0x2
+} object_func_info_t; // Size = 0x2
 
-typedef struct {
+typedef struct object_header {
     s16 ID;
     s16 flags;
     s16 field_0x04;
     s16 field_0x06;
-    module_func_info_t current_function[3];
+    object_func_info_t current_function[3];
     s16 functionInfo_ID;
     void (*destroy)(void *); // Officially called "OBJ_destruct"
-    struct module_header_t *parent;
-    struct module_header_t *next;
-    struct module_header_t *child;
-} module_header_t; // Size = 0x20
+    struct object_header_t *parent;
+    struct object_header_t *next;
+    struct object_header_t *child;
+} object_header_t; // Size = 0x20
 
-extern void *module_create(void *parent, module_t ID);
-extern void *module_createAndSetChild(void *parent, module_t ID);
+extern void *object_create(void *parent, object_t ID);
+extern void *object_createAndSetChild(void *parent, object_t ID);
 extern void goToNextFunc(u16 current_functionInfo[], s16 *functionInfo_ID);
 extern void goToFunc(u16 current_functionInfo[], s16 *functionInfo_ID,
                      s32 function);
-extern void module_allocEntryInList(module_header_t *module,
+extern void object_allocEntryInList(object_header_t *object,
                                     s32 allocatedBlockInfo_index, u32 size,
                                     u32 ptrs_array_index);
-extern void *module_allocEntryInListAndClear(module_header_t *module,
+extern void *object_allocEntryInListAndClear(object_header_t *object,
                                              s32 allocatedBlockInfo_index,
                                              u32 size, u32 ptrs_array_index);
-extern void *moduleList_findFirstModuleByID(u16 ID);
-extern void clearAllModules();
-extern void func_8000E860(module_header_t *self);
+extern void *objectList_findFirstObjectByID(u16 ID);
+extern void clearAllObjects();
+extern void func_8000E860(object_header_t *self);
 
 // Mostly used inside entrypoint functions
 // Commas at the end of statements needed for matching
@@ -74,4 +74,4 @@ extern void func_8000E860(module_header_t *self);
     curFunc = &self->header.current_function[self->header.functionInfo_ID];    \
     curFunc->timer++, functions_array[curFunc->function](self);
 
-#endif // MODULE_H
+#endif // OBJECT_H

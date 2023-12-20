@@ -1,8 +1,8 @@
 #include "cv64.h"
 #include "memory.h"
-#include "module.h"
-#include "module_ID.h"
-#include "modules/engine/GameStateMgr.h"
+#include "object.h"
+#include "object_ID.h"
+#include "objects/engine/GameStateMgr.h"
 #include <ultra64.h>
 
 void gamestate_create(s32 game_state) {
@@ -14,8 +14,8 @@ void gamestate_create(s32 game_state) {
     // the game softlocks in case GameStateMgr
     // could not be created
     do {
-        clearAllModules();
-        ptr_GameStateMgr = module_create(NULL, ENGINE_GAMESTATE_MGR);
+        clearAllObjects();
+        ptr_GameStateMgr = object_create(NULL, ENGINE_GAMESTATE_MGR);
     } while (ptr_GameStateMgr == NULL);
 
     // Set GameStateMgr params (flags, destroy function, game state ID and game
