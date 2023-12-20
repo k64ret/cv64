@@ -1,9 +1,6 @@
 #include "c64.h"
 #include <ultra64.h>
 
-#define FALSE 0
-#define TRUE  1
-
 typedef struct {
     u8 R;
     u8 G;
@@ -19,21 +16,22 @@ typedef union {
     Color8 color_u8;
 } color_union;
 
-enum fade_flags {
-    FADE_WITH_OUTLINE =
-        0x0001, // Shows a black outline in the edges of all models while fading
-    FADE_IN = 0x4000,
-    FADE_OUT = 0x8000
-};
+// clang-format off
+typedef enum fade_flag {
+    FADE_WITH_OUTLINE = 0x0001, // Shows a black outline in the edges of all models while fading
+    FADE_IN           = 0x4000,
+    FADE_OUT          = 0x8000
+} fade_flag_t;
+// clang-format on
 
-typedef struct {
+typedef struct fade_settings {
     s16 flags;
     color_union color;
     u16 current_time;
     u16 max_time;
-} fade_settings_struct;
+} fade_settings_t;
 
-typedef struct {
+typedef struct controller_state {
     u16 is_connected;
     u16 buttons_held;
     u16 buttons_pressed;
@@ -41,9 +39,9 @@ typedef struct {
     s16 joystick_y;
     s16 joystick_angle;
     s16 joystick_held; // TODO: Maybe search another name for this variable.
-} controller_struct;
+} controller_state_t;
 
-typedef struct {
+typedef struct save_state {
     u32 event_flags[16];
     u32 flags;
     u16 week;
@@ -105,7 +103,7 @@ typedef struct {
     s16 field79_0xd4;
     s32 field83_0xd8;
     u32 money_spent_on_Renon;
-} SaveStruct;
+} save_state_t;
 
 typedef struct {
     u8 unk1[0x4010];
@@ -115,16 +113,16 @@ typedef struct {
     s16 code_execution_max_delay;
     s16 code_execution_delay_timer;
     s16 should_end_master_display_list;
-    fade_settings_struct fade_settings;
+    fade_settings_t fade_settings;
     u8 unk2[0x29C];
-    controller_struct controllers[4];
+    controller_state_t controllers[4];
     u8 file_load_array_ID;
     u8 field_80387db5[3];
     void *Nisitenma_Ichigo_loaded_files_ptr[0x255];
     u8 field_803881b4[4];
     void *file_load_array[8]; // fileLoad*
     u8 unk3[0x1A0C];
-    SaveStruct SaveStruct_gameplay; // 80389be4
+    save_state_t SaveStruct_gameplay; // 80389be4
     u8 unk4[0x28];
     s16 current_PowerUp_level; // 80389cec
     u8 unk5[0x18C];
