@@ -59,8 +59,9 @@
 
 #pragma GLOBAL_ASM("../asm/nonmatchings/memory/module_nextLevel_goToNextFunc.s")
 
-#pragma GLOBAL_ASM(                                                            \
-    "../asm/nonmatchings/memory/module_curLevel_goToNextFuncAndClearTimer.s")
+// clang-format off
+#pragma GLOBAL_ASM("../asm/nonmatchings/memory/module_curLevel_goToNextFuncAndClearTimer.s")
+// clang-format on
 
 #pragma GLOBAL_ASM("../asm/nonmatchings/memory/module_curLevel_goToPrevFunc.s")
 
@@ -68,13 +69,15 @@
 
 #pragma GLOBAL_ASM("../asm/nonmatchings/memory/module_nextLevel_goToPrevFunc.s")
 
-#pragma GLOBAL_ASM(                                                            \
-    "../asm/nonmatchings/memory/module_curLevel_goToPrevFuncAndClearTimer.s")
+// clang-format off
+#pragma GLOBAL_ASM("../asm/nonmatchings/memory/module_curLevel_goToPrevFuncAndClearTimer.s")
+// clang-format on
 
 #pragma GLOBAL_ASM("../asm/nonmatchings/memory/module_curLevel_goToFunc.s")
 
-#pragma GLOBAL_ASM(                                                            \
-    "../asm/nonmatchings/memory/module_curLevel_goToFuncInLevel.s")
+// clang-format off
+#pragma GLOBAL_ASM("../asm/nonmatchings/memory/module_curLevel_goToFuncInLevel.s")
+// clang-format on
 
 #pragma GLOBAL_ASM("../asm/nonmatchings/memory/module_prevLevel_goToFunc.s")
 
