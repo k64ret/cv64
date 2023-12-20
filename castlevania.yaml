@@ -312,7 +312,7 @@ segments:
       - [0x000908D0, asm]
       - [0x00090920, data]
       - { start: 0x00092B50, type: data, name: gamestate, vram: 0x80091F50 }
-      - { start: 0x00092E70, type: data, name: module, vram: 0x80092270 }
+      - { start: 0x00092E70, type: data, name: object, vram: 0x80092270 }
       - { start: 0x00093F70, type: data, name: fade, vram: 0x80093370 }
 
       - { start: 0x000A3320, type: rodata, name: 0x00004D80, vram: 0x800A2720 }
