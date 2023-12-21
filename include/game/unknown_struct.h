@@ -1,7 +1,7 @@
 #ifndef UNKNOWN_STRUCT_H
 #define UNKNOWN_STRUCT_H
 
-#include "color.h"
+#include "gfx/color.h"
 #include "fade.h"
 #include "controller.h"
 #include "save.h"

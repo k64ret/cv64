@@ -556,11 +556,13 @@ segments:
     vram: 0x801CC000
     exclusive_ram_id: ovl_801CC
 
-  - name: konami_kcek_logo
-    type: bin
+  - name: konamiLogo
+    type: code
     start: 0x006B4FC0
     vram: 0x801CFCD0
     exclusive_ram_id: ovl_801CF
+    subsegments:
+      - [0x006B4FC0, asm]
 
   - name: MORI # Forest
     type: bin

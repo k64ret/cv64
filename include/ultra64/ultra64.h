@@ -12,7 +12,7 @@
 // #include "gu.h"
 // #include "vi.h"
 // #include "pi.h"
-// #include "controller.h"
+#include "controller.h"
 // #include "printf.h"
 #include "mbi.h"
 // #include "pfs.h"
