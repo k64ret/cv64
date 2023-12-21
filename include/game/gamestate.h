@@ -1,21 +1,21 @@
-#ifndef GAME_STATE_H
-#define GAME_STATE_H
+#ifndef GAMESTATE_H
+#define GAMESTATE_H
 
 #include <ultra64.h>
 
 // clang-format off
 typedef enum cv64_gamestate_id {
-    KONAMI_LOGO     = 1,
-    GAMEPLAY        = 2,
-    GAME_OVER       = 3,
-    STAGE_SELECT    = 4,
-    INTRO_CUTSCENE  = 5,
-    TITLE_SCREEN    = 6,
-    DATA_MENU       = 7,
-    OPTIONS_MENU    = 8,
-    TITLE_DEMO      = 9,
-    GAMENOTE_DELETE = 10,
-    CREDITS         = 11
+    GAMESTATE_KONAMI_LOGO     = 1,
+    GAMESTATE_GAMEPLAY        = 2,
+    GAMESTATE_GAME_OVER       = 3,
+    GAMESTATE_STAGE_SELECT    = 4,
+    GAMESTATE_INTRO_CUTSCENE  = 5,
+    GAMESTATE_TITLE_SCREEN    = 6,
+    GAMESTATE_DATA_MENU       = 7,
+    GAMESTATE_OPTIONS_MENU    = 8,
+    GAMESTATE_TITLE_DEMO      = 9,
+    GAMESTATE_GAMENOTE_DELETE = 10,
+    GAMESTATE_CREDITS         = 11
 } cv64_gamestate_id_t;
 // clang-format on
 

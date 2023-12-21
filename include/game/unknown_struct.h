@@ -1,9 +1,9 @@
 #ifndef UNKNOWN_STRUCT_H
 #define UNKNOWN_STRUCT_H
 
-#include "color.h"
 #include "controller.h"
 #include "fade.h"
+#include "gfx/color.h"
 #include "save.h"
 #include <ultra64.h>
 

@@ -1,7 +1,7 @@
 #ifndef GAME_STATE_H
 #define GAME_STATE_H
 
-#include "color.h"
+#include "gfx/color.h"
 #include <ultra64.h>
 
 // clang-format off
