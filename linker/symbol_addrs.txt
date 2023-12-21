@@ -1718,7 +1718,4 @@ file_selection_number_strings = 0x8018129c;
 file_selection_Yes_No_string = 0x8018134c;
 file_selection_arrow_string = 0x80181360;
 file_selection_money_string = 0x801813d4;
-
-KONAMI_LOGO_DL = 0x0600C650;
-KCEK_LOGO_DL   = 0x06015CA0;
 func_8000E860 = 0x8000E860;

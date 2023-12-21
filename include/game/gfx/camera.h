@@ -43,17 +43,17 @@ typedef struct {
 } projection_matrix_params_ORTHO;
 
 typedef union {
-    projection_matrix_params* perspective;
-    projection_matrix_params_ORTHO* ortho;
+    projection_matrix_params *perspective;
+    projection_matrix_params_ORTHO *ortho;
 } union_projection_matrix;
 
 typedef struct {
     s16 type;
     u16 flags;
-    struct camera* prev;
-    struct camera* sibling;
-    struct camera* next;
-    struct camera* parent;
+    struct camera *prev;
+    struct camera *sibling;
+    struct camera *next;
+    struct camera *parent;
     u8 field1_0x14;
     u8 field2_0x15;
     u8 field3_0x16;
@@ -81,13 +81,13 @@ typedef struct {
     u8 field25_0x2d;
     u8 field26_0x2e;
     u8 field27_0x2f;
-    screen_params* screen_params;
+    screen_params *screen_params;
     union_projection_matrix projection_matrix_params;
     u8 field30_0x38;
     u8 field31_0x39;
     u8 field32_0x3a;
     u8 field33_0x3b;
-    Gfx* clip_ratio_dl;
+    Gfx *clip_ratio_dl;
     vec3f position;
     vec3s field36_0x4c;
     angle_t angle;
@@ -100,15 +100,15 @@ typedef struct {
 } camera;
 
 typedef struct {
-    camera* field_0x00;
-    camera* field_0x04;
-    camera* game_view;          // 3D view
-    camera* effects;            // Items, shadows, and some other effects
-    camera* field_0x10;         // Normal / Action / Battle / Boss view text
-    camera* field_0x14;         // Background elements, like in the pause menu
-    camera* field_0x18;         // Used for the scrolls?
-    camera* field_0x1C;         // Used for the pause menu scroll?
-    camera* HUD;                // Used for the gameplay HUD and text
+    camera *field_0x00;
+    camera *field_0x04;
+    camera *game_view;  // 3D view
+    camera *effects;    // Items, shadows, and some other effects
+    camera *field_0x10; // Normal / Action / Battle / Boss view text
+    camera *field_0x14; // Background elements, like in the pause menu
+    camera *field_0x18; // Used for the scrolls?
+    camera *field_0x1C; // Used for the pause menu scroll?
+    camera *HUD;        // Used for the gameplay HUD and text
 } common_cameras;
 
 extern common_cameras common_cameras_array;

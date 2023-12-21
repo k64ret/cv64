@@ -34,9 +34,11 @@ typedef struct object_header {
 
 extern void *object_create(void *parent, object_t ID);
 extern void *object_createAndSetChild(void *parent, object_t ID);
-extern void object_curLevel_goToNextFuncAndClearTimer(u16 current_functionInfo[], s16 *functionInfo_ID);
-extern void object_curLevel_goToFunc(u16 current_functionInfo[], s16 *functionInfo_ID,
-                     s32 function);
+extern void
+object_curLevel_goToNextFuncAndClearTimer(u16 current_functionInfo[],
+                                          s16 *functionInfo_ID);
+extern void object_curLevel_goToFunc(u16 current_functionInfo[],
+                                     s16 *functionInfo_ID, s32 function);
 extern void object_allocEntryInList(object_header_t *object,
                                     s32 allocatedBlockInfo_index, u32 size,
                                     u32 ptrs_array_index);
@@ -58,19 +60,23 @@ extern void func_8000E860(object_header_t *self);
     self->header.functionInfo_ID--;
 
 // module_func_info_t* curFunc;
-// void (*ptr_object_curLevel_goToFunc)(u16[], s16*, s32) = object_curLevel_goToFunc;
-#define GO_TO_FUNC(self, functions_array, curFunc, object_curLevel_goToFunc,                   \
+// void (*ptr_object_curLevel_goToFunc)(u16[], s16*, s32) =
+// object_curLevel_goToFunc;
+#define GO_TO_FUNC(self, functions_array, curFunc, object_curLevel_goToFunc,   \
                    function_array_ID)                                          \
-    object_curLevel_goToFunc(self->header.current_function, &self->header.functionInfo_ID,     \
-             function_array_ID);                                               \
+    object_curLevel_goToFunc(self->header.current_function,                    \
+                             &self->header.functionInfo_ID,                    \
+                             function_array_ID);                               \
     curFunc = &self->header.current_function[self->header.functionInfo_ID];    \
     curFunc->timer++, functions_array[curFunc->function](self);
 
 // module_func_info_t* curFunc;
-// void (*ptr_object_curLevel_goToNextFuncAndClearTimer)(u16[], s16*) = object_curLevel_goToNextFuncAndClearTimer;
-#define GO_TO_NEXT_FUNC(self, functions_array, curFunc, object_curLevel_goToNextFuncAndClearTimer)          \
-    object_curLevel_goToNextFuncAndClearTimer(self->header.current_function,                                \
-                 &self->header.functionInfo_ID);                               \
+// void (*ptr_object_curLevel_goToNextFuncAndClearTimer)(u16[], s16*) =
+// object_curLevel_goToNextFuncAndClearTimer;
+#define GO_TO_NEXT_FUNC(self, functions_array, curFunc,                        \
+                        object_curLevel_goToNextFuncAndClearTimer)             \
+    object_curLevel_goToNextFuncAndClearTimer(self->header.current_function,   \
+                                              &self->header.functionInfo_ID);  \
     curFunc = &self->header.current_function[self->header.functionInfo_ID];    \
     curFunc->timer++, functions_array[curFunc->function](self);
 
