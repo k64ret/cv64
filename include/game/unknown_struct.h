@@ -20,9 +20,9 @@ typedef struct {
     cv64_controller_state_t controllers[4];
     u8 file_load_array_ID;
     u8 field_80387db5[3];
-    void *Nisitenma_Ichigo_loaded_files_ptr[0x255];
+    void* Nisitenma_Ichigo_loaded_files_ptr[0x255];
     u8 field_803881b4[4];
-    void *file_load_array[8]; // fileLoad*
+    void* file_load_array[8]; // fileLoad*
     u8 unk3[0x1A0C];
     cv64_save_state_t SaveStruct_gameplay; // 80389be4
     u8 unk4[0x28];

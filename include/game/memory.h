@@ -37,9 +37,9 @@ typedef struct cv64_heapblock_hdr {
     u16 flags;
     u8 field_0x02[2];
     u32 size;         // Size of the block
-    void *field_0x08; // Display List / GFX related?
-    void *data_start;
-    void *data_end;   // End of the allocated data, NOT end of the block
+    void* field_0x08; // Display List / GFX related?
+    void* data_start;
+    void* data_end;   // End of the allocated data, NOT end of the block
     u8 field_0x14[4]; // Related to file decompression?
 } cv64_heapblock_hdr_t;
 
@@ -47,23 +47,23 @@ typedef struct cv64_heap_inf {
     u16 flags;
     u8 field_0x02[2];
     u32 size;                         // Size of the heap
-    cv64_heapblock_hdr_t *heap_start; // Start of the block array
+    cv64_heapblock_hdr_t* heap_start; // Start of the block array
 } cv64_heap_inf_t;
 
 extern cv64_heap_inf_t heaps[8];
-extern void *HEAP_MULTIPURPOSE_START;
-extern void *HEAP_MENU_DATA_START;
+extern void* HEAP_MULTIPURPOSE_START;
+extern void* HEAP_MENU_DATA_START;
 
-extern void memory_copy(void *src, void *dest, u32 size);
-extern void memory_clear(void *ptr, u32 length);
-extern void heap_init(s32 kind, cv64_heapblock_hdr_t *first_block_ptr,
+extern void memory_copy(void* src, void* dest, u32 size);
+extern void memory_clear(void* ptr, u32 length);
+extern void heap_init(s32 kind, cv64_heapblock_hdr_t* first_block_ptr,
                       s32 heap_size, u16 additional_flags);
 extern void heap_free(s32 kind);
 extern void heap_writebackDCache();
 extern void initHeaps();
-extern void *heap_alloc(s32 kind, u32 data_size); // CV64's malloc()
-extern void *heap_allocWithAlignment(s32 kind, u32 data_size, u32 alignment);
-extern s32 heapBlock_updateBlockMaxSize(void *data, u32 data_size);
-extern void heapBlock_free(void *ptr); // CV64's free()
+extern void* heap_alloc(s32 kind, u32 data_size); // CV64's malloc()
+extern void* heap_allocWithAlignment(s32 kind, u32 data_size, u32 alignment);
+extern s32 heapBlock_updateBlockMaxSize(void* data, u32 data_size);
+extern void heapBlock_free(void* ptr); // CV64's free()
 
 #endif

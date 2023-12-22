@@ -30,12 +30,12 @@ typedef double                 f64;    /* double precision floating point */
 #endif // _LANGUAGE_C
 
 #ifndef NULL
-#define NULL (void *)0
+#define NULL (void*)0
 #endif
 
 // Leftover strings in the ROM suggest the usage of "NPTR" instead of "NULL"
 #ifndef NPTR
-#define NPTR (void *)0
+#define NPTR (void*)0
 #endif
 
 #ifndef TRUE

@@ -26,28 +26,28 @@ typedef struct object_header {
     s16 field_0x06;
     object_func_info_t current_function[3];
     s16 functionInfo_ID;
-    void (*destroy)(void *); // Officially called "OBJ_destruct"
-    struct object_header_t *parent;
-    struct object_header_t *next;
-    struct object_header_t *child;
+    void (*destroy)(void*); // Officially called "OBJ_destruct"
+    struct object_header_t* parent;
+    struct object_header_t* next;
+    struct object_header_t* child;
 } object_header_t; // Size = 0x20
 
-extern void *object_create(void *parent, object_t ID);
-extern void *object_createAndSetChild(void *parent, object_t ID);
+extern void* object_create(void* parent, object_t ID);
+extern void* object_createAndSetChild(void* parent, object_t ID);
 extern void
 object_curLevel_goToNextFuncAndClearTimer(u16 current_functionInfo[],
-                                          s16 *functionInfo_ID);
+                                          s16* functionInfo_ID);
 extern void object_curLevel_goToFunc(u16 current_functionInfo[],
-                                     s16 *functionInfo_ID, s32 function);
-extern void object_allocEntryInList(object_header_t *object,
+                                     s16* functionInfo_ID, s32 function);
+extern void object_allocEntryInList(object_header_t* object,
                                     s32 allocatedBlockInfo_index, u32 size,
                                     u32 ptrs_array_index);
-extern void *object_allocEntryInListAndClear(object_header_t *object,
+extern void* object_allocEntryInListAndClear(object_header_t* object,
                                              s32 allocatedBlockInfo_index,
                                              u32 size, u32 ptrs_array_index);
-extern void *objectList_findFirstObjectByID(u16 ID);
+extern void* objectList_findFirstObjectByID(u16 ID);
 extern void clearAllObjects();
-extern void func_8000E860(object_header_t *self);
+extern void func_8000E860(object_header_t* self);
 
 // Mostly used inside entrypoint functions
 // Commas at the end of statements needed for matching

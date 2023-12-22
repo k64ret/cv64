@@ -142,7 +142,7 @@ typedef struct {
 } OSContPad; // size = 0x06
 
 typedef struct {
-    /* 0x00 */ void *address;
+    /* 0x00 */ void* address;
     /* 0x04 */ u8 databuffer[32];
     /* 0x24 */ u8 addressCrc;
     /* 0x25 */ u8 dataCrc;
@@ -180,7 +180,7 @@ typedef struct {
     /* 0x26 */ u8 datacrc;
 } __OSContRamReadFormat; // size = 0x27
 
-#define READFORMAT(ptr) ((__OSContRamReadFormat *)(ptr))
+#define READFORMAT(ptr) ((__OSContRamReadFormat*)(ptr))
 
 typedef struct {
     /* 0x00 */ u8 align;
