@@ -13,9 +13,6 @@ typedef struct cv64_color_rgba {
     u8 A;
 } cv64_color_rgba_t;
 
-// Needed to avoid addition of padding between variables like
-// D_80383AB8's 'should_end_master_display_list' and 'fade_settings'
-#pragma pack(1)
 /**
  * RGBA color
  */

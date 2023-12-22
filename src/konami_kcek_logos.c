@@ -10,19 +10,19 @@
  *   0x6B4FC0 - 0x6B5480 (Overlay)
  */
 
-// #include "objects/engine/gamestates/konamiLogo/konamiLogo.h"
+#include "objects/engine/gamestates/konamiLogo/konamiLogo.h"
 // #include "gfx/model_info.h"
 // #include "object.h"
 #include "cv64.h"
 #include <ultra64.h>
 
 // clang-format off
-#pragma GLOBAL_ASM("../asm/nonmatchings/konami_kcek_logos/konamiLogo_entrypoint.s")
+// #pragma GLOBAL_ASM("../asm/nonmatchings/konami_kcek_logos/konamiLogo_entrypoint.s")
 // clang-format on
 
-// void konamiLogo_entrypoint(konamiLogo *self) {
-//     ENTER(self, konamiLogo_functions);
-// }
+void konamiLogo_entrypoint(cv64_konamilogo_t* self) {
+    ENTER(self, konamiLogo_functions);
+}
 
 // clang-format off
 #pragma GLOBAL_ASM("../asm/nonmatchings/konami_kcek_logos/konamiLogo_checkButtonPress.s")
