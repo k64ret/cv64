@@ -10,11 +10,11 @@
  *   0x6B4FC0 - 0x6B5480 (Overlay)
  */
 
-#include "objects/engine/gamestates/konamiLogo/konamiLogo.h"
-#include "gfx/camera.h"
-#include "gamestate.h"
-#include "unknown_struct.h"
 #include "cv64.h"
+#include "gamestate.h"
+#include "gfx/camera.h"
+#include "objects/engine/gamestates/konamiLogo/konamiLogo.h"
+#include "unknown_struct.h"
 #include <ultra64.h>
 
 void konamiLogo_entrypoint(cv64_konamilogo_t* self) {
@@ -22,7 +22,7 @@ void konamiLogo_entrypoint(cv64_konamilogo_t* self) {
 }
 
 void konamiLogo_checkButtonPress(cv64_konamilogo_t* self) {
-    void (*ptr_object_curLevel_goToFunc)(u16[], s16 *, s32) =
+    void (*ptr_object_curLevel_goToFunc)(u16[], s16*, s32) =
         object_curLevel_goToFunc;
 
     if ((D_80383AB8.controllers[0].buttons_pressed |
@@ -37,12 +37,12 @@ void konamiLogo_checkButtonPress(cv64_konamilogo_t* self) {
 }
 
 void konamiLogo_init(cv64_konamilogo_t* self) {
-    model_info *model;
-    object_func_info_t *curFunc;
+    cv64_model_inf_t* model;
+    cv64_obj_func_inf_t* curFunc;
 
-    model_info *(*ptr_modelInfo_createRootNode)(u32, void *) =
+    cv64_model_inf_t* (*ptr_modelInfo_createRootNode)(u32, void*) =
         modelInfo_createRootNode;
-    void (*ptr_object_curLevel_goToNextFuncAndClearTimer)(u16[], s16 *) =
+    void (*ptr_object_curLevel_goToNextFuncAndClearTimer)(u16[], s16*) =
         object_curLevel_goToNextFuncAndClearTimer;
 
     model = ptr_modelInfo_createRootNode(0x10, common_cameras_array.HUD);
@@ -51,17 +51,19 @@ void konamiLogo_init(cv64_konamilogo_t* self) {
     model->assets_file_ID = 0x5D;
     model->size.x = 0.9975f;
     model->size.y = 1.005f;
-    CV64_COLOR_RGBA_TO_U32(D_80383AB8.background_color) = 0x000000FF; // Black (opaque)
+    CV64_COLOR_RGBA_TO_U32(D_80383AB8.background_color) =
+        0x000000FF; // Black (opaque)
     model->flags |= 0x800;
-    CV64_COLOR_RGBA_TO_U32(model->primitive_color) = 0xFFFFFF00; // White (transparent)
+    CV64_COLOR_RGBA_TO_U32(model->primitive_color) =
+        0xFFFFFF00; // White (transparent)
 
     GO_TO_NEXT_FUNC(self, konamiLogo_functions, curFunc,
                     ptr_object_curLevel_goToNextFuncAndClearTimer);
 }
 
 void konamiLogo_fade_in(cv64_konamilogo_t* self) {
-    model_info *model = self->model;
-    void (*ptr_object_curLevel_goToNextFuncAndClearTimer)(u16[], s16 *) =
+    cv64_model_inf_t* model = self->model;
+    void (*ptr_object_curLevel_goToNextFuncAndClearTimer)(u16[], s16*) =
         object_curLevel_goToNextFuncAndClearTimer;
 
     if (model->primitive_color.A < 0xF3) {
@@ -71,17 +73,16 @@ void konamiLogo_fade_in(cv64_konamilogo_t* self) {
         ptr_object_curLevel_goToNextFuncAndClearTimer(
             self->header.current_function, &self->header.functionInfo_ID);
     }
-    D_80383AB8.background_color.R =
-    model->primitive_color.A; D_80383AB8.background_color.G
-    = model->primitive_color.A;
-    D_80383AB8.background_color.B =
-    model->primitive_color.A; konamiLogo_checkButtonPress(self);
+    D_80383AB8.background_color.R = model->primitive_color.A;
+    D_80383AB8.background_color.G = model->primitive_color.A;
+    D_80383AB8.background_color.B = model->primitive_color.A;
+    konamiLogo_checkButtonPress(self);
 }
 
 void konamiLogo_wait(cv64_konamilogo_t* self) {
     s32 timer =
         self->header.current_function[self->header.functionInfo_ID].timer;
-    void (*ptr_object_curLevel_goToNextFuncAndClearTimer)(u16[], s16 *) =
+    void (*ptr_object_curLevel_goToNextFuncAndClearTimer)(u16[], s16*) =
         object_curLevel_goToNextFuncAndClearTimer;
 
     if (timer >= 169) {
@@ -96,8 +97,8 @@ void konamiLogo_wait(cv64_konamilogo_t* self) {
 }
 
 void konamiLogo_fade_out(cv64_konamilogo_t* self) {
-    model_info *model = self->model;
-    void (*ptr_object_curLevel_goToNextFuncAndClearTimer)(u16[], s16 *) =
+    cv64_model_inf_t* model = self->model;
+    void (*ptr_object_curLevel_goToNextFuncAndClearTimer)(u16[], s16*) =
         object_curLevel_goToNextFuncAndClearTimer;
 
     if (model->primitive_color.A >= 0x0A) {
@@ -111,8 +112,8 @@ void konamiLogo_fade_out(cv64_konamilogo_t* self) {
 }
 
 void konamiLogo_KCEK_fade_in(cv64_konamilogo_t* self) {
-    model_info *model = self->model;
-    void (*ptr_object_curLevel_goToNextFuncAndClearTimer)(u16[], s16 *) =
+    cv64_model_inf_t* model = self->model;
+    void (*ptr_object_curLevel_goToNextFuncAndClearTimer)(u16[], s16*) =
         object_curLevel_goToNextFuncAndClearTimer;
 
     model->size.x = 0.995f;
@@ -128,8 +129,8 @@ void konamiLogo_KCEK_fade_in(cv64_konamilogo_t* self) {
 }
 
 void konamiLogo_KCEK_wait(cv64_konamilogo_t* self) {
-    model_info *model = self->model;
-    void (*ptr_object_curLevel_goToNextFuncAndClearTimer)(u16[], s16 *) =
+    cv64_model_inf_t* model = self->model;
+    void (*ptr_object_curLevel_goToNextFuncAndClearTimer)(u16[], s16*) =
         object_curLevel_goToNextFuncAndClearTimer;
 
     model->size.x = 0.995f;
@@ -147,8 +148,8 @@ void konamiLogo_KCEK_wait(cv64_konamilogo_t* self) {
 }
 
 void konamiLogo_KCEK_fade_out(cv64_konamilogo_t* self) {
-    model_info *model = self->model;
-    void (*ptr_object_curLevel_goToNextFuncAndClearTimer)(u16[], s16 *) =
+    cv64_model_inf_t* model = self->model;
+    void (*ptr_object_curLevel_goToNextFuncAndClearTimer)(u16[], s16*) =
         object_curLevel_goToNextFuncAndClearTimer;
     void (*ptr_gamestate_change)(s32) = gamestate_change;
 
@@ -159,9 +160,7 @@ void konamiLogo_KCEK_fade_out(cv64_konamilogo_t* self) {
         model->primitive_color.A = 0x00;
         ptr_gamestate_change(GAMESTATE_INTRO_CUTSCENE);
     }
-    D_80383AB8.background_color.R =
-    model->primitive_color.A; D_80383AB8.background_color.G
-    = model->primitive_color.A;
-    D_80383AB8.background_color.B =
-    model->primitive_color.A;
+    D_80383AB8.background_color.R = model->primitive_color.A;
+    D_80383AB8.background_color.G = model->primitive_color.A;
+    D_80383AB8.background_color.B = model->primitive_color.A;
 }

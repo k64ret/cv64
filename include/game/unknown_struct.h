@@ -9,7 +9,7 @@
 
 typedef struct {
     u8 unk1[0x4010];
-    cv64_color_rgba_t background_color;
+    cv64_rgba_t background_color;
     s16 should_setup_background_color;
     s16 should_setup_Z_buffer;
     s16 code_execution_max_delay;
@@ -133,8 +133,8 @@ typedef struct {
     u8 field25416_0x6427;
     s16 map_ID; // 80389ee0
     s16 map_entrance_ID;
-    cv64_color_rgba_t map_fade_in_color; // 80389ee4
-    s16 map_fade_out_time;          // 80389ee8
+    cv64_rgba_t map_fade_in_color; // 80389ee4
+    s16 map_fade_out_time;         // 80389ee8
     s16 map_fade_in_time;
     u16 field25429_0x6434;
     u16 current_opened_menu;
