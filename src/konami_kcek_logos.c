@@ -10,10 +10,10 @@
  *   0x6B4FC0 - 0x6B5480 (Overlay)
  */
 
+#include "objects/engine/gamestates/konami_kcek_logos.h"
 #include "cv64.h"
 #include "gamestate.h"
 #include "gfx/camera.h"
-#include "objects/engine/gamestates/konamiLogo/konamiLogo.h"
 #include "unknown_struct.h"
 #include <ultra64.h>
 
