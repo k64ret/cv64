@@ -831,7 +831,8 @@ segments:
     exclusive_ram_id: ovl_801
     subsegments:
       - [0x006F21D0, asm, overlay/map/ENDING]
-      - [0x006F39C0, rodata, overlay/map/ENDING]
+      - [0x006F39C0, data, overlay/map/ENDING]
+      - [0x006F3B80, rodata, overlay/map/ENDING]
   # End of uncompressed overlays
 
   # Compressed (Nisitenma-Ichigo) files
