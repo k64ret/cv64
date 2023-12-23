@@ -23,10 +23,10 @@ typedef struct {
     u8 field4_0x38[4];
     s32 field5_0x3c;
     u8 field6_0x40[40];
-    cv64_color_t primitive_color;
-    cv64_color_t environment_color;
-    cv64_color_t blend_color;
-    cv64_color_t fog_color;
+    cv64_color_rgba_t primitive_color;
+    cv64_color_rgba_t environment_color;
+    cv64_color_rgba_t blend_color;
+    cv64_color_rgba_t fog_color;
     u8 field11_0x78[48];
 } struct_47;
 

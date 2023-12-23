@@ -12,10 +12,10 @@ typedef struct {
     struct model_info* sibling;
     struct model_info* next;
     struct model_info* parent;
-    cv64_color_t primitive_color;
-    cv64_color_t environment_color;
-    cv64_color_t blend_color;
-    cv64_color_t fog_color;
+    cv64_color_rgba_t primitive_color;
+    cv64_color_rgba_t environment_color;
+    cv64_color_rgba_t blend_color;
+    cv64_color_rgba_t fog_color;
     u16 texture;
     u16 palette;
     u8 field24_0x28;
