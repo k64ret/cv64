@@ -59,7 +59,6 @@ animationMgr_checkDifferentAnimRotationDataPtrs = 0x8000bbdc;
 animationMgr_setAnimParamsAndTranslationData = 0x8000be10;
 animationMgr_setAnimParamsAndTranslationDataWithoutSmoothingPosTransition = 0x8000be4c;
 animationMgr_animateFrame = 0x8000c0b8;
-fade_calc = 0x8000e6c4;
 GameStateMgr_createGameStateObjects = 0x8000eb64;
 GameStateMgr_executeGameStateObjects = 0x8000ecb0;
 object_loadAssociatedFiles = 0x8000ed60;
@@ -1120,8 +1119,6 @@ Player_red_jewels = 0x80389c49;
 fileSelectController_goToGameplay = 0x80143218;
 map_ID = 0x80389ee0;
 cutscene_ID = 0x80389ef8;
-fade_setSettings = 0x8000e618;
-fade_isFading = 0x8000e67c;
 mapObjectParent_calc = 0x80018a28;
 enemyParent_calc = 0x80018e6c;
 map_entrance_ID = 0x80389ee2;
@@ -1233,10 +1230,6 @@ __ull_rshift = 0x800820d0;
 selection_text_idle_time = 0x80180484;
 some_timer_SHORT = 0x80387d74;
 gameplayMenuMgr_initHUDParams = 0x80136894;
-fade_setColor = 0x8000e5f4;
-fade_removeFlag = 0x8000e5cc;
-fade_setAllFlags = 0x8000e590;
-fade_setFlag = 0x8000e5a8;
 fade_alpha = 0x80387adb;
 gameplayMgr_main_disableCamerasInMenu = 0x80018688;
 gDisplayListHead = 0x800b49e0;
@@ -1448,7 +1441,26 @@ cutscene_settings = 0x8016b5b4;
 Objects_number_of_instances_per_object = 0x8034ce5e;
 kingSkeleton_objectFiles = 0x80095b78;
 gameState_konamiLogo_overlay_info = 0x800958b0;
-objects_file_info = 0x8009342c;
+
+// src/fade.c
+
+// .text
+fade_setSettings          = 0x8000e618; // type:func
+fade_isFading             = 0x8000e67c; // type:func
+fade_setColor             = 0x8000e5f4; // type:func
+fade_removeFlag           = 0x8000e5cc; // type:func
+fade_setAllFlags          = 0x8000e590; // type:func
+fade_setFlag              = 0x8000e5a8; // type:func
+fade_calc                 = 0x8000e6c4; // type:func
+
+// .data
+cv64_dl_fade_normal       = 0x80093370;
+cv64_dl_fade_with_outline = 0x800933D0;
+objects_file_info         = 0x8009342C;
+// .rodata
+
+// End of src/fade.c
+
 gameState_konamiLogo_object_files = 0x800958c0;
 gameState_gameOver_object_files = 0x80096348;
 object_list_free_space = 0x800a7830;

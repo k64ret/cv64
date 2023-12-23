@@ -53,7 +53,7 @@ add_custom_command(
   COMMENT "Comparing ${ROM} ROM file to ${BASEROM}"
   VERBATIM)
 
-target_compile_definitions(${TARGET} PRIVATE $<$<COMPILE_LANGUAGE:C>:_LANGUAGE_C>)
+target_compile_definitions(${TARGET} PRIVATE $<$<COMPILE_LANGUAGE:C>:_LANGUAGE_C NON_MATCHING>)
 
 target_compile_options(
   ${TARGET}

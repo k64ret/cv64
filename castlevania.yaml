@@ -312,15 +312,18 @@ segments:
       - [0x00090820, asm]
       - [0x000908D0, bin] # Possibly rsp microcode
       - [0x00090920, data]
-      - { start: 0x00092B50, type: data, name: gamestate, vram: 0x80091F50 }
-      - { start: 0x00092E70, type: data, name: object, vram: 0x80092270 }
-      - { start: 0x00093F70, type: data, name: fade, vram: 0x80093370 }
+      - [0x00092B50, data, gamestate]
+      - [0x00092E70, data, object]
+      - [0x00093F70, data, fade]
+      - [0x000948E0, data]
 
-      - { start: 0x000A3320, type: rodata, name: 0x00004D80, vram: 0x800A2720 }
-      - { start: 0x000A3330, type: rodata, name: figure, vram: 0x800A2730 }
-      - { start: 0x000A3390, type: rodata, name: 0x0000D270, vram: 0x800A2790 }
-      - { start: 0x000A33A0, type: rodata, name: 0x0000DD70, vram: 0x800A27A0 }
-      - { start: 0x000A33B0, type: rodata, name: fade, vram: 0x800A27B0 }
+      - [0x000A3320, rodata, 0x00004D80]
+      - [0x000A3330, rodata, figure]
+      - [0x000A3390, rodata, 0x0000D270]
+      - [0x000A33A0, rodata, 0x0000DD70]
+      - [0x000A33B0, rodata, fade]
+      # - [0x000A33D8, rodata]
+      # - [0x000A33E4, rodata]
 
       - [0x000A3410, asm]
       # - [0x000A3410, rodata]
@@ -541,7 +544,8 @@ segments:
     vram: 0x803D13E0
     exclusive_ram_id: ovl_803
     subsegments:
-      - [0x00697040, asm]
+      - [0x00697040, asm, overlay/reinhardt]
+      - [0x006A2B50, data, overlay/reinhardt]
 
   - name: carrie
     type: code
@@ -549,13 +553,18 @@ segments:
     vram: 0x803D13E0
     exclusive_ram_id: ovl_803
     subsegments:
-      - [0x006A42D0, asm]
+      - [0x006A42D0, asm, overlay/carrie]
+      - [0x006B0590, data, overlay/carrie]
 
   - name: gamenote_delete
-    type: bin
+    type: code
     start: 0x006B12F0
     vram: 0x801CC000
     exclusive_ram_id: ovl_801CC
+    subsegments:
+      - [0x006B12F0, asm, overlay/gamenote_delete]
+      - [0x006B4850, data, overlay/gamenote_delete]
+      - [0x006B4F60, rodata, overlay/gamenote_delete]
 
   - name: konami_kcek_logos
     type: code
@@ -563,177 +572,263 @@ segments:
     vram: 0x801CFCD0
     exclusive_ram_id: ovl_801CF
     subsegments:
-      - [0x006B4FC0, c, konami_kcek_logos]
-      - [0x006B5450, .data, konami_kcek_logos]
-      - [0x006B5470, .rodata, konami_kcek_logos]
+      - [0x006B4FC0, c, overlay/konami_kcek_logos]
+      - [0x006B5450, .data, overlay/konami_kcek_logos]
+      - [0x006B5470, .rodata, overlay/konami_kcek_logos]
 
   - name: MORI # Forest
-    type: bin
+    type: code
     start: 0x006B5480
     vram: 0x8018EB10
     exclusive_ram_id: ovl_801
+    subsegments:
+      - [0x006B5480, asm, overlay/map/MORI]
+      - [0x006BA620, data, overlay/map/MORI]
+      - [0x006BAA40, rodata, overlay/map/MORI]
 
   - name: TOU # Tower
-    type: bin
+    type: code
     start: 0x006BAB80
     vram: 0x8018EB10
     exclusive_ram_id: ovl_801
+    subsegments:
+      - [0x006BAB80, asm, overlay/map/TOU]
+      - [0x006BF7E0, data, overlay/map/TOU]
 
   - name: TOUOKUJI # Tower Roof
-    type: bin
+    type: code
     start: 0x006BFBF0
     vram: 0x8018EB10
     exclusive_ram_id: ovl_801
+    subsegments:
+      - [0x006BFBF0, asm, overlay/map/TOUOKUJI]
+      - [0x006C12F0, data, overlay/map/TOUOKUJI]
 
   - name: NAKANIWA # Inner Garden
-    type: bin
+    type: code
     start: 0x006C1460
     vram: 0x8018EB10
     exclusive_ram_id: ovl_801
+    subsegments:
+      - [0x006C1460, asm, overlay/map/NAKANIWA]
+      - [0x006C2D30, data, overlay/map/NAKANIWA]
 
   - name: BEKKAN_1F # Annex 1F
+    # type: code
     type: bin
     start: 0x006C2F20
     vram: 0x8018EB10
     exclusive_ram_id: ovl_801
+    # subsegments:
+    #   - [0x006C2F20, asm, overlay/map/BEKKAN_1F]
+    #   - [0x006C32EC, data, overlay/map/BEKKAN_1F]
 
   - name: BEKKAN_2F # Annex 2F
+    # type: code
     type: bin
     start: 0x006C3300
     vram: 0x8018EB10
     exclusive_ram_id: ovl_801
+    # subsegments:
+    #   - [0x006C3300, asm, overlay/map/BEKKAN_2F]
 
   - name: MEIRO_TEIEN # Maze Garden
+    # type: code
     type: bin
     start: 0x006C50E0
     vram: 0x8018EB10
     exclusive_ram_id: ovl_801
+    # subsegments:
+    #   - [0x006C50E0, asm, overlay/map/MEIRO_TEIEN]
 
   - name: CHIKA_KODO # Underground Mining Tunnel
+    # type: code
     type: bin
     start: 0x006C5110
     vram: 0x8018EB10
     exclusive_ram_id: ovl_801
+    # subsegments:
+    #   - [0x006C5110, asm, overlay/map/CHIKA_KODO]
 
   - name: CHIKA_SUIRO # Underground Waterway
+    # type: code
     type: bin
     start: 0x006C77D0
     vram: 0x8018EB10
     exclusive_ram_id: ovl_801
+    # subsegments:
+    #   - [0x006C77D0, asm, overlay/map/CHIKA_SUIRO]
 
   - name: HONMARU_B1F # Castle Center B1F
+    # type: code
     type: bin
     start: 0x006C86A0
     vram: 0x8018EB10
     exclusive_ram_id: ovl_801
+    # subsegments:
+    #   - [0x006C86A0, asm, overlay/map/HONMARU_B1F]
 
   - name: HONMARU_1F # Castle Center 1F
+    # type: code
     type: bin
     start: 0x006C9BF0
     vram: 0x8018EB10
     exclusive_ram_id: ovl_801
+    # subsegments:
+    #   - [0x006C9BF0, asm, overlay/map/HONMARU_1F]
 
   - name: HONMARU_2F # Castle Center 2F
+    # type: code
     type: bin
     start: 0x006CB850
     vram: 0x8018EB10
     exclusive_ram_id: ovl_801
+    # subsegments:
+    #   - [0x006CB850, asm, overlay/map/HONMARU_2F]
 
   - name: HONMARU_3F_MINAMI # Castle Center South 3F
+    # type: code
     type: bin
     start: 0x006CD050
     vram: 0x8018EB10
     exclusive_ram_id: ovl_801
+    # subsegments:
+    #   - [0x006CD050, asm, overlay/map/HONMARU_3F_MINAMI]
 
   - name: HONMARU_4F_MINAMI # Castle Center South 4F
+    # type: code
     type: bin
     start: 0x006CD740
     vram: 0x8018EB10
     exclusive_ram_id: ovl_801
+    # subsegments:
+    #   - [0x006CD740, asm, overlay/map/HONMARU_4F_MINAMI]
 
   - name: HONMARU_3F_KITA # Castle Center North 3F
+    # type: code
     type: bin
     start: 0x006CE4B0
     vram: 0x8018EB10
     exclusive_ram_id: ovl_801
+    # subsegments:
+    #   - [0x006CE4B0, asm, overlay/map/HONMARU_3F_KITA]
 
   - name: HONMARU_5F # Castle Center 5F
+    # type: code
     type: bin
     start: 0x006CE9A0
     vram: 0x8018EB10
     exclusive_ram_id: ovl_801
+    # subsegments:
+    #   - [0x006CE9A0, asm, overlay/map/HONMARU_5F]
 
   - name: SHOKEI_TOU # Tower of Execution
+    # type: code
     type: bin
     start: 0x006CF420
     vram: 0x8018EB10
     exclusive_ram_id: ovl_801
+    # subsegments:
+    #   - [0x006CF420, asm, overlay/map/SHOKEI_TOU]
 
   - name: MAHOU_TOU # Tower of Sorcery
+    # type: code
     type: bin
     start: 0x006D35A0
     vram: 0x8018EB10
     exclusive_ram_id: ovl_801
+    # subsegments:
+    #   - [0x006D35A0, asm, overlay/map/MAHOU_TOU]
 
   - name: KAGAKU_TOU # Tower of Science
+    # type: code
     type: bin
     start: 0x006D74F0
     vram: 0x8018EB10
     exclusive_ram_id: ovl_801
+    # subsegments:
+    #   - [0x006D74F0, asm, overlay/map/KAGAKU_TOU]
 
   - name: KETTOU_TOU # Duel Tower
+    # type: code
     type: bin
     start: 0x006E31D0
     vram: 0x8018EB10
     exclusive_ram_id: ovl_801
+    # subsegments:
+    #   - [0x006E31D0, asm, overlay/map/KETTOU_TOU]
 
   - name: TURO_TOKEITOU # Clock Tower
+    # type: code
     type: bin
     start: 0x006E86B0
     vram: 0x8018EB10
     exclusive_ram_id: ovl_801
+    # subsegments:
+    #   - [0x006E86B0, asm, overlay/map/TURO_TOKEITOU]
 
   - name: TENSHU # Castle Tower
+    # type: code
     type: bin
     start: 0x006EA480
     vram: 0x8018EB10
     exclusive_ram_id: ovl_801
+    # subsegments:
+    #   - [0x006EA480, asm, overlay/map/TENSHU]
 
   - name: TOKEITOU_NAI # Ending Dummy
+    # type: code
     type: bin
     start: 0x006EBD90
     vram: 0x8018EB10
     exclusive_ram_id: ovl_801
+    # subsegments:
+    #   - [0x006EBD90, asm, overlay/map/TOKEITOU_NAI]
 
   - name: DRACULA # Dracula
+    # type: code
     type: bin
     start: 0x006F0150
     vram: 0x8018EB10
     exclusive_ram_id: ovl_801
+    # subsegments:
+    #   - [0x006F0150, asm, overlay/map/DRACULA]
 
   - name: ROSE # Rose
+    # type: code
     type: bin
     start: 0x006F0A50
     vram: 0x8018EB10
     exclusive_ram_id: ovl_801
+    # subsegments:
+    #   - [0x006F0A50, asm, overlay/map/ROSE]
 
   - name: BEKKAN_BOSS # Annex Boss
+    # type: code
     type: bin
     start: 0x006F11B0
     vram: 0x8018EB10
     exclusive_ram_id: ovl_801
+    # subsegments:
+    #   - [0x006F11B0, asm, overlay/map/BEKKAN_BOSS]
 
   - name: TOU_TURO # Tower Passage
+    # type: code
     type: bin
     start: 0x006F1B80
     vram: 0x8018EB10
     exclusive_ram_id: ovl_801
+    # subsegments:
+    #   - [0x006F1B80, asm, overlay/map/TOU_TURO]
 
   - name: ENDING # Ending
-    type: bin
+    type: code
     start: 0x006F21D0
     vram: 0x8018EB10
     exclusive_ram_id: ovl_801
+    subsegments:
+      - [0x006F21D0, asm, overlay/map/ENDING]
+      - [0x006F39C0, rodata, overlay/map/ENDING]
   # End of uncompressed overlays
 
   # Compressed (Nisitenma-Ichigo) files
