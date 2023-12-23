@@ -9,7 +9,7 @@
 
 typedef struct {
     u8 unk1[0x4010];
-    cv64_color_t background_color;
+    cv64_rgba_t background_color;
     s16 should_setup_background_color;
     s16 should_setup_Z_buffer;
     s16 code_execution_max_delay;
@@ -20,9 +20,9 @@ typedef struct {
     cv64_controller_state_t controllers[4];
     u8 file_load_array_ID;
     u8 field_80387db5[3];
-    void *Nisitenma_Ichigo_loaded_files_ptr[0x255];
+    void* Nisitenma_Ichigo_loaded_files_ptr[0x255];
     u8 field_803881b4[4];
-    void *file_load_array[8]; // fileLoad*
+    void* file_load_array[8]; // fileLoad*
     u8 unk3[0x1A0C];
     cv64_save_state_t SaveStruct_gameplay; // 80389be4
     u8 unk4[0x28];
@@ -133,8 +133,8 @@ typedef struct {
     u8 field25416_0x6427;
     s16 map_ID; // 80389ee0
     s16 map_entrance_ID;
-    cv64_color_t map_fade_in_color; // 80389ee4
-    s16 map_fade_out_time;          // 80389ee8
+    cv64_rgba_t map_fade_in_color; // 80389ee4
+    s16 map_fade_out_time;         // 80389ee8
     s16 map_fade_in_time;
     u16 field25429_0x6434;
     u16 current_opened_menu;

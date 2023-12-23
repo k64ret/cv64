@@ -5,17 +5,17 @@
 #include "math.h"
 #include <ultra64.h>
 
-typedef struct {
+typedef struct cv64_model_inf {
     s16 type;
     u16 flags;
-    struct model_info *prev;
-    struct model_info *sibling;
-    struct model_info *next;
-    struct model_info *parent;
-    cv64_color_t primitive_color;
-    cv64_color_t environment_color;
-    cv64_color_t blend_color;
-    cv64_color_t fog_color;
+    struct cv64_model_inf_t* prev;
+    struct cv64_model_inf_t* sibling;
+    struct cv64_model_inf_t* next;
+    struct cv64_model_inf_t* parent;
+    cv64_rgba_t primitive_color;
+    cv64_rgba_t environment_color;
+    cv64_rgba_t blend_color;
+    cv64_rgba_t fog_color;
     u16 texture;
     u16 palette;
     u8 field24_0x28;
@@ -34,14 +34,15 @@ typedef struct {
     angle_t angle;
     angle_t field41_0x52;
     vec3f size;
-    void *field45_0x64; // map_actor_model*
+    void* field45_0x64; // map_actor_model*
     mf matrix;
-} model_info;
+} cv64_model_inf_t;
 
-extern void modelInfo_setPosVec3s(model_info *self, vec3s *position);
-extern model_info *modelInfo_createRootNode(u32 type, void *parent);
-extern model_info *modelInfo_createNextNode(u32 parent_type, void *parent);
-extern void modelInfo_showModelAndItsChildren(model_info *, u16);
-extern void modelInfo_hideModelAndItsChildren(model_info *, u16);
+extern void modelInfo_setPosVec3s(cv64_model_inf_t* self, vec3s* position);
+extern cv64_model_inf_t* modelInfo_createRootNode(u32 type, void* parent);
+extern cv64_model_inf_t* modelInfo_createNextNode(u32 parent_type,
+                                                  void* parent);
+extern void modelInfo_showModelAndItsChildren(cv64_model_inf_t*, u16);
+extern void modelInfo_hideModelAndItsChildren(cv64_model_inf_t*, u16);
 
 #endif

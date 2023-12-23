@@ -564,8 +564,8 @@ segments:
     exclusive_ram_id: ovl_801CF
     subsegments:
       - [0x006B4FC0, c, konami_kcek_logos]
-      - [0x006B5450, data, konami_kcek_logos]
-      - [0x006B5470, rodata, konami_kcek_logos]
+      - [0x006B5450, .data, konami_kcek_logos]
+      - [0x006B5470, .rodata, konami_kcek_logos]
 
   - name: MORI # Forest
     type: bin

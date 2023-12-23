@@ -1,10 +1,14 @@
 ---
+# We'll use defaults from the LLVM style, but with 4 columns indentation.
 BasedOnStyle: LLVM
 IndentWidth: 4
 ---
 Language: Cpp
 AlignConsecutiveMacros: true
 # AlignConsecutiveAssignments: true
+# Force pointers to the type for C++.
+DerivePointerAlignment: false
+PointerAlignment: Left
 ---
 Language: Json
 # Don't format JSON files

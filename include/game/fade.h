@@ -14,7 +14,7 @@ typedef enum cv64_fade_flag {
 
 typedef struct cv64_fade_settings {
     s16 flags;
-    cv64_color_t color;
+    cv64_rgba_t color;
     u16 current_time;
     u16 max_time;
 } cv64_fade_settings_t;

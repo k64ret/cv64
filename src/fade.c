@@ -50,9 +50,9 @@ void fade_setFlag(s16 flag) { D_80383AB8.fade_settings.flags |= flag; }
 void fade_removeFlag(s16 flag) { D_80383AB8.fade_settings.flags &= ~flag; }
 
 void fade_setColor(u8 R, u8 G, u8 B) {
-    D_80383AB8.fade_settings.color.color_u8.R = R;
-    D_80383AB8.fade_settings.color.color_u8.G = G;
-    D_80383AB8.fade_settings.color.color_u8.B = B;
+    D_80383AB8.fade_settings.color.R = R;
+    D_80383AB8.fade_settings.color.G = G;
+    D_80383AB8.fade_settings.color.B = B;
 }
 
 // The cleaner version
@@ -72,9 +72,9 @@ void fade_setSettings(s16 flags, u16 fade_time, u8 R, u8 G, u8 B) {
     D_80383AB8.fade_settings.current_time =
         (flags & FADE_OUT) ? 1 : fade_time - 1;
 
-    D_80383AB8.fade_settings.color.color_u8.R = R;
-    D_80383AB8.fade_settings.color.color_u8.G = G;
-    D_80383AB8.fade_settings.color.color_u8.B = B;
+    D_80383AB8.fade_settings.color.R = R;
+    D_80383AB8.fade_settings.color.G = G;
+    D_80383AB8.fade_settings.color.B = B;
 }
 
 // The cleaner version
@@ -129,21 +129,21 @@ u32 fade_isFading() {
 //             }
 //         }
 //
-//         D_80383AB8.fade_settings.color.color_u8.A = (s32)(alpha * 255.9999);
+//         D_80383AB8.fade_settings.color.A = (s32)(alpha * 255.9999);
 //
 //         if (flags & FADE_WITH_OUTLINE) {
 //             gDPSetFogColor(gDisplayListHead++,
-//                            D_80383AB8.fade_settings.color.color_u8.R,
-//                            D_80383AB8.fade_settings.color.color_u8.G,
-//                            D_80383AB8.fade_settings.color.color_u8.B,
-//                            D_80383AB8.fade_settings.color.color_u8.A);
+//                            D_80383AB8.fade_settings.color.R,
+//                            D_80383AB8.fade_settings.color.G,
+//                            D_80383AB8.fade_settings.color.B,
+//                            D_80383AB8.fade_settings.color.A);
 //             gSPDisplayList(gDisplayListHead++, &DL_fade_with_outline);
 //         } else {
 //             gDPSetPrimColor(gDisplayListHead++, 0, 0,
-//                             D_80383AB8.fade_settings.color.color_u8.R,
-//                             D_80383AB8.fade_settings.color.color_u8.G,
-//                             D_80383AB8.fade_settings.color.color_u8.B,
-//                             D_80383AB8.fade_settings.color.color_u8.A);
+//                             D_80383AB8.fade_settings.color.R,
+//                             D_80383AB8.fade_settings.color.G,
+//                             D_80383AB8.fade_settings.color.B,
+//                             D_80383AB8.fade_settings.color.A);
 //             gSPDisplayList(gDisplayListHead++, &DL_fade_normal);
 //         }
 //     }
