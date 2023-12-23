@@ -17,11 +17,11 @@
 #include "unknown_struct.h"
 #include <ultra64.h>
 
-void konamiLogo_entrypoint(cv64_konamilogo_t* self) {
-    ENTER(self, konamiLogo_functions);
+void cv64_konamilogo_entrypoint(cv64_konamilogo_t* self) {
+    ENTER(self, cv64_konamilogo_funcs);
 }
 
-void konamiLogo_checkButtonPress(cv64_konamilogo_t* self) {
+void cv64_konamilogo_check_btn_press(cv64_konamilogo_t* self) {
     void (*ptr_object_curLevel_goToFunc)(u16[], s16*, s32) =
         object_curLevel_goToFunc;
 
@@ -36,7 +36,7 @@ void konamiLogo_checkButtonPress(cv64_konamilogo_t* self) {
     }
 }
 
-void konamiLogo_init(cv64_konamilogo_t* self) {
+void cv64_konamilogo_init(cv64_konamilogo_t* self) {
     cv64_model_inf_t* model;
     cv64_obj_func_inf_t* curFunc;
 
@@ -57,11 +57,11 @@ void konamiLogo_init(cv64_konamilogo_t* self) {
     CV64_COLOR_RGBA_TO_U32(model->primitive_color) =
         0xFFFFFF00; // White (transparent)
 
-    GO_TO_NEXT_FUNC(self, konamiLogo_functions, curFunc,
+    GO_TO_NEXT_FUNC(self, cv64_konamilogo_funcs, curFunc,
                     ptr_object_curLevel_goToNextFuncAndClearTimer);
 }
 
-void konamiLogo_fade_in(cv64_konamilogo_t* self) {
+void cv64_konamilogo_fade_in(cv64_konamilogo_t* self) {
     cv64_model_inf_t* model = self->model;
     void (*ptr_object_curLevel_goToNextFuncAndClearTimer)(u16[], s16*) =
         object_curLevel_goToNextFuncAndClearTimer;
@@ -76,10 +76,10 @@ void konamiLogo_fade_in(cv64_konamilogo_t* self) {
     D_80383AB8.background_color.R = model->primitive_color.A;
     D_80383AB8.background_color.G = model->primitive_color.A;
     D_80383AB8.background_color.B = model->primitive_color.A;
-    konamiLogo_checkButtonPress(self);
+    cv64_konamilogo_check_btn_press(self);
 }
 
-void konamiLogo_wait(cv64_konamilogo_t* self) {
+void cv64_konamilogo_wait(cv64_konamilogo_t* self) {
     s32 timer =
         self->header.current_function[self->header.functionInfo_ID].timer;
     void (*ptr_object_curLevel_goToNextFuncAndClearTimer)(u16[], s16*) =
@@ -92,11 +92,11 @@ void konamiLogo_wait(cv64_konamilogo_t* self) {
             self->header.current_function[self->header.functionInfo_ID].timer;
     }
     if (timer >= 21) {
-        konamiLogo_checkButtonPress(self);
+        cv64_konamilogo_check_btn_press(self);
     }
 }
 
-void konamiLogo_fade_out(cv64_konamilogo_t* self) {
+void cv64_konamilogo_fade_out(cv64_konamilogo_t* self) {
     cv64_model_inf_t* model = self->model;
     void (*ptr_object_curLevel_goToNextFuncAndClearTimer)(u16[], s16*) =
         object_curLevel_goToNextFuncAndClearTimer;
@@ -108,10 +108,10 @@ void konamiLogo_fade_out(cv64_konamilogo_t* self) {
         ptr_object_curLevel_goToNextFuncAndClearTimer(
             self->header.current_function, &self->header.functionInfo_ID);
     }
-    konamiLogo_checkButtonPress(self);
+    cv64_konamilogo_check_btn_press(self);
 }
 
-void konamiLogo_KCEK_fade_in(cv64_konamilogo_t* self) {
+void cv64_konamilogo_kcek_fade_in(cv64_konamilogo_t* self) {
     cv64_model_inf_t* model = self->model;
     void (*ptr_object_curLevel_goToNextFuncAndClearTimer)(u16[], s16*) =
         object_curLevel_goToNextFuncAndClearTimer;
@@ -125,10 +125,10 @@ void konamiLogo_KCEK_fade_in(cv64_konamilogo_t* self) {
         ptr_object_curLevel_goToNextFuncAndClearTimer(
             self->header.current_function, &self->header.functionInfo_ID);
     }
-    konamiLogo_checkButtonPress(self);
+    cv64_konamilogo_check_btn_press(self);
 }
 
-void konamiLogo_KCEK_wait(cv64_konamilogo_t* self) {
+void cv64_konamilogo_kcek_wait(cv64_konamilogo_t* self) {
     cv64_model_inf_t* model = self->model;
     void (*ptr_object_curLevel_goToNextFuncAndClearTimer)(u16[], s16*) =
         object_curLevel_goToNextFuncAndClearTimer;
@@ -147,7 +147,7 @@ void konamiLogo_KCEK_wait(cv64_konamilogo_t* self) {
     }
 }
 
-void konamiLogo_KCEK_fade_out(cv64_konamilogo_t* self) {
+void cv64_konamilogo_kcek_fade_out(cv64_konamilogo_t* self) {
     cv64_model_inf_t* model = self->model;
     void (*ptr_object_curLevel_goToNextFuncAndClearTimer)(u16[], s16*) =
         object_curLevel_goToNextFuncAndClearTimer;
