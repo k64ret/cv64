@@ -594,6 +594,7 @@ segments:
     subsegments:
       - [0x006BAB80, asm, overlay/map/TOU]
       - [0x006BF7E0, data, overlay/map/TOU]
+      # - [0x006BFB08, rodata, overlay/map/TOU]
 
   - name: TOUOKUJI # Tower Roof
     type: code
@@ -603,6 +604,7 @@ segments:
     subsegments:
       - [0x006BFBF0, asm, overlay/map/TOUOKUJI]
       - [0x006C12F0, data, overlay/map/TOUOKUJI]
+      - [0x006C13D0, rodata, overlay/map/TOUOKUJI]
 
   - name: NAKANIWA # Inner Garden
     type: code
@@ -612,6 +614,7 @@ segments:
     subsegments:
       - [0x006C1460, asm, overlay/map/NAKANIWA]
       - [0x006C2D30, data, overlay/map/NAKANIWA]
+      - [0x006C2F00, rodata, overlay/map/NAKANIWA]
 
   - name: BEKKAN_1F # Annex 1F
     # type: code
