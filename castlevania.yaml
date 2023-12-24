@@ -545,9 +545,9 @@ segments:
     exclusive_ram_id: ovl_803
     subsegments:
       - [0x00697040, c, overlay/reinhardt]
-      - [0x006A25E0, c, overlay/reinhardt_attackmgr]
+      - [0x006A25E0, c, overlay/reinhardt_scarf]
       - [0x006A2B50, data, overlay/reinhardt]
-      - [0x006A4100, data, overlay/reinhardt_attackmgr]
+      - [0x006A4100, data, overlay/reinhardt_scarf]
 
   - name: carrie
     type: code
