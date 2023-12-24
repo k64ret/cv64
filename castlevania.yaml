@@ -634,13 +634,15 @@ segments:
       - [0x006C32E0, data, overlay/map/BEKKAN_1F]
 
   - name: BEKKAN_2F # Annex 2F
-    # type: code
-    type: bin
+    type: code
     start: 0x006C3300
     vram: 0x8018EB10
     exclusive_ram_id: ovl_801
-    # subsegments:
-    #   - [0x006C3300, asm, overlay/map/BEKKAN_2F]
+    subsegments:
+      - [0x006C3300, asm]
+      - [0x006C3B50, asm]
+      - [0x006C4D70, data]
+      - [0x006C5090, rodata]
 
   - name: MEIRO_TEIEN # Maze Garden
     # type: code
