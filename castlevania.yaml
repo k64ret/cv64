@@ -555,8 +555,14 @@ segments:
     vram: 0x803D13E0
     exclusive_ram_id: ovl_803
     subsegments:
-      - [0x006A42D0, asm, overlay/carrie]
+      - [0x006A42D0, c, overlay/carrie]
+      - [0x006AF090, c, overlay/carrie_skirt]
+      - [0x006AFEA0, c, overlay/carrie_rightstrip]
+      - [0x006B0210, c, overlay/carrie_leftstrip]
       - [0x006B0590, data, overlay/carrie]
+      - [0x006B0B20, data, overlay/carrie_skirt]
+      - [0x006B0E80, data, overlay/carrie_rightstrip]
+      - [0x006B1110, data, overlay/carrie_leftstrip]
 
   - name: gamenote_delete
     type: code
