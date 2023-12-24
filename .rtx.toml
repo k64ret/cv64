@@ -1,2 +1,17 @@
 [tools]
 python = '3.11'
+
+[tasks.clean]
+# description = 'Remove all CMake files, assembly, and binaries'
+run = "./scripts/clean"
+
+[tasks.configure]
+# description = 'Create the build system, and generate assembly and binaries'
+depends = ['clean']
+run = """cmake -S . -B build -G "Ninja""""
+alias = 'c'
+
+[tasks.build]
+# description = 'Build Castlevania ROM'
+run = "cmake --build build"
+alias = 'b'
