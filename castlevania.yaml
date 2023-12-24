@@ -596,7 +596,7 @@ segments:
     subsegments:
       - [0x006BAB80, asm, overlay/map/TOU]
       - [0x006BF7E0, data, overlay/map/TOU]
-      # - [0x006BFB08, rodata, overlay/map/TOU]
+      - [0x006BFB40, rodata, overlay/map/TOU]
 
   - name: TOUOKUJI # Tower Roof
     type: code
