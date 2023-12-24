@@ -625,14 +625,13 @@ segments:
       - [0x006C2F00, rodata, overlay/map/NAKANIWA]
 
   - name: BEKKAN_1F # Annex 1F
-    # type: code
-    type: bin
+    type: code
     start: 0x006C2F20
     vram: 0x8018EB10
     exclusive_ram_id: ovl_801
-    # subsegments:
-    #   - [0x006C2F20, asm, overlay/map/BEKKAN_1F]
-    #   - [0x006C32EC, data, overlay/map/BEKKAN_1F]
+    subsegments:
+      - [0x006C2F20, asm, overlay/map/BEKKAN_1F]
+      - [0x006C32E0, data, overlay/map/BEKKAN_1F]
 
   - name: BEKKAN_2F # Annex 2F
     # type: code
