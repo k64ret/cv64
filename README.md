@@ -15,7 +15,7 @@ There is a Dockerfile for convenience. If you want to have your
 development environment on your system, continue to [Linux](#linux-debianubuntu-offshoots)
 or [Windows](#windows).
 
-> **Note**
+> [!NOTE]
 > You may need to prefix `docker` commands with `sudo`
 > if your user is not part of the docker user group.
 
@@ -44,12 +44,31 @@ docker run --rm -ti -v $(pwd):/c64 c64
 ### Building
 
 Place a Castlevania 64 (USA v1.0) ROM in the root of the project, and rename it to `baserom.z64`.
-Then run, the following... It's that simple (supposed to be, anyway).
+
+Now, you must configure the CMake project by running the following...
 
 ```sh
-cmake -S . -B build
+cmake -S . -B build -G "Ninja"
+```
+
+> [!TIP]
+> Or run `rtx run c` if you are already using [rtx][rtx]
+
+The above snippet produces a Ninja-based build system under the hood. This seems to be faster than Make,
+but if you still prefer Make over Ninja, you can run the following...
+
+```sh
+cmake -S . -B build -G "Unix Makefiles"
+```
+
+Afterwards, to build the project, run the following...
+
+```sh
 cmake --build build
 ```
+
+> [!TIP]
+> Or run `rtx run b` if you are already using [rtx][rtx]
 
 ### Cleaning
 
@@ -58,5 +77,8 @@ Run the following to clean up the build artifacts.
 ```sh
 ./scripts/clean
 ```
+
+> [!TIP]
+> Or run `rtx run clean` if you are already using [rtx][rtx]
 
 [rtx]: https://github.com/jdx/rtx
