@@ -781,13 +781,15 @@ segments:
       - [0x006E31C0, data, overlay/map/6E1FC0]
 
   - name: KETTOU_TOU # Duel Tower
-    # type: code
-    type: bin
+    type: code
     start: 0x006E31D0
     vram: 0x8018EB10
     exclusive_ram_id: ovl_map_objects
-    # subsegments:
-    #   - [0x006E31D0, asm, overlay/map/KETTOU_TOU]
+    subsegments:
+      # - [0x006E31D0, c, overlay/map/KETTOU_TOU]
+      - [0x006E31D0, asm, overlay/map/KETTOU_TOU]
+      - [0x006E7F20, data, overlay/map/KETTOU_TOU]
+      - [0x006E8550, rodata, overlay/map/KETTOU_TOU]
 
   - name: TURO_TOKEITOU # Clock Tower
     # type: code
