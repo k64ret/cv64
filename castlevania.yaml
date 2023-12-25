@@ -845,13 +845,14 @@ segments:
       # - [0x006F1198, rodata, overlay/map/ROSE]
 
   - name: BEKKAN_BOSS # Annex Boss
-    # type: code
-    type: bin
+    type: code
     start: 0x006F11B0
     vram: 0x8018EB10
     exclusive_ram_id: ovl_map_objects
-    # subsegments:
-    #   - [0x006F11B0, asm, overlay/map/BEKKAN_BOSS]
+    subsegments:
+      - [0x006F11B0, c, overlay/map/BEKKAN_BOSS]
+      - [0x006F1B00, data, overlay/map/BEKKAN_BOSS]
+      - [0x006F1B40, rodata, overlay/map/BEKKAN_BOSS]
 
   - name: TOU_TURO # Tower Passage
     # type: code
