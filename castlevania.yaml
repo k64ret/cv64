@@ -768,13 +768,17 @@ segments:
       - [0x006D7490, rodata, overlay/map/MAHOU_TOU]
 
   - name: KAGAKU_TOU # Tower of Science
-    # type: code
-    type: bin
+    type: code
     start: 0x006D74F0
     vram: 0x8018EB10
     exclusive_ram_id: ovl_801
-    # subsegments:
-    #   - [0x006D74F0, asm, overlay/map/KAGAKU_TOU]
+    subsegments:
+      # - [0x006D74F0, c, overlay/map/6D74F0]
+      - [0x006D74F0, asm, overlay/map/6D74F0]
+      # - [0x006E1FC0, c, overlay/map/6E1FC0]
+      - [0x006E1FC0, asm, overlay/map/6E1FC0]
+      - [0x006E2150, data, overlay/map/6D74F0]
+      - [0x006E31C0, data, overlay/map/6E1FC0]
 
   - name: KETTOU_TOU # Duel Tower
     # type: code
