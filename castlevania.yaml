@@ -805,13 +805,14 @@ segments:
       # - [0x006EA460, rodata, overlay/map/6E96D0]
 
   - name: TENSHU # Castle Tower
-    # type: code
-    type: bin
+    type: code
     start: 0x006EA480
     vram: 0x8018EB10
     exclusive_ram_id: ovl_map_objects
-    # subsegments:
-    #   - [0x006EA480, asm, overlay/map/TENSHU]
+    subsegments:
+      - [0x006EA480, c, overlay/map/TENSHU]
+      - [0x006EBBD0, data, overlay/map/TENSHU]
+      - [0x006EBCE0, rodata, overlay/map/TENSHU]
 
   - name: TOKEITOU_NAI # Ending Dummy
     # type: code
