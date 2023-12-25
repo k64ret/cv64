@@ -744,13 +744,16 @@ segments:
       - [0x006CF3F0, rodata, overlay/map/HONMARU_5F]
 
   - name: SHOKEI_TOU # Tower of Execution
-    # type: code
-    type: bin
+    type: code
     start: 0x006CF420
     vram: 0x8018EB10
     exclusive_ram_id: ovl_801
-    # subsegments:
-    #   - [0x006CF420, asm, overlay/map/SHOKEI_TOU]
+    subsegments:
+      - [0x006CF420, c, overlay/map/6CF420]
+      - [0x006D2840, c, overlay/map/6D2840]
+      - [0x006D30C0, data, overlay/map/6CF420]
+      - [0x006D3530, data, overlay/map/6D2840]
+      # - [0x006D3584, rodata, overlay/map/6CF420]
 
   - name: MAHOU_TOU # Tower of Sorcery
     # type: code
