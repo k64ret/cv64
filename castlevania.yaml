@@ -639,19 +639,19 @@ segments:
     vram: 0x8018EB10
     exclusive_ram_id: ovl_801
     subsegments:
-      - [0x006C3300, asm]
-      - [0x006C3B50, asm]
-      - [0x006C4D70, data]
-      - [0x006C5090, rodata]
+      - [0x006C3300, c, overlay/map/6C3300]
+      - [0x006C3B50, c, overlay/map/6C3B50]
+      - [0x006C4D70, data, overlay/map/6C3300]
+      - [0x006C4FE0, data, overlay/map/6C3B50]
+      - [0x006C5040, rodata, overlay/map/6C3B50]
 
   - name: MEIRO_TEIEN # Maze Garden
-    # type: code
-    type: bin
+    type: code
     start: 0x006C50E0
     vram: 0x8018EB10
     exclusive_ram_id: ovl_801
-    # subsegments:
-    #   - [0x006C50E0, asm, overlay/map/MEIRO_TEIEN]
+    subsegments:
+      - [0x006C50E0, c, overlay/map/MEIRO_TEIEN]
 
   - name: CHIKA_KODO # Underground Mining Tunnel
     # type: code
