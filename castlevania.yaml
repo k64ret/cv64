@@ -734,13 +734,14 @@ segments:
       - [0x006CE980, rodata, overlay/map/HONMARU_3F_KITA]
 
   - name: HONMARU_5F # Castle Center 5F
-    # type: code
-    type: bin
+    type: code
     start: 0x006CE9A0
     vram: 0x8018EB10
     exclusive_ram_id: ovl_801
-    # subsegments:
-    #   - [0x006CE9A0, asm, overlay/map/HONMARU_5F]
+    subsegments:
+      - [0x006CE9A0, c, overlay/map/HONMARU_5F]
+      - [0x006CF3B0, data, overlay/map/HONMARU_5F]
+      - [0x006CF3F0, rodata, overlay/map/HONMARU_5F]
 
   - name: SHOKEI_TOU # Tower of Execution
     # type: code
