@@ -542,7 +542,7 @@ segments:
     type: code
     start: 0x00697040
     vram: 0x803D13E0
-    exclusive_ram_id: ovl_803
+    exclusive_ram_id: ovl_player
     subsegments:
       - [0x00697040, c, overlay/reinhardt]
       - [0x006A25E0, c, overlay/reinhardt_scarf]
@@ -553,7 +553,7 @@ segments:
     type: code
     start: 0x006A42D0
     vram: 0x803D13E0
-    exclusive_ram_id: ovl_803
+    exclusive_ram_id: ovl_player
     subsegments:
       - [0x006A42D0, c, overlay/carrie]
       - [0x006AF090, c, overlay/carrie_skirt]
@@ -568,7 +568,7 @@ segments:
     type: code
     start: 0x006B12F0
     vram: 0x801CC000
-    exclusive_ram_id: ovl_801CC
+    exclusive_ram_id: ovl_gamenote_delete
     subsegments:
       - [0x006B12F0, asm, overlay/gamenote_delete]
       - [0x006B4850, data, overlay/gamenote_delete]
@@ -578,7 +578,7 @@ segments:
     type: code
     start: 0x006B4FC0
     vram: 0x801CFCD0
-    exclusive_ram_id: ovl_801CF
+    exclusive_ram_id: ovl_konami_kcek_logos
     subsegments:
       - [0x006B4FC0, c, overlay/konami_kcek_logos]
       - [0x006B5450, .data, overlay/konami_kcek_logos]
@@ -588,7 +588,7 @@ segments:
     type: code
     start: 0x006B5480
     vram: 0x8018EB10
-    exclusive_ram_id: ovl_801
+    exclusive_ram_id: ovl_map_objects
     subsegments:
       - [0x006B5480, asm, overlay/map/MORI]
       - [0x006BA620, data, overlay/map/MORI]
@@ -598,7 +598,7 @@ segments:
     type: code
     start: 0x006BAB80
     vram: 0x8018EB10
-    exclusive_ram_id: ovl_801
+    exclusive_ram_id: ovl_map_objects
     subsegments:
       - [0x006BAB80, asm, overlay/map/TOU]
       - [0x006BF7E0, data, overlay/map/TOU]
@@ -608,7 +608,7 @@ segments:
     type: code
     start: 0x006BFBF0
     vram: 0x8018EB10
-    exclusive_ram_id: ovl_801
+    exclusive_ram_id: ovl_map_objects
     subsegments:
       - [0x006BFBF0, asm, overlay/map/TOUOKUJI]
       - [0x006C12F0, data, overlay/map/TOUOKUJI]
@@ -618,7 +618,7 @@ segments:
     type: code
     start: 0x006C1460
     vram: 0x8018EB10
-    exclusive_ram_id: ovl_801
+    exclusive_ram_id: ovl_map_objects
     subsegments:
       - [0x006C1460, asm, overlay/map/NAKANIWA]
       - [0x006C2D30, data, overlay/map/NAKANIWA]
@@ -628,7 +628,7 @@ segments:
     type: code
     start: 0x006C2F20
     vram: 0x8018EB10
-    exclusive_ram_id: ovl_801
+    exclusive_ram_id: ovl_map_objects
     subsegments:
       - [0x006C2F20, asm, overlay/map/BEKKAN_1F]
       - [0x006C32E0, data, overlay/map/BEKKAN_1F]
@@ -637,7 +637,7 @@ segments:
     type: code
     start: 0x006C3300
     vram: 0x8018EB10
-    exclusive_ram_id: ovl_801
+    exclusive_ram_id: ovl_map_objects
     subsegments:
       - [0x006C3300, c, overlay/map/6C3300]
       - [0x006C3B50, c, overlay/map/6C3B50]
@@ -649,7 +649,7 @@ segments:
     type: code
     start: 0x006C50E0
     vram: 0x8018EB10
-    exclusive_ram_id: ovl_801
+    exclusive_ram_id: ovl_map_objects
     subsegments:
       - [0x006C50E0, c, overlay/map/MEIRO_TEIEN]
 
@@ -657,7 +657,7 @@ segments:
     type: code
     start: 0x006C5110
     vram: 0x8018EB10
-    exclusive_ram_id: ovl_801
+    exclusive_ram_id: ovl_map_objects
     subsegments:
       - [0x006C5110, c, overlay/map/CHIKA_KODO]
       - [0x006C74A0, data, overlay/map/CHIKA_KODO]
@@ -666,7 +666,7 @@ segments:
     type: code
     start: 0x006C77D0
     vram: 0x8018EB10
-    exclusive_ram_id: ovl_801
+    exclusive_ram_id: ovl_map_objects
     subsegments:
       - [0x006C77D0, c, overlay/map/CHIKA_SUIRO]
       - [0x006C85A0, data, overlay/map/CHIKA_SUIRO]
@@ -676,7 +676,7 @@ segments:
     type: code
     start: 0x006C86A0
     vram: 0x8018EB10
-    exclusive_ram_id: ovl_801
+    exclusive_ram_id: ovl_map_objects
     subsegments:
       - [0x006C86A0, c, overlay/map/HONMARU_B1F]
       - [0x006C9B00, data, overlay/map/HONMARU_B1F]
@@ -686,7 +686,7 @@ segments:
     type: code
     start: 0x006C9BF0
     vram: 0x8018EB10
-    exclusive_ram_id: ovl_801
+    exclusive_ram_id: ovl_map_objects
     subsegments:
       - [0x006C9BF0, c, overlay/map/HONMARU_1F]
       - [0x006CB780, data, overlay/map/HONMARU_1F]
@@ -696,7 +696,7 @@ segments:
     type: code
     start: 0x006CB850
     vram: 0x8018EB10
-    exclusive_ram_id: ovl_801
+    exclusive_ram_id: ovl_map_objects
     subsegments:
       # - [0x006CB850, c, overlay/map/HONMARU_2F]
       - [0x006CB850, asm, overlay/map/HONMARU_2F]
@@ -707,7 +707,7 @@ segments:
     type: code
     start: 0x006CD050
     vram: 0x8018EB10
-    exclusive_ram_id: ovl_801
+    exclusive_ram_id: ovl_map_objects
     subsegments:
       - [0x006CD050, c, overlay/map/HONMARU_3F_MINAMI]
       - [0x006CD640, data, overlay/map/HONMARU_3F_MINAMI]
@@ -717,7 +717,7 @@ segments:
     type: code
     start: 0x006CD740
     vram: 0x8018EB10
-    exclusive_ram_id: ovl_801
+    exclusive_ram_id: ovl_map_objects
     subsegments:
       - [0x006CD740, c, overlay/map/HONMARU_4F_MINAMI]
       - [0x006CE350, data, overlay/map/HONMARU_4F_MINAMI]
@@ -727,7 +727,7 @@ segments:
     type: code
     start: 0x006CE4B0
     vram: 0x8018EB10
-    exclusive_ram_id: ovl_801
+    exclusive_ram_id: ovl_map_objects
     subsegments:
       - [0x006CE4B0, c, overlay/map/HONMARU_3F_KITA]
       - [0x006CE8F0, data, overlay/map/HONMARU_3F_KITA]
@@ -737,7 +737,7 @@ segments:
     type: code
     start: 0x006CE9A0
     vram: 0x8018EB10
-    exclusive_ram_id: ovl_801
+    exclusive_ram_id: ovl_map_objects
     subsegments:
       - [0x006CE9A0, c, overlay/map/HONMARU_5F]
       - [0x006CF3B0, data, overlay/map/HONMARU_5F]
@@ -747,7 +747,7 @@ segments:
     type: code
     start: 0x006CF420
     vram: 0x8018EB10
-    exclusive_ram_id: ovl_801
+    exclusive_ram_id: ovl_map_objects
     subsegments:
       - [0x006CF420, c, overlay/map/6CF420]
       - [0x006D2840, c, overlay/map/6D2840]
@@ -759,7 +759,7 @@ segments:
     type: code
     start: 0x006D35A0
     vram: 0x8018EB10
-    exclusive_ram_id: ovl_801
+    exclusive_ram_id: ovl_map_objects
     subsegments:
       # - [0x006D35A0, c, overlay/map/MAHOU_TOU]
       - [0x006D35A0, asm, overlay/map/MAHOU_TOU]
@@ -771,7 +771,7 @@ segments:
     type: code
     start: 0x006D74F0
     vram: 0x8018EB10
-    exclusive_ram_id: ovl_801
+    exclusive_ram_id: ovl_map_objects
     subsegments:
       # - [0x006D74F0, c, overlay/map/6D74F0]
       - [0x006D74F0, asm, overlay/map/6D74F0]
@@ -785,7 +785,7 @@ segments:
     type: bin
     start: 0x006E31D0
     vram: 0x8018EB10
-    exclusive_ram_id: ovl_801
+    exclusive_ram_id: ovl_map_objects
     # subsegments:
     #   - [0x006E31D0, asm, overlay/map/KETTOU_TOU]
 
@@ -794,7 +794,7 @@ segments:
     type: bin
     start: 0x006E86B0
     vram: 0x8018EB10
-    exclusive_ram_id: ovl_801
+    exclusive_ram_id: ovl_map_objects
     # subsegments:
     #   - [0x006E86B0, asm, overlay/map/TURO_TOKEITOU]
 
@@ -803,7 +803,7 @@ segments:
     type: bin
     start: 0x006EA480
     vram: 0x8018EB10
-    exclusive_ram_id: ovl_801
+    exclusive_ram_id: ovl_map_objects
     # subsegments:
     #   - [0x006EA480, asm, overlay/map/TENSHU]
 
@@ -812,7 +812,7 @@ segments:
     type: bin
     start: 0x006EBD90
     vram: 0x8018EB10
-    exclusive_ram_id: ovl_801
+    exclusive_ram_id: ovl_map_objects
     # subsegments:
     #   - [0x006EBD90, asm, overlay/map/TOKEITOU_NAI]
 
@@ -821,7 +821,7 @@ segments:
     type: bin
     start: 0x006F0150
     vram: 0x8018EB10
-    exclusive_ram_id: ovl_801
+    exclusive_ram_id: ovl_map_objects
     # subsegments:
     #   - [0x006F0150, asm, overlay/map/DRACULA]
 
@@ -830,7 +830,7 @@ segments:
     type: bin
     start: 0x006F0A50
     vram: 0x8018EB10
-    exclusive_ram_id: ovl_801
+    exclusive_ram_id: ovl_map_objects
     # subsegments:
     #   - [0x006F0A50, asm, overlay/map/ROSE]
 
@@ -839,7 +839,7 @@ segments:
     type: bin
     start: 0x006F11B0
     vram: 0x8018EB10
-    exclusive_ram_id: ovl_801
+    exclusive_ram_id: ovl_map_objects
     # subsegments:
     #   - [0x006F11B0, asm, overlay/map/BEKKAN_BOSS]
 
@@ -848,7 +848,7 @@ segments:
     type: bin
     start: 0x006F1B80
     vram: 0x8018EB10
-    exclusive_ram_id: ovl_801
+    exclusive_ram_id: ovl_map_objects
     # subsegments:
     #   - [0x006F1B80, asm, overlay/map/TOU_TURO]
 
@@ -856,7 +856,7 @@ segments:
     type: code
     start: 0x006F21D0
     vram: 0x8018EB10
-    exclusive_ram_id: ovl_801
+    exclusive_ram_id: ovl_map_objects
     subsegments:
       # - [0x006F21D0, c, overlay/map/ENDING]
       - [0x006F21D0, asm, overlay/map/ENDING]
@@ -868,1526 +868,1526 @@ segments:
   - name: nisitenma_ichigo/6F3BD0
     type: bin
     start: 0x006F3BD0
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x03000000
+    exclusive_ram_id: nisitenma_ichigo_assets_6F3BD0
 
-  - name: nisitenma_ichigo/debug_font_texture
+  - name: nisitenma_ichigo/debug_font_texture         # Officially known as "ascii_seg"
     type: bin
     start: 0x006F3CB6
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/reinhardt
     type: bin
     start: 0x006F4070
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/reinhardt_alt
     type: bin
     start: 0x006F8C94
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/whip
     type: bin
     start: 0x006FE138
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/carrie
     type: bin
     start: 0x006FE308
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/carrie_alt
     type: bin
     start: 0x00702456
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/enemy_target_graphic
     type: bin
     start: 0x00705C72
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/beta_3_head_wolf
     type: bin
     start: 0x00705DCE
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/cerberus
     type: bin
     start: 0x00709292
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/white_dragon
     type: bin
     start: 0x0070BDF8
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/gardener
     type: bin
     start: 0x0070D0D8
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/stone_dog
     type: bin
     start: 0x0070FD94
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/behemoth
     type: bin
     start: 0x0071216E
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/weretiger
     type: bin
     start: 0x0071B05E
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/werewolf
     type: bin
     start: 0x0071EF92
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/hell_knight
     type: bin
     start: 0x00721EDA
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/ghost
     type: bin
     start: 0x00724B60
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/iceman_puddle
     type: bin
     start: 0x007267DE
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/728A42
     type: bin
     start: 0x00728A42
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/72A16C
     type: bin
     start: 0x0072A16C
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/iceman
     type: bin
     start: 0x0072B974
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/fire_bat
     type: bin
     start: 0x0072D4C2
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/flying_skull
     type: bin
     start: 0x0072DE16
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/bat
     type: bin
     start: 0x0072E874
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/medusa_head
     type: bin
     start: 0x0072F0E6
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/pillar_of_bones
     type: bin
     start: 0x0073001E
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/undead_maiden
     type: bin
     start: 0x007312E6
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/vampire_maid
     type: bin
     start: 0x007353A8
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/vampire_villager
     type: bin
     start: 0x00737F76
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/vampire_butler
     type: bin
     start: 0x0073C72E
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/vincent
     type: bin
     start: 0x0073F74E
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/werejaguar
     type: bin
     start: 0x00743316
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/spider_centaur
     type: bin
     start: 0x00746BD4
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/lizard_man
     type: bin
     start: 0x00749070
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/skeleton_warrior
     type: bin
     start: 0x0074E9D8
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/glass_knight
     type: bin
     start: 0x007518E0
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/king_skeleton
     type: bin
     start: 0x00752D2C
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/skeleton_biker
     type: bin
     start: 0x007565B0
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/true_dracula
     type: bin
     start: 0x0075B65C
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/malus
     type: bin
     start: 0x007604A0
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/malus_horse
     type: bin
     start: 0x00764A48
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/demon_dracula
     type: bin
     start: 0x007684FC
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/dracula_cape
     type: bin
     start: 0x0076EE3A
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/renon
     type: bin
     start: 0x007750DE
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/demon_renon
     type: bin
     start: 0x00778232
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/death
     type: bin
     start: 0x0077D3D2
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/demonic_fish
     type: bin
     start: 0x007816E8
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/rosa
     type: bin
     start: 0x00784F22
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/788720
     type: bin
     start: 0x00788720
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/camilla
     type: bin
     start: 0x007887AE
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/actrise
     type: bin
     start: 0x0078BCD6
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/actrise_camilla_fight
     type: bin
     start: 0x0078FA5C
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/790D08
     type: bin
     start: 0x00790D08
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/793C0C
     type: bin
     start: 0x00793C0C
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/7940E2
     type: bin
     start: 0x007940E2
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/7A2B30
     type: bin
     start: 0x007A2B30
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/7A38EC
     type: bin
     start: 0x007A38EC
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/7A4DFC
     type: bin
     start: 0x007A4DFC
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/7A5352
     type: bin
     start: 0x007A5352
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/map/forest_of_silence/MORI
     type: bin
     start: 0x007A6DF4
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/map/castle_wall/TOU
     type: bin
     start: 0x007C9136
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/map/castle_wall/TOUOKUJI
     type: bin
     start: 0x007E306A
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/map/villa/NAKANIWA
     type: bin
     start: 0x007FA1DA
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/map/villa/BEKKAN_1F
     type: bin
     start: 0x0080A0F4
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/map/villa/BEKKAN_2F
     type: bin
     start: 0x0081FACA
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/map/villa/MEIRO_TEIEN
     type: bin
     start: 0x0083B95A
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/map/tunnel/CHIKA_KODO
     type: bin
     start: 0x00851944
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/map/underground_waterway/CHIKA_SUIRO
     type: bin
     start: 0x0086E98E
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/map/castle_center/HONMARU_B1F
     type: bin
     start: 0x0087F218
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/map/castle_center/HONMARU_1F
     type: bin
     start: 0x00898E60
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/map/castle_center/HONMARU_2F
     type: bin
     start: 0x008A762A
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/map/castle_center/HONMARU_3F_MINAMI
     type: bin
     start: 0x008C4F12
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/map/castle_center/HONMARU_4F_MINAMI
     type: bin
     start: 0x008DFE8E
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/map/castle_center/HONMARU_3F_KITA
     type: bin
     start: 0x008F18D2
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/map/castle_center/HONMARU_5F
     type: bin
     start: 0x00910652
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/map/tower_of_execution/SHOKEI_TOU
     type: bin
     start: 0x009180FE
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/map/tower_of_sorcery/MAHOU_TOU
     type: bin
     start: 0x00929D4A
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/map/tower_of_science/KAGAKU_TOU
     type: bin
     start: 0x0093B202
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/map/duel_tower/KETTOU_TOU
     type: bin
     start: 0x00955C62
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/map/castle_keep/TURO_TOKEITOU
     type: bin
     start: 0x009630C2
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/map/castle_keep/TENSHU
     type: bin
     start: 0x00977B28
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/map/intro_narration_cutscene/ENDING_DUMMY
     type: bin
     start: 0x009856C4
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/map/clock_tower/TOKEITOU_NAI
     type: bin
     start: 0x00985742
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/map/dracula_desert/DRACULA
     type: bin
     start: 0x0099C45E
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/map/rose_actrise_meet_room/ROSE
     type: bin
     start: 0x009A22C2
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/map/villa/BEKKAN_BOSS
     type: bin
     start: 0x009A66E8
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/map/room_of_clocks/TOU_TURO
     type: bin
     start: 0x009ACFD0
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/map/ending/ENDING
     type: bin
     start: 0x009B52C4
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/pickable_items
     type: bin
     start: 0x009C5310
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/skybox
     type: bin
     start: 0x009C9038
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/map/test_grid
     type: bin
     start: 0x009CAD2A
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/konami_kcek_logos
     type: bin
     start: 0x009CB170
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/scroll
     type: bin
     start: 0x009CDF24
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/cutscene_63
     type: bin
     start: 0x009D0AEA
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/pause_menu
     type: bin
     start: 0x009D9180
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/necronomicon_book
     type: bin
     start: 0x009E5980
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/9ED33A
     type: bin
     start: 0x009ED33A
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/gameplay_hud
     type: bin
     start: 0x009F016A
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/game_over
     type: bin
     start: 0x009FA8BE
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/file_select
     type: bin
     start: 0x009FE61A
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/controller_buttons
     type: bin
     start: 0x009FEBB8
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/renon_briefcase
     type: bin
     start: 0x009FF252
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/film_reel
     type: bin
     start: 0x00A008AA
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/cutscene_01_10_27
     type: bin
     start: 0x00A0094C
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/cutscene_02
     type: bin
     start: 0x00A0DD76
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/cutscene_2B
     type: bin
     start: 0x00A0E804
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/cutscene_2C
     type: bin
     start: 0x00A0EE1C
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/cutscene_2E
     type: bin
     start: 0x00A0FCFE
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/cutscene_3F
     type: bin
     start: 0x00A10182
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/cutscene_2C_2D
     type: bin
     start: 0x00A104F6
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/cutscene_0A
     type: bin
     start: 0x00A1476E
     vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: nisitenma_ichigo/smiley_face
     type: bin
     start: 0x00A1520C
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x08000000
+    exclusive_ram_id: nisitenma_ichigo_assets_smiley_face
 
   - name: nisitenma_ichigo/overlay/cerberus
     type: bin
     start: 0x00A1560C
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0F000000
+    exclusive_ram_id: nisitenma_ichigo_overlays
 
   - name: nisitenma_ichigo/overlay/white_dragon
     type: bin
     start: 0x00A20348
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0F000000
+    exclusive_ram_id: nisitenma_ichigo_overlays
 
   - name: nisitenma_ichigo/overlay/gardener
     type: bin
     start: 0x00A253B6
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0F000000
+    exclusive_ram_id: nisitenma_ichigo_overlays
 
   - name: nisitenma_ichigo/overlay/stone_dog
     type: bin
     start: 0x00A2945C
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0F000000
+    exclusive_ram_id: nisitenma_ichigo_overlays
 
   - name: nisitenma_ichigo/overlay/malus
     type: bin
     start: 0x00A2DE52
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0F000000
+    exclusive_ram_id: nisitenma_ichigo_overlays
 
   - name: nisitenma_ichigo/overlay/behemoth
     type: bin
     start: 0x00A31B06
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0F000000
+    exclusive_ram_id: nisitenma_ichigo_overlays
 
   - name: nisitenma_ichigo/overlay/weretiger
     type: bin
     start: 0x00A41292
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0F000000
+    exclusive_ram_id: nisitenma_ichigo_overlays
 
   - name: nisitenma_ichigo/overlay/werewolf
     type: bin
     start: 0x00A45FFA
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0F000000
+    exclusive_ram_id: nisitenma_ichigo_overlays
 
   - name: nisitenma_ichigo/overlay/hell_knight
     type: bin
     start: 0x00A4C58C
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0F000000
+    exclusive_ram_id: nisitenma_ichigo_overlays
 
   - name: nisitenma_ichigo/overlay/ghost
     type: bin
     start: 0x00A52788
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0F000000
+    exclusive_ram_id: nisitenma_ichigo_overlays
 
   - name: nisitenma_ichigo/overlay/iceman
     type: bin
     start: 0x00A54ABA
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0F000000
+    exclusive_ram_id: nisitenma_ichigo_overlays
 
   - name: nisitenma_ichigo/A5914A
     type: bin
     start: 0x00A5914A
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0F000000
+    exclusive_ram_id: nisitenma_ichigo_overlays
 
   - name: nisitenma_ichigo/A591D6
     type: bin
     start: 0x00A591D6
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0F000000
+    exclusive_ram_id: nisitenma_ichigo_overlays
 
   - name: nisitenma_ichigo/overlay/flying_skull
     type: bin
     start: 0x00A59542
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0F000000
+    exclusive_ram_id: nisitenma_ichigo_overlays
 
   - name: nisitenma_ichigo/overlay/bat
     type: bin
     start: 0x00A5B666
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0F000000
+    exclusive_ram_id: nisitenma_ichigo_overlays
 
   - name: nisitenma_ichigo/overlay/medusa_head
     type: bin
     start: 0x00A5E06C
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0F000000
+    exclusive_ram_id: nisitenma_ichigo_overlays
 
   - name: nisitenma_ichigo/overlay/pillar_of_bones
     type: bin
     start: 0x00A5F57E
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0F000000
+    exclusive_ram_id: nisitenma_ichigo_overlays
 
   - name: nisitenma_ichigo/overlay/vampires
     type: bin
     start: 0x00A62486
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0F000000
+    exclusive_ram_id: nisitenma_ichigo_overlays
 
   - name: nisitenma_ichigo/overlay/vincent_npc
     type: bin
     start: 0x00A7A708
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0F000000
+    exclusive_ram_id: nisitenma_ichigo_overlays
 
   - name: nisitenma_ichigo/A7C0FE
     type: bin
     start: 0x00A7C0FE
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0F000000
+    exclusive_ram_id: nisitenma_ichigo_overlays
 
   - name: nisitenma_ichigo/A7C8C4
     type: bin
     start: 0x00A7C8C4
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0F000000
+    exclusive_ram_id: nisitenma_ichigo_overlays
 
   - name: nisitenma_ichigo/A7D81A
     type: bin
     start: 0x00A7D81A
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0F000000
+    exclusive_ram_id: nisitenma_ichigo_overlays
 
   - name: nisitenma_ichigo/A7DBB0
     type: bin
     start: 0x00A7DBB0
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0F000000
+    exclusive_ram_id: nisitenma_ichigo_overlays
 
   - name: nisitenma_ichigo/A7E2DA
     type: bin
     start: 0x00A7E2DA
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0F000000
+    exclusive_ram_id: nisitenma_ichigo_overlays
 
   - name: nisitenma_ichigo/overlay/spider_centaur
     type: bin
     start: 0x00A7E37A
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0F000000
+    exclusive_ram_id: nisitenma_ichigo_overlays
 
   - name: nisitenma_ichigo/overlay/heavy_lizard_man
     type: bin
     start: 0x00A86CA6
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0F000000
+    exclusive_ram_id: nisitenma_ichigo_overlays
 
   - name: nisitenma_ichigo/overlay/skeleton_warrior
     type: bin
     start: 0x00A92912
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0F000000
+    exclusive_ram_id: nisitenma_ichigo_overlays
 
   - name: nisitenma_ichigo/overlay/king_skeleton
     type: bin
     start: 0x00A9B874
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0F000000
+    exclusive_ram_id: nisitenma_ichigo_overlays
 
   - name: nisitenma_ichigo/overlay/skeleton_biker
     type: bin
     start: 0x00AA39BA
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0F000000
+    exclusive_ram_id: nisitenma_ichigo_overlays
 
   - name: nisitenma_ichigo/overlay/true_dracula
     type: bin
     start: 0x00AA8B64
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0F000000
+    exclusive_ram_id: nisitenma_ichigo_overlays
 
   - name: nisitenma_ichigo/AB029E
     type: bin
     start: 0x00AB029E
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0F000000
+    exclusive_ram_id: nisitenma_ichigo_overlays
 
   - name: nisitenma_ichigo/AB10D4
     type: bin
     start: 0x00AB10D4
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0F000000
+    exclusive_ram_id: nisitenma_ichigo_overlays
 
   - name: nisitenma_ichigo/overlay/cutscene_02
     type: bin
     start: 0x00AB6C90
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0F000000
+    exclusive_ram_id: nisitenma_ichigo_overlays
 
   - name: nisitenma_ichigo/overlay/malus_horse
     type: bin
     start: 0x00ABAB3E
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0F000000
+    exclusive_ram_id: nisitenma_ichigo_overlays
 
   - name: nisitenma_ichigo/overlay/demon_dracula
     type: bin
     start: 0x00ABD154
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0F000000
+    exclusive_ram_id: nisitenma_ichigo_overlays
 
   - name: nisitenma_ichigo/overlay/demon_dracula_related_junk
     type: bin
     start: 0x00AD7B1C
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0F000000
+    exclusive_ram_id: nisitenma_ichigo_overlays
 
   - name: nisitenma_ichigo/AD7B28
     type: bin
     start: 0x00AD7B28
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0F000000
+    exclusive_ram_id: nisitenma_ichigo_overlays
 
   - name: nisitenma_ichigo/AE04FC
     type: bin
     start: 0x00AE04FC
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0F000000
+    exclusive_ram_id: nisitenma_ichigo_overlays
 
   - name: nisitenma_ichigo/overlay/gilles_de_rais_boss
     type: bin
     start: 0x00AE615A
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0F000000
+    exclusive_ram_id: nisitenma_ichigo_overlays
 
   - name: nisitenma_ichigo/AF1332
     type: bin
     start: 0x00AF1332
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0F000000
+    exclusive_ram_id: nisitenma_ichigo_overlays
 
   - name: nisitenma_ichigo/overlay/demon_renon
     type: bin
     start: 0x00AF3D12
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0F000000
+    exclusive_ram_id: nisitenma_ichigo_overlays
 
   - name: nisitenma_ichigo/overlay/death
     type: bin
     start: 0x00B04E80
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0F000000
+    exclusive_ram_id: nisitenma_ichigo_overlays
 
   - name: nisitenma_ichigo/B175D4
     type: bin
     start: 0x00B175D4
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0F000000
+    exclusive_ram_id: nisitenma_ichigo_overlays
 
   - name: nisitenma_ichigo/overlay/rosa_boss
     type: bin
     start: 0x00B1B050
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0F000000
+    exclusive_ram_id: nisitenma_ichigo_overlays
 
   - name: nisitenma_ichigo/overlay/camilla_boss
     type: bin
     start: 0x00B27886
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0F000000
+    exclusive_ram_id: nisitenma_ichigo_overlays
 
   - name: nisitenma_ichigo/overlay/actrise_boss
     type: bin
     start: 0x00B31224
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0F000000
+    exclusive_ram_id: nisitenma_ichigo_overlays
 
   - name: nisitenma_ichigo/B3A734
     type: bin
     start: 0x00B3A734
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0F000000
+    exclusive_ram_id: nisitenma_ichigo_overlays
 
   - name: nisitenma_ichigo/B42D50
     type: bin
     start: 0x00B42D50
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0F000000
+    exclusive_ram_id: nisitenma_ichigo_overlays
 
   - name: nisitenma_ichigo/B44694
     type: bin
     start: 0x00B44694
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0F000000
+    exclusive_ram_id: nisitenma_ichigo_overlays
 
   - name: nisitenma_ichigo/B449CE
     type: bin
     start: 0x00B449CE
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0F000000
+    exclusive_ram_id: nisitenma_ichigo_overlays
 
   - name: nisitenma_ichigo/B47542
     type: bin
     start: 0x00B47542
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0F000000
+    exclusive_ram_id: nisitenma_ichigo_overlays
 
   - name: nisitenma_ichigo/overlay/hell_knight_static
     type: bin
     start: 0x00B484B2
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0F000000
+    exclusive_ram_id: nisitenma_ichigo_overlays
 
   - name: nisitenma_ichigo/B48BE0
     type: bin
     start: 0x00B48BE0
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0F000000
+    exclusive_ram_id: nisitenma_ichigo_overlays
 
   - name: nisitenma_ichigo/overlay/scroll
     type: bin
     start: 0x00B4F7DC
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0F000000
+    exclusive_ram_id: nisitenma_ichigo_overlays
 
   - name: nisitenma_ichigo/B50812
     type: bin
     start: 0x00B50812
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0F000000
+    exclusive_ram_id: nisitenma_ichigo_overlays
 
   - name: nisitenma_ichigo/B5140E
     type: bin
     start: 0x00B5140E
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0F000000
+    exclusive_ram_id: nisitenma_ichigo_overlays
 
   - name: nisitenma_ichigo/overlay/title_screen
     type: bin
     start: 0x00B5166E
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0F000000
+    exclusive_ram_id: nisitenma_ichigo_overlays
 
   - name: nisitenma_ichigo/B528BA
     type: bin
     start: 0x00B528BA
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0F000000
+    exclusive_ram_id: nisitenma_ichigo_overlays
 
   - name: nisitenma_ichigo/B52BE4
     type: bin
     start: 0x00B52BE4
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0F000000
+    exclusive_ram_id: nisitenma_ichigo_overlays
 
   - name: nisitenma_ichigo/overlay/title_demo
     type: bin
     start: 0x00B52F02
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0F000000
+    exclusive_ram_id: nisitenma_ichigo_overlays
 
   - name: nisitenma_ichigo/overlay/credits_manager
     type: bin
     start: 0x00B541E0
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0F000000
+    exclusive_ram_id: nisitenma_ichigo_overlays
 
   - name: nisitenma_ichigo/overlay/pause_menu
     type: bin
     start: 0x00B543C0
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0F000000
+    exclusive_ram_id: nisitenma_ichigo_overlays
 
   - name: nisitenma_ichigo/overlay/difficulty_select
     type: bin
     start: 0x00B56516
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0F000000
+    exclusive_ram_id: nisitenma_ichigo_overlays
 
   - name: nisitenma_ichigo/overlay/game_over
     type: bin
     start: 0x00B57480
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0F000000
+    exclusive_ram_id: nisitenma_ichigo_overlays
 
   - name: nisitenma_ichigo/overlay/save_game_results
     type: bin
     start: 0x00B5892A
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0F000000
+    exclusive_ram_id: nisitenma_ichigo_overlays
 
   - name: nisitenma_ichigo/B59058
     type: bin
     start: 0x00B59058
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0F000000
+    exclusive_ram_id: nisitenma_ichigo_overlays
 
   - name: nisitenma_ichigo/overlay/save_game
     type: bin
     start: 0x00B594F2
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0F000000
+    exclusive_ram_id: nisitenma_ichigo_overlays
 
   - name: nisitenma_ichigo/overlay/textbox_advance_arrow
     type: bin
     start: 0x00B5A130
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0F000000
+    exclusive_ram_id: nisitenma_ichigo_overlays
 
   - name: nisitenma_ichigo/overlay/button_config
     type: bin
     start: 0x00B5A448
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0F000000
+    exclusive_ram_id: nisitenma_ichigo_overlays
 
   - name: nisitenma_ichigo/overlay/entrance_map_name_display
     type: bin
     start: 0x00B5ADC8
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0F000000
+    exclusive_ram_id: nisitenma_ichigo_overlays
 
   - name: nisitenma_ichigo/B5B5D0
     type: bin
     start: 0x00B5B5D0
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0F000000
+    exclusive_ram_id: nisitenma_ichigo_overlays
 
   - name: nisitenma_ichigo/code/renon_briefcase
     type: bin
     start: 0x00B5BA28
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0F000000
+    exclusive_ram_id: nisitenma_ichigo_overlays
 
   - name: nisitenma_ichigo/B5BF68
     type: bin
     start: 0x00B5BF68
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0F000000
+    exclusive_ram_id: nisitenma_ichigo_overlays
 
   - name: nisitenma_ichigo/overlay/easy_mode_ending_msg
     type: bin
     start: 0x00B5C092
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0F000000
+    exclusive_ram_id: nisitenma_ichigo_overlays
 
   - name: nisitenma_ichigo/B5C426
     type: bin
     start: 0x00B5C426
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0E000000
+    exclusive_ram_id: nisitenma_ichigo_cutscenes
 
   - name: nisitenma_ichigo/overlay/nitro_mandragora_display
     type: bin
     start: 0x00B5CDDA
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0E000000
+    exclusive_ram_id: nisitenma_ichigo_cutscenes
 
   - name: nisitenma_ichigo/B5D180
     type: bin
     start: 0x00B5D180
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0E000000
+    exclusive_ram_id: nisitenma_ichigo_cutscenes
 
   - name: nisitenma_ichigo/B5D504
     type: bin
     start: 0x00B5D504
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0E000000
+    exclusive_ram_id: nisitenma_ichigo_cutscenes
 
   - name: nisitenma_ichigo/B5D8B2
     type: bin
     start: 0x00B5D8B2
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0E000000
+    exclusive_ram_id: nisitenma_ichigo_cutscenes
 
   - name: nisitenma_ichigo/B5DBAE
     type: bin
     start: 0x00B5DBAE
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0E000000
+    exclusive_ram_id: nisitenma_ichigo_cutscenes
 
   - name: nisitenma_ichigo/B5E214
     type: bin
     start: 0x00B5E214
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0E000000
+    exclusive_ram_id: nisitenma_ichigo_cutscenes
 
   - name: nisitenma_ichigo/overlay/film_reel_effect
     type: bin
     start: 0x00B5E4DC
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0E000000
+    exclusive_ram_id: nisitenma_ichigo_cutscenes
 
   - name: nisitenma_ichigo/overlay/cutscene_01
     type: bin
     start: 0x00B5EA7E
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0E000000
+    exclusive_ram_id: nisitenma_ichigo_cutscenes
 
   - name: nisitenma_ichigo/overlay/cutscene_03
     type: bin
     start: 0x00B625C0
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0E000000
+    exclusive_ram_id: nisitenma_ichigo_cutscenes
 
   - name: nisitenma_ichigo/overlay/cutscene_04
     type: bin
     start: 0x00B63994
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0E000000
+    exclusive_ram_id: nisitenma_ichigo_cutscenes
 
   - name: nisitenma_ichigo/overlay/cutscene_05
     type: bin
     start: 0x00B64CCA
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0E000000
+    exclusive_ram_id: nisitenma_ichigo_cutscenes
 
   - name: nisitenma_ichigo/overlay/cutscene_06
     type: bin
     start: 0x00B65D52
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0E000000
+    exclusive_ram_id: nisitenma_ichigo_cutscenes
 
   - name: nisitenma_ichigo/overlay/cutscene_07
     type: bin
     start: 0x00B66CFC
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0E000000
+    exclusive_ram_id: nisitenma_ichigo_cutscenes
 
   - name: nisitenma_ichigo/overlay/cutscene_08
     type: bin
     start: 0x00B67660
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0E000000
+    exclusive_ram_id: nisitenma_ichigo_cutscenes
 
   - name: nisitenma_ichigo/overlay/cutscene_09
     type: bin
     start: 0x00B67EF2
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0E000000
+    exclusive_ram_id: nisitenma_ichigo_cutscenes
 
   - name: nisitenma_ichigo/overlay/cutscene_0A
     type: bin
     start: 0x00B68BF8
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0E000000
+    exclusive_ram_id: nisitenma_ichigo_cutscenes
 
   - name: nisitenma_ichigo/overlay/cutscene_0B
     type: bin
     start: 0x00B6A4E0
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0E000000
+    exclusive_ram_id: nisitenma_ichigo_cutscenes
 
   - name: nisitenma_ichigo/overlay/cutscene_0C
     type: bin
     start: 0x00B6B610
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0E000000
+    exclusive_ram_id: nisitenma_ichigo_cutscenes
 
   - name: nisitenma_ichigo/overlay/cutscene_0D
     type: bin
     start: 0x00B6D082
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0E000000
+    exclusive_ram_id: nisitenma_ichigo_cutscenes
 
   - name: nisitenma_ichigo/overlay/cutscene_0E
     type: bin
     start: 0x00B6FF42
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0E000000
+    exclusive_ram_id: nisitenma_ichigo_cutscenes
 
   - name: nisitenma_ichigo/overlay/cutscene_0F
     type: bin
     start: 0x00B71334
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0E000000
+    exclusive_ram_id: nisitenma_ichigo_cutscenes
 
   - name: nisitenma_ichigo/overlay/cutscene_10
     type: bin
     start: 0x00B723FC
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0E000000
+    exclusive_ram_id: nisitenma_ichigo_cutscenes
 
   - name: nisitenma_ichigo/overlay/cutscene_11
     type: bin
     start: 0x00B73F66
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0E000000
+    exclusive_ram_id: nisitenma_ichigo_cutscenes
 
   - name: nisitenma_ichigo/overlay/cutscene_12
     type: bin
     start: 0x00B7534C
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0E000000
+    exclusive_ram_id: nisitenma_ichigo_cutscenes
 
   - name: nisitenma_ichigo/overlay/cutscene_13
     type: bin
     start: 0x00B75C54
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0E000000
+    exclusive_ram_id: nisitenma_ichigo_cutscenes
 
   - name: nisitenma_ichigo/overlay/cutscene_14
     type: bin
     start: 0x00B776DC
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0E000000
+    exclusive_ram_id: nisitenma_ichigo_cutscenes
 
   - name: nisitenma_ichigo/overlay/cutscene_15
     type: bin
     start: 0x00B79BFA
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0E000000
+    exclusive_ram_id: nisitenma_ichigo_cutscenes
 
   - name: nisitenma_ichigo/overlay/cutscene_16
     type: bin
     start: 0x00B7B1FE
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0E000000
+    exclusive_ram_id: nisitenma_ichigo_cutscenes
 
   - name: nisitenma_ichigo/overlay/cutscene_17
     type: bin
     start: 0x00B7C486
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0E000000
+    exclusive_ram_id: nisitenma_ichigo_cutscenes
 
   - name: nisitenma_ichigo/overlay/cutscene_18
     type: bin
     start: 0x00B7DC7E
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0E000000
+    exclusive_ram_id: nisitenma_ichigo_cutscenes
 
   - name: nisitenma_ichigo/overlay/cutscene_19
     type: bin
     start: 0x00B7E698
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0E000000
+    exclusive_ram_id: nisitenma_ichigo_cutscenes
 
   - name: nisitenma_ichigo/overlay/cutscene_1A
     type: bin
     start: 0x00B7FBE8
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0E000000
+    exclusive_ram_id: nisitenma_ichigo_cutscenes
 
   - name: nisitenma_ichigo/overlay/cutscene_1B
     type: bin
     start: 0x00B8031A
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0E000000
+    exclusive_ram_id: nisitenma_ichigo_cutscenes
 
   - name: nisitenma_ichigo/overlay/cutscene_1C
     type: bin
     start: 0x00B82134
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0E000000
+    exclusive_ram_id: nisitenma_ichigo_cutscenes
 
   - name: nisitenma_ichigo/overlay/cutscene_1E
     type: bin
     start: 0x00B8324E
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0E000000
+    exclusive_ram_id: nisitenma_ichigo_cutscenes
 
   - name: nisitenma_ichigo/overlay/cutscene_1F
     type: bin
     start: 0x00B83E5C
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0E000000
+    exclusive_ram_id: nisitenma_ichigo_cutscenes
 
   - name: nisitenma_ichigo/overlay/cutscene_21
     type: bin
     start: 0x00B84D3E
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0E000000
+    exclusive_ram_id: nisitenma_ichigo_cutscenes
 
   - name: nisitenma_ichigo/overlay/cutscene_22
     type: bin
     start: 0x00B86EBC
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0E000000
+    exclusive_ram_id: nisitenma_ichigo_cutscenes
 
   - name: nisitenma_ichigo/overlay/cutscene_23
     type: bin
     start: 0x00B8A5F0
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0E000000
+    exclusive_ram_id: nisitenma_ichigo_cutscenes
 
   - name: nisitenma_ichigo/overlay/cutscene_24
     type: bin
     start: 0x00B8BD92
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0E000000
+    exclusive_ram_id: nisitenma_ichigo_cutscenes
 
   - name: nisitenma_ichigo/overlay/cutscene_25
     type: bin
     start: 0x00B8CC7A
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0E000000
+    exclusive_ram_id: nisitenma_ichigo_cutscenes
 
   - name: nisitenma_ichigo/overlay/cutscene_26
     type: bin
     start: 0x00B8E04C
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0E000000
+    exclusive_ram_id: nisitenma_ichigo_cutscenes
 
   - name: nisitenma_ichigo/overlay/cutscene_27
     type: bin
     start: 0x00B91A06
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0E000000
+    exclusive_ram_id: nisitenma_ichigo_cutscenes
 
   - name: nisitenma_ichigo/overlay/cutscene_28
     type: bin
     start: 0x00B94830
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0E000000
+    exclusive_ram_id: nisitenma_ichigo_cutscenes
 
   - name: nisitenma_ichigo/overlay/cutscene_29
     type: bin
     start: 0x00B94FB0
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0E000000
+    exclusive_ram_id: nisitenma_ichigo_cutscenes
 
   - name: nisitenma_ichigo/overlay/cutscene_2A
     type: bin
     start: 0x00B954FA
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0E000000
+    exclusive_ram_id: nisitenma_ichigo_cutscenes
 
   - name: nisitenma_ichigo/overlay/cutscene_2B
     type: bin
     start: 0x00B963CA
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0E000000
+    exclusive_ram_id: nisitenma_ichigo_cutscenes
 
   - name: nisitenma_ichigo/overlay/cutscene_2C
     type: bin
     start: 0x00B97AE4
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0E000000
+    exclusive_ram_id: nisitenma_ichigo_cutscenes
 
   - name: nisitenma_ichigo/overlay/cutscene_2D
     type: bin
     start: 0x00B9A01A
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0E000000
+    exclusive_ram_id: nisitenma_ichigo_cutscenes
 
   - name: nisitenma_ichigo/overlay/cutscene_2E
     type: bin
     start: 0x00B9C88A
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0E000000
+    exclusive_ram_id: nisitenma_ichigo_cutscenes
 
   - name: nisitenma_ichigo/overlay/cutscene_32
     type: bin
     start: 0x00B9FDF4
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0E000000
+    exclusive_ram_id: nisitenma_ichigo_cutscenes
 
   - name: nisitenma_ichigo/overlay/cutscene_33
     type: bin
     start: 0x00BA044A
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0E000000
+    exclusive_ram_id: nisitenma_ichigo_cutscenes
 
   - name: nisitenma_ichigo/overlay/cutscene_34
     type: bin
     start: 0x00BA1698
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0E000000
+    exclusive_ram_id: nisitenma_ichigo_cutscenes
 
   - name: nisitenma_ichigo/overlay/cutscene_35
     type: bin
     start: 0x00BA2848
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0E000000
+    exclusive_ram_id: nisitenma_ichigo_cutscenes
 
   - name: nisitenma_ichigo/overlay/cutscene_3C
     type: bin
     start: 0x00BA2E70
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0E000000
+    exclusive_ram_id: nisitenma_ichigo_cutscenes
 
   - name: nisitenma_ichigo/overlay/cutscene_3D
     type: bin
     start: 0x00BA3DF4
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0E000000
+    exclusive_ram_id: nisitenma_ichigo_cutscenes
 
   - name: nisitenma_ichigo/overlay/cutscene_3E
     type: bin
     start: 0x00BA5B38
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0E000000
+    exclusive_ram_id: nisitenma_ichigo_cutscenes
 
   - name: nisitenma_ichigo/overlay/cutscene_3F
     type: bin
     start: 0x00BA6A4A
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0E000000
+    exclusive_ram_id: nisitenma_ichigo_cutscenes
 
   - name: nisitenma_ichigo/overlay/cutscene_44
     type: bin
     start: 0x00BA83A2
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0E000000
+    exclusive_ram_id: nisitenma_ichigo_cutscenes
 
   - name: nisitenma_ichigo/overlay/cutscene_45
     type: bin
     start: 0x00BAB4F4
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0E000000
+    exclusive_ram_id: nisitenma_ichigo_cutscenes
 
   - name: nisitenma_ichigo/overlay/cutscene_52
     type: bin
     start: 0x00BAC4A2
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0E000000
+    exclusive_ram_id: nisitenma_ichigo_cutscenes
 
   - name: nisitenma_ichigo/overlay/cutscene_54
     type: bin
     start: 0x00BAD290
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0E000000
+    exclusive_ram_id: nisitenma_ichigo_cutscenes
 
   - name: nisitenma_ichigo/overlay/cutscene_55
     type: bin
     start: 0x00BAE680
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0E000000
+    exclusive_ram_id: nisitenma_ichigo_cutscenes
 
   - name: nisitenma_ichigo/overlay/cutscene_56
     type: bin
     start: 0x00BAF718
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0E000000
+    exclusive_ram_id: nisitenma_ichigo_cutscenes
 
   - name: nisitenma_ichigo/overlay/cutscene_57
     type: bin
     start: 0x00BB0712
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0E000000
+    exclusive_ram_id: nisitenma_ichigo_cutscenes
 
   - name: nisitenma_ichigo/overlay/cutscene_63
     type: bin
     start: 0x00BB1352
-    vram: 0x06000000
-    exclusive_ram_id: nisitenma_ichigo
+    vram: 0x0E000000
+    exclusive_ram_id: nisitenma_ichigo_cutscenes
   # End of compressed files
 
   - [0x00BB2D88] # Padding start
