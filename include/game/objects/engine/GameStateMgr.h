@@ -26,7 +26,7 @@ typedef struct {
     u16 flags;
     u8 field2_0x4;
     u8 field3_0x5;
-    s16 exitingGameState;
+    u16 exitingGameState;
     u8 field5_0x8;
     u8 isCurrentGameStateActive;
     u8 field7_0xa;
@@ -68,5 +68,8 @@ typedef struct {
 extern GameStateMgr* ptr_GameStateMgr;
 extern void GameStateMgr_destroy(GameStateMgr* self);
 extern gameState_settings_struct gameState_settings[12];
+extern void GameStateMgr_createGameStateModules(GameStateMgr* self);
+extern void GameStateMgr_executeGameStateModules(GameStateMgr* self,
+                                                 u32 execution_flags);
 
 #endif

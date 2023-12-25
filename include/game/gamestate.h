@@ -19,8 +19,9 @@ typedef enum cv64_gamestate_id {
 } cv64_gamestate_id_t;
 // clang-format on
 
-extern void gamestate_create(s32 gamestate_id);
-extern void gamestate_change(s32 gamestate_id);
+void gamestate_create(s32 gamestate_id);
+void gamestate_change(s32 gamestate_id);
 extern void gamestate_init();
+void end_frame(void);
 
 #endif

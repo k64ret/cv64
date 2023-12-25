@@ -3,7 +3,8 @@
 #include "object.h"
 #include "object_ID.h"
 #include "objects/engine/GameStateMgr.h"
-#include <ultra64.h>
+#include "unknown_struct.h"
+#include "unknown_struct_2.h"
 
 void gamestate_create(s32 game_state) {
     // Set target framerate
@@ -35,10 +36,29 @@ void gamestate_change(s32 game_state) {
 
 void func_80000534(void) {}
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/gamestate/GameStateMgr_calc.s")
+void GameStateMgr_entrypoint(GameStateMgr* self) {
+    if (self->current_game_state < 0) {
+        if (self->exitingGameState == FALSE) {
+            gamestate_create(-self->current_game_state);
+        } else {
+            self->exitingGameState--;
+        }
+        return;
+    } else if (self->isCurrentGameStateActive == FALSE) {
+        GameStateMgr_createGameStateModules(self);
+        gameState_settings[self->current_game_state - 1].init_function(self);
+        self->isCurrentGameStateActive++;
+    }
+    GameStateMgr_executeGameStateModules(self, D_80363AB8.execution_flags);
+}
 
 #pragma GLOBAL_ASM("../asm/nonmatchings/gamestate/gamestate_init.s")
 
 #pragma GLOBAL_ASM("../asm/nonmatchings/gamestate/setup_frame.s")
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/gamestate/end_frame.s")
+void end_frame(void) {
+    fade_calc();
+    if (D_80383AB8.should_end_master_display_list) {
+        end_master_display_list();
+    }
+}
