@@ -815,13 +815,14 @@ segments:
       - [0x006EBCE0, rodata, overlay/map/TENSHU]
 
   - name: TOKEITOU_NAI # Ending Dummy
-    # type: code
-    type: bin
+    type: code
     start: 0x006EBD90
     vram: 0x8018EB10
     exclusive_ram_id: ovl_map_objects
-    # subsegments:
-    #   - [0x006EBD90, asm, overlay/map/TOKEITOU_NAI]
+    subsegments:
+      - [0x006EBD90, asm, overlay/map/6EBD90] # This needs more eyes to figure out the splits
+      - [0x006EF000, asm, overlay/map/6EF000]
+      - [0x006EFBD0, data, overlay/map/6EBD90]
 
   - name: DRACULA # Dracula
     # type: code
