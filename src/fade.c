@@ -3,8 +3,9 @@
 #include "unknown_struct.h"
 #include <ultra64.h>
 
-// extern Gfx *gDisplayListHead;
+extern Gfx* gDisplayListHead;
 
+extern Gfx cv64_dl_fade_normal[];
 // Gfx DL_fade_normal[] = {
 //     gsDPPipeSync(),
 //     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -22,6 +23,7 @@
 //     gsSPEndDisplayList(),
 // };
 
+extern Gfx cv64_dl_fade_with_outline[];
 // Gfx DL_fade_with_outline[] = {
 //     gsDPPipeSync(),
 //     gsDPSetCycleType(G_CYC_2CYCLE),
@@ -104,47 +106,58 @@ u32 fade_isFading() {
     }
 }
 
+#ifdef NON_MATCHING
 #pragma GLOBAL_ASM("../asm/nonmatchings/fade/fade_calc.s")
+#else
 
 // 0x8000E6C4 (Matched by anon. Original scratch:
 // https://decomp.me/scratch/j0Te1)
 
-// void fade_calc() {
-//     f32 alpha;
-//     s32 flags = D_80383AB8.fade_settings.flags;
-//
-//     if ((flags != 0) && (D_80383AB8.fade_settings.current_time)) {
-//         alpha = (f32)D_80383AB8.fade_settings.current_time /
-//                 D_80383AB8.fade_settings.max_time;
-//
-//         if (flags & FADE_OUT) {
-//             if (D_80383AB8.fade_settings.current_time <
-//                 D_80383AB8.fade_settings.max_time) {
-//                 D_80383AB8.fade_settings.current_time++;
-//             }
-//         } else {
-//             D_80383AB8.fade_settings.current_time--;
-//             if (D_80383AB8.fade_settings.current_time == 0) {
-//                 D_80383AB8.fade_settings.flags = 0;
-//             }
-//         }
-//
-//         D_80383AB8.fade_settings.color.A = (s32)(alpha * 255.9999);
-//
-//         if (flags & FADE_WITH_OUTLINE) {
-//             gDPSetFogColor(gDisplayListHead++,
-//                            D_80383AB8.fade_settings.color.R,
-//                            D_80383AB8.fade_settings.color.G,
-//                            D_80383AB8.fade_settings.color.B,
-//                            D_80383AB8.fade_settings.color.A);
-//             gSPDisplayList(gDisplayListHead++, &DL_fade_with_outline);
-//         } else {
-//             gDPSetPrimColor(gDisplayListHead++, 0, 0,
-//                             D_80383AB8.fade_settings.color.R,
-//                             D_80383AB8.fade_settings.color.G,
-//                             D_80383AB8.fade_settings.color.B,
-//                             D_80383AB8.fade_settings.color.A);
-//             gSPDisplayList(gDisplayListHead++, &DL_fade_normal);
-//         }
-//     }
-// }
+void fade_calc() {
+    f32 alpha;
+    s32 flags = D_80383AB8.fade_settings.flags;
+
+    if ((flags != 0) && (D_80383AB8.fade_settings.current_time)) {
+        alpha = (f32)D_80383AB8.fade_settings.current_time /
+                D_80383AB8.fade_settings.max_time;
+
+        if (flags & FADE_OUT) {
+            if (D_80383AB8.fade_settings.current_time <
+                D_80383AB8.fade_settings.max_time) {
+                D_80383AB8.fade_settings.current_time++;
+            }
+        } else {
+            D_80383AB8.fade_settings.current_time--;
+            if (D_80383AB8.fade_settings.current_time == 0) {
+                D_80383AB8.fade_settings.flags = 0;
+            }
+        }
+
+        D_80383AB8.fade_settings.color.A = (s32)(alpha * 255.9999);
+
+        if (flags & FADE_WITH_OUTLINE) {
+            gDPSetFogColor(gDisplayListHead++, D_80383AB8.fade_settings.color.R,
+                           D_80383AB8.fade_settings.color.G,
+                           D_80383AB8.fade_settings.color.B,
+                           D_80383AB8.fade_settings.color.A);
+            gSPDisplayList(gDisplayListHead++, &cv64_dl_fade_with_outline);
+        } else {
+            gDPSetPrimColor(gDisplayListHead++, 0, 0,
+                            D_80383AB8.fade_settings.color.R,
+                            D_80383AB8.fade_settings.color.G,
+                            D_80383AB8.fade_settings.color.B,
+                            D_80383AB8.fade_settings.color.A);
+            gSPDisplayList(gDisplayListHead++, &cv64_dl_fade_normal);
+        }
+    }
+}
+
+#endif // NON_MATCHING
+
+// #pragma GLOBAL_ASM("../asm/nonmatchings/fade/D_800A27B0_A33B0.s")
+
+// #pragma GLOBAL_ASM("../asm/nonmatchings/fade/D_800A27D8_A33D8.s")
+
+// #pragma GLOBAL_ASM("../asm/nonmatchings/fade/D_800A27E4_A33E4.s")
+
+// #pragma GLOBAL_ASM("../asm/nonmatchings/fade/D_800A27F0_A33F0.s")
