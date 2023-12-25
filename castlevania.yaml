@@ -792,13 +792,17 @@ segments:
       - [0x006E8550, rodata, overlay/map/KETTOU_TOU]
 
   - name: TURO_TOKEITOU # Clock Tower
-    # type: code
-    type: bin
+    type: code
     start: 0x006E86B0
     vram: 0x8018EB10
     exclusive_ram_id: ovl_map_objects
-    # subsegments:
-    #   - [0x006E86B0, asm, overlay/map/TURO_TOKEITOU]
+    subsegments:
+      - [0x006E86B0, c, overlay/map/6E86B0]
+      - [0x006E96D0, c, overlay/map/6E96D0]
+      - [0x006EA1D0, data, overlay/map/6E86B0]
+      - [0x006EA3B0, data, overlay/map/6E96D0]
+      - [0x006EA460, rodata, overlay/map/6E86B0] # Not sure if this rodata belongs to the first/second translation unit
+      # - [0x006EA460, rodata, overlay/map/6E96D0]
 
   - name: TENSHU # Castle Tower
     # type: code
