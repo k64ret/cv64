@@ -654,13 +654,13 @@ segments:
       - [0x006C50E0, c, overlay/map/MEIRO_TEIEN]
 
   - name: CHIKA_KODO # Underground Mining Tunnel
-    # type: code
-    type: bin
+    type: code
     start: 0x006C5110
     vram: 0x8018EB10
     exclusive_ram_id: ovl_801
-    # subsegments:
-    #   - [0x006C5110, asm, overlay/map/CHIKA_KODO]
+    subsegments:
+      - [0x006C5110, c, overlay/map/CHIKA_KODO]
+      - [0x006C74A0, data, overlay/map/CHIKA_KODO]
 
   - name: CHIKA_SUIRO # Underground Waterway
     # type: code
