@@ -693,13 +693,15 @@ segments:
       - [0x006CB820, rodata, overlay/map/HONMARU_1F]
 
   - name: HONMARU_2F # Castle Center 2F
-    # type: code
-    type: bin
+    type: code
     start: 0x006CB850
     vram: 0x8018EB10
     exclusive_ram_id: ovl_801
-    # subsegments:
-    #   - [0x006CB850, asm, overlay/map/HONMARU_2F]
+    subsegments:
+      # - [0x006CB850, c, overlay/map/HONMARU_2F]
+      - [0x006CB850, asm, overlay/map/HONMARU_2F]
+      - [0x006CCDE0, data, overlay/map/HONMARU_2F]
+      - [0x006CCFA0, rodata, overlay/map/HONMARU_2F]
 
   - name: HONMARU_3F_MINAMI # Castle Center South 3F
     # type: code
