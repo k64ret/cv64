@@ -825,13 +825,14 @@ segments:
       - [0x006EFBD0, data, overlay/map/6EBD90]
 
   - name: DRACULA # Dracula
-    # type: code
-    type: bin
+    type: code
     start: 0x006F0150
     vram: 0x8018EB10
     exclusive_ram_id: ovl_map_objects
-    # subsegments:
-    #   - [0x006F0150, asm, overlay/map/DRACULA]
+    subsegments:
+      - [0x006F0150, c, overlay/map/DRACULA]
+      - [0x006F09E0, data, overlay/map/DRACULA]
+      - [0x006F0A20, rodata, overlay/map/DRACULA]
 
   - name: ROSE # Rose
     # type: code
