@@ -1,9 +1,7 @@
 #include "fade.h"
 #include "cv64.h"
-#include "unknown_struct.h"
+#include "system_work.h"
 #include <ultra64.h>
-
-extern Gfx* gDisplayListHead;
 
 extern Gfx cv64_dl_fade_normal[];
 // Gfx DL_fade_normal[] = {
@@ -45,61 +43,59 @@ extern Gfx cv64_dl_fade_with_outline[];
 //     gsSPEndDisplayList(),
 // };
 
-void fade_setAllFlags(s16 flags) { D_80383AB8.fade_settings.flags = flags; }
+void fade_setAllFlags(s16 flags) { sys.fade_flags = flags; }
 
-void fade_setFlag(s16 flag) { D_80383AB8.fade_settings.flags |= flag; }
+void fade_setFlag(s16 flag) { sys.fade_flags |= flag; }
 
-void fade_removeFlag(s16 flag) { D_80383AB8.fade_settings.flags &= ~flag; }
+void fade_removeFlag(s16 flag) { sys.fade_flags &= ~flag; }
 
 void fade_setColor(u8 R, u8 G, u8 B) {
-    D_80383AB8.fade_settings.color.R = R;
-    D_80383AB8.fade_settings.color.G = G;
-    D_80383AB8.fade_settings.color.B = B;
+    sys.fade_color.R = R;
+    sys.fade_color.G = G;
+    sys.fade_color.B = B;
 }
 
 // The cleaner version
 // void fade_setSettings(s16 flags, u16 fade_time, u8 R, u8 G, u8 B) {
 //     fade_setAllFlags(flags);
-//     D_80383AB8.fade_settings.max_time = fade_time;
-//     D_80383AB8.fade_settings.current_time =
+//     sys.fade_max_time = fade_time;
+//     sys.fade_current_time =
 //         (flags & FADE_OUT) ? 1 : fade_time - 1;
 //     fade_setColor(R, G, B);
 // }
 
 // The matching version
 void fade_setSettings(s16 flags, u16 fade_time, u8 R, u8 G, u8 B) {
-    D_80383AB8.fade_settings.flags = flags;
-    D_80383AB8.fade_settings.max_time = fade_time;
+    sys.fade_flags = flags;
+    sys.fade_max_time = fade_time;
 
-    D_80383AB8.fade_settings.current_time =
-        (flags & FADE_OUT) ? 1 : fade_time - 1;
+    sys.fade_current_time = (flags & FADE_OUT) ? 1 : fade_time - 1;
 
-    D_80383AB8.fade_settings.color.R = R;
-    D_80383AB8.fade_settings.color.G = G;
-    D_80383AB8.fade_settings.color.B = B;
+    sys.fade_color.R = R;
+    sys.fade_color.G = G;
+    sys.fade_color.B = B;
 }
 
 // The cleaner version
 // u32 fade_isFading() {
-//     if (!D_80383AB8.fade_settings.flags ||
-//         ((D_80383AB8.fade_settings.flags & FADE_OUT) &&
-//          (D_80383AB8.fade_settings.current_time ==
-//           D_80383AB8.fade_settings.max_time))) {
+//     if (!sys.fade_flags ||
+//         ((sys.fade_flags & FADE_OUT) &&
+//          (sys.fade_current_time ==
+//           sys.fade_max_time))) {
 //         return FALSE;
 //     }
 //
-//     return D_80383AB8.fade_settings.flags & (FADE_IN | FADE_OUT);
+//     return sys.fade_flags & (FADE_IN | FADE_OUT);
 // }
 
 // The matching version
 u32 fade_isFading() {
-    if (D_80383AB8.fade_settings.flags != 0) {
-        if ((D_80383AB8.fade_settings.flags & FADE_OUT) &&
-            (D_80383AB8.fade_settings.current_time ==
-             D_80383AB8.fade_settings.max_time)) {
+    if (sys.fade_flags != 0) {
+        if ((sys.fade_flags & FADE_OUT) &&
+            (sys.fade_current_time == sys.fade_max_time)) {
             return FALSE;
         } else {
-            return D_80383AB8.fade_settings.flags & (FADE_IN | FADE_OUT);
+            return sys.fade_flags & (FADE_IN | FADE_OUT);
         }
     } else {
         return FALSE;
@@ -115,38 +111,33 @@ u32 fade_isFading() {
 
 void fade_calc() {
     f32 alpha;
-    s32 flags = D_80383AB8.fade_settings.flags;
+    s32 flags = sys.fade_flags;
 
-    if ((flags != 0) && (D_80383AB8.fade_settings.current_time)) {
-        alpha = (f32)D_80383AB8.fade_settings.current_time /
-                D_80383AB8.fade_settings.max_time;
+    if ((flags != 0) && (sys.fade_current_time)) {
+        alpha = (f32)sys.fade_current_time / sys.fade_max_time;
 
         if (flags & FADE_OUT) {
-            if (D_80383AB8.fade_settings.current_time <
-                D_80383AB8.fade_settings.max_time) {
-                D_80383AB8.fade_settings.current_time++;
+            if (sys.fade_current_time < sys.fade_max_time) {
+                sys.fade_current_time++;
             }
         } else {
-            D_80383AB8.fade_settings.current_time--;
-            if (D_80383AB8.fade_settings.current_time == 0) {
-                D_80383AB8.fade_settings.flags = 0;
+            sys.fade_current_time--;
+            if (sys.fade_current_time == 0) {
+                sys.fade_flags = 0;
             }
         }
 
-        D_80383AB8.fade_settings.color.A = (s32)(alpha * 255.9999);
+        sys.fade_color.A = (s32)(alpha * 255.9999);
 
         if (flags & FADE_WITH_OUTLINE) {
-            gDPSetFogColor(gDisplayListHead++, D_80383AB8.fade_settings.color.R,
-                           D_80383AB8.fade_settings.color.G,
-                           D_80383AB8.fade_settings.color.B,
-                           D_80383AB8.fade_settings.color.A);
+            gDPSetFogColor(gDisplayListHead++, sys.fade_color.R,
+                           sys.fade_color.G, sys.fade_color.B,
+                           sys.fade_color.A);
             gSPDisplayList(gDisplayListHead++, &cv64_dl_fade_with_outline);
         } else {
-            gDPSetPrimColor(gDisplayListHead++, 0, 0,
-                            D_80383AB8.fade_settings.color.R,
-                            D_80383AB8.fade_settings.color.G,
-                            D_80383AB8.fade_settings.color.B,
-                            D_80383AB8.fade_settings.color.A);
+            gDPSetPrimColor(gDisplayListHead++, 0, 0, sys.fade_color.R,
+                            sys.fade_color.G, sys.fade_color.B,
+                            sys.fade_color.A);
             gSPDisplayList(gDisplayListHead++, &cv64_dl_fade_normal);
         }
     }

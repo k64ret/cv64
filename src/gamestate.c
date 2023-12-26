@@ -1,14 +1,14 @@
+#include "gamestate.h"
 #include "cv64.h"
 #include "memory.h"
 #include "object.h"
 #include "object_ID.h"
 #include "objects/engine/GameStateMgr.h"
-#include "unknown_struct.h"
-#include "unknown_struct_2.h"
+#include "system_work.h"
 
 void gamestate_create(s32 game_state) {
     // Set target framerate
-    code_execution_max_delay =
+    sys.code_execution_max_delay =
         gameState_settings[game_state - 1].code_execution_max_delay;
 
     // This is inside a loop to make it so that
@@ -49,16 +49,27 @@ void GameStateMgr_entrypoint(GameStateMgr* self) {
         gameState_settings[self->current_game_state - 1].init_function(self);
         self->isCurrentGameStateActive++;
     }
-    GameStateMgr_executeGameStateModules(self, D_80363AB8.execution_flags);
+    GameStateMgr_executeGameStateModules(self, sys.execution_flags);
 }
 
 #pragma GLOBAL_ASM("../asm/nonmatchings/gamestate/gamestate_init.s")
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/gamestate/setup_frame.s")
+void setup_frame(void) {
+    gDisplayListHead = &sys.field2_0x8[sys.current_dlist_buffer].dlists;
+    gSPSegment(gDisplayListHead++, 0x00, 0x00000000);
+    setup_rsp(&gDisplayListHead);
+    if (sys.should_setup_Z_buffer != FALSE) {
+        setup_z_buffer();
+    }
+    setup_framebuffer();
+    if (sys.should_setup_background_color != FALSE) {
+        setup_background_color();
+    }
+}
 
 void end_frame(void) {
     fade_calc();
-    if (D_80383AB8.should_end_master_display_list) {
+    if (sys.should_end_master_display_list) {
         end_master_display_list();
     }
 }

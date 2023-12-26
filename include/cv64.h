@@ -3,11 +3,11 @@
 
 #define CV64_BIT(num) (1 << (num))
 
-#include "ultratypes.h"
+#include <ultra64.h>
 
 typedef u8 Addr[];
 
-extern s16 code_execution_max_delay; // Maybe put this in another header
+extern Gfx* gDisplayListHead; // 0x800B49E0
 
 extern void end_master_display_list(void);
 

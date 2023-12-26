@@ -23,5 +23,9 @@ void gamestate_create(s32 gamestate_id);
 void gamestate_change(s32 gamestate_id);
 extern void gamestate_init();
 void end_frame(void);
+extern void setup_background_color();
+extern void setup_framebuffer();
+extern void setup_rsp(Gfx**);
+extern void setup_z_buffer();
 
 #endif
