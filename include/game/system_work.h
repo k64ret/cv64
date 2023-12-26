@@ -44,8 +44,10 @@ typedef struct {
     s16 should_end_master_display_list;
     s16 fade_flags;
     cv64_rgba_t fade_color;
-    u16 fade_current_time;
-    u16 fade_max_time;
+    u16 fade_current_time; // Likely called "disp_fade_cnt", according to
+                           // leftover strings in LoD
+    u16 fade_max_time; // Likely called "disp_fade_time", according to leftover
+                       // strings in LoD
     u16 fog_distance_near;
     u16 fog_distance_far;
     s32 field16_0x2402c; /* See func_8000C740 */

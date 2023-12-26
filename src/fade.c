@@ -3,45 +3,43 @@
 #include "system_work.h"
 #include <ultra64.h>
 
-extern Gfx cv64_dl_fade_normal[];
-// Gfx DL_fade_normal[] = {
-//     gsDPPipeSync(),
-//     gsDPSetCycleType(G_CYC_1CYCLE),
-//     gsSPClearGeometryMode(G_ZBUFFER | G_SHADE | G_CULL_BOTH | G_FOG |
-//                           G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR |
-//                           G_LOD | G_SHADING_SMOOTH),
-//     gsDPSetRenderMode(G_RM_CLD_SURF, G_RM_CLD_SURF2),
-//     gsDPSetCombineMode(G_CC_PRIMITIVE, G_CC_PRIMITIVE),
-//     gsDPSetPrimDepth(-1, -1),
-//     gsDPSetDepthSource(G_ZS_PRIM),
-//     gsDPSetAlphaCompare(G_AC_NONE),
-//     gsDPSetColorDither(G_CD_MAGICSQ),
-//     gsDPSetAlphaDither(G_AD_NOISE),
-//     gsDPFillRectangle(0, 0, 319, 239),
-//     gsSPEndDisplayList(),
-// };
+Gfx cv64_dl_fade_normal[] = {
+    gsDPPipeSync(),
+    gsDPSetCycleType(G_CYC_1CYCLE),
+    gsSPClearGeometryMode(G_ZBUFFER | G_SHADE | G_CULL_BOTH | G_FOG |
+                          G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR |
+                          G_LOD | G_SHADING_SMOOTH),
+    gsDPSetRenderMode(G_RM_CLD_SURF, G_RM_CLD_SURF2),
+    gsDPSetCombineMode(G_CC_PRIMITIVE, G_CC_PRIMITIVE),
+    gsDPSetPrimDepth(-1, -1),
+    gsDPSetDepthSource(G_ZS_PRIM),
+    gsDPSetAlphaCompare(G_AC_NONE),
+    gsDPSetColorDither(G_CD_MAGICSQ),
+    gsDPSetAlphaDither(G_AD_NOISE),
+    gsDPFillRectangle(0, 0, 319, 239),
+    gsSPEndDisplayList(),
+};
 
-extern Gfx cv64_dl_fade_with_outline[];
-// Gfx DL_fade_with_outline[] = {
-//     gsDPPipeSync(),
-//     gsDPSetCycleType(G_CYC_2CYCLE),
-//     gsSPClearGeometryMode(G_ZBUFFER | G_SHADE | G_CULL_BOTH | G_FOG |
-//                           G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR |
-//                           G_LOD | G_SHADING_SMOOTH),
-//     gsDPSetRenderMode(
-//         IM_RD | CVG_DST_SAVE | ZMODE_OPA | FORCE_BL |
-//             GBL_c1(G_BL_CLR_IN, G_BL_0, G_BL_CLR_FOG, G_BL_A_MEM),
-//         IM_RD | CVG_DST_SAVE | ZMODE_OPA | FORCE_BL |
-//             GBL_c2(G_BL_CLR_IN, G_BL_A_FOG, G_BL_CLR_MEM, G_BL_1MA)),
-//     gsDPSetCombineLERP(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-//     gsDPSetPrimDepth(-1, -1),
-//     gsDPSetDepthSource(G_ZS_PRIM),
-//     gsDPSetAlphaCompare(G_AC_NONE),
-//     gsDPSetColorDither(G_CD_MAGICSQ),
-//     gsDPSetAlphaDither(G_AD_NOISE),
-//     gsDPFillRectangle(0, 0, 319, 239),
-//     gsSPEndDisplayList(),
-// };
+Gfx cv64_dl_fade_with_outline[] = {
+    gsDPPipeSync(),
+    gsDPSetCycleType(G_CYC_2CYCLE),
+    gsSPClearGeometryMode(G_ZBUFFER | G_SHADE | G_CULL_BOTH | G_FOG |
+                          G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR |
+                          G_LOD | G_SHADING_SMOOTH),
+    gsDPSetRenderMode(
+        IM_RD | CVG_DST_SAVE | ZMODE_OPA | FORCE_BL |
+            GBL_c1(G_BL_CLR_IN, G_BL_0, G_BL_CLR_FOG, G_BL_A_MEM),
+        IM_RD | CVG_DST_SAVE | ZMODE_OPA | FORCE_BL |
+            GBL_c2(G_BL_CLR_IN, G_BL_A_FOG, G_BL_CLR_MEM, G_BL_1MA)),
+    gsDPSetCombineLERP(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+    gsDPSetPrimDepth(-1, -1),
+    gsDPSetDepthSource(G_ZS_PRIM),
+    gsDPSetAlphaCompare(G_AC_NONE),
+    gsDPSetColorDither(G_CD_MAGICSQ),
+    gsDPSetAlphaDither(G_AD_NOISE),
+    gsDPFillRectangle(0, 0, 319, 239),
+    gsSPEndDisplayList(),
+};
 
 void fade_setAllFlags(s16 flags) { sys.fade_flags = flags; }
 
@@ -102,13 +100,8 @@ u32 fade_isFading() {
     }
 }
 
-#ifdef NON_MATCHING
-#pragma GLOBAL_ASM("../asm/nonmatchings/fade/fade_calc.s")
-#else
-
 // 0x8000E6C4 (Matched by anon. Original scratch:
 // https://decomp.me/scratch/j0Te1)
-
 void fade_calc() {
     f32 alpha;
     s32 flags = sys.fade_flags;
@@ -142,13 +135,3 @@ void fade_calc() {
         }
     }
 }
-
-#endif // NON_MATCHING
-
-// #pragma GLOBAL_ASM("../asm/nonmatchings/fade/D_800A27B0_A33B0.s")
-
-// #pragma GLOBAL_ASM("../asm/nonmatchings/fade/D_800A27D8_A33D8.s")
-
-// #pragma GLOBAL_ASM("../asm/nonmatchings/fade/D_800A27E4_A33E4.s")
-
-// #pragma GLOBAL_ASM("../asm/nonmatchings/fade/D_800A27F0_A33F0.s")

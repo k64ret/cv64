@@ -17,6 +17,6 @@ void fade_removeFlag(s16 flag);
 void fade_setColor(u8 R, u8 G, u8 B);
 void fade_setSettings(s16 flags, u16 fade_time, u8 R, u8 G, u8 B);
 u32 fade_isFading();
-extern void fade_calc();
+void fade_calc();
 
 #endif

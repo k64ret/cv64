@@ -1353,7 +1353,7 @@ game_time_prev = 0x800a7904;
 another_display_list = 0x80363ac0;
 sys = 0x80363ab8;
 DMAMgr_functions = 0x80093cf0;
-Objects_functions = 0x80092270;
+Objects_functions = 0x80092274;
 DAT_80342148 = 0x80342148;
 initial_magic_ball_size = 0x800a4aa0;
 PlayerData = 0x80350798;
@@ -1456,13 +1456,13 @@ fade_setFlag              = 0x8000e5a8; // type:func
 fade_calc                 = 0x8000e6c4; // type:func
 
 // .data
-cv64_dl_fade_normal       = 0x80093370;
-cv64_dl_fade_with_outline = 0x800933D0;
-objects_file_info         = 0x8009342C;
+cv64_dl_fade_normal       = 0x80093370; // rom:0x00093F70 size:0x60
+cv64_dl_fade_with_outline = 0x800933D0; // rom:0x00093FD0 size:0x60
 // .rodata
 
 // End of src/fade.c
 
+objects_file_info         = 0x80093430; // rom:0x00094030 size:0x8A8
 gameState_konamiLogo_object_files = 0x800958c0;
 gameState_gameOver_object_files = 0x80096348;
 object_list_free_space = 0x800a7830;

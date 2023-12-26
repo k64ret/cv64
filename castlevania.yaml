@@ -314,14 +314,15 @@ segments:
       - [0x00090920, data]
       - [0x00092B50, data, gamestate]
       - [0x00092E70, data, object]
-      - [0x00093F70, data, fade]
-      - [0x000948E0, data]
+      - [0x00093F70, .data, fade]
+      - [0x00094030, data]
 
       - [0x000A3320, rodata, 0x00004D80]
       - [0x000A3330, rodata, figure]
       - [0x000A3390, rodata, 0x0000D270]
       - [0x000A33A0, rodata, 0x0000DD70]
-      - [0x000A33B0, rodata, fade]
+      - [0x000A33B0, .rodata, fade]
+      - [0x000A33CC, rodata]
       # - [0x000A33D8, rodata]
       # - [0x000A33E4, rodata]
 
