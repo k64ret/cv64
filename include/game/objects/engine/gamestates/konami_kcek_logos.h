@@ -22,6 +22,8 @@ void cv64_konamilogo_kcek_fade_in(cv64_konamilogo_t* self);    // 0x801cffdc
 void cv64_konamilogo_kcek_wait(cv64_konamilogo_t* self);       // 0x801d0058
 void cv64_konamilogo_kcek_fade_out(cv64_konamilogo_t* self);   // 0x801d00e0
 
+typedef void (*cv64_konamilogo_func_t)(cv64_konamilogo_t*);
+
 typedef enum cv64_konamilogo_func_id {
     KONAMILOGO_INIT,
     KONAMILOGO_FADE_IN,
@@ -33,7 +35,7 @@ typedef enum cv64_konamilogo_func_id {
     FUNC_8000E860
 } cv64_konamilogo_func_id_t;
 
-void (*cv64_konamilogo_funcs[])(cv64_konamilogo_t* self) = {
+cv64_konamilogo_func_t cv64_konamilogo_funcs[] = {
     cv64_konamilogo_init,          cv64_konamilogo_fade_in,
     cv64_konamilogo_wait,          cv64_konamilogo_fade_out,
     cv64_konamilogo_kcek_fade_in,  cv64_konamilogo_kcek_wait,
