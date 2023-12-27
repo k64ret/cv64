@@ -81,10 +81,10 @@ segments:
       - [0x00002280, c, object]
       - [0x00003550, asm]               # Matrix operations
       - [0x00004BC0, asm]
-      - [0x00004D80, asm]               # Nisitenma-Ichigo related functions + atan2 functions
+      - [0x00004D80, asm, 4D80]         # Nisitenma-Ichigo related functions + atan2 functions
       - [0x00004FE0, asm, figure]       # Figure-type structs (model_info, camera and struct_47)
-      - [0x0000D270, asm]
-      - [0x0000DD70, asm]
+      - [0x0000D270, asm, D270]
+      - [0x0000DD70, asm, DD70]
       - [0x0000F190, c, fade]
       - [0x0000F460, asm]               # Contains some gamestate-related functions
       - [0x0000F960, asm]               # File load-related. Module 0x0003's code is located here
@@ -318,10 +318,10 @@ segments:
       - [0x00093F70, .data, fade]
       - [0x00094030, data]
 
-      - [0x000A3320, rodata, 0x00004D80]
+      - [0x000A3320, rodata, 4D80]
       - [0x000A3330, rodata, figure]
-      - [0x000A3390, rodata, 0x0000D270]
-      - [0x000A33A0, rodata, 0x0000DD70]
+      - [0x000A3390, rodata, D270]
+      - [0x000A33A0, rodata, DD70]
       - [0x000A33B0, .rodata, fade]
       - [0x000A33C0, rodata]
       # - [0x000A33D8, rodata]

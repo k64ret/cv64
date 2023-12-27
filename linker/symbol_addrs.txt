@@ -10,24 +10,6 @@ initHeaps = 0x80000cf4;
 heap_alloc = 0x80000d80;
 heapBlock_updateBlockMaxSize = 0x80000fb4;
 heapBlock_free = 0x80001078;
-object_isValid = 0x80001680;
-object_free = 0x800016a8;
-clearAllObjects = 0x8000177c;
-object_allocate = 0x800017dc;
-updateObjectListFreeSlot = 0x80001868;
-object_create = 0x800018ac;
-object_createAndSetChild = 0x80001980;
-object_findFirstObjectByID = 0x80001a80;
-objectList_findFirstObjectByID = 0x80001ad0;
-object_findObjectBetweenIDRange = 0x80001af4;
-objectList_findObjectBetweenRange = 0x80001b50;
-object_findObjectByIDAndType = 0x80001b74;
-findNextMapObjectInstance = 0x8000204c;
-findFirstMapObjectInstance = 0x800020d8;
-GameStateMgr_execute = 0x80002334;
-object_executeChildObject = 0x800023d4;
-object_execute = 0x800024ac;
-object_destroyChildrenAndModelInfo = 0x80002740;
 multPointMatrix = 0x800029e8;
 vec3f_getDistanceBetweenTwoVectors = 0x8000400c;
 NisitenmaIchigo_isFileLoaded = 0x80004180;
@@ -569,8 +551,6 @@ code_execution_max_delay = 0x80387AD0;
 end_frame = 0x8000072c;
 heap_writebackDCache = 0x80000c94;
 objectList_findObjectByIDAndType = 0x80001bc0;
-object_allocEntryInList = 0x8000219c;
-object_allocEntryInListAndClear = 0x800021f4;
 getRandomFromGuRandom = 0x80004118;
 animationMgr_updateAnimParams = 0x8000be88;
 Carrie_action_pullLever_init = 0x8000e898;
@@ -1285,7 +1265,6 @@ song_ID_to_play_next = 0x80093d94;
 map_song_ID_table = 0x80096600;
 map_song_ID_unused = 0x800d5f20;
 mapSetup_functions = 0x800966a4;
-GameStateMgr_destroy = 0x800027b4;
 item_settings_table = 0x8016a904;
 interactuables_calc = 0x80125230;
 map_breakables_drop_values_list = 0x80189dd0;
@@ -1439,7 +1418,6 @@ carrie_animations_translation_data = 0x8016c7f4;
 ptr_player_animations_translation_data = 0x8016c884;
 ptr_player_animations_rotation_data = 0x8016c75c;
 cutscene_settings = 0x8016b5b4;
-objects_number_of_instances_per_object = 0x8034ce60;
 kingSkeleton_objectFiles = 0x80095b78;
 gameState_konamiLogo_overlay_info = 0x800958b0;
 
@@ -1460,6 +1438,48 @@ fade_calc                 = 0x8000e6c4; // type:func
 // .rodata
 
 // End of src/fade.c
+
+// src/object.c
+
+// .text
+object_isValid                         = 0x80001680; // type:func
+object_free                            = 0x800016A8; // type:func
+clearAllObjects                        = 0x8000177C; // type:func
+object_allocate                        = 0x800017DC; // type:func
+updateObjectListFreeSlot               = 0x80001868; // type:func
+object_create                          = 0x800018AC; // type:func
+object_createAndSetChild               = 0x80001980; // type:func
+object_findFirstObjectByID             = 0x80001A80; // type:func
+objectList_findFirstObjectByID         = 0x80001AD0; // type:func
+object_findObjectBetweenIDRange        = 0x80001AF4; // type:func
+objectList_findObjectBetweenRange      = 0x80001B50; // type:func
+object_findObjectByIDAndType           = 0x80001B74; // type:func
+func_80001BE4_27E4                     = 0x80001BE4; // type:func
+func_80001CA0_28A0                     = 0x80001CA0; // type:func
+func_80001DD4_29D4                     = 0x80001DD4; // type:func
+func_80001EB4_2AB4                     = 0x80001EB4; // type:func
+findNextMapObjectInstance              = 0x8000204C; // type:func
+findFirstMapObjectInstance             = 0x800020D8; // type:func
+func_8000211C_2D1C                     = 0x8000211C; // type:func
+object_allocEntryInList                = 0x8000219C; // type:func
+object_allocEntryInListAndClear        = 0x800021F4; // type:func
+func_80002264_2E64                     = 0x80002264; // type:func
+func_800022BC_2EBC                     = 0x800022BC; // type:func
+GameStateMgr_execute                   = 0x80002334; // type:func
+object_executeChildObject              = 0x800023D4; // type:func
+object_execute                         = 0x800024AC; // type:func
+func_80002570_3170                     = 0x80002570; // type:func
+func_800026D8_32D8                     = 0x800026D8; // type:func
+object_destroyChildrenAndModelInfo     = 0x80002740; // type:func
+GameStateMgr_destroy                   = 0x800027B4; // type:func
+func_800027BC_33BC                     = 0x800027BC; // type:func
+func_8000287C_347C                     = 0x8000287C; // type:func
+
+// .data
+objects_array                          = 0x80342060;
+objects_number_of_instances_per_object = 0x8034CE60;
+
+// End of src/object.c
 
 D_8009342C_9402C = 0x8009342C; // ignore:true
 objects_file_info         = 0x80093430; // rom:0x00094030 size:0x8A8
@@ -1507,7 +1527,6 @@ actor_spawn_radius = 0x8018a6f0;
 carrie_magic_ball_damage = 0x803dde7c;
 carrie_magic_ball_rings_size = 0x803dde70;
 latest_allocated_fig = 0x800a7850;
-objects_array = 0x80342060;
 PTR_OBJECT_0003 = 0x800a78a0;
 ptr_PlayerObject = 0x80389cdc;
 save_difficulty = 0x80389cc8;
