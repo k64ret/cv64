@@ -4,7 +4,7 @@ rm baserom_uncompressed.z64
 rm -rf build
 rm -rf assets/nisitenma_ichigo
 rm assets/*.bin
-rm -rf asm/nonmatchings
+# rm -rf asm/nonmatchings
 rm -rf asm/overlay
 rm -rf asm/data
 rm asm/*.s
