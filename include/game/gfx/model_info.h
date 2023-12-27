@@ -35,7 +35,7 @@ typedef struct cv64_model_inf {
     angle_t field41_0x52;
     vec3f size;
     void* field45_0x64; // map_actor_model*
-    mf matrix;
+    Matrix44F matrix;
 } cv64_model_inf_t;
 
 extern void modelInfo_setPosVec3s(cv64_model_inf_t* self, vec3s* position);

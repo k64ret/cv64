@@ -21,7 +21,7 @@ typedef union {
 
 typedef struct {
     Gfx dlists[5120];
-    mf matrices[512];
+    Matrix44F matrices[512];
 } sysw_gfx;
 
 typedef struct {
@@ -51,9 +51,9 @@ typedef struct {
     u16 fog_distance_near;
     u16 fog_distance_far;
     s32 field16_0x2402c; /* See func_8000C740 */
-    mf* field17_0x24030;
+    Matrix44F* field17_0x24030;
     u8 field18_0x24034[68];
-    MtxF field19_0x24078;
+    Matrix44F field19_0x24078;
     unk_union_1 field20_0x240b8;
     u32 field21_0x240bc[64];  // Nisitenma_Ichigo_loaded_files
     u32 field22_0x241bc[64];  // Also Nisitenma_Ichigo_loaded_files?
@@ -107,7 +107,7 @@ typedef struct {
     void* ptr_cameraMgr;              // cameraMgr*
     void* ptr_playerCameraController; // playerCameraController*
     u8 field70_0x263d0[4];
-    MtxF another_viewing_matrix;
+    Matrix44F another_viewing_matrix;
     cv64_rgba_t primitive_color;
     s16 map_is_setup;
     u8 field74_0x2641a;

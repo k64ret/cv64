@@ -29,7 +29,7 @@ void cv64_konamilogo_check_btn_press(cv64_konamilogo_t* self) {
          sys.controllers[1].buttons_pressed |
          sys.controllers[2].buttons_pressed |
          sys.controllers[3].buttons_pressed) &
-        (BTN_START | BTN_RECENTER)) {
+        (START_BUTTON | RECENTER_BUTTON)) {
         ptr_object_curLevel_goToFunc(self->header.current_function,
                                      &self->header.functionInfo_ID,
                                      KONAMILOGO_KCEK_WAIT);

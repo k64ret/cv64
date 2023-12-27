@@ -1,5 +1,6 @@
 #include "gamestate.h"
 #include "cv64.h"
+#include "fade.h"
 #include "memory.h"
 #include "object.h"
 #include "object_ID.h"

@@ -1,4 +1,5 @@
 -D_LANGUAGE_C
+-DF3DEX_GBI_2
 -Iinclude
 -Iinclude/ultra64
 -Iinclude/game

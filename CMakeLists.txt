@@ -65,6 +65,7 @@ target_compile_options(
           -Xcpluscomm
           -mips2
           -O2
+          -DF3DEX_GBI_2
           -verbose
           -fullwarn
           -woff

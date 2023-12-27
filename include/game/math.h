@@ -23,4 +23,6 @@ typedef struct {
     s16 pitch, yaw, roll;
 } angle_t;
 
+typedef f32 Matrix44F[4][4];
+
 #endif
