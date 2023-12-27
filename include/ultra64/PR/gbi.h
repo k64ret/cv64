@@ -1735,47 +1735,47 @@ typedef union {
  */
 #define gDma0p(pkt, c, s, l)                                                   \
     {                                                                          \
-        Gfx* _g = (Gfx*)(pkt);                                                 \
+        Gfx* _g = (Gfx*) (pkt);                                                \
                                                                                \
         _g->words.w0 = _SHIFTL((c), 24, 8) | _SHIFTL((l), 0, 24);              \
-        _g->words.w1 = (unsigned int)(s);                                      \
+        _g->words.w1 = (unsigned int) (s);                                     \
     }
 
 #define gsDma0p(c, s, l)                                                       \
     {                                                                          \
-        { _SHIFTL((c), 24, 8) | _SHIFTL((l), 0, 24), (unsigned int)(s) }       \
+        { _SHIFTL((c), 24, 8) | _SHIFTL((l), 0, 24), (unsigned int) (s) }      \
     }
 
 #define gDma1p(pkt, c, s, l, p)                                                \
     {                                                                          \
-        Gfx* _g = (Gfx*)(pkt);                                                 \
+        Gfx* _g = (Gfx*) (pkt);                                                \
                                                                                \
         _g->words.w0 =                                                         \
             (_SHIFTL((c), 24, 8) | _SHIFTL((p), 16, 8) | _SHIFTL((l), 0, 16)); \
-        _g->words.w1 = (unsigned int)(s);                                      \
+        _g->words.w1 = (unsigned int) (s);                                     \
     }
 
 #define gsDma1p(c, s, l, p)                                                    \
     {                                                                          \
         {                                                                      \
             (_SHIFTL((c), 24, 8) | _SHIFTL((p), 16, 8) | _SHIFTL((l), 0, 16)), \
-                (unsigned int)(s)                                              \
+                (unsigned int) (s)                                             \
         }                                                                      \
     }
 
 #define gDma2p(pkt, c, adrs, len, idx, ofs)                                    \
     {                                                                          \
-        Gfx* _g = (Gfx*)(pkt);                                                 \
-        _g->words.w0 = (_SHIFTL((c), 24, 8) | _SHIFTL(((len)-1) / 8, 19, 5) |  \
+        Gfx* _g = (Gfx*) (pkt);                                                \
+        _g->words.w0 = (_SHIFTL((c), 24, 8) | _SHIFTL(((len) -1) / 8, 19, 5) | \
                         _SHIFTL((ofs) / 8, 8, 8) | _SHIFTL((idx), 0, 8));      \
-        _g->words.w1 = (unsigned int)(adrs);                                   \
+        _g->words.w1 = (unsigned int) (adrs);                                  \
     }
 #define gsDma2p(c, adrs, len, idx, ofs)                                        \
     {                                                                          \
         {                                                                      \
-            (_SHIFTL((c), 24, 8) | _SHIFTL(((len)-1) / 8, 19, 5) |             \
+            (_SHIFTL((c), 24, 8) | _SHIFTL(((len) -1) / 8, 19, 5) |            \
              _SHIFTL((ofs) / 8, 8, 8) | _SHIFTL((idx), 0, 8)),                 \
-                (unsigned int)(adrs)                                           \
+                (unsigned int) (adrs)                                          \
         }                                                                      \
     }
 
@@ -1803,17 +1803,17 @@ typedef union {
  */
 #define gSPVertex(pkt, v, n, v0)                                               \
     {                                                                          \
-        Gfx* _g = (Gfx*)(pkt);                                                 \
+        Gfx* _g = (Gfx*) (pkt);                                                \
         _g->words.w0 = _SHIFTL(G_VTX, 24, 8) | _SHIFTL((n), 12, 8) |           \
                        _SHIFTL((v0) + (n), 1, 7);                              \
-        _g->words.w1 = (unsigned int)(v);                                      \
+        _g->words.w1 = (unsigned int) (v);                                     \
     }
 #define gsSPVertex(v, n, v0)                                                   \
     {                                                                          \
         {                                                                      \
             (_SHIFTL(G_VTX, 24, 8) | _SHIFTL((n), 12, 8) |                     \
              _SHIFTL((v0) + (n), 1, 7)),                                       \
-                (unsigned int)(v)                                              \
+                (unsigned int) (v)                                             \
         }                                                                      \
     }
 #elif (defined(F3DEX_GBI) || defined(F3DLP_GBI))
@@ -1827,14 +1827,14 @@ typedef union {
  *        +-+---+-----------------------------+
  */
 #define gSPVertex(pkt, v, n, v0)                                               \
-    gDma1p((pkt), G_VTX, (v), ((n) << 10) | (sizeof(Vtx) * (n)-1), (v0) * 2)
+    gDma1p((pkt), G_VTX, (v), ((n) << 10) | (sizeof(Vtx) * (n) -1), (v0) * 2)
 #define gsSPVertex(v, n, v0)                                                   \
-    gsDma1p(G_VTX, (v), ((n) << 10) | (sizeof(Vtx) * (n)-1), (v0) * 2)
+    gsDma1p(G_VTX, (v), ((n) << 10) | (sizeof(Vtx) * (n) -1), (v0) * 2)
 #else
 #define gSPVertex(pkt, v, n, v0)                                               \
-    gDma1p(pkt, G_VTX, v, sizeof(Vtx) * (n), ((n)-1) << 4 | (v0))
+    gDma1p(pkt, G_VTX, v, sizeof(Vtx) * (n), ((n) -1) << 4 | (v0))
 #define gsSPVertex(v, n, v0)                                                   \
-    gsDma1p(G_VTX, v, sizeof(Vtx) * (n), ((n)-1) << 4 | (v0))
+    gsDma1p(G_VTX, v, sizeof(Vtx) * (n), ((n) -1) << 4 | (v0))
 #endif
 
 #ifdef F3DEX_GBI_2
@@ -1862,7 +1862,7 @@ typedef union {
  */
 #define gImmp0(pkt, c)                                                         \
     {                                                                          \
-        Gfx* _g = (Gfx*)(pkt);                                                 \
+        Gfx* _g = (Gfx*) (pkt);                                                \
                                                                                \
         _g->words.w0 = _SHIFTL((c), 24, 8);                                    \
     }
@@ -1874,20 +1874,20 @@ typedef union {
 
 #define gImmp1(pkt, c, p0)                                                     \
     {                                                                          \
-        Gfx* _g = (Gfx*)(pkt);                                                 \
+        Gfx* _g = (Gfx*) (pkt);                                                \
                                                                                \
         _g->words.w0 = _SHIFTL((c), 24, 8);                                    \
-        _g->words.w1 = (unsigned int)(p0);                                     \
+        _g->words.w1 = (unsigned int) (p0);                                    \
     }
 
 #define gsImmp1(c, p0)                                                         \
     {                                                                          \
-        { _SHIFTL((c), 24, 8), (unsigned int)(p0) }                            \
+        { _SHIFTL((c), 24, 8), (unsigned int) (p0) }                           \
     }
 
 #define gImmp2(pkt, c, p0, p1)                                                 \
     {                                                                          \
-        Gfx* _g = (Gfx*)(pkt);                                                 \
+        Gfx* _g = (Gfx*) (pkt);                                                \
                                                                                \
         _g->words.w0 = _SHIFTL((c), 24, 8);                                    \
         _g->words.w1 = _SHIFTL((p0), 16, 16) | _SHIFTL((p1), 8, 8);            \
@@ -1900,7 +1900,7 @@ typedef union {
 
 #define gImmp3(pkt, c, p0, p1, p2)                                             \
     {                                                                          \
-        Gfx* _g = (Gfx*)(pkt);                                                 \
+        Gfx* _g = (Gfx*) (pkt);                                                \
                                                                                \
         _g->words.w0 = _SHIFTL((c), 24, 8);                                    \
         _g->words.w1 = (_SHIFTL((p0), 16, 16) | _SHIFTL((p1), 8, 8) |          \
@@ -1917,18 +1917,18 @@ typedef union {
 
 #define gImmp21(pkt, c, p0, p1, dat)                                           \
     {                                                                          \
-        Gfx* _g = (Gfx*)(pkt);                                                 \
+        Gfx* _g = (Gfx*) (pkt);                                                \
                                                                                \
         _g->words.w0 = (_SHIFTL((c), 24, 8) | _SHIFTL((p0), 8, 16) |           \
                         _SHIFTL((p1), 0, 8));                                  \
-        _g->words.w1 = (unsigned int)(dat);                                    \
+        _g->words.w1 = (unsigned int) (dat);                                   \
     }
 
 #define gsImmp21(c, p0, p1, dat)                                               \
     {                                                                          \
         {                                                                      \
             _SHIFTL((c), 24, 8) | _SHIFTL((p0), 8, 16) | _SHIFTL((p1), 0, 8),  \
-                (unsigned int)(dat)                                            \
+                (unsigned int) (dat)                                           \
         }                                                                      \
     }
 
@@ -1946,7 +1946,7 @@ typedef union {
 
 #define gSPSprite2DScaleFlip(pkt, sx, sy, fx, fy)                              \
     {                                                                          \
-        Gfx* _g = (Gfx*)(pkt);                                                 \
+        Gfx* _g = (Gfx*) (pkt);                                                \
                                                                                \
         _g->words.w0 = (_SHIFTL(G_SPRITE2D_SCALEFLIP, 24, 8) |                 \
                         _SHIFTL((fx), 8, 8) | _SHIFTL((fy), 0, 8));            \
@@ -1964,7 +1964,7 @@ typedef union {
 
 #define gSPSprite2DDraw(pkt, px, py)                                           \
     {                                                                          \
-        Gfx* _g = (Gfx*)(pkt);                                                 \
+        Gfx* _g = (Gfx*) (pkt);                                                \
                                                                                \
         _g->words.w0 = (_SHIFTL(G_SPRITE2D_DRAW, 24, 8));                      \
         _g->words.w1 = (_SHIFTL((px), 16, 16) | _SHIFTL((py), 0, 16));         \
@@ -2019,7 +2019,7 @@ typedef union {
  ***/
 #define gSP1Triangle(pkt, v0, v1, v2, flag)                                    \
     {                                                                          \
-        Gfx* _g = (Gfx*)(pkt);                                                 \
+        Gfx* _g = (Gfx*) (pkt);                                                \
                                                                                \
         _g->words.w0 =                                                         \
             _SHIFTL(G_TRI1, 24, 8) | __gsSP1Triangle_w1f(v0, v1, v2, flag);    \
@@ -2035,7 +2035,7 @@ typedef union {
  ***/
 #define gSPLine3D(pkt, v0, v1, flag)                                           \
     {                                                                          \
-        Gfx* _g = (Gfx*)(pkt);                                                 \
+        Gfx* _g = (Gfx*) (pkt);                                                \
                                                                                \
         _g->words.w0 =                                                         \
             _SHIFTL(G_LINE3D, 24, 8) | __gsSPLine3D_w1f(v0, v1, 0, flag);      \
@@ -2057,7 +2057,7 @@ typedef union {
  */
 #define gSPLineW3D(pkt, v0, v1, wd, flag)                                      \
     {                                                                          \
-        Gfx* _g = (Gfx*)(pkt);                                                 \
+        Gfx* _g = (Gfx*) (pkt);                                                \
                                                                                \
         _g->words.w0 =                                                         \
             _SHIFTL(G_LINE3D, 24, 8) | __gsSPLine3D_w1f(v0, v1, wd, flag);     \
@@ -2073,7 +2073,7 @@ typedef union {
  ***/
 #define gSP1Quadrangle(pkt, v0, v1, v2, v3, flag)                              \
     {                                                                          \
-        Gfx* _g = (Gfx*)(pkt);                                                 \
+        Gfx* _g = (Gfx*) (pkt);                                                \
                                                                                \
         _g->words.w0 = (_SHIFTL(G_QUAD, 24, 8) |                               \
                         __gsSP1Quadrangle_w1f(v0, v1, v2, v3, flag));          \
@@ -2095,7 +2095,7 @@ typedef union {
  ***/
 #define gSP1Triangle(pkt, v0, v1, v2, flag)                                    \
     {                                                                          \
-        Gfx* _g = (Gfx*)(pkt);                                                 \
+        Gfx* _g = (Gfx*) (pkt);                                                \
                                                                                \
         _g->words.w0 = _SHIFTL(G_TRI1, 24, 8);                                 \
         _g->words.w1 = __gsSP1Triangle_w1f(v0, v1, v2, flag);                  \
@@ -2110,7 +2110,7 @@ typedef union {
  ***/
 #define gSPLine3D(pkt, v0, v1, flag)                                           \
     {                                                                          \
-        Gfx* _g = (Gfx*)(pkt);                                                 \
+        Gfx* _g = (Gfx*) (pkt);                                                \
                                                                                \
         _g->words.w0 = _SHIFTL(G_LINE3D, 24, 8);                               \
         _g->words.w1 = __gsSPLine3D_w1f(v0, v1, 0, flag);                      \
@@ -2131,7 +2131,7 @@ typedef union {
  */
 #define gSPLineW3D(pkt, v0, v1, wd, flag)                                      \
     {                                                                          \
-        Gfx* _g = (Gfx*)(pkt);                                                 \
+        Gfx* _g = (Gfx*) (pkt);                                                \
                                                                                \
         _g->words.w0 = _SHIFTL(G_LINE3D, 24, 8);                               \
         _g->words.w1 = __gsSPLine3D_w1f(v0, v1, wd, flag);                     \
@@ -2146,7 +2146,7 @@ typedef union {
  ***/
 #define gSP1Quadrangle(pkt, v0, v1, v2, v3, flag)                              \
     {                                                                          \
-        Gfx* _g = (Gfx*)(pkt);                                                 \
+        Gfx* _g = (Gfx*) (pkt);                                                \
                                                                                \
         _g->words.w0 = (_SHIFTL(G_TRI2, 24, 8) |                               \
                         __gsSP1Quadrangle_w1f(v0, v1, v2, v3, flag));          \
@@ -2169,7 +2169,7 @@ typedef union {
  ***/
 #define gSP2Triangles(pkt, v00, v01, v02, flag0, v10, v11, v12, flag1)         \
     {                                                                          \
-        Gfx* _g = (Gfx*)(pkt);                                                 \
+        Gfx* _g = (Gfx*) (pkt);                                                \
                                                                                \
         _g->words.w0 = (_SHIFTL(G_TRI2, 24, 8) |                               \
                         __gsSP1Triangle_w1f(v00, v01, v02, flag0));            \
@@ -2190,7 +2190,7 @@ typedef union {
 #if (defined(F3DEX_GBI) || defined(F3DLP_GBI))
 #define gSPCullDisplayList(pkt, vstart, vend)                                  \
     {                                                                          \
-        Gfx* _g = (Gfx*)(pkt);                                                 \
+        Gfx* _g = (Gfx*) (pkt);                                                \
                                                                                \
         _g->words.w0 =                                                         \
             _SHIFTL(G_CULLDL, 24, 8) | _SHIFTL((vstart) * 2, 0, 16);           \
@@ -2208,10 +2208,10 @@ typedef union {
 #else
 #define gSPCullDisplayList(pkt, vstart, vend)                                  \
     {                                                                          \
-        Gfx* _g = (Gfx*)(pkt);                                                 \
+        Gfx* _g = (Gfx*) (pkt);                                                \
                                                                                \
         _g->words.w0 = _SHIFTL(G_CULLDL, 24, 8) | ((0x0f & (vstart)) * 40);    \
-        _g->words.w1 = (unsigned int)((0x0f & ((vend) + 1)) * 40);             \
+        _g->words.w1 = (unsigned int) ((0x0f & ((vend) + 1)) * 40);            \
     }
 
 #define gsSPCullDisplayList(vstart, vend)                                      \
@@ -2296,15 +2296,15 @@ typedef union {
 #define gSPForceMatrix(pkt, mptr)                                              \
     {                                                                          \
         gDma1p(pkt, G_MOVEMEM, mptr, 16, G_MV_MATRIX_1);                       \
-        gDma1p(pkt, G_MOVEMEM, (char*)(mptr) + 16, 16, G_MV_MATRIX_2);         \
-        gDma1p(pkt, G_MOVEMEM, (char*)(mptr) + 32, 16, G_MV_MATRIX_3);         \
-        gDma1p(pkt, G_MOVEMEM, (char*)(mptr) + 48, 16, G_MV_MATRIX_4);         \
+        gDma1p(pkt, G_MOVEMEM, (char*) (mptr) + 16, 16, G_MV_MATRIX_2);        \
+        gDma1p(pkt, G_MOVEMEM, (char*) (mptr) + 32, 16, G_MV_MATRIX_3);        \
+        gDma1p(pkt, G_MOVEMEM, (char*) (mptr) + 48, 16, G_MV_MATRIX_4);        \
     }
 #define gsSPForceMatrix(mptr)                                                  \
     gsDma1p(G_MOVEMEM, mptr, 16, G_MV_MATRIX_1),                               \
-        gsDma1p(G_MOVEMEM, (char*)(mptr) + 16, 16, G_MV_MATRIX_2),             \
-        gsDma1p(G_MOVEMEM, (char*)(mptr) + 32, 16, G_MV_MATRIX_3),             \
-        gsDma1p(G_MOVEMEM, (char*)(mptr) + 48, 16, G_MV_MATRIX_4)
+        gsDma1p(G_MOVEMEM, (char*) (mptr) + 16, 16, G_MV_MATRIX_2),            \
+        gsDma1p(G_MOVEMEM, (char*) (mptr) + 32, 16, G_MV_MATRIX_3),            \
+        gsDma1p(G_MOVEMEM, (char*) (mptr) + 48, 16, G_MV_MATRIX_4)
 #endif /* F3DEX_GBI_2 */
 
 /*
@@ -2317,17 +2317,17 @@ typedef union {
 #if (defined(F3DEX_GBI) || defined(F3DLP_GBI))
 #define gSPModifyVertex(pkt, vtx, where, val)                                  \
     {                                                                          \
-        Gfx* _g = (Gfx*)(pkt);                                                 \
+        Gfx* _g = (Gfx*) (pkt);                                                \
         _g->words.w0 = (_SHIFTL(G_MODIFYVTX, 24, 8) |                          \
                         _SHIFTL((where), 16, 8) | _SHIFTL((vtx) * 2, 0, 16));  \
-        _g->words.w1 = (unsigned int)(val);                                    \
+        _g->words.w1 = (unsigned int) (val);                                   \
     }
 #define gsSPModifyVertex(vtx, where, val)                                      \
     {                                                                          \
         {                                                                      \
             _SHIFTL(G_MODIFYVTX, 24, 8) | _SHIFTL((where), 16, 8) |            \
                 _SHIFTL((vtx) * 2, 0, 16),                                     \
-                (unsigned int)(val)                                            \
+                (unsigned int) (val)                                           \
         }                                                                      \
     }
 #else
@@ -2353,23 +2353,23 @@ typedef union {
 #define G_BZ_ORTHO 1
 
 #define G_DEPTOZSrg(zval, near, far, flag, zmin, zmax)                         \
-    (((unsigned int)FTOFIX32(((flag) == G_BZ_PERSP                             \
-                                  ? (1.0f - (float)(near) / (float)(zval)) /   \
-                                        (1.0f - (float)(near) / (float)(far))  \
-                                  : ((float)(zval) - (float)(near)) /          \
-                                        ((float)(far) - (float)(near))))) *    \
-         (((int)((zmax) - (zmin))) & ~1) +                                     \
-     (int)FTOFIX32(zmin))
+    (((unsigned int) FTOFIX32(                                                 \
+         ((flag) == G_BZ_PERSP ? (1.0f - (float) (near) / (float) (zval)) /    \
+                                     (1.0f - (float) (near) / (float) (far))   \
+                               : ((float) (zval) - (float) (near)) /           \
+                                     ((float) (far) - (float) (near))))) *     \
+         (((int) ((zmax) - (zmin))) & ~1) +                                    \
+     (int) FTOFIX32(zmin))
 
 #define G_DEPTOZS(zval, near, far, flag)                                       \
     G_DEPTOZSrg(zval, near, far, flag, 0, G_MAXZ)
 
 #define gSPBranchLessZrg(pkt, dl, vtx, zval, near, far, flag, zmin, zmax)      \
     {                                                                          \
-        Gfx* _g = (Gfx*)(pkt);                                                 \
+        Gfx* _g = (Gfx*) (pkt);                                                \
         _g->words.w0 = _SHIFTL(G_RDPHALF_1, 24, 8);                            \
-        _g->words.w1 = (unsigned int)(dl);                                     \
-        _g = (Gfx*)(pkt);                                                      \
+        _g->words.w1 = (unsigned int) (dl);                                    \
+        _g = (Gfx*) (pkt);                                                     \
         _g->words.w0 =                                                         \
             (_SHIFTL(G_BRANCH_Z, 24, 8) | _SHIFTL((vtx) * 5, 12, 12) |         \
              _SHIFTL((vtx) * 2, 0, 12));                                       \
@@ -2379,7 +2379,7 @@ typedef union {
 #define gsSPBranchLessZrg(dl, vtx, zval, near, far, flag, zmin, zmax)          \
     {{                                                                         \
         _SHIFTL(G_RDPHALF_1, 24, 8),                                           \
-        (unsigned int)(dl),                                                    \
+        (unsigned int) (dl),                                                   \
     }},                                                                        \
     {                                                                          \
         {                                                                      \
@@ -2403,26 +2403,26 @@ typedef union {
  */
 #define gSPBranchLessZraw(pkt, dl, vtx, zval)                                  \
     {                                                                          \
-        Gfx* _g = (Gfx*)(pkt);                                                 \
+        Gfx* _g = (Gfx*) (pkt);                                                \
         _g->words.w0 = _SHIFTL(G_RDPHALF_1, 24, 8);                            \
-        _g->words.w1 = (unsigned int)(dl);                                     \
-        _g = (Gfx*)(pkt);                                                      \
+        _g->words.w1 = (unsigned int) (dl);                                    \
+        _g = (Gfx*) (pkt);                                                     \
         _g->words.w0 =                                                         \
             (_SHIFTL(G_BRANCH_Z, 24, 8) | _SHIFTL((vtx) * 5, 12, 12) |         \
              _SHIFTL((vtx) * 2, 0, 12));                                       \
-        _g->words.w1 = (unsigned int)(zval);                                   \
+        _g->words.w1 = (unsigned int) (zval);                                  \
     }
 
 #define gsSPBranchLessZraw(dl, vtx, zval)                                      \
     {{                                                                         \
         _SHIFTL(G_RDPHALF_1, 24, 8),                                           \
-        (unsigned int)(dl),                                                    \
+        (unsigned int) (dl),                                                   \
     }},                                                                        \
     {                                                                          \
         {                                                                      \
             _SHIFTL(G_BRANCH_Z, 24, 8) | _SHIFTL((vtx) * 5, 12, 12) |          \
                 _SHIFTL((vtx) * 2, 0, 12),                                     \
-                (unsigned int)(zval),                                          \
+                (unsigned int) (zval),                                         \
         }                                                                      \
     }
 
@@ -2434,24 +2434,25 @@ typedef union {
  */
 #define gSPLoadUcodeEx(pkt, uc_start, uc_dstart, uc_dsize)                     \
     {                                                                          \
-        Gfx* _g = (Gfx*)(pkt);                                                 \
+        Gfx* _g = (Gfx*) (pkt);                                                \
         _g->words.w0 = _SHIFTL(G_RDPHALF_1, 24, 8);                            \
-        _g->words.w1 = (unsigned int)(uc_dstart);                              \
-        _g = (Gfx*)(pkt);                                                      \
+        _g->words.w1 = (unsigned int) (uc_dstart);                             \
+        _g = (Gfx*) (pkt);                                                     \
         _g->words.w0 = (_SHIFTL(G_LOAD_UCODE, 24, 8) |                         \
-                        _SHIFTL((int)(uc_dsize)-1, 0, 16));                    \
-        _g->words.w1 = (unsigned int)(uc_start);                               \
+                        _SHIFTL((int) (uc_dsize) -1, 0, 16));                  \
+        _g->words.w1 = (unsigned int) (uc_start);                              \
     }
 
 #define gsSPLoadUcodeEx(uc_start, uc_dstart, uc_dsize)                         \
     {{                                                                         \
         _SHIFTL(G_RDPHALF_1, 24, 8),                                           \
-        (unsigned int)(uc_dstart),                                             \
+        (unsigned int) (uc_dstart),                                            \
     }},                                                                        \
     {                                                                          \
         {                                                                      \
-            _SHIFTL(G_LOAD_UCODE, 24, 8) | _SHIFTL((int)(uc_dsize)-1, 0, 16),  \
-                (unsigned int)(uc_start),                                      \
+            _SHIFTL(G_LOAD_UCODE, 24, 8) |                                     \
+                _SHIFTL((int) (uc_dsize) -1, 0, 16),                           \
+                (unsigned int) (uc_start),                                     \
         }                                                                      \
     }
 
@@ -2474,18 +2475,19 @@ typedef union {
  */
 #define gSPDma_io(pkt, flag, dmem, dram, size)                                 \
     {                                                                          \
-        Gfx* _g = (Gfx*)(pkt);                                                 \
+        Gfx* _g = (Gfx*) (pkt);                                                \
         _g->words.w0 = _SHIFTL(G_DMA_IO, 24, 8) | _SHIFTL((flag), 23, 1) |     \
-                       _SHIFTL((dmem) / 8, 13, 10) | _SHIFTL((size)-1, 0, 12); \
-        _g->words.w1 = (unsigned int)(dram);                                   \
+                       _SHIFTL((dmem) / 8, 13, 10) |                           \
+                       _SHIFTL((size) -1, 0, 12);                              \
+        _g->words.w1 = (unsigned int) (dram);                                  \
     }
 
 #define gsSPDma_io(flag, dmem, dram, size)                                     \
     {                                                                          \
         {                                                                      \
             _SHIFTL(G_DMA_IO, 24, 8) | _SHIFTL((flag), 23, 1) |                \
-                _SHIFTL((dmem) / 8, 13, 10) | _SHIFTL((size)-1, 0, 12),        \
-                (unsigned int)(dram)                                           \
+                _SHIFTL((dmem) / 8, 13, 10) | _SHIFTL((size) -1, 0, 12),       \
+                (unsigned int) (dram)                                          \
         }                                                                      \
     }
 
@@ -2545,9 +2547,9 @@ typedef union {
     gsDma2p(G_MOVEMEM, (l), sizeof(Light), G_MV_LIGHT, (n) * 24 + 24)
 #else /* F3DEX_GBI_2 */
 #define gSPLight(pkt, l, n)                                                    \
-    gDma1p(pkt, G_MOVEMEM, l, sizeof(Light), ((n)-1) * 2 + G_MV_L0)
+    gDma1p(pkt, G_MOVEMEM, l, sizeof(Light), ((n) -1) * 2 + G_MV_L0)
 #define gsSPLight(l, n)                                                        \
-    gsDma1p(G_MOVEMEM, l, sizeof(Light), ((n)-1) * 2 + G_MV_L0)
+    gsDma1p(G_MOVEMEM, l, sizeof(Light), ((n) -1) * 2 + G_MV_L0)
 #endif /* F3DEX_GBI_2 */
 
 /*
@@ -2700,18 +2702,18 @@ typedef union {
 #endif /* F3DEX_GBI_2 */
 
 #define gSPLookAt(pkt, la)                                                     \
-    { gSPLookAtX(pkt, la) gSPLookAtY(pkt, (char*)(la) + 16) }
-#define gsSPLookAt(la) gsSPLookAtX(la), gsSPLookAtY((char*)(la) + 16)
+    { gSPLookAtX(pkt, la) gSPLookAtY(pkt, (char*) (la) + 16) }
+#define gsSPLookAt(la) gsSPLookAtX(la), gsSPLookAtY((char*) (la) + 16)
 
 #define gDPSetHilite1Tile(pkt, tile, hilite, width, height)                    \
     gDPSetTileSize(pkt, tile, (hilite)->h.x1 & 0xfff, (hilite)->h.y1 & 0xfff,  \
-                   ((((width)-1) * 4) + (hilite)->h.x1) & 0xfff,               \
-                   ((((height)-1) * 4) + (hilite)->h.y1) & 0xfff)
+                   ((((width) -1) * 4) + (hilite)->h.x1) & 0xfff,              \
+                   ((((height) -1) * 4) + (hilite)->h.y1) & 0xfff)
 
 #define gDPSetHilite2Tile(pkt, tile, hilite, width, height)                    \
     gDPSetTileSize(pkt, tile, (hilite)->h.x2 & 0xfff, (hilite)->h.y2 & 0xfff,  \
-                   ((((width)-1) * 4) + (hilite)->h.x2) & 0xfff,               \
-                   ((((height)-1) * 4) + (hilite)->h.y2) & 0xfff)
+                   ((((width) -1) * 4) + (hilite)->h.x2) & 0xfff,              \
+                   ((((height) -1) * 4) + (hilite)->h.y2) & 0xfff)
 
 /*
  * FOG macros
@@ -2749,7 +2751,7 @@ typedef union {
  */
 #define gSPTexture(pkt, s, t, level, tile, on)                                 \
     {                                                                          \
-        Gfx* _g = (Gfx*)(pkt);                                                 \
+        Gfx* _g = (Gfx*) (pkt);                                                \
                                                                                \
         _g->words.w0 = (_SHIFTL(G_TEXTURE, 24, 8) |                            \
                         _SHIFTL(BOWTIE_VAL, 16, 8) | _SHIFTL((level), 11, 3) | \
@@ -2771,7 +2773,7 @@ typedef union {
  */
 #define gSPTextureL(pkt, s, t, level, xparam, tile, on)                        \
     {                                                                          \
-        Gfx* _g = (Gfx*)(pkt);                                                 \
+        Gfx* _g = (Gfx*) (pkt);                                                \
                                                                                \
         _g->words.w0 = (_SHIFTL(G_TEXTURE, 24, 8) | _SHIFTL((xparam), 16, 8) | \
                         _SHIFTL((level), 11, 3) | _SHIFTL((tile), 8, 3) |      \
@@ -2793,7 +2795,7 @@ typedef union {
  */
 #define gSPTexture(pkt, s, t, level, tile, on)                                 \
     {                                                                          \
-        Gfx* _g = (Gfx*)(pkt);                                                 \
+        Gfx* _g = (Gfx*) (pkt);                                                \
                                                                                \
         _g->words.w0 = (_SHIFTL(G_TEXTURE, 24, 8) |                            \
                         _SHIFTL(BOWTIE_VAL, 16, 8) | _SHIFTL((level), 11, 3) | \
@@ -2815,7 +2817,7 @@ typedef union {
  */
 #define gSPTextureL(pkt, s, t, level, xparam, tile, on)                        \
     {                                                                          \
-        Gfx* _g = (Gfx*)(pkt);                                                 \
+        Gfx* _g = (Gfx*) (pkt);                                                \
                                                                                \
         _g->words.w0 = (_SHIFTL(G_TEXTURE, 24, 8) | _SHIFTL((xparam), 16, 8) | \
                         _SHIFTL((level), 11, 3) | _SHIFTL((tile), 8, 3) |      \
@@ -2848,7 +2850,7 @@ typedef union {
 
 #define gSPEndDisplayList(pkt)                                                 \
     {                                                                          \
-        Gfx* _g = (Gfx*)(pkt);                                                 \
+        Gfx* _g = (Gfx*) (pkt);                                                \
                                                                                \
         _g->words.w0 = _SHIFTL(G_ENDDL, 24, 8);                                \
         _g->words.w1 = 0;                                                      \
@@ -2870,17 +2872,17 @@ typedef union {
  */
 #define gSPGeometryMode(pkt, c, s)                                             \
     {                                                                          \
-        Gfx* _g = (Gfx*)(pkt);                                                 \
+        Gfx* _g = (Gfx*) (pkt);                                                \
         _g->words.w0 =                                                         \
-            _SHIFTL(G_GEOMETRYMODE, 24, 8) | _SHIFTL(~(u32)(c), 0, 24);        \
-        _g->words.w1 = (u32)(s);                                               \
+            _SHIFTL(G_GEOMETRYMODE, 24, 8) | _SHIFTL(~(u32) (c), 0, 24);       \
+        _g->words.w1 = (u32) (s);                                              \
     }
 
 #define gsSPGeometryMode(c, s)                                                 \
     {                                                                          \
         {                                                                      \
-            (_SHIFTL(G_GEOMETRYMODE, 24, 8) | _SHIFTL(~(u32)(c), 0, 24)),      \
-                (u32)(s)                                                       \
+            (_SHIFTL(G_GEOMETRYMODE, 24, 8) | _SHIFTL(~(u32) (c), 0, 24)),     \
+                (u32) (s)                                                      \
         }                                                                      \
     }
 #define gSPSetGeometryMode(pkt, word)   gSPGeometryMode((pkt), 0, (word))
@@ -2893,64 +2895,64 @@ typedef union {
 #else /* F3DEX_GBI_2 */
 #define gSPSetGeometryMode(pkt, word)                                          \
     {                                                                          \
-        Gfx* _g = (Gfx*)(pkt);                                                 \
+        Gfx* _g = (Gfx*) (pkt);                                                \
                                                                                \
         _g->words.w0 = _SHIFTL(G_SETGEOMETRYMODE, 24, 8);                      \
-        _g->words.w1 = (unsigned int)(word);                                   \
+        _g->words.w1 = (unsigned int) (word);                                  \
     }
 
 #define gsSPSetGeometryMode(word)                                              \
     {                                                                          \
-        { _SHIFTL(G_SETGEOMETRYMODE, 24, 8), (unsigned int)(word) }            \
+        { _SHIFTL(G_SETGEOMETRYMODE, 24, 8), (unsigned int) (word) }           \
     }
 
 #define gSPClearGeometryMode(pkt, word)                                        \
     {                                                                          \
-        Gfx* _g = (Gfx*)(pkt);                                                 \
+        Gfx* _g = (Gfx*) (pkt);                                                \
                                                                                \
         _g->words.w0 = _SHIFTL(G_CLEARGEOMETRYMODE, 24, 8);                    \
-        _g->words.w1 = (unsigned int)(word);                                   \
+        _g->words.w1 = (unsigned int) (word);                                  \
     }
 
 #define gsSPClearGeometryMode(word)                                            \
     {                                                                          \
-        { _SHIFTL(G_CLEARGEOMETRYMODE, 24, 8), (unsigned int)(word) }          \
+        { _SHIFTL(G_CLEARGEOMETRYMODE, 24, 8), (unsigned int) (word) }         \
     }
 #endif /* F3DEX_GBI_2 */
 
 #ifdef F3DEX_GBI_2
 #define gSPSetOtherMode(pkt, cmd, sft, len, data)                              \
     {                                                                          \
-        Gfx* _g = (Gfx*)(pkt);                                                 \
+        Gfx* _g = (Gfx*) (pkt);                                                \
         _g->words.w0 =                                                         \
             (_SHIFTL(cmd, 24, 8) | _SHIFTL(32 - (sft) - (len), 8, 8) |         \
-             _SHIFTL((len)-1, 0, 8));                                          \
-        _g->words.w1 = (unsigned int)(data);                                   \
+             _SHIFTL((len) -1, 0, 8));                                         \
+        _g->words.w1 = (unsigned int) (data);                                  \
     }
 
 #define gsSPSetOtherMode(cmd, sft, len, data)                                  \
     {                                                                          \
         {                                                                      \
             _SHIFTL(cmd, 24, 8) | _SHIFTL(32 - (sft) - (len), 8, 8) |          \
-                _SHIFTL((len)-1, 0, 8),                                        \
-                (unsigned int)(data)                                           \
+                _SHIFTL((len) -1, 0, 8),                                       \
+                (unsigned int) (data)                                          \
         }                                                                      \
     }
 #else
 #define gSPSetOtherMode(pkt, cmd, sft, len, data)                              \
     {                                                                          \
-        Gfx* _g = (Gfx*)(pkt);                                                 \
+        Gfx* _g = (Gfx*) (pkt);                                                \
                                                                                \
         _g->words.w0 =                                                         \
             (_SHIFTL(cmd, 24, 8) | _SHIFTL(sft, 8, 8) | _SHIFTL(len, 0, 8));   \
-        _g->words.w1 = (unsigned int)(data);                                   \
+        _g->words.w1 = (unsigned int) (data);                                  \
     }
 
 #define gsSPSetOtherMode(cmd, sft, len, data)                                  \
     {                                                                          \
         {                                                                      \
             _SHIFTL(cmd, 24, 8) | _SHIFTL(sft, 8, 8) | _SHIFTL(len, 0, 8),     \
-                (unsigned int)(data)                                           \
+                (unsigned int) (data)                                          \
         }                                                                      \
     }
 #endif
@@ -3046,19 +3048,19 @@ typedef union {
 
 #define gSetImage(pkt, cmd, fmt, siz, width, i)                                \
     {                                                                          \
-        Gfx* _g = (Gfx*)(pkt);                                                 \
+        Gfx* _g = (Gfx*) (pkt);                                                \
                                                                                \
         _g->words.w0 = _SHIFTL(cmd, 24, 8) | _SHIFTL(fmt, 21, 3) |             \
-                       _SHIFTL(siz, 19, 2) | _SHIFTL((width)-1, 0, 12);        \
-        _g->words.w1 = (unsigned int)(i);                                      \
+                       _SHIFTL(siz, 19, 2) | _SHIFTL((width) -1, 0, 12);       \
+        _g->words.w1 = (unsigned int) (i);                                     \
     }
 
 #define gsSetImage(cmd, fmt, siz, width, i)                                    \
     {                                                                          \
         {                                                                      \
             _SHIFTL(cmd, 24, 8) | _SHIFTL(fmt, 21, 3) | _SHIFTL(siz, 19, 2) |  \
-                _SHIFTL((width)-1, 0, 12),                                     \
-                (unsigned int)(i)                                              \
+                _SHIFTL((width) -1, 0, 12),                                    \
+                (unsigned int) (i)                                             \
         }                                                                      \
     }
 
@@ -3082,17 +3084,17 @@ typedef union {
 
 #define gDPSetCombine(pkt, muxs0, muxs1)                                       \
     {                                                                          \
-        Gfx* _g = (Gfx*)(pkt);                                                 \
+        Gfx* _g = (Gfx*) (pkt);                                                \
                                                                                \
         _g->words.w0 = _SHIFTL(G_SETCOMBINE, 24, 8) | _SHIFTL(muxs0, 0, 24);   \
-        _g->words.w1 = (unsigned int)(muxs1);                                  \
+        _g->words.w1 = (unsigned int) (muxs1);                                 \
     }
 
 #define gsDPSetCombine(muxs0, muxs1)                                           \
     {                                                                          \
         {                                                                      \
             _SHIFTL(G_SETCOMBINE, 24, 8) | _SHIFTL(muxs0, 0, 24),              \
-                (unsigned int)(muxs1)                                          \
+                (unsigned int) (muxs1)                                         \
         }                                                                      \
     }
 
@@ -3115,18 +3117,18 @@ typedef union {
 #define gDPSetCombineLERP(pkt, a0, b0, c0, d0, Aa0, Ab0, Ac0, Ad0, a1, b1, c1, \
                           d1, Aa1, Ab1, Ac1, Ad1)                              \
     {                                                                          \
-        Gfx* _g = (Gfx*)(pkt);                                                 \
+        Gfx* _g = (Gfx*) (pkt);                                                \
                                                                                \
         _g->words.w0 = _SHIFTL(G_SETCOMBINE, 24, 8) |                          \
                        _SHIFTL(GCCc0w0(G_CCMUX_##a0, G_CCMUX_##c0,             \
                                        G_ACMUX_##Aa0, G_ACMUX_##Ac0) |         \
                                    GCCc1w0(G_CCMUX_##a1, G_CCMUX_##c1),        \
                                0, 24);                                         \
-        _g->words.w1 = (unsigned int)(GCCc0w1(G_CCMUX_##b0, G_CCMUX_##d0,      \
-                                              G_ACMUX_##Ab0, G_ACMUX_##Ad0) |  \
-                                      GCCc1w1(G_CCMUX_##b1, G_ACMUX_##Aa1,     \
-                                              G_ACMUX_##Ac1, G_CCMUX_##d1,     \
-                                              G_ACMUX_##Ab1, G_ACMUX_##Ad1));  \
+        _g->words.w1 = (unsigned int) (GCCc0w1(G_CCMUX_##b0, G_CCMUX_##d0,     \
+                                               G_ACMUX_##Ab0, G_ACMUX_##Ad0) | \
+                                       GCCc1w1(G_CCMUX_##b1, G_ACMUX_##Aa1,    \
+                                               G_ACMUX_##Ac1, G_CCMUX_##d1,    \
+                                               G_ACMUX_##Ab1, G_ACMUX_##Ad1)); \
     }
 
 #define gsDPSetCombineLERP(a0, b0, c0, d0, Aa0, Ab0, Ac0, Ad0, a1, b1, c1, d1, \
@@ -3138,11 +3140,11 @@ typedef union {
                                 G_ACMUX_##Ac0) |                               \
                             GCCc1w0(G_CCMUX_##a1, G_CCMUX_##c1),               \
                         0, 24),                                                \
-                (unsigned int)(GCCc0w1(G_CCMUX_##b0, G_CCMUX_##d0,             \
-                                       G_ACMUX_##Ab0, G_ACMUX_##Ad0) |         \
-                               GCCc1w1(G_CCMUX_##b1, G_ACMUX_##Aa1,            \
-                                       G_ACMUX_##Ac1, G_CCMUX_##d1,            \
-                                       G_ACMUX_##Ab1, G_ACMUX_##Ad1))          \
+                (unsigned int) (GCCc0w1(G_CCMUX_##b0, G_CCMUX_##d0,            \
+                                        G_ACMUX_##Ab0, G_ACMUX_##Ad0) |        \
+                                GCCc1w1(G_CCMUX_##b1, G_ACMUX_##Aa1,           \
+                                        G_ACMUX_##Ac1, G_CCMUX_##d1,           \
+                                        G_ACMUX_##Ab1, G_ACMUX_##Ad1))         \
         }                                                                      \
     }
 
@@ -3161,15 +3163,15 @@ typedef union {
 
 #define gDPSetColor(pkt, c, d)                                                 \
     {                                                                          \
-        Gfx* _g = (Gfx*)(pkt);                                                 \
+        Gfx* _g = (Gfx*) (pkt);                                                \
                                                                                \
         _g->words.w0 = _SHIFTL(c, 24, 8);                                      \
-        _g->words.w1 = (unsigned int)(d);                                      \
+        _g->words.w1 = (unsigned int) (d);                                     \
     }
 
 #define gsDPSetColor(c, d)                                                     \
     {                                                                          \
-        { _SHIFTL(c, 24, 8), (unsigned int)(d) }                               \
+        { _SHIFTL(c, 24, 8), (unsigned int) (d) }                              \
     }
 
 #define DPRGBColor(pkt, cmd, r, g, b, a)                                       \
@@ -3199,7 +3201,7 @@ typedef union {
 
 #define gDPSetPrimColor(pkt, m, l, r, g, b, a)                                 \
     {                                                                          \
-        Gfx* _g = (Gfx*)(pkt);                                                 \
+        Gfx* _g = (Gfx*) (pkt);                                                \
                                                                                \
         _g->words.w0 = (_SHIFTL(G_SETPRIMCOLOR, 24, 8) | _SHIFTL(m, 8, 8) |    \
                         _SHIFTL(l, 0, 8));                                     \
@@ -3247,18 +3249,18 @@ typedef union {
  */
 #define gDPSetOtherMode(pkt, mode0, mode1)                                     \
     {                                                                          \
-        Gfx* _g = (Gfx*)(pkt);                                                 \
+        Gfx* _g = (Gfx*) (pkt);                                                \
                                                                                \
         _g->words.w0 =                                                         \
             _SHIFTL(G_RDPSETOTHERMODE, 24, 8) | _SHIFTL(mode0, 0, 24);         \
-        _g->words.w1 = (unsigned int)(mode1);                                  \
+        _g->words.w1 = (unsigned int) (mode1);                                 \
     }
 
 #define gsDPSetOtherMode(mode0, mode1)                                         \
     {                                                                          \
         {                                                                      \
             _SHIFTL(G_RDPSETOTHERMODE, 24, 8) | _SHIFTL(mode0, 0, 24),         \
-                (unsigned int)(mode1)                                          \
+                (unsigned int) (mode1)                                         \
         }                                                                      \
     }
 
@@ -3322,7 +3324,7 @@ typedef union {
 
 #define gDPLoadTileGeneric(pkt, c, tile, uls, ult, lrs, lrt)                   \
     {                                                                          \
-        Gfx* _g = (Gfx*)(pkt);                                                 \
+        Gfx* _g = (Gfx*) (pkt);                                                \
                                                                                \
         _g->words.w0 =                                                         \
             _SHIFTL(c, 24, 8) | _SHIFTL(uls, 12, 12) | _SHIFTL(ult, 0, 12);    \
@@ -3351,7 +3353,7 @@ typedef union {
 #define gDPSetTile(pkt, fmt, siz, line, tmem, tile, palette, cmt, maskt,       \
                    shiftt, cms, masks, shifts)                                 \
     {                                                                          \
-        Gfx* _g = (Gfx*)(pkt);                                                 \
+        Gfx* _g = (Gfx*) (pkt);                                                \
                                                                                \
         _g->words.w0 = _SHIFTL(G_SETTILE, 24, 8) | _SHIFTL(fmt, 21, 3) |       \
                        _SHIFTL(siz, 19, 2) | _SHIFTL(line, 9, 9) |             \
@@ -3387,7 +3389,7 @@ typedef union {
  */
 #define gDPLoadBlock(pkt, tile, uls, ult, lrs, dxt)                            \
     {                                                                          \
-        Gfx* _g = (Gfx*)(pkt);                                                 \
+        Gfx* _g = (Gfx*) (pkt);                                                \
                                                                                \
         _g->words.w0 = (_SHIFTL(G_LOADBLOCK, 24, 8) | _SHIFTL(uls, 12, 12) |   \
                         _SHIFTL(ult, 0, 12));                                  \
@@ -3409,7 +3411,7 @@ typedef union {
 
 #define gDPLoadTLUTCmd(pkt, tile, count)                                       \
     {                                                                          \
-        Gfx* _g = (Gfx*)pkt;                                                   \
+        Gfx* _g = (Gfx*) pkt;                                                  \
                                                                                \
         _g->words.w0 = _SHIFTL(G_LOADTLUT, 24, 8);                             \
         _g->words.w1 = _SHIFTL((tile), 24, 3) | _SHIFTL((count), 14, 10);      \
@@ -3438,8 +3440,8 @@ typedef union {
                    G_TX_RENDERTILE, pal, cmt, maskt, shiftt, cms, masks,       \
                    shifts);                                                    \
         gDPSetTileSize(pkt, G_TX_RENDERTILE, 0, 0,                             \
-                       ((width)-1) << G_TEXTURE_IMAGE_FRAC,                    \
-                       ((height)-1) << G_TEXTURE_IMAGE_FRAC)                   \
+                       ((width) -1) << G_TEXTURE_IMAGE_FRAC,                   \
+                       ((height) -1) << G_TEXTURE_IMAGE_FRAC)                  \
     }
 
 #define gDPLoadTextureBlockYuv(pkt, timg, fmt, siz, width, height, pal, cms,   \
@@ -3457,8 +3459,8 @@ typedef union {
                    G_TX_RENDERTILE, pal, cmt, maskt, shiftt, cms, masks,       \
                    shifts);                                                    \
         gDPSetTileSize(pkt, G_TX_RENDERTILE, 0, 0,                             \
-                       ((width)-1) << G_TEXTURE_IMAGE_FRAC,                    \
-                       ((height)-1) << G_TEXTURE_IMAGE_FRAC)                   \
+                       ((width) -1) << G_TEXTURE_IMAGE_FRAC,                   \
+                       ((height) -1) << G_TEXTURE_IMAGE_FRAC)                  \
     }
 
 /* Load fix rww 27jun95 */
@@ -3479,8 +3481,8 @@ typedef union {
                    G_TX_RENDERTILE, pal, cmt, maskt, shiftt, cms, masks,       \
                    shifts);                                                    \
         gDPSetTileSize(pkt, G_TX_RENDERTILE, 0, 0,                             \
-                       ((width)-1) << G_TEXTURE_IMAGE_FRAC,                    \
-                       ((height)-1) << G_TEXTURE_IMAGE_FRAC)                   \
+                       ((width) -1) << G_TEXTURE_IMAGE_FRAC,                   \
+                       ((height) -1) << G_TEXTURE_IMAGE_FRAC)                  \
     }
 
 /*
@@ -3500,8 +3502,8 @@ typedef union {
         gDPPipeSync(pkt);                                                      \
         gDPSetTile(pkt, fmt, siz, (((width) * siz##_LINE_BYTES) + 7) >> 3,     \
                    tmem, rtile, pal, cmt, maskt, shiftt, cms, masks, shifts);  \
-        gDPSetTileSize(pkt, rtile, 0, 0, ((width)-1) << G_TEXTURE_IMAGE_FRAC,  \
-                       ((height)-1) << G_TEXTURE_IMAGE_FRAC)                   \
+        gDPSetTileSize(pkt, rtile, 0, 0, ((width) -1) << G_TEXTURE_IMAGE_FRAC, \
+                       ((height) -1) << G_TEXTURE_IMAGE_FRAC)                  \
     }
 
 #define gDPLoadTextureBlockYuvS(pkt, timg, fmt, siz, width, height, pal, cms,  \
@@ -3519,8 +3521,8 @@ typedef union {
                    G_TX_RENDERTILE, pal, cmt, maskt, shiftt, cms, masks,       \
                    shifts);                                                    \
         gDPSetTileSize(pkt, G_TX_RENDERTILE, 0, 0,                             \
-                       ((width)-1) << G_TEXTURE_IMAGE_FRAC,                    \
-                       ((height)-1) << G_TEXTURE_IMAGE_FRAC)                   \
+                       ((width) -1) << G_TEXTURE_IMAGE_FRAC,                   \
+                       ((height) -1) << G_TEXTURE_IMAGE_FRAC)                  \
     }
 
 /*
@@ -3541,8 +3543,8 @@ typedef union {
                    tmem, G_TX_RENDERTILE, pal, cmt, maskt, shiftt, cms, masks, \
                    shifts);                                                    \
         gDPSetTileSize(pkt, G_TX_RENDERTILE, 0, 0,                             \
-                       ((width)-1) << G_TEXTURE_IMAGE_FRAC,                    \
-                       ((height)-1) << G_TEXTURE_IMAGE_FRAC)                   \
+                       ((width) -1) << G_TEXTURE_IMAGE_FRAC,                   \
+                       ((height) -1) << G_TEXTURE_IMAGE_FRAC)                  \
     }
 
 /*
@@ -3562,8 +3564,8 @@ typedef union {
         gDPPipeSync(pkt);                                                      \
         gDPSetTile(pkt, fmt, siz, (((width) * siz##_LINE_BYTES) + 7) >> 3,     \
                    tmem, rtile, pal, cmt, maskt, shiftt, cms, masks, shifts);  \
-        gDPSetTileSize(pkt, rtile, 0, 0, ((width)-1) << G_TEXTURE_IMAGE_FRAC,  \
-                       ((height)-1) << G_TEXTURE_IMAGE_FRAC)                   \
+        gDPSetTileSize(pkt, rtile, 0, 0, ((width) -1) << G_TEXTURE_IMAGE_FRAC, \
+                       ((height) -1) << G_TEXTURE_IMAGE_FRAC)                  \
     }
 
 /*
@@ -3582,8 +3584,8 @@ typedef union {
         gDPPipeSync(pkt);                                                      \
         gDPSetTile(pkt, fmt, siz, (((width) * siz##_LINE_BYTES) + 7) >> 3,     \
                    tmem, rtile, pal, cmt, maskt, shiftt, cms, masks, shifts);  \
-        gDPSetTileSize(pkt, rtile, 0, 0, ((width)-1) << G_TEXTURE_IMAGE_FRAC,  \
-                       ((height)-1) << G_TEXTURE_IMAGE_FRAC)                   \
+        gDPSetTileSize(pkt, rtile, 0, 0, ((width) -1) << G_TEXTURE_IMAGE_FRAC, \
+                       ((height) -1) << G_TEXTURE_IMAGE_FRAC)                  \
     }
 
 #define gsDPLoadTextureBlock(timg, fmt, siz, width, height, pal, cms, cmt,     \
@@ -3601,8 +3603,8 @@ typedef union {
                     G_TX_RENDERTILE, pal, cmt, maskt, shiftt, cms, masks,      \
                     shifts),                                                   \
         gsDPSetTileSize(G_TX_RENDERTILE, 0, 0,                                 \
-                        ((width)-1) << G_TEXTURE_IMAGE_FRAC,                   \
-                        ((height)-1) << G_TEXTURE_IMAGE_FRAC)
+                        ((width) -1) << G_TEXTURE_IMAGE_FRAC,                  \
+                        ((height) -1) << G_TEXTURE_IMAGE_FRAC)
 
 /* Here is the static form of the pre-swapped texture block loading */
 /* See gDPLoadTextureBlockS() for reference.  Basically, just don't
@@ -3623,8 +3625,8 @@ typedef union {
                     G_TX_RENDERTILE, pal, cmt, maskt, shiftt, cms, masks,      \
                     shifts),                                                   \
         gsDPSetTileSize(G_TX_RENDERTILE, 0, 0,                                 \
-                        ((width)-1) << G_TEXTURE_IMAGE_FRAC,                   \
-                        ((height)-1) << G_TEXTURE_IMAGE_FRAC)
+                        ((width) -1) << G_TEXTURE_IMAGE_FRAC,                  \
+                        ((height) -1) << G_TEXTURE_IMAGE_FRAC)
 
 /*
  *  Allow tmem address to be specified
@@ -3644,8 +3646,8 @@ typedef union {
                     G_TX_RENDERTILE, pal, cmt, maskt, shiftt, cms, masks,      \
                     shifts),                                                   \
         gsDPSetTileSize(G_TX_RENDERTILE, 0, 0,                                 \
-                        ((width)-1) << G_TEXTURE_IMAGE_FRAC,                   \
-                        ((height)-1) << G_TEXTURE_IMAGE_FRAC)
+                        ((width) -1) << G_TEXTURE_IMAGE_FRAC,                  \
+                        ((height) -1) << G_TEXTURE_IMAGE_FRAC)
 
 /*
  *  Allow tmem address and render_tile to be specified
@@ -3663,8 +3665,8 @@ typedef union {
         gsDPPipeSync(),                                                        \
         gsDPSetTile(fmt, siz, ((((width) * siz##_LINE_BYTES) + 7) >> 3), tmem, \
                     rtile, pal, cmt, maskt, shiftt, cms, masks, shifts),       \
-        gsDPSetTileSize(rtile, 0, 0, ((width)-1) << G_TEXTURE_IMAGE_FRAC,      \
-                        ((height)-1) << G_TEXTURE_IMAGE_FRAC)
+        gsDPSetTileSize(rtile, 0, 0, ((width) -1) << G_TEXTURE_IMAGE_FRAC,     \
+                        ((height) -1) << G_TEXTURE_IMAGE_FRAC)
 
 /*
  *  Allow tmem address and render_tile to be specified, useful when loading
@@ -3683,8 +3685,8 @@ typedef union {
         gsDPPipeSync(),                                                        \
         gsDPSetTile(fmt, siz, ((((width) * siz##_LINE_BYTES) + 7) >> 3), tmem, \
                     rtile, pal, cmt, maskt, shiftt, cms, masks, shifts),       \
-        gsDPSetTileSize(rtile, 0, 0, ((width)-1) << G_TEXTURE_IMAGE_FRAC,      \
-                        ((height)-1) << G_TEXTURE_IMAGE_FRAC)
+        gsDPSetTileSize(rtile, 0, 0, ((width) -1) << G_TEXTURE_IMAGE_FRAC,     \
+                        ((height) -1) << G_TEXTURE_IMAGE_FRAC)
 
 /*
  *  Allows tmem and render tile to be specified.  Useful when loading
@@ -3708,8 +3710,8 @@ typedef union {
         gsDPPipeSync(),                                                        \
         gsDPSetTile(fmt, siz, ((((width) * siz##_LINE_BYTES) + 7) >> 3), tmem, \
                     rtile, pal, cmt, maskt, shiftt, cms, masks, shifts),       \
-        gsDPSetTileSize(rtile, 0, 0, ((width)-1) << G_TEXTURE_IMAGE_FRAC,      \
-                        ((height)-1) << G_TEXTURE_IMAGE_FRAC)
+        gsDPSetTileSize(rtile, 0, 0, ((width) -1) << G_TEXTURE_IMAGE_FRAC,     \
+                        ((height) -1) << G_TEXTURE_IMAGE_FRAC)
 
 #define gDPLoadTextureBlock_4b(pkt, timg, fmt, width, height, pal, cms, cmt,   \
                                masks, maskt, shifts, shiftt)                   \
@@ -3725,8 +3727,8 @@ typedef union {
                    G_TX_RENDERTILE, pal, cmt, maskt, shiftt, cms, masks,       \
                    shifts);                                                    \
         gDPSetTileSize(pkt, G_TX_RENDERTILE, 0, 0,                             \
-                       ((width)-1) << G_TEXTURE_IMAGE_FRAC,                    \
-                       ((height)-1) << G_TEXTURE_IMAGE_FRAC)                   \
+                       ((width) -1) << G_TEXTURE_IMAGE_FRAC,                   \
+                       ((height) -1) << G_TEXTURE_IMAGE_FRAC)                  \
     }
 
 /* Load fix rww 27jun95 */
@@ -3746,8 +3748,8 @@ typedef union {
                    G_TX_RENDERTILE, pal, cmt, maskt, shiftt, cms, masks,       \
                    shifts);                                                    \
         gDPSetTileSize(pkt, G_TX_RENDERTILE, 0, 0,                             \
-                       ((width)-1) << G_TEXTURE_IMAGE_FRAC,                    \
-                       ((height)-1) << G_TEXTURE_IMAGE_FRAC)                   \
+                       ((width) -1) << G_TEXTURE_IMAGE_FRAC,                   \
+                       ((height) -1) << G_TEXTURE_IMAGE_FRAC)                  \
     }
 
 /*
@@ -3765,8 +3767,8 @@ typedef union {
         gDPPipeSync(pkt);                                                      \
         gDPSetTile(pkt, fmt, G_IM_SIZ_4b, ((((width) >> 1) + 7) >> 3), tmem,   \
                    rtile, pal, cmt, maskt, shiftt, cms, masks, shifts);        \
-        gDPSetTileSize(pkt, rtile, 0, 0, ((width)-1) << G_TEXTURE_IMAGE_FRAC,  \
-                       ((height)-1) << G_TEXTURE_IMAGE_FRAC)                   \
+        gDPSetTileSize(pkt, rtile, 0, 0, ((width) -1) << G_TEXTURE_IMAGE_FRAC, \
+                       ((height) -1) << G_TEXTURE_IMAGE_FRAC)                  \
     }
 
 /*
@@ -3785,8 +3787,8 @@ typedef union {
         gDPPipeSync(pkt);                                                      \
         gDPSetTile(pkt, fmt, G_IM_SIZ_4b, ((((width) >> 1) + 7) >> 3), tmem,   \
                    rtile, pal, cmt, maskt, shiftt, cms, masks, shifts);        \
-        gDPSetTileSize(pkt, rtile, 0, 0, ((width)-1) << G_TEXTURE_IMAGE_FRAC,  \
-                       ((height)-1) << G_TEXTURE_IMAGE_FRAC)                   \
+        gDPSetTileSize(pkt, rtile, 0, 0, ((width) -1) << G_TEXTURE_IMAGE_FRAC, \
+                       ((height) -1) << G_TEXTURE_IMAGE_FRAC)                  \
     }
 
 #define _gDPLoadTextureBlock_4b(pkt, timg, tmem, fmt, width, height, pal, cms, \
@@ -3803,8 +3805,8 @@ typedef union {
                    G_TX_RENDERTILE, pal, cmt, maskt, shiftt, cms, masks,       \
                    shifts);                                                    \
         gDPSetTileSize(pkt, G_TX_RENDERTILE, 0, 0,                             \
-                       ((width)-1) << G_TEXTURE_IMAGE_FRAC,                    \
-                       ((height)-1) << G_TEXTURE_IMAGE_FRAC)                   \
+                       ((width) -1) << G_TEXTURE_IMAGE_FRAC,                   \
+                       ((height) -1) << G_TEXTURE_IMAGE_FRAC)                  \
     }
 
 #define gsDPLoadTextureBlock_4b(timg, fmt, width, height, pal, cms, cmt,       \
@@ -3822,8 +3824,8 @@ typedef union {
                     G_TX_RENDERTILE, pal, cmt, maskt, shiftt, cms, masks,      \
                     shifts),                                                   \
         gsDPSetTileSize(G_TX_RENDERTILE, 0, 0,                                 \
-                        ((width)-1) << G_TEXTURE_IMAGE_FRAC,                   \
-                        ((height)-1) << G_TEXTURE_IMAGE_FRAC)
+                        ((width) -1) << G_TEXTURE_IMAGE_FRAC,                  \
+                        ((height) -1) << G_TEXTURE_IMAGE_FRAC)
 
 #define gsDPLoadTextureBlock_4bS(timg, fmt, width, height, pal, cms, cmt,      \
                                  masks, maskt, shifts, shiftt)                 \
@@ -3839,8 +3841,8 @@ typedef union {
                     G_TX_RENDERTILE, pal, cmt, maskt, shiftt, cms, masks,      \
                     shifts),                                                   \
         gsDPSetTileSize(G_TX_RENDERTILE, 0, 0,                                 \
-                        ((width)-1) << G_TEXTURE_IMAGE_FRAC,                   \
-                        ((height)-1) << G_TEXTURE_IMAGE_FRAC)
+                        ((width) -1) << G_TEXTURE_IMAGE_FRAC,                  \
+                        ((height) -1) << G_TEXTURE_IMAGE_FRAC)
 
 /*
  *  4-bit load block.  Allows tmem address and render tile to be specified.
@@ -3859,8 +3861,8 @@ typedef union {
         gsDPPipeSync(),                                                        \
         gsDPSetTile(fmt, G_IM_SIZ_4b, ((((width) >> 1) + 7) >> 3), tmem,       \
                     rtile, pal, cmt, maskt, shiftt, cms, masks, shifts),       \
-        gsDPSetTileSize(rtile, 0, 0, ((width)-1) << G_TEXTURE_IMAGE_FRAC,      \
-                        ((height)-1) << G_TEXTURE_IMAGE_FRAC)
+        gsDPSetTileSize(rtile, 0, 0, ((width) -1) << G_TEXTURE_IMAGE_FRAC,     \
+                        ((height) -1) << G_TEXTURE_IMAGE_FRAC)
 
 /*
  *  4-bit load block.  Allows tmem address and render tile to be specified.
@@ -3878,8 +3880,8 @@ typedef union {
         gsDPPipeSync(),                                                        \
         gsDPSetTile(fmt, G_IM_SIZ_4b, ((((width) >> 1) + 7) >> 3), tmem,       \
                     rtile, pal, cmt, maskt, shiftt, cms, masks, shifts),       \
-        gsDPSetTileSize(rtile, 0, 0, ((width)-1) << G_TEXTURE_IMAGE_FRAC,      \
-                        ((height)-1) << G_TEXTURE_IMAGE_FRAC)
+        gsDPSetTileSize(rtile, 0, 0, ((width) -1) << G_TEXTURE_IMAGE_FRAC,     \
+                        ((height) -1) << G_TEXTURE_IMAGE_FRAC)
 
 /*
  *  Allows tmem address to be specified
@@ -3899,8 +3901,8 @@ typedef union {
                     G_TX_RENDERTILE, pal, cmt, maskt, shiftt, cms, masks,      \
                     shifts),                                                   \
         gsDPSetTileSize(G_TX_RENDERTILE, 0, 0,                                 \
-                        ((width)-1) << G_TEXTURE_IMAGE_FRAC,                   \
-                        ((height)-1) << G_TEXTURE_IMAGE_FRAC)
+                        ((width) -1) << G_TEXTURE_IMAGE_FRAC,                  \
+                        ((height) -1) << G_TEXTURE_IMAGE_FRAC)
 
 #ifndef _HW_VERSION_1
 
@@ -4216,7 +4218,7 @@ typedef union {
         gDPSetTile(pkt, 0, 0, 0, tmemaddr, G_TX_LOADTILE, 0, 0, 0, 0, 0, 0,    \
                    0);                                                         \
         gDPLoadSync(pkt);                                                      \
-        gDPLoadTLUTCmd(pkt, G_TX_LOADTILE, ((count)-1));                       \
+        gDPLoadTLUTCmd(pkt, G_TX_LOADTILE, ((count) -1));                      \
         gDPPipeSync(pkt);                                                      \
     }
 
@@ -4235,7 +4237,7 @@ typedef union {
                                                                                \
     gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, dram), gsDPTileSync(), \
         gsDPSetTile(0, 0, 0, tmemaddr, G_TX_LOADTILE, 0, 0, 0, 0, 0, 0, 0),    \
-        gsDPLoadSync(), gsDPLoadTLUTCmd(G_TX_LOADTILE, ((count)-1)),           \
+        gsDPLoadSync(), gsDPLoadTLUTCmd(G_TX_LOADTILE, ((count) -1)),          \
         gsDPPipeSync()
 
 #else /* **** WORKAROUND hardware 1 load_tlut bug ****** */
@@ -4248,53 +4250,53 @@ typedef union {
 
 #define gDPSetScissor(pkt, mode, ulx, uly, lrx, lry)                           \
     {                                                                          \
-        Gfx* _g = (Gfx*)pkt;                                                   \
+        Gfx* _g = (Gfx*) pkt;                                                  \
                                                                                \
         _g->words.w0 = _SHIFTL(G_SETSCISSOR, 24, 8) |                          \
-                       _SHIFTL((int)((float)(ulx) * 4.0F), 12, 12) |           \
-                       _SHIFTL((int)((float)(uly) * 4.0F), 0, 12);             \
+                       _SHIFTL((int) ((float) (ulx) * 4.0F), 12, 12) |         \
+                       _SHIFTL((int) ((float) (uly) * 4.0F), 0, 12);           \
         _g->words.w1 = _SHIFTL(mode, 24, 2) |                                  \
-                       _SHIFTL((int)((float)(lrx) * 4.0F), 12, 12) |           \
-                       _SHIFTL((int)((float)(lry) * 4.0F), 0, 12);             \
+                       _SHIFTL((int) ((float) (lrx) * 4.0F), 12, 12) |         \
+                       _SHIFTL((int) ((float) (lry) * 4.0F), 0, 12);           \
     }
 
 #define gDPSetScissorFrac(pkt, mode, ulx, uly, lrx, lry)                       \
     {                                                                          \
-        Gfx* _g = (Gfx*)pkt;                                                   \
+        Gfx* _g = (Gfx*) pkt;                                                  \
                                                                                \
         _g->words.w0 = _SHIFTL(G_SETSCISSOR, 24, 8) |                          \
-                       _SHIFTL((int)((ulx)), 12, 12) |                         \
-                       _SHIFTL((int)((uly)), 0, 12);                           \
-        _g->words.w1 = _SHIFTL(mode, 24, 2) | _SHIFTL((int)((lrx)), 12, 12) |  \
-                       _SHIFTL((int)((lry)), 0, 12);                           \
+                       _SHIFTL((int) ((ulx)), 12, 12) |                        \
+                       _SHIFTL((int) ((uly)), 0, 12);                          \
+        _g->words.w1 = _SHIFTL(mode, 24, 2) | _SHIFTL((int) ((lrx)), 12, 12) | \
+                       _SHIFTL((int) ((lry)), 0, 12);                          \
     }
 
 #define gsDPSetScissor(mode, ulx, uly, lrx, lry)                               \
     {                                                                          \
         {                                                                      \
             _SHIFTL(G_SETSCISSOR, 24, 8) |                                     \
-                _SHIFTL((int)((float)(ulx) * 4.0F), 12, 12) |                  \
-                _SHIFTL((int)((float)(uly) * 4.0F), 0, 12),                    \
+                _SHIFTL((int) ((float) (ulx) * 4.0F), 12, 12) |                \
+                _SHIFTL((int) ((float) (uly) * 4.0F), 0, 12),                  \
                 _SHIFTL(mode, 24, 2) |                                         \
-                    _SHIFTL((int)((float)(lrx) * 4.0F), 12, 12) |              \
-                    _SHIFTL((int)((float)(lry) * 4.0F), 0, 12)                 \
+                    _SHIFTL((int) ((float) (lrx) * 4.0F), 12, 12) |            \
+                    _SHIFTL((int) ((float) (lry) * 4.0F), 0, 12)               \
         }                                                                      \
     }
 
 #define gsDPSetScissorFrac(mode, ulx, uly, lrx, lry)                           \
     {                                                                          \
         {                                                                      \
-            _SHIFTL(G_SETSCISSOR, 24, 8) | _SHIFTL((int)((ulx)), 12, 12) |     \
-                _SHIFTL((int)((uly)), 0, 12),                                  \
-                _SHIFTL(mode, 24, 2) | _SHIFTL((int)(lrx), 12, 12) |           \
-                    _SHIFTL((int)(lry), 0, 12)                                 \
+            _SHIFTL(G_SETSCISSOR, 24, 8) | _SHIFTL((int) ((ulx)), 12, 12) |    \
+                _SHIFTL((int) ((uly)), 0, 12),                                 \
+                _SHIFTL(mode, 24, 2) | _SHIFTL((int) (lrx), 12, 12) |          \
+                    _SHIFTL((int) (lry), 0, 12)                                \
         }                                                                      \
     }
 
 /* Fraction never used in fill */
 #define gDPFillRectangle(pkt, ulx, uly, lrx, lry)                              \
     {                                                                          \
-        Gfx* _g = (Gfx*)(pkt);                                                 \
+        Gfx* _g = (Gfx*) (pkt);                                                \
                                                                                \
         _g->words.w0 = (_SHIFTL(G_FILLRECT, 24, 8) | _SHIFTL((lrx), 14, 10) |  \
                         _SHIFTL((lry), 2, 10));                                \
@@ -4313,7 +4315,7 @@ typedef union {
 /* like gDPFillRectangle but accepts negative arguments */
 #define gDPScisFillRectangle(pkt, ulx, uly, lrx, lry)                          \
     {                                                                          \
-        Gfx* _g = (Gfx*)(pkt);                                                 \
+        Gfx* _g = (Gfx*) (pkt);                                                \
                                                                                \
         _g->words.w0 =                                                         \
             (_SHIFTL(G_FILLRECT, 24, 8) | _SHIFTL(MAX((lrx), 0), 14, 10) |     \
@@ -4324,7 +4326,7 @@ typedef union {
 
 #define gDPSetConvert(pkt, k0, k1, k2, k3, k4, k5)                             \
     {                                                                          \
-        Gfx* _g = (Gfx*)(pkt);                                                 \
+        Gfx* _g = (Gfx*) (pkt);                                                \
                                                                                \
         _g->words.w0 = (_SHIFTL(G_SETCONVERT, 24, 8) | _SHIFTL(k0, 13, 9) |    \
                         _SHIFTL(k1, 4, 9) | _SHIFTR(k2, 5, 4));                \
@@ -4344,7 +4346,7 @@ typedef union {
 
 #define gDPSetKeyR(pkt, cR, sR, wR)                                            \
     {                                                                          \
-        Gfx* _g = (Gfx*)(pkt);                                                 \
+        Gfx* _g = (Gfx*) (pkt);                                                \
                                                                                \
         _g->words.w0 = _SHIFTL(G_SETKEYR, 24, 8);                              \
         _g->words.w1 =                                                         \
@@ -4361,7 +4363,7 @@ typedef union {
 
 #define gDPSetKeyGB(pkt, cG, sG, wG, cB, sB, wB)                               \
     {                                                                          \
-        Gfx* _g = (Gfx*)(pkt);                                                 \
+        Gfx* _g = (Gfx*) (pkt);                                                \
                                                                                \
         _g->words.w0 = (_SHIFTL(G_SETKEYGB, 24, 8) | _SHIFTL(wG, 12, 12) |     \
                         _SHIFTL(wB, 0, 12));                                   \
@@ -4381,7 +4383,7 @@ typedef union {
 
 #define gDPNoParam(pkt, cmd)                                                   \
     {                                                                          \
-        Gfx* _g = (Gfx*)(pkt);                                                 \
+        Gfx* _g = (Gfx*) (pkt);                                                \
                                                                                \
         _g->words.w0 = _SHIFTL(cmd, 24, 8);                                    \
         _g->words.w1 = 0;                                                      \
@@ -4394,7 +4396,7 @@ typedef union {
 
 #define gDPParam(pkt, cmd, param)                                              \
     {                                                                          \
-        Gfx* _g = (Gfx*)(pkt);                                                 \
+        Gfx* _g = (Gfx*) (pkt);                                                \
                                                                                \
         _g->words.w0 = _SHIFTL(cmd, 24, 8);                                    \
         _g->words.w1 = (param);                                                \
@@ -4425,7 +4427,7 @@ typedef union {
 
 #define gDPTextureRectangle(pkt, xl, yl, xh, yh, tile, s, t, dsdx, dtdy)       \
     {                                                                          \
-        Gfx* _g = (Gfx*)(pkt);                                                 \
+        Gfx* _g = (Gfx*) (pkt);                                                \
         if (pkt)                                                               \
             ;                                                                  \
         _g->words.w0 = (_SHIFTL(G_TEXRECT, 24, 8) | _SHIFTL(xh, 12, 12) |      \
@@ -4452,7 +4454,7 @@ typedef union {
 
 #define gDPTextureRectangleFlip(pkt, xl, yl, xh, yh, tile, s, t, dsdx, dtdy)   \
     {                                                                          \
-        Gfx* _g = (Gfx*)(pkt);                                                 \
+        Gfx* _g = (Gfx*) (pkt);                                                \
         if (pkt)                                                               \
             ;                                                                  \
         _g->words.w0 = (_SHIFTL(G_TEXRECTFLIP, 24, 8) | _SHIFTL(xh, 12, 12) |  \
@@ -4472,7 +4474,7 @@ typedef union {
 
 #define gSPTextureRectangle(pkt, xl, yl, xh, yh, tile, s, t, dsdx, dtdy)       \
     {                                                                          \
-        Gfx* _g = (Gfx*)(pkt);                                                 \
+        Gfx* _g = (Gfx*) (pkt);                                                \
                                                                                \
         _g->words.w0 = (_SHIFTL(G_TEXRECT, 24, 8) | _SHIFTL(xh, 12, 12) |      \
                         _SHIFTL(yh, 0, 12));                                   \
@@ -4486,31 +4488,32 @@ typedef union {
 /* like gSPTextureRectangle but accepts negative position arguments */
 #define gSPScisTextureRectangle(pkt, xl, yl, xh, yh, tile, s, t, dsdx, dtdy)   \
     {                                                                          \
-        Gfx* _g = (Gfx*)(pkt);                                                 \
+        Gfx* _g = (Gfx*) (pkt);                                                \
                                                                                \
         _g->words.w0 =                                                         \
-            (_SHIFTL(G_TEXRECT, 24, 8) | _SHIFTL(MAX((s16)(xh), 0), 12, 12) |  \
-             _SHIFTL(MAX((s16)(yh), 0), 0, 12));                               \
+            (_SHIFTL(G_TEXRECT, 24, 8) | _SHIFTL(MAX((s16) (xh), 0), 12, 12) | \
+             _SHIFTL(MAX((s16) (yh), 0), 0, 12));                              \
         _g->words.w1 =                                                         \
-            (_SHIFTL((tile), 24, 3) | _SHIFTL(MAX((s16)(xl), 0), 12, 12) |     \
-             _SHIFTL(MAX((s16)(yl), 0), 0, 12));                               \
-        gImmp1(pkt, G_RDPHALF_1,                                               \
-               (_SHIFTL(                                                       \
-                    ((s) -                                                     \
-                     (((s16)(xl) < 0)                                          \
-                          ? (((s16)(dsdx) < 0)                                 \
-                                 ? (MAX((((s16)(xl) * (s16)(dsdx)) >> 7), 0))  \
-                                 : (MIN((((s16)(xl) * (s16)(dsdx)) >> 7), 0))) \
-                          : 0)),                                               \
-                    16, 16) |                                                  \
-                _SHIFTL(                                                       \
-                    ((t) -                                                     \
-                     (((yl) < 0)                                               \
-                          ? (((s16)(dtdy) < 0)                                 \
-                                 ? (MAX((((s16)(yl) * (s16)(dtdy)) >> 7), 0))  \
-                                 : (MIN((((s16)(yl) * (s16)(dtdy)) >> 7), 0))) \
-                          : 0)),                                               \
-                    0, 16)));                                                  \
+            (_SHIFTL((tile), 24, 3) | _SHIFTL(MAX((s16) (xl), 0), 12, 12) |    \
+             _SHIFTL(MAX((s16) (yl), 0), 0, 12));                              \
+        gImmp1(                                                                \
+            pkt, G_RDPHALF_1,                                                  \
+            (_SHIFTL(                                                          \
+                 ((s) -                                                        \
+                  (((s16) (xl) < 0)                                            \
+                       ? (((s16) (dsdx) < 0)                                   \
+                              ? (MAX((((s16) (xl) * (s16) (dsdx)) >> 7), 0))   \
+                              : (MIN((((s16) (xl) * (s16) (dsdx)) >> 7), 0)))  \
+                       : 0)),                                                  \
+                 16, 16) |                                                     \
+             _SHIFTL(                                                          \
+                 ((t) -                                                        \
+                  (((yl) < 0)                                                  \
+                       ? (((s16) (dtdy) < 0)                                   \
+                              ? (MAX((((s16) (yl) * (s16) (dtdy)) >> 7), 0))   \
+                              : (MIN((((s16) (yl) * (s16) (dtdy)) >> 7), 0)))  \
+                       : 0)),                                                  \
+                 0, 16)));                                                     \
         gImmp1(pkt, G_RDPHALF_2,                                               \
                (_SHIFTL((dsdx), 16, 16) | _SHIFTL((dtdy), 0, 16)));            \
     }
@@ -4524,7 +4527,7 @@ typedef union {
 
 #define gSPTextureRectangleFlip(pkt, xl, yl, xh, yh, tile, s, t, dsdx, dtdy)   \
     {                                                                          \
-        Gfx* _g = (Gfx*)(pkt);                                                 \
+        Gfx* _g = (Gfx*) (pkt);                                                \
                                                                                \
         _g->words.w0 = (_SHIFTL(G_TEXRECTFLIP, 24, 8) | _SHIFTL(xh, 12, 12) |  \
                         _SHIFTL(yh, 0, 12));                                   \
@@ -4536,15 +4539,15 @@ typedef union {
     }
 
 #define gsDPWord(wordhi, wordlo)                                               \
-    gsImmp1(G_RDPHALF_1, (unsigned int)(wordhi)),                              \
-        gsImmp1(G_RDPHALF_2, (unsigned int)(wordlo))
+    gsImmp1(G_RDPHALF_1, (unsigned int) (wordhi)),                             \
+        gsImmp1(G_RDPHALF_2, (unsigned int) (wordlo))
 
 #define gDPWord(pkt, wordhi, wordlo)                                           \
     {                                                                          \
-        Gfx* _g = (Gfx*)(pkt);                                                 \
+        Gfx* _g = (Gfx*) (pkt);                                                \
                                                                                \
-        gImmp1(pkt, G_RDPHALF_1, (unsigned int)(wordhi));                      \
-        gImmp1(pkt, G_RDPHALF_2, (unsigned int)(wordlo));                      \
+        gImmp1(pkt, G_RDPHALF_1, (unsigned int) (wordhi));                     \
+        gImmp1(pkt, G_RDPHALF_2, (unsigned int) (wordlo));                     \
     }
 
 #define gDPFullSync(pkt)     gDPNoParam(pkt, G_RDPFULLSYNC)

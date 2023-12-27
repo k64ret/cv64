@@ -60,25 +60,27 @@
 
 #else /* _LANGUAGE_C */
 
-#define K0_TO_K1(x)    ((u32)(x) | 0xA0000000) /* kseg0 to kseg1 */
-#define K1_TO_K0(x)    ((u32)(x) & 0x9FFFFFFF) /* kseg1 to kseg0 */
-#define K0_TO_PHYS(x)  ((u32)(x) & 0x1FFFFFFF) /* kseg0 to physical */
-#define K1_TO_PHYS(x)  ((u32)(x) & 0x1FFFFFFF) /* kseg1 to physical */
-#define KDM_TO_PHYS(x) ((u32)(x) & 0x1FFFFFFF) /* direct mapped to physical */
-#define PHYS_TO_K0(x)  ((u32)(x) | 0x80000000) /* physical to kseg0 */
-#define PHYS_TO_K1(x)  ((u32)(x) | 0xA0000000) /* physical to kseg1 */
+#define K0_TO_K1(x)   ((u32) (x) | 0xA0000000) /* kseg0 to kseg1 */
+#define K1_TO_K0(x)   ((u32) (x) & 0x9FFFFFFF) /* kseg1 to kseg0 */
+#define K0_TO_PHYS(x) ((u32) (x) & 0x1FFFFFFF) /* kseg0 to physical */
+#define K1_TO_PHYS(x) ((u32) (x) & 0x1FFFFFFF) /* kseg1 to physical */
+#define KDM_TO_PHYS(x)                                                         \
+    ((u32) (x) & 0x1FFFFFFF)                   /* direct mapped to physical    \
+                                                */
+#define PHYS_TO_K0(x) ((u32) (x) | 0x80000000) /* physical to kseg0 */
+#define PHYS_TO_K1(x) ((u32) (x) | 0xA0000000) /* physical to kseg1 */
 
 #endif /* _LANGUAGE_ASSEMBLY */
 
 /*
  * Address predicates
  */
-#define IS_KSEG0(x)   ((u32)(x) >= K0BASE && (u32)(x) < K1BASE)
-#define IS_KSEG1(x)   ((u32)(x) >= K1BASE && (u32)(x) < K2BASE)
-#define IS_KSEGDM(x)  ((u32)(x) >= K0BASE && (u32)(x) < K2BASE)
-#define IS_KSEG2(x)   ((u32)(x) >= K2BASE && (u32)(x) < KPTE_SHDUBASE)
-#define IS_KPTESEG(x) ((u32)(x) >= KPTE_SHDUBASE)
-#define IS_KUSEG(x)   ((u32)(x) < K0BASE)
+#define IS_KSEG0(x)   ((u32) (x) >= K0BASE && (u32) (x) < K1BASE)
+#define IS_KSEG1(x)   ((u32) (x) >= K1BASE && (u32) (x) < K2BASE)
+#define IS_KSEGDM(x)  ((u32) (x) >= K0BASE && (u32) (x) < K2BASE)
+#define IS_KSEG2(x)   ((u32) (x) >= K2BASE && (u32) (x) < KPTE_SHDUBASE)
+#define IS_KPTESEG(x) ((u32) (x) >= KPTE_SHDUBASE)
+#define IS_KUSEG(x)   ((u32) (x) < K0BASE)
 
 /*
  * TLB size constants

@@ -147,7 +147,7 @@ s32 alHeapCheck(ALHeap* hp);
 
 #ifdef _DEBUG
 #define alHeapAlloc(hp, elem, size)                                            \
-    alHeapDBAlloc((u8*)__FILE__, __LINE__, (hp), (elem), (size))
+    alHeapDBAlloc((u8*) __FILE__, __LINE__, (hp), (elem), (size))
 #else
 #define alHeapAlloc(hp, elem, size) alHeapDBAlloc(0, 0, (hp), (elem), (size))
 #endif

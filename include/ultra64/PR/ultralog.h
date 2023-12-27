@@ -37,7 +37,7 @@ extern "C" {
 
 #define OS_LOG_MAX_ARGS 16
 #define OS_LOG_MAGIC    0x20736a73
-#define OS_LOG_FLOAT(x) (*(int*)&(x))
+#define OS_LOG_FLOAT(x) (*(int*) &(x))
 #define OS_LOG_VERSION  1
 
 typedef struct {

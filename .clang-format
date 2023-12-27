@@ -9,6 +9,7 @@ AlignConsecutiveMacros: true
 # Force pointers to the type for C++.
 DerivePointerAlignment: false
 PointerAlignment: Left
+SpaceAfterCStyleCast: true
 ---
 Language: Json
 # Don't format JSON files

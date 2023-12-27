@@ -106,7 +106,7 @@ void fade_calc() {
     s32 flags = sys.fade_flags;
 
     if ((flags != 0) && (sys.fade_current_time)) {
-        alpha = (f32)sys.fade_current_time / sys.fade_max_time;
+        alpha = (f32) sys.fade_current_time / sys.fade_max_time;
 
         if (flags & FADE_OUT) {
             if (sys.fade_current_time < sys.fade_max_time) {
@@ -119,7 +119,7 @@ void fade_calc() {
             }
         }
 
-        sys.fade_color.A = (s32)(alpha * 255.9999);
+        sys.fade_color.A = (s32) (alpha * 255.9999);
 
         if (flags & FADE_WITH_OUTLINE) {
             gDPSetFogColor(gDisplayListHead++, sys.fade_color.R,

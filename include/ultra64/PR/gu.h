@@ -36,9 +36,9 @@
 #define M_PI   3.14159265358979323846
 #define M_DTOR (3.14159265358979323846 / 180.0)
 
-#define FTOFIX32(x) (long)((x) * (float)0x00010000)
-#define FIX32TOF(x) ((float)(x) * (1.0f / (float)0x00010000))
-#define FTOFRAC8(x) ((int)MIN(((x) * (128.0f)), 127.0f) & 0xff)
+#define FTOFIX32(x) (long) ((x) * (float) 0x00010000)
+#define FIX32TOF(x) ((float) (x) * (1.0f / (float) 0x00010000))
+#define FTOFRAC8(x) ((int) MIN(((x) * (128.0f)), 127.0f) & 0xff)
 
 #define FILTER_WRAP  0
 #define FILTER_CLAMP 1

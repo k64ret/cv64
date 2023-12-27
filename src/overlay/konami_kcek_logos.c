@@ -139,7 +139,7 @@ void cv64_konamilogo_kcek_wait(cv64_konamilogo_t* self) {
         model->primitive_color.A = 0xFF;
     }
     model->dlist = &KCEK_LOGO_DL;
-    if ((s32)self->header.current_function[self->header.functionInfo_ID]
+    if ((s32) self->header.current_function[self->header.functionInfo_ID]
             .timer >= 97) {
         ptr_object_curLevel_goToNextFuncAndClearTimer(
             self->header.current_function, &self->header.functionInfo_ID);

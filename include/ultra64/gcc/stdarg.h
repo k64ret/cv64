@@ -49,7 +49,7 @@ typedef char* __gnuc_va_list;
             (__builtin_args_info(2) > 8 ? 64 : __builtin_args_info(2) * 8))
 #else
 #define va_start(__AP, __LASTARG)                                              \
-    (__AP = (__gnuc_va_list)__builtin_next_arg(__LASTARG))
+    (__AP = (__gnuc_va_list) __builtin_next_arg(__LASTARG))
 #endif
 
 #else
@@ -71,14 +71,14 @@ typedef char* __gnuc_va_list;
     (__AP = __builtin_next_arg() - 64 +                                        \
             (__builtin_args_info(2) > 8 ? 64 : __builtin_args_info(2) * 8))
 #else
-#define va_start(__AP) __AP = (char*)&__builtin_va_alist
+#define va_start(__AP) __AP = (char*) &__builtin_va_alist
 #endif
 #endif
 
 #ifndef va_end
 void va_end(__gnuc_va_list); /* Defined in libgcc.a */
 #endif
-#define va_end(__AP) ((void)0)
+#define va_end(__AP) ((void) 0)
 
 /* We cast to void * and then to TYPE * because this avoids
    a warning about increasing the alignment requirement.  */
@@ -89,13 +89,14 @@ void va_end(__gnuc_va_list); /* Defined in libgcc.a */
 #if __mips >= 3
 #ifdef __MIPSEB__
 #define va_arg(__AP, __type)                                                   \
-    ((__type*)(void*)(__AP = (char*)((((__PTRDIFF_TYPE__)__AP + 8 - 1) & -8) + \
-                                     __va_rounded_size(__type))))[-1]
+    ((__type*) (void*) (__AP = (char*) ((((__PTRDIFF_TYPE__) __AP + 8 - 1) &   \
+                                         -8) +                                 \
+                                        __va_rounded_size(__type))))[-1]
 #else
 #define va_arg(__AP, __type)                                                   \
-    ((__AP = (char*)((((__PTRDIFF_TYPE__)__AP + 8 - 1) & -8) +                 \
-                     __va_rounded_size(__type))),                              \
-     *(__type*)(void*)(__AP - __va_rounded_size(__type)))
+    ((__AP = (char*) ((((__PTRDIFF_TYPE__) __AP + 8 - 1) & -8) +               \
+                      __va_rounded_size(__type))),                             \
+     *(__type*) (void*) (__AP - __va_rounded_size(__type)))
 #endif
 
 #else /* not __mips>=3 */
@@ -103,17 +104,17 @@ void va_end(__gnuc_va_list); /* Defined in libgcc.a */
 #ifdef __MIPSEB__
 /* For big-endian machines.  */
 #define va_arg(__AP, __type)                                                   \
-    ((__AP = (char*)((__alignof__(__type) > 4 ? ((int)__AP + 8 - 1) & -8       \
-                                              : ((int)__AP + 4 - 1) & -4) +    \
-                     __va_rounded_size(__type))),                              \
-     *(__type*)(void*)(__AP - __va_rounded_size(__type)))
+    ((__AP = (char*) ((__alignof__(__type) > 4 ? ((int) __AP + 8 - 1) & -8     \
+                                               : ((int) __AP + 4 - 1) & -4) +  \
+                      __va_rounded_size(__type))),                             \
+     *(__type*) (void*) (__AP - __va_rounded_size(__type)))
 #else
 /* For little-endian machines.  */
 #define va_arg(__AP, __type)                                                   \
-    ((__type*)(void*)(__AP = (char*)((__alignof__(__type) > 4                  \
-                                          ? ((int)__AP + 8 - 1) & -8           \
-                                          : ((int)__AP + 4 - 1) & -4) +        \
-                                     __va_rounded_size(__type))))[-1]
+    ((__type*) (void*) (__AP = (char*) ((__alignof__(__type) > 4               \
+                                             ? ((int) __AP + 8 - 1) & -8       \
+                                             : ((int) __AP + 4 - 1) & -4) +    \
+                                        __va_rounded_size(__type))))[-1]
 #endif
 #endif
 

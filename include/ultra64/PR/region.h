@@ -69,7 +69,7 @@ extern "C" {
  */
 
 /* Perform alignment on input 's' */
-#define ALIGN(s, align) (((u32)(s) + ((align)-1)) & ~((align)-1))
+#define ALIGN(s, align) (((u32) (s) + ((align) -1)) & ~((align) -1))
 
 /***************************************
  *

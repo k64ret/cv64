@@ -13,6 +13,6 @@ typedef struct cv64_rgba {
     u8 A;
 } cv64_rgba_t;
 
-#define CV64_COLOR_RGBA_TO_U32(color) *((u32*)&color)
+#define CV64_COLOR_RGBA_TO_U32(color) *((u32*) &color)
 
 #endif
