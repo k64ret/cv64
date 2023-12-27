@@ -3,23 +3,6 @@
 
 #include "gamestate.h"
 
-typedef union {
-    u32 module_ID;
-    void (*function)();
-} gameStateInfoModuleOrFunc;
-
-typedef struct {
-    gameStateInfoModuleOrFunc module_ID_or_a_function_ptr[16];
-} gameState_info;
-
-typedef struct {
-    // Max delay before most of the code can be executed. Used for framerate
-    // timing. 0 = 60fps, 1 = 30fps. Update rate.
-    u32 code_execution_max_delay;
-    void (*init_function)();
-    gameState_info info;
-} gameState_settings_struct;
-
 // ID 0x0001
 typedef struct {
     s16 ID;
@@ -67,7 +50,6 @@ typedef struct {
 
 extern GameStateMgr* ptr_GameStateMgr;
 extern void GameStateMgr_destroy(GameStateMgr* self);
-extern gameState_settings_struct gameState_settings[12];
 extern void GameStateMgr_createGameStateModules(GameStateMgr* self);
 extern void GameStateMgr_executeGameStateModules(GameStateMgr* self,
                                                  u32 execution_flags);
