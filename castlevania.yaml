@@ -26,7 +26,7 @@ options:
   #   - linker/reloc_addrs.txt
   # ld_symbol_header_path: include/ld_symbols.h
   # create_asm_dependencies: True
-  disassemble_all: False
+  disassemble_all: True
   migrate_rodata_to_functions: False
   find_file_boundaries: True
   header_encoding: ASCII
@@ -323,7 +323,7 @@ segments:
       - [0x000A3390, rodata, 0x0000D270]
       - [0x000A33A0, rodata, 0x0000DD70]
       - [0x000A33B0, .rodata, fade]
-      - [0x000A33CC, rodata]
+      - [0x000A33C0, rodata]
       # - [0x000A33D8, rodata]
       # - [0x000A33E4, rodata]
 

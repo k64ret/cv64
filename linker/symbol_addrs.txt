@@ -1234,7 +1234,7 @@ some_timer_SHORT = 0x80387d74;
 gameplayMenuMgr_initHUDParams = 0x80136894;
 fade_alpha = 0x80387adb;
 gameplayMgr_main_disableCamerasInMenu = 0x80018688;
-gDisplayListHead = 0x800b49e0;
+gDisplayListHead = 0x800B49E0;
 contPak_notInserted_1 = 0x800d7491;
 contPak_notInserted_2 = 0x800d7492;
 contPak_notInserted_3 = 0x800d7493;
@@ -1456,13 +1456,13 @@ fade_setFlag              = 0x8000e5a8; // type:func
 fade_calc                 = 0x8000e6c4; // type:func
 
 // .data
-cv64_dl_fade_normal       = 0x80093370; // rom:0x00093F70 size:0x60
-cv64_dl_fade_with_outline = 0x800933D0; // rom:0x00093FD0 size:0x60
+//cv64_dl_fade_normal       = 0x80093370; // rom:0x00093F70 size:0x60
+//cv64_dl_fade_with_outline = 0x800933D0; // rom:0x00093FD0 size:0x60
 // .rodata
 
 // End of src/fade.c
 
-// D_8009342C_9402C = 0x8009342C; // ignore:true
+D_8009342C_9402C = 0x8009342C; // ignore:true
 objects_file_info         = 0x80093430; // rom:0x00094030 size:0x8A8
 gameState_konamiLogo_object_files = 0x800958c0;
 gameState_gameOver_object_files = 0x80096348;
