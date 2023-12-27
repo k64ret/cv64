@@ -87,7 +87,7 @@ void fade_setSettings(s16 flags, u16 fade_time, u8 R, u8 G, u8 B) {
 // }
 
 // The matching version
-u32 fade_isFading() {
+u32 fade_isFading(void) {
     if (sys.fade_flags != 0) {
         if ((sys.fade_flags & FADE_OUT) &&
             (sys.fade_current_time == sys.fade_max_time)) {
