@@ -1,6 +1,6 @@
 # LZK64 compression
 
-> [!WARN]
+> [!WARNING]
 > **This specification is a WIP**
 
 > [!NOTE]
