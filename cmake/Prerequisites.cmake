@@ -18,7 +18,7 @@ if(Python_FOUND)
 
   # Run Splat
   execute_process(
-    COMMAND ${Python_EXECUTABLE} ${SPLAT} ${SPLAT_CONFIG} --disassemble-all
+    COMMAND ${Python_EXECUTABLE} ${SPLAT} ${SPLAT_CONFIG}
     OUTPUT_FILE ${CMAKE_BINARY_DIR}/splat.log
     WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
 endif()

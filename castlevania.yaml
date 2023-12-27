@@ -26,6 +26,7 @@ options:
   #   - linker/reloc_addrs.txt
   # ld_symbol_header_path: include/ld_symbols.h
   # create_asm_dependencies: True
+  disassemble_all: True
   migrate_rodata_to_functions: False
   find_file_boundaries: True
   header_encoding: ASCII
