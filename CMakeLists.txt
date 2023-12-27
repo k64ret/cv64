@@ -66,6 +66,7 @@ target_compile_options(
           -mips2
           -O2
           -DF3DEX_GBI_2
+          -D_LANGUAGE_C
           -verbose
           -fullwarn
           -woff

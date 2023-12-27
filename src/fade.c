@@ -1,7 +1,6 @@
 #include "fade.h"
 #include "cv64.h"
 #include "system_work.h"
-#include <ultra64.h>
 
 Gfx cv64_dl_fade_normal[] = {
     gsDPPipeSync(),

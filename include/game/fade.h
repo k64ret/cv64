@@ -1,7 +1,6 @@
-#ifndef GAME_STATE_H
-#define GAME_STATE_H
+#ifndef FADE_H
+#define FADE_H
 
-#include "gfx/color.h"
 #include <ultra64.h>
 
 typedef enum cv64_fade_flag {
