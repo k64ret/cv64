@@ -1,6 +1,4 @@
-#include "cv64.h"
 #include "math.h"
-#include <ultra64.h>
 
 f32 func_80011310_11F10(f32 src) {
     f32 src_squared;
@@ -30,12 +28,7 @@ f32 vec3f_distance(vec3f* src1, vec3f* src2) {
 }
 
 f32 vec3f_magnitude(vec3f* src) {
-    f32 x, y, z;
-
-    z = src->z;
-    y = src->x;
-    x = src->y;
-    return sqrtf((z * z) + ((y * y) + (x * x)));
+    return sqrtf((src->z * src->z) + ((src->x * src->x) + (src->y * src->y)));
 }
 
 f32 vec3f_80011440(vec3f* dest, vec3f* src, f32 scalar) {
@@ -52,21 +45,21 @@ f32 vec3f_80011440(vec3f* dest, vec3f* src, f32 scalar) {
 }
 
 void vec3f_add(vec3f* dest, vec3f* src1, vec3f* src2) {
-    dest->x = (f32) (src2->x + src1->x);
-    dest->y = (f32) (src2->y + src1->y);
-    dest->z = (f32) (src2->z + src1->z);
+    dest->x = src2->x + src1->x;
+    dest->y = src2->y + src1->y;
+    dest->z = src2->z + src1->z;
 }
 
 void vec3f_substract(vec3f* dest, vec3f* src1, vec3f* src2) {
-    dest->x = (f32) (src1->x - src2->x);
-    dest->y = (f32) (src1->y - src2->y);
-    dest->z = (f32) (src1->z - src2->z);
+    dest->x = src1->x - src2->x;
+    dest->y = src1->y - src2->y;
+    dest->z = src1->z - src2->z;
 }
 
 void vec3f_copy(vec3f* dest, vec3f* src) {
-    dest->x = (f32) src->x;
-    dest->y = (f32) src->y;
-    dest->z = (f32) src->z;
+    dest->x = src->x;
+    dest->y = src->y;
+    dest->z = src->z;
 }
 
 void vec3f_swap(vec3f* dest, vec3f* src) {
@@ -78,22 +71,22 @@ void vec3f_swap(vec3f* dest, vec3f* src) {
 }
 
 void vec3f_multiplyScalar(vec3f* dest, vec3f* src, f32 scalar) {
-    dest->x = (f32) (src->x * scalar);
-    dest->y = (f32) (src->y * scalar);
-    dest->z = (f32) (src->z * scalar);
+    dest->x = src->x * scalar;
+    dest->y = src->y * scalar;
+    dest->z = src->z * scalar;
 }
 
 void vec3f_percentage(vec3f* dest, vec3f* src, f32 percent) {
     percent = 1.0f / percent;
-    dest->x = (f32) (src->x * percent);
-    dest->y = (f32) (src->y * percent);
-    dest->z = (f32) (src->z * percent);
+    dest->x = src->x * percent;
+    dest->y = src->y * percent;
+    dest->z = src->z * percent;
 }
 
 void vec3f_complement(vec3f* dest, vec3f* src) {
-    dest->x = (f32) -src->x;
-    dest->y = (f32) -src->y;
-    dest->z = (f32) -src->z;
+    dest->x = -src->x;
+    dest->y = -src->y;
+    dest->z = -src->z;
 }
 
 f32 vec3f_80011614(vec3f* dest, vec3f* src) {
@@ -114,19 +107,12 @@ f32 vec3f_dotProduct(vec3f* src1, vec3f* src2) {
 // https://decomp.me/scratch/UsxkR
 #pragma GLOBAL_ASM("../asm/nonmatchings/vec3f/vec3f_crossProduct.s")
 
-// https://decomp.me/scratch/BnDGa
-#ifdef NON_MATCHING
-#pragma GLOBAL_ASM("../asm/nonmatchings/vec3f/vec3f_80011710.s")
-#else
 f32 vec3f_80011710(vec3f* arg0, vec3f* arg1) {
-    f32 sp1C;
-    f32 sp18;
-
-    sp1C = vec3f_dotProduct(arg0, arg1);
-    sp18 = vec3f_magnitude(arg0);
-    return func_80011310_11F10(sp1C / (sp18 * vec3f_magnitude(arg1)));
+    f32 temp1 = vec3f_dotProduct(arg0, arg1);
+    f32 temp2 = vec3f_magnitude(arg0);
+    f32 temp3 = vec3f_magnitude(arg1);
+    return func_80011310_11F10(temp1 / (temp2 * temp3));
 }
-#endif
 
 void vec3f_set(vec3f* vec, f32 x, f32 y, f32 z) {
     vec->x = x;
@@ -147,26 +133,56 @@ void vec3f_800117a4(vec3f* dest, vec3f* src1, vec3f* src2, f32 scalar) {
     vec3f_add(dest, &temp1, &temp2);
 }
 
-// https://decomp.me/scratch/GE9jU
-#ifdef NON_MATCHING
-#pragma GLOBAL_ASM("../asm/nonmatchings/vec3f/vec3f_80011808.s")
-#else
 void vec3f_80011808(vec3f* dest, vec3f* src1, vec3f* src2) {
     vec3f temp;
-    f32 dot;
 
-    dot = vec3f_dotProduct(src1, src2);
-    vec3f_multiplyScalar(&temp, src2,
-                         (dot / vec3f_dotProduct(src2, src2)) * 2.0f);
+    vec3f_multiplyScalar(
+        &temp, src2,
+        (vec3f_dotProduct(src1, src2) / vec3f_dotProduct(src2, src2)) * 2);
     vec3f_substract(dest, src1, &temp);
 }
-#endif
 
 // https://decomp.me/scratch/qh1ja
 #pragma GLOBAL_ASM("../asm/nonmatchings/vec3f/matrix_multiplyVec3f.s")
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/vec3f/func_80011914_12514.s")
+void func_80011914_12514(vec3f* dest, vec3f* src, vec3f* rotation, s32 angle) {
+    Matrix44F mtx;
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/vec3f/func_80011984_12584.s")
+    guAlignF(mtx, ANGLE_FIXED_POINT_TO_DEGREES(angle), rotation->x, rotation->y,
+             rotation->z);
+    matrix_multiplyVec3f(dest, src, mtx);
+}
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/vec3f/func_800119F0_125F0.s")
+void func_80011984_12584(vec3f* arg0, vec3f* arg1, vec3f* arg2) {
+    vec3f sp24;
+
+    vec3f_multiplyScalar(&sp24, arg2,
+                         vec3f_dotProduct(arg1, arg2) /
+                             vec3f_dotProduct(arg2, arg2));
+    vec3f_substract(arg0, arg1, &sp24);
+}
+
+void func_800119F0_125F0(vec3f* arg0, vec3f* arg1, vec3f* arg2, vec3f* arg3) {
+    f32 var_fv1;
+    vec3f sp30;
+    vec3f sp24;
+    vec3f sp18;
+
+    vec3f_substract(&sp30, arg2, arg1);
+    vec3f_substract(&sp24, arg3, arg1);
+    var_fv1 = vec3f_dotProduct(&sp30, &sp30);
+    if (var_fv1 != 0.0f) {
+        var_fv1 = vec3f_dotProduct(&sp30, &sp24) / var_fv1;
+    }
+    if (var_fv1 < 0.0f) {
+        vec3f_substract(arg0, arg1, arg3);
+        return;
+    }
+    if (var_fv1 > 1.0f) {
+        vec3f_substract(arg0, arg2, arg3);
+        return;
+    }
+    vec3f_multiplyScalar(&sp18, &sp30, var_fv1);
+    vec3f_add(&sp18, &sp18, arg1);
+    vec3f_substract(arg0, &sp18, arg3);
+}
