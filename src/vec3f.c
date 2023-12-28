@@ -111,9 +111,22 @@ f32 vec3f_dotProduct(vec3f* src1, vec3f* src2) {
     return (src2->z * src1->z) + ((src1->x * src2->x) + (src1->y * src2->y));
 }
 
+// https://decomp.me/scratch/UsxkR
 #pragma GLOBAL_ASM("../asm/nonmatchings/vec3f/vec3f_crossProduct.s")
 
+// https://decomp.me/scratch/BnDGa
+#ifdef NON_MATCHING
 #pragma GLOBAL_ASM("../asm/nonmatchings/vec3f/vec3f_80011710.s")
+#else
+f32 vec3f_80011710(vec3f* arg0, vec3f* arg1) {
+    f32 sp1C;
+    f32 sp18;
+
+    sp1C = vec3f_dotProduct(arg0, arg1);
+    sp18 = vec3f_magnitude(arg0);
+    return func_80011310_11F10(sp1C / (sp18 * vec3f_magnitude(arg1)));
+}
+#endif
 
 void vec3f_set(vec3f* vec, f32 x, f32 y, f32 z) {
     vec->x = x;
@@ -125,10 +138,31 @@ void vec3f_multiplyByOne(vec3f* dest) {
     vec3f_multiplyScalar(dest, dest, 1.0f);
 }
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/vec3f/vec3f_800117a4.s")
+void vec3f_800117a4(vec3f* dest, vec3f* src1, vec3f* src2, f32 scalar) {
+    vec3f temp1;
+    vec3f temp2;
 
+    vec3f_multiplyScalar(&temp1, src1, 1.0f - scalar);
+    vec3f_multiplyScalar(&temp2, src2, scalar);
+    vec3f_add(dest, &temp1, &temp2);
+}
+
+// https://decomp.me/scratch/GE9jU
+#ifdef NON_MATCHING
 #pragma GLOBAL_ASM("../asm/nonmatchings/vec3f/vec3f_80011808.s")
+#else
+void vec3f_80011808(vec3f* dest, vec3f* src1, vec3f* src2) {
+    vec3f temp;
+    f32 dot;
 
+    dot = vec3f_dotProduct(src1, src2);
+    vec3f_multiplyScalar(&temp, src2,
+                         (dot / vec3f_dotProduct(src2, src2)) * 2.0f);
+    vec3f_substract(dest, src1, &temp);
+}
+#endif
+
+// https://decomp.me/scratch/qh1ja
 #pragma GLOBAL_ASM("../asm/nonmatchings/vec3f/matrix_multiplyVec3f.s")
 
 #pragma GLOBAL_ASM("../asm/nonmatchings/vec3f/func_80011914_12514.s")

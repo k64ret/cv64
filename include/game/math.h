@@ -42,11 +42,11 @@ void vec3f_complement(vec3f* dest, vec3f* src);
 f32 vec3f_80011614(vec3f* dest, vec3f* src);
 f32 vec3f_dotProduct(vec3f* src1, vec3f* src2);
 // vec3f_crossProduct
-// vec3f_80011710
+f32 vec3f_80011710(vec3f* arg0, vec3f* arg1);
 void vec3f_set(vec3f* vec, f32 x, f32 y, f32 z);
 void vec3f_multiplyByOne(vec3f* dest);
-// vec3f_800117A4
-// vec3f_80011808
+void vec3f_800117a4(vec3f* dest, vec3f* src1, vec3f* src2, f32 scalar);
+void vec3f_80011808(vec3f* dest, vec3f* src1, vec3f* src2);
 // matrix_multiplyVec3f
 // func_80011914_12514
 // func_80011984_12584
