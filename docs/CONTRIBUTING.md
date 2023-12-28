@@ -1,4 +1,4 @@
-# CV64 code style guide
+# Code style
 
 ## DO
 
@@ -28,9 +28,10 @@ This table should be updated with new abbreviations as we discover more useful o
 
 | Word/Phrase  | Abbreviation |
 | ------------ | ------------ |
-| object       | obj          |
-| info         | inf          |
 | display list | dl           |
 | function     | func         |
-| system       | sys          |
 | header       | hdr          |
+| info         | inf          |
+| manager      | mgr          |
+| object       | obj          |
+| system       | sys          |
