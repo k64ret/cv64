@@ -2,11 +2,32 @@
 #include "math.h"
 #include <ultra64.h>
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/vec3f/func_80011310_11F10.s")
+f32 func_80011310_11F10(f32 src) {
+    f32 src_squared;
+    f32 sqrt;
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/vec3f/func_80011370_11F70.s")
+    src_squared = src * src;
+    sqrt = (src_squared > 1.0f) ? 0.0f : sqrtf(1.0f - src_squared);
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/vec3f/vec3f_distance.s")
+    return atan2f(sqrt, src);
+}
+
+f32 func_80011370_11F70(f32 src) {
+    f32 src_squared;
+    f32 sqrt;
+
+    src_squared = src * src;
+    sqrt = (src_squared > 1.0f) ? 0.0f : sqrtf(1.0f - src_squared);
+
+    return atan2f(src, sqrt);
+}
+
+f32 vec3f_distance(vec3f* src1, vec3f* src2) {
+    vec3f dest;
+
+    vec3f_substract(&dest, src1, src2);
+    return vec3f_magnitude(&dest);
+}
 
 f32 vec3f_magnitude(vec3f* src) {
     f32 x, y, z;
@@ -17,7 +38,18 @@ f32 vec3f_magnitude(vec3f* src) {
     return sqrtf((z * z) + ((y * y) + (x * x)));
 }
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/vec3f/vec3f_80011440.s")
+f32 vec3f_80011440(vec3f* dest, vec3f* src, f32 scalar) {
+    f32 magn;
+
+    magn = vec3f_magnitude(src);
+    if (magn != 0.0f) {
+        vec3f_multiplyScalar(dest, src, scalar / magn);
+    } else {
+        vec3f_set(dest, 0.0f, 0.0f, 0.0f);
+    }
+
+    return magn;
+}
 
 void vec3f_add(vec3f* dest, vec3f* src1, vec3f* src2) {
     dest->x = (f32) (src2->x + src1->x);
@@ -64,7 +96,16 @@ void vec3f_complement(vec3f* dest, vec3f* src) {
     dest->z = (f32) -src->z;
 }
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/vec3f/vec3f_80011614.s")
+f32 vec3f_80011614(vec3f* dest, vec3f* src) {
+    f32 magn;
+
+    magn = vec3f_magnitude(src);
+    if (magn != 0.0f) {
+        vec3f_percentage(dest, src, magn);
+    }
+
+    return magn;
+}
 
 f32 vec3f_dotProduct(vec3f* src1, vec3f* src2) {
     return (src2->z * src1->z) + ((src1->x * src2->x) + (src1->y * src2->y));
