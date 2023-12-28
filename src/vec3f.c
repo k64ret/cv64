@@ -104,8 +104,15 @@ f32 vec3f_dotProduct(vec3f* src1, vec3f* src2) {
     return (src2->z * src1->z) + ((src1->x * src2->x) + (src1->y * src2->y));
 }
 
-// https://decomp.me/scratch/UsxkR
-#pragma GLOBAL_ASM("../asm/nonmatchings/vec3f/vec3f_crossProduct.s")
+void vec3f_crossProduct(vec3f* dest, vec3f* src1, vec3f* src2) {
+    f32 temp1 = (src1->y * src2->z) - (src2->y * src1->z);
+    f32 temp2 = (src1->z * src2->x) - (src2->z * src1->x);
+    f32 temp3 = (src1->x * src2->y) - (src2->x * src1->y);
+
+    dest->x = temp1;
+    dest->y = temp2;
+    dest->z = temp3;
+}
 
 f32 vec3f_80011710(vec3f* arg0, vec3f* arg1) {
     f32 temp1 = vec3f_dotProduct(arg0, arg1);
@@ -143,14 +150,14 @@ void vec3f_80011808(vec3f* dest, vec3f* src1, vec3f* src2) {
 }
 
 // https://decomp.me/scratch/qh1ja
-#pragma GLOBAL_ASM("../asm/nonmatchings/vec3f/matrix_multiplyVec3f.s")
+#pragma GLOBAL_ASM("../asm/nonmatchings/vec3f/func_80011880.s")
 
 void func_80011914_12514(vec3f* dest, vec3f* src, vec3f* rotation, s32 angle) {
     Matrix44F mtx;
 
     guAlignF(mtx, ANGLE_FIXED_POINT_TO_DEGREES(angle), rotation->x, rotation->y,
              rotation->z);
-    matrix_multiplyVec3f(dest, src, mtx);
+    func_80011880(dest, src, mtx);
 }
 
 void func_80011984_12584(vec3f* arg0, vec3f* arg1, vec3f* arg2) {

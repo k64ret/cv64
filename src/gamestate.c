@@ -7,6 +7,9 @@
 #include "objects/engine/GameStateMgr.h"
 #include "system_work.h"
 
+// .bss
+// GameStateMgr* ptr_GameStateMgr;
+
 void gamestate_create(s32 game_state) {
     // Set target framerate
     sys.code_execution_max_delay =
@@ -17,7 +20,7 @@ void gamestate_create(s32 game_state) {
     // could not be created
     do {
         clearAllObjects();
-        ptr_GameStateMgr = object_create(NULL, ENGINE_GAMESTATE_MGR);
+        ptr_GameStateMgr = object_create(NULL, ENGINE_GAMESTATEMGR);
     } while (ptr_GameStateMgr == NULL);
 
     // Set GameStateMgr params (flags, destroy function, game state ID and game
