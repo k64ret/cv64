@@ -1,30 +1,40 @@
-#ifndef ULTRA64_H
-#define ULTRA64_H
 
-#include "ultratypes.h"
-// #include "exception.h"
-// #include "rcp.h"
-// #include "thread.h"
-// #include "convert.h"
-// #include "time.h"
-// #include "message.h"
-// #include "sptask.h"
-// #include "gu.h"
-// #include "vi.h"
-// #include "pi.h"
-#include "controller.h"
-// #include "printf.h"
-#include "mbi.h"
-// #include "pfs.h"
-// #include "motor.h"
-// #include "R4300.h"
-// #include "ucode.h"
+/**************************************************************************
+ *                                                                        *
+ *               Copyright (C) 1994, Silicon Graphics, Inc.               *
+ *                                                                        *
+ *  These coded instructions, statements, and computer programs  contain  *
+ *  unpublished  proprietary  information of Silicon Graphics, Inc., and  *
+ *  are protected by Federal copyright  law.  They  may not be disclosed  *
+ *  to  third  parties  or copied or duplicated in any form, in whole or  *
+ *  in part, without the prior written consent of Silicon Graphics, Inc.  *
+ *                                                                        *
+ *************************************************************************/
 
-#define VTX(x, y, z, s, t, crnx, cgny, cbnz, a)                                \
-    {                                                                          \
-        {                                                                      \
-            {x, y, z}, 0, {s, t}, { crnx, cgny, cbnz, a }                      \
-        }                                                                      \
-    }
+/**************************************************************************
+ *
+ *  $Revision: 1.10 $
+ *  $Date: 1997/02/11 08:37:33 $
+ *  $Source: /exdisk2/cvs/N64OS/Master/cvsmdev2/PR/include/ultra64.h,v $
+ *
+ **************************************************************************/
+
+#ifndef _ULTRA64_H_
+#define _ULTRA64_H_
+
+#include <PR/gu.h>
+#include <PR/libaudio.h>
+#include <PR/mbi.h>
+#include <PR/os.h>
+#include <PR/ramrom.h>
+#include <PR/rcp.h>
+#include <PR/region.h>
+#include <PR/rmon.h>
+#include <PR/sp.h>
+#include <PR/sptask.h>
+#include <PR/ucode.h>
+#include <PR/ultraerror.h>
+#include <PR/ultralog.h>
+#include <PR/ultratypes.h>
 
 #endif

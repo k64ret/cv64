@@ -96,7 +96,7 @@ typedef struct {
     u8 field40_0x65;
     u8 field41_0x66;
     u8 field42_0x67;
-    mf matrix;
+    Matrix44F matrix;
 } camera;
 
 typedef struct {

@@ -14,7 +14,7 @@
 #include "cv64.h"
 #include "gamestate.h"
 #include "gfx/camera.h"
-#include "unknown_struct.h"
+#include "system_work.h"
 #include <ultra64.h>
 
 void cv64_konamilogo_entrypoint(cv64_konamilogo_t* self) {
@@ -25,11 +25,11 @@ void cv64_konamilogo_check_btn_press(cv64_konamilogo_t* self) {
     void (*ptr_object_curLevel_goToFunc)(u16[], s16*, s32) =
         object_curLevel_goToFunc;
 
-    if ((D_80383AB8.controllers[0].buttons_pressed |
-         D_80383AB8.controllers[1].buttons_pressed |
-         D_80383AB8.controllers[2].buttons_pressed |
-         D_80383AB8.controllers[3].buttons_pressed) &
-        (BTN_START | BTN_RECENTER)) {
+    if ((sys.controllers[0].buttons_pressed |
+         sys.controllers[1].buttons_pressed |
+         sys.controllers[2].buttons_pressed |
+         sys.controllers[3].buttons_pressed) &
+        (START_BUTTON | RECENTER_BUTTON)) {
         ptr_object_curLevel_goToFunc(self->header.current_function,
                                      &self->header.functionInfo_ID,
                                      KONAMILOGO_KCEK_WAIT);
@@ -51,8 +51,7 @@ void cv64_konamilogo_init(cv64_konamilogo_t* self) {
     model->assets_file_ID = 0x5D;
     model->size.x = 0.9975f;
     model->size.y = 1.005f;
-    CV64_COLOR_RGBA_TO_U32(D_80383AB8.background_color) =
-        0x000000FF; // Black (opaque)
+    CV64_COLOR_RGBA_TO_U32(sys.background_color) = 0x000000FF; // Black (opaque)
     model->flags |= 0x800;
     CV64_COLOR_RGBA_TO_U32(model->primitive_color) =
         0xFFFFFF00; // White (transparent)
@@ -73,9 +72,9 @@ void cv64_konamilogo_fade_in(cv64_konamilogo_t* self) {
         ptr_object_curLevel_goToNextFuncAndClearTimer(
             self->header.current_function, &self->header.functionInfo_ID);
     }
-    D_80383AB8.background_color.R = model->primitive_color.A;
-    D_80383AB8.background_color.G = model->primitive_color.A;
-    D_80383AB8.background_color.B = model->primitive_color.A;
+    sys.background_color.R = model->primitive_color.A;
+    sys.background_color.G = model->primitive_color.A;
+    sys.background_color.B = model->primitive_color.A;
     cv64_konamilogo_check_btn_press(self);
 }
 
@@ -140,7 +139,7 @@ void cv64_konamilogo_kcek_wait(cv64_konamilogo_t* self) {
         model->primitive_color.A = 0xFF;
     }
     model->dlist = &KCEK_LOGO_DL;
-    if ((s32)self->header.current_function[self->header.functionInfo_ID]
+    if ((s32) self->header.current_function[self->header.functionInfo_ID]
             .timer >= 97) {
         ptr_object_curLevel_goToNextFuncAndClearTimer(
             self->header.current_function, &self->header.functionInfo_ID);
@@ -160,7 +159,7 @@ void cv64_konamilogo_kcek_fade_out(cv64_konamilogo_t* self) {
         model->primitive_color.A = 0x00;
         ptr_gamestate_change(GAMESTATE_INTRO_CUTSCENE);
     }
-    D_80383AB8.background_color.R = model->primitive_color.A;
-    D_80383AB8.background_color.G = model->primitive_color.A;
-    D_80383AB8.background_color.B = model->primitive_color.A;
+    sys.background_color.R = model->primitive_color.A;
+    sys.background_color.G = model->primitive_color.A;
+    sys.background_color.B = model->primitive_color.A;
 }

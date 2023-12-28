@@ -19,8 +19,31 @@ typedef enum cv64_gamestate_id {
 } cv64_gamestate_id_t;
 // clang-format on
 
-extern void gamestate_create(s32 gamestate_id);
-extern void gamestate_change(s32 gamestate_id);
+typedef union {
+    u32 module_ID;
+    void (*function)();
+} gameStateInfoModuleOrFunc;
+
+typedef struct {
+    gameStateInfoModuleOrFunc module_ID_or_a_function_ptr[16];
+} gameState_info;
+
+typedef struct {
+    // Max delay before most of the code can be executed. Used for framerate
+    // timing. 0 = 60fps, 1 = 30fps. Update rate.
+    u32 code_execution_max_delay;
+    void (*init_function)();
+    gameState_info info;
+} gameState_settings_struct;
+
+void gamestate_create(s32 gamestate_id);
+void gamestate_change(s32 gamestate_id);
 extern void gamestate_init();
+void end_frame(void);
+extern void setup_background_color();
+extern void setup_framebuffer();
+extern void setup_rsp(Gfx**);
+extern void setup_z_buffer();
+extern gameState_settings_struct gameState_settings[12];
 
 #endif

@@ -570,7 +570,7 @@ typedef enum object_id {
 } object_id_t;
 
 typedef enum object {
-    ENGINE_GAMESTATE_MGR              = OBJECT_ID(NONE, ID_GAMESTATE_MGR),
+    ENGINE_GAMESTATEMGR              = OBJECT_ID(NONE, ID_GAMESTATE_MGR),
     ENGINE_DMA_MGR                    = OBJECT_ID(NONE, ID_DMA_MGR),
     GAMESTATE_GAMEPLAY_MGR            = OBJECT_ID(NONE, ID_GAMEPLAY_MGR),
     ENGINE_MAP_OBJECT_PARENT          = OBJECT_ID(NONE, ID_MAP_OBJECT_PARENT),
