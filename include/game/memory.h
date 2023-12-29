@@ -3,6 +3,8 @@
 
 #include <ultra64.h>
 
+#define ALIGN8(val) (((val) + 7) & ~7)
+
 #define HEAP_MULTIPURPOSE_SIZE 0xD0000
 #define HEAP_MENU_DATA_SIZE    0x40000
 
@@ -56,8 +58,8 @@ extern void* HEAP_MENU_DATA_START;
 
 extern void memory_copy(void* src, void* dest, u32 size);
 extern void memory_clear(void* ptr, u32 length);
-extern void heap_init(s32 kind, cv64_heapblock_hdr_t* first_block_ptr,
-                      s32 heap_size, u16 additional_flags);
+void heap_init(cv64_heap_kind_t kind, cv64_heapblock_hdr_t* first_block_ptr,
+               s32 heap_size, u32 additional_flags);
 extern void heap_free(s32 kind);
 extern void heap_writebackDCache();
 extern void initHeaps();

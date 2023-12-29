@@ -1,11 +1,17 @@
-#include "cv64.h"
-#include <ultra64.h>
+#include "memory.h"
 
 #pragma GLOBAL_ASM("../asm/nonmatchings/memory/memory_clear.s")
 
 #pragma GLOBAL_ASM("../asm/nonmatchings/memory/memory_copy.s")
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/memory/heap_init.s")
+void heap_init(cv64_heap_kind_t kind, cv64_heapblock_hdr_t* first_block_ptr,
+               s32 heap_size, u32 additional_flags) {
+    heaps[kind].flags = additional_flags | HEAP_ACTIVE;
+    heaps[kind].size = ALIGN8(heap_size);
+    heaps[kind].heap_start = ALIGN8((s32) first_block_ptr);
+    first_block_ptr->flags = HEAP_BLOCK_FREE;
+    first_block_ptr->size = heaps[kind].size - sizeof(cv64_heapblock_hdr_t);
+}
 
 #pragma GLOBAL_ASM("../asm/nonmatchings/memory/heap_free.s")
 
