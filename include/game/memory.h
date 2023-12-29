@@ -60,7 +60,7 @@ extern void memory_copy(void* src, void* dest, u32 size);
 extern void memory_clear(void* ptr, u32 length);
 void heap_init(cv64_heap_kind_t kind, cv64_heapblock_hdr_t* first_block_ptr,
                s32 heap_size, u32 additional_flags);
-extern void heap_free(s32 kind);
+void heap_free(cv64_heap_kind_t kind);
 extern void heap_writebackDCache();
 extern void initHeaps();
 extern void* heap_alloc(s32 kind, u32 data_size); // CV64's malloc()

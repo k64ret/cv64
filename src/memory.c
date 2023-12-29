@@ -13,7 +13,7 @@ void heap_init(cv64_heap_kind_t kind, cv64_heapblock_hdr_t* first_block_ptr,
     first_block_ptr->size = heaps[kind].size - sizeof(cv64_heapblock_hdr_t);
 }
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/memory/heap_free.s")
+void heap_free(cv64_heap_kind_t kind) { heaps[kind].flags = 0; }
 
 #pragma GLOBAL_ASM("../asm/nonmatchings/memory/heap_writebackDCache.s")
 
