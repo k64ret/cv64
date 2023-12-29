@@ -1,9 +1,10 @@
-#include "cv64.h"
-#include <ultra64.h>
+#include "objects/map_objects/TOU_TURO/cv64_touturo_door.h"
 
 // clang-format off
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/overlay/map/TOU_TURO/func_8018EB10_6F1B80.s")
+void cv64_touturo_door_entrypoint(cv64_touturo_door_t* self) {
+    ENTER(self, cv64_touturo_door_funcs);
+}
 
 #pragma GLOBAL_ASM("../asm/nonmatchings/overlay/map/TOU_TURO/func_8018EB80_6F1BF0.s")
 

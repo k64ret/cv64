@@ -2,6 +2,7 @@
 #define MODEL_INFO_H
 
 #include "gfx/color.h"
+#include "map_actor_model.h"
 #include "math.h"
 #include <ultra64.h>
 
@@ -34,7 +35,7 @@ typedef struct cv64_model_inf {
     angle_t angle;
     angle_t field41_0x52;
     vec3f size;
-    void* field45_0x64; // map_actor_model*
+    cv64_map_actor_model_t* map_actor_model;
     Matrix44F matrix;
 } cv64_model_inf_t;
 

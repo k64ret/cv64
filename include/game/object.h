@@ -4,9 +4,6 @@
 #include "cv64.h"
 #include "object_ID.h"
 
-#define OBJECT_SIZE        0x74
-#define OBJECT_HEADER_SIZE 0x20
-
 // clang-format off
 typedef enum cv64_obj_exec_flag {
     PAUSE = CV64_BIT(14),
@@ -31,6 +28,15 @@ typedef struct cv64_obj_hdr {
     struct cv64_obj_hdr_t* next;
     struct cv64_obj_hdr_t* child;
 } cv64_obj_hdr_t; // Size = 0x20
+
+// Generic object struct
+typedef struct cv64_obj {
+    cv64_obj_hdr_t header;
+    u8 field_0x20[84]
+} cv64_obj_t; // Size = 0x74
+
+#define OBJECT_SIZE        sizeof(cv64_obj_t)
+#define OBJECT_HEADER_SIZE sizeof(cv64_obj_hdr_t)
 
 extern void* object_create(void* parent, object_t ID);
 extern void* object_createAndSetChild(void* parent, object_t ID);

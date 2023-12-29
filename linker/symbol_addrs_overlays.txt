@@ -10,3 +10,16 @@
 // cv64_konamilogo_kcek_fade_out   = 0x801D00E0; // type:func segment:konami_kcek_logos
 // .data
 // cv64_konamilogo_funcs           = 0x801D0160; // segment:konami_kcek_logos size:0x20
+
+// .text
+cv64_touturo_door_entrypoint      = 0x8018eb10; // type:func segment:TOU_TURO
+cv64_touturo_door_init = 0x8018eb80; // type:func segment:TOU_TURO
+cv64_touturo_door_loop            = 0x8018ec64; // type:func segment:TOU_TURO
+cv64_touturo_door_exit_check_event_flags         = 0x8018edcc; // type:func segment:TOU_TURO
+cv64_touturo_door_entrance_check_event_flags            = 0x8018ee34; // type:func segment:TOU_TURO
+cv64_touturo_door_entrance_close_door        = 0x8018eeb4; // type:func segment:TOU_TURO
+// .data
+//cv64_touturo_door_funcs           = 0x8018f0f0; // segment:TOU_TURO size:0x08
+//cv64_touturo_door_dlists           = 0x8018f0f8; // segment:TOU_TURO size:0x08
+//cv64_touturo_door_exit_funcs           = 0x8018f100; // segment:TOU_TURO size:0x08
+//cv64_touturo_door_entrance_funcs           = 0x8018f108; // segment:TOU_TURO size:0x0C
