@@ -49,7 +49,7 @@ void vec3f_set(vec3f* vec, f32 x, f32 y, f32 z);
 void vec3f_multiplyByOne(vec3f* dest);
 void vec3f_800117a4(vec3f* dest, vec3f* src1, vec3f* src2, f32 scalar);
 void vec3f_80011808(vec3f* dest, vec3f* src1, vec3f* src2);
-extern void func_80011880(vec3f* dest, vec3f* src, Matrix44F* mtx);
+void func_80011880(vec3f* dest, vec3f* src, Matrix44F* mtx);
 void func_80011914_12514(vec3f* dest, vec3f* src, vec3f* rotation, s32 angle);
 void func_80011984_12584(vec3f* arg0, vec3f* arg1, vec3f* arg2);
 void func_800119F0_125F0(vec3f* arg0, vec3f* arg1, vec3f* arg2, vec3f* arg3);

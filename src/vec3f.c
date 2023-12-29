@@ -149,8 +149,19 @@ void vec3f_80011808(vec3f* dest, vec3f* src1, vec3f* src2) {
     vec3f_substract(dest, src1, &temp);
 }
 
-// https://decomp.me/scratch/qh1ja
-#pragma GLOBAL_ASM("../asm/nonmatchings/vec3f/func_80011880.s")
+// https://decomp.me/scratch/jpCsM
+void func_80011880(vec3f* dest, vec3f* src, Matrix44F* mtx) {
+    f32 temp_fa0 = ((mtx[0][0][0] * src->x) + (mtx[0][1][0] * src->y)) +
+                   (mtx[0][2][0] * src->z) + mtx[0][3][0];
+    f32 temp_fa1 = ((mtx[0][0][1] * src->x) + (mtx[0][1][1] * src->y)) +
+                   (mtx[0][2][1] * src->z) + mtx[0][3][1];
+    f32 temp_fv1 = ((mtx[0][0][2] * src->x) + (mtx[0][1][2] * src->y)) +
+                   (mtx[0][2][2] * src->z) + mtx[0][3][2];
+
+    dest->x = temp_fa0;
+    dest->y = temp_fa1;
+    dest->z = temp_fv1;
+}
 
 void func_80011914_12514(vec3f* dest, vec3f* src, vec3f* rotation, s32 angle) {
     Matrix44F mtx;
