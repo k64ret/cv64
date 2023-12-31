@@ -4,6 +4,7 @@
 
 [![Discord](https://img.shields.io/discord/106120859520905216?logo=discord)](https://discord.gg/eKht382)
 [![Castlevania 64 - Research Spreadsheets](https://img.shields.io/badge/Castlevania%2064%20-%20Research%20Spreadsheets-blue?logo=googlesheets)](https://docs.google.com/spreadsheets/d/1nzh_nFf26oVZy6uWeNYiYGXAto6Yz3xypZwWqwJBBJQ/edit#gid=74717405)
+[![TCRF - Castlevania (Nintendo 64)](https://img.shields.io/badge/TCRF-Castlevania%20%28Nintendo%2064%29-blue)](https://tcrf.net/Notes:Castlevania_(Nintendo_64))
 
 </div>
 
