@@ -3,7 +3,7 @@
 <div align="center">
 
 [![Discord](https://img.shields.io/discord/106120859520905216?logo=discord)](https://discord.gg/eKht382)
-[![Castlevania 64 - Research Spreadsheets](https://img.shields.io/badge/Google%20Sheets-Castlevania%2064%20--%20Research%20Spreadsheets?logo=googlesheets)](https://docs.google.com/spreadsheets/d/1nzh_nFf26oVZy6uWeNYiYGXAto6Yz3xypZwWqwJBBJQ/edit#gid=74717405)
+[![Castlevania 64 - Research Spreadsheets](https://img.shields.io/badge/Google%20Sheets-Castlevania%2064%20--%20Research%20Spreadsheets-green?logo=googlesheets)](https://docs.google.com/spreadsheets/d/1nzh_nFf26oVZy6uWeNYiYGXAto6Yz3xypZwWqwJBBJQ/edit#gid=74717405)
 
 </div>
 
