@@ -1,5 +1,11 @@
 # Castlevania Decompilation
 
+<div align="center">
+
+![CV64&CVLoDSpeedruns](https://img.shields.io/discord/106120859520905216?logo=discord)
+
+</div>
+
 ## Getting started
 
 ### Requirements
