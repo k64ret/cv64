@@ -218,10 +218,9 @@ void object_prevLevel_goToFunc(u16 current_functionInfo[], s16* functionInfo_ID,
         functionInfo_entry = &current_functionInfo[*functionInfo_ID];
         functionInfo_entry--;
         *functionInfo_entry = function;
-        entry_to_clean = functionInfo_entry + 1;
-        while (entry_to_clean < (u16*) functionInfo_ID) {
+        for (entry_to_clean = functionInfo_entry + 1;
+             entry_to_clean < (u16*) functionInfo_ID; entry_to_clean++) {
             *entry_to_clean = 0;
-            entry_to_clean++;
         }
     }
 }
