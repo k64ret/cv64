@@ -72,5 +72,7 @@ void object_curLevel_goToNextFunc(u16 current_functionInfo[],
                                   s16* functionInfo_ID);
 void object_prevLevel_goToNextFunc(u16 current_functionInfo[],
                                    s16* functionInfo_ID);
+void object_nextLevel_goToNextFunc(u16 current_functionInfo[],
+                                   s16* functionInfo_ID);
 
 #endif
