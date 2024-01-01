@@ -154,7 +154,22 @@ void object_prevLevel_goToPrevFunc(u16 current_functionInfo[],
     }
 }
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/memory/object_nextLevel_goToPrevFunc.s")
+void object_nextLevel_goToPrevFunc(u16 current_functionInfo[],
+                                   s16* functionInfo_ID) {
+    u16* functionInfo_entry;
+    u16* entry_to_clean;
+
+    functionInfo_entry = &current_functionInfo[*functionInfo_ID];
+    functionInfo_entry++;
+    if (functionInfo_entry < (u16*) functionInfo_ID) {
+        entry_to_clean = functionInfo_entry + 1;
+        (*functionInfo_entry)--;
+        while (entry_to_clean < (u16*) functionInfo_ID) {
+            *entry_to_clean = 0;
+            entry_to_clean++;
+        }
+    }
+}
 
 // clang-format off
 #pragma GLOBAL_ASM("../asm/nonmatchings/memory/object_curLevel_goToPrevFuncAndClearTimer.s")
