@@ -90,5 +90,7 @@ void object_prevLevel_goToPrevFunc(u16 current_functionInfo[],
                                    s16* functionInfo_ID);
 void object_nextLevel_goToPrevFunc(u16 current_functionInfo[],
                                    s16* functionInfo_ID);
+void object_curLevel_goToPrevFuncAndClearTimer(u16 current_functionInfo[],
+                                               s16* functionInfo_ID);
 
 #endif
