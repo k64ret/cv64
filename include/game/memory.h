@@ -52,6 +52,14 @@ typedef struct cv64_heap_inf {
     cv64_heapblock_hdr_t* heap_start; // Start of the block array
 } cv64_heap_inf_t;
 
+typedef union cv64_obj_func_inf {
+    struct {
+        u8 timer;    // Could also be number of accesses to function
+        u8 function; // Function ID
+    };
+    u16 whole;
+} cv64_obj_func_inf_t; // Size = 0x2
+
 extern cv64_heap_inf_t heaps[8];
 extern void* HEAP_MULTIPURPOSE_START;
 extern void* HEAP_MENU_DATA_START;
@@ -74,5 +82,7 @@ void object_prevLevel_goToNextFunc(u16 current_functionInfo[],
                                    s16* functionInfo_ID);
 void object_nextLevel_goToNextFunc(u16 current_functionInfo[],
                                    s16* functionInfo_ID);
+void object_curLevel_goToNextFuncAndClearTimer(
+    cv64_obj_func_inf_t current_functionInfo[], s16* functionInfo_ID);
 
 #endif

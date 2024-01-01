@@ -107,9 +107,21 @@ void object_nextLevel_goToNextFunc(u16 current_functionInfo[],
     }
 }
 
-// clang-format off
-#pragma GLOBAL_ASM("../asm/nonmatchings/memory/object_curLevel_goToNextFuncAndClearTimer.s")
-// clang-format on
+void object_curLevel_goToNextFuncAndClearTimer(
+    cv64_obj_func_inf_t current_functionInfo[], s16* functionInfo_ID) {
+    cv64_obj_func_inf_t* functionInfo_entry;
+    cv64_obj_func_inf_t* entry_to_clean;
+
+    functionInfo_entry = &current_functionInfo[*functionInfo_ID];
+    functionInfo_entry->whole++;   // Set current function to the next function
+    functionInfo_entry->timer = 0; // Set timer to 0
+    entry_to_clean = functionInfo_entry + 1;
+    while ((cv64_obj_func_inf_t*) entry_to_clean <
+           (cv64_obj_func_inf_t*) functionInfo_ID) {
+        entry_to_clean->whole = 0;
+        entry_to_clean++;
+    }
+}
 
 #pragma GLOBAL_ASM("../asm/nonmatchings/memory/object_curLevel_goToPrevFunc.s")
 
