@@ -1,5 +1,30 @@
 # Castlevania Decompilation
 
+<div align="center">
+
+[![Discord](https://img.shields.io/discord/106120859520905216?logo=discord&logoColor=white&label=CV64%26CVLoDSpeedruns)](https://discord.gg/eKht382)
+[![Castlevania 64 - Research Spreadsheets](https://img.shields.io/badge/Castlevania%2064%20-%20Research%20Spreadsheets-blue?logo=googlesheets)][research-spreadsheets]
+[![TCRF - Castlevania (Nintendo 64)](https://img.shields.io/badge/TCRF-Castlevania%20%28Nintendo%2064%29-blue)](https://tcrf.net/Notes:Castlevania_(Nintendo_64))
+
+</div>
+
+## Acknowledgements
+
+### Tools
+
+These tools are instrumental in the decompilation process of Castlevania 64.
+
+- [Splat](https://github.com/ethteck/splat)
+- [LZKN64][lzkn64]
+- [asm-processor](https://github.com/simonlindholm/asm-processor)
+
+### People
+
+These people make this project possible and successful.
+
+- [@moisesPC](https://github.com/moisesPC) for his research efforts and the creation/upkeep of the [Castlevania 64 - Research Spreadsheets][research-spreadsheets]
+- [@LiquidCat64](https://github.com/LiquidCat64) and [@Fluvian](https://github.com/Fluvian) for reversing the [LZKN64][lzkn64] compression algorithm used by Konami
+
 ## Getting started
 
 ### Requirements
@@ -7,7 +32,7 @@
 - Your own (legally obtained) copy of Castlevania for the Nintendo 64 (USA v1.0) (`sha1: 989A28782ED6B0BC489A1BBBD7BEC355D8F2707E`)
 - CMake
 - Git
-- GNU Make
+- Make/Ninja
 
 #### Docker
 
@@ -82,3 +107,5 @@ Run the following to clean up the build artifacts.
 > Or run `rtx run clean` if you are already using [rtx][rtx]
 
 [rtx]: https://github.com/jdx/rtx
+[research-spreadsheets]: https://docs.google.com/spreadsheets/d/1nzh_nFf26oVZy6uWeNYiYGXAto6Yz3xypZwWqwJBBJQ/edit#gid=74717405
+[lzkn64]: https://github.com/fluvian/lzkn64
