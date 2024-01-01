@@ -68,4 +68,7 @@ extern void* heap_allocWithAlignment(s32 kind, u32 data_size, u32 alignment);
 extern s32 heapBlock_updateBlockMaxSize(void* data, u32 data_size);
 extern void heapBlock_free(void* ptr); // CV64's free()
 
+void object_curLevel_goToNextFunc(u16 current_functionInfo[],
+                                  s16* functionInfo_ID);
+
 #endif

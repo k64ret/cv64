@@ -59,7 +59,19 @@ void heap_free(cv64_heap_kind_t kind) { heaps[kind].flags = HEAP_INACTIVE; }
 
 #pragma GLOBAL_ASM("../asm/nonmatchings/memory/func_80001338_1F38.s")
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/memory/object_curLevel_goToNextFunc.s")
+void object_curLevel_goToNextFunc(u16 current_functionInfo[],
+                                  s16* functionInfo_ID) {
+    u16* functionInfo_entry;
+    u16* entry_to_clean;
+
+    functionInfo_entry = &current_functionInfo[*functionInfo_ID];
+    entry_to_clean = functionInfo_entry + 1;
+    (*functionInfo_entry)++; // Set current entry to next function
+    while (entry_to_clean < (u16*) functionInfo_ID) {
+        *entry_to_clean = 0;
+        entry_to_clean++;
+    }
+}
 
 #pragma GLOBAL_ASM("../asm/nonmatchings/memory/object_prevLevel_goToNextFunc.s")
 
