@@ -84,5 +84,7 @@ void object_nextLevel_goToNextFunc(u16 current_functionInfo[],
                                    s16* functionInfo_ID);
 void object_curLevel_goToNextFuncAndClearTimer(
     cv64_obj_func_inf_t current_functionInfo[], s16* functionInfo_ID);
+void object_curLevel_goToPrevFunc(cv64_obj_func_inf_t current_functionInfo[],
+                                  s16* functionInfo_ID);
 
 #endif

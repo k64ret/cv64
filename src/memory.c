@@ -123,7 +123,19 @@ void object_curLevel_goToNextFuncAndClearTimer(
     }
 }
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/memory/object_curLevel_goToPrevFunc.s")
+void object_curLevel_goToPrevFunc(cv64_obj_func_inf_t current_functionInfo[],
+                                  s16* functionInfo_ID) {
+    cv64_obj_func_inf_t* functionInfo_entry;
+    u16* entry_to_clean;
+
+    functionInfo_entry = &current_functionInfo[*functionInfo_ID];
+    functionInfo_entry->whole--;
+    entry_to_clean = (u16*) functionInfo_entry + 1;
+    while (entry_to_clean < (u16*) functionInfo_ID) {
+        *entry_to_clean = 0;
+        entry_to_clean++;
+    }
+}
 
 #pragma GLOBAL_ASM("../asm/nonmatchings/memory/object_prevLevel_goToPrevFunc.s")
 
