@@ -22,8 +22,8 @@ These tools are instrumental in the decompilation process of Castlevania 64.
 
 These people make this project possible and successful.
 
-- @moisesPC for his research efforts and the creation/upkeep of the [Castlevania 64 - Research Spreadsheets][research-spreadsheets]
-- @LiquidCat64 and @Fluvian for reversing the [LZKN64][lzkn64] compression algorithm used by Konami
+- [@moisesPC](https://github.com/moisesPC) for his research efforts and the creation/upkeep of the [Castlevania 64 - Research Spreadsheets][research-spreadsheets]
+- [@LiquidCat64](https://github.com/LiquidCat64) and [@Fluvian](https://github.com/Fluvian) for reversing the [LZKN64][lzkn64] compression algorithm used by Konami
 
 ## Getting started
 
