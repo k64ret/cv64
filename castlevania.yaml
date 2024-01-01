@@ -863,7 +863,8 @@ segments:
     exclusive_ram_id: ovl_map_objects
     subsegments:
       - [0x006F1B80, c, overlay/map/TOU_TURO]
-      - [0x006F2160, .data, overlay/map/TOU_TURO]
+      # - [0x006F2160, .data, overlay/map/TOU_TURO]
+      - [0x006F2160, data, overlay/map/TOU_TURO]
       - [0x006F2190, rodata, overlay/map/TOU_TURO]
 
   - name: ENDING # Ending
