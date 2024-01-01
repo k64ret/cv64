@@ -232,4 +232,20 @@ void object_prevLevel_goToFunc(u16 current_functionInfo[], s16* functionInfo_ID,
     }
 }
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/memory/object_nextLevel_goToFunc.s")
+void object_nextLevel_goToFunc(u16 current_functionInfo[], s16* functionInfo_ID,
+                               s32 function) {
+    u16* functionInfo_entry;
+    u16* entry_to_clean;
+
+    functionInfo_entry = &current_functionInfo[*functionInfo_ID];
+    functionInfo_entry++;
+    if (functionInfo_entry < (u16*) functionInfo_ID) {
+        entry_to_clean = functionInfo_entry + 1;
+        (*functionInfo_entry)--; // Unneeded
+        *functionInfo_entry = function;
+        while (entry_to_clean < (u16*) functionInfo_ID) {
+            *entry_to_clean = 0;
+            entry_to_clean++;
+        }
+    }
+}

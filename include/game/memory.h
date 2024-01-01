@@ -99,5 +99,7 @@ void object_curLevel_goToFuncInLevel(u16 current_functionInfo[],
                                      s32 function);
 void object_prevLevel_goToFunc(u16 current_functionInfo[], s16* functionInfo_ID,
                                s32 function);
+void object_nextLevel_goToFunc(u16 current_functionInfo[], s16* functionInfo_ID,
+                               s32 function);
 
 #endif
