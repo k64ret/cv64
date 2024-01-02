@@ -1,13 +1,16 @@
 # Objects
 
-**Objects** (formerly known as *modules*) are a common data structure seen through the game's code.
+**Objects** are a common data structure seen through the game's code.
+
+> [!NOTE]
+> Objects were formerly known as *modules*
 
 Objects are used to modularize the code's execution flow by associating code and data to certain objects. This way, said code can only be executed if its associated object is present in memory. Not only that, but it can also be used to assign an order of execution to the code associated to the objects.
 
 Pretty much every piece of code running in the main thread is associated to a certain object (menus, enemies, the player, etc).
 
 ## Structure
-All objects are 0x74 bytes long. The first 0x20 bytes consist of a header that is used to track things, while the other 0x54 bytes can vary depending on the object.
+All objects are `0x74` bytes long. The first `0x20` bytes consist of a header that is used to track things, while the other `0x54` bytes can vary depending on the object.
 
 In the decomp, the object data structures and its associated functions are declared in `object.h`.
 
@@ -32,7 +35,7 @@ typedef struct cv64_obj_hdr {
 ```
 
 ### ID
-This is a numeric identifier used for distinguish the object from the rest, as well as to know where the object's associated code and files (if any) can be found.
+This is a numeric identifier used to distinguish the object from the rest, as well as to know where the object's associated code and files (if any) can be found.
 
 They are also used to store some execution flag, so in reality this field is composed of two things:
 
