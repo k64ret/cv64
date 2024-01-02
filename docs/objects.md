@@ -222,7 +222,7 @@ It consists of two fields:
 
 * function: The ID of the function pointer entry inside the array mentioned above. The game use this to know which one of the object's specific functions to execute.
 
-An object can have up to three "levels" of function pointers to execute functions from, so the game will first execute the functions in level 0, then level 1, then level 2, if needed.
+An object can have up to three "levels" of function pointers to execute functions from, so the game will first execute the functions in level 0, then level 1, then level 2, if needed. The `functionInfo_ID` variable in the object header is used to know which level to look at (set to -1 by default).
 
 An example of all three levels being used can be found in the Player's actor, to assign "states" and "substates" to the player's actions.</br>
 For example, level 0 contains the ID of the main "state" function (i.e. JUMP), and then level 1 contains the ID of the specific "substate" of jumping (for example, a function for propelling up, another function for falling down, etc).
