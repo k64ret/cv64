@@ -10,6 +10,10 @@ Objects are used to modularize the code's execution flow by associating code and
 Pretty much every piece of code running in the main thread is associated to a certain object (menus, enemies, the player, etc).
 
 ## Structure
+![](images/cv64_obj_RAM.png)
+>*The Gardener's enemy object seen in memory using [Project64's debugger](https://hack64.net/docs/pj64d/).
+Highlighted in blue is the object's header.*
+
 All objects are `0x74` bytes long. The first `0x20` bytes consist of a header that is used to track things, while the other `0x54` bytes can vary depending on the object.
 
 In the decomp, the object data structures and its associated functions are declared in `object.h`.
