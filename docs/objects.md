@@ -141,8 +141,11 @@ The new object will be set as the `child` object of its parent, and the previous
 Scentially what this means is that the new object will now execute right after the parent is done executing, and all of the parent's previous children will now execute after the new object.
 
 - **Before**
+
 ![](images/cv64_object_create_before.png)
+
 - **After**
+
 ![](images/cv64_object_create_after.png)
 
 #### `object_createAndSetChild`
@@ -152,8 +155,11 @@ When an object is spawned through this function, it checks if the parent has any
 This makes it so that the newly created object will execute at the very bottom of the list of objects from the parent's "branch".
 
 - **Before**
+
 ![](images/cv64_obj_create_set_child_before.png)
+
 - **After**
+
 ![](images/cv64_obj_create_set_child_after.png)
 
 ```
