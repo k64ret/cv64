@@ -196,13 +196,12 @@ Every frame, the game iterates through all the objects allocated in `objects_arr
 
 ##### **Code mapped by the TLB**
 Most [overlays](https://en.wikipedia.org/wiki/Overlay_(programming)) are loaded dynamically in memory before being executed.</br>
-This is, it's only loaded into memory when needed (for example, the code associated to an enemy that only appears on specific maps). And when it's not needed anymore, it's unloaded.
+This is, they're only loaded into memory when needed (for example, the code associated to an enemy that only appears on specific maps). And when they're not needed anymore, they're unloaded.
 
 Because this code is loaded dynamically, it also means that the address of the `entrypoint` function within said code is not guaranteed to always be the same.
-
 The thing is, `objects_functions` only stores a single address that is not meant to be changed during gameplay, which is problematic in this case, since the address can be different each time.
 
-Not only that, but overlays, are compiled with a specific `entrypoint` address that, if changed, can make the code not work properly (things such as branches can only work if the overlay is loaded into the same `entrypoint` address the code was compiled to, otherwise it will likely branch to unintended places in memory and crash the game)
+Not only that, but overlays, are compiled with a specific `entrypoint` address that, if changed, can make the code not work properly (things such as branch assembly instructions can only work if the overlay is loaded into the same `entrypoint` address it was compiled to, otherwise it will likely branch to unintended places in memory and crash the game).
 
 In order to fix this issue, the developers chose to map the code for overlays to certain addresses within the KUSEG segment (most commonly addresses 0x0F000000 and 0x0E000000) before the execution of its code begins.
 
@@ -218,14 +217,14 @@ For most objects, this function is used to branch into another set of functions,
 This set of functions are stored as function pointers arrays, each one with an ID. This is where the `current_function` variable of the object's header comes into play.
 
 It consists of two fields:
-* timer: A timer value that measures for how long the function has been executed, when it gets to the max value (255), it rolls back to 0.
+* **timer**: A timer value that measures for how long the function has been executed. When it gets to the max value (255), it rolls back to 0.
 
-* function: The ID of the function pointer entry inside the array mentioned above. The game use this to know which one of the object's specific functions to execute.
+* **function**: The ID of the function pointer entry inside the array mentioned above. The game uses this to know which one of the object's specific functions to execute.
 
 An object can have up to three "levels" of function pointers to execute functions from, so the game will first execute the functions in level 0, then level 1, then level 2, if needed. The `functionInfo_ID` variable in the object header is used to know which level to look at (set to -1 by default).
 
 An example of all three levels being used can be found in the Player's actor, to assign "states" and "substates" to the player's actions.</br>
-For example, level 0 contains the ID of the main "state" function (i.e. JUMP), and then level 1 contains the ID of the specific "substate" of jumping (for example, a function for propelling up, another function for falling down, etc).
+For example, level 0 contains the ID of the main "state" function (i.e. JUMP), and then level 1 contains the ID of the specific "substate" of said state (for example, in the case of jumping, a function for propelling up, another function for falling down, etc).
 
 #### Example: Konami / KCEK Logo
 The function pointers array for the Konami / KCEK logo object looks like this:
@@ -244,19 +243,19 @@ cv64_konamilogo_func_t cv64_konamilogo_funcs[] = {
 ```
 So, if `current_function[0].function` for the Konami / KCEK logo object is equal to 0, then it will execute the `cv64_konamilogo_init`. If it's 1, it will execute `cv64_konamilogo_fade_in`, and so on.
 
-The function in the `function` field will always be executed until its changed. In order to change it, there's various functions the devs used, but the most commonly used ones are:
+The function ID in the `function` field will always be executed until its changed. In order to change it, there're various functions the devs used, but the most commonly used ones are:
 
 * `object_curLevel_goToNextFuncAndClearTimer`: Used to branch to the next function in the array (i.e. function++)
 
-* `object_curLevel_goToFunc`: Used to branch to a specific function ID within the array, specified as the third argument (i.e. function = ID)
+* `object_curLevel_goToFunc`: Used to branch to a specific function ID within the array, specified by the third argument (i.e. function = ID)
 
 ## Groups
 All objects are grouped into different categories depending on what they're meant to be used for. Depending on the category, the objects may have a different structure layout, and they may be assigned different *parent* objects when spawned.
 
-* **Engine / Game States**: Used for engine related tasks, as well as for game states.
-* **Cutscenes**: Used for cutscenes and cutscene-related tasks
-* **Cameras**: Used for camera-related tasks
-* **Player**: Includes the player actors, and player-related objects
+* **Engine / Game States**: Used for engine related tasks, as well as being utilized as the "main" object of a game state.
+* **Cutscenes**: Used for cutscenes and cutscene-related tasks.
+* **Cameras**: Used for camera-related tasks.
+* **Player**: Includes the player actors, and player-related objects.
 * **Enemies**: Used for enemies that are meant to spawn in different maps.
 * **Effects**
 * **Menus**
