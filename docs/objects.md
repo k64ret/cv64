@@ -96,7 +96,7 @@ As mentioned before, every object has certain code associated to it, so in order
 ### Execution tree
 All objects are organized in a tree-like manner, where objects at the top are executed first, then the ones at the bottom. To explain this further, let's use the following diagram as an example.
 
-This is how the execution tree looks like when idling in the screen that appears when botting the game with no Controller Paks plugged in:
+This is how the execution tree looks like when idling in the screen that appears when booting the game with no Controller Paks plugged in:
 
 ![](images/cv64_boot_no_cont.png)
 ![](images/cv64_boot_no_cont_obj_execution_tree.png)
@@ -174,18 +174,18 @@ Once an object is spawned, its code will automatically begin execution in the ne
 To explain how this process works: in order to execute an object, the game calls `object_execute` to execute an object's associated code and all its `child` / `next`.
 
 ```c
-void object_create(cv64_obj_hdr_t* object);
+void object_execute(cv64_obj_hdr_t* object);
 ```
 
 Where `object` is the pointer to the object at the beginning of the "branch".
 
-For example, if calling `object_create` and passing the pointer to `Obj X` as the argument, all objects in the diagram will execute one frame worth of code.
+For example, if calling `object_execute` and passing the pointer to `Obj X` as the argument, all objects in the diagram will execute one frame worth of code.
 
-But if the same function is called with `Obj A`'s pointer as the argument, then only `Obj A` and `Obj B` will execute.
+But if instead, the same function is called with `Obj A`'s pointer as the argument, then only `Obj A` and `Obj B` will execute.
 
 ![](images/cv64_obj_create_set_child_before.png)
 
-In practice, `GameStateMgr` (object ID 1) is always the top-most object in the execution tree, so any `child` / `next` objects that come down from it will automatically execute, no need to explicitly call `object_create` on the newly spawned object.
+In practice, `GameStateMgr` (object ID 1) is always the top-most object in the execution tree, so any `child` / `next` objects that come down from it will automatically execute, no need to explicitly call `object_execute` on the newly spawned object.
 
 #### `objects_functions`
 In order to know where the code associated to said object is located, the identifier part of its `ID` is used as an index into an array known as `objects_functions`.
@@ -194,7 +194,7 @@ This is an array of 554 function pointers (one per object) containing the beginn
 
 Every frame, the game iterates through all the objects allocated in `objects_array`, looks for its `entrypoint` function, and executes it.
 
-##### Code mapped by the TLB
+##### **Code mapped by the TLB**
 Most [overlays](https://en.wikipedia.org/wiki/Overlay_(programming)) are loaded dynamically in memory before being executed.</br>
 This is, it's only loaded into memory when needed (for example, the code associated to an enemy that only appears on specific maps). And when it's not needed anymore, it's unloaded.
 
