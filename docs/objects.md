@@ -2,7 +2,7 @@
 
 **Objects** are a common data structure seen through the game's code.
 
-> [!INFO]
+> [!NOTE]
 > Objects were formerly known as *modules*
 
 Objects are used to modularize the code's execution flow by associating code and data to certain objects. This way, said code can only be executed if its associated object is present in memory. Not only that, but it can also be used to assign an order of execution to the code associated to the objects.
