@@ -1,5 +1,7 @@
+<!-- markdownlint-disable-next-line MD043 -->
 # Castlevania Decompilation
 
+<!-- markdownlint-disable-next-line MD033 -->
 <div align="center">
 
 [![Discord](https://img.shields.io/discord/106120859520905216?logo=discord&logoColor=white&label=CV64%26CVLoDSpeedruns)](https://discord.gg/eKht382)
@@ -22,27 +24,30 @@ These tools are instrumental in the decompilation process of Castlevania 64.
 
 These people make this project possible and successful.
 
-- [@moisesPC](https://github.com/moisesPC) for his research efforts and the creation/upkeep of the [Castlevania 64 - Research Spreadsheets][research-spreadsheets]
-- [@LiquidCat64](https://github.com/LiquidCat64) and [@Fluvian](https://github.com/Fluvian) for reversing the [LZKN64][lzkn64] compression algorithm used by Konami
+- [@moisesPC](https://github.com/moisesPC) for his research efforts and the
+creation/upkeep of the [Castlevania 64 - Research Spreadsheets][research-spreadsheets]
+- [@LiquidCat64](https://github.com/LiquidCat64) and [@Fluvian](https://github.com/Fluvian)
+for reversing the [LZKN64][lzkn64] compression algorithm used by Konami
 
 ## Getting started
 
 ### Requirements
 
-- Your own (legally obtained) copy of Castlevania for the Nintendo 64 (USA v1.0) (`sha1: 989A28782ED6B0BC489A1BBBD7BEC355D8F2707E`)
+- Your own (legally obtained) copy of Castlevania for the Nintendo 64 (USA v1.0)
+(`sha1: 989A28782ED6B0BC489A1BBBD7BEC355D8F2707E`)
 - CMake
 - Git
 - Make/Ninja
 
 #### Docker
 
-There is a Dockerfile for convenience. If you want to have your
-development environment on your system, continue to [Linux](#linux-debianubuntu-offshoots)
+There is a Dockerfile for convenience. If you want to have your development
+environment on your system, continue to [Linux](#linux-debianubuntu-offshoots)
 or [Windows](#windows).
 
 > [!NOTE]
-> You may need to prefix `docker` commands with `sudo`
-> if your user is not part of the docker user group.
+> You may need to prefix `docker` commands with `sudo` if your user is not part
+> of the docker user group.
 
 You can build the Docker image as follows.
 
@@ -68,7 +73,8 @@ docker run --rm -ti -v $(pwd):/c64 c64
 
 ### Building
 
-Place a Castlevania 64 (USA v1.0) ROM in the root of the project, and rename it to `baserom.z64`.
+Place a Castlevania 64 (USA v1.0) ROM in the root of the project, and rename it
+to `baserom.z64`.
 
 Now, you must configure the CMake project by running the following...
 
@@ -79,8 +85,9 @@ cmake -S . -B build -G "Ninja"
 > [!TIP]
 > Or run `rtx run c` if you are already using [rtx][rtx]
 
-The above snippet produces a Ninja-based build system under the hood. This seems to be faster than Make,
-but if you still prefer Make over Ninja, you can run the following...
+The above snippet produces a Ninja-based build system under the hood. This seems
+to be faster than Make, but if you still prefer Make over Ninja, you can run the
+following...
 
 ```sh
 cmake -S . -B build -G "Unix Makefiles"

@@ -22,7 +22,7 @@ typedef struct cv64_obj_func_inf {
 typedef struct cv64_obj_hdr {
     s16 ID;
     s16 flags;
-    s16 timer;      // Misc. timer whose purpose depends on the object
+    s16 timer; // Misc. timer whose purpose depends on the object
     s16 field_0x06;
     cv64_obj_func_inf_t current_function[3];
     s16 functionInfo_ID;
