@@ -18,10 +18,15 @@ object (menus, enemies, the player, etc).
 
 ## Structure
 
-<figure>
-  <img src="images/cv64_obj_RAM.png" alt="Castlevania 64 object RAM">
-  <figcaption>The Gardener's enemy object seen in memory using <a href="https://hack64.net/docs/pj64d/">Project64's debugger</a>. Highlighted in blue is the object's header.</figcaption>
-</figure>
+<div align="center">
+  
+![Castlevania 64 object RAM](images/cv64_obj_RAM.png)
+
+</div>
+
+_The Gardener's enemy object seen in memory using
+[Project64's debugger](https://hack64.net/docs/pj64d/). Highlighted in blue
+is the object's header._
 
 All objects are `0x74` bytes long. The first `0x20` bytes consist of a header
 that is used to track things, while the other `0x54` bytes can vary depending
