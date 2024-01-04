@@ -75,7 +75,7 @@ DESTROY      = 0x8000
 
 - `STAGE_OBJECT`: notifies the game that the object is a _map actor_. A map actor
 is an actor meant to be used in a certain map. This includes most map-specific
-hazards or decorative elements.
+hazards or decorative elements. Sometimes `0x1800` is used instead.
 
 - `MAP_OVERLAY`: indicates that the code associated to the object needs to be
 [mapped by the TLB](#code-mapped-by-the-tlb) to an address in [KUSEG](https://en64.shoutwiki.com/wiki/N64_CPU#CPU_Addressing).
@@ -104,7 +104,7 @@ PAUSE = CV64_BIT(14),
 TOP   = CV64_BIT(15)
 ```
 
-- **PAUSE**: temporarily freezes the execution of the object's associated code
+- **PAUSE**: temporarily freezes the execution of the object's associated code.
 - **TOP**: the only object known to have this flag is `GameStateMgr`. Other
 than that, it does not seem to affect code execution.
 
@@ -402,3 +402,33 @@ decorative elements)
 
 The headers for these objects are stored inside `include/game/objects`, in one
 directory per category.
+
+## Loading files
+
+Objects can have files associated to them, usually overlays and assets files.
+
+The game references the `objects_file_info` array to know which files to load from the Nisitenma-Ichigo table. Said array has 554 entries, one per object, and each entry is a pointer to an array of the struct `objectsFileInfo`:
+
+```c
+#define OBJECTS_FILE_INFO_END_OF_LIST 0x4000
+
+typedef struct {
+    u16 flags;
+    u16 file_ID;
+    u32 file_padding;
+} objectsFileInfo;
+```
+
+For example, the Gardener's `objectsFileInfo` array is as follows:
+```c
+#define GARDENER_OVERLAY 0x74
+#define GARDENER_ASSETS  0x0C
+
+// 0x80095A50 (USA v1.0)
+objectsFileInfo gardener_files[] = {
+    {0, GARDENER_OVERLAY, 0x1000},
+    {OBJECTS_FILE_INFO_END_OF_LIST, GARDENER_ASSETS, 0}
+};
+```
+
+When the Gardener object is spawned, the game goes to that array and loads each of the files in said array until the last entry, which is marked by the `OBJECTS_FILE_INFO_END_OF_LIST` flag.
