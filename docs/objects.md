@@ -18,8 +18,9 @@ object (menus, enemies, the player, etc).
 
 ## Structure
 
+<!-- markdownlint-disable-next-line MD033 -->
 <div align="center">
-  
+
 ![Castlevania 64 object RAM](images/cv64_obj_RAM.png)
 
 _The Gardener's enemy object seen in memory using
@@ -173,41 +174,39 @@ All objects are allocated in the `objects_array`. This array has a total
 capacity of 384 objects (if the game attempts to allocate an object when the
 array is full, then said object will fail to spawn).
 
-On this array, objects are allocated one after the other sequentially. The way
-the game determines a slot is empty is by finding the first object slot in the
-array where the ID value is 0 (remember, objects start from ID 1).
+Objects are allocated sequentially on this array. The way the game determines a
+slot is empty is by finding the first object slot in the array where the `ID`
+value is 0 (remember, objects start from ID 1).
 
-When objects are destroyed, their IDs are eventually set to 0, which tells the
+When objects are destroyed, their `ID`s are eventually set to 0, which tells the
 game their slot is free for a new object to occupy.
 
 ## Object spawning and execution
 
 ### Spawning an object
 
-There're two functions used to spawn an object in memory:</br>
+There are two functions used to spawn an object in memory:
 
 ```c
 void* object_create(void* parent, object_t ID);
-```
 
-```c
 void* object_createAndSetChild(void* parent, object_t ID);
 ```
 
 On these functions, `parent` is the parent object, and `ID` is the identifier of
 the new object to spawn
 
-The difference bewtween these two functions reside in the location inside the
-execution tree the newly created object will end up in.
+The difference between these two functions resides in where they place the newly
+created object within the execution tree.
 
 #### `object_create`
 
 The new object will be set as the `child` object of its parent, and the previous
 `child` of the parent is now set as the new object's `child`
 
-Scentially what this means is that the new object will now execute right after
-the parent is done executing, and all of the parent's previous children will now
-execute after the new object.
+Essentially, this means that the new object will now execute right after the
+parent, and all of the parent's previous children will now execute after the new
+object.
 
 - **Before**
 
