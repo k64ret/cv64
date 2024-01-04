@@ -1,26 +1,27 @@
 <!-- markdownlint-disable-next-line MD043 -->
 # Objects
 
-**Objects** are a common data structure seen through the game's code.
+**Objects** (formerly known as _modules_) are a common data structure seen
+through the game's code.
 
-> [!NOTE]
-> Objects were formerly known as *modules*
+An "object" has two main uses:
 
-Objects are used to modularize the code's execution flow by associating code
-and data to certain objects. This way, said code can only be executed if its
-associated object is present in memory. Not only that, but it can also be used
-to assign an order of execution to the code associated to the objects.
+- modularize code execution flow
+- assign code execution order
 
-Pretty much every piece of code running in the main thread is associated to a
-certain object (menus, enemies, the player, etc).
+These are accomplished by associating code and data to objects that use them.
+This means code can only execute when its associated object is present in
+memory.
+
+Almost every piece of code running in the main thread is associated to a certain
+object (menus, enemies, the player, etc).
 
 ## Structure
 
 ![Castlevania 64 object RAM](images/cv64_obj_RAM.png)
-
-> *The Gardener's enemy object seen in memory using
-> [Project64's debugger](https://hack64.net/docs/pj64d/). Highlighted in blue
-> is the object's header.*
+_The Gardener's enemy object seen in memory using
+[Project64's debugger](https://hack64.net/docs/pj64d/). Highlighted in blue
+is the object's header._
 
 All objects are `0x74` bytes long. The first `0x20` bytes consist of a header
 that is used to track things, while the other `0x54` bytes can vary depending
@@ -51,58 +52,54 @@ typedef struct cv64_obj_hdr {
 
 ### `ID`
 
-This is a numeric identifier used to distinguish the object from the rest, as
-well as to know where the object's associated code and files (if any) can be
-found.
+This is a unique numeric identifier distinguishing the object from others, and
+linking to the object's associated code and files (if any).
 
-They are also used to store some execution flag, so in reality this field is
-composed of two things:
+The `ID` also stores an execution flag. So, in reality this field is composed of
+the following two things:
 
-#### Upper 5 bits: Execution `flags`
+#### Upper 5 bits: Execution flags
 
 ```c
 NONE         = 0x0000
-STAGE_OBJECT = 0x1000   // Sometimes 0x18 is used as well.
-// The object's code should be mapped by the TLB
+STAGE_OBJECT = 0x1000
 MAP_OVERLAY  = 0x2000
-// Marked for deletion
 DESTROY      = 0x8000
 ```
 
-* `STAGE_OBJECT`: Used to notify the game that the object is a map actor. This
-is, an actor that is only meant to be used in a certain map, which includes
-most map-specific hazards or decorative elements.
+- `STAGE_OBJECT`: notifies the game that the object is a _map actor_. A map actor
+is an actor meant to be used in a certain map. This includes most map-specific
+hazards or decorative elements.
 
-* `MAP_OVERLAY`: This flag indicates that the code associated to the object
-needs to be mapped by the TLB to an address in [KUSEG](https://en64.shoutwiki.com/wiki/N64_CPU#CPU_Addressing).
-For more info, [see this section below](#code-mapped-by-the-tlb).
+- `MAP_OVERLAY`: indicates that the code associated to the object needs to be
+[mapped by the TLB](#code-mapped-by-the-tlb) to an address in [KUSEG](https://en64.shoutwiki.com/wiki/N64_CPU#CPU_Addressing).
 
-* `DESTROY`: This is enabled in order to mark this object for deletion. This is,
-to remove the object from memory next time the game attempts to execute it.</br>
-Once an object is destroyed, its code will stop running.
+- `DESTROY`: marks this object for deletion. This is, to remove the object from
+memory next time the game attempts to execute it. Once an object is destroyed,
+its code will stop running.
 
 #### Lower 11 bits: The actual identifier
 
-For instance, the Gardener's object ID is `0x2090`:</br>
+For example, the Gardener's object ID is `0x2090`:
 
-* `0x2000` = Execution flags (MAP_OVERLAY)
-* `0x0090` = The actual identifier
+- `0x2000` = Execution flags (`MAP_OVERLAY`)
+- `0x0090` = The actual identifier
 
-There are a total of 554 object IDs assigned by KCEK, starting from 1.</br>
-These can all be found in `object_ID.h`
+There are a total of 554 object IDs assigned by KCEK, starting from 1. These can
+all be found in `object_ID.h`
 
-### Flags
+### `flags`
 
 These are other sets of flags different from the ones specified above. At the
 moment, only two are known:
 
 ```c
-PAUSE = CV64_BIT(14),   // 0x4000
-TOP   = CV64_BIT(15)    // 0x8000
+PAUSE = CV64_BIT(14),
+TOP   = CV64_BIT(15)
 ```
 
-* **PAUSE**: Temporarily freezes the execution of the object's associated code.
-* **TOP**: The only object known to have this flag is `GameStateMgr`. Other
+- **PAUSE**: temporarily freezes the execution of the object's associated code
+- **TOP**: the only object known to have this flag is `GameStateMgr`. Other
 than that, it does not seem to affect code execution.
 
 ### Timer
@@ -112,19 +109,19 @@ example, the `interactuables` object (the entity that handles pickable items and
 text spots that you can read with C-Right) uses this timer to know how much time
 has passed before it can begin to disappear after awhile.
 
-### current_function and functionInfo_ID
+### `current_function` and `functionInfo_ID`
 
 See the section: [How the code of an object executes](#how-the-code-of-an-object-executes)
 
-### Parent, child and next
+### `parent`, `child`, and `next`
 
 See the section: [Execution tree](#execution-tree)
 
-### Destroy
+### `destroy`
 
-This is a pointer to the object's destroy function. This function is called when
-an object no longer needs to be running, and destroys other structs associated
-to it. This function is also responsible for setting the `DESTROY` flag.
+This is a pointer to the object's `destroy` function. This function is called
+when an object no longer needs to run, and destroys other structs associated to
+it. This function is also responsible for setting the `DESTROY` flag.
 
 ## Execution
 
@@ -138,33 +135,32 @@ to execute it, said object must be spawned in memory.
 ### Execution tree
 
 All objects are organized in a tree-like manner, where objects at the top are
-executed first, then the ones at the bottom. To explain this further, let's use
-the following diagram as an example.
+executed first, followed by ones underneath it. To explain this further, let's
+use the following diagram as an example.
 
-This is how the execution tree looks like when idling in the screen that appears
-when booting the game with no Controller Paks plugged in:
+This is how the execution tree looks when idling in the screen that appears when
+booting the game with no Controller Paks plugged in:
 
 ![Castlevania 64 boot_no_cont](images/cv64_boot_no_cont.png)
 ![Castlevania 64 boot_no_cont_obj_execution_tree](images/cv64_boot_no_cont_obj_execution_tree.png)
 
 Each box represents an object, where the number inside it is its `ID`. The
-arrows pointing straight down / down and left represent the `next` pointer,
-whereas the arrows pointing down and right are the `child` pointers.</br>
-The numbers in red represent the order of execution of each object in the tree.
+arrows pointing straight down / down-left represent the `next` pointer, whereas
+the arrows pointing down-right are the `child` pointers. The numbers in red
+represent the execution order of each object in the tree.
 
 In the execution tree, objects are executed from top to bottom, starting from
 object ID 1 (`GameStateMgr`).
 
-After an object is done being executed, it starts executing the `child` object,
-if it has it. If it doesn't have a child, then it goes to the `next` object and
-starts executing that.
+After an object is finished executing, it executes the `child` object if it has
+one. Otherwise, it executes the `next` object.
 
-This continues on and on recursively until there're no more `child` / `next`
-objects to execute, at which point it goes back in the tree and starts execution
-of the remaining objects.
+This continues recursively until there are no more `child` / `next` objects left
+to execute. After which, it goes back in the tree and executes the remaining
+objects.
 
-If there aren't anymore left, then execution for the current frame is done, and
-the cycle repeats for the next frame.
+If there are none left, then the current frame is executed, and the cycle
+repeats for the next frame.
 
 ### Objects array
 
@@ -208,11 +204,11 @@ Scentially what this means is that the new object will now execute right after
 the parent is done executing, and all of the parent's previous children will now
 execute after the new object.
 
-* **Before**
+- **Before**
 
 ![Castlevania 64 object_create_before](images/cv64_object_create_before.png)
 
-* **After**
+- **After**
 
 ![Castlevania 64 object_create_after](images/cv64_object_create_after.png)
 
@@ -225,11 +221,11 @@ column of `next` objects from said child.
 This makes it so that the newly created object will execute at the very bottom
 of the list of objects from the parent's "branch".
 
-* **Before**
+- **Before**
 
 ![Castlevania 64 obj_create_set_child_before](images/cv64_obj_create_set_child_before.png)
 
-* **After**
+- **After**
 
 ![Castlevania 64 obj_create_set_child_after](images/cv64_obj_create_set_child_after.png)
 
@@ -330,10 +326,10 @@ into play.
 
 It consists of two fields:
 
-* **timer**: A timer value that measures for how long the function has been
+- **timer**: A timer value that measures for how long the function has been
 executed. When it gets to the max value (255), it rolls back to 0.
 
-* **function**: The ID of the function pointer entry inside the array mentioned
+- **function**: The ID of the function pointer entry inside the array mentioned
 above. The game uses this to know which one of the object's specific functions
 to execute.
 
@@ -374,31 +370,31 @@ The function ID in the `function` field will always be executed until its
 changed. In order to change it, there're various functions the devs used, but
 the most commonly used ones are:
 
-* `object_curLevel_goToNextFuncAndClearTimer`: Used to branch to the next
-function in the array (i.e. function++)
+- `object_curLevel_goToNextFuncAndClearTimer`: branches to the next function in
+the array (i.e. function++)
 
-* `object_curLevel_goToFunc`: Used to branch to a specific function ID within
-the array, specified by the third argument (i.e. function = ID)
+- `object_curLevel_goToFunc`: branches to a specific function ID within the
+array, specified by the third argument (i.e. function = ID)
 
 ## Groups
 
 All objects are grouped into different categories depending on what they're
 meant to be used for. Depending on the category, the objects may have a
-different structure layout, and they may be assigned different *parent* objects
+different structure layout, and they may be assigned different _parent_ objects
 when spawned.
 
-* **Engine / Game States**: Used for engine related tasks, as well as being
-utilized as the "main" object of a game state.
-* **Cutscenes**: Used for cutscenes and cutscene-related tasks.
-* **Cameras**: Used for camera-related tasks.
-* **Player**: Includes the player actors, and player-related objects.
-* **Enemies**: Used for enemies that are meant to spawn in different maps.
-* **Effects**
-* **Menus**
-* **Maps**: Used for map-handling tasks, such as objects that handle the culling
-of map pieces / chunks and the creation of the map's collision.
-* **Map Actors**: Here go all actors that are meant to be used in one single
-map. Can be things such as enemies, hazards or decorative elements.
+- **Engine / Game States**: engine related tasks, and the "main" object of a
+game state
+- **Cutscenes**: cutscenes, and cutscene-related tasks
+- **Cameras**: camera-related tasks
+- **Player**: player actors, and player-related objects
+- **Enemies**: enemies meant to spawn in different maps
+- **Effects**
+- **Menus**
+- **Maps**: map-handling tasks (objects handling the culling of map pieces /
+chunks, and the creation of the map's collision)
+- **Map Actors**: actors meant for use in one single map (enemies, hazards,
+decorative elements)
 
 The headers for these objects are stored inside `include/game/objects`, in one
 directory per category.
