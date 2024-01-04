@@ -18,7 +18,7 @@ object (menus, enemies, the player, etc).
 
 ## Structure
 
-<img src="images/cv64_obj_RAM.png" alt="Castlevania 64 object RAM">
+<img src="images/cv64_obj_RAM.png" alt="Castlevania 64 object RAM" style="max-width: 100%;">
 <em>The Gardener's enemy object seen in memory using <a href="https://hack64.net/docs/pj64d/">Project64's debugger</a>.
 Highlighted in blue is the object's header.</em>
 
