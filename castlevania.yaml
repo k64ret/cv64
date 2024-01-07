@@ -721,9 +721,9 @@ segments:
     vram: 0x8018EB10
     exclusive_ram_id: ovl_map_objects
     subsegments:
-      - [0x006CD740, c, overlay/map/HONMARU_4F_MINAMI]
-      - [0x006CE350, data, overlay/map/HONMARU_4F_MINAMI]
-      - [0x006CE470, rodata, overlay/map/HONMARU_4F_MINAMI]
+      - [0x006CD740, c, overlay/map/honmaru_4f_minami]
+      - [0x006CE350, data, overlay/map/honmaru_4f_minami]
+      - [0x006CE470, rodata, overlay/map/honmaru_4f_minami]
 
   - name: HONMARU_3F_KITA # Castle Center North 3F
     type: code
