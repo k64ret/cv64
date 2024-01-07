@@ -862,9 +862,9 @@ segments:
     vram: 0x8018EB10
     exclusive_ram_id: ovl_map_objects
     subsegments:
-      - [0x006F1B80, c, overlay/map/TOU_TURO]
-      - [0x006F2160, data, overlay/map/TOU_TURO]
-      # - [0x006F21B8, rodata, overlay/map/TOU_TURO]
+      - [0x006F1B80, c, overlay/map/tou_turo]
+      - [0x006F2160, data, overlay/map/tou_turo]
+      # - [0x006F21B8, rodata, overlay/map/tou_turo]
 
   - name: ENDING # Ending
     type: code
