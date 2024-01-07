@@ -1,3 +1,4 @@
+<!-- markdownlint-disable-next-line MD043 -->
 # Code style
 
 ## DO
@@ -7,6 +8,7 @@
 - use common abbreviations to shorten names - see [abbreviations](#abbreviations)
 - follow this scheme for member function and variable names
 
+<!-- markdownlint-disable-next-line MD040 -->
 ```
 <prefix>_<membertype>_<functionname/variablename>
 ```
