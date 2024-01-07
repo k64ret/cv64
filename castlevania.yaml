@@ -661,8 +661,8 @@ segments:
     vram: 0x8018EB10
     exclusive_ram_id: ovl_map_objects
     subsegments:
-      - [0x006C5110, c, overlay/map/CHIKA_KODO]
-      - [0x006C74A0, data, overlay/map/CHIKA_KODO]
+      - [0x006C5110, c, overlay/map/chika_kodo]
+      - [0x006C74A0, data, overlay/map/chika_kodo]
 
   - name: CHIKA_SUIRO # Underground Waterway
     type: code
