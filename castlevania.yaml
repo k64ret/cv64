@@ -670,9 +670,9 @@ segments:
     vram: 0x8018EB10
     exclusive_ram_id: ovl_map_objects
     subsegments:
-      - [0x006C77D0, c, overlay/map/CHIKA_SUIRO]
-      - [0x006C85A0, data, overlay/map/CHIKA_SUIRO]
-      - [0x006C8670, rodata, overlay/map/CHIKA_SUIRO]
+      - [0x006C77D0, c, overlay/map/chika_suiro]
+      - [0x006C85A0, data, overlay/map/chika_suiro]
+      - [0x006C8670, rodata, overlay/map/chika_suiro]
 
   - name: HONMARU_B1F # Castle Center B1F
     type: code
