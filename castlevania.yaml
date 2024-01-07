@@ -741,9 +741,9 @@ segments:
     vram: 0x8018EB10
     exclusive_ram_id: ovl_map_objects
     subsegments:
-      - [0x006CE9A0, c, overlay/map/HONMARU_5F]
-      - [0x006CF3B0, data, overlay/map/HONMARU_5F]
-      - [0x006CF3F0, rodata, overlay/map/HONMARU_5F]
+      - [0x006CE9A0, c, overlay/map/honmaru_5f]
+      - [0x006CF3B0, data, overlay/map/honmaru_5f]
+      - [0x006CF3F0, rodata, overlay/map/honmaru_5f]
 
   - name: SHOKEI_TOU # Tower of Execution
     type: code
