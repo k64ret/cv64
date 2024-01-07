@@ -13,4 +13,6 @@ extern void end_master_display_list(void);
 
 #define NPTR 0
 
+#define ARRAY_COUNT(arr) (s32)(sizeof(arr) / sizeof(arr[0]))
+
 #endif // CV64_H

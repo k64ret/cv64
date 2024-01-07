@@ -1,4 +1,5 @@
 #include "memory.h"
+#include "object.h"
 
 #pragma GLOBAL_ASM("../asm/nonmatchings/memory/memory_clear.s")
 
@@ -8,31 +9,44 @@ void heap_init(cv64_heap_kind_t kind, cv64_heapblock_hdr_t* first_block_ptr,
                s32 heap_size, u32 additional_flags) {
     heaps[kind].flags = additional_flags | HEAP_ACTIVE;
     heaps[kind].size = ALIGN8(heap_size);
-    heaps[kind].heap_start = ALIGN8((s32) first_block_ptr);
+    heaps[kind].heap_start = ALIGN8(first_block_ptr);
     first_block_ptr->flags = HEAP_BLOCK_FREE;
     first_block_ptr->size = heaps[kind].size - sizeof(cv64_heapblock_hdr_t);
 }
 
 void heap_free(cv64_heap_kind_t kind) { heaps[kind].flags = HEAP_INACTIVE; }
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/memory/heap_writebackDCache.s")
+void heap_writebackDCache(void) {
+    cv64_heap_inf_t* first;
+    cv64_heap_inf_t* current_heap;
+
+    first = &heaps[0], current_heap = &heaps[HEAP_NUM - 1];
+    do {
+        if (current_heap->flags & HEAP_WRITE_BACK_CACHE_TO_RAM) {
+            osWritebackDCache(current_heap->heap_start, current_heap->size);
+        }
+        current_heap--;
+    } while ((u32) first <= (u32) current_heap);
+}
 
 #pragma GLOBAL_ASM("../asm/nonmatchings/memory/initHeaps.s")
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/memory/func_80000D68_1968.s")
+void func_80000D68_1968(s32 arg0, u32 arg1) {}
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/memory/func_80000D74_1974.s")
+s32 func_80000D74_1974(s32 arg0) { return 0; }
 
 #pragma GLOBAL_ASM("../asm/nonmatchings/memory/heap_alloc.s")
 
 #pragma GLOBAL_ASM("../asm/nonmatchings/memory/heap_allocWithAlignment.s")
 
+// https://decomp.me/scratch/tHw91
 #pragma GLOBAL_ASM("../asm/nonmatchings/memory/heapBlock_updateBlockMaxSize.s")
 
 #pragma GLOBAL_ASM("../asm/nonmatchings/memory/func_80001008_1C08.s")
 
 #pragma GLOBAL_ASM("../asm/nonmatchings/memory/heapBlock_free.s")
 
+// https://decomp.me/scratch/eT3oh
 #pragma GLOBAL_ASM("../asm/nonmatchings/memory/func_80001080_1C80.s")
 
 #pragma GLOBAL_ASM("../asm/nonmatchings/memory/func_800010A0_1CA0.s")

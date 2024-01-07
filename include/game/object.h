@@ -14,9 +14,12 @@ typedef enum cv64_obj_exec_flag {
 } cv64_obj_exec_flag_t;
 // clang-format on
 
-typedef struct cv64_obj_func_inf {
-    u8 timer;          // Could also be "number of accesses to function"
-    u8 function;       // ID within the functions array
+typedef union cv64_obj_func_inf {
+    struct {
+        u8 timer;    // Could also be number of accesses to function
+        u8 function; // Function ID
+    };
+    u16 whole;
 } cv64_obj_func_inf_t; // Size = 0x2
 
 typedef struct cv64_obj_hdr {
@@ -34,9 +37,6 @@ typedef struct cv64_obj_hdr {
 
 extern void* object_create(void* parent, object_t ID);
 extern void* object_createAndSetChild(void* parent, object_t ID);
-extern void
-object_curLevel_goToNextFuncAndClearTimer(u16 current_functionInfo[],
-                                          s16* functionInfo_ID);
 extern void object_curLevel_goToFunc(u16 current_functionInfo[],
                                      s16* functionInfo_ID, s32 function);
 extern void object_allocEntryInList(cv64_obj_hdr_t* object,
@@ -46,6 +46,31 @@ extern void* object_allocEntryInListAndClear(cv64_obj_hdr_t* object,
                                              s32 allocatedBlockInfo_index,
                                              u32 size, u32 ptrs_array_index);
 extern void* objectList_findFirstObjectByID(u16 ID);
+void object_curLevel_goToNextFunc(u16 current_functionInfo[],
+                                  s16* functionInfo_ID);
+void object_prevLevel_goToNextFunc(u16 current_functionInfo[],
+                                   s16* functionInfo_ID);
+void object_nextLevel_goToNextFunc(u16 current_functionInfo[],
+                                   s16* functionInfo_ID);
+void object_curLevel_goToNextFuncAndClearTimer(
+    cv64_obj_func_inf_t current_functionInfo[], s16* functionInfo_ID);
+void object_curLevel_goToPrevFunc(cv64_obj_func_inf_t current_functionInfo[],
+                                  s16* functionInfo_ID);
+void object_prevLevel_goToPrevFunc(u16 current_functionInfo[],
+                                   s16* functionInfo_ID);
+void object_nextLevel_goToPrevFunc(u16 current_functionInfo[],
+                                   s16* functionInfo_ID);
+void object_curLevel_goToPrevFuncAndClearTimer(u16 current_functionInfo[],
+                                               s16* functionInfo_ID);
+void object_curLevel_goToFunc(u16 current_functionInfo[], s16* functionInfo_ID,
+                              s32 function);
+void object_curLevel_goToFuncInLevel(u16 current_functionInfo[],
+                                     s16* functionInfo_ID, s16 level,
+                                     s32 function);
+void object_prevLevel_goToFunc(u16 current_functionInfo[], s16* functionInfo_ID,
+                               s32 function);
+void object_nextLevel_goToFunc(u16 current_functionInfo[], s16* functionInfo_ID,
+                               s32 function);
 extern void clearAllObjects();
 extern void func_8000E860(cv64_obj_hdr_t* self);
 
