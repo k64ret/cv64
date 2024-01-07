@@ -1,17 +1,9 @@
 #include "cv64.h"
-#include "object.h"
+#include "objects/map/rose/vent.h"
 #include <ultra64.h>
 
-typedef struct cv64_ovl_rose {
-    cv64_obj_hdr_t header;
-} cv64_ovl_rose_t;
-
-typedef void (*cv64_ovl_rose_func_t)(cv64_ovl_rose_t*);
-
-extern cv64_ovl_rose_func_t cv64_ovl_rose_funcs[];
-
-void cv64_ovl_rose_entrypoint(cv64_ovl_rose_t* self) {
-    ENTER(self, cv64_ovl_rose_funcs);
+void cv64_ovl_rose_entrypoint(cv64_ovl_rose_vent_t* self) {
+    ENTER(self, cv64_ovl_rose_vent_funcs);
 }
 
 // clang-format off
