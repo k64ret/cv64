@@ -812,9 +812,9 @@ segments:
     vram: 0x8018EB10
     exclusive_ram_id: ovl_map_objects
     subsegments:
-      - [0x006EA480, c, overlay/map/TENSHU]
-      - [0x006EBBD0, data, overlay/map/TENSHU]
-      - [0x006EBCE0, rodata, overlay/map/TENSHU]
+      - [0x006EA480, c, overlay/map/tenshu]
+      - [0x006EBBD0, data, overlay/map/tenshu]
+      - [0x006EBCE0, rodata, overlay/map/tenshu]
 
   - name: TOKEITOU_NAI # Ending Dummy
     type: code
