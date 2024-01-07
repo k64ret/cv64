@@ -680,9 +680,9 @@ segments:
     vram: 0x8018EB10
     exclusive_ram_id: ovl_map_objects
     subsegments:
-      - [0x006C86A0, c, overlay/map/HONMARU_B1F]
-      - [0x006C9B00, data, overlay/map/HONMARU_B1F]
-      - [0x006C9BC0, rodata, overlay/map/HONMARU_B1F]
+      - [0x006C86A0, c, overlay/map/honmaru_b1f]
+      - [0x006C9B00, data, overlay/map/honmaru_b1f]
+      - [0x006C9BC0, rodata, overlay/map/honmaru_b1f]
 
   - name: HONMARU_1F # Castle Center 1F
     type: code
