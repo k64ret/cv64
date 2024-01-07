@@ -10,3 +10,8 @@
 // cv64_konamilogo_kcek_fade_out   = 0x801D00E0; // type:func segment:konami_kcek_logos
 // .data
 // cv64_konamilogo_funcs           = 0x801D0160; // segment:konami_kcek_logos size:0x20
+
+// .text
+cv64_ovl_rose_entrypoint           = 0x8018EB10; // type:func segment:ROSE
+// .data
+cv64_ovl_rose_funcs                = 0x8018F210; // segment:ROSE size:0x08

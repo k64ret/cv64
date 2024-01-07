@@ -1,9 +1,20 @@
 #include "cv64.h"
+#include "object.h"
 #include <ultra64.h>
 
-// clang-format off
+typedef struct cv64_ovl_rose {
+    cv64_obj_hdr_t header;
+} cv64_ovl_rose_t;
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/overlay/map/ROSE/func_8018EB10_6F0A50.s")
+typedef void (*cv64_ovl_rose_func_t)(cv64_ovl_rose_t*);
+
+extern cv64_ovl_rose_func_t cv64_ovl_rose_funcs[];
+
+void cv64_ovl_rose_entrypoint(cv64_ovl_rose_t* self) {
+    ENTER(self, cv64_ovl_rose_funcs);
+}
+
+// clang-format off
 
 #pragma GLOBAL_ASM("../asm/nonmatchings/overlay/map/ROSE/func_8018EB80_6F0AC0.s")
 
