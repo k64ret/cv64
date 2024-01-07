@@ -653,7 +653,7 @@ segments:
     vram: 0x8018EB10
     exclusive_ram_id: ovl_map_objects
     subsegments:
-      - [0x006C50E0, c, overlay/map/MEIRO_TEIEN]
+      - [0x006C50E0, c, overlay/map/meiro_teien]
 
   - name: CHIKA_KODO # Underground Mining Tunnel
     type: code
