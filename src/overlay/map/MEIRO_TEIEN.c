@@ -10,7 +10,7 @@
  *   0x6C50E0 - 0x6C5110 (Overlay)
  */
 
-#include "objects/map/obj_01B5.h"
+#include "objects/map/meiro_teien/obj_01B5.h"
 
 // Only one map-exclusive object is defined for the Maze Garden map,
 // but it only removes itself from memory the moment it spawns.

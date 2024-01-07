@@ -1,27 +1,28 @@
-#include "cv64.h"
-#include "objects/map/rose/vent.h"
-#include <ultra64.h>
+#include "objects/map/rose/door.h"
+#include "objects/map/rose/ventilator.h"
 
-void cv64_ovl_rose_entrypoint(cv64_ovl_rose_vent_t* self) {
-    ENTER(self, cv64_ovl_rose_vent_funcs);
+void cv64_ovl_rose_ventilator_entrypoint(cv64_ovl_rose_ventilator_t* self) {
+    ENTER(self, cv64_ovl_rose_ventilator_funcs);
 }
 
 // clang-format off
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/overlay/map/ROSE/func_8018EB80_6F0AC0.s")
+#pragma GLOBAL_ASM("../asm/nonmatchings/overlay/map/ROSE/cv64_ovl_rose_ventilator_init.s")
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/overlay/map/ROSE/func_8018EC94_6F0BD4.s")
+#pragma GLOBAL_ASM("../asm/nonmatchings/overlay/map/ROSE/cv64_ovl_rose_ventilator_loop.s")
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/overlay/map/ROSE/func_8018ED98_6F0CD8.s")
+void cv64_ovl_rose_door_entrypoint(cv64_ovl_rose_door_t* self) {
+    ENTER(self, cv64_ovl_rose_door_funcs);
+}
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/overlay/map/ROSE/func_8018EE08_6F0D48.s")
+#pragma GLOBAL_ASM("../asm/nonmatchings/overlay/map/ROSE/cv64_ovl_rose_door_init.s")
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/overlay/map/ROSE/func_8018EF3C_6F0E7C.s")
+#pragma GLOBAL_ASM("../asm/nonmatchings/overlay/map/ROSE/cv64_ovl_rose_door_loop.s")
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/overlay/map/ROSE/func_8018F024_6F0F64.s")
+#pragma GLOBAL_ASM("../asm/nonmatchings/overlay/map/ROSE/cv64_ovl_rose_door_state_startClosing.s")
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/overlay/map/ROSE/func_8018F0D4_6F1014.s")
+#pragma GLOBAL_ASM("../asm/nonmatchings/overlay/map/ROSE/cv64_ovl_rose_door_state_closing.s")
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/overlay/map/ROSE/func_8018F204_6F1144.s")
+void cv64_ovl_rose_door_state_idle(cv64_ovl_rose_door_t* self) {}
 
 // clang-format on
