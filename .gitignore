@@ -10,3 +10,5 @@ build/
 *.ld
 *.bin
 *.zip
+
+.vscode/
