@@ -10,5 +10,6 @@ build/
 *.ld
 *.bin
 *.zip
+*.hexproj
 
 .vscode/

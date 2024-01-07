@@ -11,24 +11,23 @@
 // .data
 // cv64_konamilogo_funcs           = 0x801D0160; // segment:konami_kcek_logos size:0x20
 
+// src/overlay/map/rose.c
 // .text
-cv64_ovl_rose_ventilator_entrypoint           = 0x8018EB10; // type:func segment:ROSE
-cv64_ovl_rose_ventilator_init           = 0x8018eb80; // type:func segment:ROSE
-cv64_ovl_rose_ventilator_loop           = 0x8018ec94; // type:func segment:ROSE
-
-cv64_ovl_rose_door_entrypoint           = 0x8018ed98; // type:func segment:ROSE
-cv64_ovl_rose_door_init           = 0x8018ee08; // type:func segment:ROSE
-cv64_ovl_rose_door_loop           = 0x8018ef3c; // type:func segment:ROSE
-cv64_ovl_rose_door_state_startClosing           = 0x8018f024; // type:func segment:ROSE
-cv64_ovl_rose_door_state_closing           = 0x8018f0d4; // type:func segment:ROSE
-cv64_ovl_rose_door_state_idle           = 0x8018f204; // type:func segment:ROSE
+cv64_ovl_rose_ventilator_entrypoint   = 0x8018EB10; // type:func segment:ROSE
+cv64_ovl_rose_ventilator_init         = 0x8018eb80; // type:func segment:ROSE
+cv64_ovl_rose_ventilator_loop         = 0x8018ec94; // type:func segment:ROSE
+cv64_ovl_rose_door_entrypoint         = 0x8018ed98; // type:func segment:ROSE
+cv64_ovl_rose_door_init               = 0x8018ee08; // type:func segment:ROSE
+cv64_ovl_rose_door_loop               = 0x8018ef3c; // type:func segment:ROSE
+cv64_ovl_rose_door_state_startClosing = 0x8018f024; // type:func segment:ROSE
+cv64_ovl_rose_door_state_closing      = 0x8018f0d4; // type:func segment:ROSE
+cv64_ovl_rose_door_state_idle         = 0x8018f204; // type:func segment:ROSE
 // .data
-cv64_ovl_rose_ventilator_funcs                = 0x8018F210; // segment:ROSE size:0x08
-
-cv64_ovl_rose_door_funcs                = 0x8018f218; // segment:ROSE size:0x08
-cv64_ovl_rose_door_state_funcs                = 0x8018f220; // segment:ROSE size:0x0C
+cv64_ovl_rose_ventilator_funcs        = 0x8018F210; // segment:ROSE size:0x08
+cv64_ovl_rose_door_funcs              = 0x8018f218; // segment:ROSE size:0x08
+cv64_ovl_rose_door_state_funcs        = 0x8018f220; // segment:ROSE size:0x0C
 // .rodata
-D_8018F230 = 0x8018F230; // segment:ROSE size:0x22
-
-D_8018F258 = 0x8018F258; // segment:ROSE size:0x08
-D_8018F260 = 0x8018F260; // segment:ROSE size:0x08
+D_8018F230                            = 0x8018F230; // segment:ROSE size:0x22
+D_8018F258                            = 0x8018F258; // segment:ROSE size:0x08
+D_8018F260                            = 0x8018F260; // segment:ROSE size:0x08
+// End of src/overlay/map/rose.c

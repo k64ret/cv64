@@ -1,7 +1,7 @@
-KONAMI_LOGO_DL = 0x0600C650; // segment:nisitenma_ichigo/konami_kcek_logos
-KCEK_LOGO_DL   = 0x06015CA0; // segment:nisitenma_ichigo/konami_kcek_logos
+KONAMI_LOGO_DL       = 0x0600C650; // segment:nisitenma_ichigo/konami_kcek_logos
+KCEK_LOGO_DL         = 0x06015CA0; // segment:nisitenma_ichigo/konami_kcek_logos
 VENTILATOR_DOOR_DL   = 0x06005400; // segment:nisitenma_ichigo/map/rose_actrise_meet_room/ROSE
-ROSE_DOOR_DL   = 0x06005A30; // segment:nisitenma_ichigo/map/rose_actrise_meet_room/ROSE
+ROSE_DOOR_DL         = 0x06005A30; // segment:nisitenma_ichigo/map/rose_actrise_meet_room/ROSE
 
 // test_grid_txt   = 0x06000000; // segment:test_grid
 // test_grid_tlut  = 0x06000800; // segment:test_grid
