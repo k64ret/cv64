@@ -2,14 +2,18 @@
 #include "gfx/model_info.h"
 #include "map_actor_model.h"
 
+typedef struct cv64_ovl_rose_door_cfg {
+    f32 initial_height;
+    f32 height;
+    f32 closing_speed;
+} cv64_ovl_rose_door_cfg_t;
+
 typedef struct cv64_ovl_rose_door {
     cv64_obj_hdr_t header;
     u8 field_0x4[4];
     cv64_model_inf_t* model;
     u8 field_0x28[12];
-    f32 initial_height;
-    f32 height;
-    f32 closing_speed;
+    cv64_ovl_rose_door_cfg_t height_settings;
     u8 field_0x40[40];
     cv64_map_actor_model_t* map_actor_model;
     u8 field_0x6C[4];

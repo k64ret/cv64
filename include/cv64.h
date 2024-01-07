@@ -1,10 +1,12 @@
 #ifndef CV64_H
 #define CV64_H
 
-#define CV64_BIT(num) (1 << (num))
-
+#include "gfx/model_info.h"
 #include "math.h"
 #include <ultra64.h>
+
+#define CV64_BIT(num)        (1 << (num))
+#define STOP_SOUND(sound_ID) (0x8000 | sound_ID)
 
 typedef u8 Addr[];
 
