@@ -852,9 +852,9 @@ segments:
     vram: 0x8018EB10
     exclusive_ram_id: ovl_map_objects
     subsegments:
-      - [0x006F11B0, c, overlay/map/BEKKAN_BOSS]
-      - [0x006F1B00, data, overlay/map/BEKKAN_BOSS]
-      - [0x006F1B40, rodata, overlay/map/BEKKAN_BOSS]
+      - [0x006F11B0, c, overlay/map/bekkan_boss]
+      - [0x006F1B00, data, overlay/map/bekkan_boss]
+      - [0x006F1B40, rodata, overlay/map/bekkan_boss]
 
   - name: TOU_TURO # Tower Passage
     type: code
