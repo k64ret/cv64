@@ -5,24 +5,24 @@
 #include "object.h"
 
 // ID: 0x000E
-typedef struct cv64_konamilogo {
+typedef struct cv64_ovl_konamilogo {
     cv64_object_hdr_t header;
     u8 padding1[4];
     cv64_model_inf_t* model;
     u8 padding2[OBJECT_SIZE - 0x28];
-} cv64_konamilogo_t;
+} cv64_ovl_konamilogo_t;
 
-void cv64_konamilogo_entrypoint(cv64_konamilogo_t* self);      // 0x801cfcd0
-void cv64_konamilogo_check_btn_press(cv64_konamilogo_t* self); // 0x801cfd40
-void cv64_konamilogo_init(cv64_konamilogo_t* self);            // 0x801cfda0
-void cv64_konamilogo_fade_in(cv64_konamilogo_t* self);         // 0x801cfe7c
-void cv64_konamilogo_wait(cv64_konamilogo_t* self);            // 0x801cff08
-void cv64_konamilogo_fade_out(cv64_konamilogo_t* self);        // 0x801cff7c
-void cv64_konamilogo_kcek_fade_in(cv64_konamilogo_t* self);    // 0x801cffdc
-void cv64_konamilogo_kcek_wait(cv64_konamilogo_t* self);       // 0x801d0058
-void cv64_konamilogo_kcek_fade_out(cv64_konamilogo_t* self);   // 0x801d00e0
+void cv64_konamilogo_entrypoint(cv64_ovl_konamilogo_t* self);      // 0x801cfcd0
+void cv64_konamilogo_check_btn_press(cv64_ovl_konamilogo_t* self); // 0x801cfd40
+void cv64_konamilogo_init(cv64_ovl_konamilogo_t* self);            // 0x801cfda0
+void cv64_konamilogo_fade_in(cv64_ovl_konamilogo_t* self);         // 0x801cfe7c
+void cv64_konamilogo_wait(cv64_ovl_konamilogo_t* self);            // 0x801cff08
+void cv64_konamilogo_fade_out(cv64_ovl_konamilogo_t* self);        // 0x801cff7c
+void cv64_konamilogo_kcek_fade_in(cv64_ovl_konamilogo_t* self);    // 0x801cffdc
+void cv64_konamilogo_kcek_wait(cv64_ovl_konamilogo_t* self);       // 0x801d0058
+void cv64_konamilogo_kcek_fade_out(cv64_ovl_konamilogo_t* self);   // 0x801d00e0
 
-typedef void (*cv64_konamilogo_func_t)(cv64_konamilogo_t*);
+typedef void (*cv64_konamilogo_func_t)(cv64_ovl_konamilogo_t*);
 
 typedef enum cv64_konamilogo_func_id {
     KONAMILOGO_INIT,

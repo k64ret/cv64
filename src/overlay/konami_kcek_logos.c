@@ -17,11 +17,11 @@
 #include "system_work.h"
 #include <ultra64.h>
 
-void cv64_konamilogo_entrypoint(cv64_konamilogo_t* self) {
+void cv64_konamilogo_entrypoint(cv64_ovl_konamilogo_t* self) {
     ENTER(self, cv64_konamilogo_funcs);
 }
 
-void cv64_konamilogo_check_btn_press(cv64_konamilogo_t* self) {
+void cv64_konamilogo_check_btn_press(cv64_ovl_konamilogo_t* self) {
     void (*ptr_object_curLevel_goToFunc)(u16[], s16*, s32) =
         object_curLevel_goToFunc;
 
@@ -36,7 +36,7 @@ void cv64_konamilogo_check_btn_press(cv64_konamilogo_t* self) {
     }
 }
 
-void cv64_konamilogo_init(cv64_konamilogo_t* self) {
+void cv64_konamilogo_init(cv64_ovl_konamilogo_t* self) {
     cv64_model_inf_t* model;
     cv64_object_func_inf_t* curFunc;
 
@@ -60,7 +60,7 @@ void cv64_konamilogo_init(cv64_konamilogo_t* self) {
                     ptr_object_curLevel_goToNextFuncAndClearTimer);
 }
 
-void cv64_konamilogo_fade_in(cv64_konamilogo_t* self) {
+void cv64_konamilogo_fade_in(cv64_ovl_konamilogo_t* self) {
     cv64_model_inf_t* model = self->model;
     void (*ptr_object_curLevel_goToNextFuncAndClearTimer)(u16[], s16*) =
         object_curLevel_goToNextFuncAndClearTimer;
@@ -78,7 +78,7 @@ void cv64_konamilogo_fade_in(cv64_konamilogo_t* self) {
     cv64_konamilogo_check_btn_press(self);
 }
 
-void cv64_konamilogo_wait(cv64_konamilogo_t* self) {
+void cv64_konamilogo_wait(cv64_ovl_konamilogo_t* self) {
     s32 timer =
         self->header.current_function[self->header.functionInfo_ID].timer;
     void (*ptr_object_curLevel_goToNextFuncAndClearTimer)(u16[], s16*) =
@@ -95,7 +95,7 @@ void cv64_konamilogo_wait(cv64_konamilogo_t* self) {
     }
 }
 
-void cv64_konamilogo_fade_out(cv64_konamilogo_t* self) {
+void cv64_konamilogo_fade_out(cv64_ovl_konamilogo_t* self) {
     cv64_model_inf_t* model = self->model;
     void (*ptr_object_curLevel_goToNextFuncAndClearTimer)(u16[], s16*) =
         object_curLevel_goToNextFuncAndClearTimer;
@@ -110,7 +110,7 @@ void cv64_konamilogo_fade_out(cv64_konamilogo_t* self) {
     cv64_konamilogo_check_btn_press(self);
 }
 
-void cv64_konamilogo_kcek_fade_in(cv64_konamilogo_t* self) {
+void cv64_konamilogo_kcek_fade_in(cv64_ovl_konamilogo_t* self) {
     cv64_model_inf_t* model = self->model;
     void (*ptr_object_curLevel_goToNextFuncAndClearTimer)(u16[], s16*) =
         object_curLevel_goToNextFuncAndClearTimer;
@@ -127,7 +127,7 @@ void cv64_konamilogo_kcek_fade_in(cv64_konamilogo_t* self) {
     cv64_konamilogo_check_btn_press(self);
 }
 
-void cv64_konamilogo_kcek_wait(cv64_konamilogo_t* self) {
+void cv64_konamilogo_kcek_wait(cv64_ovl_konamilogo_t* self) {
     cv64_model_inf_t* model = self->model;
     void (*ptr_object_curLevel_goToNextFuncAndClearTimer)(u16[], s16*) =
         object_curLevel_goToNextFuncAndClearTimer;
@@ -146,7 +146,7 @@ void cv64_konamilogo_kcek_wait(cv64_konamilogo_t* self) {
     }
 }
 
-void cv64_konamilogo_kcek_fade_out(cv64_konamilogo_t* self) {
+void cv64_konamilogo_kcek_fade_out(cv64_ovl_konamilogo_t* self) {
     cv64_model_inf_t* model = self->model;
     void (*ptr_object_curLevel_goToNextFuncAndClearTimer)(u16[], s16*) =
         object_curLevel_goToNextFuncAndClearTimer;
