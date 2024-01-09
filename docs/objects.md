@@ -363,21 +363,21 @@ jumping, a function for propelling up, another function for falling down, etc).
 The function pointers array for the Konami / KCEK logo object looks like this:
 
 ```c
-cv64_konamilogo_func_t cv64_konamilogo_funcs[] = {
-    cv64_konamilogo_init,          // 0
-    cv64_konamilogo_fade_in,       // 1
-    cv64_konamilogo_wait,          // 2
-    cv64_konamilogo_fade_out,      // 3
-    cv64_konamilogo_kcek_fade_in,  // 4
-    cv64_konamilogo_kcek_wait,     // 5
-    cv64_konamilogo_kcek_fade_out, // 6
+cv64_ovl_konamilogo_func_t cv64_ovl_konamilogo_funcs[] = {
+    cv64_ovl_konamilogo_init,          // 0
+    cv64_ovl_konamilogo_fade_in,       // 1
+    cv64_ovl_konamilogo_wait,          // 2
+    cv64_ovl_konamilogo_fade_out,      // 3
+    cv64_ovl_konamilogo_kcek_fade_in,  // 4
+    cv64_ovl_konamilogo_kcek_wait,     // 5
+    cv64_ovl_konamilogo_kcek_fade_out, // 6
     func_8000E860                  // 7
 };
 ```
 
 So, if `current_function[0].function` for the Konami / KCEK logo object is equal
-to 0, then it will execute the `cv64_konamilogo_init`. If it's 1, it will
-execute `cv64_konamilogo_fade_in`, and so on.
+to 0, then it will execute the `cv64_ovl_konamilogo_init`. If it's 1, it will
+execute `cv64_ovl_konamilogo_fade_in`, and so on.
 
 The function ID in the `function` field will always be executed until its
 changed. In order to change it, there are various functions the devs used, but

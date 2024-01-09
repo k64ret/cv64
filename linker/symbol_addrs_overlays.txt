@@ -1,15 +1,15 @@
 // .text
-// cv64_konamilogo_entrypoint      = 0x801CFCD0; // type:func segment:konami_kcek_logos
-// cv64_konamilogo_check_btn_press = 0x801CFD40; // type:func segment:konami_kcek_logos
-// cv64_konamilogo_init            = 0x801CFDA0; // type:func segment:konami_kcek_logos
-// cv64_konamilogo_fade_in         = 0x801CFE7C; // type:func segment:konami_kcek_logos
-// cv64_konamilogo_wait            = 0x801CFF08; // type:func segment:konami_kcek_logos
-// cv64_konamilogo_fade_out        = 0x801CFF7C; // type:func segment:konami_kcek_logos
-// cv64_konamilogo_kcek_fade_in    = 0x801CFFDC; // type:func segment:konami_kcek_logos
-// cv64_konamilogo_kcek_wait       = 0x801D0058; // type:func segment:konami_kcek_logos
-// cv64_konamilogo_kcek_fade_out   = 0x801D00E0; // type:func segment:konami_kcek_logos
+// cv64_ovl_konamilogo_entrypoint      = 0x801CFCD0; // type:func segment:konami_kcek_logos
+// cv64_ovl_konamilogo_check_btn_press = 0x801CFD40; // type:func segment:konami_kcek_logos
+// cv64_ovl_konamilogo_init            = 0x801CFDA0; // type:func segment:konami_kcek_logos
+// cv64_ovl_konamilogo_fade_in         = 0x801CFE7C; // type:func segment:konami_kcek_logos
+// cv64_ovl_konamilogo_wait            = 0x801CFF08; // type:func segment:konami_kcek_logos
+// cv64_ovl_konamilogo_fade_out        = 0x801CFF7C; // type:func segment:konami_kcek_logos
+// cv64_ovl_konamilogo_kcek_fade_in    = 0x801CFFDC; // type:func segment:konami_kcek_logos
+// cv64_ovl_konamilogo_kcek_wait       = 0x801D0058; // type:func segment:konami_kcek_logos
+// cv64_ovl_konamilogo_kcek_fade_out   = 0x801D00E0; // type:func segment:konami_kcek_logos
 // .data
-// cv64_konamilogo_funcs           = 0x801D0160; // segment:konami_kcek_logos size:0x20
+// cv64_ovl_konamilogo_funcs           = 0x801D0160; // segment:konami_kcek_logos size:0x20
 
 // src/overlay/map/rose.c
 // .text
