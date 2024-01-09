@@ -35,8 +35,8 @@ typedef struct cv64_object_hdr {
     struct cv64_object_hdr_t* child;
 } cv64_object_hdr_t; // Size = 0x20
 
-extern void* object_create(void* parent, object_t ID);
-extern void* object_createAndSetChild(void* parent, object_t ID);
+extern void* object_create(void* parent, cv64_object_t ID);
+extern void* object_createAndSetChild(void* parent, cv64_object_t ID);
 extern void object_curLevel_goToFunc(u16 current_functionInfo[],
                                      s16* functionInfo_ID, s32 function);
 extern void object_allocEntryInList(cv64_object_hdr_t* object,
