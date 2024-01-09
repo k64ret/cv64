@@ -4,13 +4,19 @@
 #define OBJECT_ID(type, id) (((type) << 8) | (id))
 
 // clang-format off
-// The flags that are part of the "ID" field of ModuleHeader, NOT field 0x02
-typedef enum object_type {
+
+/**
+ * The flags that are part of the "ID" field of `cv64_object_hdr_t`, NOT field 0x02
+ */
+typedef enum cv64_object_kind {
     NONE         = 0x00,
-    STAGE_OBJECT = 0x10, // Non-enemy map actors. Sometimes 0x18 is used as well.
+    /**
+     * Non-enemy map actors. Sometimes 0x18 is used as well.
+     */
+    STAGE_OBJECT = 0x10,
     MAP_OVERLAY  = 0x20,
     DESTROY      = 0x80
-} object_type_t;
+} cv64_object_kind_t;
 
 typedef enum object_id {
     ID_GAMESTATE_MGR              = 0x001,
