@@ -14,20 +14,20 @@ typedef enum cv64_object_exec_flag {
 } cv64_object_exec_flag_t;
 // clang-format on
 
-typedef union cv64_obj_func_inf {
+typedef union cv64_object_func_inf {
     struct {
         u8 timer;    // Could also be number of accesses to function
         u8 function; // Function ID
     };
     u16 whole;
-} cv64_obj_func_inf_t; // Size = 0x2
+} cv64_object_func_inf_t; // Size = 0x2
 
 typedef struct cv64_obj_hdr {
     s16 ID;
     s16 flags;
     s16 timer; // Misc. timer whose purpose depends on the object
     s16 field_0x06;
-    cv64_obj_func_inf_t current_function[3];
+    cv64_object_func_inf_t current_function[3];
     s16 functionInfo_ID;
     void (*destroy)(void*); // Officially called "OBJ_destruct"
     struct cv64_obj_hdr_t* parent;
@@ -53,8 +53,8 @@ void object_prevLevel_goToNextFunc(u16 current_functionInfo[],
 void object_nextLevel_goToNextFunc(u16 current_functionInfo[],
                                    s16* functionInfo_ID);
 void object_curLevel_goToNextFuncAndClearTimer(
-    cv64_obj_func_inf_t current_functionInfo[], s16* functionInfo_ID);
-void object_curLevel_goToPrevFunc(cv64_obj_func_inf_t current_functionInfo[],
+    cv64_object_func_inf_t current_functionInfo[], s16* functionInfo_ID);
+void object_curLevel_goToPrevFunc(cv64_object_func_inf_t current_functionInfo[],
                                   s16* functionInfo_ID);
 void object_prevLevel_goToPrevFunc(u16 current_functionInfo[],
                                    s16* functionInfo_ID);

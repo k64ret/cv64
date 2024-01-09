@@ -38,7 +38,7 @@ void cv64_konamilogo_check_btn_press(cv64_konamilogo_t* self) {
 
 void cv64_konamilogo_init(cv64_konamilogo_t* self) {
     cv64_model_inf_t* model;
-    cv64_obj_func_inf_t* curFunc;
+    cv64_object_func_inf_t* curFunc;
 
     cv64_model_inf_t* (*ptr_modelInfo_createRootNode)(u32, void*) =
         modelInfo_createRootNode;
