@@ -18,7 +18,7 @@ typedef enum cv64_object_kind {
     DESTROY      = 0x80
 } cv64_object_kind_t;
 
-typedef enum object_id {
+typedef enum cv64_object_id {
     ID_GAMESTATE_MGR              = 0x001,
     MODULE_002                    = 0x002,
     MODULE_003                    = 0x003,
@@ -573,7 +573,7 @@ typedef enum object_id {
     MODULE_228                    = 0x228,
     MODULE_229                    = 0x229,
     MODULE_22A                    = 0x22A
-} object_id_t;
+} cv64_object_id_t;
 
 typedef enum object {
     ENGINE_GAMESTATEMGR              = OBJECT_ID(NONE, ID_GAMESTATE_MGR),
