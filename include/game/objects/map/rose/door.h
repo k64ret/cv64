@@ -1,3 +1,6 @@
+#ifndef ROSE_DOOR_H
+#define ROSE_DOOR_H
+
 #include "actor.h"
 #include "gfx/model_info.h"
 #include "map_actor_model.h"
@@ -34,3 +37,5 @@ extern cv64_ovl_rose_door_func_t cv64_ovl_rose_door_funcs[];
 extern cv64_ovl_rose_door_func_t cv64_ovl_rose_door_state_funcs[];
 
 extern const u32 ROSE_DOOR_DL;
+
+#endif // ROSE_DOOR_H

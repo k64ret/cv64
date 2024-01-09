@@ -1,3 +1,6 @@
+#ifndef ROSE_VENTILATOR_H
+#define ROSE_VENTILATOR_H
+
 #include "actor.h"
 #include "gfx/model_info.h"
 
@@ -26,3 +29,5 @@ extern void cv64_ovl_rose_ventilator_loop(cv64_ovl_rose_ventilator_t* self);
 extern cv64_ovl_rose_ventilator_func_t cv64_ovl_rose_ventilator_funcs[];
 
 extern const u32 VENTILATOR_DOOR_DL;
+
+#endif // ROSE_VENTILATOR_H
