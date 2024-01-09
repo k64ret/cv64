@@ -72,7 +72,7 @@ void cv64_ovl_rose_ventilator_loop(cv64_ovl_rose_ventilator_t* self) {
     CV64_COLOR_RGBA_TO_U32(model->fog_color) =
         CV64_COLOR_RGBA_TO_U32(sys.background_color);
     if (ptr_actor_checkSpawn(self, model->position.x, model->position.y,
-                             model->position.z) != 0) {
+                             model->position.z) != FALSE) {
         ptr_object_curLevel_goToNextFuncAndClearTimer(
             (u16*) self->header.current_function,
             &self->header.functionInfo_ID);
