@@ -8,10 +8,10 @@
 #define OBJECT_HEADER_SIZE 0x20
 
 // clang-format off
-typedef enum cv64_obj_exec_flag {
+typedef enum cv64_object_exec_flag {
     PAUSE = CV64_BIT(14),
     TOP   = CV64_BIT(15)
-} cv64_obj_exec_flag_t;
+} cv64_object_exec_flag_t;
 // clang-format on
 
 typedef union cv64_obj_func_inf {
