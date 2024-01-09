@@ -43,7 +43,7 @@ typedef struct cv64_object_func_inf {
     u8 function;       // ID within the functions array
 } cv64_object_func_inf_t;
 
-typedef struct cv64_obj_hdr {
+typedef struct cv64_object_hdr {
     s16 ID;
     s16 flags;
     s16 timer;
@@ -51,10 +51,10 @@ typedef struct cv64_obj_hdr {
     cv64_object_func_inf_t current_function[3];
     s16 functionInfo_ID;
     void (*destroy)(void*); // Officially called "OBJ_destruct"
-    struct cv64_obj_hdr_t* parent;
-    struct cv64_obj_hdr_t* next;
-    struct cv64_obj_hdr_t* child;
-} cv64_obj_hdr_t;
+    struct cv64_object_hdr_t* parent;
+    struct cv64_object_hdr_t* next;
+    struct cv64_object_hdr_t* child;
+} cv64_object_hdr_t;
 ```
 
 ### `ID`
@@ -262,7 +262,7 @@ In order to execute an object, the game calls `object_execute` to execute an
 object's associated code and all its `child` / `next`.
 
 ```c
-void object_execute(cv64_obj_hdr_t* object);
+void object_execute(cv64_object_hdr_t* object);
 ```
 
 `object` is the pointer to the object at the beginning of the "branch".

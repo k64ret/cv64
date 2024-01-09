@@ -22,7 +22,7 @@ typedef union cv64_object_func_inf {
     u16 whole;
 } cv64_object_func_inf_t; // Size = 0x2
 
-typedef struct cv64_obj_hdr {
+typedef struct cv64_object_hdr {
     s16 ID;
     s16 flags;
     s16 timer; // Misc. timer whose purpose depends on the object
@@ -30,19 +30,19 @@ typedef struct cv64_obj_hdr {
     cv64_object_func_inf_t current_function[3];
     s16 functionInfo_ID;
     void (*destroy)(void*); // Officially called "OBJ_destruct"
-    struct cv64_obj_hdr_t* parent;
-    struct cv64_obj_hdr_t* next;
-    struct cv64_obj_hdr_t* child;
-} cv64_obj_hdr_t; // Size = 0x20
+    struct cv64_object_hdr_t* parent;
+    struct cv64_object_hdr_t* next;
+    struct cv64_object_hdr_t* child;
+} cv64_object_hdr_t; // Size = 0x20
 
 extern void* object_create(void* parent, object_t ID);
 extern void* object_createAndSetChild(void* parent, object_t ID);
 extern void object_curLevel_goToFunc(u16 current_functionInfo[],
                                      s16* functionInfo_ID, s32 function);
-extern void object_allocEntryInList(cv64_obj_hdr_t* object,
+extern void object_allocEntryInList(cv64_object_hdr_t* object,
                                     s32 allocatedBlockInfo_index, u32 size,
                                     u32 ptrs_array_index);
-extern void* object_allocEntryInListAndClear(cv64_obj_hdr_t* object,
+extern void* object_allocEntryInListAndClear(cv64_object_hdr_t* object,
                                              s32 allocatedBlockInfo_index,
                                              u32 size, u32 ptrs_array_index);
 extern void* objectList_findFirstObjectByID(u16 ID);
@@ -72,7 +72,7 @@ void object_prevLevel_goToFunc(u16 current_functionInfo[], s16* functionInfo_ID,
 void object_nextLevel_goToFunc(u16 current_functionInfo[], s16* functionInfo_ID,
                                s32 function);
 extern void clearAllObjects();
-extern void func_8000E860(cv64_obj_hdr_t* self);
+extern void func_8000E860(cv64_object_hdr_t* self);
 
 // Mostly used inside entrypoint functions
 // Commas at the end of statements needed for matching

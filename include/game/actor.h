@@ -30,7 +30,7 @@ typedef struct cv64_actor_settings {
 
 // Generic actor struct
 typedef struct cv64_actor {
-    cv64_obj_hdr_t header;
+    cv64_object_hdr_t header;
     u8 padding1[4];
     cv64_model_inf_t* model;
     u8 field_0x28[OBJECT_SIZE - 0x28];

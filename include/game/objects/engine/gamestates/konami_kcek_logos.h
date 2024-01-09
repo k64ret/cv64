@@ -6,7 +6,7 @@
 
 // ID: 0x000E
 typedef struct cv64_konamilogo {
-    cv64_obj_hdr_t header;
+    cv64_object_hdr_t header;
     u8 padding1[4];
     cv64_model_inf_t* model;
     u8 padding2[OBJECT_SIZE - 0x28];
