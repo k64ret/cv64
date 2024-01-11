@@ -5,9 +5,9 @@
 #include "gfx/model_info.h"
 
 typedef struct cv64_ovl_rose_ventilator_cfg {
-    u32 time_until_changing_max_speed;
-    u32 current_speed;
-    u32 max_speed;
+    s32 time_until_changing_max_speed;
+    s32 current_speed;
+    s32 max_speed;
 } cv64_ovl_rose_ventilator_cfg_t;
 
 typedef struct cv64_ovl_rose_ventilator {
@@ -28,6 +28,6 @@ extern void cv64_ovl_rose_ventilator_loop(cv64_ovl_rose_ventilator_t* self);
 
 extern cv64_ovl_rose_ventilator_func_t cv64_ovl_rose_ventilator_funcs[];
 
-extern const u32 VENTILATOR_DOOR_DL;
+extern const u32 ROSE_VENTILATOR_DL;
 
 #endif // ROSE_VENTILATOR_H

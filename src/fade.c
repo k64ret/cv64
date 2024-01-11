@@ -15,7 +15,7 @@ Gfx cv64_dl_fade_normal[] = {
     gsDPSetAlphaCompare(G_AC_NONE),
     gsDPSetColorDither(G_CD_MAGICSQ),
     gsDPSetAlphaDither(G_AD_NOISE),
-    gsDPFillRectangle(0, 0, 319, 239),
+    gsDPFillRectangle(0, 0, SCREEN_WIDTH - 1, SCREEN_HEIGHT - 1),
     gsSPEndDisplayList(),
 };
 
@@ -36,7 +36,7 @@ Gfx cv64_dl_fade_with_outline[] = {
     gsDPSetAlphaCompare(G_AC_NONE),
     gsDPSetColorDither(G_CD_MAGICSQ),
     gsDPSetAlphaDither(G_AD_NOISE),
-    gsDPFillRectangle(0, 0, 319, 239),
+    gsDPFillRectangle(0, 0, SCREEN_WIDTH - 1, SCREEN_HEIGHT - 1),
     gsSPEndDisplayList(),
 };
 

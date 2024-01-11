@@ -7,6 +7,7 @@
 
 /**
  * The flags that are part of the "ID" field of `cv64_object_hdr_t`, NOT field 0x02
+ * Used with cv64_object_t
  */
 typedef enum cv64_object_kind {
     NONE         = 0x00,
@@ -17,6 +18,17 @@ typedef enum cv64_object_kind {
     MAP_OVERLAY  = 0x20,
     DESTROY      = 0x80
 } cv64_object_kind_t;
+
+// Same as above but with the additional zeroes, so that we can use inside code
+typedef enum cv64_object_flag {
+    FLAG_NONE         = 0x0000,
+    /**
+     * Non-enemy map actors. Sometimes 0x18 is used as well.
+     */
+    FLAG_STAGE_OBJECT = 0x1000,
+    FLAG_MAP_OVERLAY  = 0x2000,
+    FLAG_DESTROY      = 0x8000
+} cv64_object_flag_t;
 
 typedef enum cv64_object_id {
     ID_GAMESTATE_MGR              = 0x001,

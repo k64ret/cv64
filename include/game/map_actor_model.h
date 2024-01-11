@@ -15,6 +15,6 @@ typedef struct cv64_map_actor_model {
 } cv64_map_actor_model_t;
 
 extern cv64_map_actor_model_t*
-getMapActorModelEntryFromArray(u32 segment_address, s16 file_ID);
+getMapActorModelEntryFromArray(u32 segment_address, s32 file_ID);
 
 #endif
