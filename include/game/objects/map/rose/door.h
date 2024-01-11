@@ -26,8 +26,11 @@ typedef struct cv64_ovl_rose_door {
 typedef void (*cv64_ovl_rose_door_func_t)(cv64_ovl_rose_door_t*);
 
 void cv64_ovl_rose_door_entrypoint(cv64_ovl_rose_door_t* self);
-extern void cv64_ovl_rose_door_init(cv64_ovl_rose_door_t* self);
-extern void cv64_ovl_rose_door_loop(cv64_ovl_rose_door_t* self);
+void cv64_ovl_rose_door_init(cv64_ovl_rose_door_t* self);
+void cv64_ovl_rose_door_loop(cv64_ovl_rose_door_t* self);
+
+cv64_ovl_rose_door_func_t cv64_ovl_rose_door_funcs[] = {
+    cv64_ovl_rose_door_init, cv64_ovl_rose_door_loop};
 
 typedef enum cv64_ovl_rose_door_state_func_id {
     ROSE_DOOR_START_CLOSING,
@@ -35,12 +38,13 @@ typedef enum cv64_ovl_rose_door_state_func_id {
     ROSE_DOOR_IDLE
 } cv64_ovl_konamilogo_func_id_t;
 
-extern void cv64_ovl_rose_door_state_startClosing(cv64_ovl_rose_door_t* self);
-extern void cv64_ovl_rose_door_state_closing(cv64_ovl_rose_door_t* self);
+void cv64_ovl_rose_door_state_startClosing(cv64_ovl_rose_door_t* self);
+void cv64_ovl_rose_door_state_closing(cv64_ovl_rose_door_t* self);
 void cv64_ovl_rose_door_state_idle(cv64_ovl_rose_door_t* self);
 
-extern cv64_ovl_rose_door_func_t cv64_ovl_rose_door_funcs[];
-extern cv64_ovl_rose_door_func_t cv64_ovl_rose_door_state_funcs[];
+cv64_ovl_rose_door_func_t cv64_ovl_rose_door_state_funcs[] = {
+    cv64_ovl_rose_door_state_startClosing, cv64_ovl_rose_door_state_closing,
+    cv64_ovl_rose_door_state_idle};
 
 extern const u32 ROSE_DOOR_DL;
 

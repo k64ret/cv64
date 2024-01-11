@@ -11,7 +11,8 @@ extern u8 play_sound_in_position(s16 sound_ID, vec3f* position);
 extern u8 play_sound_in_position_and_set_volume(s16 sound_ID, vec3f* position,
                                                 f32 volume_multiplier);
 
-// Sound IDs
-#define SD_ROSE_DOOR_CLOSE 0x29B
+// Sound IDs (officially referred to as "sound codes")
+#define SD_ROSE_DOOR_CLOSING 0x29B
+#define SD_ROSE_DOOR_CLOSE   0x27B
 
 #endif

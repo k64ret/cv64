@@ -843,8 +843,8 @@ segments:
     exclusive_ram_id: ovl_map_objects
     subsegments:
       - [0x006F0A50, c, overlay/map/rose]
-      - [0x006F1150, data, overlay/map/rose]
-      # - [0x006F1198, rodata, overlay/map/rose]
+      - [0x006F1150, .data, overlay/map/rose]
+      - [0x006F1170, .rodata, overlay/map/rose]
 
   - name: BEKKAN_BOSS # Annex Boss
     type: code

@@ -1,8 +1,7 @@
+#include "objects/map/rose/rose.h"
 #include "actor.h"
 #include "gfx/figure.h"
 #include "gfx/struct_47.h"
-#include "objects/map/rose/door.h"
-#include "objects/map/rose/ventilator.h"
 #include "objects/player/player.h"
 #include "random.h"
 #include "sound.h"
@@ -19,6 +18,7 @@ void cv64_ovl_rose_ventilator_init(cv64_ovl_rose_ventilator_t* self) {
     u32 unused;
 
     if (model == NULL) {
+        // VENTILATOR : Can't allocate F3D.\n
         self->header.destroy(self);
     } else {
         self->model = model;
@@ -133,14 +133,14 @@ void cv64_ovl_rose_door_state_startClosing(cv64_ovl_rose_door_t* self) {
     if ((*checkIfOutsideEntityIsInsideMainEntityRadius)(
             model, ptr_PlayerData->visualData.model, 15.0f, AXIS_Z) == FALSE) {
         if (sys.SaveStruct_gameplay.character == REINHARDT) {
-            (*play_sound_in_position_and_set_volume)(SD_ROSE_DOOR_CLOSE,
+            (*play_sound_in_position_and_set_volume)(SD_ROSE_DOOR_CLOSING,
                                                      &model->position, 0.5f);
         } else {
-            (*play_sound_in_position_and_set_volume)(SD_ROSE_DOOR_CLOSE,
+            (*play_sound_in_position_and_set_volume)(SD_ROSE_DOOR_CLOSING,
                                                      &model->position, 1.0f);
         }
         // Cleaner version
-        // (*play_sound_in_position_and_set_volume)(SD_ROSE_DOOR_CLOSE,
+        // (*play_sound_in_position_and_set_volume)(SD_ROSE_DOOR_CLOSING,
         // &model->position,
         // ((sys.SaveStruct_gameplay.character == REINHARDT) ? 0.5f : 1.0f));
         height_settings->closing_speed = 0.0f;
@@ -149,8 +149,27 @@ void cv64_ovl_rose_door_state_startClosing(cv64_ovl_rose_door_t* self) {
     }
 }
 
-// clang-format off
-#pragma GLOBAL_ASM("../asm/nonmatchings/overlay/map/rose/cv64_ovl_rose_door_state_closing.s")
-// clang-format on
+void cv64_ovl_rose_door_state_closing(cv64_ovl_rose_door_t* self) {
+    cv64_ovl_rose_door_cfg_t* height_settings = &self->height_settings;
+    cv64_model_inf_t* model = self->model;
+
+    if (height_settings->closing_speed < 0.4166666666666667) {
+        height_settings->closing_speed += 0.01388888888888889;
+    }
+    height_settings->height -= height_settings->closing_speed;
+    if (height_settings->height < 0.0) {
+        (*play_sound)(STOP_SOUND(SD_ROSE_DOOR_CLOSING));
+        if (sys.SaveStruct_gameplay.character == REINHARDT) {
+            (*play_sound_in_position_and_set_volume)(SD_ROSE_DOOR_CLOSE,
+                                                     &model->position, 0.5f);
+        } else {
+            (*play_sound_in_position_and_set_volume)(SD_ROSE_DOOR_CLOSE,
+                                                     &model->position, 1.0f);
+        }
+        height_settings->height = 0.0f;
+        (*object_curLevel_goToNextFuncAndClearTimer)(
+            self->header.current_function, &self->header.functionInfo_ID);
+    }
+}
 
 void cv64_ovl_rose_door_state_idle(cv64_ovl_rose_door_t* self) {}

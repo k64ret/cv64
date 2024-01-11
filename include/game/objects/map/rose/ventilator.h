@@ -23,10 +23,11 @@ typedef struct cv64_ovl_rose_ventilator {
 typedef void (*cv64_ovl_rose_ventilator_func_t)(cv64_ovl_rose_ventilator_t*);
 
 void cv64_ovl_rose_ventilator_entrypoint(cv64_ovl_rose_ventilator_t* self);
-extern void cv64_ovl_rose_ventilator_init(cv64_ovl_rose_ventilator_t* self);
-extern void cv64_ovl_rose_ventilator_loop(cv64_ovl_rose_ventilator_t* self);
+void cv64_ovl_rose_ventilator_init(cv64_ovl_rose_ventilator_t* self);
+void cv64_ovl_rose_ventilator_loop(cv64_ovl_rose_ventilator_t* self);
 
-extern cv64_ovl_rose_ventilator_func_t cv64_ovl_rose_ventilator_funcs[];
+cv64_ovl_rose_ventilator_func_t cv64_ovl_rose_ventilator_funcs[] = {
+    cv64_ovl_rose_ventilator_init, cv64_ovl_rose_ventilator_loop};
 
 extern const u32 ROSE_VENTILATOR_DL;
 
