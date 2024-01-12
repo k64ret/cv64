@@ -27,7 +27,7 @@
 // cv64_ovl_rose_door_funcs              = 0x8018f218; // segment:ROSE size:0x08
 // cv64_ovl_rose_door_state_funcs        = 0x8018f220; // segment:ROSE size:0x0C
 // .rodata
-// D_8018F230                            = 0x8018F230; // segment:ROSE size:0x22
+// D_8018F230                            = 0x8018F230; // type:asciz segment:ROSE size:0x22
 // D_8018F258                            = 0x8018F258; // segment:ROSE size:0x08
 // D_8018F260                            = 0x8018F260; // segment:ROSE size:0x08
 // End of src/overlay/map/rose.c
