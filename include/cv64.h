@@ -7,9 +7,6 @@
 
 #define CV64_BIT(num) (1 << (num))
 
-// This is used to emit unused and unreferenced strings into rodata
-#define unused_string
-
 typedef u8 Addr[];
 
 extern Gfx* gDisplayListHead; // 0x800B49E0
