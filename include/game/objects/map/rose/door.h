@@ -36,7 +36,7 @@ typedef enum cv64_ovl_rose_door_state_func_id {
     ROSE_DOOR_START_CLOSING,
     ROSE_DOOR_CLOSING,
     ROSE_DOOR_IDLE
-} cv64_ovl_konamilogo_func_id_t;
+} cv64_ovl_rose_door_state_func_id_t;
 
 void cv64_ovl_rose_door_state_startClosing(cv64_ovl_rose_door_t* self);
 void cv64_ovl_rose_door_state_closing(cv64_ovl_rose_door_t* self);
