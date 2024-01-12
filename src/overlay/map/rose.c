@@ -50,6 +50,20 @@ void cv64_ovl_rose_ventilator_loop(cv64_ovl_rose_ventilator_t* self) {
         CV64_COLOR_RGBA_TO_U32(sys.background_color);
     if ((*actor_checkSpawn)(self, model->position.x, model->position.y,
                             model->position.z) != FALSE) {
+        // clang-format off
+        /* @bug If the player is far away enough from the ventilator, it will try to go to the next function.
+                However, `cv64_ovl_rose_ventilator_funcs` only has two functions. This will make the game
+                read out of bounds into `cv64_ovl_rose_ventilator_funcs` and essentially turn the current
+                ventilator actor into a door.
+
+                One of the side-effects is that the ventilator model will not be destroyed, so multiple ventilator
+                models can be created.
+
+                The devs probably intended to create a destroy function specific to the ventilator actor,
+                and then placing it into `cv64_ovl_rose_ventilator_funcs`, but no such function exists
+                in the final game
+        */
+        // clang-format on
         (*object_curLevel_goToNextFuncAndClearTimer)(
             self->header.current_function, &self->header.functionInfo_ID);
     } else {
