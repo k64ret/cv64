@@ -3,6 +3,9 @@
 
 #include <ultra64.h>
 
+#define REINHARDT 0
+#define CARRIE    1
+
 typedef struct cv64_save_state {
     u32 event_flags[16];
     u32 flags;
@@ -15,7 +18,7 @@ typedef struct cv64_save_state {
     u32 gameplay_framecount; // Updates at 60fps
     s16 button_config;
     s16 sound_mode;
-    u16 character;
+    s16 character;
     u16 life;
     u16 field13_0x5c; // Maybe related to the scrapped Magic meter?
     u16 subweapon;

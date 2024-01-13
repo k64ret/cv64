@@ -1,4 +1,5 @@
 [tools]
+cmake = '3.28'
 python = '3.11'
 
 [tasks.clean]

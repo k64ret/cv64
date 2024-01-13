@@ -6,43 +6,51 @@
 
 #define OBJECT_SIZE        0x74
 #define OBJECT_HEADER_SIZE 0x20
+#define OBJECT_ARRAY_MAX   384
+#define OBJECT_NUM_MAX     554
 
 // clang-format off
-typedef enum cv64_obj_exec_flag {
+typedef enum cv64_object_exec_flag {
     PAUSE = CV64_BIT(14),
     TOP   = CV64_BIT(15)
-} cv64_obj_exec_flag_t;
+} cv64_object_exec_flag_t;
 // clang-format on
 
-typedef union cv64_obj_func_inf {
+typedef union cv64_object_func_inf {
     struct {
         u8 timer;    // Could also be number of accesses to function
         u8 function; // Function ID
     };
     u16 whole;
-} cv64_obj_func_inf_t; // Size = 0x2
+} cv64_object_func_inf_t; // Size = 0x2
 
-typedef struct cv64_obj_hdr {
+typedef struct cv64_object_hdr {
     s16 ID;
     s16 flags;
     s16 timer; // Misc. timer whose purpose depends on the object
     s16 field_0x06;
-    cv64_obj_func_inf_t current_function[3];
+    cv64_object_func_inf_t current_function[3];
     s16 functionInfo_ID;
     void (*destroy)(void*); // Officially called "OBJ_destruct"
-    struct cv64_obj_hdr_t* parent;
-    struct cv64_obj_hdr_t* next;
-    struct cv64_obj_hdr_t* child;
-} cv64_obj_hdr_t; // Size = 0x20
+    struct cv64_object_hdr_t* parent;
+    struct cv64_object_hdr_t* next;
+    struct cv64_object_hdr_t* child;
+} cv64_object_hdr_t; // Size = 0x20
 
-extern void* object_create(void* parent, object_t ID);
-extern void* object_createAndSetChild(void* parent, object_t ID);
+// Generic object struct
+typedef struct cv64_object {
+    cv64_object_hdr_t header;
+    u8 field_0x20[OBJECT_SIZE - OBJECT_HEADER_SIZE];
+} cv64_object_t; // Size = 0x74
+
+extern void* object_create(void* parent, cv64_object_full_id_t ID);
+extern void* object_createAndSetChild(void* parent, cv64_object_full_id_t ID);
 extern void object_curLevel_goToFunc(u16 current_functionInfo[],
                                      s16* functionInfo_ID, s32 function);
-extern void object_allocEntryInList(cv64_obj_hdr_t* object,
+extern void object_allocEntryInList(cv64_object_hdr_t* object,
                                     s32 allocatedBlockInfo_index, u32 size,
                                     u32 ptrs_array_index);
-extern void* object_allocEntryInListAndClear(cv64_obj_hdr_t* object,
+extern void* object_allocEntryInListAndClear(cv64_object_hdr_t* object,
                                              s32 allocatedBlockInfo_index,
                                              u32 size, u32 ptrs_array_index);
 extern void* objectList_findFirstObjectByID(u16 ID);
@@ -53,8 +61,8 @@ void object_prevLevel_goToNextFunc(u16 current_functionInfo[],
 void object_nextLevel_goToNextFunc(u16 current_functionInfo[],
                                    s16* functionInfo_ID);
 void object_curLevel_goToNextFuncAndClearTimer(
-    cv64_obj_func_inf_t current_functionInfo[], s16* functionInfo_ID);
-void object_curLevel_goToPrevFunc(cv64_obj_func_inf_t current_functionInfo[],
+    cv64_object_func_inf_t current_functionInfo[], s16* functionInfo_ID);
+void object_curLevel_goToPrevFunc(cv64_object_func_inf_t current_functionInfo[],
                                   s16* functionInfo_ID);
 void object_prevLevel_goToPrevFunc(u16 current_functionInfo[],
                                    s16* functionInfo_ID);
@@ -72,7 +80,10 @@ void object_prevLevel_goToFunc(u16 current_functionInfo[], s16* functionInfo_ID,
 void object_nextLevel_goToFunc(u16 current_functionInfo[], s16* functionInfo_ID,
                                s32 function);
 extern void clearAllObjects();
-extern void func_8000E860(cv64_obj_hdr_t* self);
+extern void func_8000E860(cv64_object_hdr_t* self);
+
+extern cv64_object_t objects_array[OBJECT_ARRAY_MAX];
+extern u16 objects_number_of_instances_per_object[OBJECT_NUM_MAX];
 
 // Mostly used inside entrypoint functions
 // Commas at the end of statements needed for matching
