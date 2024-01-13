@@ -1,13 +1,10 @@
 /**
  * File: meiro_teien.c
- * Description: Contains the code for objects exclusive to MEIRO TEIEN (Maze
- * Garden) Associated objects: 0x01B5
+ * Description: Contains the code for objects exclusive to MEIRO TEIEN
+ * (Maze Garden)
+ * Associated objects: 0x01B5
  *
- * osMapTLB'd? = No
- * Entrypoint address   = 0x8018EB10
- * Associated files ptr = 0x8018EB40
- * Associated files:
- *   0x6C50E0 - 0x6C5110 (Overlay)
+ * Mapped by the TLB? = No
  */
 
 #include "objects/map/meiro_teien/obj_01B5.h"

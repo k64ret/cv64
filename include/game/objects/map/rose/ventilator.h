@@ -10,6 +10,7 @@ typedef struct cv64_ovl_rose_ventilator_cfg {
     s32 max_speed;
 } cv64_ovl_rose_ventilator_cfg_t;
 
+// ID: 0x0220
 typedef struct cv64_ovl_rose_ventilator {
     cv64_object_hdr_t header;
     u8 field_0x4[4];

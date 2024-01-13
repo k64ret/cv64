@@ -11,6 +11,8 @@ typedef struct cv64_ovl_rose_door_cfg {
     f32 closing_speed;
 } cv64_ovl_rose_door_cfg_t;
 
+// ID: 0x1221
+// Variable 1 = Don't close door
 typedef struct cv64_ovl_rose_door {
     cv64_object_hdr_t header;
     u8 field_0x4[4];
@@ -33,9 +35,9 @@ cv64_ovl_rose_door_func_t cv64_ovl_rose_door_funcs[] = {
     cv64_ovl_rose_door_init, cv64_ovl_rose_door_loop};
 
 typedef enum cv64_ovl_rose_door_state_func_id {
-    ROSE_DOOR_START_CLOSING,
-    ROSE_DOOR_CLOSING,
-    ROSE_DOOR_IDLE
+    ROSE_DOOR_STATE_START_CLOSING,
+    ROSE_DOOR_STATE_CLOSING,
+    ROSE_DOOR_STATE_IDLE
 } cv64_ovl_rose_door_state_func_id_t;
 
 void cv64_ovl_rose_door_state_startClosing(cv64_ovl_rose_door_t* self);

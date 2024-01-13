@@ -3,11 +3,7 @@
  * Description: Handles the Konami / KCEK logo screen
  * Associated objects: 0x000E
  *
- * osMapTLB'd? = No
- * Entrypoint address   = 0x801CFCD0
- * Associated files ptr = 0x800958C0
- * Associated files:
- *   0x6B4FC0 - 0x6B5480 (Overlay)
+ * Mapped by the TLB? = No
  */
 
 #include "objects/engine/gamestates/konami_kcek_logos.h"
@@ -36,8 +32,8 @@ void cv64_ovl_konamilogo_check_btn_press(cv64_ovl_konamilogo_t* self) {
 
 void cv64_ovl_konamilogo_init(cv64_ovl_konamilogo_t* self) {
     cv64_object_func_inf_t* curFunc;
-    cv64_model_inf_t* model =
-        (*modelInfo_createRootNode)(HUD_ELEMENT, common_cameras_array.HUD);
+    cv64_model_inf_t* model = (*modelInfo_createRootNode)(
+        FIG_TYPE_HUD_ELEMENT, common_cameras_array.HUD);
 
     self->model = model;
     model->dlist = &KONAMI_LOGO_DL;
@@ -45,7 +41,7 @@ void cv64_ovl_konamilogo_init(cv64_ovl_konamilogo_t* self) {
     model->size.x = 0.9975f;
     model->size.y = 1.005f;
     CV64_COLOR_RGBA_TO_U32(sys.background_color) = 0x000000FF; // Black (opaque)
-    model->flags |= 0x800;
+    model->flags |= FIG_FLAG_0800;
     CV64_COLOR_RGBA_TO_U32(model->primitive_color) =
         0xFFFFFF00; // White (transparent)
 

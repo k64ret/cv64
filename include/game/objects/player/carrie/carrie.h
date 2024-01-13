@@ -5,7 +5,7 @@
 #include "object.h"
 #include "objects/player/player.h"
 
-// ID 0x0074 / 0x0075
+// ID: 0x0074 / 0x0075
 typedef struct {
     cv64_object_hdr_t header;
     u8 field_0x20[4];

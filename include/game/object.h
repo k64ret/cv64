@@ -6,6 +6,8 @@
 
 #define OBJECT_SIZE        0x74
 #define OBJECT_HEADER_SIZE 0x20
+#define OBJECT_ARRAY_MAX   384
+#define OBJECT_NUM_MAX     554
 
 // clang-format off
 typedef enum cv64_object_exec_flag {
@@ -35,8 +37,14 @@ typedef struct cv64_object_hdr {
     struct cv64_object_hdr_t* child;
 } cv64_object_hdr_t; // Size = 0x20
 
-extern void* object_create(void* parent, cv64_object_t ID);
-extern void* object_createAndSetChild(void* parent, cv64_object_t ID);
+// Generic object struct
+typedef struct cv64_object {
+    cv64_object_hdr_t header;
+    u8 field_0x20[OBJECT_SIZE - OBJECT_HEADER_SIZE];
+} cv64_object_t; // Size = 0x74
+
+extern void* object_create(void* parent, cv64_object_full_id_t ID);
+extern void* object_createAndSetChild(void* parent, cv64_object_full_id_t ID);
 extern void object_curLevel_goToFunc(u16 current_functionInfo[],
                                      s16* functionInfo_ID, s32 function);
 extern void object_allocEntryInList(cv64_object_hdr_t* object,
@@ -73,6 +81,9 @@ void object_nextLevel_goToFunc(u16 current_functionInfo[], s16* functionInfo_ID,
                                s32 function);
 extern void clearAllObjects();
 extern void func_8000E860(cv64_object_hdr_t* self);
+
+extern cv64_object_t objects_array[OBJECT_ARRAY_MAX];
+extern u16 objects_number_of_instances_per_object[OBJECT_NUM_MAX];
 
 // Mostly used inside entrypoint functions
 // Commas at the end of statements needed for matching

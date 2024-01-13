@@ -1,3 +1,12 @@
+/**
+ * File: rose.c
+ * Description: Contains the code for objects exclusive to ROSE
+ * (Rosa / Actriese Fan Room)
+ * Associated objects: 0x0220, 0x1221
+ *
+ * Mapped by the TLB? = No
+ */
+
 #include "objects/map/rose/rose.h"
 #include "actor.h"
 #include "gfx/figure.h"
@@ -14,7 +23,7 @@ void cv64_ovl_rose_ventilator_entrypoint(cv64_ovl_rose_ventilator_t* self) {
 void cv64_ovl_rose_ventilator_init(cv64_ovl_rose_ventilator_t* self) {
     cv64_ovl_rose_ventilator_cfg_t* speed_settings = &self->speed_settings;
     cv64_model_inf_t* model =
-        (*modelInfo_createRootNode)(STANDALONE, D_8018CDE0[0]);
+        (*modelInfo_createRootNode)(FIG_TYPE_STANDALONE, D_8018CDE0[0]);
     u32 unused;
 
     if (model == NULL) {
@@ -24,7 +33,7 @@ void cv64_ovl_rose_ventilator_init(cv64_ovl_rose_ventilator_t* self) {
         self->model = model;
         model->dlist = &ROSE_VENTILATOR_DL;
         model->assets_file_ID = sys.map_assets_file_IDs[0];
-        model->flags |= (0x800 | 0x100);
+        model->flags |= (FIG_FLAG_0800 | FIG_FLAG_0100);
         CV64_COLOR_RGBA_TO_U32(model->primitive_color) =
             CV64_COLOR_RGBA_TO_U32(sys.primitive_color);
         CV64_COLOR_RGBA_TO_U32(model->fog_color) =
@@ -51,20 +60,21 @@ void cv64_ovl_rose_ventilator_loop(cv64_ovl_rose_ventilator_t* self) {
     if ((*actor_checkSpawn)(self, model->position.x, model->position.y,
                             model->position.z) != FALSE) {
         // clang-format off
-        /*
-         * @bug
-         * If the player is far away enough from the ventilator, it will try to go to the next function.
-         * However, `cv64_ovl_rose_ventilator_funcs` only has two functions. This will make the game
-         * read out of bounds into `cv64_ovl_rose_ventilator_funcs` and essentially turn the current
-         * ventilator actor into a door.
-         *
-         * One of the side-effects is that the ventilator model will not be destroyed, so multiple ventilator
-         * models can be created.
-         *
-         * The devs probably intended to create a destroy function specific to the ventilator actor,
-         * and then placing it into `cv64_ovl_rose_ventilator_funcs`, but no such function exists
-         * in the final game
-         */
+        /* @bug If the player is far away enough from the ventilator, it will try to go to the next function.
+                However, `cv64_ovl_rose_ventilator_funcs` only has two functions. This will make the game
+                read out of bounds into `cv64_ovl_rose_door_funcs` and essentially turn the current
+                ventilator actor into a door.
+
+                One of the side-effects is that the ventilator model will not be destroyed, so multiple ventilator
+                models can be created, until `figures_array` is full.
+
+                In practice this will never happen because the spawn radius for the ventilator is larger than the
+                map itself, so there's no way to get far away enough from the ventilator to trigger this bug.
+
+                The devs probably intended to create a destroy function specific to the ventilator actor,
+                and then placing it into `cv64_ovl_rose_ventilator_funcs`, but no such function exists
+                in the final game.
+        */
         // clang-format on
         (*object_curLevel_goToNextFuncAndClearTimer)(
             self->header.current_function, &self->header.functionInfo_ID);
@@ -93,18 +103,18 @@ void cv64_ovl_rose_door_init(cv64_ovl_rose_door_t* self) {
     cv64_actor_settings_t* settings = self->settings;
     cv64_ovl_rose_door_cfg_t* height_settings = &self->height_settings;
     cv64_model_inf_t* model =
-        (*modelInfo_createRootNode)(STANDALONE, D_8018CDE0[0]);
+        (*modelInfo_createRootNode)(FIG_TYPE_STANDALONE, D_8018CDE0[0]);
 
     self->model = model;
     (*actor_model_set_pos_and_angle)(self, model);
     model->assets_file_ID = sys.map_assets_file_IDs[0];
     model->dlist = &ROSE_DOOR_DL;
-    model->flags |= (0x800 | 0x100);
+    model->flags |= (FIG_FLAG_0800 | FIG_FLAG_0100);
     CV64_COLOR_RGBA_TO_U32(model->primitive_color) =
         CV64_COLOR_RGBA_TO_U32(sys.primitive_color);
     CV64_COLOR_RGBA_TO_U32(model->fog_color) =
         CV64_COLOR_RGBA_TO_U32(sys.background_color);
-    self->header.ID |= FLAG_STAGE_OBJECT;
+    self->header.ID |= OBJ_FLAG_STAGE_OBJECT;
     map_actor_model =
         (*getMapActorModelEntryFromArray)(model->dlist, model->assets_file_ID);
     model->map_actor_model = map_actor_model;
@@ -116,10 +126,10 @@ void cv64_ovl_rose_door_init(cv64_ovl_rose_door_t* self) {
     height_settings->closing_speed = 0.0f;
     model->position.y =
         height_settings->height + height_settings->initial_height;
-    if (settings->variable_1 != 0) {
+    if (settings->variable_1 != FALSE) {
         (*object_nextLevel_goToFunc)(self->header.current_function,
                                      &self->header.functionInfo_ID,
-                                     ROSE_DOOR_IDLE);
+                                     ROSE_DOOR_STATE_IDLE);
     }
 }
 

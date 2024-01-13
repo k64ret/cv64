@@ -3,7 +3,7 @@
 
 #include "gamestate.h"
 
-// ID 0x0001
+// ID: 0x0001
 typedef struct {
     s16 ID;
     u16 flags;

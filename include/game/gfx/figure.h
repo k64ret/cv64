@@ -6,20 +6,29 @@
 // Types and functions common to figure-type structs (model_info, camera,
 // struct_47)
 
+#define FIG_HEADER_SIZE 0x14
+#define FIG_SIZE        0xA8
+#define FIG_ARRAY_MAX   512
+
 // Types
-#define STANDALONE         0x0004 // Assumption
-#define MAP_PIECE          0x0008
-#define HUD_ELEMENT        0x0010
-#define HIERARCHY_NODE     0x0040 // "offset", according to leftover strings
-#define STRUCT_47          0x0080
-#define CAMERA_ORTHO       0x0100
-#define CAMERA_PERSPECTIVE 0x0200
-#define CAMERA_CUTSCENE                                                        \
+#define FIG_TYPE_STANDALONE  0x0004 // Assumption
+#define FIG_TYPE_MAP_PIECE   0x0008
+#define FIG_TYPE_HUD_ELEMENT 0x0010
+#define FIG_TYPE_HIERARCHY_NODE                                                \
+    0x0040 // "offset", according to leftover strings
+#define FIG_TYPE_STRUCT_47          0x0080
+#define FIG_TYPE_CAMERA_ORTHO       0x0100
+#define FIG_TYPE_CAMERA_PERSPECTIVE 0x0200
+#define FIG_TYPE_CAMERA_CUTSCENE                                               \
     0x0800 // Also assigned to the Player's mirrored copy in the Villa's mirror
            // room
-#define HIERARCHY_FIRST_NODE 0x1000
-#define HIERARCHY_ROOT       0x2000 // "super", according to leftover strings
-#define HIDE                 0x8000
+#define FIG_TYPE_HIERARCHY_FIRST_NODE 0x1000
+#define FIG_TYPE_HIERARCHY_ROOT       0x2000 // "super", according to leftover strings
+#define FIG_TYPE_HIDE                 0x8000
+
+// Flags
+#define FIG_FLAG_0100 0x0100
+#define FIG_FLAG_0800 0x0800
 
 typedef struct {
     s16 type;
@@ -28,8 +37,16 @@ typedef struct {
     struct figHeader* sibling;
     struct figHeader* next;
     struct figHeader* parent;
-} figHeader;
+} figHeader; // Size = 0x14
 
-figHeader* fig_allocate(s16 type);
+// Generic figure struct
+typedef struct {
+    figHeader header;
+    u8 field_0x14[FIG_SIZE - FIG_HEADER_SIZE];
+} figure; // Size = 0xA8
+
+extern figHeader* fig_allocate(s16 type);
+
+extern figure figures_array[FIG_ARRAY_MAX];
 
 #endif

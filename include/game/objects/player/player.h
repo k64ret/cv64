@@ -6,7 +6,7 @@
 #include "atari_work.h"
 #include "gfx/model_info.h"
 #include "math.h"
-#include "objects/camera/module_006E.h"
+#include "objects/camera/object_006E.h"
 #include "objects/player/attackMgr.h"
 #include "objects/player/player_flags.h"
 #include <ultra64.h>
