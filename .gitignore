@@ -1,8 +1,14 @@
+# IDE workspace folders
+.vscode/
+.idea/
+
+# Ignored project folders
 asm/
 bin/
 assets/
 build/
 
+# Ignored filetypes
 .make_options
 *.log
 *.[nvz]64
@@ -11,5 +17,3 @@ build/
 *.bin
 *.zip
 *.hexproj
-
-.vscode/
