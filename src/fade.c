@@ -74,7 +74,7 @@ void fade_setSettings(s16 flags, u16 fade_time, u8 R, u8 G, u8 B) {
 }
 
 // The cleaner version
-// u32 fade_isFading() {
+// u32 fade_isFading(void) {
 //     if (!sys.fade_flags ||
 //         ((sys.fade_flags & FADE_OUT) &&
 //          (sys.fade_current_time ==
@@ -101,7 +101,7 @@ u32 fade_isFading(void) {
 
 // 0x8000E6C4 (Matched by anon. Original scratch:
 // https://decomp.me/scratch/j0Te1)
-void fade_calc() {
+void fade_calc(void) {
     f32 alpha;
     s32 flags = sys.fade_flags;
 

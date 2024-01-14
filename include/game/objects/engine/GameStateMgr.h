@@ -48,7 +48,8 @@ typedef struct {
     gameState_info current_game_state_info;
 } GameStateMgr;
 
-extern void GameStateMgr_destroy(GameStateMgr* self);
+void GameStateMgr_execute(GameStateMgr* self);
+void GameStateMgr_destroy(GameStateMgr* self);
 extern void GameStateMgr_createGameStateModules(GameStateMgr* self);
 extern void GameStateMgr_executeGameStateModules(GameStateMgr* self,
                                                  u32 execution_flags);

@@ -1,7 +1,7 @@
 #ifndef OBJECT_006E_H
 #define OBJECT_006E_H
 
-#include <ultra64.h>
+#include "object.h"
 
 // ID: 0x006E
 // TODO: Fill this

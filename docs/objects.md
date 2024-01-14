@@ -280,11 +280,11 @@ execution tree, so any `child` / `next` objects that come down from it will
 automatically execute; no need to explicitly call `object_execute` on the newly
 spawned object.
 
-#### `objects_functions`
+#### `Objects_functions`
 
 In order to know where the code associated to said object is located, the
 [identifier part](#lower-11-bits-the-actual-identifier) of its `ID` is used as
-an index into an array known as `objects_functions`.
+an index into an array known as `Objects_functions`.
 
 This is an array of 554 function pointers (one per object) containing the
 beginning of the object's associated code. Each entry in this array is called an
@@ -304,7 +304,7 @@ they're unloaded.
 
 Because this code is loaded dynamically, the address of its `entrypoint`
 function is not guaranteed to be constant. This is problematic because
-`objects_functions` only stores a single address meant to be constant during
+`Objects_functions` only stores a single address meant to be constant during
 gameplay.
 
 In addition, overlays are compiled with a specific `entrypoint` address

@@ -38,12 +38,12 @@ typedef struct {
 
 void gamestate_create(s32 gamestate_id);
 void gamestate_change(s32 gamestate_id);
-extern void gamestate_init();
+extern void gamestate_init(void);
 void end_frame(void);
-extern void setup_background_color();
-extern void setup_framebuffer();
+extern void setup_background_color(void);
+extern void setup_framebuffer(void);
 extern void setup_rsp(Gfx**);
-extern void setup_z_buffer();
+extern void setup_z_buffer(void);
 extern gameState_settings_struct gameState_settings[12];
 
 #endif
