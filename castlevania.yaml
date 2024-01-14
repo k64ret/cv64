@@ -87,10 +87,10 @@ segments:
       - [0x0000DD70, asm]
       - [0x0000F190, c, fade]
       - [0x0000F460, asm]               # Contains some gamestate-related functions
-      - [0x0000F960, asm]               # File load-related. Module 0x0003's code is located here
+      - [0x0000F960, asm]               # File load-related. Object 0x0003's code is located here
       - [0x00010100, asm]
       - [0x000101C0, asm, DMAMgr]
-      - [0x000113D0, asm]              # struct_47, Modules 0x006D, 0x006E and 0x006F's code
+      - [0x000113D0, asm]              # struct_47, Objects 0x006D, 0x006E and 0x006F's code
       - [0x00011F10, c, vec3f]
       - [0x00012700, asm]              # Appears to contain float-rounding functions?
       - [0x00012900, asm]

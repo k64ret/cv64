@@ -1,7 +1,7 @@
 gamestate_create = 0x80000460; // type:func
 gamestate_change = 0x80000510; // type:func
-GameStateMgr_createGameStateModules = 0x8000eb64; // type:func
-GameStateMgr_executeGameStateModules = 0x8000ecb0; // type:func
+GameStateMgr_createGameStateObjects = 0x8000eb64; // type:func
+GameStateMgr_executeGameStateObjects = 0x8000ecb0; // type:func
 memory_clear = 0x80000770;
 memory_copy = 0x800008d0;
 heap_init = 0x80000c28;

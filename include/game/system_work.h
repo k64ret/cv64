@@ -83,7 +83,7 @@ typedef struct {
     s16 field44_0x2621e;
     s16 FREEZE_gameplayMenuMgr;
     s16 contPak_file_no;
-    void* ptr_PlayerModule;                           // Player*
+    void* ptr_PlayerObject;                           // Player*
     void* actor_player_is_currently_interacting_with; // interactuables*
     u32 pull_lever;
     u8 field50_0x26230[4];

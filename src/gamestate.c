@@ -49,11 +49,11 @@ void GameStateMgr_entrypoint(GameStateMgr* self) {
         }
         return;
     } else if (self->isCurrentGameStateActive == FALSE) {
-        GameStateMgr_createGameStateModules(self);
+        GameStateMgr_createGameStateObjects(self);
         gameState_settings[self->current_game_state - 1].init_function(self);
         self->isCurrentGameStateActive++;
     }
-    GameStateMgr_executeGameStateModules(self, sys.execution_flags);
+    GameStateMgr_executeGameStateObjects(self, sys.execution_flags);
 }
 
 #pragma GLOBAL_ASM("../asm/nonmatchings/gamestate/gamestate_init.s")

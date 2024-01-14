@@ -20,12 +20,12 @@ typedef enum cv64_gamestate_id {
 // clang-format on
 
 typedef union {
-    u32 module_ID;
+    u32 object_ID;
     void (*function)();
-} gameStateInfoModuleOrFunc;
+} gameStateInfoObjectOrFunc;
 
 typedef struct {
-    gameStateInfoModuleOrFunc module_ID_or_a_function_ptr[16];
+    gameStateInfoObjectOrFunc object_ID_or_a_function_ptr[16];
 } gameState_info;
 
 typedef struct {
