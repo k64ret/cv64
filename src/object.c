@@ -19,7 +19,7 @@ int object_isValid(cv64_object_hdr_t* self) {
 #pragma GLOBAL_ASM("../asm/nonmatchings/object/updateObjectListFreeSlot.s")
 
 cv64_object_hdr_t* object_create(cv64_object_hdr_t* parent,
-                                 cv64_object_full_id_t ID) {
+                                 cv64_object_id_t ID) {
     // Allocate the object in the objects array
     cv64_object_hdr_t* new_object = object_allocate(ID);
 
@@ -43,7 +43,7 @@ cv64_object_hdr_t* object_create(cv64_object_hdr_t* parent,
 }
 
 cv64_object_hdr_t* object_createAndSetChild(cv64_object_hdr_t* parent,
-                                            cv64_object_full_id_t ID) {
+                                            cv64_object_id_t ID) {
     cv64_object_hdr_t* new_object;
     cv64_object_hdr_t* var_v0;
     cv64_object_hdr_t* var_v1;
@@ -80,7 +80,7 @@ cv64_object_hdr_t* object_createAndSetChild(cv64_object_hdr_t* parent,
     return new_object;
 }
 
-cv64_object_t* object_findFirstObjectByID(cv64_object_full_id_t ID,
+cv64_object_t* object_findFirstObjectByID(cv64_object_id_t ID,
                                           cv64_object_t* current_object) {
     // The first slot in the object array is always empty.
     // In that array, objects start at ID 1.

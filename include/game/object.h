@@ -56,10 +56,10 @@ typedef struct cv64_object_file_info {
 
 extern cv64_object_hdr_t* object_allocate(s32 ID);
 cv64_object_hdr_t* object_create(cv64_object_hdr_t* parent,
-                                 cv64_object_full_id_t ID);
+                                 cv64_object_id_t ID);
 cv64_object_hdr_t* object_createAndSetChild(cv64_object_hdr_t* parent,
-                                            cv64_object_full_id_t ID);
-cv64_object_t* object_findFirstObjectByID(cv64_object_full_id_t ID,
+                                            cv64_object_id_t ID);
+cv64_object_t* object_findFirstObjectByID(cv64_object_id_t ID,
                                           cv64_object_t* current_object);
 void object_execute(cv64_object_hdr_t* self);
 void object_executeChildObject(cv64_object_hdr_t* self);

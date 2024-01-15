@@ -6,8 +6,8 @@
 // clang-format off
 
 /**
- * The flags that are part of the "ID" field of `cv64_object_hdr_t`, NOT field 0x02
- * Used with cv64_object_t
+ * The flags that are part of the `ID` field of `cv64_object_hdr_t`, NOT
+ * `field_0x02`. Used with `cv64_object_id_t`.
  */
 typedef enum cv64_object_kind {
     OBJ_KIND_NONE         = 0x00,
@@ -19,7 +19,10 @@ typedef enum cv64_object_kind {
     OBJ_KIND_DESTROY      = 0x80
 } cv64_object_kind_t;
 
-// Same as above but with the additional zeroes, so that we can use inside code
+/**
+ * Same as `cv64_object_kind_t` but with the additional zeroes, so that we can
+ * use inside code
+ */
 typedef enum cv64_object_flag {
     OBJ_FLAG_NONE         = 0x0000,
     /**
@@ -30,21 +33,21 @@ typedef enum cv64_object_flag {
     OBJ_FLAG_DESTROY      = 0x8000
 } cv64_object_flag_t;
 
-typedef enum cv64_object_id {
-    ID_GAMESTATEMGR              = 0x001,
+typedef enum cv64_object_id_raw {
+    ID_GAMESTATEMGR                  = 0x001,
     ID_OBJECT_002                    = 0x002,
     ID_OBJECT_003                    = 0x003,
-    ID_DMAMGR                    = 0x004,
-    ID_GAMEPLAYMGR               = 0x005,
-    ID_MAP_OBJECT_PARENT          = 0x006,
-    ID_PLAYER_CONTROLLER          = 0x007,
-    ID_MAP_SETUP                  = 0x008,
-    ID_ENEMY_PARENT               = 0x009,
+    ID_DMAMGR                        = 0x004,
+    ID_GAMEPLAYMGR                   = 0x005,
+    ID_MAP_OBJECT_PARENT             = 0x006,
+    ID_PLAYER_CONTROLLER             = 0x007,
+    ID_MAP_SETUP                     = 0x008,
+    ID_ENEMY_PARENT                  = 0x009,
     ID_OBJECT_00A                    = 0x00A,
     ID_OBJECT_00B                    = 0x00B,
     ID_OBJECT_00C                    = 0x00C,
     ID_OBJECT_00D                    = 0x00D,
-    ID_KONAMI_KCEK_LOGOS                    = 0x00E,
+    ID_KONAMI_KCEK_LOGOS             = 0x00E,
     ID_OBJECT_00F                    = 0x00F,
     ID_OBJECT_010                    = 0x010,
     ID_OBJECT_011                    = 0x011,
@@ -72,7 +75,7 @@ typedef enum cv64_object_id {
     ID_OBJECT_027                    = 0x027,
     ID_OBJECT_028                    = 0x028,
     ID_OBJECT_029                    = 0x029,
-    ID_CUTSCENEMGR               = 0x02A,
+    ID_CUTSCENEMGR                   = 0x02A,
     ID_OBJECT_02B                    = 0x02B,
     ID_OBJECT_02C                    = 0x02C,
     ID_OBJECT_02D                    = 0x02D,
@@ -123,7 +126,7 @@ typedef enum cv64_object_id {
     ID_OBJECT_05A                    = 0x05A,
     ID_OBJECT_05B                    = 0x05B,
     ID_OBJECT_05C                    = 0x05C,
-    ID_CUTSCENE_FOREST_BLESSING   = 0x05D,
+    ID_CUTSCENE_FOREST_BLESSING      = 0x05D,
     ID_OBJECT_05E                    = 0x05E,
     ID_OBJECT_05F                    = 0x05F,
     ID_OBJECT_060                    = 0x060,
@@ -134,24 +137,24 @@ typedef enum cv64_object_id {
     ID_OBJECT_065                    = 0x065,
     ID_OBJECT_066                    = 0x066,
     ID_OBJECT_067                    = 0x067,
-    ID_CUTSCENE_CREDITS           = 0x068,
+    ID_CUTSCENE_CREDITS              = 0x068,
     ID_OBJECT_069                    = 0x069,
     ID_OBJECT_06A                    = 0x06A,
     ID_OBJECT_06B                    = 0x06B,
     ID_OBJECT_06C                    = 0x06C,
     ID_OBJECT_06D                    = 0x06D,
-    ID_OBJ_06E                    = 0x06E,
+    ID_OBJ_06E                       = 0x06E,
     ID_OBJECT_06F                    = 0x06F,
-    ID_REINHARDT                  = 0x070,
-    ID_REINHARDT_ALT              = 0x071,
-    ID_REINHARDT_ATTACKMGR       = 0x072,
-    ID_REINHARDT_DYNAMIC_SCARF    = 0x073,
-    ID_CARRIE                     = 0x074,
-    ID_CARRIE_ALT                 = 0x075,
-    ID_CARRIE_ATTACKMGR          = 0x076,
-    ID_CARRIE_DYNAMIC_SKIRT       = 0x077,
-    ID_CARRIE_DYNAMIC_RIGHT_STRIP = 0x078,
-    ID_CARRIE_DYNAMIC_LEFT_STRIP  = 0x079,
+    ID_REINHARDT                     = 0x070,
+    ID_REINHARDT_ALT                 = 0x071,
+    ID_REINHARDT_ATTACKMGR           = 0x072,
+    ID_REINHARDT_DYNAMIC_SCARF       = 0x073,
+    ID_CARRIE                        = 0x074,
+    ID_CARRIE_ALT                    = 0x075,
+    ID_CARRIE_ATTACKMGR              = 0x076,
+    ID_CARRIE_DYNAMIC_SKIRT          = 0x077,
+    ID_CARRIE_DYNAMIC_RIGHT_STRIP    = 0x078,
+    ID_CARRIE_DYNAMIC_LEFT_STRIP     = 0x079,
     ID_OBJECT_07A                    = 0x07A,
     ID_OBJECT_07B                    = 0x07B,
     ID_OBJECT_07C                    = 0x07C,
@@ -174,7 +177,7 @@ typedef enum cv64_object_id {
     ID_OBJECT_08D                    = 0x08D,
     ID_OBJECT_08E                    = 0x08E,
     ID_OBJECT_08F                    = 0x08F,
-    ID_GARDENER                   = 0x090,
+    ID_GARDENER                      = 0x090,
     ID_OBJECT_091                    = 0x091,
     ID_OBJECT_092                    = 0x092,
     ID_OBJECT_093                    = 0x093,
@@ -324,7 +327,7 @@ typedef enum cv64_object_id {
     ID_OBJECT_123                    = 0x123,
     ID_OBJECT_124                    = 0x124,
     ID_OBJECT_125                    = 0x125,
-    ID_GAMEPLAY_MENUMGR          = 0x126,
+    ID_GAMEPLAY_MENUMGR              = 0x126,
     ID_OBJECT_127                    = 0x127,
     ID_OBJECT_128                    = 0x128,
     ID_OBJECT_129                    = 0x129,
@@ -351,7 +354,7 @@ typedef enum cv64_object_id {
     ID_OBJECT_13E                    = 0x13E,
     ID_OBJECT_13F                    = 0x13F,
     ID_OBJECT_140                    = 0x140,
-    ID_STAGE_SELECT               = 0x141,
+    ID_STAGE_SELECT                  = 0x141,
     ID_OBJECT_142                    = 0x142,
     ID_OBJECT_143                    = 0x143,
     ID_OBJECT_144                    = 0x144,
@@ -467,7 +470,7 @@ typedef enum cv64_object_id {
     ID_OBJECT_1B2                    = 0x1B2,
     ID_OBJECT_1B3                    = 0x1B3,
     ID_OBJECT_1B4                    = 0x1B4,
-    ID_MEIRO_TEIEN_OBJ_01B5                    = 0x1B5,
+    ID_MEIRO_TEIEN_OBJ_01B5          = 0x1B5,
     ID_OBJECT_1B6                    = 0x1B6,
     ID_OBJECT_1B7                    = 0x1B7,
     ID_OBJECT_1B8                    = 0x1B8,
@@ -574,8 +577,8 @@ typedef enum cv64_object_id {
     ID_OBJECT_21D                    = 0x21D,
     ID_OBJECT_21E                    = 0x21E,
     ID_OBJECT_21F                    = 0x21F,
-    ID_ROSE_VENTILATOR                    = 0x220,
-    ID_ROSE_DOOR                    = 0x221,
+    ID_ROSE_VENTILATOR               = 0x220,
+    ID_ROSE_DOOR                     = 0x221,
     ID_OBJECT_222                    = 0x222,
     ID_OBJECT_223                    = 0x223,
     ID_OBJECT_224                    = 0x224,
@@ -585,44 +588,44 @@ typedef enum cv64_object_id {
     ID_OBJECT_228                    = 0x228,
     ID_OBJECT_229                    = 0x229,
     ID_OBJECT_22A                    = 0x22A
-} cv64_object_id_t;
+} cv64_object_id_raw_t;
 
-typedef enum cv64_object_full_id {
+typedef enum cv64_object_id {
     ENGINE_GAMESTATEMGR               = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_GAMESTATEMGR),
-    ENGINE_DMAMGR                    = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_DMAMGR),
-    ENGINE_GAMEPLAYMGR            = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_GAMEPLAYMGR),
+    ENGINE_DMAMGR                     = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_DMAMGR),
+    ENGINE_GAMEPLAYMGR                = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_GAMEPLAYMGR),
     ENGINE_MAP_OBJECT_PARENT          = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_MAP_OBJECT_PARENT),
     ENGINE_PLAYER_CONTROLLER          = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_PLAYER_CONTROLLER),
     ENGINE_MAP_SETUP                  = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_MAP_SETUP),
     ENGINE_ENEMY_PARENT               = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_ENEMY_PARENT),
-    ENGINE_KONAMI_KCEK_LOGOS               = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_KONAMI_KCEK_LOGOS),
+    ENGINE_KONAMI_KCEK_LOGOS          = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_KONAMI_KCEK_LOGOS),
 
-    CUTSCENE_CUTSCENEMGR             = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_CUTSCENEMGR),
+    CUTSCENE_CUTSCENEMGR              = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_CUTSCENEMGR),
     CUTSCENE_CUTSCENE_FOREST_BLESSING = CV64_OBJECT_ID(OBJ_KIND_MAP_OVERLAY, ID_CUTSCENE_FOREST_BLESSING),
     CUTSCENE_CUTSCENE_CREDITS         = CV64_OBJECT_ID(OBJ_KIND_MAP_OVERLAY, ID_CUTSCENE_CREDITS),
 
-    CAMERA_OBJ_06E             = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_OBJ_06E),
+    CAMERA_OBJ_06E                    = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_OBJ_06E),
 
     PLAYER_REINHARDT                  = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_REINHARDT),
     PLAYER_REINHARDT_ALT              = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_REINHARDT_ALT),
-    PLAYER_REINHARDT_ATTACKMGR       = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_REINHARDT_ATTACKMGR),
+    PLAYER_REINHARDT_ATTACKMGR        = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_REINHARDT_ATTACKMGR),
     PLAYER_REINHARDT_DYNAMIC_SCARF    = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_REINHARDT_DYNAMIC_SCARF),
     PLAYER_CARRIE                     = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_CARRIE),
     PLAYER_CARRIE_ALT                 = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_CARRIE_ALT),
-    PLAYER_CARRIE_ATTACKMGR          = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_CARRIE_ATTACKMGR),
+    PLAYER_CARRIE_ATTACKMGR           = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_CARRIE_ATTACKMGR),
     PLAYER_CARRIE_DYNAMIC_SKIRT       = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_CARRIE_DYNAMIC_SKIRT),
     PLAYER_CARRIE_DYNAMIC_RIGHT_STRIP = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_CARRIE_DYNAMIC_RIGHT_STRIP),
     PLAYER_CARRIE_DYNAMIC_LEFT_STRIP  = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_CARRIE_DYNAMIC_LEFT_STRIP),
 
     ENEMY_GARDENER                    = CV64_OBJECT_ID(OBJ_KIND_MAP_OVERLAY, ID_GARDENER),
 
-    MENU_GAMEPLAY_MENUMGR            = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_GAMEPLAY_MENUMGR),
+    MENU_GAMEPLAY_MENUMGR             = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_GAMEPLAY_MENUMGR),
     MENU_STAGE_SELECT                 = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_STAGE_SELECT),
 
-    STAGE_OBJECT_MEIRO_TEIEN_OBJ_01B5                 = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_MEIRO_TEIEN_OBJ_01B5),
-    STAGE_OBJECT_ROSE_VENTILATOR                 = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_ROSE_VENTILATOR),
-    STAGE_OBJECT_ROSE_DOOR                 = CV64_OBJECT_ID(OBJ_KIND_STAGE_OBJECT, ID_ROSE_DOOR)
-} cv64_object_full_id_t;
+    STAGE_OBJECT_MEIRO_TEIEN_OBJ_01B5 = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_MEIRO_TEIEN_OBJ_01B5),
+    STAGE_OBJECT_ROSE_VENTILATOR      = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_ROSE_VENTILATOR),
+    STAGE_OBJECT_ROSE_DOOR            = CV64_OBJECT_ID(OBJ_KIND_STAGE_OBJECT, ID_ROSE_DOOR)
+} cv64_object_id_t;
 
 // clang-format on
 
