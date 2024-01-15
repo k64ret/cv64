@@ -66,11 +66,8 @@ cv64_object_hdr_t* object_createAndSetChild(cv64_object_hdr_t* parent,
                 var_v1 = parent->child;
                 // Traverse all the parent's child "next" pointers until the
                 // last one is reached Then put the new one in there.
-                if (var_v0 != NULL) {
-                    do {
-                        var_v1 = var_v0;
-                        var_v0 = var_v0->next;
-                    } while (var_v0 != NULL);
+                for (; var_v0 != NULL; var_v0 = var_v0->next) {
+                    var_v1 = var_v0;
                 }
                 var_v1->next = new_object;
             } else {
