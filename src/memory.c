@@ -43,7 +43,7 @@ s32 func_80000D74_1974(s32 arg0) { return 0; }
 // https://decomp.me/scratch/tHw91
 #pragma GLOBAL_ASM("../asm/nonmatchings/memory/heapBlock_updateBlockMaxSize.s")
 
-void* func_80001008_1C08(s32 heap_kind, u32 size) {
+void* func_80001008_1C08(cv64_heap_kind_t heap_kind, u32 size) {
     u32 data;
     cv64_heapblock_hdr_t* data_header;
 
