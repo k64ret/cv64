@@ -3,8 +3,10 @@
 #include "objects/engine/GameStateMgr.h"
 #include "objects/engine/object_0003.h"
 
-// Checks if the object is allocated inside `objects_array`
-// Return type needs to be `int` specifically to match (NOT `s32`)
+/**
+ * Checks if the object is allocated inside `objects_array`. Return type
+ * explicitly needs to be `int` to match (NOT `s32` typedef)
+ */
 int object_isValid(cv64_object_hdr_t* self) {
     return ((u32) self >= (u32) ARRAY_START(objects_array)) &&
            ((u32) self < (u32) ARRAY_END(objects_array));
@@ -204,33 +206,30 @@ void GameStateMgr_execute(GameStateMgr* self) {
 }
 
 void object_executeChildObject(cv64_object_hdr_t* self) {
-    if (self != NULL) {
-        do {
-            // If a object is waiting to be deleted (i.e. if its ID = 8xxx or
-            // Axxx (2xxx | 8xxx)) then don't execute it, nor its children
-            if (self->ID > 0) {
-                // If a object has an ID = 2xxx, then its code is meant to be
-                // mapped somewhere by the TLB (usually 0x0F000000 or
-                // 0x0E000000) before it's accessed
-                if (self->ID & OBJ_FLAG_MAP_OVERLAY) {
-                    if ((self->flags & OBJ_EXEC_FLAG_PAUSE) == FALSE) {
-                        mapOverlay(self);
-                        Objects_functions[(self->ID & 0x7FF) - 1](self);
-                        unmapOverlay(self);
-                    }
-                } else if ((self->flags & OBJ_EXEC_FLAG_PAUSE) == FALSE) {
+    for (; self != NULL; self = self->next) {
+        // If a object is waiting to be deleted (i.e. if its ID = 8xxx or
+        // Axxx (2xxx | 8xxx)) then don't execute it, nor its children
+        if (self->ID > 0) {
+            // If a object has an ID = 2xxx, then its code is meant to be
+            // mapped somewhere by the TLB (usually 0x0F000000 or
+            // 0x0E000000) before it's accessed
+            if (self->ID & OBJ_FLAG_MAP_OVERLAY) {
+                if ((self->flags & OBJ_EXEC_FLAG_PAUSE) == FALSE) {
+                    mapOverlay(self);
                     Objects_functions[(self->ID & 0x7FF) - 1](self);
+                    unmapOverlay(self);
                 }
-                // Execute its child object
-                if (self->child != NULL) {
-                    object_executeChildObject(self->child);
-                }
+            } else if ((self->flags & OBJ_EXEC_FLAG_PAUSE) == FALSE) {
+                Objects_functions[(self->ID & 0x7FF) - 1](self);
             }
-            // When there are no child objects left to execute,
-            // go to the next object and execute it
-            // until there are no more "next" objects left to execute
-            self = self->next;
-        } while (self != NULL);
+            // Execute its child object
+            if (self->child != NULL) {
+                object_executeChildObject(self->child);
+            }
+        }
+        // When there are no child objects left to execute,
+        // go to the next object and execute it
+        // until there are no more "next" objects left to execute
     }
 }
 
