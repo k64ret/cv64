@@ -14,7 +14,28 @@ int object_isValid(cv64_object_hdr_t* self) {
 
 #pragma GLOBAL_ASM("../asm/nonmatchings/object/clearAllObjects.s")
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/object/object_allocate.s")
+cv64_object_hdr_t* object_allocate(cv64_object_id_t ID) {
+    cv64_object_t* current_object;
+    cv64_object_t* last;
+
+    for (current_object = ARRAY_START(objects_array);
+         current_object < ARRAY_END(objects_array); current_object++) {
+        // If the object we're currently checking has ID = 0,
+        // that means that it's free, so we can create our new object here
+        if (current_object->header.ID == 0) {
+            // Clear the object space by filling its memory space with 0
+            memory_clear(current_object, sizeof(cv64_object_t));
+            // Assign the ID for our new object
+            current_object->header.ID = ID;
+            // Update the "object_list_free_space" pointer
+            if (current_object >= object_list_free_space) {
+                object_list_free_space = current_object + 1;
+            }
+            return (cv64_object_hdr_t*) current_object;
+        }
+    }
+    return NULL;
+}
 
 #pragma GLOBAL_ASM("../asm/nonmatchings/object/updateObjectListFreeSlot.s")
 
@@ -65,7 +86,7 @@ cv64_object_hdr_t* object_createAndSetChild(cv64_object_hdr_t* parent,
                 var_v0 = parent->child->next;
                 var_v1 = parent->child;
                 // Traverse all the parent's child "next" pointers until the
-                // last one is reached Then put the new one in there.
+                // last one is reached. Then put the new one in there.
                 for (; var_v0 != NULL; var_v0 = var_v0->next) {
                     var_v1 = var_v0;
                 }
@@ -92,37 +113,57 @@ cv64_object_t* object_findFirstObjectByID(cv64_object_id_t ID,
 
     // Go through each object sequentially, and when the first object of a given
     // ID is found return a pointer to that object.
-    if ((u32) current_object < (u32) object_list_free_space) {
-        while (TRUE) {
-            if (ID == (current_object->header.ID & 0x7FF)) {
-                return current_object;
-            }
-            current_object++;
-            if ((u32) object_list_free_space <= (u32) current_object) {
-                break;
-            }
+    for (; (u32) current_object < (u32) object_list_free_space;
+         current_object++) {
+        if (ID == (current_object->header.ID & 0x07FF)) {
+            return current_object;
         }
     }
     return NULL;
 }
 
-// clang-format off
-#pragma GLOBAL_ASM("../asm/nonmatchings/object/objectList_findFirstObjectByID.s")
-// clang-format on
+// Starts at -1 because `object_findFirstObjectByID` adds it to +1
+// at the beginning of that function
+cv64_object_t* objectList_findFirstObjectByID(s32 ID) {
+    return object_findFirstObjectByID(ID, &objects_array[-1]);
+}
 
-// clang-format off
-#pragma GLOBAL_ASM("../asm/nonmatchings/object/object_findObjectBetweenIDRange.s")
-// clang-format on
+cv64_object_t* object_findObjectBetweenIDRange(s32 min_ID, s32 max_ID,
+                                               cv64_object_t* current_object) {
+    s32 current_obj_ID;
 
-// clang-format off
-#pragma GLOBAL_ASM("../asm/nonmatchings/object/objectList_findObjectBetweenRange.s")
-// clang-format on
+    min_ID &= 0x7FF;
+    max_ID &= 0x7FF;
+    current_object++;
+    for (; (u32) current_object < (u32) object_list_free_space;
+         current_object++) {
+        current_obj_ID = current_object->header.ID & 0x7FF;
+        if ((current_obj_ID >= (min_ID)) && ((max_ID) >= current_obj_ID)) {
+            return current_object;
+        }
+    }
+    return NULL;
+}
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/object/object_findObjectByIDAndType.s")
+cv64_object_t* objectList_findObjectBetweenRange(s32 min_ID, s32 max_ID) {
+    return object_findObjectBetweenIDRange(min_ID, max_ID, &objects_array[-1]);
+}
 
-// clang-format off
-#pragma GLOBAL_ASM("../asm/nonmatchings/object/objectList_findObjectByIDAndType.s")
-// clang-format on
+cv64_object_t* object_findObjectByIDAndType(s32 ID,
+                                            cv64_object_t* current_object) {
+    current_object++;
+    for (; (u32) current_object < (u32) object_list_free_space;
+         current_object++) {
+        if (current_object->header.ID & ID) {
+            return current_object;
+        }
+    }
+    return NULL;
+}
+
+cv64_object_t* objectList_findObjectByIDAndType(s32 ID) {
+    return object_findObjectByIDAndType(ID, &objects_array[-1]);
+}
 
 #pragma GLOBAL_ASM("../asm/nonmatchings/object/func_80001BE4_27E4.s")
 

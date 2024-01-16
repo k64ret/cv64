@@ -54,13 +54,15 @@ typedef struct cv64_object_file_info {
     u32 file_padding;
 } cv64_object_file_info_t;
 
-extern cv64_object_hdr_t* object_allocate(s32 ID);
+cv64_object_hdr_t* object_allocate(cv64_object_id_t ID);
 cv64_object_hdr_t* object_create(cv64_object_hdr_t* parent,
                                  cv64_object_id_t ID);
 cv64_object_hdr_t* object_createAndSetChild(cv64_object_hdr_t* parent,
                                             cv64_object_id_t ID);
 cv64_object_t* object_findFirstObjectByID(cv64_object_id_t ID,
                                           cv64_object_t* current_object);
+cv64_object_t* object_findObjectBetweenIDRange(s32 min_ID, s32 max_ID,
+                                               cv64_object_t* current_object);
 void object_execute(cv64_object_hdr_t* self);
 void object_executeChildObject(cv64_object_hdr_t* self);
 extern void object_curLevel_goToFunc(u16 current_functionInfo[],
@@ -71,7 +73,11 @@ extern void object_allocEntryInList(cv64_object_hdr_t* object,
 extern void* object_allocEntryInListAndClear(cv64_object_hdr_t* object,
                                              s32 allocatedBlockInfo_index,
                                              u32 size, u32 ptrs_array_index);
-extern void* objectList_findFirstObjectByID(u16 ID);
+cv64_object_t* objectList_findFirstObjectByID(s32 ID);
+cv64_object_t* objectList_findObjectBetweenRange(s32 min_ID, s32 max_ID);
+cv64_object_t* object_findObjectByIDAndType(s32 ID,
+                                            cv64_object_t* current_object);
+cv64_object_t* objectList_findObjectByIDAndType(s32 ID);
 void object_curLevel_goToNextFunc(u16 current_functionInfo[],
                                   s16* functionInfo_ID);
 void object_prevLevel_goToNextFunc(u16 current_functionInfo[],
