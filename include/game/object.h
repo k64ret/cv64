@@ -39,13 +39,14 @@ typedef struct cv64_object_hdr_t {
 } cv64_object_hdr_t; // Size = 0x20
 
 // Generic object struct
-#define OBJ_NUM_PTRS 16
+#define OBJ_NUM_PTRS       16
+#define OBJ_NUM_FIELD_0x24 4
 typedef struct cv64_object_t {
     cv64_object_hdr_t header;
     u16 field_0x20;
     u16 field_0x22;
-    u32 field_0x24[4];
-    void* ptrs[16];
+    u32 field_0x24[OBJ_NUM_FIELD_0x24];
+    void* ptrs[OBJ_NUM_PTRS];
 } cv64_object_t; // Size = 0x74
 
 #define OBJECT_FILE_INFO_FLAG_NONE 0x00
