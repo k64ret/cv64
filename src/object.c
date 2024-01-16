@@ -13,9 +13,48 @@ int object_isValid(cv64_object_hdr_t* self) {
            ((u32) self < (u32) ARRAY_END(objects_array));
 }
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/object/object_free.s")
+void object_free(cv64_object_t* self) {
+    s32 i;
+    s32 var_s1;
+    u32* temp_v1;
+    u32* var_v0;
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/object/clearAllObjects.s")
+    i = 0;
+    var_s1 = 1;
+    for (; i < OBJ_NUM_PTRS; var_s1 *= 2) {
+        if (self->field_0x20 & var_s1) {
+            heapBlock_free(self->ptrs[i]);
+        }
+        if (self->field_0x22 & var_s1) {
+            func_80001080_1C80(self->ptrs[i]);
+        }
+        i++;
+    }
+    var_v0 = &self->field_0x24;
+    for (i = 3; i >= 0; var_v0++) {
+        temp_v1 = *var_v0;
+        i--;
+        if (temp_v1 != NULL) {
+            *temp_v1 = 0;
+        }
+    }
+    objects_number_of_instances_per_object[(self->header.ID & 0x7FF) - 1]--;
+    self->header.ID = 0;
+}
+
+void clearAllObjects() {
+    u32 i;
+    cv64_object_t* currentObject;
+
+    for (i = 0; i < OBJECT_NUM_MAX; i++) {
+        objects_number_of_instances_per_object[i] = 0;
+    }
+    for (currentObject = ARRAY_START(objects_array);
+         currentObject < ARRAY_END(objects_array); currentObject++) {
+        *((u32*) currentObject) =
+            0; // Set the first 4 bytes of each object to 0
+    }
+}
 
 cv64_object_hdr_t* object_allocate(cv64_object_id_t ID) {
     cv64_object_t* current_object;
@@ -40,7 +79,20 @@ cv64_object_hdr_t* object_allocate(cv64_object_id_t ID) {
     return NULL;
 }
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/object/updateObjectListFreeSlot.s")
+void updateObjectListFreeSlot() {
+    cv64_object_t* current;
+    cv64_object_t* previous;
+
+    for (current = ARRAY_END(objects_array), previous = current - 1;
+         previous >= ARRAY_START(objects_array);) {
+        if (previous->header.ID == 0) {
+            current = previous--;
+        } else {
+            break;
+        }
+    }
+    object_list_free_space = current;
+}
 
 cv64_object_hdr_t* object_create(cv64_object_hdr_t* parent,
                                  cv64_object_id_t ID) {
@@ -180,7 +232,24 @@ cv64_object_t* objectList_findObjectByIDAndType(s32 ID) {
 
 #pragma GLOBAL_ASM("../asm/nonmatchings/object/findFirstMapObjectInstance.s")
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/object/func_8000211C_2D1C.s")
+cv64_object_t* func_8000211C_2D1C(s32 ID) {
+    cv64_object_t* var_v0;
+
+    if (ID & OBJ_FLAG_MAP_OVERLAY) {
+        ID &= 0x7FF;
+        var_v0 = objectList_findFirstObjectByID(ID);
+        if (var_v0 != NULL) {
+            do {
+                if (!(var_v0->header.flags & OBJ_EXEC_FLAG_PAUSE)) {
+                    return var_v0;
+                }
+                var_v0 = object_findFirstObjectByID(ID, var_v0);
+            } while (var_v0 != NULL);
+        }
+        return NULL;
+    }
+    return objectList_findFirstObjectByID(ID);
+}
 
 void* object_allocEntryInList(cv64_object_t* self, s32 heap_kind, u32 size,
                               s32 ptrs_index) {

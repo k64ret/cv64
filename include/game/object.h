@@ -39,8 +39,8 @@ typedef struct cv64_object_hdr_t {
 } cv64_object_hdr_t; // Size = 0x20
 
 // Generic object struct
-#define OBJ_NUM_PTRS       16
 #define OBJ_NUM_FIELD_0x24 4
+#define OBJ_NUM_PTRS       16
 typedef struct cv64_object_t {
     cv64_object_hdr_t header;
     u16 field_0x20;
@@ -59,28 +59,38 @@ typedef struct cv64_object_file_info {
     u32 file_padding;
 } cv64_object_file_info_t;
 
+int object_isValid(cv64_object_hdr_t* self);
+void object_free(cv64_object_t* self);
+void clearAllObjects();
 cv64_object_hdr_t* object_allocate(cv64_object_id_t ID);
+void updateObjectListFreeSlot();
 cv64_object_hdr_t* object_create(cv64_object_hdr_t* parent,
                                  cv64_object_id_t ID);
 cv64_object_hdr_t* object_createAndSetChild(cv64_object_hdr_t* parent,
                                             cv64_object_id_t ID);
 cv64_object_t* object_findFirstObjectByID(cv64_object_id_t ID,
                                           cv64_object_t* current_object);
+cv64_object_t* objectList_findFirstObjectByID(s32 ID);
 cv64_object_t* object_findObjectBetweenIDRange(s32 min_ID, s32 max_ID,
                                                cv64_object_t* current_object);
-void object_execute(cv64_object_hdr_t* self);
-void object_executeChildObject(cv64_object_hdr_t* self);
-extern void object_curLevel_goToFunc(u16 current_functionInfo[],
-                                     s16* functionInfo_ID, s32 function);
-void* object_allocEntryInList(cv64_object_t* self, s32 heap_kind, u32 size,
-                              s32 ptrs_index);
-void* object_allocEntryInListAndClear(cv64_object_t* self, s32 heap_kind,
-                                      u32 size, s32 ptrs_index);
-cv64_object_t* objectList_findFirstObjectByID(s32 ID);
 cv64_object_t* objectList_findObjectBetweenRange(s32 min_ID, s32 max_ID);
 cv64_object_t* object_findObjectByIDAndType(s32 ID,
                                             cv64_object_t* current_object);
 cv64_object_t* objectList_findObjectByIDAndType(s32 ID);
+cv64_object_t* func_8000211C_2D1C(s32 ID);
+void* object_allocEntryInList(cv64_object_t* self, s32 heap_kind, u32 size,
+                              s32 ptrs_index);
+void* object_allocEntryInListAndClear(cv64_object_t* self, s32 heap_kind,
+                                      u32 size, s32 ptrs_index);
+void* func_80002264_2E64(cv64_object_t* self, u32 size, s32 heap_kind,
+                         s32 ptrs_index);
+void func_800022BC_2EBC(cv64_object_t* self, s32 ptrs_index);
+void object_executeChildObject(cv64_object_hdr_t* self);
+void object_execute(cv64_object_hdr_t* self);
+void func_800026D8_32D8(cv64_object_hdr_t* self);
+void object_destroyChildrenAndModelInfo(cv64_object_hdr_t* self);
+void object_curLevel_goToFunc(u16 current_functionInfo[], s16* functionInfo_ID,
+                              s32 function);
 void object_curLevel_goToNextFunc(u16 current_functionInfo[],
                                   s16* functionInfo_ID);
 void object_prevLevel_goToNextFunc(u16 current_functionInfo[],
@@ -106,15 +116,8 @@ void object_prevLevel_goToFunc(u16 current_functionInfo[], s16* functionInfo_ID,
                                s32 function);
 void object_nextLevel_goToFunc(u16 current_functionInfo[], s16* functionInfo_ID,
                                s32 function);
-extern void clearAllObjects();
 extern void func_8000E860(cv64_object_hdr_t* self);
-void object_destroyChildrenAndModelInfo(cv64_object_hdr_t* self);
 void func_80002570_3170(cv64_object_hdr_t* self);
-void func_800026D8_32D8(cv64_object_hdr_t* self);
-void func_800022BC_2EBC(cv64_object_t* self, s32 ptrs_index);
-void* func_80002264_2E64(cv64_object_t* self, u32 size, s32 heap_kind,
-                         s32 ptrs_index);
-int object_isValid(cv64_object_hdr_t* self);
 extern void mapOverlay(cv64_object_hdr_t* self);
 extern void unmapOverlay();
 
