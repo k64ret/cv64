@@ -39,9 +39,13 @@ typedef struct cv64_object_hdr_t {
 } cv64_object_hdr_t; // Size = 0x20
 
 // Generic object struct
-typedef struct cv64_object {
+#define OBJ_NUM_PTRS 16
+typedef struct cv64_object_t {
     cv64_object_hdr_t header;
-    u8 field_0x20[OBJECT_SIZE - OBJECT_HEADER_SIZE];
+    u16 field_0x20;
+    u16 field_0x22;
+    u32 field_0x24[4];
+    void* ptrs[16];
 } cv64_object_t; // Size = 0x74
 
 #define OBJECT_FILE_INFO_FLAG_NONE 0x00
@@ -67,12 +71,10 @@ void object_execute(cv64_object_hdr_t* self);
 void object_executeChildObject(cv64_object_hdr_t* self);
 extern void object_curLevel_goToFunc(u16 current_functionInfo[],
                                      s16* functionInfo_ID, s32 function);
-extern void object_allocEntryInList(cv64_object_hdr_t* object,
-                                    s32 allocatedBlockInfo_index, u32 size,
-                                    u32 ptrs_array_index);
-extern void* object_allocEntryInListAndClear(cv64_object_hdr_t* object,
-                                             s32 allocatedBlockInfo_index,
-                                             u32 size, u32 ptrs_array_index);
+void* object_allocEntryInList(cv64_object_t* self, s32 heap_kind, u32 size,
+                              s32 ptrs_index);
+void* object_allocEntryInListAndClear(cv64_object_t* self, s32 heap_kind,
+                                      u32 size, s32 ptrs_index);
 cv64_object_t* objectList_findFirstObjectByID(s32 ID);
 cv64_object_t* objectList_findObjectBetweenRange(s32 min_ID, s32 max_ID);
 cv64_object_t* object_findObjectByIDAndType(s32 ID,
@@ -105,7 +107,12 @@ void object_nextLevel_goToFunc(u16 current_functionInfo[], s16* functionInfo_ID,
                                s32 function);
 extern void clearAllObjects();
 extern void func_8000E860(cv64_object_hdr_t* self);
-extern void object_destroyChildrenAndModelInfo(cv64_object_hdr_t* self);
+void object_destroyChildrenAndModelInfo(cv64_object_hdr_t* self);
+void func_80002570_3170(cv64_object_hdr_t* self);
+void func_800026D8_32D8(cv64_object_hdr_t* self);
+void func_800022BC_2EBC(cv64_object_t* self, s32 ptrs_index);
+void* func_80002264_2E64(cv64_object_t* self, u32 size, s32 heap_kind,
+                         s32 ptrs_index);
 int object_isValid(cv64_object_hdr_t* self);
 extern void mapOverlay(cv64_object_hdr_t* self);
 extern void unmapOverlay();

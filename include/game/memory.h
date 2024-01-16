@@ -52,9 +52,6 @@ typedef enum cv64_heapblock_flag {
 
 typedef enum cv64_heap_flag {
     HEAP_INACTIVE                = 0x0000,
-    /**
-     * Assumption based on function 0x80000C94
-     */
     HEAP_WRITE_BACK_CACHE_TO_RAM = 0x4000,
     HEAP_ACTIVE                  = 0x8000
 } cv64_heap_flag_t;
@@ -73,8 +70,8 @@ typedef struct cv64_heapblock_hdr {
      */
     void* field_0x08;
     /**
-     * `data_ptrs[0]` = Start ptr, `data_ptrs[1]` = End ptr (End of the
-     * allocated data, NOT end of the block)
+     * `data_ptrs[0]` = Start ptr,
+     * `data_ptrs[1]` = End ptr (End of allocated data, NOT end of block)
      */
     void* data_ptrs[2];
     /**
@@ -112,5 +109,6 @@ extern void* heap_allocWithAlignment(s32 kind, u32 data_size, u32 alignment);
 extern s32 heapBlock_updateBlockMaxSize(void* data, u32 data_size);
 extern void heapBlock_free(u16* ptr); // CV64's free()
 void* func_80001008_1C08(cv64_heap_kind_t heap_kind, u32 size);
+extern void func_80001080_1C80(void*);
 
 #endif

@@ -1,5 +1,6 @@
 #include "object.h"
 #include "cv64.h"
+#include "memory.h"
 #include "objects/engine/GameStateMgr.h"
 #include "objects/engine/object_0003.h"
 
@@ -181,15 +182,36 @@ cv64_object_t* objectList_findObjectByIDAndType(s32 ID) {
 
 #pragma GLOBAL_ASM("../asm/nonmatchings/object/func_8000211C_2D1C.s")
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/object/object_allocEntryInList.s")
+void* object_allocEntryInList(cv64_object_t* self, s32 heap_kind, u32 size,
+                              s32 ptrs_index) {
+    self->field_0x20 |= (1 << ptrs_index);
+    self->ptrs[ptrs_index] = heap_alloc(heap_kind, size);
+    return self->ptrs[ptrs_index];
+}
 
-// clang-format off
-#pragma GLOBAL_ASM("../asm/nonmatchings/object/object_allocEntryInListAndClear.s")
-// clang-format on
+void* object_allocEntryInListAndClear(cv64_object_t* self, s32 heap_kind,
+                                      u32 size, s32 ptrs_index) {
+    self->field_0x20 |= (1 << ptrs_index);
+    self->ptrs[ptrs_index] = heap_alloc(heap_kind, size);
+    memory_clear(self->ptrs[ptrs_index], size);
+    return self->ptrs[ptrs_index];
+}
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/object/func_80002264_2E64.s")
+void* func_80002264_2E64(cv64_object_t* self, u32 size, s32 heap_kind,
+                         s32 ptrs_index) {
+    self->field_0x22 |= (1 << ptrs_index);
+    self->ptrs[ptrs_index] = func_80001008_1C08(size, heap_kind);
+    return self->ptrs[ptrs_index];
+}
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/object/func_800022BC_2EBC.s")
+void func_800022BC_2EBC(cv64_object_t* self, s32 ptrs_index) {
+    if (self->field_0x20 & (1 << ptrs_index)) {
+        heapBlock_free(self->ptrs[ptrs_index]);
+    }
+    if (self->field_0x22 & (1 << ptrs_index)) {
+        func_80001080_1C80(self->ptrs[ptrs_index]);
+    }
+}
 
 void GameStateMgr_execute(GameStateMgr* self) {
     if (self->ID > 0) {
@@ -257,11 +279,42 @@ void object_execute(cv64_object_hdr_t* self) {
 
 #pragma GLOBAL_ASM("../asm/nonmatchings/object/func_80002570_3170.s")
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/object/func_800026D8_32D8.s")
+void func_800026D8_32D8(cv64_object_hdr_t* self) {
+    cv64_object_hdr_t* temp_s0;
+    cv64_object_hdr_t* temp_s1;
 
-// clang-format off
-#pragma GLOBAL_ASM("../asm/nonmatchings/object/object_destroyChildrenAndModelInfo.s")
-// clang-format on
+    temp_s0 = self->child;
+    if (temp_s0 != NULL) {
+        temp_s0->destroy(self->child);
+        temp_s0 = temp_s0->next;
+        if (temp_s0 != NULL) {
+            do {
+                temp_s1 = temp_s0->next;
+                temp_s0->destroy(temp_s0);
+                temp_s0 = temp_s1;
+            } while (temp_s1 != NULL);
+        }
+    }
+}
+
+void object_destroyChildrenAndModelInfo(cv64_object_hdr_t* self) {
+    cv64_object_hdr_t* temp_s0;
+    cv64_object_hdr_t* temp_s1;
+
+    temp_s0 = self->child;
+    if (temp_s0 != NULL) {
+        temp_s0->destroy(self->child);
+        temp_s0 = temp_s0->next;
+        if (temp_s0 != NULL) {
+            do {
+                temp_s1 = temp_s0->next;
+                temp_s0->destroy(temp_s0);
+                temp_s0 = temp_s1;
+            } while (temp_s1 != NULL);
+        }
+    }
+    func_80002570_3170(self);
+}
 
 void GameStateMgr_destroy(GameStateMgr* self) {}
 
