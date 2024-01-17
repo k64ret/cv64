@@ -19,28 +19,30 @@ int object_isValid(cv64_object_hdr_t* self) {
 
 /**
  * Removes the object's instance from `objects_array`, and frees
- * the object's pointer list (`ptrs`).
+ * the object's pointer list (`alloc_data`).
  */
 void object_free(cv64_object_t* self) {
     s32 i;
     s32 var_s1;
-    u32* temp_v1;
-    u32* var_v0;
+    figure* current_figure;
+    figure** current_figure_ptr;
 
-    for (i = 0, var_s1 = 1; i < OBJ_NUM_PTRS; var_s1 = var_s1 << 1, i++) {
+    for (i = 0, var_s1 = 1; i < OBJ_NUM_ALLOC_DATA; var_s1 = var_s1 << 1, i++) {
         if (self->field_0x20 & var_s1) {
-            heapBlock_free(self->ptrs[i]);
+            heapBlock_free(self->alloc_data[i]);
         }
         if (self->field_0x22 & var_s1) {
-            func_80001080_1C80(self->ptrs[i]);
+            func_80001080_1C80(self->alloc_data[i]);
         }
     }
-    var_v0 = &self->field_0x24;
-    for (i = 3; i >= 0; var_v0++) {
-        temp_v1 = *var_v0;
+    current_figure_ptr = &self->figures;
+    for (i = OBJ_NUM_FIGURES - 1; i >= 0; current_figure_ptr++) {
+        current_figure = *current_figure_ptr;
         i--;
-        if (temp_v1 != NULL) {
-            *temp_v1 = 0;
+        if (current_figure != NULL) {
+            // Set the first 4 bytes of the figure to 0,
+            // clearing the slot from `figures_array`
+            *((u32*) current_figure) = 0;
         }
     }
     objects_number_of_instances_per_object[(self->header.ID & 0x7FF) - 1]--;
@@ -320,45 +322,45 @@ cv64_object_t* func_8000211C_2D1C(s32 ID) {
 
 /**
  * Dynamically allocates arbitrary data, and keeps its pointer
- * in one of the object's pointer list (`ptrs`).
+ * in one of the object's pointer list (`alloc_data`).
  */
 void* object_allocEntryInList(cv64_object_t* self, s32 heap_kind, u32 size,
-                              s32 ptrs_index) {
-    self->field_0x20 |= (1 << ptrs_index);
-    self->ptrs[ptrs_index] = heap_alloc(heap_kind, size);
-    return self->ptrs[ptrs_index];
+                              s32 alloc_data_index) {
+    self->field_0x20 |= (1 << alloc_data_index);
+    self->alloc_data[alloc_data_index] = heap_alloc(heap_kind, size);
+    return self->alloc_data[alloc_data_index];
 }
 
 /**
  * Dynamically allocates arbitrary data, and keeps its pointer
- * in one of the object's pointer list (`ptrs`),
+ * in one of the object's pointer list (`alloc_data`),
  * then clears the allocated data.
  */
 void* object_allocEntryInListAndClear(cv64_object_t* self, s32 heap_kind,
-                                      u32 size, s32 ptrs_index) {
-    self->field_0x20 |= (1 << ptrs_index);
-    self->ptrs[ptrs_index] = heap_alloc(heap_kind, size);
-    memory_clear(self->ptrs[ptrs_index], size);
-    return self->ptrs[ptrs_index];
+                                      u32 size, s32 alloc_data_index) {
+    self->field_0x20 |= (1 << alloc_data_index);
+    self->alloc_data[alloc_data_index] = heap_alloc(heap_kind, size);
+    memory_clear(self->alloc_data[alloc_data_index], size);
+    return self->alloc_data[alloc_data_index];
 }
 
 void* func_80002264_2E64(cv64_object_t* self, u32 size, s32 heap_kind,
-                         s32 ptrs_index) {
-    self->field_0x22 |= (1 << ptrs_index);
-    self->ptrs[ptrs_index] = func_80001008_1C08(size, heap_kind);
-    return self->ptrs[ptrs_index];
+                         s32 alloc_data_index) {
+    self->field_0x22 |= (1 << alloc_data_index);
+    self->alloc_data[alloc_data_index] = func_80001008_1C08(size, heap_kind);
+    return self->alloc_data[alloc_data_index];
 }
 
 /**
  * Frees data previously allocated inside
- * one of the object's pointer list (`ptrs`).
+ * one of the object's pointer list (`alloc_data`).
  */
-void func_800022BC_2EBC(cv64_object_t* self, s32 ptrs_index) {
-    if (self->field_0x20 & (1 << ptrs_index)) {
-        heapBlock_free(self->ptrs[ptrs_index]);
+void func_800022BC_2EBC(cv64_object_t* self, s32 alloc_data_index) {
+    if (self->field_0x20 & (1 << alloc_data_index)) {
+        heapBlock_free(self->alloc_data[alloc_data_index]);
     }
-    if (self->field_0x22 & (1 << ptrs_index)) {
-        func_80001080_1C80(self->ptrs[ptrs_index]);
+    if (self->field_0x22 & (1 << alloc_data_index)) {
+        func_80001080_1C80(self->alloc_data[alloc_data_index]);
     }
 }
 

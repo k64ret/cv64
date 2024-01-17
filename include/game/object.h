@@ -2,12 +2,11 @@
 #define OBJECT_H
 
 #include "cv64.h"
+#include "gfx/figure.h"
 #include "object_ID.h"
 
-#define OBJECT_SIZE        0x74
-#define OBJECT_HEADER_SIZE 0x20
-#define OBJECT_ARRAY_MAX   384
-#define OBJECT_NUM_MAX     554
+#define OBJECT_ARRAY_MAX 384
+#define OBJECT_NUM_MAX   554
 
 // clang-format off
 typedef enum cv64_object_exec_flag {
@@ -39,15 +38,22 @@ typedef struct cv64_object_hdr_t {
 } cv64_object_hdr_t; // Size = 0x20
 
 // Generic object struct
-#define OBJ_NUM_FIELD_0x24 4
-#define OBJ_NUM_PTRS       16
+#define OBJ_NUM_FIGURES    4
+#define OBJ_NUM_ALLOC_DATA 16
 typedef struct cv64_object_t {
     cv64_object_hdr_t header;
-    u16 field_0x20;
-    u16 field_0x22;
-    u32 field_0x24[OBJ_NUM_FIELD_0x24];
-    void* ptrs[OBJ_NUM_PTRS];
+    /** The following two variables are
+     * bitfields, where each bit represents
+     * a non-NULL pointer (1) in `alloc_data`
+     */
+    u16 field_0x20; // Entries allocated with `heap_alloc`
+    u16 field_0x22; // Entries allocated with `func_80001008_1C08`
+    figure* figures[OBJ_NUM_FIGURES];
+    void* alloc_data[OBJ_NUM_ALLOC_DATA];
 } cv64_object_t; // Size = 0x74
+
+#define OBJECT_SIZE        sizeof(cv64_object_t)
+#define OBJECT_HEADER_SIZE sizeof(cv64_object_hdr_t)
 
 #define OBJECT_FILE_INFO_FLAG_NONE 0x00
 #define OBJECT_FILE_INFO_FLAG_LAST 0x40
@@ -79,12 +85,12 @@ cv64_object_t* object_findObjectByIDAndType(s32 ID,
 cv64_object_t* objectList_findObjectByIDAndType(s32 ID);
 cv64_object_t* func_8000211C_2D1C(s32 ID);
 void* object_allocEntryInList(cv64_object_t* self, s32 heap_kind, u32 size,
-                              s32 ptrs_index);
+                              s32 alloc_data_index);
 void* object_allocEntryInListAndClear(cv64_object_t* self, s32 heap_kind,
-                                      u32 size, s32 ptrs_index);
+                                      u32 size, s32 alloc_data_index);
 void* func_80002264_2E64(cv64_object_t* self, u32 size, s32 heap_kind,
-                         s32 ptrs_index);
-void func_800022BC_2EBC(cv64_object_t* self, s32 ptrs_index);
+                         s32 alloc_data_index);
+void func_800022BC_2EBC(cv64_object_t* self, s32 alloc_data_index);
 void object_executeChildObject(cv64_object_hdr_t* self);
 void object_execute(cv64_object_hdr_t* self);
 void func_800026D8_32D8(cv64_object_hdr_t* self);
