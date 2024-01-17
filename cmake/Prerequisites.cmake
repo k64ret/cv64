@@ -3,7 +3,7 @@ find_package(Python REQUIRED COMPONENTS Interpreter)
 if(Python_FOUND)
   # Install Python dependencies
   execute_process(
-    COMMAND ${Python_EXECUTABLE} -m pip install -r ${CMAKE_SOURCE_DIR}/requirements.txt
+    COMMAND ${Python_EXECUTABLE} -m pip install -U -r ${CMAKE_SOURCE_DIR}/requirements.txt
     WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
     OUTPUT_FILE ${CMAKE_BINARY_DIR}/pip.log)
 
@@ -18,7 +18,7 @@ if(Python_FOUND)
 
   # Run Splat
   execute_process(
-    COMMAND ${Python_EXECUTABLE} ${SPLAT} ${SPLAT_CONFIG}
+    COMMAND ${Python_EXECUTABLE} -m splat split ${SPLAT_CONFIG}
     OUTPUT_FILE ${CMAKE_BINARY_DIR}/splat.log
     WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
 endif()
