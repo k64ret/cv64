@@ -8,7 +8,7 @@
 #include "system_work.h"
 
 // .bss
-// GameStateMgr* ptr_GameStateMgr;
+GameStateMgr* ptr_GameStateMgr;
 
 void gamestate_create(s32 game_state) {
     // Set target framerate

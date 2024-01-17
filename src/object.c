@@ -4,6 +4,10 @@
 #include "objects/engine/GameStateMgr.h"
 #include "objects/engine/object_0003.h"
 
+// .bss
+cv64_object_t* object_list_free_space;
+cv64_object_t* ptr_gameplayParentObject;
+
 /**
  * Checks if the object is allocated inside `objects_array`. Return type
  * explicitly needs to be `int` to match (NOT `s32` typedef)
