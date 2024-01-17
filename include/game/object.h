@@ -125,7 +125,7 @@ extern cv64_object_t objects_array[OBJECT_ARRAY_MAX];
 extern u16 objects_number_of_instances_per_object[OBJECT_NUM_MAX];
 extern cv64_object_file_info_t* objects_file_info[OBJECT_NUM_MAX];
 extern void (*Objects_functions[OBJECT_NUM_MAX])(cv64_object_hdr_t* self);
-extern cv64_object_t* object_list_free_space;
+extern cv64_object_t* object_list_free_slot;
 
 // Mostly used inside entrypoint functions
 // Commas at the end of statements needed for matching
