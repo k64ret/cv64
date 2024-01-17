@@ -23,15 +23,16 @@ int object_isValid(cv64_object_hdr_t* self) {
  */
 void object_free(cv64_object_t* self) {
     s32 i;
-    s32 var_s1;
+    s32 alloc_data_slot;
     figure* current_figure;
     figure** current_figure_ptr;
 
-    for (i = 0, var_s1 = 1; i < OBJ_NUM_ALLOC_DATA; var_s1 = var_s1 << 1, i++) {
-        if (self->field_0x20 & var_s1) {
+    for (i = 0, alloc_data_slot = 1; i < OBJ_NUM_ALLOC_DATA;
+         alloc_data_slot = alloc_data_slot << 1, i++) {
+        if (self->field_0x20 & alloc_data_slot) {
             heapBlock_free(self->alloc_data[i]);
         }
-        if (self->field_0x22 & var_s1) {
+        if (self->field_0x22 & alloc_data_slot) {
             func_80001080_1C80(self->alloc_data[i]);
         }
     }
