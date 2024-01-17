@@ -23,16 +23,13 @@ void object_free(cv64_object_t* self) {
     u32* temp_v1;
     u32* var_v0;
 
-    i = 0;
-    var_s1 = 1;
-    for (; i < OBJ_NUM_PTRS; var_s1 *= 2) {
+    for (i = 0, var_s1 = 1; i < OBJ_NUM_PTRS; var_s1 *= 2, i++) {
         if (self->field_0x20 & var_s1) {
             heapBlock_free(self->ptrs[i]);
         }
         if (self->field_0x22 & var_s1) {
             func_80001080_1C80(self->ptrs[i]);
         }
-        i++;
     }
     var_v0 = &self->field_0x24;
     for (i = 3; i >= 0; var_v0++) {
@@ -255,14 +252,14 @@ cv64_object_t* func_8000211C_2D1C(s32 ID) {
 
 void* object_allocEntryInList(cv64_object_t* self, s32 heap_kind, u32 size,
                               s32 ptrs_index) {
-    self->field_0x20 |= (1 << ptrs_index);
+    self->field_0x20 |= CV64_BIT(ptrs_index);
     self->ptrs[ptrs_index] = heap_alloc(heap_kind, size);
     return self->ptrs[ptrs_index];
 }
 
 void* object_allocEntryInListAndClear(cv64_object_t* self, s32 heap_kind,
                                       u32 size, s32 ptrs_index) {
-    self->field_0x20 |= (1 << ptrs_index);
+    self->field_0x20 |= CV64_BIT(ptrs_index);
     self->ptrs[ptrs_index] = heap_alloc(heap_kind, size);
     memory_clear(self->ptrs[ptrs_index], size);
     return self->ptrs[ptrs_index];
@@ -270,16 +267,16 @@ void* object_allocEntryInListAndClear(cv64_object_t* self, s32 heap_kind,
 
 void* func_80002264_2E64(cv64_object_t* self, u32 size, s32 heap_kind,
                          s32 ptrs_index) {
-    self->field_0x22 |= (1 << ptrs_index);
+    self->field_0x22 |= CV64_BIT(ptrs_index);
     self->ptrs[ptrs_index] = func_80001008_1C08(size, heap_kind);
     return self->ptrs[ptrs_index];
 }
 
 void func_800022BC_2EBC(cv64_object_t* self, s32 ptrs_index) {
-    if (self->field_0x20 & (1 << ptrs_index)) {
+    if (self->field_0x20 & CV64_BIT(ptrs_index)) {
         heapBlock_free(self->ptrs[ptrs_index]);
     }
-    if (self->field_0x22 & (1 << ptrs_index)) {
+    if (self->field_0x22 & CV64_BIT(ptrs_index)) {
         func_80001080_1C80(self->ptrs[ptrs_index]);
     }
 }
