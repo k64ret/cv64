@@ -43,17 +43,20 @@ void object_free(cv64_object_t* self) {
     self->header.ID = 0;
 }
 
-// clang-format off
 void clearAllObjects() {
     u32 i;
     cv64_object_t* currentObject;
 
-    for (i = 0; i < OBJECT_NUM_MAX; i++) {objects_number_of_instances_per_object[i] = 0;}
-    for (currentObject = ARRAY_START(objects_array); currentObject < ARRAY_END(objects_array); currentObject++) {
-        *((u32*) currentObject) = 0;    // Set the first 4 bytes of each object to 0
+    // clang-format off
+    for (i = 0; i < OBJECT_NUM_MAX; i++) objects_number_of_instances_per_object[i] = 0;
+    // clang-format on
+
+    for (currentObject = ARRAY_START(objects_array);
+         currentObject < ARRAY_END(objects_array); currentObject++) {
+        // Set the first 4 bytes of each object to 0
+        *((u32*) currentObject) = 0;
     }
 }
-// clang-format on
 
 cv64_object_hdr_t* object_allocate(cv64_object_id_t ID) {
     cv64_object_t* current_object;
