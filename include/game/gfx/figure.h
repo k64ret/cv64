@@ -6,9 +6,8 @@
 // Types and functions common to figure-type structs (model_info, camera,
 // struct_47)
 
-#define FIG_HEADER_SIZE 0x14
-#define FIG_SIZE        0xA8
-#define FIG_ARRAY_MAX   512
+#define FIG_SIZE      0xA8
+#define FIG_ARRAY_MAX 512
 
 // Types
 #define FIG_TYPE_STANDALONE  0x0004 // Assumption
@@ -38,6 +37,8 @@ typedef struct {
     struct figHeader* next;
     struct figHeader* parent;
 } figHeader; // Size = 0x14
+
+#define FIG_HEADER_SIZE sizeof(figHeader)
 
 // Generic figure struct
 typedef struct {

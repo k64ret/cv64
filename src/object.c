@@ -5,44 +5,54 @@
 #include "objects/engine/object_0003.h"
 
 // .bss
-cv64_object_t* object_list_free_space;
+cv64_object_t* object_list_free_slot;
 cv64_object_t* ptr_gameplayParentObject;
 
 /**
- * Checks if the object is allocated inside `objects_array`. Return type
- * explicitly needs to be `int` to match (NOT `s32` typedef)
+ * Checks if the object is allocated inside `objects_array`.
+ * Return type explicitly needs to be `int` to match (NOT `s32` typedef)
  */
 int object_isValid(cv64_object_hdr_t* self) {
     return ((u32) self >= (u32) ARRAY_START(objects_array)) &&
            ((u32) self < (u32) ARRAY_END(objects_array));
 }
 
+/**
+ * Removes the object's instance from `objects_array`, and frees
+ * the object's pointer list (`alloc_data`).
+ */
 void object_free(cv64_object_t* self) {
     s32 i;
-    s32 var_s1;
-    u32* temp_v1;
-    u32* var_v0;
+    s32 alloc_data_slot;
+    figure* current_figure;
+    figure** current_figure_ptr;
 
-    for (i = 0, var_s1 = 1; i < OBJ_NUM_PTRS; var_s1 *= 2, i++) {
-        if (self->field_0x20 & var_s1) {
-            heapBlock_free(self->ptrs[i]);
+    for (i = 0, alloc_data_slot = 1; i < OBJ_NUM_ALLOC_DATA;
+         alloc_data_slot = alloc_data_slot << 1, i++) {
+        if (self->field_0x20 & alloc_data_slot) {
+            heapBlock_free(self->alloc_data[i]);
         }
-        if (self->field_0x22 & var_s1) {
-            func_80001080_1C80(self->ptrs[i]);
+        if (self->field_0x22 & alloc_data_slot) {
+            func_80001080_1C80(self->alloc_data[i]);
         }
     }
-    var_v0 = &self->field_0x24;
-    for (i = 3; i >= 0; var_v0++) {
-        temp_v1 = *var_v0;
+    current_figure_ptr = &self->figures;
+    for (i = OBJ_NUM_FIGURES - 1; i >= 0; current_figure_ptr++) {
+        current_figure = *current_figure_ptr;
         i--;
-        if (temp_v1 != NULL) {
-            *temp_v1 = 0;
+        if (current_figure != NULL) {
+            // Set the first 4 bytes of the figure to 0,
+            // clearing the slot from `figures_array`
+            *((u32*) current_figure) = 0;
         }
     }
     objects_number_of_instances_per_object[(self->header.ID & 0x7FF) - 1]--;
     self->header.ID = 0;
 }
 
+/**
+ * Clears the whole `objects_array`
+ */
 void clearAllObjects() {
     u32 i;
     cv64_object_t* currentObject;
@@ -58,6 +68,9 @@ void clearAllObjects() {
     }
 }
 
+/**
+ * Allocates an object's basic struct in `objects_array`
+ */
 cv64_object_hdr_t* object_allocate(cv64_object_id_t ID) {
     cv64_object_t* current_object;
     cv64_object_t* last;
@@ -71,9 +84,9 @@ cv64_object_hdr_t* object_allocate(cv64_object_id_t ID) {
             memory_clear(current_object, sizeof(cv64_object_t));
             // Assign the ID for our new object
             current_object->header.ID = ID;
-            // Update the "object_list_free_space" pointer
-            if (current_object >= object_list_free_space) {
-                object_list_free_space = current_object + 1;
+            // Update the "object_list_free_slot" pointer
+            if (current_object >= object_list_free_slot) {
+                object_list_free_slot = current_object + 1;
             }
             return (cv64_object_hdr_t*) current_object;
         }
@@ -81,6 +94,9 @@ cv64_object_hdr_t* object_allocate(cv64_object_id_t ID) {
     return NULL;
 }
 
+/**
+ * Updates the `objects_array` free space pointer
+ */
 void updateObjectListFreeSlot() {
     cv64_object_t* current;
     cv64_object_t* previous;
@@ -93,9 +109,13 @@ void updateObjectListFreeSlot() {
             break;
         }
     }
-    object_list_free_space = current;
+    object_list_free_slot = current;
 }
 
+/**
+ * Creates a new object and makes it so that
+ * the new object is executed right after `parent`
+ */
 cv64_object_hdr_t* object_create(cv64_object_hdr_t* parent,
                                  cv64_object_id_t ID) {
     // Allocate the object in the objects array
@@ -120,6 +140,11 @@ cv64_object_hdr_t* object_create(cv64_object_hdr_t* parent,
     return new_object;
 }
 
+/**
+ * Creates a new object and makes it so that
+ * the new object is executed after all the `parent`'s children
+ * are executed beforehand.
+ */
 cv64_object_hdr_t* object_createAndSetChild(cv64_object_hdr_t* parent,
                                             cv64_object_id_t ID) {
     cv64_object_hdr_t* new_object;
@@ -158,6 +183,10 @@ cv64_object_hdr_t* object_createAndSetChild(cv64_object_hdr_t* parent,
     return new_object;
 }
 
+/**
+ * Traverse the `objects_array`, starting from the `current_object`'s slot
+ * and return the first instance of the object with the raw ID
+ */
 cv64_object_t* object_findFirstObjectByID(cv64_object_id_t ID,
                                           cv64_object_t* current_object) {
     // The first slot in the object array is always empty.
@@ -170,7 +199,7 @@ cv64_object_t* object_findFirstObjectByID(cv64_object_id_t ID,
 
     // Go through each object sequentially, and when the first object of a given
     // ID is found return a pointer to that object.
-    for (; (u32) current_object < (u32) object_list_free_space;
+    for (; (u32) current_object < (u32) object_list_free_slot;
          current_object++) {
         if (ID == (current_object->header.ID & 0x07FF)) {
             return current_object;
@@ -179,12 +208,22 @@ cv64_object_t* object_findFirstObjectByID(cv64_object_id_t ID,
     return NULL;
 }
 
-// Starts at -1 because `object_findFirstObjectByID` adds it to +1
-// at the beginning of that function
+/**
+ * Traverse the `objects_array`, starting from the first slot
+ * and return the first instance of the object with the raw ID
+ *
+ * Starts at -1 because `object_findFirstObjectByID` adds it to +1
+ * at the beginning of that function.
+ */
 cv64_object_t* objectList_findFirstObjectByID(s32 ID) {
     return object_findFirstObjectByID(ID, &objects_array[-1]);
 }
 
+/**
+ * Traverse the `objects_array`, starting from the `current_object`'s slot
+ * and return the first instance of the object whose raw ID is higher or equal
+ * to `min_ID` or lower or equal to `max_ID`
+ */
 cv64_object_t* object_findObjectBetweenIDRange(s32 min_ID, s32 max_ID,
                                                cv64_object_t* current_object) {
     s32 current_obj_ID;
@@ -192,7 +231,7 @@ cv64_object_t* object_findObjectBetweenIDRange(s32 min_ID, s32 max_ID,
     min_ID &= 0x7FF;
     max_ID &= 0x7FF;
     current_object++;
-    for (; (u32) current_object < (u32) object_list_free_space;
+    for (; (u32) current_object < (u32) object_list_free_slot;
          current_object++) {
         current_obj_ID = current_object->header.ID & 0x7FF;
         if ((current_obj_ID >= (min_ID)) && ((max_ID) >= current_obj_ID)) {
@@ -202,14 +241,27 @@ cv64_object_t* object_findObjectBetweenIDRange(s32 min_ID, s32 max_ID,
     return NULL;
 }
 
+/**
+ * Traverse the `objects_array`, starting from the first slot
+ * and return the first instance of the object whose raw ID is higher or equal
+ * to `min_ID` or lower or equal to `max_ID`
+ *
+ * Starts at -1 because `object_findFirstObjectByID` adds it to +1
+ * at the beginning of that function.
+ */
 cv64_object_t* objectList_findObjectBetweenRange(s32 min_ID, s32 max_ID) {
     return object_findObjectBetweenIDRange(min_ID, max_ID, &objects_array[-1]);
 }
 
+/**
+ * Traverse the `objects_array`, starting from the `current_object`'s slot
+ * and return the first instance of the object where the ID passed has bits in
+ * common with the object currently being read.
+ */
 cv64_object_t* object_findObjectByIDAndType(s32 ID,
                                             cv64_object_t* current_object) {
     current_object++;
-    for (; (u32) current_object < (u32) object_list_free_space;
+    for (; (u32) current_object < (u32) object_list_free_slot;
          current_object++) {
         if (current_object->header.ID & ID) {
             return current_object;
@@ -218,6 +270,14 @@ cv64_object_t* object_findObjectByIDAndType(s32 ID,
     return NULL;
 }
 
+/**
+ * Traverse the `objects_array`, starting from the first slot
+ * and return the first instance of the object where the ID passed has bits in
+ * common with the object currently being read.
+ *
+ * Starts at -1 because `object_findFirstObjectByID` adds it to +1
+ * at the beginning of that function.
+ */
 cv64_object_t* objectList_findObjectByIDAndType(s32 ID) {
     return object_findObjectByIDAndType(ID, &objects_array[-1]);
 }
@@ -234,6 +294,14 @@ cv64_object_t* objectList_findObjectByIDAndType(s32 ID) {
 
 #pragma GLOBAL_ASM("../asm/nonmatchings/object/findFirstMapObjectInstance.s")
 
+/**
+ * This function either:
+ *
+ * - Returns the first occurence of an object in `objects_array` given its raw
+ * ID.
+ * - Returns the first occurence of a non-paused object in `objects_array` given
+ * its raw ID, and whose code is mapped by the TLB.
+ */
 cv64_object_t* func_8000211C_2D1C(s32 ID) {
     cv64_object_t* var_v0;
 
@@ -253,37 +321,53 @@ cv64_object_t* func_8000211C_2D1C(s32 ID) {
     return objectList_findFirstObjectByID(ID);
 }
 
+/**
+ * Dynamically allocates arbitrary data, and keeps its pointer
+ * in one of the object's pointer list (`alloc_data`).
+ */
 void* object_allocEntryInList(cv64_object_t* self, s32 heap_kind, u32 size,
-                              s32 ptrs_index) {
-    self->field_0x20 |= CV64_BIT(ptrs_index);
-    self->ptrs[ptrs_index] = heap_alloc(heap_kind, size);
-    return self->ptrs[ptrs_index];
+                              s32 alloc_data_index) {
+    self->field_0x20 |= (1 << alloc_data_index);
+    self->alloc_data[alloc_data_index] = heap_alloc(heap_kind, size);
+    return self->alloc_data[alloc_data_index];
 }
 
+/**
+ * Dynamically allocates arbitrary data, and keeps its pointer
+ * in one of the object's pointer list (`alloc_data`),
+ * then clears the allocated data.
+ */
 void* object_allocEntryInListAndClear(cv64_object_t* self, s32 heap_kind,
-                                      u32 size, s32 ptrs_index) {
-    self->field_0x20 |= CV64_BIT(ptrs_index);
-    self->ptrs[ptrs_index] = heap_alloc(heap_kind, size);
-    memory_clear(self->ptrs[ptrs_index], size);
-    return self->ptrs[ptrs_index];
+                                      u32 size, s32 alloc_data_index) {
+    self->field_0x20 |= (1 << alloc_data_index);
+    self->alloc_data[alloc_data_index] = heap_alloc(heap_kind, size);
+    memory_clear(self->alloc_data[alloc_data_index], size);
+    return self->alloc_data[alloc_data_index];
 }
 
 void* func_80002264_2E64(cv64_object_t* self, u32 size, s32 heap_kind,
-                         s32 ptrs_index) {
-    self->field_0x22 |= CV64_BIT(ptrs_index);
-    self->ptrs[ptrs_index] = func_80001008_1C08(size, heap_kind);
-    return self->ptrs[ptrs_index];
+                         s32 alloc_data_index) {
+    self->field_0x22 |= (1 << alloc_data_index);
+    self->alloc_data[alloc_data_index] = func_80001008_1C08(size, heap_kind);
+    return self->alloc_data[alloc_data_index];
 }
 
-void func_800022BC_2EBC(cv64_object_t* self, s32 ptrs_index) {
-    if (self->field_0x20 & CV64_BIT(ptrs_index)) {
-        heapBlock_free(self->ptrs[ptrs_index]);
+/**
+ * Frees data previously allocated inside
+ * one of the object's pointer list (`alloc_data`).
+ */
+void func_800022BC_2EBC(cv64_object_t* self, s32 alloc_data_index) {
+    if (self->field_0x20 & (1 << alloc_data_index)) {
+        heapBlock_free(self->alloc_data[alloc_data_index]);
     }
-    if (self->field_0x22 & CV64_BIT(ptrs_index)) {
-        func_80001080_1C80(self->ptrs[ptrs_index]);
+    if (self->field_0x22 & (1 << alloc_data_index)) {
+        func_80001080_1C80(self->alloc_data[alloc_data_index]);
     }
 }
 
+/**
+ * Executes one frame of the object's code
+ */
 void GameStateMgr_execute(GameStateMgr* self) {
     if (self->ID > 0) {
         if (self->ID & OBJ_FLAG_MAP_OVERLAY) {
@@ -298,6 +382,9 @@ void GameStateMgr_execute(GameStateMgr* self) {
     }
 }
 
+/**
+ * Executes one frame of the object's and all of its children's code
+ */
 void object_executeChildObject(cv64_object_hdr_t* self) {
     for (; self != NULL; self = self->next) {
         // If a object is waiting to be deleted (i.e. if its ID = 8xxx or
@@ -326,6 +413,9 @@ void object_executeChildObject(cv64_object_hdr_t* self) {
     }
 }
 
+/**
+ * Executes one frame of the object's and its `child`'s code
+ */
 void object_execute(cv64_object_hdr_t* self) {
     // If a object is waiting to be deleted (i.e. if its ID = 8xxx or Axxx (2xxx
     // | 8xxx)) then don't execute it, nor its children
@@ -350,6 +440,9 @@ void object_execute(cv64_object_hdr_t* self) {
 
 #pragma GLOBAL_ASM("../asm/nonmatchings/object/func_80002570_3170.s")
 
+/**
+ * Destroys the object and all of its children
+ */
 void func_800026D8_32D8(cv64_object_hdr_t* self) {
     cv64_object_hdr_t* temp_s0;
     cv64_object_hdr_t* temp_s1;
@@ -368,6 +461,10 @@ void func_800026D8_32D8(cv64_object_hdr_t* self) {
     }
 }
 
+/**
+ * Destroys the object and all of its children, as well
+ * as some additional data, such as their associated models, if any.
+ */
 void object_destroyChildrenAndModelInfo(cv64_object_hdr_t* self) {
     cv64_object_hdr_t* temp_s0;
     cv64_object_hdr_t* temp_s1;
@@ -387,6 +484,9 @@ void object_destroyChildrenAndModelInfo(cv64_object_hdr_t* self) {
     func_80002570_3170(self);
 }
 
+/**
+ * Object's generic destroy function. Only used by `GameStateMgr`.
+ */
 void GameStateMgr_destroy(GameStateMgr* self) {}
 
 #pragma GLOBAL_ASM("../asm/nonmatchings/object/func_800027BC_33BC.s")
