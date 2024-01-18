@@ -1127,7 +1127,6 @@ textbox_8012cd54 = 0x8012cd54;
 SaveStruct_cPak = 0x800d74a0;
 SaveStruct_gameplay = 0x80389be4;
 controller_pak_note_table = 0x80096ad0;
-entrypoint = 0x80000400;
 gCartHandle = 0x800d5e78;
 osViModeNtsc = 0x800a10b0;
 osViModePal = 0x800a1970;
