@@ -307,17 +307,17 @@ cv64_object_t* func_8000211C_2D1C(s32 ID) {
 
     if (ID & OBJ_FLAG_MAP_OVERLAY) {
         ID &= 0x7FF;
-        var_v0 = objectList_findFirstObjectByID(ID);
-        if (var_v0 != NULL) {
-            do {
-                if (!(var_v0->header.flags & OBJ_EXEC_FLAG_PAUSE)) {
-                    return var_v0;
-                }
-                var_v0 = object_findFirstObjectByID(ID, var_v0);
-            } while (var_v0 != NULL);
+
+        for (var_v0 = objectList_findFirstObjectByID(ID); var_v0 != NULL;
+             var_v0 = object_findFirstObjectByID(ID, var_v0)) {
+            if (!(var_v0->header.flags & OBJ_EXEC_FLAG_PAUSE)) {
+                return var_v0;
+            }
         }
+
         return NULL;
     }
+
     return objectList_findFirstObjectByID(ID);
 }
 
