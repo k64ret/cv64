@@ -1,11 +1,11 @@
-KONAMI_LOGO_DL       = 0x0600C650; // segment:nisitenma_ichigo/konami_kcek_logos
-KCEK_LOGO_DL         = 0x06015CA0; // segment:nisitenma_ichigo/konami_kcek_logos
+KONAMI_LOGO_DL = 0x0600C650; // segment:nisitenma_ichigo/konami_kcek_logos
+KCEK_LOGO_DL   = 0x06015CA0; // segment:nisitenma_ichigo/konami_kcek_logos
 
-ROSE_VENTILATOR_DL   = 0x06005400; // segment:nisitenma_ichigo/map/rose_actrise_meet_room/ROSE
-ROSE_DOOR_DL         = 0x06005A30; // segment:nisitenma_ichigo/map/rose_actrise_meet_room/ROSE
+ROSE_VENTILATOR_DL = 0x06005400; // segment:nisitenma_ichigo/map/rose_actrise_meet_room/ROSE
+ROSE_DOOR_DL       = 0x06005A30; // segment:nisitenma_ichigo/map/rose_actrise_meet_room/ROSE
 
-CV64_TOUTURO_DOOR_EXIT_DLIST     = 0x0600A300; // segment:nisitenma_ichigo/map/room_of_clocks/TOU_TURO
-CV64_TOUTURO_DOOR_ENTRANCE_DLIST = 0x0600AB00; // segment:nisitenma_ichigo/map/room_of_clocks/TOU_TURO
+TOUTURO_DOOR_EXIT_DL     = 0x0600A300; // segment:nisitenma_ichigo/map/room_of_clocks/TOU_TURO
+TOUTURO_DOOR_ENTRANCE_DL = 0x0600AB00; // segment:nisitenma_ichigo/map/room_of_clocks/TOU_TURO
 
 // test_grid_txt   = 0x06000000; // segment:test_grid
 // test_grid_tlut  = 0x06000800; // segment:test_grid

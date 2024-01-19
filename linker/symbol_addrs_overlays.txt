@@ -34,16 +34,16 @@ D_8018F260                            = 0x8018F260; // segment:ROSE size:0x08
 
 // src/overlay/map/tou_turo.c
 // .text
-cv64_touturo_door_entrypoint                 = 0x8018EB10; // type:func segment:TOU_TURO
-cv64_touturo_door_init                       = 0x8018EB80; // type:func segment:TOU_TURO
-cv64_touturo_door_loop                       = 0x8018EC64; // type:func segment:TOU_TURO
-cv64_touturo_door_exit_check_event_flags     = 0x8018EDCC; // type:func segment:TOU_TURO
-cv64_touturo_door_entrance_check_event_flags = 0x8018EE34; // type:func segment:TOU_TURO
-cv64_touturo_door_entrance_close_door        = 0x8018EEB4; // type:func segment:TOU_TURO
+cv64_ovl_touturo_door_entrypoint                 = 0x8018EB10; // type:func segment:TOU_TURO
+cv64_ovl_touturo_door_init                       = 0x8018EB80; // type:func segment:TOU_TURO
+cv64_ovl_touturo_door_loop                       = 0x8018EC64; // type:func segment:TOU_TURO
+cv64_ovl_touturo_door_exit_check_event_flags     = 0x8018EDCC; // type:func segment:TOU_TURO
+cv64_ovl_touturo_door_entrance_check_event_flags = 0x8018EE34; // type:func segment:TOU_TURO
+cv64_ovl_touturo_door_entrance_close_door        = 0x8018EEB4; // type:func segment:TOU_TURO
 // .data
-cv64_touturo_door_funcs                      = 0x8018F0F0; // segment:TOU_TURO rom:0x006F2160 size:0x08
-cv64_touturo_door_dlists                     = 0x8018F0F8; // segment:TOU_TURO rom:0x006F2168 size:0x08
-cv64_touturo_door_exit_funcs                 = 0x8018F100; // segment:TOU_TURO rom:0x006F2170 size:0x08
-cv64_touturo_door_entrance_funcs             = 0x8018F108; // segment:TOU_TURO rom:0x006F2178 size:0x0C
+cv64_ovl_touturo_door_funcs                      = 0x8018F0F0; // segment:TOU_TURO rom:0x006F2160 size:0x08
+cv64_ovl_touturo_door_dlists                     = 0x8018F0F8; // segment:TOU_TURO rom:0x006F2168 size:0x08
+cv64_ovl_touturo_door_exit_funcs                 = 0x8018F100; // segment:TOU_TURO rom:0x006F2170 size:0x08
+cv64_ovl_touturo_door_entrance_funcs             = 0x8018F108; // segment:TOU_TURO rom:0x006F2178 size:0x0C
 // .rodata
 // End of src/overlay/map/tou_turo.c
