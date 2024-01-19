@@ -1,18 +1,21 @@
 #include "cv64.h"
+#include "objects/map/tou_turo/door.h"
 #include <ultra64.h>
+
+void cv64_touturo_door_entrypoint(cv64_touturo_door_t* self) {
+    ENTER(self, cv64_touturo_door_funcs);
+}
 
 // clang-format off
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/overlay/map/tou_turo/func_8018EB10_6F1B80.s")
+#pragma GLOBAL_ASM("../asm/nonmatchings/overlay/map/tou_turo/cv64_touturo_door_init.s")
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/overlay/map/tou_turo/func_8018EB80_6F1BF0.s")
+#pragma GLOBAL_ASM("../asm/nonmatchings/overlay/map/tou_turo/cv64_touturo_door_loop.s")
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/overlay/map/tou_turo/func_8018EC64_6F1CD4.s")
+#pragma GLOBAL_ASM("../asm/nonmatchings/overlay/map/tou_turo/cv64_touturo_door_exit_check_event_flags.s")
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/overlay/map/tou_turo/func_8018EDCC_6F1E3C.s")
+#pragma GLOBAL_ASM("../asm/nonmatchings/overlay/map/tou_turo/cv64_touturo_door_entrance_check_event_flags.s")
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/overlay/map/tou_turo/func_8018EE34_6F1EA4.s")
-
-#pragma GLOBAL_ASM("../asm/nonmatchings/overlay/map/tou_turo/func_8018EEB4_6F1F24.s")
+#pragma GLOBAL_ASM("../asm/nonmatchings/overlay/map/tou_turo/cv64_touturo_door_entrance_close_door.s")
 
 // clang-format on
