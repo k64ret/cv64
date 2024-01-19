@@ -8,7 +8,7 @@
 #include "system_work.h"
 
 // .bss
-// GameStateMgr* ptr_GameStateMgr;
+GameStateMgr* ptr_GameStateMgr;
 
 void gamestate_create(s32 game_state) {
     // Set target framerate
@@ -25,7 +25,7 @@ void gamestate_create(s32 game_state) {
 
     // Set GameStateMgr params (flags, destroy function, game state ID and game
     // state info)
-    ptr_GameStateMgr->flags |= TOP;
+    ptr_GameStateMgr->flags |= OBJ_EXEC_FLAG_TOP;
     ptr_GameStateMgr->destroy = GameStateMgr_destroy;
     ptr_GameStateMgr->current_game_state = game_state;
     memory_copy(&gameState_settings[game_state - 1].info,
@@ -49,16 +49,16 @@ void GameStateMgr_entrypoint(GameStateMgr* self) {
         }
         return;
     } else if (self->isCurrentGameStateActive == FALSE) {
-        GameStateMgr_createGameStateModules(self);
+        GameStateMgr_createGameStateObjects(self);
         gameState_settings[self->current_game_state - 1].init_function(self);
         self->isCurrentGameStateActive++;
     }
-    GameStateMgr_executeGameStateModules(self, sys.execution_flags);
+    GameStateMgr_executeGameStateObjects(self, sys.execution_flags);
 }
 
 #pragma GLOBAL_ASM("../asm/nonmatchings/gamestate/gamestate_init.s")
 
-void setup_frame(void) {
+void setup_frame() {
     gDisplayListHead = &sys.field2_0x8[sys.current_dlist_buffer].dlists;
     gSPSegment(gDisplayListHead++, 0x00, 0x00000000);
     setup_rsp(&gDisplayListHead);

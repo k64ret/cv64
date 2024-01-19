@@ -6,9 +6,11 @@ IndentWidth: 4
 Language: Cpp
 AlignConsecutiveMacros: true
 # AlignConsecutiveAssignments: true
+ColumnLimit: 80
 # Force pointers to the type for C++.
 DerivePointerAlignment: false
 PointerAlignment: Left
+SortIncludes: Never
 SpaceAfterCStyleCast: true
 ---
 Language: Json

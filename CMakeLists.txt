@@ -6,7 +6,6 @@ set(TARGET castlevania)
 set(ELF ${CMAKE_BINARY_DIR}/${TARGET})
 set(ROM ${CMAKE_BINARY_DIR}/${TARGET}.z64)
 set(BASEROM ${CMAKE_SOURCE_DIR}/baserom.z64)
-set(SPLAT ${CMAKE_SOURCE_DIR}/tools/splat/split.py)
 set(SPLAT_CONFIG ${CMAKE_SOURCE_DIR}/${TARGET}.yaml)
 set(DECOMPRESS ${CMAKE_SOURCE_DIR}/tools/decompress.py)
 
@@ -68,7 +67,7 @@ target_compile_options(
           -verbose
           -fullwarn
           -woff
-          513,649,838>)
+          513,594,596,649,712,838>)
 
 target_include_directories(
   ${TARGET}

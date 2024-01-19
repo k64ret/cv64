@@ -20,13 +20,14 @@ options:
   symbol_name_format: $VRAM_$ROM
   symbol_addrs_path:
     - linker/symbol_addrs.txt
+    - linker/symbol_addrs_makerom.txt
     - linker/symbol_addrs_overlays.txt
     - linker/symbol_addrs_assets.txt
   # reloc_addrs_path:
   #   - linker/reloc_addrs.txt
   # ld_symbol_header_path: include/ld_symbols.h
   # create_asm_dependencies: True
-  disassemble_all: True
+  disassemble_all: False
   migrate_rodata_to_functions: False
   find_file_boundaries: True
   header_encoding: ASCII
@@ -50,13 +51,19 @@ options:
   gfx_ucode: f3dex2
 segments:
   - name: header
-    type: header
+    type: code
     start: 0x00000000
+    # Uncommenting this causes linking to fail
+    # vram: 0xA4000000
+    subsegments:
+      - [0x00000000, header, header]
 
   - name: boot
     type: code
     start: 0x00000040
     vram: 0xA4000040
+    # Same here...
+    # follows_vram: header
     exclusive_ram_id: ipl3
     subsegments:
       - [0x00000040, hasm, ipl3]
@@ -87,10 +94,10 @@ segments:
       - [0x0000DD70, asm]
       - [0x0000F190, c, fade]
       - [0x0000F460, asm]               # Contains some gamestate-related functions
-      - [0x0000F960, asm]               # File load-related. Module 0x0003's code is located here
+      - [0x0000F960, asm]               # File load-related. Object 0x0003's code is located here
       - [0x00010100, asm]
       - [0x000101C0, asm, DMAMgr]
-      - [0x000113D0, asm]              # struct_47, Modules 0x006D, 0x006E and 0x006F's code
+      - [0x000113D0, asm]              # struct_47, Objects 0x006D, 0x006E and 0x006F's code
       - [0x00011F10, c, vec3f]
       - [0x00012700, asm]              # Appears to contain float-rounding functions?
       - [0x00012900, asm]
@@ -374,9 +381,9 @@ segments:
       - [0x000A7CC0, rodata]
       - [0x000A7D30, rodata]
       - [0x000A7D40, rodata]
-      # - { start: 0x000A8420, type: bss, vram: 0x800A7820 }
-      - { start: 0x000A8420, type: bss, vram: 0x800A7820, name: gamestate }
-      - { start: 0x000A8420, type: bss, vram: 0x800A7830, name: object }
+      - { start: 0x000A8420, type: .bss, vram: 0x800A7820, name: gamestate }
+      - { start: 0x000A8420, type: .bss, vram: 0x800A7830, name: object }
+      - { start: 0x000A8420, type: bss, vram: 0x800A7840 }  # Only contains ptr_Object_0002.
       - { start: 0x000A8420, type: bss, vram: 0x800A7850, name: figure }
       - { start: 0x000A8420, type: bss, vram: 0x800A78A0, name: F960 }
 

@@ -1,5 +1,6 @@
 #include "memory.h"
 #include "object.h"
+#include "system_work.h"
 
 #pragma GLOBAL_ASM("../asm/nonmatchings/memory/memory_clear.s")
 
@@ -42,7 +43,23 @@ s32 func_80000D74_1974(s32 arg0) { return 0; }
 // https://decomp.me/scratch/tHw91
 #pragma GLOBAL_ASM("../asm/nonmatchings/memory/heapBlock_updateBlockMaxSize.s")
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/memory/func_80001008_1C08.s")
+void* func_80001008_1C08(cv64_heap_kind_t heap_kind, u32 size) {
+    u32 data;
+    cv64_heapblock_hdr_t* data_header;
+
+    data = (u32) heap_alloc(heap_kind, size * 2);
+    if (data == NULL) {
+        return NULL;
+    } else {
+        data_header = data - sizeof(cv64_heapblock_hdr_t);
+        data_header->data_ptrs[0] = data;
+        data_header->flags |= HEAP_BLOCK_4000;
+        data_header->data_ptrs[1] = data + size;
+        data_header->field_0x08 =
+            data_header->data_ptrs[sys.current_dlist_buffer];
+        return &data_header->field_0x08;
+    }
+}
 
 #pragma GLOBAL_ASM("../asm/nonmatchings/memory/heapBlock_free.s")
 
