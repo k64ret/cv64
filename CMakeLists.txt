@@ -67,7 +67,7 @@ target_compile_options(
           -verbose
           -fullwarn
           -woff
-          513,649,838>)
+          513,594,596,649,712,838>)
 
 target_include_directories(
   ${TARGET}
