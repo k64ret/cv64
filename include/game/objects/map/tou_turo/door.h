@@ -7,12 +7,11 @@
 #include "object.h"
 
 // To-do: Un-hardcode these
-// #define TOUTURO_DOOR_EXIT_DL     0x0600A300
-// #define TOUTURO_DOOR_ENTRANCE_DL 0x0600AB00
 extern const u32 TOUTURO_DOOR_EXIT_DL;
 extern const u32 TOUTURO_DOOR_ENTRANCE_DL;
 
 // ID: 0x1224
+// Variable 1 = Door type (see below)
 typedef struct cv64_ovl_touturo_door {
     cv64_object_hdr_t header;
     u8 padding1[4];
@@ -56,6 +55,12 @@ extern u32 cv64_ovl_touturo_door_dlists[];
 // cv64_ovl_touturo_door_exit_func_t cv64_ovl_touturo_door_exit_funcs[] = {
 //     cv64_ovl_touturo_door_exit_check_event_flags, func_801578FC};
 extern cv64_ovl_touturo_door_exit_func_t cv64_ovl_touturo_door_exit_funcs[];
+
+typedef enum cv64_ovl_touturo_door_entrance_func_id {
+    TOU_TURO_DOOR_ENTRANCE_CHECK_EVENT_FLAGS,
+    TOU_TURO_DOOR_ENTRANCE_CLOSE_DOOR,
+    FUNC_801578FC
+} cv64_ovl_touturo_door_entrance_func_id_t;
 
 // cv64_ovl_touturo_door_entrance_func_t cv64_ovl_touturo_door_entrance_funcs[]
 // = {

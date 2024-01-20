@@ -1,6 +1,7 @@
 #ifndef SAVE_H
 #define SAVE_H
 
+#include "event_flags.h"
 #include <ultra64.h>
 
 #define REINHARDT 0
