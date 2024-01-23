@@ -46,4 +46,5 @@ cv64_ovl_touturo_door_dlists                     = 0x8018F0F8; // segment:TOU_TU
 cv64_ovl_touturo_door_exit_funcs                 = 0x8018F100; // segment:TOU_TURO rom:0x006F2170 size:0x08
 cv64_ovl_touturo_door_entrance_funcs             = 0x8018F108; // segment:TOU_TURO rom:0x006F2178 size:0x0C
 // .rodata
+cv64_ovl_touturo_unused_str                      = 0x8018F120; // type:asciz segment:TOU_TURO size:0x26
 // End of src/overlay/map/tou_turo.c

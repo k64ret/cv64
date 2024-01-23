@@ -6,6 +6,9 @@
 #include "map_actor_model.h"
 #include "object.h"
 
+const char cv64_ovl_touturo_unused_str[] =
+    "ERROR P27TOBIRA : EFFECT SPAWN ERROR\n";
+
 // To-do: Un-hardcode these
 extern const u32 TOUTURO_DOOR_EXIT_DL;
 extern const u32 TOUTURO_DOOR_ENTRANCE_DL;

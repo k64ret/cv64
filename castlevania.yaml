@@ -871,7 +871,7 @@ segments:
     subsegments:
       - [0x006F1B80, c, overlay/map/tou_turo]
       - [0x006F2160, data, overlay/map/tou_turo]
-      - [0x006F2190, rodata, overlay/map/tou_turo]
+      - [0x006F2190, .rodata, overlay/map/tou_turo]
 
   - name: ENDING # Ending
     type: code
