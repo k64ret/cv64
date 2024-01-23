@@ -34,8 +34,8 @@ void cv64_ovl_touturo_door_init(cv64_ovl_touturo_door_t* self) {
     if (settings) {
     } // Needed for matching
 
-    actor_model_set_pos_and_angle((cv64_actor_t*) self, model);
-    model->flags |= (0x800 | 0x100);
+    actor_model_set_pos_and_angle(self, model);
+    model->flags |= (FIG_FLAG_0800 | FIG_FLAG_0100);
 
     model->assets_file_ID = sys.map_assets_file_IDs[0];
     model->dlist = cv64_ovl_touturo_door_dlists[settings->variable_1];
@@ -103,7 +103,7 @@ void cv64_ovl_touturo_door_entrance_check_event_flags(
         model->position.y = 6.0f;
         (*object_curLevel_goToFunc)(self->header.current_function,
                                     &self->header.functionInfo_ID,
-                                    FUNC_801578FC);
+                                    TOU_TURO_FUNC_801578FC);
     } else {
         sys.SaveStruct_gameplay.event_flags[EVENT_FLAG_ID_MISC_STAGES] |=
             EVENT_FLAG_MISC_STAGES_ENTERED_ROOM_OF_CLOCKS;
@@ -130,10 +130,10 @@ void cv64_ovl_touturo_door_entrance_close_door(cv64_ovl_touturo_door_t* self) {
         for (i = 0; i < 6; i++) {
             rand_Z_pos = ((*rand_f32)() * 40.0f) - 20.0f;
 
-            effect = (*createEffectObjectUnderEffectMgr)(1, NULL, 0);
+            effect = (*createEffectObjectUnderEffectMgr)(EFFECT_ID_1, NULL, 0);
 
-            if (model && func_8005B78C)
-                ; // Needed for matching
+            if (model && func_8005B78C) {
+            } // Needed for matching
 
             if (effect != NULL) {
                 (*func_8005B78C)(effect, 3);

@@ -6,6 +6,8 @@
 #include "actor.h"
 #include "object.h"
 
+#define EFFECT_ID_1 1
+
 // Generic effect struct
 typedef struct cv64_effect {
     cv64_object_hdr_t header;
