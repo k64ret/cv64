@@ -31,7 +31,7 @@ void cv64_ovl_touturo_door_init(cv64_ovl_touturo_door_t* self) {
     model = self->model =
         modelInfo_createRootNode(FIG_TYPE_STANDALONE, D_8018CDE0[0]);
 
-    if (settings) {
+    if (model) {
     } // Needed for matching
 
     actor_model_set_pos_and_angle(self, model);
@@ -132,15 +132,15 @@ void cv64_ovl_touturo_door_entrance_close_door(cv64_ovl_touturo_door_t* self) {
 
             effect = (*createEffectObjectUnderEffectMgr)(EFFECT_ID_1, NULL, 0);
 
-            if (model && func_8005B78C) {
-            } // Needed for matching
-
             if (effect != NULL) {
                 (*func_8005B78C)(effect, 3);
                 (*effect_setPosition)(effect, model->position.x + 3.0f,
                                       model->position.y + 1.0f,
                                       model->position.z + rand_Z_pos, 8);
                 (*effect_setScale)(effect, 0.3f, 0.2f, 0.3f, 8);
+            } else {
+                // Empty else needed for matching
+                // ERROR P27TOBIRA : EFFECT SPAWN ERROR\n
             }
         }
 
