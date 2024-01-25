@@ -1,3 +1,6 @@
 splat64[mips]==0.21.3
 numpy
 numba
+pycparser
+pynacl
+toml
