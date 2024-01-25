@@ -1,3 +1,6 @@
 splat64[mips]
 numpy
 numba
+pycparser
+pynacl
+toml
