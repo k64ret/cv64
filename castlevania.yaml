@@ -20,13 +20,14 @@ options:
   symbol_name_format: $VRAM_$ROM
   symbol_addrs_path:
     - linker/symbol_addrs.txt
+    - linker/symbol_addrs_makerom.txt
     - linker/symbol_addrs_overlays.txt
     - linker/symbol_addrs_assets.txt
   # reloc_addrs_path:
   #   - linker/reloc_addrs.txt
   # ld_symbol_header_path: include/ld_symbols.h
   # create_asm_dependencies: True
-  disassemble_all: True
+  disassemble_all: False
   migrate_rodata_to_functions: False
   find_file_boundaries: True
   header_encoding: ASCII
@@ -50,13 +51,19 @@ options:
   gfx_ucode: f3dex2
 segments:
   - name: header
-    type: header
+    type: code
     start: 0x00000000
+    # Uncommenting this causes linking to fail
+    # vram: 0xA4000000
+    subsegments:
+      - [0x00000000, header, header]
 
   - name: boot
     type: code
     start: 0x00000040
     vram: 0xA4000040
+    # Same here...
+    # follows_vram: header
     exclusive_ram_id: ipl3
     subsegments:
       - [0x00000040, hasm, ipl3]
@@ -87,10 +94,10 @@ segments:
       - [0x0000DD70, asm]
       - [0x0000F190, c, fade]
       - [0x0000F460, asm]               # Contains some gamestate-related functions
-      - [0x0000F960, asm]               # File load-related. Module 0x0003's code is located here
+      - [0x0000F960, asm]               # File load-related. Object 0x0003's code is located here
       - [0x00010100, asm]
       - [0x000101C0, asm, DMAMgr]
-      - [0x000113D0, asm]              # struct_47, Modules 0x006D, 0x006E and 0x006F's code
+      - [0x000113D0, asm]              # struct_47, Objects 0x006D, 0x006E and 0x006F's code
       - [0x00011F10, c, vec3f]
       - [0x00012700, asm]              # Appears to contain float-rounding functions?
       - [0x00012900, asm]
@@ -374,9 +381,9 @@ segments:
       - [0x000A7CC0, rodata]
       - [0x000A7D30, rodata]
       - [0x000A7D40, rodata]
-      # - { start: 0x000A8420, type: bss, vram: 0x800A7820 }
-      - { start: 0x000A8420, type: bss, vram: 0x800A7820, name: gamestate }
-      - { start: 0x000A8420, type: bss, vram: 0x800A7830, name: object }
+      - { start: 0x000A8420, type: .bss, vram: 0x800A7820, name: gamestate }
+      - { start: 0x000A8420, type: .bss, vram: 0x800A7830, name: object }
+      - { start: 0x000A8420, type: bss, vram: 0x800A7840 }  # Only contains ptr_Object_0002.
       - { start: 0x000A8420, type: bss, vram: 0x800A7850, name: figure }
       - { start: 0x000A8420, type: bss, vram: 0x800A78A0, name: F960 }
 
@@ -592,9 +599,9 @@ segments:
     vram: 0x8018EB10
     exclusive_ram_id: ovl_map_objects
     subsegments:
-      - [0x006B5480, asm, overlay/map/MORI]
-      - [0x006BA620, data, overlay/map/MORI]
-      - [0x006BAA40, rodata, overlay/map/MORI]
+      - [0x006B5480, asm, overlay/map/mori]
+      - [0x006BA620, data, overlay/map/mori]
+      - [0x006BAA40, rodata, overlay/map/mori]
 
   - name: TOU # Tower
     type: code
@@ -602,9 +609,9 @@ segments:
     vram: 0x8018EB10
     exclusive_ram_id: ovl_map_objects
     subsegments:
-      - [0x006BAB80, asm, overlay/map/TOU]
-      - [0x006BF7E0, data, overlay/map/TOU]
-      - [0x006BFB40, rodata, overlay/map/TOU]
+      - [0x006BAB80, asm, overlay/map/tou]
+      - [0x006BF7E0, data, overlay/map/tou]
+      - [0x006BFB40, rodata, overlay/map/tou]
 
   - name: TOUOKUJI # Tower Roof
     type: code
@@ -612,9 +619,9 @@ segments:
     vram: 0x8018EB10
     exclusive_ram_id: ovl_map_objects
     subsegments:
-      - [0x006BFBF0, asm, overlay/map/TOUOKUJI]
-      - [0x006C12F0, data, overlay/map/TOUOKUJI]
-      - [0x006C13D0, rodata, overlay/map/TOUOKUJI]
+      - [0x006BFBF0, asm, overlay/map/touokuji]
+      - [0x006C12F0, data, overlay/map/touokuji]
+      - [0x006C13D0, rodata, overlay/map/touokuji]
 
   - name: NAKANIWA # Inner Garden
     type: code
@@ -622,9 +629,9 @@ segments:
     vram: 0x8018EB10
     exclusive_ram_id: ovl_map_objects
     subsegments:
-      - [0x006C1460, asm, overlay/map/NAKANIWA]
-      - [0x006C2D30, data, overlay/map/NAKANIWA]
-      - [0x006C2F00, rodata, overlay/map/NAKANIWA]
+      - [0x006C1460, asm, overlay/map/nakaniwa]
+      - [0x006C2D30, data, overlay/map/nakaniwa]
+      - [0x006C2F00, rodata, overlay/map/nakaniwa]
 
   - name: BEKKAN_1F # Annex 1F
     type: code
@@ -632,8 +639,8 @@ segments:
     vram: 0x8018EB10
     exclusive_ram_id: ovl_map_objects
     subsegments:
-      - [0x006C2F20, asm, overlay/map/BEKKAN_1F]
-      - [0x006C32E0, data, overlay/map/BEKKAN_1F]
+      - [0x006C2F20, asm, overlay/map/bekkan_1f]
+      - [0x006C32E0, data, overlay/map/bekkan_1f]
 
   - name: BEKKAN_2F # Annex 2F
     type: code
@@ -653,7 +660,7 @@ segments:
     vram: 0x8018EB10
     exclusive_ram_id: ovl_map_objects
     subsegments:
-      - [0x006C50E0, c, overlay/map/MEIRO_TEIEN]
+      - [0x006C50E0, c, overlay/map/meiro_teien]
 
   - name: CHIKA_KODO # Underground Mining Tunnel
     type: code
@@ -661,8 +668,8 @@ segments:
     vram: 0x8018EB10
     exclusive_ram_id: ovl_map_objects
     subsegments:
-      - [0x006C5110, c, overlay/map/CHIKA_KODO]
-      - [0x006C74A0, data, overlay/map/CHIKA_KODO]
+      - [0x006C5110, c, overlay/map/chika_kodo]
+      - [0x006C74A0, data, overlay/map/chika_kodo]
 
   - name: CHIKA_SUIRO # Underground Waterway
     type: code
@@ -670,9 +677,9 @@ segments:
     vram: 0x8018EB10
     exclusive_ram_id: ovl_map_objects
     subsegments:
-      - [0x006C77D0, c, overlay/map/CHIKA_SUIRO]
-      - [0x006C85A0, data, overlay/map/CHIKA_SUIRO]
-      - [0x006C8670, rodata, overlay/map/CHIKA_SUIRO]
+      - [0x006C77D0, c, overlay/map/chika_suiro]
+      - [0x006C85A0, data, overlay/map/chika_suiro]
+      - [0x006C8670, rodata, overlay/map/chika_suiro]
 
   - name: HONMARU_B1F # Castle Center B1F
     type: code
@@ -680,9 +687,9 @@ segments:
     vram: 0x8018EB10
     exclusive_ram_id: ovl_map_objects
     subsegments:
-      - [0x006C86A0, c, overlay/map/HONMARU_B1F]
-      - [0x006C9B00, data, overlay/map/HONMARU_B1F]
-      - [0x006C9BC0, rodata, overlay/map/HONMARU_B1F]
+      - [0x006C86A0, c, overlay/map/honmaru_b1f]
+      - [0x006C9B00, data, overlay/map/honmaru_b1f]
+      - [0x006C9BC0, rodata, overlay/map/honmaru_b1f]
 
   - name: HONMARU_1F # Castle Center 1F
     type: code
@@ -690,9 +697,9 @@ segments:
     vram: 0x8018EB10
     exclusive_ram_id: ovl_map_objects
     subsegments:
-      - [0x006C9BF0, c, overlay/map/HONMARU_1F]
-      - [0x006CB780, data, overlay/map/HONMARU_1F]
-      - [0x006CB820, rodata, overlay/map/HONMARU_1F]
+      - [0x006C9BF0, c, overlay/map/honmaru_1f]
+      - [0x006CB780, data, overlay/map/honmaru_1f]
+      - [0x006CB820, rodata, overlay/map/honmaru_1f]
 
   - name: HONMARU_2F # Castle Center 2F
     type: code
@@ -700,10 +707,10 @@ segments:
     vram: 0x8018EB10
     exclusive_ram_id: ovl_map_objects
     subsegments:
-      # - [0x006CB850, c, overlay/map/HONMARU_2F]
-      - [0x006CB850, asm, overlay/map/HONMARU_2F]
-      - [0x006CCDE0, data, overlay/map/HONMARU_2F]
-      - [0x006CCFA0, rodata, overlay/map/HONMARU_2F]
+      # - [0x006CB850, c, overlay/map/honmaru_2f]
+      - [0x006CB850, asm, overlay/map/honmaru_2f]
+      - [0x006CCDE0, data, overlay/map/honmaru_2f]
+      - [0x006CCFA0, rodata, overlay/map/honmaru_2f]
 
   - name: HONMARU_3F_MINAMI # Castle Center South 3F
     type: code
@@ -711,9 +718,9 @@ segments:
     vram: 0x8018EB10
     exclusive_ram_id: ovl_map_objects
     subsegments:
-      - [0x006CD050, c, overlay/map/HONMARU_3F_MINAMI]
-      - [0x006CD640, data, overlay/map/HONMARU_3F_MINAMI]
-      - [0x006CD720, rodata, overlay/map/HONMARU_3F_MINAMI]
+      - [0x006CD050, c, overlay/map/honmaru_3f_minami]
+      - [0x006CD640, data, overlay/map/honmaru_3f_minami]
+      - [0x006CD720, rodata, overlay/map/honmaru_3f_minami]
 
   - name: HONMARU_4F_MINAMI # Castle Center South 4F
     type: code
@@ -721,9 +728,9 @@ segments:
     vram: 0x8018EB10
     exclusive_ram_id: ovl_map_objects
     subsegments:
-      - [0x006CD740, c, overlay/map/HONMARU_4F_MINAMI]
-      - [0x006CE350, data, overlay/map/HONMARU_4F_MINAMI]
-      - [0x006CE470, rodata, overlay/map/HONMARU_4F_MINAMI]
+      - [0x006CD740, c, overlay/map/honmaru_4f_minami]
+      - [0x006CE350, data, overlay/map/honmaru_4f_minami]
+      - [0x006CE470, rodata, overlay/map/honmaru_4f_minami]
 
   - name: HONMARU_3F_KITA # Castle Center North 3F
     type: code
@@ -731,9 +738,9 @@ segments:
     vram: 0x8018EB10
     exclusive_ram_id: ovl_map_objects
     subsegments:
-      - [0x006CE4B0, c, overlay/map/HONMARU_3F_KITA]
-      - [0x006CE8F0, data, overlay/map/HONMARU_3F_KITA]
-      - [0x006CE980, rodata, overlay/map/HONMARU_3F_KITA]
+      - [0x006CE4B0, c, overlay/map/honmaru_3f_kita]
+      - [0x006CE8F0, data, overlay/map/honmaru_3f_kita]
+      - [0x006CE980, rodata, overlay/map/honmaru_3f_kita]
 
   - name: HONMARU_5F # Castle Center 5F
     type: code
@@ -741,9 +748,9 @@ segments:
     vram: 0x8018EB10
     exclusive_ram_id: ovl_map_objects
     subsegments:
-      - [0x006CE9A0, c, overlay/map/HONMARU_5F]
-      - [0x006CF3B0, data, overlay/map/HONMARU_5F]
-      - [0x006CF3F0, rodata, overlay/map/HONMARU_5F]
+      - [0x006CE9A0, c, overlay/map/honmaru_5f]
+      - [0x006CF3B0, data, overlay/map/honmaru_5f]
+      - [0x006CF3F0, rodata, overlay/map/honmaru_5f]
 
   - name: SHOKEI_TOU # Tower of Execution
     type: code
@@ -763,11 +770,11 @@ segments:
     vram: 0x8018EB10
     exclusive_ram_id: ovl_map_objects
     subsegments:
-      # - [0x006D35A0, c, overlay/map/MAHOU_TOU]
-      - [0x006D35A0, asm, overlay/map/MAHOU_TOU]
-      - [0x006D7170, data, overlay/map/MAHOU_TOU]
-      # - [0x006D7478, rodata, overlay/map/MAHOU_TOU]
-      - [0x006D7490, rodata, overlay/map/MAHOU_TOU]
+      # - [0x006D35A0, c, overlay/map/mahou_tou]
+      - [0x006D35A0, asm, overlay/map/mahou_tou]
+      - [0x006D7170, data, overlay/map/mahou_tou]
+      # - [0x006D7478, rodata, overlay/map/mahou_tou]
+      - [0x006D7490, rodata, overlay/map/mahou_tou]
 
   - name: KAGAKU_TOU # Tower of Science
     type: code
@@ -788,10 +795,10 @@ segments:
     vram: 0x8018EB10
     exclusive_ram_id: ovl_map_objects
     subsegments:
-      # - [0x006E31D0, c, overlay/map/KETTOU_TOU]
-      - [0x006E31D0, asm, overlay/map/KETTOU_TOU]
-      - [0x006E7F20, data, overlay/map/KETTOU_TOU]
-      - [0x006E8550, rodata, overlay/map/KETTOU_TOU]
+      # - [0x006E31D0, c, overlay/map/kettou_tou]
+      - [0x006E31D0, asm, overlay/map/kettou_tou]
+      - [0x006E7F20, data, overlay/map/kettou_tou]
+      - [0x006E8550, rodata, overlay/map/kettou_tou]
 
   - name: TURO_TOKEITOU # Clock Tower
     type: code
@@ -812,9 +819,9 @@ segments:
     vram: 0x8018EB10
     exclusive_ram_id: ovl_map_objects
     subsegments:
-      - [0x006EA480, c, overlay/map/TENSHU]
-      - [0x006EBBD0, data, overlay/map/TENSHU]
-      - [0x006EBCE0, rodata, overlay/map/TENSHU]
+      - [0x006EA480, c, overlay/map/tenshu]
+      - [0x006EBBD0, data, overlay/map/tenshu]
+      - [0x006EBCE0, rodata, overlay/map/tenshu]
 
   - name: TOKEITOU_NAI # Ending Dummy
     type: code
@@ -832,9 +839,9 @@ segments:
     vram: 0x8018EB10
     exclusive_ram_id: ovl_map_objects
     subsegments:
-      - [0x006F0150, c, overlay/map/DRACULA]
-      - [0x006F09E0, data, overlay/map/DRACULA]
-      - [0x006F0A20, rodata, overlay/map/DRACULA]
+      - [0x006F0150, c, overlay/map/dracula]
+      - [0x006F09E0, data, overlay/map/dracula]
+      - [0x006F0A20, rodata, overlay/map/dracula]
 
   - name: ROSE # Rose
     type: code
@@ -842,9 +849,9 @@ segments:
     vram: 0x8018EB10
     exclusive_ram_id: ovl_map_objects
     subsegments:
-      - [0x006F0A50, c, overlay/map/ROSE]
-      - [0x006F1150, data, overlay/map/ROSE]
-      # - [0x006F1198, rodata, overlay/map/ROSE]
+      - [0x006F0A50, c, overlay/map/rose]
+      - [0x006F1150, .data, overlay/map/rose]
+      - [0x006F1170, .rodata, overlay/map/rose]
 
   - name: BEKKAN_BOSS # Annex Boss
     type: code
@@ -852,9 +859,9 @@ segments:
     vram: 0x8018EB10
     exclusive_ram_id: ovl_map_objects
     subsegments:
-      - [0x006F11B0, c, overlay/map/BEKKAN_BOSS]
-      - [0x006F1B00, data, overlay/map/BEKKAN_BOSS]
-      - [0x006F1B40, rodata, overlay/map/BEKKAN_BOSS]
+      - [0x006F11B0, c, overlay/map/bekkan_boss]
+      - [0x006F1B00, data, overlay/map/bekkan_boss]
+      - [0x006F1B40, rodata, overlay/map/bekkan_boss]
 
   - name: TOU_TURO # Tower Passage
     type: code
@@ -862,9 +869,9 @@ segments:
     vram: 0x8018EB10
     exclusive_ram_id: ovl_map_objects
     subsegments:
-      - [0x006F1B80, c, overlay/map/TOU_TURO]
-      - [0x006F2160, data, overlay/map/TOU_TURO]
-      # - [0x006F21B8, rodata, overlay/map/TOU_TURO]
+      - [0x006F1B80, c, overlay/map/tou_turo]
+      - [0x006F2160, data, overlay/map/tou_turo]
+      # - [0x006F21B8, rodata, overlay/map/tou_turo]
 
   - name: ENDING # Ending
     type: code
@@ -872,10 +879,10 @@ segments:
     vram: 0x8018EB10
     exclusive_ram_id: ovl_map_objects
     subsegments:
-      # - [0x006F21D0, c, overlay/map/ENDING]
-      - [0x006F21D0, asm, overlay/map/ENDING]
-      - [0x006F39C0, data, overlay/map/ENDING]
-      - [0x006F3B80, rodata, overlay/map/ENDING]
+      # - [0x006F21D0, c, overlay/map/ending]
+      - [0x006F21D0, asm, overlay/map/ending]
+      - [0x006F39C0, data, overlay/map/ending]
+      - [0x006F3B80, rodata, overlay/map/ending]
   # End of uncompressed overlays
 
   # Compressed (Nisitenma-Ichigo) files

@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
-rm baserom_uncompressed.z64
+rm -f baserom_uncompressed.z64
 rm -rf build
 rm -rf assets/nisitenma_ichigo
-rm assets/*.bin
+rm -f assets/*.bin
 # rm -rf asm/nonmatchings
 rm -rf asm/overlay
 rm -rf asm/data
-rm asm/*.s
+rm -f asm/*.s

@@ -1,9 +1,15 @@
 [tools]
+cmake = '3.28'
 python = '3.11'
+
+[tasks.m2ctx]
+run = "python3 ./tools/m2ctx.py"
+alias = 'ctx'
 
 [tasks.clean]
 # description = 'Remove all CMake files, assembly, and binaries'
 run = "./scripts/clean"
+alias = 'cl'
 
 [tasks.configure]
 # description = 'Create the build system, and generate assembly and binaries'

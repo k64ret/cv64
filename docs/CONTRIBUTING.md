@@ -15,8 +15,8 @@
 
 Some examples of this are:
 
-- `cv64_konamilogo_check_btn_press`
-- `cv64_konamilogo_funcs`
+- `cv64_ovl_konamilogo_check_btn_press`
+- `cv64_ovl_konamilogo_funcs`
 - `cv64_dl_fade_with_outline`
 
 ## DON'T

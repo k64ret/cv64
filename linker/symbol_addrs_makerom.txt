@@ -1,0 +1,3 @@
+entrypoint   = 0x80000400; // type:func
+// ROM_HDR_CRC1 = 0xF35D5F95; // segment:header
+// ROM_HDR_CRC2 = 0x8AFE3D69; // segment:header

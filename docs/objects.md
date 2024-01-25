@@ -38,23 +38,23 @@ In this project, the object data structures and its associated functions are
 declared in `object.h`.
 
 ```c
-typedef struct cv64_obj_func_inf {
+typedef struct cv64_object_func_inf {
     u8 timer;          // Could also be "number of accesses to function"
     u8 function;       // ID within the functions array
-} cv64_obj_func_inf_t;
+} cv64_object_func_inf_t;
 
-typedef struct cv64_obj_hdr {
+typedef struct cv64_object_hdr {
     s16 ID;
     s16 flags;
     s16 timer;
     s16 field_0x06;
-    cv64_obj_func_inf_t current_function[3];
+    cv64_object_func_inf_t current_function[3];
     s16 functionInfo_ID;
     void (*destroy)(void*); // Officially called "OBJ_destruct"
-    struct cv64_obj_hdr_t* parent;
-    struct cv64_obj_hdr_t* next;
-    struct cv64_obj_hdr_t* child;
-} cv64_obj_hdr_t;
+    struct cv64_object_hdr_t* parent;
+    struct cv64_object_hdr_t* next;
+    struct cv64_object_hdr_t* child;
+} cv64_object_hdr_t;
 ```
 
 ### `ID`
@@ -199,9 +199,9 @@ game their slot is free for a new object to occupy.
 There are two functions used to spawn an object in memory:
 
 ```c
-void* object_create(void* parent, object_t ID);
+void* object_create(void* parent, cv64_object_t ID);
 
-void* object_createAndSetChild(void* parent, object_t ID);
+void* object_createAndSetChild(void* parent, cv64_object_t ID);
 ```
 
 On these functions, `parent` is the parent object, and `ID` is the identifier of
@@ -262,7 +262,7 @@ In order to execute an object, the game calls `object_execute` to execute an
 object's associated code and all its `child` / `next`.
 
 ```c
-void object_execute(cv64_obj_hdr_t* object);
+void object_execute(cv64_object_hdr_t* object);
 ```
 
 `object` is the pointer to the object at the beginning of the "branch".
@@ -280,11 +280,11 @@ execution tree, so any `child` / `next` objects that come down from it will
 automatically execute; no need to explicitly call `object_execute` on the newly
 spawned object.
 
-#### `objects_functions`
+#### `Objects_functions`
 
 In order to know where the code associated to said object is located, the
 [identifier part](#lower-11-bits-the-actual-identifier) of its `ID` is used as
-an index into an array known as `objects_functions`.
+an index into an array known as `Objects_functions`.
 
 This is an array of 554 function pointers (one per object) containing the
 beginning of the object's associated code. Each entry in this array is called an
@@ -304,7 +304,7 @@ they're unloaded.
 
 Because this code is loaded dynamically, the address of its `entrypoint`
 function is not guaranteed to be constant. This is problematic because
-`objects_functions` only stores a single address meant to be constant during
+`Objects_functions` only stores a single address meant to be constant during
 gameplay.
 
 In addition, overlays are compiled with a specific `entrypoint` address
@@ -363,21 +363,21 @@ jumping, a function for propelling up, another function for falling down, etc).
 The function pointers array for the Konami / KCEK logo object looks like this:
 
 ```c
-cv64_konamilogo_func_t cv64_konamilogo_funcs[] = {
-    cv64_konamilogo_init,          // 0
-    cv64_konamilogo_fade_in,       // 1
-    cv64_konamilogo_wait,          // 2
-    cv64_konamilogo_fade_out,      // 3
-    cv64_konamilogo_kcek_fade_in,  // 4
-    cv64_konamilogo_kcek_wait,     // 5
-    cv64_konamilogo_kcek_fade_out, // 6
+cv64_ovl_konamilogo_func_t cv64_ovl_konamilogo_funcs[] = {
+    cv64_ovl_konamilogo_init,          // 0
+    cv64_ovl_konamilogo_fade_in,       // 1
+    cv64_ovl_konamilogo_wait,          // 2
+    cv64_ovl_konamilogo_fade_out,      // 3
+    cv64_ovl_konamilogo_kcek_fade_in,  // 4
+    cv64_ovl_konamilogo_kcek_wait,     // 5
+    cv64_ovl_konamilogo_kcek_fade_out, // 6
     func_8000E860                  // 7
 };
 ```
 
 So, if `current_function[0].function` for the Konami / KCEK logo object is equal
-to 0, then it will execute the `cv64_konamilogo_init`. If it's 1, it will
-execute `cv64_konamilogo_fade_in`, and so on.
+to 0, then it will execute the `cv64_ovl_konamilogo_init`. If it's 1, it will
+execute `cv64_ovl_konamilogo_fade_in`, and so on.
 
 The function ID in the `function` field will always be executed until its
 changed. In order to change it, there are various functions the devs used, but

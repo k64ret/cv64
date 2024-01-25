@@ -65,7 +65,7 @@ docker run --rm -ti -v $(pwd):/c64 c64
 
 - build-essential
 - binutils-mips-linux-gnu
-- python3/pip3 (I recommend managing this through [rtx][rtx])
+- python3/pip3 (I recommend managing this through [mise][mise])
 
 #### Windows
 
@@ -83,7 +83,7 @@ cmake -S . -B build -G "Ninja"
 ```
 
 > [!TIP]
-> Or run `rtx run c` if you are already using [rtx][rtx]
+> Or run `mise run c` if you are already using [mise][mise]
 
 The above snippet produces a Ninja-based build system under the hood. This seems
 to be faster than Make, but if you still prefer Make over Ninja, you can run the
@@ -100,7 +100,7 @@ cmake --build build
 ```
 
 > [!TIP]
-> Or run `rtx run b` if you are already using [rtx][rtx]
+> Or run `mise run b` if you are already using [mise][mise]
 
 ### Cleaning
 
@@ -111,8 +111,8 @@ Run the following to clean up the build artifacts.
 ```
 
 > [!TIP]
-> Or run `rtx run clean` if you are already using [rtx][rtx]
+> Or run `mise run clean` if you are already using [mise][mise]
 
-[rtx]: https://github.com/jdx/rtx
+[mise]: https://github.com/jdx/mise
 [research-spreadsheets]: https://docs.google.com/spreadsheets/d/1nzh_nFf26oVZy6uWeNYiYGXAto6Yz3xypZwWqwJBBJQ/edit#gid=74717405
 [lzkn64]: https://github.com/fluvian/lzkn64

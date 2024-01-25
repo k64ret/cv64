@@ -74,7 +74,7 @@ segments:
     subsegments:
       - [0x1060, c, gamestate]
       - [0x1370, c, memory]
-      - [0x2280, c, module]
+      - [0x2280, c, object]
       - [0x3550, asm]
       - [0x4BC0, asm]
       - [0x4D80, asm]
@@ -307,7 +307,7 @@ segments:
       - [0x90820, c]
       - [0x908D0, bin]
       - [0x90920, data]
-      - { start: 0x92E70, type: .data, name: module, vram: 0x80092270 }
+      - { start: 0x92E70, type: .data, name: object, vram: 0x80092270 }
       - { start: 0x93F70, type: .data, name: fade, vram: 0x80093370 }
       - { start: 0xA33B0, type: .rodata, name: fade, vram: 0x800A27B0 }
       - [0xA3410, .rodata]
@@ -361,7 +361,7 @@ segments:
       - [0xA7D30, .rodata]
       - [0xA7D40, .rodata]
       - { start: 0xA8420, type: .bss, name: gamestate, vram: 0x800A7820 }
-      # - { start: 0xA8430, type: .bss, name: module, vram: 0x800A7830 }
+      # - { start: 0xA8430, type: .bss, name: object, vram: 0x800A7830 }
 
   - type: bin
     start: 0xA8420

@@ -5,7 +5,7 @@
 
 // ID: 0x01B5
 typedef struct {
-    cv64_obj_hdr_t header;
+    cv64_object_hdr_t header;
     u8 field_0x20[OBJECT_SIZE - 0x20];
 } obj_01B5;
 
