@@ -1754,3 +1754,5 @@ D_8018CDE0 = 0x8018CDE0;
 play_sound_in_position_and_set_volume = 0x80013C40;
 figures_array = 0x8034EAB8;
 func_8000EE18 = 0x8000EE18;
+func_801578FC = 0x801578FC;
+func_8005B78C = 0x8005B78C;

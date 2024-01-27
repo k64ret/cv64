@@ -1,13 +1,18 @@
 #ifndef SAVE_H
 #define SAVE_H
 
+#include "event_flags.h"
 #include <ultra64.h>
+
+#define NUM_EVENT_FLAGS  16
+#define NUM_ITEMS        41 // Total number of items, not including the white jewel
+#define SIZE_ITEMS_ARRAY 64 // Size of the whole items array
 
 #define REINHARDT 0
 #define CARRIE    1
 
 typedef struct cv64_save_state {
-    u32 event_flags[16];
+    u32 event_flags[NUM_EVENT_FLAGS];
     u32 flags;
     u16 week;
     u16 day;
@@ -23,29 +28,17 @@ typedef struct cv64_save_state {
     u16 field13_0x5c; // Maybe related to the scrapped Magic meter?
     u16 subweapon;
     u32 money;
-    u8 inventory_items_amount[42];
-    u8 field22_0x8e;
-    u8 field23_0x8f;
-    u8 field24_0x90;
-    u8 field25_0x91;
-    u8 field26_0x92;
-    u8 field27_0x93;
-    u8 field28_0x94;
-    u8 field29_0x95;
-    u8 field30_0x96;
-    u8 field31_0x97;
-    u8 field32_0x98;
-    u8 field33_0x99;
-    u8 field34_0x9a;
-    u8 field35_0x9b;
-    u8 field36_0x9c;
-    u8 field37_0x9d;
-    u8 field38_0x9e;
-    u8 field39_0x9f;
-    u8 field40_0xa0;
-    u8 field41_0xa1;
-    u8 field42_0xa2;
-    u8 field43_0xa3;
+    union {
+        struct {
+            s8 jewels[5];
+            s8 healing[7];
+            s8 subweapons[6];
+            s8 quest[20];
+            s8 gold[3];
+            s8 field_0x41[SIZE_ITEMS_ARRAY - NUM_ITEMS]; // Probably unused
+        } category;
+        u8 array[SIZE_ITEMS_ARRAY];
+    } items;
     u32 player_status;
     u16 health_depletion_rate_while_poisoned;
     u16 current_hour_VAMP; // If greater than 24, you turn into vampire
@@ -68,6 +61,6 @@ typedef struct cv64_save_state {
     s16 field79_0xd4;
     s32 field83_0xd8;
     u32 money_spent_on_Renon;
-} cv64_save_state_t;
+} cv64_save_state_t; // Size = 0xE0
 
 #endif

@@ -7,6 +7,6 @@
 #include "objects/map/rose/door.h"
 // clang-format on
 
-const char ROSE_unused_string_1[] = "VENTILATOR : Can't allocate F3D.\n";
+const char cv64_ovl_rose_unused_str[] = "VENTILATOR : Can't allocate F3D.\n";
 
 #endif // ROSE_H
