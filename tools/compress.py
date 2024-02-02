@@ -136,7 +136,7 @@ def write_raw_files(input, buffer, table_addr):
     file_buf = bytearray(MAX_LZKN64_FILE_SIZE)
     pos = first_file_addr
 
-    print("New file addresses:")
+    # print("New file addresses:")
     for i in range(0, len(file_addrs), 2):
         copy_buffer_from_pos_with_len(input, file_buf, file_addrs[i], file_sizes[i])
 
@@ -154,8 +154,8 @@ def write_raw_files(input, buffer, table_addr):
         ).to_bytes(4, "big")
 
         # Only log unique file addresses
-        if i > 0 and (pos - last_pos) > 0:
-            print(f"{hex(pos)}")
+        # if i > 0 and (pos - last_pos) > 0:
+        #     print(f"{hex(pos)}")
 
         last_pos = pos
         pos += len(file_buf)
