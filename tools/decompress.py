@@ -252,7 +252,7 @@ def write_raw_files(input, buffer, table_addr):
 
         # Only log unique file addresses
         if i > 0 and (new_file_addrs[i] - new_file_addrs[i - 1]) > 0:
-            print(f"{hex(new_file_addrs[i])}")
+            print(f"{i//2+2}: 0x{file_addrs[i]:08X} -> 0x{new_file_addrs[i]:08X}")
 
 
 # Find the nearest power of two for the final ROM size.

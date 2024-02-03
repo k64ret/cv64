@@ -8,6 +8,7 @@ set(ROM ${CMAKE_BINARY_DIR}/${TARGET}.z64)
 set(BASEROM ${CMAKE_SOURCE_DIR}/baserom.z64)
 set(SPLAT_CONFIG ${CMAKE_SOURCE_DIR}/${TARGET}.yaml)
 set(DECOMPRESS ${CMAKE_SOURCE_DIR}/tools/decompress.py)
+set(COMPRESS ${CMAKE_SOURCE_DIR}/tools/compress.py)
 
 include(cmake/Prerequisites.cmake)
 
@@ -39,8 +40,17 @@ add_custom_command(
   TARGET ${TARGET}
   POST_BUILD
   COMMAND ${CMAKE_OBJCOPY} ARGS ${ELF} ${ROM} -O binary
-  COMMAND ${CMAKE_OBJCOPY} ARGS -O binary --gap-fill 0x00 --pad-to 0xC00000 ${ELF} ${ROM}
+  COMMAND ${CMAKE_OBJCOPY} ARGS -O binary --gap-fill 0x00 --pad-to 0x01000000 ${ELF} ${ROM}
   COMMENT "Converting ${ELF} executable into final ${ROM} ROM"
+  VERBATIM)
+
+# Compress build/castlevania.z64
+add_custom_command(
+  TARGET ${TARGET}
+  POST_BUILD
+  COMMAND ${Python_EXECUTABLE} ARGS ${COMPRESS} ${ROM} ${ROM}
+  WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+  COMMENT "Compressing Nisitema-Ichigo assets in ${ROM} ROM file"
   VERBATIM)
 
 add_custom_command(
