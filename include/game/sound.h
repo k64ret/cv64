@@ -13,7 +13,8 @@ extern u8 play_sound_in_position_and_set_volume(u16 sound_ID, vec3f* position,
 
 // Sound IDs (officially referred to as "sound codes")
 #define SD_TOU_TURO_DOOR_CLOSE 0x11B
-#define SD_ROSE_DOOR_CLOSING   0x29B
 #define SD_ROSE_DOOR_CLOSE     0x27B
+#define SD_ROSE_DOOR_CLOSING   0x29B
+#define SD_2E9                 0x2E9
 
 #endif

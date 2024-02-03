@@ -6,7 +6,7 @@
 // ID: 0x006E
 // TODO: Fill this
 typedef struct {
-    u8 field_0x[OBJECT_SIZE];
-} Obj_006E;
+    u8 field_0x00[OBJECT_SIZE];
+} object_006E;
 
 #endif

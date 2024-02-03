@@ -1776,12 +1776,14 @@ segments:
     vram: 0x0F000000
     exclusive_ram_id: nisitenma_ichigo_overlays
 
-  - name: nisitenma_ichigo/A5914A
-    type: bin
+  - name: nisitenma_ichigo/overlay/overlay_7D
+    type: code
     # start: 0x00A5914A
     start: 0x00CF5ED0
     vram: 0x0F000000
     exclusive_ram_id: nisitenma_ichigo_overlays
+    subsegments:
+      - [0x00CF5ED0, c, nisitenma_ichigo/overlay/overlay_7D]
 
   - name: nisitenma_ichigo/A591D6
     type: bin
@@ -1944,12 +1946,14 @@ segments:
     vram: 0x0F000000
     exclusive_ram_id: nisitenma_ichigo_overlays
 
-  - name: nisitenma_ichigo/overlay/demon_dracula_related_junk
-    type: bin
+  - name: nisitenma_ichigo/overlay/overlay_95
+    type: code
     # start: 0x00AD7B1C
     start: 0x00DA6B60
     vram: 0x0F000000
     exclusive_ram_id: nisitenma_ichigo_overlays
+    subsegments:
+      - [0x00DA6B60, c, nisitenma_ichigo/overlay/overlay_95]
 
   - name: nisitenma_ichigo/AD7B28
     type: bin
@@ -2120,11 +2124,13 @@ segments:
     exclusive_ram_id: nisitenma_ichigo_overlays
 
   - name: nisitenma_ichigo/overlay/credits_manager
-    type: bin
+    type: code
     # start: 0x00B541E0
     start: 0x00E55570
     vram: 0x0F000000
     exclusive_ram_id: nisitenma_ichigo_overlays
+    subsegments:
+      - [0x00E55570, c, nisitenma_ichigo/overlay/credits_manager]
 
   - name: nisitenma_ichigo/overlay/pause_menu
     type: bin
@@ -2196,19 +2202,21 @@ segments:
     vram: 0x0F000000
     exclusive_ram_id: nisitenma_ichigo_overlays
 
-  - name: nisitenma_ichigo/code/renon_briefcase
+  - name: nisitenma_ichigo/overlay/renon_briefcase
     type: bin
     # start: 0x00B5BA28
     start: 0x00E612A0
     vram: 0x0F000000
     exclusive_ram_id: nisitenma_ichigo_overlays
 
-  - name: nisitenma_ichigo/B5BF68
-    type: bin
+  - name: nisitenma_ichigo/overlay/overlay_BA
+    type: code
     # start: 0x00B5BF68
     start: 0x00E61930
     vram: 0x0F000000
     exclusive_ram_id: nisitenma_ichigo_overlays
+    subsegments:
+      - [0x00E61930, c, nisitenma_ichigo/overlay/overlay_BA]
 
   - name: nisitenma_ichigo/overlay/easy_mode_ending_msg
     type: bin

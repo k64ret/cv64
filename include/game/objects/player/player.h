@@ -15,7 +15,7 @@ typedef struct {
     u32 flags; // Player flags. See player_flags.h
     atari_base_work* atari_base;
     cv64_model_inf_t* model;
-    Obj_006E* obj_006E;
+    object_006E* obj_006E;
     animationMgr animMgr;
 } playerVisualData;
 

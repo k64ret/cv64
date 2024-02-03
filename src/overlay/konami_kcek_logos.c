@@ -6,7 +6,7 @@
  * Mapped by the TLB? = No
  */
 
-#include "objects/engine/gamestates/konami_kcek_logos.h"
+#include "objects/engine/konami_kcek_logos.h"
 #include "cv64.h"
 #include "gamestate.h"
 #include "gfx/camera.h"

@@ -1,0 +1,7 @@
+#ifndef CUTSCENE_ID_H
+#define CUTSCENE_ID_H
+
+#define CUTSCENE_ID_NONE    0x00
+#define CUTSCENE_ID_CREDITS 0x63
+
+#endif // CUTSCENE_ID_H
