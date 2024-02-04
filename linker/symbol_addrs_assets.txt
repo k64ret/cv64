@@ -7,6 +7,8 @@ ROSE_DOOR_DL       = 0x06005A30; // segment:nisitenma_ichigo/map/rose_actrise_me
 TOUTURO_DOOR_EXIT_DL     = 0x0600A300; // segment:nisitenma_ichigo/map/room_of_clocks/TOU_TURO
 TOUTURO_DOOR_ENTRANCE_DL = 0x0600AB00; // segment:nisitenma_ichigo/map/room_of_clocks/TOU_TURO
 
+TEXTBOX_ADVANCE_ARROW_DL = 0x06001120; // segment:nisitenma_ichigo/overlay/textbox_advance_arrow
+
 // test_grid_txt   = 0x06000000; // segment:test_grid
 // test_grid_tlut  = 0x06000800; // segment:test_grid
 // test_grid_vtx   = 0x06000820; // segment:test_grid rom:0x00BD96E0 size:0x780

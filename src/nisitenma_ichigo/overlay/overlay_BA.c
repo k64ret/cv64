@@ -6,11 +6,12 @@
  * Dracula.
  *
  *   Sound 0x2E9 appears to be silent, so it's unknown how it would have sound
- * like. For some reason, it's grouped under the "Menu" objects. Associated
- * objects: 0x213F
+ * like. For some reason, it's grouped under the "Menu" objects.
+ * Associated objects: 0x213F
  *
  * Mapped by the TLB? = Yes
  */
+
 #include "objects/menu/object_213F.h"
 #include "objects/player/player.h"
 #include "sound.h"

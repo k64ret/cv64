@@ -2175,11 +2175,13 @@ segments:
     exclusive_ram_id: nisitenma_ichigo_overlays
 
   - name: nisitenma_ichigo/overlay/textbox_advance_arrow
-    type: bin
+    type: code
     # start: 0x00B5A130
     start: 0x00E5F2A0
     vram: 0x0F000000
     exclusive_ram_id: nisitenma_ichigo_overlays
+    subsegments:
+      - [0x00E5F2A0, c, nisitenma_ichigo/overlay/textbox_advance_arrow]
 
   - name: nisitenma_ichigo/overlay/button_config
     type: bin
