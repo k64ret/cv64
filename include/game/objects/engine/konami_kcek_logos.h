@@ -38,12 +38,6 @@ typedef enum cv64_ovl_konamilogo_func_id {
     FUNC_8000E860
 } cv64_ovl_konamilogo_func_id_t;
 
-cv64_ovl_konamilogo_func_t cv64_ovl_konamilogo_funcs[] = {
-    cv64_ovl_konamilogo_init,          cv64_ovl_konamilogo_fade_in,
-    cv64_ovl_konamilogo_wait,          cv64_ovl_konamilogo_fade_out,
-    cv64_ovl_konamilogo_kcek_fade_in,  cv64_ovl_konamilogo_kcek_wait,
-    cv64_ovl_konamilogo_kcek_fade_out, func_8000E860};
-
 // These variables need to be extern'd,
 // otherwise the code will vary slightly and won't match.
 extern const u32 KONAMI_LOGO_DL;

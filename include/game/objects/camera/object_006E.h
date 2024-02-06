@@ -3,8 +3,8 @@
 
 #include "object.h"
 
-// ID: 0x006E
 // TODO: Fill this
+// ID: 0x006E
 typedef struct {
     u8 field_0x00[OBJECT_SIZE];
 } object_006E;

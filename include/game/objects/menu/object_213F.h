@@ -15,9 +15,4 @@ void obj213F_isPlayerDroppingDown(object_213F* self);     // 0x0F0000DC
 void obj213F_playSound(object_213F* self);                // 0x0F000130
 void obj213F_destroy(object_213F* self);                  // 0x0F000174
 
-// 0x0F0001A0
-void (*obj213F_functions[])(object_213F* self) = {
-    obj213F_isDraculaCutsceneWatched, obj213F_isPlayerDroppingDown,
-    obj213F_playSound, obj213F_destroy};
-
 #endif

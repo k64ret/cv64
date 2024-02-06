@@ -13,6 +13,12 @@
 #include "gamestate.h"
 #include "cutscene_ID.h"
 
+void (*creditsMgr_functions[])(creditsMgr* self) = {
+    creditsMgr_init,
+    creditsMgr_loop,
+    creditsMgr_exit
+};
+
 void creditsMgr_entrypoint(creditsMgr* self) {
     ENTER(self, creditsMgr_functions);
 }

@@ -14,6 +14,22 @@
 #include "atari.h"
 #include "system_work.h"
 
+/*
+ *   You have completed
+ *   the game in EASY mode.
+ *   If you want to face
+ *   the challenge
+ *       of more stages,
+ *   try NORMAL mode.
+ */
+u16 cv64_ovl_easyending_msg[] = {
+    #include "objects/menu/easy_mode_ending.msg"
+};
+
+cv64_ovl_easyending_func_t cv64_ovl_easyending_funcs[] = {
+    cv64_ovl_easyending_init, cv64_ovl_easyending_loop,
+    cv64_ovl_easyending_destroy};
+
 void cv64_ovl_easyending_entrypoint(cv64_ovl_easyending_t* self) {
     ENTER(self, cv64_ovl_easyending_funcs);
 }

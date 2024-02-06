@@ -24,10 +24,6 @@ void textboxAdvanceArrow_init(textboxAdvanceArrow* self);
 void textboxAdvanceArrow_loop(textboxAdvanceArrow* self);
 void textboxAdvanceArrow_destroy(textboxAdvanceArrow* self);
 
-void (*textboxAdvanceArrow_functions[])(textboxAdvanceArrow* self) = {
-    textboxAdvanceArrow_init, textboxAdvanceArrow_loop,
-    textboxAdvanceArrow_destroy};
-
 extern const u32 TEXTBOX_ADVANCE_ARROW_DL;
 
 #endif

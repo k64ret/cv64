@@ -27,9 +27,6 @@ void cv64_ovl_rose_ventilator_entrypoint(cv64_ovl_rose_ventilator_t* self);
 void cv64_ovl_rose_ventilator_init(cv64_ovl_rose_ventilator_t* self);
 void cv64_ovl_rose_ventilator_loop(cv64_ovl_rose_ventilator_t* self);
 
-cv64_ovl_rose_ventilator_func_t cv64_ovl_rose_ventilator_funcs[] = {
-    cv64_ovl_rose_ventilator_init, cv64_ovl_rose_ventilator_loop};
-
 extern const u32 ROSE_VENTILATOR_DL;
 
 #endif // ROSE_VENTILATOR_H
