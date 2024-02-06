@@ -73,6 +73,13 @@ docker run --rm -ti -v $(pwd):/c64 c64
 
 ### Building
 
+> [!WARNING]
+> If the compilation process fails, go to the `castlevania.yaml` file
+and set the option `dissasemble_all` to `True`, then clean and build again.
+> It should then end up with an error.
+At this point, change said option back to `False`,
+clean and build again and the project should build successfully.
+
 Place a Castlevania 64 (USA v1.0) ROM in the root of the project, and rename it
 to `baserom.z64`.
 
@@ -111,7 +118,20 @@ Run the following to clean up the build artifacts.
 ```
 
 > [!TIP]
-> Or run `mise run clean` if you are already using [mise][mise]
+> Or run `mise run cl` if you are already using [mise][mise]
+
+### Context generation
+
+You can generate a `ctx.c` context file for use with [mips2c](https://github.com/matt-kempster/m2c)
+or [decomp.me](https://decomp.me/).
+This will contain all headers within a given source file
+
+```sh
+python3 ./tools/m2ctx.py <your_C_file>
+```
+
+> [!TIP]
+> Or run `mise run ctx <your_C_file>` if you are already using [mise][mise]
 
 [mise]: https://github.com/jdx/mise
 [research-spreadsheets]: https://docs.google.com/spreadsheets/d/1nzh_nFf26oVZy6uWeNYiYGXAto6Yz3xypZwWqwJBBJQ/edit#gid=74717405

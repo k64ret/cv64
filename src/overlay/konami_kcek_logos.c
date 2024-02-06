@@ -12,7 +12,6 @@
 #include "gfx/camera.h"
 #include "gfx/figure.h"
 #include "system_work.h"
-#include <ultra64.h>
 
 void cv64_ovl_konamilogo_entrypoint(cv64_ovl_konamilogo_t* self) {
     ENTER(self, cv64_ovl_konamilogo_funcs);
@@ -37,7 +36,7 @@ void cv64_ovl_konamilogo_init(cv64_ovl_konamilogo_t* self) {
 
     self->model = model;
     model->dlist = &KONAMI_LOGO_DL;
-    model->assets_file_ID = 0x5D;
+    model->assets_file_ID = NI_ASSETS_KONAMI_KCEK_LOGOS;
     model->size.x = 0.9975f;
     model->size.y = 1.005f;
     CV64_COLOR_RGBA_TO_U32(sys.background_color) = 0x000000FF; // Black (opaque)

@@ -8,7 +8,7 @@
 
 #include "objects/engine/creditsMgr.h"
 #include "objects/engine/DMAMgr.h"
-#include "atari_work.h"
+#include "atari.h"
 #include "system_work.h"
 #include "gamestate.h"
 #include "cutscene_ID.h"

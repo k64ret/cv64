@@ -9,6 +9,7 @@
  */
 
 #include "gfx/camera.h"
+#include "gfx/color.h"
 #include "objects/menu/textboxAdvanceArrow.h"
 
 void textboxAdvanceArrow_entrypoint(textboxAdvanceArrow* self) {
@@ -33,7 +34,7 @@ void textboxAdvanceArrow_init(textboxAdvanceArrow* self) {
     model = (*modelInfo_createRootNode)(FIG_TYPE_HUD_ELEMENT, temp);
     self->model = model;
     model->dlist = &TEXTBOX_ADVANCE_ARROW_DL;
-    model->assets_file_ID = 0x65;
+    model->assets_file_ID = NI_ASSETS_FILE_SELECT;
     model->flags |= 0x80;
     model->flags |= 0x800;
     CV64_COLOR_RGBA_TO_U32(model->primitive_color) = 0xFF0000FF; // Red (opaque)

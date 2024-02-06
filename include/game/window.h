@@ -7,6 +7,19 @@
 #include "struct_78.h"
 #include <ultra64.h>
 
+typedef enum cv64_window_flag {
+    WINDOW_FLAG_1 = CV64_BIT(0),
+    WINDOW_FLAG_4 = CV64_BIT(2),
+    WINDOW_FLAG_10 = CV64_BIT(4),
+    WINDOW_FLAG_20 = CV64_BIT(5),
+    WINDOW_CLOSING = CV64_BIT(8),
+    WINDOW_OPENING = CV64_BIT(9),
+    WINDOW_OPENED_X = CV64_BIT(12),
+    WINDOW_OPENED_Y = CV64_BIT(13),
+    WINDOW_FLAG_40000 = CV64_BIT(18),
+    WINDOW_HIDE = CV64_BIT(19),
+} cv64_window_flag_t;
+
 typedef struct {
     u32 flags;
     camera* display_camera;

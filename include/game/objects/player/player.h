@@ -3,7 +3,7 @@
 
 #include "actor.h"
 #include "animation.h"
-#include "atari_work.h"
+#include "atari.h"
 #include "gfx/model_info.h"
 #include "math.h"
 #include "objects/camera/object_006E.h"

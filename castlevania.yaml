@@ -34,7 +34,6 @@ options:
   header_encoding: ASCII
   generated_c_preamble: |
     #include "cv64.h"
-    #include <ultra64.h>
   o_as_suffix: False
   use_legacy_include_asm: False
   mips_abi_float_regs: o32
@@ -2228,7 +2227,7 @@ segments:
     exclusive_ram_id: nisitenma_ichigo_overlays
     subsegments:
       - [0x00E61AE0, c, overlay/easy_mode_ending_msg]
-      - [0x00E61E30, data, overlay/easy_mode_ending_msg]
+      - [0x00E61E30, .data, overlay/easy_mode_ending_msg]
 
   - name: nisitenma_ichigo/B5C426
     type: bin
