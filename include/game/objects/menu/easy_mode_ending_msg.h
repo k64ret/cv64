@@ -29,7 +29,7 @@ void cv64_ovl_easyending_destroy(cv64_ovl_easyending_t* self);
  *   try NORMAL mode.
  */
 u16 cv64_ovl_easyending_msg[] = {
-#include "overlay/easy_mode_ending.msg"
+#include "easy_mode_ending.msg"
 };
 
 cv64_ovl_easyending_func_t cv64_ovl_easyending_funcs[] = {
