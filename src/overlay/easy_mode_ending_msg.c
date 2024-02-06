@@ -6,6 +6,8 @@
  * Mapped by the TLB? = Yes
  */
 
+// clang-format off
+
 #include "objects/menu/easy_mode_ending_msg.h"
 #include "sound.h"
 #include "cv64.h"
@@ -21,24 +23,16 @@ void cv64_ovl_easyending_init(cv64_ovl_easyending_t* self) {
     u32 message_ptr;
 
     (*play_sound)(SD_00A);
-    new_textbox = (*textbox_create)(self, common_cameras_array.HUD,
-                                    (OPEN_TEXTBOX | FAST_TEXT_TRANSITION));
+    new_textbox = (*textbox_create)(self, common_cameras_array.HUD, (OPEN_TEXTBOX | FAST_TEXT_TRANSITION));
     self->ending_textbox = new_textbox;
     (*textbox_setPos)(new_textbox, 30, 110, 1);
     (*textbox_setDimensions)(new_textbox, 6, 250, 0, 0);
     new_textbox->palette = TEXT_COLOR_WHITE;
     new_textbox->display_time = 0;
     message_ptr = (*text_getMessageFromPool)(cv64_ovl_easyending_msg, 0);
-    (*textbox_setMessagePtr)(
-        new_textbox,
-        GET_UNMAPPED_ADDRESS(NI_OVL_EASY_MODE_ENDING_MSG, message_ptr), NULL,
-        0);
-    (*textbox_enableLens)(new_textbox,
-                          (WINDOW_FLAG_40000 | WINDOW_FLAG_20 | WINDOW_FLAG_10 |
-                           WINDOW_FLAG_4 | WINDOW_FLAG_1),
-                          30);
-    (*object_curLevel_goToNextFuncAndClearTimer)(self->header.current_function,
-                                                 &self->header.functionInfo_ID);
+    (*textbox_setMessagePtr)(new_textbox, GET_UNMAPPED_ADDRESS(NI_OVL_EASY_MODE_ENDING_MSG, message_ptr), NULL, 0);
+    (*textbox_enableLens)(new_textbox, (WINDOW_FLAG_40000 | WINDOW_FLAG_20 | WINDOW_FLAG_10 | WINDOW_FLAG_4 | WINDOW_FLAG_1), 30);
+    (*object_curLevel_goToNextFuncAndClearTimer)(self->header.current_function, &self->header.functionInfo_ID);
 }
 
 void func_0F00018C() {}
@@ -48,8 +42,7 @@ void cv64_ovl_easyending_loop(cv64_ovl_easyending_t* self) {
     u32* textbox_flags = &self->ending_textbox->flags;
 
     self->active_time++;
-    if ((self->active_time > 120) &&
-        (sys.controllers[0].buttons_pressed & A_BUTTON)) {
+    if ((self->active_time > 120) && (sys.controllers[0].buttons_pressed & A_BUTTON)) {
         *textbox_flags |= CLOSE_TEXTBOX;
         sys.SaveStruct_gameplay.money = 0;
         sys.SaveStruct_gameplay.time_saved_counter = 0;
@@ -79,17 +72,12 @@ void cv64_ovl_easyending_loop(cv64_ovl_easyending_t* self) {
         sys.SaveStruct_gameplay.seconds = 0;
         sys.SaveStruct_gameplay.milliseconds = 0;
         // Clear event flags
-        for (i = 0; i < NUM_EVENT_FLAGS; i++) {
-            sys.SaveStruct_gameplay.event_flags[i] = 0;
-        }
+        for (i = 0; i < NUM_EVENT_FLAGS; i++) { sys.SaveStruct_gameplay.event_flags[i] = 0; }
         // Remove inventory items
-        for (j = 0; j < SIZE_ITEMS_ARRAY; j++) {
-            sys.SaveStruct_gameplay.items.array[j] = 0;
-        }
+        for (j = 0; j < SIZE_ITEMS_ARRAY; j++) { sys.SaveStruct_gameplay.items.array[j] = 0; }
         (*atari_work_table_init)();
         self->active_time = 0;
-        (*object_curLevel_goToNextFuncAndClearTimer)(
-            self->header.current_function, &self->header.functionInfo_ID);
+        (*object_curLevel_goToNextFuncAndClearTimer)(self->header.current_function, &self->header.functionInfo_ID);
     }
 }
 
@@ -99,9 +87,7 @@ void cv64_ovl_easyending_destroy(cv64_ovl_easyending_t* self) {
     self->active_time++;
     if (self->active_time > 30) {
         textbox_flags = self->ending_textbox->flags;
-        if (!(textbox_flags & MFDS_FLAG_20000000) &&
-            !(textbox_flags & CLOSE_LENS) &&
-            !(textbox_flags & MFDS_FLAG_2000000)) {
+        if (!(textbox_flags & MFDS_FLAG_20000000) && !(textbox_flags & CLOSE_LENS) && !(textbox_flags & MFDS_FLAG_2000000)) {
             if (!(textbox_flags & TEXTBOX_IS_ACTIVE)) {
                 self->ending_textbox->flags = textbox_flags | CLOSE_TEXTBOX;
             }
@@ -109,3 +95,5 @@ void cv64_ovl_easyending_destroy(cv64_ovl_easyending_t* self) {
         }
     }
 }
+
+// clang-format on

@@ -1,7 +1,7 @@
 /*
  * File: creditsMgr.c
  * Description: Creates the credits cutscene and resets the game once it's over.
- * Associated modules: 0x201B
+ * Associated objects: 0x201B
  *
  * Mapped by the TLB? = Yes
  */

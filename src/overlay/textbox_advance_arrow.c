@@ -9,7 +9,6 @@
  */
 
 #include "gfx/camera.h"
-#include "gfx/color.h"
 #include "objects/menu/textboxAdvanceArrow.h"
 
 void textboxAdvanceArrow_entrypoint(textboxAdvanceArrow* self) {
