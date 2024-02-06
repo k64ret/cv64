@@ -7,7 +7,7 @@
 #include "gfx/camera.h"
 #include "gfx/model_info.h"
 #include "objects/menu/lens.h"
-#include "objects/menu/textboxAdvanceArrow.h"
+// #include "objects/menu/textboxAdvanceArrow.h"
 #include "window.h"
 #include <ultra64.h>
 
@@ -142,7 +142,7 @@ typedef struct {
     Gfx** mfds_double;
     void* field_0x38;
     void* field_0x3C;
-    textboxAdvanceArrow* advance_arrow;
+    void* advance_arrow; // textboxAdvanceArrow*
     void* field_0x44;
     void* field_0x48;
     void* field_0x4C;
