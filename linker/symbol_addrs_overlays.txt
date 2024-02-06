@@ -48,3 +48,14 @@ cv64_ovl_touturo_door_entrance_funcs             = 0x8018F108; // segment:TOU_TU
 // .rodata
 cv64_ovl_touturo_unused_str                      = 0x8018F120; // type:asciz segment:TOU_TURO size:0x26
 // End of src/overlay/map/tou_turo.c
+
+// src/overlay/easy_mode_ending_msg.c
+// .text
+cv64_ovl_easyending_entrypoint = 0x0F000000; // type:func segment:nisitenma_ichigo/overlay/easy_mode_ending_msg
+cv64_ovl_easyending_init       = 0x0F000070; // type:func segment:nisitenma_ichigo/overlay/easy_mode_ending_msg
+cv64_ovl_easyending_loop       = 0x0F000194; // type:func segment:nisitenma_ichigo/overlay/easy_mode_ending_msg
+cv64_ovl_easyending_destroy    = 0x0F0002E0; // type:func segment:nisitenma_ichigo/overlay/easy_mode_ending_msg
+// .data
+cv64_ovl_easyending_msg        = 0x0F000350; // segment:nisitenma_ichigo/overlay/easy_mode_ending_msg size:0xF0
+cv64_ovl_easyending_funcs      = 0x0F000440; // segment:nisitenma_ichigo/overlay/easy_mode_ending_msg size:0x0C
+// End of src/overlay/easy_mode_ending_msg.c

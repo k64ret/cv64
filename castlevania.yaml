@@ -2221,11 +2221,14 @@ segments:
       - [0x00E61930, c, overlay/overlay_BA]
 
   - name: nisitenma_ichigo/overlay/easy_mode_ending_msg
-    type: bin
+    type: code
     # start: 0x00B5C092
     start: 0x00E61AE0
     vram: 0x0F000000
     exclusive_ram_id: nisitenma_ichigo_overlays
+    subsegments:
+      - [0x00E61AE0, c, overlay/easy_mode_ending_msg]
+      - [0x00E61E30, data, overlay/easy_mode_ending_msg]
 
   - name: nisitenma_ichigo/B5C426
     type: bin
