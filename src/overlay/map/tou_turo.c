@@ -16,7 +16,7 @@
 #include "gfx/struct_47.h"
 #include <ultra64.h>
 
-// cv64_ovl_touturo_door_func_t cv64_touturo_door_funcs[] =
+// cv64_ovl_touturo_door_func_t cv64_ovl_touturo_door_funcs[] =
 // {cv64_ovl_touturo_door_init,
 //                                                       cv64_ovl_touturo_door_loop};
 extern cv64_ovl_touturo_door_func_t cv64_ovl_touturo_door_funcs[];
