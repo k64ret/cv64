@@ -8,15 +8,11 @@ options:
   # Paths
   base_path: .
   target_path: baserom_uncompressed.z64
-  asm_path: asm
-  asset_path: assets
-  src_path: src
   # Used to generate values within the `castlevania.ld` linker script
   build_path: CMakeFiles/castlevania.dir
   ld_script_path: linker/castlevania.ld
   undefined_funcs_auto_path: linker/auto/undefined_funcs_auto.ld
   undefined_syms_auto_path: linker/auto/undefined_syms_auto.ld
-  extensions_path: tools/splat_ext
   # Disambiguates default symbol names sharing same VRAM address in separate overlays
   symbol_name_format: $VRAM_$ROM
   symbol_addrs_path:
@@ -24,10 +20,6 @@ options:
     - linker/symbol_addrs_makerom.txt
     - linker/symbol_addrs_overlays.txt
     - linker/symbol_addrs_assets.txt
-  # reloc_addrs_path:
-  #   - linker/reloc_addrs.txt
-  # ld_symbol_header_path: include/ld_symbols.h
-  # create_asm_dependencies: True
   disassemble_all: False
   migrate_rodata_to_functions: False
   find_file_boundaries: True
@@ -40,14 +32,8 @@ options:
   asm_function_macro: glabel
   asm_jtbl_label_macro: jlabel
   asm_data_macro: dlabel
-  # section_order: [".text", ".data", ".rodata", ".bss"]
-  # auto_all_sections: [".data", ".rodata", ".bss"]
-  # string_encoding: ASCII
-  # data_string_encoding: ASCII
   rodata_string_guesser_level: 2
   data_string_guesser_level: 2
-  # libultra_symbols: True
-  # hardware_regs: True
   gfx_ucode: f3dex2
 segments:
   - name: header
@@ -1783,6 +1769,7 @@ segments:
     exclusive_ram_id: nisitenma_ichigo_overlays
     subsegments:
       - [0x00CF5ED0, c, overlay/overlay_7D]
+      - [0x00CF6030, .data, overlay/overlay_7D]
 
   - name: ni_A591D6
     type: bin
@@ -2130,6 +2117,7 @@ segments:
     exclusive_ram_id: nisitenma_ichigo_overlays
     subsegments:
       - [0x00E55570, c, overlay/credits_manager]
+      - [0x00E557A0, .data, overlay/credits_manager]
 
   - name: ni_ovl_pause_menu
     type: bin
@@ -2181,6 +2169,8 @@ segments:
     exclusive_ram_id: nisitenma_ichigo_overlays
     subsegments:
       - [0x00E5F2A0, c, overlay/textbox_advance_arrow]
+      - [0x00E5F640, .data, overlay/textbox_advance_arrow]
+      - [0x00E5F640, .rodata, overlay/textbox_advance_arrow]
 
   - name: ni_ovl_button_config
     type: bin
@@ -2218,6 +2208,7 @@ segments:
     exclusive_ram_id: nisitenma_ichigo_overlays
     subsegments:
       - [0x00E61930, c, overlay/overlay_BA]
+      - [0x00E61AD0, .data, overlay/overlay_BA]
 
   - name: ni_ovl_easy_mode_ending_msg
     type: code

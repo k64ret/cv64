@@ -49,6 +49,47 @@ cv64_ovl_touturo_door_entrance_funcs             = 0x8018F108; // segment:TOU_TU
 cv64_ovl_touturo_unused_str                      = 0x8018F120; // type:asciz segment:TOU_TURO size:0x26
 // End of src/overlay/map/tou_turo.c
 
+// src/overlay/overlay_7D.c
+// .text
+obj20A3_entrypoint = 0x0F000000; // type:func segment:ni_ovl_overlay_7D
+obj20A4_entrypoint = 0x0F000070; // type:func segment:ni_ovl_overlay_7D
+obj20A5_entrypoint = 0x0F0000E0; // type:func segment:ni_ovl_overlay_7D
+func_0F000150      = 0x0F000150; // type:func segment:ni_ovl_overlay_7D
+// .data
+cv64_ovl_7d_funcs  = 0x0F000160; // segment:ni_ovl_overlay_7D size:0x04
+// End of src/overlay/overlay_7D.c
+
+// src/overlay/credits_manager.c
+// .text
+creditsMgr_entrypoint     = 0x0F000000; // type:func segment:ni_ovl_credits_manager
+creditsMgr_init           = 0x0F000070; // type:func segment:ni_ovl_credits_manager
+creditsMgr_loop           = 0x0F00016C; // type:func segment:ni_ovl_credits_manager
+creditsMgr_exit           = 0x0F0001F0; // type:func segment:ni_ovl_credits_manager
+// .data
+cv64_ovl_creditsmgr_funcs = 0x0F000230; // segment:ni_ovl_credits_manager size:0x0C
+// End of src/overlay/credits_manager.c
+
+// src/overlay/textbox_advance_arrow.c
+// .text
+textboxAdvanceArrow_entrypoint     = 0x0F000000; // type:func segment:ni_ovl_textbox_advance_arrow
+textboxAdvanceArrow_init           = 0x0F000070; // type:func segment:ni_ovl_textbox_advance_arrow
+textboxAdvanceArrow_loop           = 0x0F000190; // type:func segment:ni_ovl_textbox_advance_arrow
+textboxAdvanceArrow_destroy        = 0x0F00037C; // type:func segment:ni_ovl_textbox_advance_arrow
+// .data
+cv64_ovl_textboxadvancearrow_funcs = 0x0F0003A0; // segment:ni_ovl_textbox_advance_arrow size:0x0C
+// End of src/overlay/textbox_advance_arrow.c
+
+// src/overlay/overlay_BA.c
+// .text
+obj213F_entrypoint               = 0x0F000000; // type:func segment:ni_ovl_overlay_BA
+obj213F_isDraculaCutsceneWatched = 0x0F000070; // type:func segment:ni_ovl_overlay_BA
+obj213F_isPlayerDroppingDown     = 0x0F0000DC; // type:func segment:ni_ovl_overlay_BA
+obj213F_playSound                = 0x0F000130; // type:func segment:ni_ovl_overlay_BA
+obj213F_destroy                  = 0x0F000174; // type:func segment:ni_ovl_overlay_BA
+// .data
+cv64_ovl_obj213F_funcs           = 0x0F0001A0; // segment:ni_ovl_overlay_BA size:0x0C
+// End of src/overlay/overlay_BA.c
+
 // src/overlay/easy_mode_ending_msg.c
 // .text
 cv64_ovl_easyending_entrypoint = 0x0F000000; // type:func segment:ni_ovl_easy_mode_ending_msg
