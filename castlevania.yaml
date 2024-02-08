@@ -1509,33 +1509,32 @@ segments:
     exclusive_ram_id: nisitenma_ichigo_assets
 
   - name: NI_ASSETS_TEST_GRID
-    type: bin
+    type: data
     # start: 0x009CAD2A
     start: 0x00BD8EC0
     vram: 0x06000000
     exclusive_ram_id: nisitenma_ichigo_assets
     subsegments:
-      - [0x00BD8EC0, bin]
-      # - { start: 0xBD8EC0, type: ci4, name: img/map/test_grid_txt.ci4, palette: img/map/test_grid_tlut.rgba16, width: 64, height: 64 }
-      # - { start: 0xBD96C0, type: palette, name: img/map/test_grid_tlut.rgba16, size: 0x20 }
+      - { start: 0xBD8EC0, type: .ci4, name: map/test_grid/img/test_grid_txt.ci4, palette: map/test_grid/img/test_grid_tlut.rgba16, width: 64, height: 64 }
+      - { start: 0xBD96C0, type: .palette, name: map/test_grid/img/test_grid_tlut.rgba16, size: 0x20 }
 
-      # - { start: 0xBD96E0, type: vtx, data_only: true, name: data/map/test_grid }
+      - { start: 0xBD96E0, type: .vtx, data_only: true, name: map/test_grid/vertices/test_grid_vtx }
 
-      # - { start: 0xBD9E60, type: .data, name: data/map/test_grid_1 }
-      # - { start: 0xBD9F98, type: .data, name: data/map/test_grid_2 }
-      # - { start: 0xBDA0B0, type: .data, name: data/map/test_grid_3 }
-      # - { start: 0xBDA1C8, type: .data, name: data/map/test_grid_4 }
-      # - { start: 0xBDA2A0, type: .data, name: data/map/test_grid_5 }
-      # - { start: 0xBDA3B8, type: .data, name: data/map/test_grid_6 }
-      # - { start: 0xBDA4B0, type: .data, name: data/map/test_grid_7 }
-      # - { start: 0xBDA5A8, type: .data, name: data/map/test_grid_8 }
-      # - { start: 0xBDA680, type: .data, name: data/map/test_grid_9 }
-      # - { start: 0xBDA798, type: .data, name: data/map/test_grid_10 }
-      # - { start: 0xBDA890, type: .data, name: data/map/test_grid_11 }
-      # - { start: 0xBDA988, type: .data, name: data/map/test_grid_12 }
-      # - { start: 0xBDAA60, type: .data, name: data/map/test_grid_13 }
-      # - { start: 0xBDAB38, type: .data, name: data/map/test_grid_14 }
-      # - { start: 0xBDAC10, type: .data, name: data/map/test_grid_15 }
+      - { start: 0xBD9E60, type: .gfx, name: map/test_grid/dlists/test_grid_1 }
+      - { start: 0xBD9F98, type: .gfx, name: map/test_grid/dlists/test_grid_2 }
+      - { start: 0xBDA0B0, type: .gfx, name: map/test_grid/dlists/test_grid_3 }
+      - { start: 0xBDA1C8, type: .gfx, name: map/test_grid/dlists/test_grid_4 }
+      - { start: 0xBDA2A0, type: .gfx, name: map/test_grid/dlists/test_grid_5 }
+      - { start: 0xBDA3B8, type: .gfx, name: map/test_grid/dlists/test_grid_6 }
+      - { start: 0xBDA4B0, type: .gfx, name: map/test_grid/dlists/test_grid_7 }
+      - { start: 0xBDA5A8, type: .gfx, name: map/test_grid/dlists/test_grid_8 }
+      - { start: 0xBDA680, type: .gfx, name: map/test_grid/dlists/test_grid_9 }
+      - { start: 0xBDA798, type: .gfx, name: map/test_grid/dlists/test_grid_10 }
+      - { start: 0xBDA890, type: .gfx, name: map/test_grid/dlists/test_grid_11 }
+      - { start: 0xBDA988, type: .gfx, name: map/test_grid/dlists/test_grid_12 }
+      - { start: 0xBDAA60, type: .gfx, name: map/test_grid/dlists/test_grid_13 }
+      - { start: 0xBDAB38, type: .gfx, name: map/test_grid/dlists/test_grid_14 }
+      - { start: 0xBDAC10, type: .gfx, name: map/test_grid/dlists/test_grid_15 }
 
   - name: ni_konami_kcek_logos
     type: bin
