@@ -12,7 +12,7 @@
  *      causing graphical glitches and crashes with the elements that use said
  *      heap (such as the Pause menu).
  *
- * The correct size should be 0x34000.
+ *      The correct size should be 0x34000.
  */
 #define HEAP_MENU_DATA_SIZE 0x40000
 

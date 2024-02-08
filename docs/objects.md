@@ -3,7 +3,7 @@
 
 **Objects**[^1] are a common data structure seen through the game's code.
 
-[^1]: Objects were formerly known as _modules_
+[^1]: Objects were formerly known as _modules_ in old documentation
 
 An "object" has two main uses:
 

@@ -3,7 +3,7 @@
 
 #include "actor.h"
 #include "animation.h"
-#include "atari_work.h"
+#include "atari.h"
 #include "gfx/model_info.h"
 #include "math.h"
 #include "objects/camera/object_006E.h"
@@ -15,7 +15,7 @@ typedef struct {
     u32 flags; // Player flags. See player_flags.h
     atari_base_work* atari_base;
     cv64_model_inf_t* model;
-    Obj_006E* obj_006E;
+    object_006E* obj_006E;
     animationMgr animMgr;
 } playerVisualData;
 

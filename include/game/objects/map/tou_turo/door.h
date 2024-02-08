@@ -6,9 +6,6 @@
 #include "map_actor_model.h"
 #include "object.h"
 
-const char cv64_ovl_touturo_unused_str[] =
-    "ERROR P27TOBIRA : EFFECT SPAWN ERROR\n";
-
 extern const u32 TOUTURO_DOOR_EXIT_DL;
 extern const u32 TOUTURO_DOOR_ENTRANCE_DL;
 
@@ -45,31 +42,10 @@ cv64_ovl_touturo_door_entrance_check_event_flags(cv64_ovl_touturo_door_t* self);
 extern void
 cv64_ovl_touturo_door_entrance_close_door(cv64_ovl_touturo_door_t* self);
 
-// .data
-// cv64_ovl_touturo_door_func_t cv64_touturo_door_funcs[] =
-// {cv64_ovl_touturo_door_init,
-//                                                       cv64_ovl_touturo_door_loop};
-extern cv64_ovl_touturo_door_func_t cv64_ovl_touturo_door_funcs[];
-
-// const u32 cv64_ovl_touturo_door_dlists[] = {TOUTURO_DOOR_EXIT_DL,
-//                                   TOUTURO_DOOR_ENTRANCE_DL};
-extern const u32 cv64_ovl_touturo_door_dlists[];
-
-// cv64_ovl_touturo_door_exit_func_t cv64_ovl_touturo_door_exit_funcs[] = {
-//     cv64_ovl_touturo_door_exit_check_event_flags, func_801578FC};
-extern cv64_ovl_touturo_door_exit_func_t cv64_ovl_touturo_door_exit_funcs[];
-
 typedef enum cv64_ovl_touturo_door_entrance_func_id {
     TOU_TURO_DOOR_ENTRANCE_CHECK_EVENT_FLAGS,
     TOU_TURO_DOOR_ENTRANCE_CLOSE_DOOR,
     TOU_TURO_FUNC_801578FC
 } cv64_ovl_touturo_door_entrance_func_id_t;
-
-// cv64_ovl_touturo_door_entrance_func_t cv64_ovl_touturo_door_entrance_funcs[]
-// = {
-//     cv64_ovl_touturo_door_entrance_check_event_flags,
-//     cv64_ovl_touturo_door_entrance_close_door, func_801578FC};
-extern cv64_ovl_touturo_door_entrance_func_t
-    cv64_ovl_touturo_door_entrance_funcs[];
 
 #endif // CV64_TOU_TURO_DOOR_H

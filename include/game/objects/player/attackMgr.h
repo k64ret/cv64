@@ -5,7 +5,7 @@
 
 // TODO: Fill this
 typedef struct {
-    u8 field_0x[OBJECT_SIZE];
+    u8 field_0x00[OBJECT_SIZE];
 } attackManager;
 
 #endif

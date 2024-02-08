@@ -21,4 +21,21 @@ extern void end_master_display_list();
 #define SCREEN_WIDTH  320
 #define SCREEN_HEIGHT 240
 
+// clang-format off
+
+/**
+ * Obtain the un-mapped address of data from a Nisitenma-Ichigo file
+ * This is needed if data is trying to be accessed when said data is not mapped by the TLB
+ * (which usually happens with data within overlays)
+ */
+#define GET_UNMAPPED_ADDRESS(file_ID, data_ptr)                                                     \
+    (u32) sys.Nisitenma_Ichigo_loaded_files_ptr[file_ID] + ((u32) data_ptr & 0xFFFFFF)
+
+// clang-format on
+
+// Nisitenma-Ichigo file IDs
+#define NI_ASSETS_KONAMI_KCEK_LOGOS 0x5D
+#define NI_ASSETS_FILE_SELECT       0x65
+#define NI_OVL_EASY_MODE_ENDING_MSG 0xBB
+
 #endif // CV64_H

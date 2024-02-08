@@ -6,13 +6,18 @@
  * Mapped by the TLB? = No
  */
 
-#include "objects/engine/gamestates/konami_kcek_logos.h"
+#include "objects/engine/konami_kcek_logos.h"
 #include "cv64.h"
 #include "gamestate.h"
 #include "gfx/camera.h"
 #include "gfx/figure.h"
 #include "system_work.h"
-#include <ultra64.h>
+
+cv64_ovl_konamilogo_func_t cv64_ovl_konamilogo_funcs[] = {
+    cv64_ovl_konamilogo_init,          cv64_ovl_konamilogo_fade_in,
+    cv64_ovl_konamilogo_wait,          cv64_ovl_konamilogo_fade_out,
+    cv64_ovl_konamilogo_kcek_fade_in,  cv64_ovl_konamilogo_kcek_wait,
+    cv64_ovl_konamilogo_kcek_fade_out, func_8000E860};
 
 void cv64_ovl_konamilogo_entrypoint(cv64_ovl_konamilogo_t* self) {
     ENTER(self, cv64_ovl_konamilogo_funcs);
@@ -37,7 +42,7 @@ void cv64_ovl_konamilogo_init(cv64_ovl_konamilogo_t* self) {
 
     self->model = model;
     model->dlist = &KONAMI_LOGO_DL;
-    model->assets_file_ID = 0x5D;
+    model->assets_file_ID = NI_ASSETS_KONAMI_KCEK_LOGOS;
     model->size.x = 0.9975f;
     model->size.y = 1.005f;
     CV64_COLOR_RGBA_TO_U32(sys.background_color) = 0x000000FF; // Black (opaque)

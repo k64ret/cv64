@@ -16,6 +16,18 @@
 #include "sound.h"
 #include "system_work.h"
 
+cv64_ovl_rose_ventilator_func_t cv64_ovl_rose_ventilator_funcs[] = {
+    cv64_ovl_rose_ventilator_init, cv64_ovl_rose_ventilator_loop};
+
+cv64_ovl_rose_door_func_t cv64_ovl_rose_door_funcs[] = {
+    cv64_ovl_rose_door_init, cv64_ovl_rose_door_loop};
+
+cv64_ovl_rose_door_func_t cv64_ovl_rose_door_state_funcs[] = {
+    cv64_ovl_rose_door_state_startClosing, cv64_ovl_rose_door_state_closing,
+    cv64_ovl_rose_door_state_idle};
+
+const char cv64_ovl_rose_unused_str[] = "VENTILATOR : Can't allocate F3D.\n";
+
 void cv64_ovl_rose_ventilator_entrypoint(cv64_ovl_rose_ventilator_t* self) {
     ENTER(self, cv64_ovl_rose_ventilator_funcs);
 }

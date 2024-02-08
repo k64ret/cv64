@@ -16,6 +16,29 @@
 #include "gfx/struct_47.h"
 #include <ultra64.h>
 
+// cv64_ovl_touturo_door_func_t cv64_ovl_touturo_door_funcs[] =
+// {cv64_ovl_touturo_door_init,
+//                                                       cv64_ovl_touturo_door_loop};
+extern cv64_ovl_touturo_door_func_t cv64_ovl_touturo_door_funcs[];
+
+// const u32 cv64_ovl_touturo_door_dlists[] = {TOUTURO_DOOR_EXIT_DL,
+//                                   TOUTURO_DOOR_ENTRANCE_DL};
+extern const u32 cv64_ovl_touturo_door_dlists[];
+
+// cv64_ovl_touturo_door_exit_func_t cv64_ovl_touturo_door_exit_funcs[] = {
+//     cv64_ovl_touturo_door_exit_check_event_flags, func_801578FC};
+extern cv64_ovl_touturo_door_exit_func_t cv64_ovl_touturo_door_exit_funcs[];
+
+// cv64_ovl_touturo_door_entrance_func_t cv64_ovl_touturo_door_entrance_funcs[]
+// = {
+//     cv64_ovl_touturo_door_entrance_check_event_flags,
+//     cv64_ovl_touturo_door_entrance_close_door, func_801578FC};
+extern cv64_ovl_touturo_door_entrance_func_t
+    cv64_ovl_touturo_door_entrance_funcs[];
+
+const char cv64_ovl_touturo_unused_str[] =
+    "ERROR P27TOBIRA : EFFECT SPAWN ERROR\n";
+
 void cv64_ovl_touturo_door_entrypoint(cv64_ovl_touturo_door_t* self) {
     ENTER(self, cv64_ovl_touturo_door_funcs);
 }

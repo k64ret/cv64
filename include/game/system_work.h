@@ -27,7 +27,7 @@ typedef struct {
 typedef struct {
     u32 game_loop_time;
     u32 execution_flags;
-    sysw_gfx field2_0x8[2]; /* Double check */
+    sysw_gfx field2_0x8[2]; /* TODO: Double check */
     s16 current_dlist_buffer;
     s16 previous_dlist_buffer;
     s16 frameBuffer_index;
@@ -55,8 +55,8 @@ typedef struct {
     u8 field18_0x24034[68];
     Matrix44F field19_0x24078;
     unk_union_1 field20_0x240b8;
-    u32 field21_0x240bc[64];  // Nisitenma_Ichigo_loaded_files
-    u32 field22_0x241bc[64];  // Also Nisitenma_Ichigo_loaded_files?
+    u32 NisitenmaIchigo_loadedFiles[64];
+    u32 NisitenmaIchigo_currentlyCompressingFiles[64];
     u16 code_execution_timer; /* Increments every time the game executes most of
                                  its code and a frame advances. Updates at
                                  30fps. */

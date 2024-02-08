@@ -11,6 +11,12 @@
 #define REINHARDT 0
 #define CARRIE    1
 
+#define SUBWEAPON_NONE       0
+#define SUBWEAPON_KNIFE      1
+#define SUBWEAPON_HOLY_WATER 2
+#define SUBWEAPON_CROSS      3
+#define SUBWEAPON_AXE        4
+
 typedef struct cv64_save_state {
     u32 event_flags[NUM_EVENT_FLAGS];
     u32 flags;
