@@ -23,9 +23,11 @@ extern void end_master_display_list();
 
 // clang-format off
 
-// Obtain the un-mapped address of data from a Nisitenma-Ichigo file
-// This is needed if data is trying to be accessed when said data is not mapped by the TLB
-// (which usually happens with data within overlays)
+/**
+ * Obtain the un-mapped address of data from a Nisitenma-Ichigo file
+ * This is needed if data is trying to be accessed when said data is not mapped by the TLB
+ * (which usually happens with data within overlays)
+ */
 #define GET_UNMAPPED_ADDRESS(file_ID, data_ptr)                                                     \
     (u32) sys.Nisitenma_Ichigo_loaded_files_ptr[file_ID] + ((u32) data_ptr & 0xFFFFFF)
 
