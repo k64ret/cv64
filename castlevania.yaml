@@ -392,7 +392,7 @@ segments:
       - [0x000BC530, asm, HUD_params]  # HUD_params is an struct associated to the HUD object
       - [0x000BC6D0, asm, renonShop]
       - [0x000BDFE0, asm]
-      - [0x000BE4B0, asm, menu_alloc_struct]  # Contains functions for allocating menu-related structs
+      - [0x000BE4B0, c, menu_alloc_struct]  # Contains functions for allocating menu-related structs
       - [0x000BE740, asm]   # Contains code for handling gameplayMenuMgr's textbox
       - [0x000BEF40, asm, item]   # Contains item / inventory handling code, as well as code for handling displaying these
       - [0x000BFFB0, asm, miniScroll]
