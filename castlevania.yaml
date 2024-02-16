@@ -378,63 +378,64 @@ segments:
     start: 0x000A8420
     vram: 0x80125230
     follows_vram: main
+    bss_size: 0x20C0
     subsegments:
-      - [0x000A8420, asm, interactuable]
+      - [0x000A8420, asm, common/interactuable]
       - [0x000A9560, asm]
-      - [0x000AA130, asm, cutsceneMgr]
-      - [0x000AA6E0, asm, cutsceneTrigger]
-      - [0x000AB0F0, asm, cutscene]   # Also contains initNewGame() and player_status_init()
-      - [0x000AD710, asm, stage_select]
-      - [0x000AE120, asm, textboxObject]
-      - [0x000AFD00, asm, textbox]
-      - [0x000B5720, asm, lens]
+      - [0x000AA130, asm, common/cutscene_manager]
+      - [0x000AA6E0, asm, common/cutscene_trigger]
+      - [0x000AB0F0, asm, common/cutscene]   # Also contains initNewGame() and player_status_init()
+      - [0x000AD710, asm, common/stage_select]
+      - [0x000AE120, asm, common/textbox_object]
+      - [0x000AFD00, asm, common/textbox]
+      - [0x000B5720, asm, common/lens]
       - [0x000B9900, asm]   # Contains gameplayMenuMgr and the HUD object code
-      - [0x000BC530, asm, HUD_params]  # HUD_params is an struct associated to the HUD object
-      - [0x000BC6D0, asm, renonShop]
+      - [0x000BC530, asm, common/hud_params]  # HUD_params is an struct associated to the HUD object
+      - [0x000BC6D0, asm, common/renon_shop]
       - [0x000BDFE0, asm]
-      - [0x000BE4B0, c, menu_alloc_struct]  # Contains functions for allocating menu-related structs
+      - [0x000BE4B0, c, common/menu_alloc_struct]  # Contains functions for allocating menu-related structs
       - [0x000BE740, asm]   # Contains code for handling gameplayMenuMgr's textbox
-      - [0x000BEF40, asm, item]   # Contains item / inventory handling code, as well as code for handling displaying these
-      - [0x000BFFB0, asm, miniScroll]
+      - [0x000BEF40, asm, common/item]   # Contains item / inventory handling code, as well as code for handling displaying these
+      - [0x000BFFB0, asm, common/mini_scroll]
       - [0x000C0120, asm]   # Contains some functions for creating and managing `GameNoteErrorHandler`
-      - [0x000C01A0, asm, distortion]
+      - [0x000C01A0, asm, common/distortion]
       - [0x000C2770, asm]   # Contains object 0x0167's code
       - [0x000C2CB0, asm]   # Contains code related to creating many menu-related structs + code for slashGfx
       - [0x000C4190, asm]   # Contains Menu and fileSelectController's code
-      - [0x000C65E0, asm, optionsController]
-      - [0x000C7160, asm, fileSelect]
-      - [0x000CB5A0, asm, scroll]
-      - [0x000D1A20, asm, necronomicon]   # Handles the book seen in the Data screen
-      - [0x000D25F0, asm, page]    # Handles a Necronomicon's page
-      - [0x000D2A50, asm, pageWork]
-      - [0x000D2B10, asm, mark]
-      - [0x000D2E90, asm, markWork]
-      - [0x000D2FE0, asm, glance]
+      - [0x000C65E0, asm, common/options_controller]
+      - [0x000C7160, asm, common/file_select]
+      - [0x000CB5A0, asm, common/scroll]
+      - [0x000D1A20, asm, common/necronomicon]   # Handles the book seen in the Data screen
+      - [0x000D25F0, asm, common/page]    # Handles a Necronomicon's page
+      - [0x000D2A50, asm, common/page_work]
+      - [0x000D2B10, asm, common/mark]
+      - [0x000D2E90, asm, common/mark_work]
+      - [0x000D2FE0, asm, common/glance]
       - [0x000D46B0, asm]
-      - [0x000D5250, asm, mapMgr]
+      - [0x000D5250, asm, common/map_manager]
       - [0x000D6C30, asm]   # Contains object 0x0169's code
-      - [0x000D7DF0, asm, map]    # Contains map-handling code that's not part of mapMgr
-      - [0x000D94B0, asm, loadingZone]
-      - [0x000DA150, asm, squashPoint]
+      - [0x000D7DF0, asm, common/map]    # Contains map-handling code that's not part of mapMgr
+      - [0x000D94B0, asm, common/loading_zone]
+      - [0x000DA150, asm, common/squash_point]
       - [0x000DA820, asm]   # Contains the code for the decorativeElements object?
       - [0x000DC5A0, asm]
       - [0x000DD470, asm]
       - [0x000DD8E0, asm]
       - [0x000DF0F0, asm]
       - [0x000DF780, asm]
-      - [0x000DFE00, asm, room]
-      - [0x000E14E0, asm, door]
-      - [0x000E3290, asm, lever]
-      - [0x000E3820, asm, riverWater]   # Contains code for the river water seen in Forest of Silence
+      - [0x000DFE00, asm, common/room]
+      - [0x000E14E0, asm, common/door]
+      - [0x000E3290, asm, common/lever]
+      - [0x000E3820, asm, common/river_water]   # Contains code for the river water seen in Forest of Silence
       - [0x000E3CA0, asm]
       - [0x000E41F0, asm]
       - [0x000E4350, asm]
-      - [0x000E4DC0, asm, elevator]
+      - [0x000E4DC0, asm, common/elevator]
       - [0x000E5980, asm]
-      - [0x000E6350, asm, candle]
-      - [0x000E9490, asm, soundRange]
+      - [0x000E6350, asm, common/candle]
+      - [0x000E9490, asm, common/sound_range]
       - [0x000E9800, asm]   # Also contains code for the `rain` object
-      - [0x000EA9B0, asm, actorCreator]
+      - [0x000EA9B0, asm, common/actor_creator]
       - [0x000EB700, asm]   # Contains object 0x00BA's code
       - [0x000EDA60, data]
       - [0x000EE750, data]
@@ -442,7 +443,7 @@ segments:
       - [0x000EE790, data]
       - [0x000EE7B0, data]
       - [0x000EFA80, data]
-      - [0x000EFAD0, data, stage_select]
+      - [0x000EFAD0, data, common/stage_select]
       - [0x000EFC70, data]
       - [0x000F0290, data]
       - [0x00103680, data]
@@ -464,7 +465,7 @@ segments:
       - [0x0010D8E0, data]
       - [0x0010D900, data]
       - [0x0010DC60, data]
-      - [0x0010E070, rodata, stage_select]
+      - [0x0010E070, rodata, common/stage_select]
       - [0x0010E0F0, rodata]
       - [0x0010E1E0, rodata]
       - [0x0010E410, rodata]
@@ -487,6 +488,7 @@ segments:
       - [0x0010FA20, rodata]
       - [0x0010FA60, rodata]
       - [0x0010FB60, rodata]
+      - { start: 0x0010FC40, type: bss, vram: 0x8018CA50 }
 
   - name: assets_10FC40                         # Related to audio?
     type: bin
