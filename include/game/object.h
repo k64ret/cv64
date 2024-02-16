@@ -126,6 +126,10 @@ extern void func_8000E860(cv64_object_hdr_t* self);
 void func_80002570_3170(cv64_object_hdr_t* self);
 extern void mapOverlay(cv64_object_hdr_t* self);
 extern void unmapOverlay();
+void* allocStructInObjectEntryList(const char* name, cv64_object_t* object,
+                                   u32 size, s32 alloc_data_index);
+void* func_8013B454_BE644(const char* name, cv64_object_t* object, u32 size,
+                          s32 alloc_data_index);
 
 extern cv64_object_t objects_array[OBJECT_ARRAY_MAX];
 extern u16 objects_number_of_instances_per_object[OBJECT_NUM_MAX];

@@ -1,4 +1,4 @@
-/*
+/**
  * File: overlay_95.c
  * Description:
  *   This file is related to the Demon Dracula boss, since it's loaded before

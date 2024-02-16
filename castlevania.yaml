@@ -8,15 +8,11 @@ options:
   # Paths
   base_path: .
   target_path: baserom_uncompressed.z64
-  asm_path: asm
-  asset_path: assets
-  src_path: src
   # Used to generate values within the `castlevania.ld` linker script
   build_path: CMakeFiles/castlevania.dir
   ld_script_path: linker/castlevania.ld
   undefined_funcs_auto_path: linker/auto/undefined_funcs_auto.ld
   undefined_syms_auto_path: linker/auto/undefined_syms_auto.ld
-  extensions_path: tools/splat_ext
   # Disambiguates default symbol names sharing same VRAM address in separate overlays
   symbol_name_format: $VRAM_$ROM
   symbol_addrs_path:
@@ -24,10 +20,6 @@ options:
     - linker/symbol_addrs_makerom.txt
     - linker/symbol_addrs_overlays.txt
     - linker/symbol_addrs_assets.txt
-  # reloc_addrs_path:
-  #   - linker/reloc_addrs.txt
-  # ld_symbol_header_path: include/ld_symbols.h
-  # create_asm_dependencies: True
   disassemble_all: False
   migrate_rodata_to_functions: False
   find_file_boundaries: True
@@ -40,14 +32,8 @@ options:
   asm_function_macro: glabel
   asm_jtbl_label_macro: jlabel
   asm_data_macro: dlabel
-  # section_order: [".text", ".data", ".rodata", ".bss"]
-  # auto_all_sections: [".data", ".rodata", ".bss"]
-  # string_encoding: ASCII
-  # data_string_encoding: ASCII
   rodata_string_guesser_level: 2
   data_string_guesser_level: 2
-  # libultra_symbols: True
-  # hardware_regs: True
   gfx_ucode: f3dex2
 segments:
   - name: header
@@ -318,7 +304,7 @@ segments:
       - [0x00090760, asm]
       - [0x00090770, asm]
       - [0x00090820, asm]
-      - [0x000908D0, bin] # Possibly rsp microcode
+      - [0x000908D0, bin] # RSP microcode
       - [0x00090920, data]
       - [0x00092B50, data, gamestate]
       - [0x00092E70, data, object]
@@ -387,16 +373,122 @@ segments:
       - { start: 0x000A8420, type: bss, vram: 0x800A7850, name: figure }
       - { start: 0x000A8420, type: bss, vram: 0x800A78A0, name: F960 }
 
-  - type: bin
+  - name: common
+    type: code
     start: 0x000A8420
+    vram: 0x80125230
     follows_vram: main
-
-  # - name: code_80125230
-  #   type: code
-  #   start: 0x000A8420
-  #   vram: 0x80125230
-  #   subsegments:
-  #     - [0x000A8420, asm]
+    bss_size: 0x20C0
+    subsegments:
+      - [0x000A8420, asm, common/interactuable]
+      - [0x000A9560, asm]
+      - [0x000AA130, asm, common/cutscene_manager]
+      - [0x000AA6E0, asm, common/cutscene_trigger]
+      - [0x000AB0F0, asm, common/cutscene]   # Also contains initNewGame() and player_status_init()
+      - [0x000AD710, asm, common/stage_select]
+      - [0x000AE120, asm, common/textbox_object]
+      - [0x000AFD00, asm, common/textbox]
+      - [0x000B5720, asm, common/lens]
+      - [0x000B9900, asm]   # Contains gameplayMenuMgr and the HUD object code
+      - [0x000BC530, asm, common/hud_params]  # HUD_params is an struct associated to the HUD object
+      - [0x000BC6D0, asm, common/renon_shop]
+      - [0x000BDFE0, asm]
+      - [0x000BE4B0, c, common/menu_alloc_struct]  # Contains functions for allocating menu-related structs
+      - [0x000BE740, asm]   # Contains code for handling gameplayMenuMgr's textbox
+      - [0x000BEF40, asm, common/item]   # Contains item / inventory handling code, as well as code for handling displaying these
+      - [0x000BFFB0, asm, common/mini_scroll]
+      - [0x000C0120, asm]   # Contains some functions for creating and managing `GameNoteErrorHandler`
+      - [0x000C01A0, asm, common/distortion]
+      - [0x000C2770, asm]   # Contains object 0x0167's code
+      - [0x000C2CB0, asm]   # Contains code related to creating many menu-related structs + code for slashGfx
+      - [0x000C4190, asm]   # Contains Menu and fileSelectController's code
+      - [0x000C65E0, asm, common/options_controller]
+      - [0x000C7160, asm, common/file_select]
+      - [0x000CB5A0, asm, common/scroll]
+      - [0x000D1A20, asm, common/necronomicon]   # Handles the book seen in the Data screen
+      - [0x000D25F0, asm, common/page]    # Handles a Necronomicon's page
+      - [0x000D2A50, asm, common/page_work]
+      - [0x000D2B10, asm, common/mark]
+      - [0x000D2E90, asm, common/mark_work]
+      - [0x000D2FE0, asm, common/glance]
+      - [0x000D46B0, asm]
+      - [0x000D5250, asm, common/map_manager]
+      - [0x000D6C30, asm]   # Contains object 0x0169's code
+      - [0x000D7DF0, asm, common/map]    # Contains map-handling code that's not part of mapMgr
+      - [0x000D94B0, asm, common/loading_zone]
+      - [0x000DA150, asm, common/squash_point]
+      - [0x000DA820, asm]   # Contains the code for the decorativeElements object?
+      - [0x000DC5A0, asm]
+      - [0x000DD470, asm]
+      - [0x000DD8E0, asm]
+      - [0x000DF0F0, asm]
+      - [0x000DF780, asm]
+      - [0x000DFE00, asm, common/room]
+      - [0x000E14E0, asm, common/door]
+      - [0x000E3290, asm, common/lever]
+      - [0x000E3820, asm, common/river_water]   # Contains code for the river water seen in Forest of Silence
+      - [0x000E3CA0, asm]
+      - [0x000E41F0, asm]
+      - [0x000E4350, asm]
+      - [0x000E4DC0, asm, common/elevator]
+      - [0x000E5980, asm]
+      - [0x000E6350, asm, common/candle]
+      - [0x000E9490, asm, common/sound_range]
+      - [0x000E9800, asm]   # Also contains code for the `rain` object
+      - [0x000EA9B0, asm, common/actor_creator]
+      - [0x000EB700, asm]   # Contains object 0x00BA's code
+      - [0x000EDA60, data]
+      - [0x000EE750, data]
+      - [0x000EE770, data]
+      - [0x000EE790, data]
+      - [0x000EE7B0, data]
+      - [0x000EFA80, data]
+      - [0x000EFAD0, data, common/stage_select]
+      - [0x000EFC70, data]
+      - [0x000F0290, data]
+      - [0x00103680, data]
+      - [0x00103720, data]
+      - [0x00103E10, data]
+      - [0x001040F0, data]
+      - [0x00104190, data]
+      - [0x001042A0, data]
+      - [0x00104550, data]
+      - [0x00104660, data]
+      - [0x001049C0, data]
+      - [0x00104AD0, data]
+      - [0x00104B40, data]
+      - [0x00104B60, data]
+      - [0x001084D0, data]
+      - [0x00109900, data]
+      - [0x0010A730, data]
+      - [0x0010A800, data]
+      - [0x0010D8E0, data]
+      - [0x0010D900, data]
+      - [0x0010DC60, data]
+      - [0x0010E070, rodata, common/stage_select]
+      - [0x0010E0F0, rodata]
+      - [0x0010E1E0, rodata]
+      - [0x0010E410, rodata]
+      - [0x0010E650, rodata]
+      - [0x0010E8A0, rodata]
+      - [0x0010E8F0, rodata]
+      - [0x0010EFC0, rodata]
+      - [0x0010EFD0, rodata]
+      - [0x0010EFE0, rodata]
+      - [0x0010F010, rodata]
+      - [0x0010F020, rodata]
+      - [0x0010F090, rodata]
+      - [0x0010F190, rodata]
+      - [0x0010F290, rodata]
+      - [0x0010F7D0, rodata]
+      - [0x0010F810, rodata]
+      - [0x0010F920, rodata]
+      - [0x0010F9D0, rodata]
+      - [0x0010F9F0, rodata]
+      - [0x0010FA20, rodata]
+      - [0x0010FA60, rodata]
+      - [0x0010FB60, rodata]
+      - { start: 0x0010FC40, type: bss, vram: 0x8018CA50 }
 
   - name: assets_10FC40                         # Related to audio?
     type: bin
@@ -532,7 +624,7 @@ segments:
       - [0x0066BF60, bin]
       - [0x0066C110, bin]
 
-  - name: assets_66C3D0                     # Appears to contain animations
+  - name: npc_animations
     type: bin
     start: 0x0066C3D0
     vram: 0x803A6770
@@ -541,10 +633,10 @@ segments:
 
   - name: player_animations
     type: bin
-    start: 0x67D7B0
+    start: 0x0067D7B0
     vram: 0x803B7B50
     subsegments:
-      - [0x67D7B0, bin]
+      - [0x0067D7B0, bin]
 
   # Uncompressed overlays
   - name: reinhardt
@@ -1529,27 +1621,26 @@ segments:
     vram: 0x06000000
     exclusive_ram_id: nisitenma_ichigo_assets
     subsegments:
-      - [0x00BD8EC0, bin]
-      # - { start: 0xBD8EC0, type: ci4, name: img/map/test_grid_txt.ci4, palette: img/map/test_grid_tlut.rgba16, width: 64, height: 64 }
-      # - { start: 0xBD96C0, type: palette, name: img/map/test_grid_tlut.rgba16, size: 0x20 }
+      - { start: 0x00BD8EC0, type: ci4, name: map/test_grid/img/test_grid_txt.ci4, palette: map/test_grid/img/test_grid_tlut.rgba16, width: 64, height: 64 }
+      - { start: 0x00BD96C0, type: palette, name: map/test_grid/img/test_grid_tlut.rgba16, size: 0x20 }
 
-      # - { start: 0xBD96E0, type: vtx, data_only: true, name: data/map/test_grid }
+      - { start: 0x00BD96E0, type: vtx, data_only: true, name: map/test_grid/vertices/test_grid_vtx }
 
-      # - { start: 0xBD9E60, type: .data, name: data/map/test_grid_1 }
-      # - { start: 0xBD9F98, type: .data, name: data/map/test_grid_2 }
-      # - { start: 0xBDA0B0, type: .data, name: data/map/test_grid_3 }
-      # - { start: 0xBDA1C8, type: .data, name: data/map/test_grid_4 }
-      # - { start: 0xBDA2A0, type: .data, name: data/map/test_grid_5 }
-      # - { start: 0xBDA3B8, type: .data, name: data/map/test_grid_6 }
-      # - { start: 0xBDA4B0, type: .data, name: data/map/test_grid_7 }
-      # - { start: 0xBDA5A8, type: .data, name: data/map/test_grid_8 }
-      # - { start: 0xBDA680, type: .data, name: data/map/test_grid_9 }
-      # - { start: 0xBDA798, type: .data, name: data/map/test_grid_10 }
-      # - { start: 0xBDA890, type: .data, name: data/map/test_grid_11 }
-      # - { start: 0xBDA988, type: .data, name: data/map/test_grid_12 }
-      # - { start: 0xBDAA60, type: .data, name: data/map/test_grid_13 }
-      # - { start: 0xBDAB38, type: .data, name: data/map/test_grid_14 }
-      # - { start: 0xBDAC10, type: .data, name: data/map/test_grid_15 }
+      - { start: 0x00BD9E60, type: gfx, data_only: true, name: map/test_grid/dlists/test_grid_1 }
+      - { start: 0x00BD9F98, type: gfx, data_only: true, name: map/test_grid/dlists/test_grid_2 }
+      - { start: 0x00BDA0B0, type: gfx, data_only: true, name: map/test_grid/dlists/test_grid_3 }
+      - { start: 0x00BDA1C8, type: gfx, data_only: true, name: map/test_grid/dlists/test_grid_4 }
+      - { start: 0x00BDA2A0, type: gfx, data_only: true, name: map/test_grid/dlists/test_grid_5 }
+      - { start: 0x00BDA3B8, type: gfx, data_only: true, name: map/test_grid/dlists/test_grid_6 }
+      - { start: 0x00BDA4B0, type: gfx, data_only: true, name: map/test_grid/dlists/test_grid_7 }
+      - { start: 0x00BDA5A8, type: gfx, data_only: true, name: map/test_grid/dlists/test_grid_8 }
+      - { start: 0x00BDA680, type: gfx, data_only: true, name: map/test_grid/dlists/test_grid_9 }
+      - { start: 0x00BDA798, type: gfx, data_only: true, name: map/test_grid/dlists/test_grid_10 }
+      - { start: 0x00BDA890, type: gfx, data_only: true, name: map/test_grid/dlists/test_grid_11 }
+      - { start: 0x00BDA988, type: gfx, data_only: true, name: map/test_grid/dlists/test_grid_12 }
+      - { start: 0x00BDAA60, type: gfx, data_only: true, name: map/test_grid/dlists/test_grid_13 }
+      - { start: 0x00BDAB38, type: gfx, data_only: true, name: map/test_grid/dlists/test_grid_14 }
+      - { start: 0x00BDAC10, type: gfx, data_only: true, name: map/test_grid/dlists/test_grid_15 }
 
   - name: ni_konami_kcek_logos
     type: bin
@@ -1783,6 +1874,7 @@ segments:
     exclusive_ram_id: nisitenma_ichigo_overlays
     subsegments:
       - [0x00CF5ED0, c, overlay/overlay_7D]
+      - [0x00CF6030, .data, overlay/overlay_7D]
 
   - name: ni_A591D6
     type: bin
@@ -2130,6 +2222,7 @@ segments:
     exclusive_ram_id: nisitenma_ichigo_overlays
     subsegments:
       - [0x00E55570, c, overlay/credits_manager]
+      - [0x00E557A0, .data, overlay/credits_manager]
 
   - name: ni_ovl_pause_menu
     type: bin
@@ -2181,6 +2274,8 @@ segments:
     exclusive_ram_id: nisitenma_ichigo_overlays
     subsegments:
       - [0x00E5F2A0, c, overlay/textbox_advance_arrow]
+      - [0x00E5F640, .data, overlay/textbox_advance_arrow]
+      - [0x00E5F640, .rodata, overlay/textbox_advance_arrow]
 
   - name: ni_ovl_button_config
     type: bin
@@ -2218,6 +2313,7 @@ segments:
     exclusive_ram_id: nisitenma_ichigo_overlays
     subsegments:
       - [0x00E61930, c, overlay/overlay_BA]
+      - [0x00E61AD0, .data, overlay/overlay_BA]
 
   - name: ni_ovl_easy_mode_ending_msg
     type: code

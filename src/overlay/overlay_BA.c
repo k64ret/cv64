@@ -18,11 +18,13 @@
 #include "system_work.h"
 
 // 0x0F0001A0
-void (*obj213F_functions[])(object_213F* self) = {
+void (*cv64_ovl_obj213F_funcs[])(object_213F* self) = {
     obj213F_isDraculaCutsceneWatched, obj213F_isPlayerDroppingDown,
     obj213F_playSound, obj213F_destroy};
 
-void obj213F_entrypoint(object_213F* self) { ENTER(self, obj213F_functions); }
+void obj213F_entrypoint(object_213F* self) {
+    ENTER(self, cv64_ovl_obj213F_funcs);
+}
 
 void obj213F_isDraculaCutsceneWatched(object_213F* self) {
     cv64_model_inf_t* player_model;
