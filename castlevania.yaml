@@ -622,7 +622,7 @@ segments:
       - [0x0066BF60, bin]
       - [0x0066C110, bin]
 
-  - name: assets_66C3D0                     # Appears to contain animations
+  - name: npc_animations
     type: bin
     start: 0x0066C3D0
     vram: 0x803A6770
@@ -631,10 +631,10 @@ segments:
 
   - name: player_animations
     type: bin
-    start: 0x67D7B0
+    start: 0x0067D7B0
     vram: 0x803B7B50
     subsegments:
-      - [0x67D7B0, bin]
+      - [0x0067D7B0, bin]
 
   # Uncompressed overlays
   - name: reinhardt
