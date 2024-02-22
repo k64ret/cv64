@@ -1,5 +1,3 @@
-// clang-format off
-
 #include "cv64.h"
 #include "memory.h"
 #include "objects/engine/DMAMgr.h"
@@ -14,13 +12,9 @@ u16 stageSelect_text[] = {
 };
 
 cv64_stage_select_func_t stageSelect_functions[] = {
-    stageSelect_init,
-    stageSelect_initGraphics,
-    stageSelect_initMenuButton,
-    stageSelect_moveButton,
-    stageSelect_warpToStage,
-    func_8000E860
-};
+    stageSelect_init,           stageSelect_initGraphics,
+    stageSelect_initMenuButton, stageSelect_moveButton,
+    stageSelect_warpToStage,    func_8000E860};
 
 const char cv64_stage_select_unused_str_1[] = "Model Trans OK!!\n";
 const char cv64_stage_select_unused_str_2[] = "Mfds Set OK!!\n";
@@ -35,13 +29,19 @@ void stageSelect_init(stageSelect* self) {
     if (((*fade_isFading)() == FALSE) && ((ptr_DMAMgr->DMAChunkMgr != NULL))) {
         (*fade_setSettings)(FADE_IN, 30, 0, 0, 0);
         sys.cutscene_flags = 0;
-        (*heap_init)(HEAP_KIND_MENU_DATA, &HEAP_MENU_DATA_START, HEAP_MENU_DATA_SIZE, HEAP_WRITE_BACK_CACHE_TO_RAM);
+        (*heap_init)(HEAP_KIND_MENU_DATA, &HEAP_MENU_DATA_START,
+                     HEAP_MENU_DATA_SIZE, HEAP_WRITE_BACK_CACHE_TO_RAM);
         self->assets_file_end = NULL;
-        self->assets_file_start = (*heap_alloc)(HEAP_KIND_MENU_DATA, NI_ASSETS_MENU_BUFFER_SIZE);
-        DMAMgr_loadNisitenmaIchigoFile(ptr_DMAMgr, NI_ASSETS_MENU, (u32) self->assets_file_start, &self->assets_file_end);
+        self->assets_file_start =
+            (*heap_alloc)(HEAP_KIND_MENU_DATA, NI_ASSETS_MENU_BUFFER_SIZE);
+        DMAMgr_loadNisitenmaIchigoFile(ptr_DMAMgr, NI_ASSETS_MENU,
+                                       (u32) self->assets_file_start,
+                                       &self->assets_file_end);
         NisitenmaIchigo_checkAndStoreLoadedFile(NI_ASSETS_MENU);
-        (*object_allocEntryInList)(self, HEAP_KIND_MULTIPURPOSE, sizeof(mfds_state* [10]), 0);
-        (*object_curLevel_goToNextFuncAndClearTimer)(self->header.current_function, &self->header.functionInfo_ID);
+        (*object_allocEntryInList)(self, HEAP_KIND_MULTIPURPOSE,
+                                   sizeof(mfds_state* [10]), 0);
+        (*object_curLevel_goToNextFuncAndClearTimer)(
+            self->header.current_function, &self->header.functionInfo_ID);
     }
 }
 
@@ -50,13 +50,17 @@ void stageSelect_initGraphics(stageSelect* self) {
     mfds_state** textbox_array = self->textboxes;
 
     if (self->assets_file_end != NULL) {
-        heapBlock_updateBlockMaxSize(self->assets_file_start, (u32) self->assets_file_end - (u32) self->assets_file_start);
-        bg_model = modelInfo_createRootNode(FIG_TYPE_HUD_ELEMENT, common_camera_8009B444);
+        heapBlock_updateBlockMaxSize(self->assets_file_start,
+                                     (u32) self->assets_file_end -
+                                         (u32) self->assets_file_start);
+        bg_model = modelInfo_createRootNode(FIG_TYPE_HUD_ELEMENT,
+                                            common_camera_8009B444);
         self->red_background_model = bg_model;
         bg_model->assets_file_ID = NI_ASSETS_MENU;
         bg_model->dlist = &MENU_RED_BACKGROUND_DL;
         bg_model->flags |= FIG_FLAG_0800;
-        CV64_COLOR_RGBA_TO_U32(bg_model->primitive_color) = (s8) 0x000000FF;      // Slight fakematch?
+        CV64_COLOR_RGBA_TO_U32(bg_model->primitive_color) =
+            (s8) 0x000000FF; // Slight fakematch?
         bg_model->position.x = 0.0f;
         bg_model->position.y = 0.0f;
         bg_model->position.z = 0.0f;
@@ -64,27 +68,35 @@ void stageSelect_initGraphics(stageSelect* self) {
         bg_model->size.y = 1.0f;
         bg_model->size.z = 1.0f;
 
-        for (self->text_ID = 0; self->text_ID < STAGE_SELECT_NUM_OPTIONS + 1; self->text_ID++) {
-            textbox_array[self->text_ID] = (*textbox_create)(self, common_camera_8009B444, (OPEN_TEXTBOX | MFDS_FLAG_400000 | FAST_TEXT_TRANSITION));
+        for (self->text_ID = 0; self->text_ID < STAGE_SELECT_NUM_OPTIONS + 1;
+             self->text_ID++) {
+            textbox_array[self->text_ID] = (*textbox_create)(
+                self, common_camera_8009B444,
+                (OPEN_TEXTBOX | MFDS_FLAG_400000 | FAST_TEXT_TRANSITION));
             if (textbox_array[self->text_ID] == 0) {
                 continue;
-            }
-            else {
+            } else {
                 textbox_array[self->text_ID]->palette = TEXT_COLOR_WHITE;
                 if (self->text_ID != 0) {
-                    (*textbox_setPos)(textbox_array[self->text_ID], 30, (self->text_ID * 23) + 23, 1);
-                }
-                else {
+                    (*textbox_setPos)(textbox_array[self->text_ID], 30,
+                                      (self->text_ID * 23) + 23, 1);
+                } else {
                     textbox_array[self->text_ID]->palette = TEXT_COLOR_BEIGE;
                     (*textbox_setPos)(textbox_array[self->text_ID], 100, 10, 1);
-                    (*textbox_setHeightAndWidth)(textbox_array[self->text_ID], 1, 2, 1);
+                    (*textbox_setHeightAndWidth)(textbox_array[self->text_ID],
+                                                 1, 2, 1);
                 }
-                (*textbox_setDimensions)(textbox_array[self->text_ID], 1, 300, 0, 0);
-                (*textbox_setMessagePtr)(textbox_array[self->text_ID], text_getMessageFromPool(stageSelect_text, self->text_ID), NULL, 0);
+                (*textbox_setDimensions)(textbox_array[self->text_ID], 1, 300,
+                                         0, 0);
+                (*textbox_setMessagePtr)(
+                    textbox_array[self->text_ID],
+                    text_getMessageFromPool(stageSelect_text, self->text_ID),
+                    NULL, 0);
             }
         }
         (*atari_work_table_init)();
-        (*object_curLevel_goToNextFuncAndClearTimer)(self->header.current_function, &self->header.functionInfo_ID);
+        (*object_curLevel_goToNextFuncAndClearTimer)(
+            self->header.current_function, &self->header.functionInfo_ID);
     }
 }
 
@@ -93,19 +105,26 @@ void stageSelect_initMenuButton(stageSelect* self) {
     mfds_state** textbox_array = self->textboxes;
 
     if ((*fade_isFading)() == FALSE) {
-        for (self->text_ID = 0; self->text_ID < STAGE_SELECT_NUM_OPTIONS + 1; self->text_ID++) {
-            if ((textbox_array[self->text_ID]->flags & TEXTBOX_IS_ACTIVE) == FALSE) {
+        for (self->text_ID = 0; self->text_ID < STAGE_SELECT_NUM_OPTIONS + 1;
+             self->text_ID++) {
+            if ((textbox_array[self->text_ID]->flags & TEXTBOX_IS_ACTIVE) ==
+                FALSE) {
                 return;
             }
         }
-        self->lens_window_work = (*lens_create)(self, common_camera_HUD, (WINDOW_FLAG_800000 | WINDOW_FLAG_80 | WINDOW_FLAG_20 | WINDOW_FLAG_10 | WINDOW_FLAG_4 | WINDOW_FLAG_1), -120.0f, 61.0f, 10.0f, 2.0f, 240.0f, 90.0f);
+        self->lens_window_work = (*lens_create)(
+            self, common_camera_HUD,
+            (WINDOW_FLAG_800000 | WINDOW_FLAG_80 | WINDOW_FLAG_20 |
+             WINDOW_FLAG_10 | WINDOW_FLAG_4 | WINDOW_FLAG_1),
+            -120.0f, 61.0f, 10.0f, 2.0f, 240.0f, 90.0f);
         lens = self->lens_window_work;
         if (lens != NULL) {
             (*windowWork_setParams)(lens, 0, 7, 5, 1.6f, 1.0f, NULL);
             lens->flags &= ~WINDOW_CLOSING;
             lens->flags |= WINDOW_OPENING;
         }
-        (*object_curLevel_goToNextFuncAndClearTimer)(self->header.current_function, &self->header.functionInfo_ID);
+        (*object_curLevel_goToNextFuncAndClearTimer)(
+            self->header.current_function, &self->header.functionInfo_ID);
     }
 }
 
@@ -120,20 +139,25 @@ void stageSelect_moveButton(stageSelect* self) {
             self->lens_are_moving = FALSE;
             self->lens_move_offset = 1;
         }
-        lens->position.y = (self->lens_move_offset * self->field_0x70) + self->text_ID;
+        lens->position.y =
+            (self->lens_move_offset * self->field_0x70) + self->text_ID;
         self->lens_transition_rate += 1.0;
         return;
     }
     current_option = self->current_option;
     previous_option = self->previous_option;
     if (current_option == (u32) previous_option) {
-        if ((sys.controllers[0].buttons_pressed & A_BUTTON) || (sys.controllers[0].buttons_pressed & (START_BUTTON | RECENTER_BUTTON))) {
+        if ((sys.controllers[0].buttons_pressed & A_BUTTON) ||
+            (sys.controllers[0].buttons_pressed &
+             (START_BUTTON | RECENTER_BUTTON))) {
             lens->flags &= ~WINDOW_OPENING;
             lens->flags |= WINDOW_CLOSING;
-            (*object_curLevel_goToNextFuncAndClearTimer)(self->header.current_function, &self->header.functionInfo_ID);
-        }
-        else {
-            (*menuButton_selectNextOption)(&self->current_option, &self->header.timer, STAGE_SELECT_NUM_OPTIONS);
+            (*object_curLevel_goToNextFuncAndClearTimer)(
+                self->header.current_function, &self->header.functionInfo_ID);
+        } else {
+            (*menuButton_selectNextOption)(&self->current_option,
+                                           &self->header.timer,
+                                           STAGE_SELECT_NUM_OPTIONS);
         }
         return;
     }
@@ -149,8 +173,10 @@ void stageSelect_warpToStage(stageSelect* self) {
     s16 i, j;
     window_work* lens = self->lens_window_work;
 
-    if ((lens->flags & (WINDOW_OPENED_4000 | WINDOW_OPENED_8000)) >> 0xE != FALSE) {
+    if ((lens->flags & (WINDOW_OPENED_4000 | WINDOW_OPENED_8000)) >> 0xE !=
+        FALSE) {
         stageSelect_closeTextboxes(self);
+
         sys.SaveStruct_gameplay.map_ID = NONE;
         sys.SaveStruct_gameplay.map_entrance_ID = NONE;
         sys.SaveStruct_gameplay.life = 100;
@@ -158,99 +184,117 @@ void stageSelect_warpToStage(stageSelect* self) {
         sys.SaveStruct_gameplay.subweapon = SUBWEAPON_NONE;
         sys.SaveStruct_gameplay.money = 0;
         sys.SaveStruct_gameplay.player_status = 0;
+
         // Remove inventory items
+        // clang-format off
         for (i = 1; i < NUM_ITEMS + 1; i++) sys.SaveStruct_gameplay.items.array[i - 1] = 0;
+        // clang-format on
+
         sys.SaveStruct_gameplay.week = 0;
         sys.SaveStruct_gameplay.day = 0;
         sys.SaveStruct_gameplay.hour = 0;
         sys.SaveStruct_gameplay.minute = 0;
         sys.SaveStruct_gameplay.seconds = 0;
         sys.SaveStruct_gameplay.milliseconds = 0;
+
         // Clear event flags
+        // clang-format off
         for (j = 0; j < NUM_EVENT_FLAGS; j++) sys.SaveStruct_gameplay.event_flags[j] = 0;
+        // clang-format on
+
         sys.field89_0x2644c = 0;
         sys.cutscene_flags &= ~CUTSCENE_FLAG_PLAYING;
         sys.current_boss_actor_ID = 0;
+
         switch (self->current_option) {
-            case FOREST:
-                sys.entrance_cutscene_ID = 60;
-                sys.map_fade_out_time = 30;
-                sys.map_fade_in_time = 30;
-                sys.map_ID = MORI;
-                sys.map_entrance_ID = 0;
-                sys.map_fade_in_color.R = 0;
-                sys.map_fade_in_color.G = 0;
-                sys.map_fade_in_color.B = 0;
-                break;
-            case INSIDE_OF_RAMPART:
-                sys.entrance_cutscene_ID = 4;
-                sys.map_ID = TOUOKUJI;
-                sys.map_fade_out_time = 30;
-                sys.map_fade_in_time = 30;
-                sys.map_entrance_ID = 0;
-                sys.map_fade_in_color.R = 0;
-                sys.map_fade_in_color.G = 0;
-                sys.map_fade_in_color.B = 0;
-                break;
-            case COURTYARD:
-                sys.cutscene_flags |= CUTSCENE_FLAG_10;
-                sys.entrance_cutscene_ID = 9;
-                sys.map_ID = NAKANIWA;
-                sys.map_fade_out_time = 30;
-                sys.map_fade_in_time = 30;
-                sys.map_entrance_ID = 0;
-                sys.map_fade_in_color.R = 0;
-                sys.map_fade_in_color.G = 0;
-                sys.map_fade_in_color.B = 0;
-                break;
-            case EXECUTION_TOWER:
-                sys.map_ID = SHOKEI_TOU;
-                sys.map_fade_out_time = 30;
-                sys.map_fade_in_time = 30;
-                sys.map_entrance_ID = 0;
-                sys.map_fade_in_color.R = 0;
-                sys.map_fade_in_color.G = 0;
-                sys.map_fade_in_color.B = 0;
-                break;
-            case CLOCK_TOWER:
-                sys.map_ID = TOKEITOU_NAI;
-                sys.map_fade_out_time = 30;
-                sys.map_fade_in_time = 30;
-                sys.map_entrance_ID = 0;
-                sys.map_fade_in_color.R = 0;
-                sys.map_fade_in_color.G = 0;
-                sys.map_fade_in_color.B = 0;
-                break;
-            case VS_DEATH:
-                sys.map_ID = TURO_TOKEITOU,      // Comma needed for matching
+        case FOREST:
+            sys.entrance_cutscene_ID = 60;
+            sys.map_fade_out_time = 30;
+            sys.map_fade_in_time = 30;
+            sys.map_ID = MORI;
+            sys.map_entrance_ID = 0;
+            sys.map_fade_in_color.R = 0;
+            sys.map_fade_in_color.G = 0;
+            sys.map_fade_in_color.B = 0;
+            break;
+
+        case INSIDE_OF_RAMPART:
+            sys.entrance_cutscene_ID = 4;
+            sys.map_ID = TOUOKUJI;
+            sys.map_fade_out_time = 30;
+            sys.map_fade_in_time = 30;
+            sys.map_entrance_ID = 0;
+            sys.map_fade_in_color.R = 0;
+            sys.map_fade_in_color.G = 0;
+            sys.map_fade_in_color.B = 0;
+            break;
+
+        case COURTYARD:
+            sys.cutscene_flags |= CUTSCENE_FLAG_10;
+            sys.entrance_cutscene_ID = 9;
+            sys.map_ID = NAKANIWA;
+            sys.map_fade_out_time = 30;
+            sys.map_fade_in_time = 30;
+            sys.map_entrance_ID = 0;
+            sys.map_fade_in_color.R = 0;
+            sys.map_fade_in_color.G = 0;
+            sys.map_fade_in_color.B = 0;
+            break;
+
+        case EXECUTION_TOWER:
+            sys.map_ID = SHOKEI_TOU;
+            sys.map_fade_out_time = 30;
+            sys.map_fade_in_time = 30;
+            sys.map_entrance_ID = 0;
+            sys.map_fade_in_color.R = 0;
+            sys.map_fade_in_color.G = 0;
+            sys.map_fade_in_color.B = 0;
+            break;
+
+        case CLOCK_TOWER:
+            sys.map_ID = TOKEITOU_NAI;
+            sys.map_fade_out_time = 30;
+            sys.map_fade_in_time = 30;
+            sys.map_entrance_ID = 0;
+            sys.map_fade_in_color.R = 0;
+            sys.map_fade_in_color.G = 0;
+            sys.map_fade_in_color.B = 0;
+            break;
+
+        case VS_DEATH:
+            sys.map_ID = TURO_TOKEITOU, // Comma needed for matching
                 sys.map_entrance_ID = 1;
-                sys.map_fade_out_time = 30;
-                sys.map_fade_in_time = 30;
-                sys.map_fade_in_color.R = 0;
-                sys.map_fade_in_color.G = 0;
-                sys.map_fade_in_color.B = 0;
-                break;
-            case VS_ACTRIESE:
-                sys.map_ID = TURO_TOKEITOU;
-                sys.map_fade_out_time = 30;
-                sys.map_fade_in_time = 30;
-                sys.map_entrance_ID = 0;
-                sys.map_fade_in_color.R = 0;
-                sys.map_fade_in_color.G = 0;
-                sys.map_fade_in_color.B = 0;
-                break;
-            case VS_BEHIMOS:
-                sys.map_ID = HONMARU_B1F;
-                sys.map_fade_out_time = 30;
-                sys.map_fade_in_time = 30;
-                sys.map_entrance_ID = 0;
-                sys.map_fade_in_color.R = 0;
-                sys.map_fade_in_color.G = 0;
-                sys.map_fade_in_color.B = 0;
-                break;
+            sys.map_fade_out_time = 30;
+            sys.map_fade_in_time = 30;
+            sys.map_fade_in_color.R = 0;
+            sys.map_fade_in_color.G = 0;
+            sys.map_fade_in_color.B = 0;
+            break;
+
+        case VS_ACTRIESE:
+            sys.map_ID = TURO_TOKEITOU;
+            sys.map_fade_out_time = 30;
+            sys.map_fade_in_time = 30;
+            sys.map_entrance_ID = 0;
+            sys.map_fade_in_color.R = 0;
+            sys.map_fade_in_color.G = 0;
+            sys.map_fade_in_color.B = 0;
+            break;
+
+        case VS_BEHIMOS:
+            sys.map_ID = HONMARU_B1F;
+            sys.map_fade_out_time = 30;
+            sys.map_fade_in_time = 30;
+            sys.map_entrance_ID = 0;
+            sys.map_fade_in_color.R = 0;
+            sys.map_fade_in_color.G = 0;
+            sys.map_fade_in_color.B = 0;
+            break;
         }
+
         gamestate_change(GAMESTATE_GAMEPLAY);
-        (*object_curLevel_goToNextFuncAndClearTimer)(self->header.current_function, &self->header.functionInfo_ID);
+        (*object_curLevel_goToNextFuncAndClearTimer)(
+            self->header.current_function, &self->header.functionInfo_ID);
     }
 }
 
@@ -261,10 +305,9 @@ void stageSelect_closeTextboxes(stageSelect* self) {
     // However, we don't know if that specific flag represents something
     // not related to opening / closing the lens
     self->lens_window_work->flags |= (WINDOW_CLOSING | WINDOW_OPENING);
-    for (self->text_ID = 0; self->text_ID < STAGE_SELECT_NUM_OPTIONS + 1; self->text_ID++) {
+    for (self->text_ID = 0; self->text_ID < STAGE_SELECT_NUM_OPTIONS + 1;
+         self->text_ID++) {
         textbox_array[self->text_ID]->flags |= CLOSE_TEXTBOX;
     }
     (*heap_free)(HEAP_KIND_MENU_DATA);
 }
-
-// clang-format on
