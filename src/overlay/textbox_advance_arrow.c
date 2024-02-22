@@ -26,7 +26,7 @@ void textboxAdvanceArrow_init(textboxAdvanceArrow* self) {
 
     temp = (*func_80004C40)(FIG_TYPE_STRUCT_47);
     self->field_0x28 = temp;
-    (*func_80004CE8)(temp, common_cameras_array.HUD);
+    (*func_80004CE8)(temp, common_camera_HUD);
     temp->primitive_color.R = temp->primitive_color.G =
         temp->primitive_color.B = 0xA0;
     temp->field5_0x3c = 1;

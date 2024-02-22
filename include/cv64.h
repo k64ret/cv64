@@ -12,6 +12,9 @@ typedef u8 Addr[];
 extern Gfx* gDisplayListHead; // 0x800B49E0
 
 extern void end_master_display_list();
+extern s32 menuButton_selectNextOption(s32* option, s16* param_2,
+                                       s16 number_of_options);
+extern u32 NisitenmaIchigo_checkAndStoreLoadedFile(u32 file_ID);
 
 #define NPTR             0
 #define ARRAY_COUNT(arr) (s32)(sizeof(arr) / sizeof(arr[0]))
@@ -20,6 +23,9 @@ extern void end_master_display_list();
 
 #define SCREEN_WIDTH  320
 #define SCREEN_HEIGHT 240
+
+#define CUTSCENE_FLAG_PLAYING 1
+#define CUTSCENE_FLAG_10      0x10
 
 // clang-format off
 
@@ -33,8 +39,12 @@ extern void end_master_display_list();
 
 // clang-format on
 
+extern const u32 MENU_RED_BACKGROUND_DL;
+#define NI_ASSETS_MENU_BUFFER_SIZE 0x30000
+
 // Nisitenma-Ichigo file IDs
 #define NI_ASSETS_KONAMI_KCEK_LOGOS 0x5D
+#define NI_ASSETS_MENU              0x60
 #define NI_ASSETS_FILE_SELECT       0x65
 #define NI_OVL_EASY_MODE_ENDING_MSG 0xBB
 

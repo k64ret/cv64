@@ -99,18 +99,16 @@ typedef struct {
     Matrix44F matrix;
 } camera;
 
-typedef struct {
-    camera* field_0x00;
-    camera* field_0x04;
-    camera* game_view;  // 3D view
-    camera* effects;    // Items, shadows, and some other effects
-    camera* field_0x10; // Normal / Action / Battle / Boss view text
-    camera* field_0x14; // Background elements, like in the pause menu
-    camera* field_0x18; // Used for the scrolls?
-    camera* field_0x1C; // Used for the pause menu scroll?
-    camera* HUD;        // Used for the gameplay HUD and text
-} common_cameras;
-
-extern common_cameras common_cameras_array;
+extern camera* common_camera_8009B430;
+extern camera* common_camera_8009B434;
+extern camera* common_camera_game_view; // 3D view
+extern camera* common_camera_effects; // Items, shadows, and some other effects
+extern camera*
+    common_camera_8009B440; // Normal / Action / Battle / Boss view text
+extern camera*
+    common_camera_8009B444; // Background elements, like in the pause menu
+extern camera* common_camera_8009B448; // Used for the scrolls?
+extern camera* common_camera_8009B44C; // Used for the pause menu scroll?
+extern camera* common_camera_HUD;      // Used for the gameplay HUD and text
 
 #endif

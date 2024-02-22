@@ -33,4 +33,8 @@ typedef struct {
     window_work* main_window;
 } lens_obj;
 
+extern window_work* lens_create(void* parent, camera* display_camera, u32 flags,
+                                f32 pos_X, f32 pos_Y, f32 pos_Z, f32 height,
+                                f32 width, f32 closing_speed);
+
 #endif
