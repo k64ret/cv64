@@ -488,7 +488,11 @@ segments:
       - [0x0010FA20, rodata]
       - [0x0010FA60, rodata]
       - [0x0010FB60, rodata]
-      - { start: 0x0010FC40, type: bss, vram: 0x8018CA50 }
+      - { start: 0x0010FC40, type: bss, vram: 0x8018CA50, name: B9900 }
+      - { start: 0x0010FC40, type: bss, vram: 0x8018CA60, name: common/file_select }
+      - { start: 0x0010FC40, type: bss, vram: 0x8018CA80, name: common/map_manager }
+      - { start: 0x0010FC40, type: bss, vram: 0x8018CDF0, name: D6C30 }
+      - { start: 0x0010FC40, type: bss, vram: 0x8018CE40, name: common/map }
 
   - name: assets_10FC40                         # Related to audio?
     type: bin
@@ -1866,15 +1870,15 @@ segments:
     vram: 0x0F000000
     exclusive_ram_id: nisitenma_ichigo_overlays
 
-  - name: ni_ovl_overlay_7D
+  - name: ni_ovl_icemanAssetsLoader
     type: code
     # start: 0x00A5914A
     start: 0x00CF5ED0
     vram: 0x0F000000
     exclusive_ram_id: nisitenma_ichigo_overlays
     subsegments:
-      - [0x00CF5ED0, c, overlay/overlay_7D]
-      - [0x00CF6030, .data, overlay/overlay_7D]
+      - [0x00CF5ED0, c, overlay/icemanAssetsLoader]
+      - [0x00CF6030, .data, overlay/icemanAssetsLoader]
 
   - name: ni_A591D6
     type: bin
@@ -2037,14 +2041,14 @@ segments:
     vram: 0x0F000000
     exclusive_ram_id: nisitenma_ichigo_overlays
 
-  - name: ni_ovl_overlay_95
+  - name: ni_ovl_demonDraculaAssetsLoader
     type: code
     # start: 0x00AD7B1C
     start: 0x00DA6B60
     vram: 0x0F000000
     exclusive_ram_id: nisitenma_ichigo_overlays
     subsegments:
-      - [0x00DA6B60, c, overlay/overlay_95]
+      - [0x00DA6B60, c, overlay/demonDraculaAssetsLoader]
 
   - name: ni_AD7B28
     type: bin

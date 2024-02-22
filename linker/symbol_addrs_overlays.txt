@@ -4,7 +4,7 @@ stageSelect_entrypoint                  = 0x8012A520; // type:func segment:commo
 stageSelect_init                  = 0x8012A590; // type:func segment:common
 stageSelect_initGraphics          = 0x8012A688; // type:func segment:common
 stageSelect_initLens              = 0x8012A904; // type:func segment:common
-stageSelect_moveButton            = 0x8012AA60; // type:func segment:common
+stageSelect_moveLens            = 0x8012AA60; // type:func segment:common
 stageSelect_warpToStage           = 0x8012AC04; // type:func segment:common
 stageSelect_closeTextboxes        = 0x8012AEA0; // type:func segment:common
 // .data
@@ -73,16 +73,6 @@ cv64_ovl_touturo_door_entrance_funcs             = 0x8018F108; // segment:TOU_TU
 // .rodata
 cv64_ovl_touturo_unused_str                      = 0x8018F120; // type:asciz segment:TOU_TURO size:0x26
 // End of src/overlay/map/tou_turo.c
-
-// src/overlay/overlay_7D.c
-// .text
-obj20A3_entrypoint = 0x0F000000; // type:func segment:ni_ovl_overlay_7D
-obj20A4_entrypoint = 0x0F000070; // type:func segment:ni_ovl_overlay_7D
-obj20A5_entrypoint = 0x0F0000E0; // type:func segment:ni_ovl_overlay_7D
-func_0F000150      = 0x0F000150; // type:func segment:ni_ovl_overlay_7D
-// .data
-cv64_ovl_7d_funcs  = 0x0F000160; // segment:ni_ovl_overlay_7D size:0x04
-// End of src/overlay/overlay_7D.c
 
 // src/overlay/credits_manager.c
 // .text

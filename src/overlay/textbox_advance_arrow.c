@@ -2,8 +2,8 @@
  * File: textbox_advance_arrow.c
  * Description:
  *   The blinking red arrow that appears when you can press A to advance t the
- * next string in a textbox. (Not to be confused with the red arrow used for
- * selecting options in some textboxes)
+ *   next string in a textbox. (Not to be confused with the red arrow used for
+ *   selecting options in some textboxes)
  * Associated objects: 0x2138
  *
  * Mapped by the TLB? = Yes

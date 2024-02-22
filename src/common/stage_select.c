@@ -14,8 +14,8 @@ u16 stageSelect_text[] = {
 cv64_stage_select_func_t stageSelect_functions[] = {
     stageSelect_init,
     stageSelect_initGraphics,
-    stageSelect_initMenuButton,
-    stageSelect_moveButton,
+    stageSelect_initLens,
+    stageSelect_moveLens,
     stageSelect_warpToStage,
     func_8000E860
 };
@@ -126,7 +126,7 @@ void stageSelect_initGraphics(stageSelect* self) {
     }
 }
 
-void stageSelect_initMenuButton(stageSelect* self) {
+void stageSelect_initLens(stageSelect* self) {
     window_work* lens;
     mfds_state** textbox_array = self->textboxes;
 
@@ -138,7 +138,7 @@ void stageSelect_initMenuButton(stageSelect* self) {
                 return;
             }
         }
-        self->lens_window_work = (*lens_create)(
+        self->lens = (*lens_create)(
             self,
             common_camera_HUD,
             (WINDOW_FLAG_800000 | WINDOW_FLAG_80 | WINDOW_FLAG_20 |
@@ -150,7 +150,7 @@ void stageSelect_initMenuButton(stageSelect* self) {
             240.0f,
             90.0f
         );
-        lens = self->lens_window_work;
+        lens = self->lens;
         if (lens != NULL) {
             (*windowWork_setParams)(lens, 0, 7, 5, 1.6f, 1.0f, NULL);
             lens->flags &= ~WINDOW_CLOSING;
@@ -162,8 +162,8 @@ void stageSelect_initMenuButton(stageSelect* self) {
     }
 }
 
-void stageSelect_moveButton(stageSelect* self) {
-    window_work* lens = self->lens_window_work;
+void stageSelect_moveLens(stageSelect* self) {
+    window_work* lens = self->lens;
     s32 current_option;
     s8 previous_option;
 
@@ -174,7 +174,8 @@ void stageSelect_moveButton(stageSelect* self) {
             self->lens_move_offset = 1;
         }
         lens->position.y =
-            (self->lens_move_offset * self->field_0x70) + self->text_ID;
+            (self->lens_move_offset * self->lens_move_vertical_difference) +
+            self->text_ID;
         self->lens_transition_rate += 1.0;
         return;
     }
@@ -201,17 +202,16 @@ void stageSelect_moveButton(stageSelect* self) {
     self->lens_are_moving = TRUE;
     self->previous_option = current_option;
     self->text_ID = (61 - ((f64) previous_option * 23));
-    self->field_0x5D = (61 - ((f64) current_option * 23));
+    self->next_text_ID = (61 - ((f64) current_option * 23));
     self->lens_transition_rate = 0;
-    self->field_0x70 = self->field_0x5D - self->text_ID;
+    self->lens_move_vertical_difference = self->next_text_ID - self->text_ID;
 }
 
 void stageSelect_warpToStage(stageSelect* self) {
     s16 i, j;
-    window_work* lens = self->lens_window_work;
+    window_work* lens = self->lens;
 
-    if ((lens->flags & (WINDOW_OPENED_4000 | WINDOW_OPENED_8000)) >> 0xE !=
-        FALSE) {
+    if ((lens->flags & (WINDOW_FLAG_4000 | WINDOW_FLAG_8000)) >> 0xE != FALSE) {
         stageSelect_closeTextboxes(self);
 
         sys.SaveStruct_gameplay.map_ID = NONE;
@@ -342,7 +342,7 @@ void stageSelect_closeTextboxes(stageSelect* self) {
     // TODO: (WINDOW_CLOSING | WINDOW_OPENING) represents flag 0x300.
     // However, we don't know if that specific flag represents something
     // not related to opening / closing the lens
-    self->lens_window_work->flags |= (WINDOW_CLOSING | WINDOW_OPENING);
+    self->lens->flags |= (WINDOW_CLOSING | WINDOW_OPENING);
     for (self->text_ID = 0; self->text_ID < STAGE_SELECT_NUM_OPTIONS + 1;
          self->text_ID++) {
         textbox_array[self->text_ID]->flags |= CLOSE_TEXTBOX;
