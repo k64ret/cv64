@@ -12,7 +12,7 @@ u16 stageSelect_text[] = {
 };
 
 cv64_stage_select_func_t stageSelect_functions[] = {
-    stageSelect_init,
+    stageSelect_loadAssetsFile,
     stageSelect_initGraphics,
     stageSelect_initLens,
     stageSelect_moveLens,
@@ -29,7 +29,7 @@ void stageSelect_entrypoint(stageSelect* self) {
     ENTER(self, stageSelect_functions);
 }
 
-void stageSelect_init(stageSelect* self) {
+void stageSelect_loadAssetsFile(stageSelect* self) {
     if (((*fade_isFading)() == FALSE) && ((ptr_DMAMgr->DMAChunkMgr != NULL))) {
         (*fade_setSettings)(FADE_IN, 30, 0, 0, 0);
         sys.cutscene_flags = 0;

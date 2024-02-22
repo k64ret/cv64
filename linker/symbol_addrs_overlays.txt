@@ -1,12 +1,12 @@
 // src/overlay/stage_select.c
 // .text
-stageSelect_entrypoint                  = 0x8012A520; // type:func segment:common
-stageSelect_init                  = 0x8012A590; // type:func segment:common
-stageSelect_initGraphics          = 0x8012A688; // type:func segment:common
-stageSelect_initLens              = 0x8012A904; // type:func segment:common
-stageSelect_moveLens            = 0x8012AA60; // type:func segment:common
-stageSelect_warpToStage           = 0x8012AC04; // type:func segment:common
-stageSelect_closeTextboxes        = 0x8012AEA0; // type:func segment:common
+stageSelect_entrypoint              = 0x8012A520; // type:func segment:common
+stageSelect_loadAssetsFile          = 0x8012A590; // type:func segment:common
+stageSelect_initGraphics            = 0x8012A688; // type:func segment:common
+stageSelect_initLens                = 0x8012A904; // type:func segment:common
+stageSelect_moveLens                = 0x8012AA60; // type:func segment:common
+stageSelect_warpToStage             = 0x8012AC04; // type:func segment:common
+stageSelect_closeTextboxes          = 0x8012AEA0; // type:func segment:common
 // .data
 //stageSelect_text                  = 0x8016C8E0; // type:u16 segment:common size:0x017C
 //stageSelect_functions             = 0x8016CA5C; // segment:common size:0x18

@@ -44,12 +44,12 @@ typedef struct {
 
 typedef void (*cv64_stage_select_func_t)(stageSelect*);
 
-void stageSelect_entrypoint(stageSelect* self);     // 8012a520
-void stageSelect_init(stageSelect* self);           // 8012a590
-void stageSelect_initGraphics(stageSelect* self);   // 8012a688
-void stageSelect_initLens(stageSelect* self);       // 8012a904
-void stageSelect_moveLens(stageSelect* self);       // 8012aa60
-void stageSelect_warpToStage(stageSelect* self);    // 8012ac04
-void stageSelect_closeTextboxes(stageSelect* self); // 8012aea0
+void stageSelect_entrypoint(stageSelect* self);     // 0x8012A520
+void stageSelect_loadAssetsFile(stageSelect* self); // 0x8012A590
+void stageSelect_initGraphics(stageSelect* self);   // 0x8012A688
+void stageSelect_initLens(stageSelect* self);       // 0x8012A904
+void stageSelect_moveLens(stageSelect* self);       // 0x8012AA60
+void stageSelect_warpToStage(stageSelect* self);    // 0x8012AC04
+void stageSelect_closeTextboxes(stageSelect* self); // 0x8012AEA0
 
 #endif
