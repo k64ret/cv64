@@ -25,8 +25,10 @@ u16 cv64_ovl_easyending_msg[] = {
 };
 
 cv64_ovl_easyending_func_t cv64_ovl_easyending_funcs[] = {
-    cv64_ovl_easyending_init, cv64_ovl_easyending_loop,
-    cv64_ovl_easyending_destroy};
+    cv64_ovl_easyending_init,
+    cv64_ovl_easyending_loop,
+    cv64_ovl_easyending_destroy
+};
 
 void cv64_ovl_easyending_entrypoint(cv64_ovl_easyending_t* self) {
     ENTER(self, cv64_ovl_easyending_funcs);
@@ -37,8 +39,9 @@ void cv64_ovl_easyending_init(cv64_ovl_easyending_t* self) {
     u32 message_ptr;
 
     (*play_sound)(SD_00A);
-    new_textbox = (*textbox_create)(self, common_cameras_array.HUD,
-                                    (OPEN_TEXTBOX | FAST_TEXT_TRANSITION));
+    new_textbox = (*textbox_create)(
+        self, common_camera_HUD, (OPEN_TEXTBOX | FAST_TEXT_TRANSITION)
+    );
     self->ending_textbox = new_textbox;
     (*textbox_setPos)(new_textbox, 30, 110, 1);
     (*textbox_setDimensions)(new_textbox, 6, 250, 0, 0);
@@ -47,14 +50,19 @@ void cv64_ovl_easyending_init(cv64_ovl_easyending_t* self) {
     message_ptr = (*text_getMessageFromPool)(cv64_ovl_easyending_msg, 0);
     (*textbox_setMessagePtr)(
         new_textbox,
-        GET_UNMAPPED_ADDRESS(NI_OVL_EASY_MODE_ENDING_MSG, message_ptr), NULL,
-        0);
-    (*textbox_enableLens)(new_textbox,
-                          (WINDOW_FLAG_40000 | WINDOW_FLAG_20 | WINDOW_FLAG_10 |
-                           WINDOW_FLAG_4 | WINDOW_FLAG_1),
-                          30);
-    (*object_curLevel_goToNextFuncAndClearTimer)(self->header.current_function,
-                                                 &self->header.functionInfo_ID);
+        GET_UNMAPPED_ADDRESS(NI_OVL_EASY_MODE_ENDING_MSG, message_ptr),
+        NULL,
+        0
+    );
+    (*textbox_enableLens)(
+        new_textbox,
+        (WINDOW_FLAG_40000 | WINDOW_FLAG_20 | WINDOW_FLAG_10 | WINDOW_FLAG_4 |
+         WINDOW_FLAG_1),
+        30
+    );
+    (*object_curLevel_goToNextFuncAndClearTimer)(
+        self->header.current_function, &self->header.functionInfo_ID
+    );
 }
 
 void func_0F00018C() {}
@@ -107,7 +115,8 @@ void cv64_ovl_easyending_loop(cv64_ovl_easyending_t* self) {
         (*atari_work_table_init)();
         self->active_time = 0;
         (*object_curLevel_goToNextFuncAndClearTimer)(
-            self->header.current_function, &self->header.functionInfo_ID);
+            self->header.current_function, &self->header.functionInfo_ID
+        );
     }
 }
 

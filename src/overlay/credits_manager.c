@@ -13,8 +13,8 @@
 #include "gamestate.h"
 #include "cutscene_ID.h"
 
-void (*cv64_ovl_creditsmgr_funcs[])(creditsMgr* self) = {
-    creditsMgr_init, creditsMgr_loop, creditsMgr_exit};
+void (*cv64_ovl_creditsmgr_funcs[])(creditsMgr* self
+) = {creditsMgr_init, creditsMgr_loop, creditsMgr_exit};
 
 void creditsMgr_entrypoint(creditsMgr* self) {
     ENTER(self, cv64_ovl_creditsmgr_funcs);
@@ -41,7 +41,8 @@ void creditsMgr_init(creditsMgr* self) {
         sys.field89_0x2644c = 0;
         sys.cutscene_ID = CUTSCENE_ID_CREDITS;
         (*object_curLevel_goToNextFuncAndClearTimer)(
-            self->header.current_function, &self->header.functionInfo_ID);
+            self->header.current_function, &self->header.functionInfo_ID
+        );
     }
 }
 
@@ -60,7 +61,8 @@ void creditsMgr_loop(creditsMgr* self) {
         if (self->field_0x34[3] == 2) {
             (*fade_setSettings)(FADE_OUT, 30, 0, 0, 0);
             (*object_curLevel_goToNextFuncAndClearTimer)(
-                self->header.current_function, &self->header.functionInfo_ID);
+                self->header.current_function, &self->header.functionInfo_ID
+            );
         }
     }
 }

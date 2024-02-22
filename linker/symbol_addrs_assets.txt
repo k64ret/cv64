@@ -9,6 +9,8 @@ TOUTURO_DOOR_ENTRANCE_DL = 0x0600AB00; // segment:NI_ASSETS_TOU_TURO
 
 TEXTBOX_ADVANCE_ARROW_DL = 0x06001120; // segment:ni_ovl_textbox_advance_arrow
 
+MENU_RED_BACKGROUND_DL = 0x06016D10; // segment:ni_pause_menu
+
 // test_grid_txt   = 0x06000000; // segment:NI_ASSETS_TEST_GRID
 // test_grid_tlut  = 0x06000800; // segment:NI_ASSETS_TEST_GRID
 // test_grid_vtx   = 0x06000820; // segment:NI_ASSETS_TEST_GRID rom:0x00BD96E0 size:0x780

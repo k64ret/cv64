@@ -2,8 +2,8 @@
  * File: textbox_advance_arrow.c
  * Description:
  *   The blinking red arrow that appears when you can press A to advance t the
- * next string in a textbox. (Not to be confused with the red arrow used for
- * selecting options in some textboxes)
+ *   next string in a textbox. (Not to be confused with the red arrow used for
+ *   selecting options in some textboxes)
  * Associated objects: 0x2138
  *
  * Mapped by the TLB? = Yes
@@ -13,8 +13,10 @@
 #include "objects/menu/textboxAdvanceArrow.h"
 
 void (*cv64_ovl_textboxadvancearrow_funcs[])(textboxAdvanceArrow* self) = {
-    textboxAdvanceArrow_init, textboxAdvanceArrow_loop,
-    textboxAdvanceArrow_destroy};
+    textboxAdvanceArrow_init,
+    textboxAdvanceArrow_loop,
+    textboxAdvanceArrow_destroy
+};
 
 void textboxAdvanceArrow_entrypoint(textboxAdvanceArrow* self) {
     ENTER(self, cv64_ovl_textboxadvancearrow_funcs);
@@ -26,7 +28,7 @@ void textboxAdvanceArrow_init(textboxAdvanceArrow* self) {
 
     temp = (*func_80004C40)(FIG_TYPE_STRUCT_47);
     self->field_0x28 = temp;
-    (*func_80004CE8)(temp, common_cameras_array.HUD);
+    (*func_80004CE8)(temp, common_camera_HUD);
     temp->primitive_color.R = temp->primitive_color.G =
         temp->primitive_color.B = 0xA0;
     temp->field5_0x3c = 1;
@@ -49,8 +51,9 @@ void textboxAdvanceArrow_init(textboxAdvanceArrow* self) {
     model->position.y = -90.0f;
     self->disable_arrow = FALSE;
     self->fade_timer = 0;
-    (*object_curLevel_goToNextFuncAndClearTimer)(self->header.current_function,
-                                                 &self->header.functionInfo_ID);
+    (*object_curLevel_goToNextFuncAndClearTimer)(
+        self->header.current_function, &self->header.functionInfo_ID
+    );
 }
 
 void textboxAdvanceArrow_loop(textboxAdvanceArrow* self) {
@@ -75,7 +78,8 @@ void textboxAdvanceArrow_loop(textboxAdvanceArrow* self) {
     }
     if (self->disable_arrow) {
         (*object_curLevel_goToNextFuncAndClearTimer)(
-            self->header.current_function, &self->header.functionInfo_ID);
+            self->header.current_function, &self->header.functionInfo_ID
+        );
     }
 }
 

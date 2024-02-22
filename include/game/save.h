@@ -17,6 +17,40 @@
 #define SUBWEAPON_CROSS      3
 #define SUBWEAPON_AXE        4
 
+typedef enum cv64_map_ID {
+    MORI = 0,
+    TOU = 1,
+    TOUOKUJI = 2,
+    NAKANIWA = 3,
+    BEKKAN_1F = 4,
+    BEKKAN_2F = 5,
+    MEIRO_TEIEN = 6,
+    CHIKA_KODO = 7,
+    CHIKA_SUIRO = 8,
+    HONMARU_B1F = 9,
+    HONMARU_1F = 10,
+    HONMARU_2F = 11,
+    HONMARU_3F_MINAMI = 12,
+    HONMARU_4F_MINAMI = 13,
+    HONMARU_3F_KITA = 14,
+    HONMARU_5F = 15,
+    SHOKEI_TOU = 16,
+    MAHOU_TOU = 17,
+    KAGAKU_TOU = 18,
+    KETTOU_TOU = 19,
+    TURO_TOKEITOU = 20,
+    TENSHU = 21,
+    ENDING_DUMMY = 22,
+    TOKEITOU_NAI = 23,
+    DRACULA = 24,
+    ROSE = 25,
+    BEKKAN_BOSS = 26,
+    TOU_TURO = 27,
+    ENDING = 28,
+    TEST_GRID = 29,
+    NONE = -1
+} cv64_map_ID_t;
+
 typedef struct cv64_save_state {
     u32 event_flags[NUM_EVENT_FLAGS];
     u32 flags;

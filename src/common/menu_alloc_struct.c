@@ -33,44 +33,52 @@ void* func_8013B33C_BE52C(const char* name, u32 size) {
     return data;
 }
 
-void* allocStructInObjectEntryList(const char* name, cv64_object_t* object,
-                                   u32 size, s32 alloc_data_index) {
+void* allocStructInObjectEntryList(
+    const char* name, cv64_object_t* object, u32 size, s32 alloc_data_index
+) {
     void* data;
     u32 temp;
 
     if (isMenuDataHeapActive()) {
-        data = (*object_allocEntryInList)(object, HEAP_KIND_MENU_DATA, size,
-                                          alloc_data_index);
+        data = (*object_allocEntryInList)(
+            object, HEAP_KIND_MENU_DATA, size, alloc_data_index
+        );
         if (data == NULL) {
-            data = (*object_allocEntryInList)(object, HEAP_KIND_MULTIPURPOSE,
-                                              size, alloc_data_index);
+            data = (*object_allocEntryInList)(
+                object, HEAP_KIND_MULTIPURPOSE, size, alloc_data_index
+            );
         } else {
             // Empty else needed for matching
         }
     } else {
-        data = (*object_allocEntryInList)(object, HEAP_KIND_MULTIPURPOSE, size,
-                                          alloc_data_index);
+        data = (*object_allocEntryInList)(
+            object, HEAP_KIND_MULTIPURPOSE, size, alloc_data_index
+        );
     }
     return data;
 }
 
-void* func_8013B454_BE644(const char* name, cv64_object_t* object, u32 size,
-                          s32 alloc_data_index) {
+void* func_8013B454_BE644(
+    const char* name, cv64_object_t* object, u32 size, s32 alloc_data_index
+) {
     void* data;
     u32 temp;
 
     if (isMenuDataHeapActive()) {
-        data = (*func_80002264_2E64)(object, HEAP_KIND_MENU_DATA, size,
-                                     alloc_data_index);
+        data = (*func_80002264_2E64)(
+            object, HEAP_KIND_MENU_DATA, size, alloc_data_index
+        );
         if (data == NULL) {
-            data = (*func_80002264_2E64)(object, HEAP_KIND_MULTIPURPOSE, size,
-                                         alloc_data_index);
+            data = (*func_80002264_2E64)(
+                object, HEAP_KIND_MULTIPURPOSE, size, alloc_data_index
+            );
         } else {
             // Empty else needed for matching
         }
     } else {
-        data = (*func_80002264_2E64)(object, HEAP_KIND_MULTIPURPOSE, size,
-                                     alloc_data_index);
+        data = (*func_80002264_2E64)(
+            object, HEAP_KIND_MULTIPURPOSE, size, alloc_data_index
+        );
     }
     return data;
 }

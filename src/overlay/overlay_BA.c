@@ -3,10 +3,10 @@
  * Description:
  *   This actor can be found in the main area of Castle Wall, and its purpose
  *   is to play sound 0x2E9 when falling off the platform where you encounter
- * Dracula.
+ *   Dracula.
  *
  *   Sound 0x2E9 appears to be silent, so it's unknown how it would have sound
- * like. For some reason, it's grouped under the "Menu" objects.
+ *   like. For some reason, it's grouped under the "Menu" objects.
  * Associated objects: 0x213F
  *
  * Mapped by the TLB? = Yes
@@ -19,8 +19,11 @@
 
 // 0x0F0001A0
 void (*cv64_ovl_obj213F_funcs[])(object_213F* self) = {
-    obj213F_isDraculaCutsceneWatched, obj213F_isPlayerDroppingDown,
-    obj213F_playSound, obj213F_destroy};
+    obj213F_isDraculaCutsceneWatched,
+    obj213F_isPlayerDroppingDown,
+    obj213F_playSound,
+    obj213F_destroy
+};
 
 void obj213F_entrypoint(object_213F* self) {
     ENTER(self, cv64_ovl_obj213F_funcs);
@@ -36,7 +39,8 @@ void obj213F_isDraculaCutsceneWatched(object_213F* self) {
 
         if (300.0f < player_model->position.y) {
             (*object_curLevel_goToNextFuncAndClearTimer)(
-                self->header.current_function, &self->header.functionInfo_ID);
+                self->header.current_function, &self->header.functionInfo_ID
+            );
         }
     }
 }
@@ -46,14 +50,16 @@ void obj213F_isPlayerDroppingDown(object_213F* self) {
 
     if (model->position.y < 300.0f) {
         (*object_curLevel_goToNextFuncAndClearTimer)(
-            self->header.current_function, &self->header.functionInfo_ID);
+            self->header.current_function, &self->header.functionInfo_ID
+        );
     }
 }
 
 void obj213F_playSound(object_213F* self) {
     (*play_sound)(SD_2E9);
-    (*object_curLevel_goToNextFuncAndClearTimer)(self->header.current_function,
-                                                 &self->header.functionInfo_ID);
+    (*object_curLevel_goToNextFuncAndClearTimer)(
+        self->header.current_function, &self->header.functionInfo_ID
+    );
 }
 
 void obj213F_destroy(object_213F* self) { self->header.destroy(self); }

@@ -14,10 +14,15 @@
 #include "system_work.h"
 
 cv64_ovl_konamilogo_func_t cv64_ovl_konamilogo_funcs[] = {
-    cv64_ovl_konamilogo_init,          cv64_ovl_konamilogo_fade_in,
-    cv64_ovl_konamilogo_wait,          cv64_ovl_konamilogo_fade_out,
-    cv64_ovl_konamilogo_kcek_fade_in,  cv64_ovl_konamilogo_kcek_wait,
-    cv64_ovl_konamilogo_kcek_fade_out, func_8000E860};
+    cv64_ovl_konamilogo_init,
+    cv64_ovl_konamilogo_fade_in,
+    cv64_ovl_konamilogo_wait,
+    cv64_ovl_konamilogo_fade_out,
+    cv64_ovl_konamilogo_kcek_fade_in,
+    cv64_ovl_konamilogo_kcek_wait,
+    cv64_ovl_konamilogo_kcek_fade_out,
+    func_8000E860
+};
 
 void cv64_ovl_konamilogo_entrypoint(cv64_ovl_konamilogo_t* self) {
     ENTER(self, cv64_ovl_konamilogo_funcs);
@@ -29,16 +34,18 @@ void cv64_ovl_konamilogo_check_btn_press(cv64_ovl_konamilogo_t* self) {
          sys.controllers[2].buttons_pressed |
          sys.controllers[3].buttons_pressed) &
         (START_BUTTON | RECENTER_BUTTON)) {
-        (*object_curLevel_goToFunc)(self->header.current_function,
-                                    &self->header.functionInfo_ID,
-                                    KONAMILOGO_KCEK_WAIT);
+        (*object_curLevel_goToFunc)(
+            self->header.current_function,
+            &self->header.functionInfo_ID,
+            KONAMILOGO_KCEK_WAIT
+        );
     }
 }
 
 void cv64_ovl_konamilogo_init(cv64_ovl_konamilogo_t* self) {
     cv64_object_func_inf_t* curFunc;
-    cv64_model_inf_t* model = (*modelInfo_createRootNode)(
-        FIG_TYPE_HUD_ELEMENT, common_cameras_array.HUD);
+    cv64_model_inf_t* model =
+        (*modelInfo_createRootNode)(FIG_TYPE_HUD_ELEMENT, common_camera_HUD);
 
     self->model = model;
     model->dlist = &KONAMI_LOGO_DL;
@@ -50,8 +57,12 @@ void cv64_ovl_konamilogo_init(cv64_ovl_konamilogo_t* self) {
     CV64_COLOR_RGBA_TO_U32(model->primitive_color) =
         0xFFFFFF00; // White (transparent)
 
-    GO_TO_NEXT_FUNC(self, cv64_ovl_konamilogo_funcs, curFunc,
-                    (*object_curLevel_goToNextFuncAndClearTimer));
+    GO_TO_NEXT_FUNC(
+        self,
+        cv64_ovl_konamilogo_funcs,
+        curFunc,
+        (*object_curLevel_goToNextFuncAndClearTimer)
+    );
 }
 
 void cv64_ovl_konamilogo_fade_in(cv64_ovl_konamilogo_t* self) {
@@ -62,7 +73,8 @@ void cv64_ovl_konamilogo_fade_in(cv64_ovl_konamilogo_t* self) {
     } else {
         model->primitive_color.A = 0xFF;
         (*object_curLevel_goToNextFuncAndClearTimer)(
-            self->header.current_function, &self->header.functionInfo_ID);
+            self->header.current_function, &self->header.functionInfo_ID
+        );
     }
     sys.background_color.R = model->primitive_color.A;
     sys.background_color.G = model->primitive_color.A;
@@ -76,7 +88,8 @@ void cv64_ovl_konamilogo_wait(cv64_ovl_konamilogo_t* self) {
 
     if (timer >= 169) {
         (*object_curLevel_goToNextFuncAndClearTimer)(
-            self->header.current_function, &self->header.functionInfo_ID);
+            self->header.current_function, &self->header.functionInfo_ID
+        );
         timer =
             self->header.current_function[self->header.functionInfo_ID].timer;
     }
@@ -93,7 +106,8 @@ void cv64_ovl_konamilogo_fade_out(cv64_ovl_konamilogo_t* self) {
     } else {
         model->primitive_color.A = 0x00;
         (*object_curLevel_goToNextFuncAndClearTimer)(
-            self->header.current_function, &self->header.functionInfo_ID);
+            self->header.current_function, &self->header.functionInfo_ID
+        );
     }
     cv64_ovl_konamilogo_check_btn_press(self);
 }
@@ -108,7 +122,8 @@ void cv64_ovl_konamilogo_kcek_fade_in(cv64_ovl_konamilogo_t* self) {
     } else {
         model->primitive_color.A = 0xFF;
         (*object_curLevel_goToNextFuncAndClearTimer)(
-            self->header.current_function, &self->header.functionInfo_ID);
+            self->header.current_function, &self->header.functionInfo_ID
+        );
     }
     cv64_ovl_konamilogo_check_btn_press(self);
 }
@@ -126,7 +141,8 @@ void cv64_ovl_konamilogo_kcek_wait(cv64_ovl_konamilogo_t* self) {
     if ((s32) self->header.current_function[self->header.functionInfo_ID]
             .timer >= 97) {
         (*object_curLevel_goToNextFuncAndClearTimer)(
-            self->header.current_function, &self->header.functionInfo_ID);
+            self->header.current_function, &self->header.functionInfo_ID
+        );
     }
 }
 

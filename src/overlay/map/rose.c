@@ -17,14 +17,18 @@
 #include "system_work.h"
 
 cv64_ovl_rose_ventilator_func_t cv64_ovl_rose_ventilator_funcs[] = {
-    cv64_ovl_rose_ventilator_init, cv64_ovl_rose_ventilator_loop};
+    cv64_ovl_rose_ventilator_init, cv64_ovl_rose_ventilator_loop
+};
 
 cv64_ovl_rose_door_func_t cv64_ovl_rose_door_funcs[] = {
-    cv64_ovl_rose_door_init, cv64_ovl_rose_door_loop};
+    cv64_ovl_rose_door_init, cv64_ovl_rose_door_loop
+};
 
 cv64_ovl_rose_door_func_t cv64_ovl_rose_door_state_funcs[] = {
-    cv64_ovl_rose_door_state_startClosing, cv64_ovl_rose_door_state_closing,
-    cv64_ovl_rose_door_state_idle};
+    cv64_ovl_rose_door_state_startClosing,
+    cv64_ovl_rose_door_state_closing,
+    cv64_ovl_rose_door_state_idle
+};
 
 const char cv64_ovl_rose_unused_str[] = "VENTILATOR : Can't allocate F3D.\n";
 
@@ -57,7 +61,8 @@ void cv64_ovl_rose_ventilator_init(cv64_ovl_rose_ventilator_t* self) {
             ((*rand)() & 0x1FF) + 30;
         (*actor_model_set_pos_and_angle)(self, model);
         (*object_curLevel_goToNextFuncAndClearTimer)(
-            self->header.current_function, &self->header.functionInfo_ID);
+            self->header.current_function, &self->header.functionInfo_ID
+        );
     }
 }
 
@@ -69,8 +74,9 @@ void cv64_ovl_rose_ventilator_loop(cv64_ovl_rose_ventilator_t* self) {
         CV64_COLOR_RGBA_TO_U32(sys.primitive_color);
     CV64_COLOR_RGBA_TO_U32(model->fog_color) =
         CV64_COLOR_RGBA_TO_U32(sys.background_color);
-    if ((*actor_checkSpawn)(self, model->position.x, model->position.y,
-                            model->position.z) != FALSE) {
+    if ((*actor_checkSpawn)(
+            self, model->position.x, model->position.y, model->position.z
+        ) != FALSE) {
         // clang-format off
         /* @bug If the player is far away enough from the ventilator, it will try to go to the next function.
                 However, `cv64_ovl_rose_ventilator_funcs` only has two functions. This will make the game
@@ -89,7 +95,8 @@ void cv64_ovl_rose_ventilator_loop(cv64_ovl_rose_ventilator_t* self) {
         */
         // clang-format on
         (*object_curLevel_goToNextFuncAndClearTimer)(
-            self->header.current_function, &self->header.functionInfo_ID);
+            self->header.current_function, &self->header.functionInfo_ID
+        );
     } else {
         model->angle.pitch -= speed_settings->current_speed;
         if (speed_settings->current_speed < speed_settings->max_speed) {
@@ -131,17 +138,20 @@ void cv64_ovl_rose_door_init(cv64_ovl_rose_door_t* self) {
         (*getMapActorModelEntryFromArray)(model->dlist, model->assets_file_ID);
     model->map_actor_model = map_actor_model;
     self->map_actor_model = map_actor_model;
-    (*object_curLevel_goToNextFuncAndClearTimer)(self->header.current_function,
-                                                 &self->header.functionInfo_ID);
+    (*object_curLevel_goToNextFuncAndClearTimer)(
+        self->header.current_function, &self->header.functionInfo_ID
+    );
     height_settings->initial_height = model->position.y;
     height_settings->height = 25.0f;
     height_settings->closing_speed = 0.0f;
     model->position.y =
         height_settings->height + height_settings->initial_height;
     if (settings->variable_1 != FALSE) {
-        (*object_nextLevel_goToFunc)(self->header.current_function,
-                                     &self->header.functionInfo_ID,
-                                     ROSE_DOOR_STATE_IDLE);
+        (*object_nextLevel_goToFunc)(
+            self->header.current_function,
+            &self->header.functionInfo_ID,
+            ROSE_DOOR_STATE_IDLE
+        );
     }
 }
 
@@ -154,8 +164,9 @@ void cv64_ovl_rose_door_loop(cv64_ovl_rose_door_t* self) {
     CV64_COLOR_RGBA_TO_U32(model->fog_color) =
         CV64_COLOR_RGBA_TO_U32(sys.background_color);
 
-    if ((*actor_checkSpawn)(self, model->position.x, model->position.y,
-                            model->position.z) != FALSE) {
+    if ((*actor_checkSpawn)(
+            self, model->position.x, model->position.y, model->position.z
+        ) != FALSE) {
         self->header.destroy(self);
     } else {
         ENTER(self, cv64_ovl_rose_door_state_funcs);
@@ -169,13 +180,16 @@ void cv64_ovl_rose_door_state_startClosing(cv64_ovl_rose_door_t* self) {
     cv64_model_inf_t* model = self->model;
 
     if ((*checkIfOutsideEntityIsInsideMainEntityRadius)(
-            model, ptr_PlayerData->visualData.model, 15.0f, AXIS_Z) == FALSE) {
+            model, ptr_PlayerData->visualData.model, 15.0f, AXIS_Z
+        ) == FALSE) {
         if (sys.SaveStruct_gameplay.character == REINHARDT) {
-            (*play_sound_in_position_and_set_volume)(SD_ROSE_DOOR_CLOSING,
-                                                     &model->position, 0.5f);
+            (*play_sound_in_position_and_set_volume)(
+                SD_ROSE_DOOR_CLOSING, &model->position, 0.5f
+            );
         } else {
-            (*play_sound_in_position_and_set_volume)(SD_ROSE_DOOR_CLOSING,
-                                                     &model->position, 1.0f);
+            (*play_sound_in_position_and_set_volume)(
+                SD_ROSE_DOOR_CLOSING, &model->position, 1.0f
+            );
         }
         // Cleaner version
         // (*play_sound_in_position_and_set_volume)(SD_ROSE_DOOR_CLOSING,
@@ -183,7 +197,8 @@ void cv64_ovl_rose_door_state_startClosing(cv64_ovl_rose_door_t* self) {
         // ((sys.SaveStruct_gameplay.character == REINHARDT) ? 0.5f : 1.0f));
         height_settings->closing_speed = 0.0f;
         (*object_curLevel_goToNextFuncAndClearTimer)(
-            self->header.current_function, &self->header.functionInfo_ID);
+            self->header.current_function, &self->header.functionInfo_ID
+        );
     }
 }
 
@@ -198,15 +213,18 @@ void cv64_ovl_rose_door_state_closing(cv64_ovl_rose_door_t* self) {
     if (height_settings->height < 0.0) {
         (*play_sound)(STOP_SOUND(SD_ROSE_DOOR_CLOSING));
         if (sys.SaveStruct_gameplay.character == REINHARDT) {
-            (*play_sound_in_position_and_set_volume)(SD_ROSE_DOOR_CLOSE,
-                                                     &model->position, 0.5f);
+            (*play_sound_in_position_and_set_volume)(
+                SD_ROSE_DOOR_CLOSE, &model->position, 0.5f
+            );
         } else {
-            (*play_sound_in_position_and_set_volume)(SD_ROSE_DOOR_CLOSE,
-                                                     &model->position, 1.0f);
+            (*play_sound_in_position_and_set_volume)(
+                SD_ROSE_DOOR_CLOSE, &model->position, 1.0f
+            );
         }
         height_settings->height = 0.0f;
         (*object_curLevel_goToNextFuncAndClearTimer)(
-            self->header.current_function, &self->header.functionInfo_ID);
+            self->header.current_function, &self->header.functionInfo_ID
+        );
     }
 }
 

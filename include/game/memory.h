@@ -99,8 +99,12 @@ extern void* HEAP_MENU_DATA_START;
 
 extern void memory_copy(void* src, void* dest, u32 size);
 extern void memory_clear(void* ptr, u32 length);
-void heap_init(cv64_heap_kind_t kind, cv64_heapblock_hdr_t* first_block_ptr,
-               s32 heap_size, u32 additional_flags);
+void heap_init(
+    cv64_heap_kind_t kind,
+    cv64_heapblock_hdr_t* first_block_ptr,
+    s32 heap_size,
+    u32 additional_flags
+);
 void heap_free(cv64_heap_kind_t kind);
 void heap_writebackDCache(void);
 extern void initHeaps(void);

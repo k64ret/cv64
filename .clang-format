@@ -4,14 +4,20 @@ BasedOnStyle: LLVM
 IndentWidth: 4
 ---
 Language: Cpp
+AlignAfterOpenBracket: BlockIndent
 AlignConsecutiveMacros: true
-# AlignConsecutiveAssignments: true
-ColumnLimit: 80
-# Force pointers to the type for C++.
-DerivePointerAlignment: false
+AlignOperands: false
+BinPackArguments: false
+BinPackParameters: false
+BreakStringLiterals: false
+IndentCaseLabels: true
+IndentPPDirectives: BeforeHash
+LineEnding: LF
 PointerAlignment: Left
+ReflowComments: false
 SortIncludes: Never
 SpaceAfterCStyleCast: true
+TabWidth: 4
 ---
 Language: Json
 # Don't format JSON files

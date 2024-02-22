@@ -37,16 +37,20 @@ typedef struct cv64_actor {
     cv64_actor_settings_t* settings;
 } cv64_actor_t;
 
-extern void actor_model_set_pos(cv64_actor_t* actor,
-                                cv64_model_inf_t* actor_model);
-extern void actor_model_set_pos_and_angle(cv64_actor_t* actor,
-                                          cv64_model_inf_t* actor_model);
-extern s32 actor_checkSpawn(cv64_actor_t* actor, f32 actor_pos_X,
-                            f32 actor_pos_Y, f32 actor_pos_Z);
+extern void
+actor_model_set_pos(cv64_actor_t* actor, cv64_model_inf_t* actor_model);
+extern void actor_model_set_pos_and_angle(
+    cv64_actor_t* actor, cv64_model_inf_t* actor_model
+);
+extern s32 actor_checkSpawn(
+    cv64_actor_t* actor, f32 actor_pos_X, f32 actor_pos_Y, f32 actor_pos_Z
+);
 extern void func_801578FC(cv64_actor_t* actor);
-extern u32
-checkIfOutsideEntityIsInsideMainEntityRadius(cv64_model_inf_t* player_model,
-                                             cv64_model_inf_t* actor_model,
-                                             f32 actor_spawn_radius, u32 axis);
+extern u32 checkIfOutsideEntityIsInsideMainEntityRadius(
+    cv64_model_inf_t* player_model,
+    cv64_model_inf_t* actor_model,
+    f32 actor_spawn_radius,
+    u32 axis
+);
 
 #endif

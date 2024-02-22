@@ -5,9 +5,10 @@
 Gfx cv64_dl_fade_normal[] = {
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
-    gsSPClearGeometryMode(G_ZBUFFER | G_SHADE | G_CULL_BOTH | G_FOG |
-                          G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR |
-                          G_LOD | G_SHADING_SMOOTH),
+    gsSPClearGeometryMode(
+        G_ZBUFFER | G_SHADE | G_CULL_BOTH | G_FOG | G_LIGHTING | G_TEXTURE_GEN |
+        G_TEXTURE_GEN_LINEAR | G_LOD | G_SHADING_SMOOTH
+    ),
     gsDPSetRenderMode(G_RM_CLD_SURF, G_RM_CLD_SURF2),
     gsDPSetCombineMode(G_CC_PRIMITIVE, G_CC_PRIMITIVE),
     gsDPSetPrimDepth(-1, -1),
@@ -22,14 +23,16 @@ Gfx cv64_dl_fade_normal[] = {
 Gfx cv64_dl_fade_with_outline[] = {
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_2CYCLE),
-    gsSPClearGeometryMode(G_ZBUFFER | G_SHADE | G_CULL_BOTH | G_FOG |
-                          G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR |
-                          G_LOD | G_SHADING_SMOOTH),
+    gsSPClearGeometryMode(
+        G_ZBUFFER | G_SHADE | G_CULL_BOTH | G_FOG | G_LIGHTING | G_TEXTURE_GEN |
+        G_TEXTURE_GEN_LINEAR | G_LOD | G_SHADING_SMOOTH
+    ),
     gsDPSetRenderMode(
         IM_RD | CVG_DST_SAVE | ZMODE_OPA | FORCE_BL |
             GBL_c1(G_BL_CLR_IN, G_BL_0, G_BL_CLR_FOG, G_BL_A_MEM),
         IM_RD | CVG_DST_SAVE | ZMODE_OPA | FORCE_BL |
-            GBL_c2(G_BL_CLR_IN, G_BL_A_FOG, G_BL_CLR_MEM, G_BL_1MA)),
+            GBL_c2(G_BL_CLR_IN, G_BL_A_FOG, G_BL_CLR_MEM, G_BL_1MA)
+    ),
     gsDPSetCombineLERP(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
     gsDPSetPrimDepth(-1, -1),
     gsDPSetDepthSource(G_ZS_PRIM),
@@ -122,14 +125,24 @@ void fade_calc(void) {
         sys.fade_color.A = (s32) (alpha * 255.9999);
 
         if (flags & FADE_WITH_OUTLINE) {
-            gDPSetFogColor(gDisplayListHead++, sys.fade_color.R,
-                           sys.fade_color.G, sys.fade_color.B,
-                           sys.fade_color.A);
+            gDPSetFogColor(
+                gDisplayListHead++,
+                sys.fade_color.R,
+                sys.fade_color.G,
+                sys.fade_color.B,
+                sys.fade_color.A
+            );
             gSPDisplayList(gDisplayListHead++, &cv64_dl_fade_with_outline);
         } else {
-            gDPSetPrimColor(gDisplayListHead++, 0, 0, sys.fade_color.R,
-                            sys.fade_color.G, sys.fade_color.B,
-                            sys.fade_color.A);
+            gDPSetPrimColor(
+                gDisplayListHead++,
+                0,
+                0,
+                sys.fade_color.R,
+                sys.fade_color.G,
+                sys.fade_color.B,
+                sys.fade_color.A
+            );
             gSPDisplayList(gDisplayListHead++, &cv64_dl_fade_normal);
         }
     }
