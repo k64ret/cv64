@@ -5,6 +5,7 @@ rm -rf build
 rm -rf assets/nisitenma_ichigo
 rm -f assets/*.bin
 # rm -rf asm/nonmatchings
-rm -rf asm/overlay
+rm -rf asm/common
 rm -rf asm/data
+rm -rf asm/overlay
 rm -f asm/*.s
