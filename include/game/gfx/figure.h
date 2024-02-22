@@ -19,7 +19,7 @@
 #define FIG_TYPE_CAMERA_ORTHO       0x0100
 #define FIG_TYPE_CAMERA_PERSPECTIVE 0x0200
 #define FIG_TYPE_CAMERA_CUTSCENE                                               \
-    0x0800 // Also assigned to the Player's mirrored copy in the Villa's mirror
+    0x0800 // Also assigned to the Player's mirrored copy in the Villa's mirror \
            // room
 #define FIG_TYPE_HIERARCHY_FIRST_NODE 0x1000
 #define FIG_TYPE_HIERARCHY_ROOT       0x2000 // "super", according to leftover strings

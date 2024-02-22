@@ -28,9 +28,11 @@ void gamestate_create(s32 game_state) {
     ptr_GameStateMgr->flags |= OBJ_EXEC_FLAG_TOP;
     ptr_GameStateMgr->destroy = GameStateMgr_destroy;
     ptr_GameStateMgr->current_game_state = game_state;
-    memory_copy(&gameState_settings[game_state - 1].info,
-                &ptr_GameStateMgr->current_game_state_info,
-                sizeof(gameState_info));
+    memory_copy(
+        &gameState_settings[game_state - 1].info,
+        &ptr_GameStateMgr->current_game_state_info,
+        sizeof(gameState_info)
+    );
 }
 
 void gamestate_change(s32 game_state) {

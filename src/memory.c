@@ -6,8 +6,12 @@
 
 #pragma GLOBAL_ASM("../asm/nonmatchings/memory/memory_copy.s")
 
-void heap_init(cv64_heap_kind_t kind, cv64_heapblock_hdr_t* first_block_ptr,
-               s32 heap_size, u32 additional_flags) {
+void heap_init(
+    cv64_heap_kind_t kind,
+    cv64_heapblock_hdr_t* first_block_ptr,
+    s32 heap_size,
+    u32 additional_flags
+) {
     heaps[kind].flags = additional_flags | HEAP_ACTIVE;
     heaps[kind].size = ALIGN8(heap_size);
     heaps[kind].heap_start = ALIGN8(first_block_ptr);
@@ -90,8 +94,9 @@ void* func_80001008_1C08(cv64_heap_kind_t heap_kind, u32 size) {
 
 #pragma GLOBAL_ASM("../asm/nonmatchings/memory/func_80001338_1F38.s")
 
-void object_curLevel_goToNextFunc(u16 current_functionInfo[],
-                                  s16* functionInfo_ID) {
+void object_curLevel_goToNextFunc(
+    u16 current_functionInfo[], s16* functionInfo_ID
+) {
     u16* functionInfo_entry;
     u16* entry_to_clean;
 
@@ -104,8 +109,9 @@ void object_curLevel_goToNextFunc(u16 current_functionInfo[],
     }
 }
 
-void object_prevLevel_goToNextFunc(u16 current_functionInfo[],
-                                   s16* functionInfo_ID) {
+void object_prevLevel_goToNextFunc(
+    u16 current_functionInfo[], s16* functionInfo_ID
+) {
     u16* functionInfo_entry;
     u16* entry_to_clean;
 
@@ -114,14 +120,16 @@ void object_prevLevel_goToNextFunc(u16 current_functionInfo[],
         functionInfo_entry--;
         (*functionInfo_entry)++;
         for (entry_to_clean = functionInfo_entry + 1;
-             entry_to_clean < (u16*) functionInfo_ID; entry_to_clean++) {
+             entry_to_clean < (u16*) functionInfo_ID;
+             entry_to_clean++) {
             *entry_to_clean = 0;
         }
     }
 }
 
-void object_nextLevel_goToNextFunc(u16 current_functionInfo[],
-                                   s16* functionInfo_ID) {
+void object_nextLevel_goToNextFunc(
+    u16 current_functionInfo[], s16* functionInfo_ID
+) {
     u16* functionInfo_entry;
     u16* entry_to_clean;
 
@@ -138,7 +146,8 @@ void object_nextLevel_goToNextFunc(u16 current_functionInfo[],
 }
 
 void object_curLevel_goToNextFuncAndClearTimer(
-    cv64_object_func_inf_t current_functionInfo[], s16* functionInfo_ID) {
+    cv64_object_func_inf_t current_functionInfo[], s16* functionInfo_ID
+) {
     cv64_object_func_inf_t* functionInfo_entry;
     cv64_object_func_inf_t* entry_to_clean;
 
@@ -153,21 +162,24 @@ void object_curLevel_goToNextFuncAndClearTimer(
     }
 }
 
-void object_curLevel_goToPrevFunc(cv64_object_func_inf_t current_functionInfo[],
-                                  s16* functionInfo_ID) {
+void object_curLevel_goToPrevFunc(
+    cv64_object_func_inf_t current_functionInfo[], s16* functionInfo_ID
+) {
     cv64_object_func_inf_t* functionInfo_entry;
     u16* entry_to_clean;
 
     functionInfo_entry = &current_functionInfo[*functionInfo_ID];
     functionInfo_entry->whole--;
     for (entry_to_clean = (u16*) functionInfo_entry + 1;
-         entry_to_clean < (u16*) functionInfo_ID; entry_to_clean++) {
+         entry_to_clean < (u16*) functionInfo_ID;
+         entry_to_clean++) {
         *entry_to_clean = 0;
     }
 }
 
-void object_prevLevel_goToPrevFunc(u16 current_functionInfo[],
-                                   s16* functionInfo_ID) {
+void object_prevLevel_goToPrevFunc(
+    u16 current_functionInfo[], s16* functionInfo_ID
+) {
     u16* functionInfo_entry;
     u16* entry_to_clean;
 
@@ -176,14 +188,16 @@ void object_prevLevel_goToPrevFunc(u16 current_functionInfo[],
         functionInfo_entry--;
         (*functionInfo_entry)--;
         for (entry_to_clean = functionInfo_entry + 1;
-             entry_to_clean < (u16*) functionInfo_ID; entry_to_clean++) {
+             entry_to_clean < (u16*) functionInfo_ID;
+             entry_to_clean++) {
             *entry_to_clean = 0;
         }
     }
 }
 
-void object_nextLevel_goToPrevFunc(u16 current_functionInfo[],
-                                   s16* functionInfo_ID) {
+void object_nextLevel_goToPrevFunc(
+    u16 current_functionInfo[], s16* functionInfo_ID
+) {
     u16* functionInfo_entry;
     u16* entry_to_clean;
 
@@ -199,8 +213,9 @@ void object_nextLevel_goToPrevFunc(u16 current_functionInfo[],
     }
 }
 
-void object_curLevel_goToPrevFuncAndClearTimer(u16 current_functionInfo[],
-                                               s16* functionInfo_ID) {
+void object_curLevel_goToPrevFuncAndClearTimer(
+    u16 current_functionInfo[], s16* functionInfo_ID
+) {
     u16* functionInfo_entry;
     u16* entry_to_clean;
 
@@ -208,40 +223,45 @@ void object_curLevel_goToPrevFuncAndClearTimer(u16 current_functionInfo[],
     (*functionInfo_entry)--;
     (u8)(*functionInfo_entry) = 0;
     for (entry_to_clean = functionInfo_entry + 1;
-         entry_to_clean < (u16*) functionInfo_ID; entry_to_clean++) {
+         entry_to_clean < (u16*) functionInfo_ID;
+         entry_to_clean++) {
         *entry_to_clean = 0;
     }
 }
 
-void object_curLevel_goToFunc(u16 current_functionInfo[], s16* functionInfo_ID,
-                              s32 function) {
+void object_curLevel_goToFunc(
+    u16 current_functionInfo[], s16* functionInfo_ID, s32 function
+) {
     u16* functionInfo_entry;
     u16* entry_to_clean;
 
     functionInfo_entry = &current_functionInfo[*functionInfo_ID];
     *functionInfo_entry = function;
     for (entry_to_clean = functionInfo_entry + 1;
-         entry_to_clean < (u16*) functionInfo_ID; entry_to_clean++) {
+         entry_to_clean < (u16*) functionInfo_ID;
+         entry_to_clean++) {
         *entry_to_clean = 0;
     }
 }
 
-void object_curLevel_goToFuncInLevel(u16 current_functionInfo[],
-                                     s16* functionInfo_ID, s16 level,
-                                     s32 function) {
+void object_curLevel_goToFuncInLevel(
+    u16 current_functionInfo[], s16* functionInfo_ID, s16 level, s32 function
+) {
     u16* functionInfo_entry;
     u16* entry_to_clean;
 
     functionInfo_entry = &current_functionInfo[level];
     *functionInfo_entry = function;
     for (entry_to_clean = functionInfo_entry + 1;
-         entry_to_clean < (u16*) functionInfo_ID; entry_to_clean++) {
+         entry_to_clean < (u16*) functionInfo_ID;
+         entry_to_clean++) {
         *entry_to_clean = 0;
     }
 }
 
-void object_prevLevel_goToFunc(u16 current_functionInfo[], s16* functionInfo_ID,
-                               s32 function) {
+void object_prevLevel_goToFunc(
+    u16 current_functionInfo[], s16* functionInfo_ID, s32 function
+) {
     u16* functionInfo_entry;
     u16* entry_to_clean;
 
@@ -250,14 +270,16 @@ void object_prevLevel_goToFunc(u16 current_functionInfo[], s16* functionInfo_ID,
         functionInfo_entry--;
         *functionInfo_entry = function;
         for (entry_to_clean = functionInfo_entry + 1;
-             entry_to_clean < (u16*) functionInfo_ID; entry_to_clean++) {
+             entry_to_clean < (u16*) functionInfo_ID;
+             entry_to_clean++) {
             *entry_to_clean = 0;
         }
     }
 }
 
-void object_nextLevel_goToFunc(u16 current_functionInfo[], s16* functionInfo_ID,
-                               s32 function) {
+void object_nextLevel_goToFunc(
+    u16 current_functionInfo[], s16* functionInfo_ID, s32 function
+) {
     u16* functionInfo_entry;
     u16* entry_to_clean;
 

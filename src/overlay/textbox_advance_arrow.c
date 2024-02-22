@@ -13,8 +13,10 @@
 #include "objects/menu/textboxAdvanceArrow.h"
 
 void (*cv64_ovl_textboxadvancearrow_funcs[])(textboxAdvanceArrow* self) = {
-    textboxAdvanceArrow_init, textboxAdvanceArrow_loop,
-    textboxAdvanceArrow_destroy};
+    textboxAdvanceArrow_init,
+    textboxAdvanceArrow_loop,
+    textboxAdvanceArrow_destroy
+};
 
 void textboxAdvanceArrow_entrypoint(textboxAdvanceArrow* self) {
     ENTER(self, cv64_ovl_textboxadvancearrow_funcs);
@@ -49,8 +51,9 @@ void textboxAdvanceArrow_init(textboxAdvanceArrow* self) {
     model->position.y = -90.0f;
     self->disable_arrow = FALSE;
     self->fade_timer = 0;
-    (*object_curLevel_goToNextFuncAndClearTimer)(self->header.current_function,
-                                                 &self->header.functionInfo_ID);
+    (*object_curLevel_goToNextFuncAndClearTimer)(
+        self->header.current_function, &self->header.functionInfo_ID
+    );
 }
 
 void textboxAdvanceArrow_loop(textboxAdvanceArrow* self) {
@@ -75,7 +78,8 @@ void textboxAdvanceArrow_loop(textboxAdvanceArrow* self) {
     }
     if (self->disable_arrow) {
         (*object_curLevel_goToNextFuncAndClearTimer)(
-            self->header.current_function, &self->header.functionInfo_ID);
+            self->header.current_function, &self->header.functionInfo_ID
+        );
     }
 }
 

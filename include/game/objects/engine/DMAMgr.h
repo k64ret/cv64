@@ -48,7 +48,8 @@ typedef struct {
 } DMAMgr;
 
 extern DMAMgr* ptr_DMAMgr;
-extern void* DMAMgr_loadNisitenmaIchigoFile(DMAMgr* this, s32 file_ID,
-                                            u32 dest_start, void* param_4);
+extern void* DMAMgr_loadNisitenmaIchigoFile(
+    DMAMgr* this, s32 file_ID, u32 dest_start, void* param_4
+);
 
 #endif

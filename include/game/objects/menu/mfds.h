@@ -157,25 +157,35 @@ typedef struct {
     mfds_state* state;
 } obj_mfds;
 
-extern mfds_state* textbox_create(void* parent_object, camera* display_camera,
-                                  u32 flags);
-extern void textbox_setDimensions(mfds_state* self, s8 height, s16 width,
-                                  u8 param_4, u8 character_spacing);
+extern mfds_state*
+textbox_create(void* parent_object, camera* display_camera, u32 flags);
+extern void textbox_setDimensions(
+    mfds_state* self, s8 height, s16 width, u8 param_4, u8 character_spacing
+);
 extern void textbox_setPos(mfds_state* self, u16 x, u16 y, s32 unused);
-extern void textbox_setMessagePtr(mfds_state* self, u16* text,
-                                  u16* item_amount_number_text, s16 number);
-extern void textbox_enableLens(mfds_state* self, u32 window_work_flags,
-                               f32 window_closing_speed);
+extern void textbox_setMessagePtr(
+    mfds_state* self, u16* text, u16* item_amount_number_text, s16 number
+);
+extern void textbox_enableLens(
+    mfds_state* self, u32 window_work_flags, f32 window_closing_speed
+);
 extern u16* text_getMessageFromPool(u16* message_pool_base_ptr, s32 id);
-extern void textbox_setScaleAndSomethingElse(mfds_state* self, u8 param_2,
-                                             u8 param_3, f32 position_Z,
-                                             f32 scale_X, f32 scale_Y,
-                                             u8 param_7, u8 param_8);
+extern void textbox_setScaleAndSomethingElse(
+    mfds_state* self,
+    u8 param_2,
+    u8 param_3,
+    f32 position_Z,
+    f32 scale_X,
+    f32 scale_Y,
+    u8 param_7,
+    u8 param_8
+);
 extern void text_convertIntNumberToText(u32, u16*, u8, u32);
 extern u16* text_findCharInString(u16* text, u16 char_to_find);
 extern mfds_color_anim_data text_color_anim_data_table[4][8];
 extern u16* convertUTF16ToCustomTextFormat(u16* text_buffer);
-extern void textbox_setHeightAndWidth(mfds_state* self, u32 index,
-                                      u8 text_height, u8 text_width);
+extern void textbox_setHeightAndWidth(
+    mfds_state* self, u32 index, u8 text_height, u8 text_width
+);
 
 #endif

@@ -144,19 +144,21 @@ void vec3f_80011808(vec3f* dest, vec3f* src1, vec3f* src2) {
     vec3f temp;
 
     vec3f_multiplyScalar(
-        &temp, src2,
-        (vec3f_dotProduct(src1, src2) / vec3f_dotProduct(src2, src2)) * 2);
+        &temp,
+        src2,
+        (vec3f_dotProduct(src1, src2) / vec3f_dotProduct(src2, src2)) * 2
+    );
     vec3f_substract(dest, src1, &temp);
 }
 
 // https://decomp.me/scratch/jpCsM
 void func_80011880(vec3f* dest, vec3f* src, Matrix44F* mtx) {
     f32 temp_fa0 = ((mtx[0][0][0] * src->x) + (mtx[0][1][0] * src->y)) +
-                   (mtx[0][2][0] * src->z) + mtx[0][3][0];
+        (mtx[0][2][0] * src->z) + mtx[0][3][0];
     f32 temp_fa1 = ((mtx[0][0][1] * src->x) + (mtx[0][1][1] * src->y)) +
-                   (mtx[0][2][1] * src->z) + mtx[0][3][1];
+        (mtx[0][2][1] * src->z) + mtx[0][3][1];
     f32 temp_fv1 = ((mtx[0][0][2] * src->x) + (mtx[0][1][2] * src->y)) +
-                   (mtx[0][2][2] * src->z) + mtx[0][3][2];
+        (mtx[0][2][2] * src->z) + mtx[0][3][2];
 
     dest->x = temp_fa0;
     dest->y = temp_fa1;
@@ -166,17 +168,22 @@ void func_80011880(vec3f* dest, vec3f* src, Matrix44F* mtx) {
 void func_80011914_12514(vec3f* dest, vec3f* src, vec3f* rotation, s32 angle) {
     Matrix44F mtx;
 
-    guAlignF(mtx, ANGLE_FIXED_POINT_TO_DEGREES(angle), rotation->x, rotation->y,
-             rotation->z);
+    guAlignF(
+        mtx,
+        ANGLE_FIXED_POINT_TO_DEGREES(angle),
+        rotation->x,
+        rotation->y,
+        rotation->z
+    );
     func_80011880(dest, src, mtx);
 }
 
 void func_80011984_12584(vec3f* arg0, vec3f* arg1, vec3f* arg2) {
     vec3f sp24;
 
-    vec3f_multiplyScalar(&sp24, arg2,
-                         vec3f_dotProduct(arg1, arg2) /
-                             vec3f_dotProduct(arg2, arg2));
+    vec3f_multiplyScalar(
+        &sp24, arg2, vec3f_dotProduct(arg1, arg2) / vec3f_dotProduct(arg2, arg2)
+    );
     vec3f_substract(arg0, arg1, &sp24);
 }
 

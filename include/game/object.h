@@ -70,66 +70,84 @@ void object_free(cv64_object_t* self);
 void clearAllObjects();
 cv64_object_hdr_t* object_allocate(cv64_object_id_t ID);
 void updateObjectListFreeSlot();
-cv64_object_hdr_t* object_create(cv64_object_hdr_t* parent,
-                                 cv64_object_id_t ID);
-cv64_object_hdr_t* object_createAndSetChild(cv64_object_hdr_t* parent,
-                                            cv64_object_id_t ID);
-cv64_object_t* object_findFirstObjectByID(cv64_object_id_t ID,
-                                          cv64_object_t* current_object);
+cv64_object_hdr_t*
+object_create(cv64_object_hdr_t* parent, cv64_object_id_t ID);
+cv64_object_hdr_t*
+object_createAndSetChild(cv64_object_hdr_t* parent, cv64_object_id_t ID);
+cv64_object_t*
+object_findFirstObjectByID(cv64_object_id_t ID, cv64_object_t* current_object);
 cv64_object_t* objectList_findFirstObjectByID(s32 ID);
-cv64_object_t* object_findObjectBetweenIDRange(s32 min_ID, s32 max_ID,
-                                               cv64_object_t* current_object);
+cv64_object_t* object_findObjectBetweenIDRange(
+    s32 min_ID, s32 max_ID, cv64_object_t* current_object
+);
 cv64_object_t* objectList_findObjectBetweenRange(s32 min_ID, s32 max_ID);
-cv64_object_t* object_findObjectByIDAndType(s32 ID,
-                                            cv64_object_t* current_object);
+cv64_object_t*
+object_findObjectByIDAndType(s32 ID, cv64_object_t* current_object);
 cv64_object_t* objectList_findObjectByIDAndType(s32 ID);
 cv64_object_t* func_8000211C_2D1C(s32 ID);
-void* object_allocEntryInList(cv64_object_t* self, s32 heap_kind, u32 size,
-                              s32 alloc_data_index);
-void* object_allocEntryInListAndClear(cv64_object_t* self, s32 heap_kind,
-                                      u32 size, s32 alloc_data_index);
-void* func_80002264_2E64(cv64_object_t* self, u32 size, s32 heap_kind,
-                         s32 alloc_data_index);
+void* object_allocEntryInList(
+    cv64_object_t* self, s32 heap_kind, u32 size, s32 alloc_data_index
+);
+void* object_allocEntryInListAndClear(
+    cv64_object_t* self, s32 heap_kind, u32 size, s32 alloc_data_index
+);
+void* func_80002264_2E64(
+    cv64_object_t* self, u32 size, s32 heap_kind, s32 alloc_data_index
+);
 void func_800022BC_2EBC(cv64_object_t* self, s32 alloc_data_index);
 void object_executeChildObject(cv64_object_hdr_t* self);
 void object_execute(cv64_object_hdr_t* self);
 void func_800026D8_32D8(cv64_object_hdr_t* self);
 void object_destroyChildrenAndModelInfo(cv64_object_hdr_t* self);
-void object_curLevel_goToFunc(u16 current_functionInfo[], s16* functionInfo_ID,
-                              s32 function);
-void object_curLevel_goToNextFunc(u16 current_functionInfo[],
-                                  s16* functionInfo_ID);
-void object_prevLevel_goToNextFunc(u16 current_functionInfo[],
-                                   s16* functionInfo_ID);
-void object_nextLevel_goToNextFunc(u16 current_functionInfo[],
-                                   s16* functionInfo_ID);
+void object_curLevel_goToFunc(
+    u16 current_functionInfo[], s16* functionInfo_ID, s32 function
+);
+void object_curLevel_goToNextFunc(
+    u16 current_functionInfo[], s16* functionInfo_ID
+);
+void object_prevLevel_goToNextFunc(
+    u16 current_functionInfo[], s16* functionInfo_ID
+);
+void object_nextLevel_goToNextFunc(
+    u16 current_functionInfo[], s16* functionInfo_ID
+);
 void object_curLevel_goToNextFuncAndClearTimer(
-    cv64_object_func_inf_t current_functionInfo[], s16* functionInfo_ID);
-void object_curLevel_goToPrevFunc(cv64_object_func_inf_t current_functionInfo[],
-                                  s16* functionInfo_ID);
-void object_prevLevel_goToPrevFunc(u16 current_functionInfo[],
-                                   s16* functionInfo_ID);
-void object_nextLevel_goToPrevFunc(u16 current_functionInfo[],
-                                   s16* functionInfo_ID);
-void object_curLevel_goToPrevFuncAndClearTimer(u16 current_functionInfo[],
-                                               s16* functionInfo_ID);
-void object_curLevel_goToFunc(u16 current_functionInfo[], s16* functionInfo_ID,
-                              s32 function);
-void object_curLevel_goToFuncInLevel(u16 current_functionInfo[],
-                                     s16* functionInfo_ID, s16 level,
-                                     s32 function);
-void object_prevLevel_goToFunc(u16 current_functionInfo[], s16* functionInfo_ID,
-                               s32 function);
-void object_nextLevel_goToFunc(u16 current_functionInfo[], s16* functionInfo_ID,
-                               s32 function);
+    cv64_object_func_inf_t current_functionInfo[], s16* functionInfo_ID
+);
+void object_curLevel_goToPrevFunc(
+    cv64_object_func_inf_t current_functionInfo[], s16* functionInfo_ID
+);
+void object_prevLevel_goToPrevFunc(
+    u16 current_functionInfo[], s16* functionInfo_ID
+);
+void object_nextLevel_goToPrevFunc(
+    u16 current_functionInfo[], s16* functionInfo_ID
+);
+void object_curLevel_goToPrevFuncAndClearTimer(
+    u16 current_functionInfo[], s16* functionInfo_ID
+);
+void object_curLevel_goToFunc(
+    u16 current_functionInfo[], s16* functionInfo_ID, s32 function
+);
+void object_curLevel_goToFuncInLevel(
+    u16 current_functionInfo[], s16* functionInfo_ID, s16 level, s32 function
+);
+void object_prevLevel_goToFunc(
+    u16 current_functionInfo[], s16* functionInfo_ID, s32 function
+);
+void object_nextLevel_goToFunc(
+    u16 current_functionInfo[], s16* functionInfo_ID, s32 function
+);
 extern void func_8000E860(cv64_object_hdr_t* self);
 void func_80002570_3170(cv64_object_hdr_t* self);
 extern void mapOverlay(cv64_object_hdr_t* self);
 extern void unmapOverlay();
-void* allocStructInObjectEntryList(const char* name, cv64_object_t* object,
-                                   u32 size, s32 alloc_data_index);
-void* func_8013B454_BE644(const char* name, cv64_object_t* object, u32 size,
-                          s32 alloc_data_index);
+void* allocStructInObjectEntryList(
+    const char* name, cv64_object_t* object, u32 size, s32 alloc_data_index
+);
+void* func_8013B454_BE644(
+    const char* name, cv64_object_t* object, u32 size, s32 alloc_data_index
+);
 
 extern cv64_object_t objects_array[OBJECT_ARRAY_MAX];
 extern u16 objects_number_of_instances_per_object[OBJECT_NUM_MAX];
@@ -148,19 +166,28 @@ extern cv64_object_t* object_list_free_slot;
     self->header.functionInfo_ID--;
 
 // cv64_object_func_inf_t* curFunc;
-#define GO_TO_FUNC(self, functions_array, curFunc, object_curLevel_goToFunc,   \
-                   function_array_ID)                                          \
-    (*object_curLevel_goToFunc)(self->header.current_function,                 \
-                                &self->header.functionInfo_ID,                 \
-                                function_array_ID);                            \
+#define GO_TO_FUNC(                                                            \
+    self,                                                                      \
+    functions_array,                                                           \
+    curFunc,                                                                   \
+    object_curLevel_goToFunc,                                                  \
+    function_array_ID                                                          \
+)                                                                              \
+    (*object_curLevel_goToFunc)(                                               \
+        self->header.current_function,                                         \
+        &self->header.functionInfo_ID,                                         \
+        function_array_ID                                                      \
+    );                                                                         \
     curFunc = &self->header.current_function[self->header.functionInfo_ID];    \
     curFunc->timer++, functions_array[curFunc->function](self);
 
 // cv64_object_func_inf_t* curFunc;
-#define GO_TO_NEXT_FUNC(self, functions_array, curFunc,                        \
-                        object_curLevel_goToNextFuncAndClearTimer)             \
+#define GO_TO_NEXT_FUNC(                                                       \
+    self, functions_array, curFunc, object_curLevel_goToNextFuncAndClearTimer  \
+)                                                                              \
     (*object_curLevel_goToNextFuncAndClearTimer)(                              \
-        self->header.current_function, &self->header.functionInfo_ID);         \
+        self->header.current_function, &self->header.functionInfo_ID           \
+    );                                                                         \
     curFunc = &self->header.current_function[self->header.functionInfo_ID];    \
     curFunc->timer++, functions_array[curFunc->function](self);
 

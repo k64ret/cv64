@@ -40,8 +40,14 @@ typedef struct {
     struct_78* field_0x40;
 } window_work;
 
-extern void windowWork_setParams(window_work* window_work, u32 flags,
-                                 u8 param_3, u8 param_4, f32 distortion_size,
-                                 f32 param_6, void* param_7);
+extern void windowWork_setParams(
+    window_work* window_work,
+    u32 flags,
+    u8 param_3,
+    u8 param_4,
+    f32 distortion_size,
+    f32 param_6,
+    void* param_7
+);
 
 #endif
