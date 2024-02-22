@@ -299,8 +299,10 @@ void stageSelect_warpToStage(stageSelect* self) {
                 break;
 
             case VS_DEATH:
-                // Comma needed for matching
-                sys.map_ID = TURO_TOKEITOU, sys.map_entrance_ID = 1;
+                // clang-format off
+                sys.map_ID = TURO_TOKEITOU, // Comma needed for matching
+                sys.map_entrance_ID = 1;
+                // clang-format on
                 sys.map_fade_out_time = 30;
                 sys.map_fade_in_time = 30;
                 sys.map_fade_in_color.R = 0;
