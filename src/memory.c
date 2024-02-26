@@ -221,7 +221,9 @@ void object_curLevel_goToPrevFuncAndClearTimer(
 
     functionInfo_entry = &current_functionInfo[*functionInfo_ID];
     (*functionInfo_entry)--;
-    (u8)(*functionInfo_entry) = 0;
+    // clang-format off
+    (u8) (*functionInfo_entry) = 0;
+    // clang-format on
     for (entry_to_clean = functionInfo_entry + 1;
          entry_to_clean < (u16*) functionInfo_ID;
          entry_to_clean++) {

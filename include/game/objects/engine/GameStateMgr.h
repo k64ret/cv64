@@ -45,11 +45,12 @@ typedef struct {
     u8 field37_0x31;
     u8 field38_0x32;
     u8 field39_0x33;
-    gameState_info current_game_state_info;
+    s32 current_game_state_slots[NUM_GSS_SLOTS];
 } GameStateMgr;
 
 void GameStateMgr_execute(GameStateMgr* self);
 void GameStateMgr_destroy(GameStateMgr* self);
+void gamestate_init(GameStateMgr* self);
 extern void GameStateMgr_createGameStateObjects(GameStateMgr* self);
 extern void
 GameStateMgr_executeGameStateObjects(GameStateMgr* self, u32 execution_flags);
