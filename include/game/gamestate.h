@@ -26,7 +26,7 @@ typedef enum cv64_gamestate_id {
 
 #define NUM_GSS_SLOTS 16
 #define GSS_SLOT(flags, function_or_objID)                                     \
-    ((flags << 24) | (s32) function_or_objID)
+    (((flags) << 24) | (s32) function_or_objID)
 
 typedef struct {
     // Max delay before most of the code can be executed. Used for framerate

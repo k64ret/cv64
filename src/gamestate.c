@@ -11,6 +11,7 @@
 #include "system_work.h"
 
 // clang-format off
+
 // NOTE: The constants starting with 0x80XXXXXX are
 //       function addresses. Since those are unknown
 //       at compile time, the compiler will error out
@@ -21,9 +22,9 @@ gameState_settings_struct gameState_settings[NUM_GAMESTATES] = {
         0,
         gamestate_init,
         {
-            GSS_SLOT(0x20, 0x8000C6D0),            GSS_SLOT(0x20, 0x80000694),            GSS_SLOT(0x20, ENGINE_OBJ_002),            GSS_SLOT(0x07, ENGINE_KONAMI_KCEK_LOGOS_CREATOR),
-            GSS_SLOT(0x20, CAMERA_OBJ_06D),        GSS_SLOT(0x20, CAMERA_CAMERAMGR),      GSS_SLOT(0x20, 0x80012400),                GSS_SLOT(0x20, 0x8000C740),
-            GSS_SLOT(0x20, 0x80005658),            GSS_SLOT(0x20, 0x8000072C),            GSS_SLOT(0x20, ENGINE_OBJ_003),            GSS_SLOT(0x20, ENGINE_DMAMGR),
+            GSS_SLOT(0x20, 0x8000C6D0),     GSS_SLOT(0x20, 0x80000694),       GSS_SLOT(0x20, ENGINE_OBJ_002), GSS_SLOT(0x07, ENGINE_KONAMI_KCEK_LOGOS_CREATOR),
+            GSS_SLOT(0x20, CAMERA_OBJ_06D), GSS_SLOT(0x20, CAMERA_CAMERAMGR), GSS_SLOT(0x20, 0x80012400),     GSS_SLOT(0x20, 0x8000C740),
+            GSS_SLOT(0x20, 0x80005658),     GSS_SLOT(0x20, 0x8000072C),       GSS_SLOT(0x20, ENGINE_OBJ_003), GSS_SLOT(0x20, ENGINE_DMAMGR),
             0, 0, 0, 0
         }
     },
@@ -32,10 +33,10 @@ gameState_settings_struct gameState_settings[NUM_GAMESTATES] = {
         1,
         gamestate_init,
         {
-            GSS_SLOT(0x20, 0x8000C6D0),                GSS_SLOT(0x20, 0x80000694),                    GSS_SLOT(0x20, ENGINE_OBJ_002),                 GSS_SLOT(0x40, 0x80018E74),
-            GSS_SLOT(0x07, ENGINE_GAMEPLAYMGR),        GSS_SLOT(0x20, CAMERA_OBJ_06D),                GSS_SLOT(0x20, CAMERA_CAMERAMGR),               GSS_SLOT(0x20, 0x80012400),
-            GSS_SLOT(0x20, 0x8000C740),                GSS_SLOT(0x07, 0x80040AA0),                    GSS_SLOT(0x20, 0x80005658),                     GSS_SLOT(0x20, 0x8000072C),
-            GSS_SLOT(0x20, ENGINE_OBJ_003),            GSS_SLOT(0x40, ENGINE_DMAMGR), 0, 0
+            GSS_SLOT(0x20, 0x8000C6D0),         GSS_SLOT(0x20, 0x80000694),     GSS_SLOT(0x20, ENGINE_OBJ_002),   GSS_SLOT(0x40, 0x80018E74),
+            GSS_SLOT(0x07, ENGINE_GAMEPLAYMGR), GSS_SLOT(0x20, CAMERA_OBJ_06D), GSS_SLOT(0x20, CAMERA_CAMERAMGR), GSS_SLOT(0x20, 0x80012400),
+            GSS_SLOT(0x20, 0x8000C740),         GSS_SLOT(0x07, 0x80040AA0),     GSS_SLOT(0x20, 0x80005658),       GSS_SLOT(0x20, 0x8000072C),
+            GSS_SLOT(0x20, ENGINE_OBJ_003),     GSS_SLOT(0x40, ENGINE_DMAMGR), 0, 0
         }
     },
     // GAMESTATE_GAME_OVER
@@ -43,9 +44,9 @@ gameState_settings_struct gameState_settings[NUM_GAMESTATES] = {
         1,
         gamestate_init,
         {
-            GSS_SLOT(0x20, 0x8000C6D0),            GSS_SLOT(0x20, 0x80000694),            GSS_SLOT(0x20, ENGINE_OBJ_002),            GSS_SLOT(0x07, ENGINE_GAME_OVER_CREATOR),
-            GSS_SLOT(0x20, CAMERA_OBJ_06D),        GSS_SLOT(0x20, CAMERA_CAMERAMGR),      GSS_SLOT(0x20, 0x80012400),                GSS_SLOT(0x20, 0x8000C740),
-            GSS_SLOT(0x20, 0x80005658),            GSS_SLOT(0x20, 0x8000072C),            GSS_SLOT(0x20, ENGINE_OBJ_003),            GSS_SLOT(0x40, ENGINE_DMAMGR),
+            GSS_SLOT(0x20, 0x8000C6D0),     GSS_SLOT(0x20, 0x80000694),       GSS_SLOT(0x20, ENGINE_OBJ_002), GSS_SLOT(0x07, ENGINE_GAME_OVER_CREATOR),
+            GSS_SLOT(0x20, CAMERA_OBJ_06D), GSS_SLOT(0x20, CAMERA_CAMERAMGR), GSS_SLOT(0x20, 0x80012400),     GSS_SLOT(0x20, 0x8000C740),
+            GSS_SLOT(0x20, 0x80005658),     GSS_SLOT(0x20, 0x8000072C),       GSS_SLOT(0x20, ENGINE_OBJ_003), GSS_SLOT(0x40, ENGINE_DMAMGR),
             0, 0, 0, 0
         }
     },
@@ -54,9 +55,9 @@ gameState_settings_struct gameState_settings[NUM_GAMESTATES] = {
         1,
         gamestate_init,
         {
-            GSS_SLOT(0x20, 0x8000C6D0),            GSS_SLOT(0x20, 0x80000694),            GSS_SLOT(0x20, ENGINE_OBJ_002),            GSS_SLOT(0x07, MENU_STAGE_SELECT),
-            GSS_SLOT(0x20, CAMERA_OBJ_06D),        GSS_SLOT(0x20, CAMERA_CAMERAMGR),      GSS_SLOT(0x20, 0x80012400),                GSS_SLOT(0x20, 0x8000C740),
-            GSS_SLOT(0x20, 0x80005658),            GSS_SLOT(0x20, 0x8000072C),            GSS_SLOT(0x40, ENGINE_OBJ_003),            GSS_SLOT(0x40, ENGINE_DMAMGR),
+            GSS_SLOT(0x20, 0x8000C6D0),     GSS_SLOT(0x20, 0x80000694),       GSS_SLOT(0x20, ENGINE_OBJ_002), GSS_SLOT(0x07, MENU_STAGE_SELECT),
+            GSS_SLOT(0x20, CAMERA_OBJ_06D), GSS_SLOT(0x20, CAMERA_CAMERAMGR), GSS_SLOT(0x20, 0x80012400),     GSS_SLOT(0x20, 0x8000C740),
+            GSS_SLOT(0x20, 0x80005658),     GSS_SLOT(0x20, 0x8000072C),       GSS_SLOT(0x40, ENGINE_OBJ_003), GSS_SLOT(0x40, ENGINE_DMAMGR),
             0, 0, 0, 0
         }
     },
@@ -65,9 +66,9 @@ gameState_settings_struct gameState_settings[NUM_GAMESTATES] = {
         1,
         gamestate_init,
         {
-            GSS_SLOT(0x20, 0x8000C6D0),            GSS_SLOT(0x20, 0x80000694),            GSS_SLOT(0x20, ENGINE_OBJ_002),            GSS_SLOT(0x07, ENGINE_OPENING_CREATOR),
-            GSS_SLOT(0x20, CAMERA_OBJ_06D),        GSS_SLOT(0x20, CAMERA_CAMERAMGR),      GSS_SLOT(0x20, 0x80012400),                GSS_SLOT(0x20, 0x8000C740),
-            GSS_SLOT(0x20, 0x80005658),            GSS_SLOT(0x20, 0x8000072C),            GSS_SLOT(0x20, ENGINE_OBJ_003),            GSS_SLOT(0x40, ENGINE_DMAMGR),
+            GSS_SLOT(0x20, 0x8000C6D0),     GSS_SLOT(0x20, 0x80000694),       GSS_SLOT(0x20, ENGINE_OBJ_002), GSS_SLOT(0x07, ENGINE_OPENING_CREATOR),
+            GSS_SLOT(0x20, CAMERA_OBJ_06D), GSS_SLOT(0x20, CAMERA_CAMERAMGR), GSS_SLOT(0x20, 0x80012400),     GSS_SLOT(0x20, 0x8000C740),
+            GSS_SLOT(0x20, 0x80005658),     GSS_SLOT(0x20, 0x8000072C),       GSS_SLOT(0x20, ENGINE_OBJ_003), GSS_SLOT(0x40, ENGINE_DMAMGR),
             0, 0, 0, 0
         }
     },
@@ -76,9 +77,9 @@ gameState_settings_struct gameState_settings[NUM_GAMESTATES] = {
         1,
         gamestate_init,
         {
-            GSS_SLOT(0x20, 0x8000C6D0),            GSS_SLOT(0x20, 0x80000694),            GSS_SLOT(0x20, ENGINE_OBJ_002),            GSS_SLOT(0x07, ENGINE_TITLE_SCREEN_CREATOR),
-            GSS_SLOT(0x20, CAMERA_OBJ_06D),        GSS_SLOT(0x20, CAMERA_CAMERAMGR),      GSS_SLOT(0x20, 0x80012400),                GSS_SLOT(0x20, 0x8000C740),
-            GSS_SLOT(0x20, 0x80005658),            GSS_SLOT(0x20, 0x8000072C),            GSS_SLOT(0x20, ENGINE_OBJ_003),            GSS_SLOT(0x40, ENGINE_DMAMGR),
+            GSS_SLOT(0x20, 0x8000C6D0),     GSS_SLOT(0x20, 0x80000694),       GSS_SLOT(0x20, ENGINE_OBJ_002), GSS_SLOT(0x07, ENGINE_TITLE_SCREEN_CREATOR),
+            GSS_SLOT(0x20, CAMERA_OBJ_06D), GSS_SLOT(0x20, CAMERA_CAMERAMGR), GSS_SLOT(0x20, 0x80012400),     GSS_SLOT(0x20, 0x8000C740),
+            GSS_SLOT(0x20, 0x80005658),     GSS_SLOT(0x20, 0x8000072C),       GSS_SLOT(0x20, ENGINE_OBJ_003), GSS_SLOT(0x40, ENGINE_DMAMGR),
             0, 0, 0, 0
         }
     },
@@ -87,9 +88,9 @@ gameState_settings_struct gameState_settings[NUM_GAMESTATES] = {
         1,
         gamestate_init,
         {
-            GSS_SLOT(0x20, 0x8000C6D0),            GSS_SLOT(0x20, 0x80000694),            GSS_SLOT(0x20, ENGINE_OBJ_002),            GSS_SLOT(0x07, ENGINE_FILE_SELECT_CREATOR),
-            GSS_SLOT(0x20, CAMERA_OBJ_06D),        GSS_SLOT(0x20, CAMERA_CAMERAMGR),      GSS_SLOT(0x20, 0x80012400),                GSS_SLOT(0x20, 0x8000C740),
-            GSS_SLOT(0x20, 0x80005658),            GSS_SLOT(0x20, 0x8000072C),            GSS_SLOT(0x20, ENGINE_OBJ_003),            GSS_SLOT(0x40, ENGINE_DMAMGR),
+            GSS_SLOT(0x20, 0x8000C6D0),     GSS_SLOT(0x20, 0x80000694),       GSS_SLOT(0x20, ENGINE_OBJ_002), GSS_SLOT(0x07, ENGINE_FILE_SELECT_CREATOR),
+            GSS_SLOT(0x20, CAMERA_OBJ_06D), GSS_SLOT(0x20, CAMERA_CAMERAMGR), GSS_SLOT(0x20, 0x80012400),     GSS_SLOT(0x20, 0x8000C740),
+            GSS_SLOT(0x20, 0x80005658),     GSS_SLOT(0x20, 0x8000072C),       GSS_SLOT(0x20, ENGINE_OBJ_003), GSS_SLOT(0x40, ENGINE_DMAMGR),
             0, 0, 0, 0
         }
     },
@@ -98,9 +99,9 @@ gameState_settings_struct gameState_settings[NUM_GAMESTATES] = {
         1,
         gamestate_init,
         {
-            GSS_SLOT(0x20, 0x8000C6D0),            GSS_SLOT(0x20, 0x80000694),            GSS_SLOT(0x20, ENGINE_OBJ_002),            GSS_SLOT(0x07, ENGINE_OPTIONS_CREATOR),
-            GSS_SLOT(0x20, CAMERA_OBJ_06D),        GSS_SLOT(0x20, CAMERA_CAMERAMGR),      GSS_SLOT(0x20, 0x80012400),                GSS_SLOT(0x20, 0x8000C740),
-            GSS_SLOT(0x20, 0x80005658),            GSS_SLOT(0x20, 0x8000072C),            GSS_SLOT(0x20, ENGINE_OBJ_003),            GSS_SLOT(0x40, ENGINE_DMAMGR),
+            GSS_SLOT(0x20, 0x8000C6D0),     GSS_SLOT(0x20, 0x80000694),       GSS_SLOT(0x20, ENGINE_OBJ_002), GSS_SLOT(0x07, ENGINE_OPTIONS_CREATOR),
+            GSS_SLOT(0x20, CAMERA_OBJ_06D), GSS_SLOT(0x20, CAMERA_CAMERAMGR), GSS_SLOT(0x20, 0x80012400),     GSS_SLOT(0x20, 0x8000C740),
+            GSS_SLOT(0x20, 0x80005658),     GSS_SLOT(0x20, 0x8000072C),       GSS_SLOT(0x20, ENGINE_OBJ_003), GSS_SLOT(0x40, ENGINE_DMAMGR),
             0, 0, 0, 0
         }
     },
@@ -109,10 +110,10 @@ gameState_settings_struct gameState_settings[NUM_GAMESTATES] = {
         1,
         gamestate_init,
         {
-            GSS_SLOT(0x20, 0x8000C6D0),                    GSS_SLOT(0x20, 0x80000694),            GSS_SLOT(0x20, ENGINE_OBJ_002),        GSS_SLOT(0x40, 0x80018E74),
-            GSS_SLOT(0x07, ENGINE_TITLE_DEMO_CREATOR),     GSS_SLOT(0x07, ENGINE_GAMEPLAYMGR),    GSS_SLOT(0x20, CAMERA_OBJ_06D),        GSS_SLOT(0x20, CAMERA_CAMERAMGR),
-            GSS_SLOT(0x20, 0x80012400),                    GSS_SLOT(0x20, 0x8000C740),            GSS_SLOT(0x07, 0x80040AA0),            GSS_SLOT(0x20, 0x80005658),
-            GSS_SLOT(0x20, 0x8000072C),                    GSS_SLOT(0x20, ENGINE_OBJ_003),        GSS_SLOT(0x40, ENGINE_DMAMGR), 0
+            GSS_SLOT(0x20, 0x8000C6D0),                GSS_SLOT(0x20, 0x80000694),         GSS_SLOT(0x20, ENGINE_OBJ_002), GSS_SLOT(0x40, 0x80018E74),
+            GSS_SLOT(0x07, ENGINE_TITLE_DEMO_CREATOR), GSS_SLOT(0x07, ENGINE_GAMEPLAYMGR), GSS_SLOT(0x20, CAMERA_OBJ_06D), GSS_SLOT(0x20, CAMERA_CAMERAMGR),
+            GSS_SLOT(0x20, 0x80012400),                GSS_SLOT(0x20, 0x8000C740),         GSS_SLOT(0x07, 0x80040AA0),     GSS_SLOT(0x20, 0x80005658),
+            GSS_SLOT(0x20, 0x8000072C),                GSS_SLOT(0x20, ENGINE_OBJ_003),     GSS_SLOT(0x40, ENGINE_DMAMGR), 0
         }
     },
     // GAMESTATE_GAMENOTE_DELETE
@@ -120,9 +121,9 @@ gameState_settings_struct gameState_settings[NUM_GAMESTATES] = {
         1,
         gamestate_init,
         {
-            GSS_SLOT(0x20, 0x8000C6D0),            GSS_SLOT(0x20, 0x80000694),            GSS_SLOT(0x20, ENGINE_OBJ_002),            GSS_SLOT(0x07, ENGINE_GAMENOTE_DELETE_MGR_CREATOR),
-            GSS_SLOT(0x20, CAMERA_OBJ_06D),        GSS_SLOT(0x20, CAMERA_CAMERAMGR),      GSS_SLOT(0x20, 0x80012400),                GSS_SLOT(0x20, 0x8000C740),
-            GSS_SLOT(0x20, 0x80005658),            GSS_SLOT(0x20, 0x8000072C),            GSS_SLOT(0x20, ENGINE_OBJ_003),            GSS_SLOT(0x20, ENGINE_DMAMGR),
+            GSS_SLOT(0x20, 0x8000C6D0),     GSS_SLOT(0x20, 0x80000694),       GSS_SLOT(0x20, ENGINE_OBJ_002), GSS_SLOT(0x07, ENGINE_GAMENOTE_DELETE_MGR_CREATOR),
+            GSS_SLOT(0x20, CAMERA_OBJ_06D), GSS_SLOT(0x20, CAMERA_CAMERAMGR), GSS_SLOT(0x20, 0x80012400),     GSS_SLOT(0x20, 0x8000C740),
+            GSS_SLOT(0x20, 0x80005658),     GSS_SLOT(0x20, 0x8000072C),       GSS_SLOT(0x20, ENGINE_OBJ_003), GSS_SLOT(0x20, ENGINE_DMAMGR),
             0, 0, 0, 0
         }
     },
@@ -131,13 +132,14 @@ gameState_settings_struct gameState_settings[NUM_GAMESTATES] = {
         1,
         gamestate_init,
         {
-            GSS_SLOT(0x20, 0x8000C6D0),            GSS_SLOT(0x20, 0x80000694),            GSS_SLOT(0x20, ENGINE_OBJ_002),            GSS_SLOT(0x07, ENGINE_CREDITSMGR_CREATOR),
-            GSS_SLOT(0x20, CAMERA_OBJ_06D),        GSS_SLOT(0x20, CAMERA_CAMERAMGR),      GSS_SLOT(0x20, 0x80012400),                GSS_SLOT(0x20, 0x8000C740),
-            GSS_SLOT(0x20, 0x80005658),            GSS_SLOT(0x20, 0x8000072C),            GSS_SLOT(0x20, ENGINE_OBJ_003),            GSS_SLOT(0x40, ENGINE_DMAMGR),
+            GSS_SLOT(0x20, 0x8000C6D0),     GSS_SLOT(0x20, 0x80000694),       GSS_SLOT(0x20, ENGINE_OBJ_002), GSS_SLOT(0x07, ENGINE_CREDITSMGR_CREATOR),
+            GSS_SLOT(0x20, CAMERA_OBJ_06D), GSS_SLOT(0x20, CAMERA_CAMERAMGR), GSS_SLOT(0x20, 0x80012400),     GSS_SLOT(0x20, 0x8000C740),
+            GSS_SLOT(0x20, 0x80005658),     GSS_SLOT(0x20, 0x8000072C),       GSS_SLOT(0x20, ENGINE_OBJ_003), GSS_SLOT(0x40, ENGINE_DMAMGR),
             0, 0, 0, 0
         }
     },
 };
+
 // clang-format on
 
 GameStateMgr* ptr_GameStateMgr;
