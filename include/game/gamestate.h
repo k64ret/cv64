@@ -28,6 +28,20 @@ typedef enum cv64_gamestate_id {
 #define GSS_SLOT(flags, function_or_objID)                                     \
     (((flags) << 24) | (s32) function_or_objID)
 
+/*
+    Note: Because we don't know the addresses of functions at compile time,
+    we don't have other choice but to put the addresses of these functions manually
+    in order to match the gamestate slots in `gamestate.c`.
+*/
+#define FUNC_8000C6D0        0x8000C6D0
+#define SETUP_FRAME          0x80000694
+#define UPDATE_GAMEPLAY_TIME 0x80018E74
+#define FUNC_80012400        0x80012400
+#define FUNC_8000C740        0x8000C740
+#define ATARI_WORK_UPDATE    0x80040AA0
+#define FUNC_80005658        0x80005658
+#define END_FRAME            0x8000072C
+
 typedef struct {
     // Max delay before most of the code can be executed. Used for framerate
     // timing. 0 = 60fps, 1 = 30fps. Update rate.
