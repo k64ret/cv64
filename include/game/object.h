@@ -138,7 +138,7 @@ void object_prevLevel_goToFunc(
 void object_nextLevel_goToFunc(
     u16 current_functionInfo[], s16* functionInfo_ID, s32 function
 );
-extern void func_8000E860(cv64_object_hdr_t* self);
+void func_8000E860(cv64_object_hdr_t* self);
 void func_80002570_3170(cv64_object_hdr_t* self);
 extern void mapOverlay(cv64_object_hdr_t* self);
 extern void unmapOverlay();

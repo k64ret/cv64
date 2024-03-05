@@ -52,7 +52,7 @@ void GameStateMgr_execute(GameStateMgr* self);
 void GameStateMgr_destroy(GameStateMgr* self);
 void gamestate_init(GameStateMgr* self);
 extern void GameStateMgr_setupGameState(GameStateMgr* self);
-extern void GameStateMgr_executeGameStateObjectsAndFunctions(
+void GameStateMgr_executeGameStateObjectsAndFunctions(
     GameStateMgr* self, u32 execution_flags
 );
 extern GameStateMgr* ptr_GameStateMgr;
