@@ -1,5 +1,6 @@
 #include "cv64.h"
 #include "game/objects/engine/GameStateMgr.h"
+#include "game/fade.h"
 #include "object.h"
 
 void object_doNothing(cv64_object_t* self) {}
@@ -28,19 +29,54 @@ void object_goToNextFuncIfTimerIsThree(cv64_object_t* self) {
     }
 }
 
+// Turn off clang-format to preserve whitespace for matching
 // clang-format off
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/F460/object_fadeOutNineFramesAndGoToNextFunc.s")
+void object_fadeOutNineFramesAndGoToNextFunc(cv64_object_t* self) {            \
+    (*fade_setSettings)(FADE_OUT, 9, 0, 0, 0);
+    (*object_curLevel_goToNextFuncAndClearTimer)(
+        self->header.current_function, &self->header.functionInfo_ID
+    );
+}
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/F460/object_fadeOutFifteenFramesAndGoToNextFunc.s")
+void object_fadeOutFifteenFramesAndGoToNextFunc(cv64_object_t* self) {         \
+    (*fade_setSettings)(FADE_OUT, 15, 0, 0, 0);
+    (*object_curLevel_goToNextFuncAndClearTimer)(
+        self->header.current_function, &self->header.functionInfo_ID
+    );
+}
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/F460/object_fadeOutTwentyOneFramesAndGoToNextFunc.s")
+void object_fadeOutTwentyOneFramesAndGoToNextFunc(cv64_object_t* self) {       \
+    (*fade_setSettings)(FADE_OUT, 21, 0, 0, 0);
+    (*object_curLevel_goToNextFuncAndClearTimer)(
+        self->header.current_function, &self->header.functionInfo_ID
+    );
+}
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/F460/object_fadeOutThirtyFramesAndGoToNextFunc.s")
+void object_fadeOutThirtyFramesAndGoToNextFunc(cv64_object_t* self) {          \
+    (*fade_setSettings)(FADE_OUT, 30, 0, 0, 0);
+    (*object_curLevel_goToNextFuncAndClearTimer)(
+        self->header.current_function, &self->header.functionInfo_ID
+    );
+}
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/F460/object_fadeOutFortyFiveFramesAndGoToNextFunc.s")
+void object_fadeOutFortyFiveFramesAndGoToNextFunc(cv64_object_t* self) {       \
+    (*fade_setSettings)(FADE_OUT, 45, 0, 0, 0);
+    (*object_curLevel_goToNextFuncAndClearTimer)(
+        self->header.current_function, &self->header.functionInfo_ID
+    );
+}
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/F460/object_fadeOutSixtyFramesAndGoToNextFunc.s")
+void object_fadeOutSixtyFramesAndGoToNextFunc(cv64_object_t* self) {           \
+    (*fade_setSettings)(FADE_OUT, 60, 0, 0, 0);
+    (*object_curLevel_goToNextFuncAndClearTimer)(
+        self->header.current_function, &self->header.functionInfo_ID
+    );
+}
+
+// clang-format on
+
+// clang-format off
 
 #pragma GLOBAL_ASM("../asm/nonmatchings/F460/object_goToNextFuncIfNotFading.s")
 
