@@ -1,7 +1,29 @@
+// src/gamestate.c
+
 gamestate_create = 0x80000460; // type:func
 gamestate_change = 0x80000510; // type:func
-GameStateMgr_createGameStateObjects = 0x8000eb64; // type:func
-GameStateMgr_executeGameStateObjects = 0x8000ecb0; // type:func
+
+// End of src/gamestate.c
+
+// src/F460.c
+
+func_8000E860                                    = 0x8000E860; // type:func
+func_8000E868_F468                               = 0x8000E868; // type:func
+object_goToNextFuncIfTimerIsTwo                  = 0x8000E898; // type:func
+func_8000E8E0_F4E0                               = 0x8000E8E0; // type:func
+func_8000E928_F528                               = 0x8000E928; // type:func
+func_8000E97C_F57C                               = 0x8000E97C; // type:func
+func_8000E9D0_F5D0                               = 0x8000E9D0; // type:func
+func_8000EA24_F624                               = 0x8000EA24; // type:func
+func_8000EA78_F678                               = 0x8000EA78; // type:func
+func_8000EACC_F6CC                               = 0x8000EACC; // type:func
+gameplayMgr_main_checkExitFadeOutCompleted       = 0x8000EB20; // type:func
+GameStateMgr_setupGameState                      = 0x8000EB64; // type:func
+GameStateMgr_executeGameStateObjects             = 0x8000EC24; // type:func
+GameStateMgr_executeGameStateObjectsAndFunctions = 0x8000ECB0; // type:func
+
+// End of src/F460.c
+
 memory_clear = 0x80000770;
 memory_copy = 0x800008d0;
 heap_init = 0x80000c28;
@@ -552,8 +574,6 @@ heap_writebackDCache = 0x80000c94;
 objectList_findObjectByIDAndType = 0x80001bc0;
 getRandomFromGuRandom = 0x80004118;
 animationMgr_updateAnimParams = 0x8000be88;
-Carrie_action_pullLever_init = 0x8000e898;
-gameplayMgr_main_checkExitFadeOutCompleted = 0x8000eb20;
 NisitenmaIchigo_checkAndRemoveLoadedFile = 0x8000f2c4;
 object_0003_calc = 0x8000f308;
 DMAMgr_calc = 0x8000fb98;
@@ -1742,7 +1762,6 @@ file_selection_number_strings = 0x8018129c;
 file_selection_Yes_No_string = 0x8018134c;
 file_selection_arrow_string = 0x80181360;
 file_selection_money_string = 0x801813d4;
-func_8000E860 = 0x8000E860;
 HEAP_MULTIPURPOSE_START = 0x80271060;
 HEAP_MENU_DATA_START = 0x801CC000;
 D_8018CDE0 = 0x8018CDE0;

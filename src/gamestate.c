@@ -181,11 +181,11 @@ void GameStateMgr_entrypoint(GameStateMgr* self) {
         }
         return;
     } else if (self->isCurrentGameStateActive == FALSE) {
-        GameStateMgr_createGameStateObjects(self);
+        GameStateMgr_setupGameState(self);
         gameState_settings[self->current_game_state - 1].init_function(self);
         self->isCurrentGameStateActive++;
     }
-    GameStateMgr_executeGameStateObjects(self, sys.execution_flags);
+    GameStateMgr_executeGameStateObjectsAndFunctions(self, sys.execution_flags);
 }
 
 void gamestate_init(GameStateMgr* self) {
