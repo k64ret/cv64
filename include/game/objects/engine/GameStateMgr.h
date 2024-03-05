@@ -51,9 +51,10 @@ typedef struct {
 void GameStateMgr_execute(GameStateMgr* self);
 void GameStateMgr_destroy(GameStateMgr* self);
 void gamestate_init(GameStateMgr* self);
-extern void GameStateMgr_createGameStateObjects(GameStateMgr* self);
-extern void
-GameStateMgr_executeGameStateObjects(GameStateMgr* self, u32 execution_flags);
+extern void GameStateMgr_setupGameState(GameStateMgr* self);
+void GameStateMgr_executeGameStateCappedFramerate(
+    GameStateMgr* self, u32 execution_flags
+);
 extern GameStateMgr* ptr_GameStateMgr;
 
 #endif

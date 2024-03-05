@@ -371,7 +371,7 @@ cv64_ovl_konamilogo_func_t cv64_ovl_konamilogo_funcs[] = {
     cv64_ovl_konamilogo_kcek_fade_in,  // 4
     cv64_ovl_konamilogo_kcek_wait,     // 5
     cv64_ovl_konamilogo_kcek_fade_out, // 6
-    func_8000E860                  // 7
+    object_doNothing                   // 7
 };
 ```
 

@@ -100,16 +100,18 @@ void object_execute(cv64_object_hdr_t* self);
 void func_800026D8_32D8(cv64_object_hdr_t* self);
 void object_destroyChildrenAndModelInfo(cv64_object_hdr_t* self);
 void object_curLevel_goToFunc(
-    u16 current_functionInfo[], s16* functionInfo_ID, s32 function
+    cv64_object_func_inf_t current_functionInfo[],
+    s16* functionInfo_ID,
+    s32 function
 );
 void object_curLevel_goToNextFunc(
-    u16 current_functionInfo[], s16* functionInfo_ID
+    cv64_object_func_inf_t current_functionInfo[], s16* functionInfo_ID
 );
 void object_prevLevel_goToNextFunc(
-    u16 current_functionInfo[], s16* functionInfo_ID
+    cv64_object_func_inf_t current_functionInfo[], s16* functionInfo_ID
 );
 void object_nextLevel_goToNextFunc(
-    u16 current_functionInfo[], s16* functionInfo_ID
+    cv64_object_func_inf_t current_functionInfo[], s16* functionInfo_ID
 );
 void object_curLevel_goToNextFuncAndClearTimer(
     cv64_object_func_inf_t current_functionInfo[], s16* functionInfo_ID
@@ -118,27 +120,46 @@ void object_curLevel_goToPrevFunc(
     cv64_object_func_inf_t current_functionInfo[], s16* functionInfo_ID
 );
 void object_prevLevel_goToPrevFunc(
-    u16 current_functionInfo[], s16* functionInfo_ID
+    cv64_object_func_inf_t current_functionInfo[], s16* functionInfo_ID
 );
 void object_nextLevel_goToPrevFunc(
-    u16 current_functionInfo[], s16* functionInfo_ID
+    cv64_object_func_inf_t current_functionInfo[], s16* functionInfo_ID
 );
 void object_curLevel_goToPrevFuncAndClearTimer(
-    u16 current_functionInfo[], s16* functionInfo_ID
+    cv64_object_func_inf_t current_functionInfo[], s16* functionInfo_ID
 );
 void object_curLevel_goToFunc(
-    u16 current_functionInfo[], s16* functionInfo_ID, s32 function
+    cv64_object_func_inf_t current_functionInfo[],
+    s16* functionInfo_ID,
+    s32 function
 );
 void object_curLevel_goToFuncInLevel(
-    u16 current_functionInfo[], s16* functionInfo_ID, s16 level, s32 function
+    cv64_object_func_inf_t current_functionInfo[],
+    s16* functionInfo_ID,
+    s16 level,
+    s32 function
 );
 void object_prevLevel_goToFunc(
-    u16 current_functionInfo[], s16* functionInfo_ID, s32 function
+    cv64_object_func_inf_t current_functionInfo[],
+    s16* functionInfo_ID,
+    s32 function
 );
 void object_nextLevel_goToFunc(
-    u16 current_functionInfo[], s16* functionInfo_ID, s32 function
+    cv64_object_func_inf_t current_functionInfo[],
+    s16* functionInfo_ID,
+    s32 function
 );
-extern void func_8000E860(cv64_object_hdr_t* self);
+void object_doNothing(cv64_object_t* self);
+void object_goToNextFuncNoCondition(cv64_object_t* self);
+void object_goToNextFuncIfTimerIsTwo(cv64_object_t* self);
+void object_goToNextFuncIfTimerIsThree(cv64_object_t* self);
+void object_fadeOutNineFramesAndGoToNextFunc(cv64_object_t* self);
+void object_fadeOutFifteenFramesAndGoToNextFunc(cv64_object_t* self);
+void object_fadeOutTwentyOneFramesAndGoToNextFunc(cv64_object_t* self);
+void object_fadeOutThirtyFramesAndGoToNextFunc(cv64_object_t* self);
+void object_fadeOutFortyFiveFramesAndGoToNextFunc(cv64_object_t* self);
+void object_fadeOutSixtyFramesAndGoToNextFunc(cv64_object_t* self);
+void object_goToNextFuncIfNotFading(cv64_object_t* self);
 void func_80002570_3170(cv64_object_hdr_t* self);
 extern void mapOverlay(cv64_object_hdr_t* self);
 extern void unmapOverlay();

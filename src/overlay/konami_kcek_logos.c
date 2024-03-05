@@ -21,7 +21,7 @@ cv64_ovl_konamilogo_func_t cv64_ovl_konamilogo_funcs[] = {
     cv64_ovl_konamilogo_kcek_fade_in,
     cv64_ovl_konamilogo_kcek_wait,
     cv64_ovl_konamilogo_kcek_fade_out,
-    func_8000E860
+    object_doNothing
 };
 
 void cv64_ovl_konamilogo_entrypoint(cv64_ovl_konamilogo_t* self) {
