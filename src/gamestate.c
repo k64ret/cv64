@@ -12,10 +12,6 @@
 
 // clang-format off
 
-// NOTE: The constants starting with 0x80XXXXXX are
-//       function addresses. Since those are unknown
-//       at compile time, the compiler will error out
-//       if we just put the function name in there.
 gameState_settings_struct gameState_settings[NUM_GAMESTATES] = {
     // GAMESTATE_KONAMI_LOGO
     {
