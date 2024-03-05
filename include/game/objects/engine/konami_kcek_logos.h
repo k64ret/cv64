@@ -35,7 +35,7 @@ typedef enum cv64_ovl_konamilogo_func_id {
     KONAMILOGO_KCEK_FADE_IN,
     KONAMILOGO_KCEK_WAIT,
     KONAMILOGO_KCEK_FADE_OUT,
-    FUNC_8000E860
+    OBJECT_DO_NOTHING
 } cv64_ovl_konamilogo_func_id_t;
 
 // These variables need to be extern'd,

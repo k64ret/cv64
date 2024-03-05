@@ -17,7 +17,7 @@ cv64_stage_select_func_t stageSelect_functions[] = {
     stageSelect_initLens,
     stageSelect_moveLens,
     stageSelect_warpToStage,
-    func_8000E860
+    object_doNothing
 };
 
 const char cv64_stage_select_unused_str_1[] = "Model Trans OK!!\n";

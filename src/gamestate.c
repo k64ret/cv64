@@ -185,7 +185,7 @@ void GameStateMgr_entrypoint(GameStateMgr* self) {
         gameState_settings[self->current_game_state - 1].init_function(self);
         self->isCurrentGameStateActive++;
     }
-    GameStateMgr_executeGameStateObjectsAndFunctions(self, sys.execution_flags);
+    GameStateMgr_executeGameStateCappedFramerate(self, sys.execution_flags);
 }
 
 void gamestate_init(GameStateMgr* self) {
