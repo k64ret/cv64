@@ -5,24 +5,24 @@ gamestate_change = 0x80000510; // type:func
 
 // End of src/gamestate.c
 
-// src/F460.c
+// src/object_flow.c
 
-object_doNothing                                    = 0x8000E860; // type:func
-object_goToNextFuncNoCondition                               = 0x8000E868; // type:func
-object_goToNextFuncIfTimerIsTwo                  = 0x8000E898; // type:func
-object_goToNextFuncIfTimerIsThree                               = 0x8000E8E0; // type:func
-object_fadeOutNineFramesAndGoToNextFunc                               = 0x8000E928; // type:func
-object_fadeOutFifteenFramesAndGoToNextFunc                               = 0x8000E97C; // type:func
-object_fadeOutTwentyOneFramesAndGoToNextFunc                               = 0x8000E9D0; // type:func
-object_fadeOutThirtyFramesAndGoToNextFunc                               = 0x8000EA24; // type:func
-object_fadeOutFortyFiveFramesAndGoToNextFunc                               = 0x8000EA78; // type:func
-object_fadeOutSixtyFramesAndGoToNextFunc                               = 0x8000EACC; // type:func
-object_goToNextFuncIfNotFading       = 0x8000EB20; // type:func
-GameStateMgr_setupGameState                      = 0x8000EB64; // type:func
-GameStateMgr_executeGameStateUncappedFramerate             = 0x8000EC24; // type:func
-GameStateMgr_executeGameStateCappedFramerate = 0x8000ECB0; // type:func
+object_doNothing                               = 0x8000E860; // type:func
+object_goToNextFuncNoCondition                 = 0x8000E868; // type:func
+object_goToNextFuncIfTimerIsTwo                = 0x8000E898; // type:func
+object_goToNextFuncIfTimerIsThree              = 0x8000E8E0; // type:func
+object_fadeOutNineFramesAndGoToNextFunc        = 0x8000E928; // type:func
+object_fadeOutFifteenFramesAndGoToNextFunc     = 0x8000E97C; // type:func
+object_fadeOutTwentyOneFramesAndGoToNextFunc   = 0x8000E9D0; // type:func
+object_fadeOutThirtyFramesAndGoToNextFunc      = 0x8000EA24; // type:func
+object_fadeOutFortyFiveFramesAndGoToNextFunc   = 0x8000EA78; // type:func
+object_fadeOutSixtyFramesAndGoToNextFunc       = 0x8000EACC; // type:func
+object_goToNextFuncIfNotFading                 = 0x8000EB20; // type:func
+GameStateMgr_setupGameState                    = 0x8000EB64; // type:func
+GameStateMgr_executeGameStateUncappedFramerate = 0x8000EC24; // type:func
+GameStateMgr_executeGameStateCappedFramerate   = 0x8000ECB0; // type:func
 
-// End of src/F460.c
+// End of src/object_flow.c
 
 memory_clear = 0x80000770;
 memory_copy = 0x800008d0;
