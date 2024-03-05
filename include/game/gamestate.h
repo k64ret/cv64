@@ -29,10 +29,12 @@ typedef enum cv64_gamestate_id {
     (((flags) << 24) | (s32) function_or_objID)
 
 /*
-    Note: Because we don't know the addresses of functions at compile time,
-    we don't have other choice but to put the addresses of these functions manually
-    in order to match the gamestate slots in `gamestate.c`.
-*/
+ * NOTE:
+ *
+ * Since we don't know the addresses of functions at compile time, we have no
+ * recourse but to put the addresses of these functions manually in order to
+ * match the gamestate slots in `gamestate.c`.
+ */
 #define FUNC_8000C6D0        0x8000C6D0
 #define SETUP_FRAME          0x80000694
 #define UPDATE_GAMEPLAY_TIME 0x80018E74
