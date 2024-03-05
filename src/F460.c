@@ -3,82 +3,59 @@
 #include "game/fade.h"
 #include "object.h"
 
+#define LOCAL_GO_TO_NEXT_FUNC(object)                                          \
+    do {                                                                       \
+        (*object_curLevel_goToNextFuncAndClearTimer)(                          \
+            (object)->header.current_function,                                 \
+            &(object)->header.functionInfo_ID                                  \
+        );                                                                     \
+    } while (0)
+
+#define FADE_OUT_AND_GO_TO_NEXT_FUNC(fade_time, object)                        \
+    do {                                                                       \
+        (*fade_setSettings)(FADE_OUT, (s16) (fade_time), 0, 0, 0);             \
+        LOCAL_GO_TO_NEXT_FUNC(object);                                         \
+    } while (0)
+
 void object_doNothing(cv64_object_t* self) {}
 
+// Turn off clang-format to preserve whitespace for matching
 // clang-format off
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/F460/object_goToNextFuncNoCondition.s")
+void object_goToNextFuncNoCondition(cv64_object_t* self) { LOCAL_GO_TO_NEXT_FUNC(self); }
 
 // clang-format on
 
 void object_goToNextFuncIfTimerIsTwo(cv64_object_t* self) {
     if (self->header.current_function[self->header.functionInfo_ID].timer ==
         2) {
-        (*object_curLevel_goToNextFuncAndClearTimer)(
-            self->header.current_function, &self->header.functionInfo_ID
-        );
+        LOCAL_GO_TO_NEXT_FUNC(self);
     }
 }
 
 void object_goToNextFuncIfTimerIsThree(cv64_object_t* self) {
     if (self->header.current_function[self->header.functionInfo_ID].timer ==
         3) {
-        (*object_curLevel_goToNextFuncAndClearTimer)(
-            self->header.current_function, &self->header.functionInfo_ID
-        );
+        LOCAL_GO_TO_NEXT_FUNC(self);
     }
 }
 
 // Turn off clang-format to preserve whitespace for matching
 // clang-format off
 
-void object_fadeOutNineFramesAndGoToNextFunc(cv64_object_t* self) {            \
-    (*fade_setSettings)(FADE_OUT, 9, 0, 0, 0);
-    (*object_curLevel_goToNextFuncAndClearTimer)(
-        self->header.current_function, &self->header.functionInfo_ID
-    );
-}
+void object_fadeOutNineFramesAndGoToNextFunc(cv64_object_t* self) { FADE_OUT_AND_GO_TO_NEXT_FUNC(9, self); }
 
-void object_fadeOutFifteenFramesAndGoToNextFunc(cv64_object_t* self) {         \
-    (*fade_setSettings)(FADE_OUT, 15, 0, 0, 0);
-    (*object_curLevel_goToNextFuncAndClearTimer)(
-        self->header.current_function, &self->header.functionInfo_ID
-    );
-}
+void object_fadeOutFifteenFramesAndGoToNextFunc(cv64_object_t* self) { FADE_OUT_AND_GO_TO_NEXT_FUNC(15, self); }
 
-void object_fadeOutTwentyOneFramesAndGoToNextFunc(cv64_object_t* self) {       \
-    (*fade_setSettings)(FADE_OUT, 21, 0, 0, 0);
-    (*object_curLevel_goToNextFuncAndClearTimer)(
-        self->header.current_function, &self->header.functionInfo_ID
-    );
-}
+void object_fadeOutTwentyOneFramesAndGoToNextFunc(cv64_object_t* self) { FADE_OUT_AND_GO_TO_NEXT_FUNC(21, self); }
 
-void object_fadeOutThirtyFramesAndGoToNextFunc(cv64_object_t* self) {          \
-    (*fade_setSettings)(FADE_OUT, 30, 0, 0, 0);
-    (*object_curLevel_goToNextFuncAndClearTimer)(
-        self->header.current_function, &self->header.functionInfo_ID
-    );
-}
+void object_fadeOutThirtyFramesAndGoToNextFunc(cv64_object_t* self) { FADE_OUT_AND_GO_TO_NEXT_FUNC(30, self); }
 
-void object_fadeOutFortyFiveFramesAndGoToNextFunc(cv64_object_t* self) {       \
-    (*fade_setSettings)(FADE_OUT, 45, 0, 0, 0);
-    (*object_curLevel_goToNextFuncAndClearTimer)(
-        self->header.current_function, &self->header.functionInfo_ID
-    );
-}
+void object_fadeOutFortyFiveFramesAndGoToNextFunc(cv64_object_t* self) { FADE_OUT_AND_GO_TO_NEXT_FUNC(45, self); }
 
-void object_fadeOutSixtyFramesAndGoToNextFunc(cv64_object_t* self) {           \
-    (*fade_setSettings)(FADE_OUT, 60, 0, 0, 0);
-    (*object_curLevel_goToNextFuncAndClearTimer)(
-        self->header.current_function, &self->header.functionInfo_ID
-    );
-}
+void object_fadeOutSixtyFramesAndGoToNextFunc(cv64_object_t* self) { FADE_OUT_AND_GO_TO_NEXT_FUNC(60, self); }
 
-// clang-format on
-
-// clang-format off
-
-#pragma GLOBAL_ASM("../asm/nonmatchings/F460/object_goToNextFuncIfNotFading.s")
+void object_goToNextFuncIfNotFading(cv64_object_t* self) { if ((*fade_isFading)()) return; LOCAL_GO_TO_NEXT_FUNC(self); }
 
 // clang-format on
 
