@@ -48,6 +48,7 @@ typedef struct {
 } figure; // Size = 0xA8
 
 extern figHeader* fig_allocate(s16 type);
+extern void clearAllFigs();
 
 extern figure figures_array[FIG_ARRAY_MAX];
 

@@ -306,7 +306,7 @@ segments:
       - [0x00090820, asm]
       - [0x000908D0, bin] # RSP microcode
       - [0x00090920, data]
-      - [0x00092B50, data, gamestate]
+      - [0x00092B50, .data, gamestate]
       - [0x00092E70, data, object]
       - [0x00093F70, .data, fade]
       - [0x00094030, data]

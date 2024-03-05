@@ -15,6 +15,11 @@ extern void end_master_display_list();
 extern s32
 menuButton_selectNextOption(s32* option, s16* param_2, s16 number_of_options);
 extern u32 NisitenmaIchigo_checkAndStoreLoadedFile(u32 file_ID);
+extern void func_800010A0_1CA0();
+extern void func_8001248C_1308C();
+extern void func_8000C6D0();
+extern void func_80012400();
+extern void func_80005658();
 
 #define NPTR             0
 #define ARRAY_COUNT(arr) (s32)(sizeof(arr) / sizeof(arr[0]))
