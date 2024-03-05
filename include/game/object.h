@@ -140,6 +140,7 @@ void object_nextLevel_goToFunc(
 );
 void func_8000E860(cv64_object_hdr_t* self);
 void object_goToNextFuncIfTimerIsTwo(cv64_object_t* self);
+void func_8000E8E0_F4E0(cv64_object_t* self);
 void func_80002570_3170(cv64_object_hdr_t* self);
 extern void mapOverlay(cv64_object_hdr_t* self);
 extern void unmapOverlay();

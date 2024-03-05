@@ -19,9 +19,16 @@ void object_goToNextFuncIfTimerIsTwo(cv64_object_t* self) {
     }
 }
 
-// clang-format off
+void func_8000E8E0_F4E0(cv64_object_t* self) {
+    if (self->header.current_function[self->header.functionInfo_ID].timer ==
+        3) {
+        (*object_curLevel_goToNextFuncAndClearTimer)(
+            self->header.current_function, &self->header.functionInfo_ID
+        );
+    }
+}
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/F460/func_8000E8E0_F4E0.s")
+// clang-format off
 
 #pragma GLOBAL_ASM("../asm/nonmatchings/F460/func_8000E928_F528.s")
 
