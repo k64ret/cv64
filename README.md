@@ -131,7 +131,7 @@ python3 ./tools/m2ctx.py <your_C_file>
 ```
 
 > [!TIP]
-> Or run `mise run ctx <your_C_file>` if you are already using [mise][mise]
+> Or run `mise run ctx -- <your_C_file>` if you are already using [mise][mise]
 
 [mise]: https://github.com/jdx/mise
 [research-spreadsheets]: https://docs.google.com/spreadsheets/d/1nzh_nFf26oVZy6uWeNYiYGXAto6Yz3xypZwWqwJBBJQ/edit#gid=74717405
