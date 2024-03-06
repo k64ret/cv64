@@ -2,7 +2,10 @@
 #include "object.h"
 #include "system_work.h"
 #include "cutscene_ID.h"
+#include "fade.h"
 #include "objects/player/player.h"
+
+extern void camera_setClippingAndScissoring(s16);
 
 typedef struct {
     cv64_object_hdr_t header;
