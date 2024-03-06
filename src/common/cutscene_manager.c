@@ -45,7 +45,7 @@ void cutsceneMgr_entrypoint(cutsceneMgr* self) {
 void cutsceneMgr_main(cutsceneMgr* self) {
     playerVisualData* visual_data;
 
-    if (sys.cutscene_ID == 0)
+    if (sys.cutscene_ID == CUTSCENE_ID_NONE)
         return;
 
     if (sys.cutscene_ID < 3U) {

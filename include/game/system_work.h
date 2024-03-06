@@ -6,6 +6,7 @@
 #include "gfx/color.h"
 #include "math.h"
 #include "save.h"
+#include "cutscene_ID.h"
 #include <ultra64.h>
 
 typedef union {
@@ -124,8 +125,8 @@ typedef struct {
                              // GAME_OVER = 14
     u8 field84_0x26438[4];
     u32 titleDemoCharacter; // 0 = REINHARDT, 1 = CARRIE
-    s32 cutscene_ID;
-    s32 entrance_cutscene_ID;
+    cv64_cutscene_id_t cutscene_ID;
+    cv64_cutscene_id_t entrance_cutscene_ID;
     u32 cutscene_flags;
     u32 field89_0x2644c;
 } system_work; // Size = 0x26450
