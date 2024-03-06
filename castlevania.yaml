@@ -439,7 +439,7 @@ segments:
       - [0x000EB700, asm]   # Contains object 0x00BA's code
       - [0x000EDA60, data]
       - [0x000EE750, data]
-      - [0x000EE770, data]
+      - [0x000EE770, data, common/cutscene_manager]
       - [0x000EE790, data]
       - [0x000EE7B0, data]
       - [0x000EFA80, data]
