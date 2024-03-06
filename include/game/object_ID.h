@@ -76,7 +76,7 @@ typedef enum cv64_object_id_raw {
     ID_OBJECT_028                    = 0x028,
     ID_OBJECT_029                    = 0x029,
     ID_CUTSCENEMGR                   = 0x02A,
-    ID_OBJECT_02B                    = 0x02B,
+    ID_CSFILMREEL                    = 0x02B,
     ID_OBJECT_02C                    = 0x02C,
     ID_OBJECT_02D                    = 0x02D,
     ID_OBJECT_02E                    = 0x02E,
@@ -623,6 +623,7 @@ typedef enum cv64_object_id {
     ENGINE_GAME_OVER                   = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_GAME_OVER),
 
     CUTSCENE_CUTSCENEMGR               = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_CUTSCENEMGR),
+    CUTSCENE_CSFILMREEL                = CV64_OBJECT_ID(OBJ_KIND_MAP_OVERLAY, ID_CSFILMREEL),
     CUTSCENE_CUTSCENE_FOREST_BLESSING  = CV64_OBJECT_ID(OBJ_KIND_MAP_OVERLAY, ID_CUTSCENE_FOREST_BLESSING),
     CUTSCENE_CUTSCENE_CREDITS          = CV64_OBJECT_ID(OBJ_KIND_MAP_OVERLAY, ID_CUTSCENE_CREDITS),
 

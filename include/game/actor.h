@@ -2,8 +2,10 @@
 #define ACTOR_H
 
 #include "gfx/model_info.h"
-#include "math.h"
 #include "object.h"
+#include "atari.h"
+#include "objects/camera/object_006E.h"
+#include "animation.h"
 #include <ultra64.h>
 
 // For "axis" argument from checkIfOutsideEntityIsInsideMainEntityRadius()
@@ -27,6 +29,14 @@ typedef struct cv64_actor_settings {
     u16 variable_3;
     actor_settings_spawn_settings_union difficulty__spawn_settings;
 } cv64_actor_settings_t;
+
+typedef struct {
+    u32 flags;
+    atari_base_work* atari_base;
+    cv64_model_inf_t* model;
+    object_006E* obj_006E;
+    animationMgr animMgr;
+} actorVisualData;
 
 // Generic actor struct
 typedef struct cv64_actor {
