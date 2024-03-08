@@ -1784,3 +1784,7 @@ func_8000C6D0 = 0x8000C6D0;
 func_80012400 = 0x80012400;
 func_8000C740 = 0x8000C740;
 func_80005658 = 0x80005658;
+effectMgr_loop = 0x8005af84;
+func_8005AF8C = 0x8005AF8C;
+func_8005AF94 = 0x8005AF94;
+ptr_effectMgr = 0x800dd0d0;
