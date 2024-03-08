@@ -122,11 +122,7 @@ void cutsceneMgr_loop(cutsceneMgr* self) {
         (*object_curLevel_goToNextFuncAndClearTimer)(
             self->header.current_function, &self->header.functionInfo_ID
         );
-        return;
-    }
-    if ((sys.controllers[0].buttons_pressed & (START_BUTTON | RECENTER_BUTTON)
-        ) &&
-        (2 < sys.cutscene_ID)) {
+    } else if ((sys.controllers[0].buttons_pressed & (START_BUTTON | RECENTER_BUTTON)) && (2 < sys.cutscene_ID)) {
         cutscene* cutscene_obj = self->cutscene_object;
         cutscene_obj->skip_cutscene = TRUE;
     }

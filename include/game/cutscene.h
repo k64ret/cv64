@@ -29,16 +29,23 @@ typedef struct {
 #define CUTSCENE_OVERLAY_FILM_REEL          1 // Unused
 #define CUTSCENE_OVERLAY_WIDESCREEN_BORDERS 2
 #define CUTSCENE_OVERLAY_FADE               8
+
 typedef struct {
     u16 object_ID;
     u16 cutscene_ID;
     u16 overlay;
-    // Unused? Set to many values in `cutscene_settings`
+    /**
+     * Unused? Set to many values in `cutscene_settings`
+     */
     u8 field_0x06;
     u8 make_player_idle_after_cutscene;
-    // Unused? Set to many values in `cutscene_settings`
+    /**
+     * Unused? Set to many values in `cutscene_settings`
+     */
     u8 field_0x08;
-    // Maybe padding
+    /**
+     * Maybe padding
+     */
     u8 field_0x09;
 } cutscene_parameters;
 
@@ -46,6 +53,7 @@ extern cutscene_parameters cutscene_settings[NUM_CUTSCENES];
 
 #define FULLSCREEN         0
 #define WIDESCREEN_BORDERS 1
+
 extern void cutscene_setCameraClippingAndScissoring(s16 top_edge_coords);
 
 #endif
