@@ -9,6 +9,7 @@
 #define CUTSCENE_FLAG_FILM_REEL_EFFECT           0x04
 #define CUTSCENE_FLAG_DISPLAY_WIDESCREEN_BORDERS 0x08 // Assumption
 #define CUTSCENE_FLAG_10                         0x10
+#define CUTSCENE_FLAG_20                         0x20
 
 // Generic cutscene struct
 typedef struct {
@@ -29,12 +30,15 @@ typedef struct {
 #define CUTSCENE_OVERLAY_WIDESCREEN_BORDERS 2
 #define CUTSCENE_OVERLAY_FADE               8
 typedef struct {
-    u8 field_0x00;
-    u8 field_0x01;
     u16 object_ID;
     u16 cutscene_ID;
     u16 overlay;
+    // Unused? Set to many values in `cutscene_settings`
+    u8 field_0x06;
+    u8 make_player_idle_after_cutscene;
+    // Unused? Set to many values in `cutscene_settings`
     u8 field_0x08;
+    // Maybe padding
     u8 field_0x09;
 } cutscene_parameters;
 

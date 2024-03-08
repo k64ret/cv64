@@ -14,7 +14,7 @@ typedef struct {
      * Follows the cutscene ID listing WITHOUT the empty slots (for example,
      * cutscene 0x3C here is 0x32)
      */
-    s32 cutscene_ID;
+    u32 cutscene_ID;
     cutscene* cutscene_object;
     u8 field_0x4C[40];
 } cutsceneMgr;

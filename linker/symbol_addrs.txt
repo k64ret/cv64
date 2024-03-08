@@ -1433,7 +1433,7 @@ reindhart_animations_translation_data = 0x8016c764;
 carrie_animations_translation_data = 0x8016c7f4;
 ptr_player_animations_translation_data = 0x8016c884;
 ptr_player_animations_rotation_data = 0x8016c75c;
-cutscene_settings = 0x8016b5b4;
+cutscene_settings = 0x8016B5C0;
 kingSkeleton_objectFiles = 0x80095b78;
 gameState_konamiLogo_overlay_info = 0x800958b0;
 
