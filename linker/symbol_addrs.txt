@@ -24,6 +24,23 @@ GameStateMgr_executeGameStateCappedFramerate   = 0x8000ECB0; // type:func
 
 // End of src/object_flow.c
 
+// src/common/cutscene_manager.c
+
+// .text
+cutsceneMgr                          = 0x8034238C;
+ptr_cutsceneMgr                      = 0x800D5F00;
+cutsceneMgr_main                     = 0x80126FB0; // type:func
+cutsceneMgr_stopCutscene             = 0x80127348; // type:func
+cutsceneMgr_loop                     = 0x80127274; // type:func
+cutsceneMgr_setCameraClippingAndScissoring = 0x801271DC; // type:func
+cutsceneMgr_createCutscene           = 0x80127054; // type:func
+cutsceneMgr_entrypoint               = 0x80126F40; // type:func
+
+// .data
+cutsceneMgr_functions                = 0x8016B580;
+
+// End of src/common/cutscene_manager.c
+
 memory_clear = 0x80000770;
 memory_copy = 0x800008d0;
 heap_init = 0x80000c28;
@@ -458,7 +475,7 @@ interactuableObject_stopInteraction = 0x80126354;
 playerCanInteractWithInteractuable = 0x801268e4;
 getMapEventFlagID = 0x80126cec;
 checkCutsceneTimeRangeTrigger = 0x80127e84;
-camera_setClippingAndScissoring = 0x801287f0;
+cutscene_setCameraClippingAndScissoring = 0x801287f0;
 textbox_create = 0x8012cb88;
 textbox_setPos = 0x8012ccfc;
 textbox_setDimensions = 0x8012cd14;
@@ -773,11 +790,6 @@ interactuables_selectTextboxOption = 0x80125d84;
 interactuables_stopCheck = 0x80126004;
 interactuables_destroy = 0x801261dc;
 PlayerMgr_getActorCurrentlyInteractingWith = 0x80126370;
-cutsceneMgr_entrypoint = 0x80126f40;
-cutsceneMgr_createCutscene = 0x80127054;
-cutsceneMgr_setClippingAndScissoring = 0x801271dc;
-cutsceneMgr_loop = 0x80127274;
-cutsceneMgr_stopCutscene = 0x80127348;
 cutsceneTrigger_entrypoint = 0x801274f0;
 cutsceneTrigger_checkCollision = 0x801276b4;
 cutsceneTrigger_destroy = 0x80127e60;
@@ -1252,8 +1264,6 @@ object_nextLevel_goToNextFunc = 0x800013fc;
 object_prevLevel_goToFunc = 0x80001600;
 dmaIoMesgQueue = 0x800abfa0;
 object_nextLevel_goToFunc = 0x80001638;
-cutscene_settings_list = 0x8016b5c0;
-cutsceneMgr_main = 0x80126fb0;
 seed_RNG_C_rand_srand = 0x80186e3c;
 srand = 0x801588e0;
 seed_RNG = 0x800973c0;
@@ -1423,7 +1433,7 @@ reindhart_animations_translation_data = 0x8016c764;
 carrie_animations_translation_data = 0x8016c7f4;
 ptr_player_animations_translation_data = 0x8016c884;
 ptr_player_animations_rotation_data = 0x8016c75c;
-cutscene_settings = 0x8016b5b4;
+cutscene_settings = 0x8016B5C0;
 kingSkeleton_objectFiles = 0x80095b78;
 gameState_konamiLogo_overlay_info = 0x800958b0;
 
@@ -1516,17 +1526,14 @@ pickable_items_assets_file_ID = 0x80389ed8;
 PLAYER_HAS_MAX_HEALTH = 0x80180490;
 isPlayerAirborne = 0x8003c9e8;
 forest_of_silence_actor_list = 0x802bcb90;
-ptr_cutsceneMgr = 0x800d5f00;
 ptr_mapObjectParent = 0x800d5f04;
 ptr_PlayerController = 0x800d5f08;
 ptr_mapSetup = 0x800d5f0c;
 ptr_enemyParent = 0x800d5f10;
 ptr_enemyTargetGfx = 0x800d5f18;
 ptr_gameplayMenuMgr = 0x800d5f1c;
-cutsceneMgr = 0x8034238c;
 ptr_Object_006C = 0x80389e84;
 entrance_cutscene_ID = 0x80389efc;
-cutsceneMgr_functions = 0x8016b580;
 actorPurpleFireCandle_80188da0 = 0x80188da0;
 actor_spawn_radius = 0x8018a6f0;
 carrie_magic_ball_damage = 0x803dde7c;

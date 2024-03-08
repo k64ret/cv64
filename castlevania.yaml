@@ -382,7 +382,7 @@ segments:
     subsegments:
       - [0x000A8420, asm, common/interactuable]
       - [0x000A9560, asm]
-      - [0x000AA130, asm, common/cutscene_manager]
+      - [0x000AA130, c, common/cutscene_manager]
       - [0x000AA6E0, asm, common/cutscene_trigger]
       - [0x000AB0F0, asm, common/cutscene]   # Also contains initNewGame() and player_status_init()
       - [0x000AD710, c, common/stage_select]
@@ -439,7 +439,7 @@ segments:
       - [0x000EB700, asm]   # Contains object 0x00BA's code
       - [0x000EDA60, data]
       - [0x000EE750, data]
-      - [0x000EE770, data]
+      - [0x000EE770, .data, common/cutscene_manager]
       - [0x000EE790, data]
       - [0x000EE7B0, data]
       - [0x000EFA80, data]

@@ -29,9 +29,6 @@ extern void func_80005658();
 #define SCREEN_WIDTH  320
 #define SCREEN_HEIGHT 240
 
-#define CUTSCENE_FLAG_PLAYING 1
-#define CUTSCENE_FLAG_10      0x10
-
 // clang-format off
 
 /**

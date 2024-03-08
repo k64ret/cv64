@@ -2,22 +2,11 @@
 #define PLAYER_H
 
 #include "actor.h"
-#include "animation.h"
-#include "atari.h"
 #include "gfx/model_info.h"
 #include "math.h"
-#include "objects/camera/object_006E.h"
 #include "objects/player/attackMgr.h"
 #include "objects/player/player_flags.h"
 #include <ultra64.h>
-
-typedef struct {
-    u32 flags; // Player flags. See player_flags.h
-    atari_base_work* atari_base;
-    cv64_model_inf_t* model;
-    object_006E* obj_006E;
-    animationMgr animMgr;
-} playerVisualData;
 
 typedef struct {
     s16 field0_0x0;
@@ -118,7 +107,7 @@ typedef struct {
 
 typedef struct {
     u8 field_0x00[4];
-    playerVisualData visualData;
+    actorVisualData visualData;
     playerParams* params;
     u32 additionalFlags;
     u32 field_0x4C;
@@ -209,6 +198,33 @@ typedef struct {
     u8 field59_0xa6;
     u8 field60_0xa7;
 } playerMovingAttack;
+
+// Generic player actor struct
+typedef struct {
+    cv64_object_hdr_t header;
+    u8 field_0x20[4];
+    cv64_model_inf_t* model;
+    playerData* data;
+    playerMovingAttack* movingAttack;
+    u8 field_0x30[OBJECT_SIZE - 0x30];
+} Player;
+
+typedef enum cv64_player_state_funcs_id {
+    PLAYER_INIT,
+    PLAYER_IDLE,
+    PLAYER_DAMAGE,
+    PLAYER_JUMP,
+    PLAYER_ATTACK,
+    PLAYER_ACTION,
+    PLAYER_MOVING,
+    PLAYER_LEDGE_MOVEMENT,
+    PLAYER_FALLING,
+    PLAYER_SLIDE,
+    PLAYER_ENEMY_LOCK,
+    PLAYER_DEAD,
+    PLAYER_FROZEN,
+    PLAYER_FROZEN_GRAB
+} cv64_player_state_funcs_id_t;
 
 extern playerData* ptr_PlayerData;
 

@@ -4,8 +4,12 @@
 #include "controller.h"
 #include "fade.h"
 #include "gfx/color.h"
+#include "actor.h"
 #include "math.h"
 #include "save.h"
+#include "cutscene.h"
+#include "cutscene_ID.h"
+#include "objects/player/player.h"
 #include <ultra64.h>
 
 typedef union {
@@ -15,7 +19,7 @@ typedef union {
 
 typedef union {
     void* field_voidptr;
-    void* enemy; // Actor*
+    cv64_actor_t* enemy;
     s16 damage;
 } being_grabbed_frozen_related_union;
 
@@ -83,7 +87,7 @@ typedef struct {
     s16 field44_0x2621e;
     s16 FREEZE_gameplayMenuMgr;
     s16 contPak_file_no;
-    void* ptr_PlayerObject;                           // Player*
+    Player* ptr_PlayerObject;                         // Player*
     void* actor_player_is_currently_interacting_with; // interactuables*
     u32 pull_lever;
     u8 field50_0x26230[4];
@@ -99,7 +103,7 @@ typedef struct {
     s16 player_position_log_current;
     vec3f player_position_log[30];
     being_grabbed_frozen_related_union field62_0x263b4;
-    void* enemy_grabbing_player; // Actor*
+    cv64_actor_t* enemy_grabbing_player;
     u16 angle_of_player_being_grabbed_by_enemy;
     u16 player_grabbed_by_vampire_timer_or_frozen;
     s16 current_boss_actor_ID;
@@ -124,8 +128,8 @@ typedef struct {
                              // GAME_OVER = 14
     u8 field84_0x26438[4];
     u32 titleDemoCharacter; // 0 = REINHARDT, 1 = CARRIE
-    s32 cutscene_ID;
-    s32 entrance_cutscene_ID;
+    u32 cutscene_ID;
+    u32 entrance_cutscene_ID;
     u32 cutscene_flags;
     u32 field89_0x2644c;
 } system_work; // Size = 0x26450
