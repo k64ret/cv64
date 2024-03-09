@@ -1,4 +1,4 @@
-#include "object.h"
+#include "objects/engine/object_0002.h"
 #include "cv64.h"
 #include "memory.h"
 #include "objects/engine/GameStateMgr.h"
