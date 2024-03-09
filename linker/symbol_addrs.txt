@@ -24,20 +24,37 @@ GameStateMgr_executeGameStateCappedFramerate   = 0x8000ECB0; // type:func
 
 // End of src/object_flow.c
 
+// src/effect_manager.c
+
+// .text
+effectMgr_entrypoint = 0x8005AEC0; // type:func
+effectMgr_init       = 0x8005AF30; // type:func
+effectMgr_loop       = 0x8005AF84; // type:func
+func_8005AF8C        = 0x8005AF8C; // type:func
+func_8005AF94        = 0x8005AF94; // type:func
+
+// .data
+effectMgr_functions  = 0x8009AD60; // size:0x08
+
+// .bss
+ptr_effectMgr        = 0x800DD0D0;
+
+// End of src/effect_manager.c
+
 // src/common/cutscene_manager.c
 
 // .text
-cutsceneMgr                          = 0x8034238C;
-ptr_cutsceneMgr                      = 0x800D5F00;
-cutsceneMgr_main                     = 0x80126FB0; // type:func
-cutsceneMgr_stopCutscene             = 0x80127348; // type:func
-cutsceneMgr_loop                     = 0x80127274; // type:func
+cutsceneMgr                                = 0x8034238C;
+ptr_cutsceneMgr                            = 0x800D5F00;
+cutsceneMgr_main                           = 0x80126FB0; // type:func
+cutsceneMgr_stopCutscene                   = 0x80127348; // type:func
+cutsceneMgr_loop                           = 0x80127274; // type:func
 cutsceneMgr_setCameraClippingAndScissoring = 0x801271DC; // type:func
-cutsceneMgr_createCutscene           = 0x80127054; // type:func
-cutsceneMgr_entrypoint               = 0x80126F40; // type:func
+cutsceneMgr_createCutscene                 = 0x80127054; // type:func
+cutsceneMgr_entrypoint                     = 0x80126F40; // type:func
 
 // .data
-cutsceneMgr_functions                = 0x8016B580;
+cutsceneMgr_functions                      = 0x8016B580;
 
 // End of src/common/cutscene_manager.c
 
@@ -732,8 +749,6 @@ hit_top_check = 0x800580e0;
 magicBall_setBallColor = 0x8005a4c0;
 magicBall_setOuterRingsColor = 0x8005a55c;
 effect91_return_init = 0x8005a5ec;
-effectMgr_entrypoint = 0x8005aec0;
-effectMgr_init = 0x8005af30;
 createEffectObjectUnderEffectMgr = 0x8005afa0;
 effect_destroy = 0x8005b40c;
 effect_setPosition = 0x8005b4ac;
@@ -1660,7 +1675,6 @@ player_attack_and_getting_hit_counter = 0x801226b0;
 player_damage_animations = 0x80096ed0;
 nitroExplosion_functions = 0x8009733c;
 player_params = 0x80342bb4;
-effectMgr_functions = 0x8009ad60;
 knife_hit_effect_scale = 0x800a3678;
 Carrie_frozenGrab_functions = 0x800971b0;
 gameplayMgr_functions = 0x8009663c;

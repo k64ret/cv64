@@ -158,8 +158,8 @@ segments:
       - [0x000574C0, asm]
       - [0x0005B620, asm]
       - [0x0005B7E0, asm]
-      - [0x0005BAC0, asm]
-      - [0x0005BBA0, asm]
+      - [0x0005BAC0, c, effect_manager]
+      - [0x0005BBA0, asm, effect]
       - [0x000610F0, asm]
       - [0x00063A60, asm]
       - [0x0006A4A0, asm]
@@ -310,6 +310,8 @@ segments:
       - [0x00092E70, data, object]
       - [0x00093F70, .data, fade]
       - [0x00094030, data]
+      - [0x0009B960, .data, effect_manager]
+      - [0x0009B970, data]
 
       - [0x000A3320, rodata, 4D80]
       - [0x000A3330, rodata, figure]
@@ -369,9 +371,11 @@ segments:
       - [0x000A7D40, rodata]
       - { start: 0x000A8420, type: .bss, vram: 0x800A7820, name: gamestate }
       - { start: 0x000A8420, type: .bss, vram: 0x800A7830, name: object }
-      - { start: 0x000A8420, type: bss, vram: 0x800A7840 }  # Only contains ptr_Object_0002.
+      - { start: 0x000A8420, type: .bss, vram: 0x800A7840, name: object_0002  }  # Only contains ptr_Object_0002.
       - { start: 0x000A8420, type: bss, vram: 0x800A7850, name: figure }
       - { start: 0x000A8420, type: bss, vram: 0x800A78A0, name: F960 }
+      - { start: 0x000A8420, type: .bss, vram: 0x800DD0D0, name: effect_manager }
+      - { start: 0x000A8420, type: bss, vram: 0x800DD0E0 }
 
   - name: common
     type: code
