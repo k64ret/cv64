@@ -41,6 +41,13 @@ ptr_effectMgr        = 0x800DD0D0;
 
 // End of src/effect_manager.c
 
+// src/common/interactuable.c
+
+// .data
+interactuables_functions = 0x8016B560; // size:0x18
+
+// End of src/common/interactuable.c
+
 // src/common/cutscene_manager.c
 
 // .text
@@ -1622,7 +1629,6 @@ running_turning_angle_speed = 0x803ddd58;
 Player_idle_functions = 0x803ddb74;
 picked_powerup_amount = 0x800d7c80;
 fileSelect_functions = 0x80181498;
-interactuables_functions = 0x8016b560;
 knife_functions = 0x800972f0;
 camera_params_array = 0x800931bc;
 common_camera_8009B430 = 0x8009B430;
