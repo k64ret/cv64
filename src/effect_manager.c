@@ -1,14 +1,24 @@
 #include "cv64.h"
 #include "objects/effect/effect_manager.h"
 
+cv64_effectMgr_func_t effectMgr_functions[] = {effectMgr_init, effectMgr_loop};
+
 // effectMgr* ptr_effectMgr;
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/effect_manager/effectMgr_entrypoint.s")
+void effectMgr_entrypoint(effectMgr* self) { ENTER(self, effectMgr_functions); }
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/effect_manager/effectMgr_init.s")
+void effectMgr_init(effectMgr* self) {
+    self->display_camera = modelInfo_createRootNode(
+        FIG_TYPE_HIERARCHY_ROOT, common_camera_game_view
+    );
+    ptr_effectMgr = self;
+    (*object_curLevel_goToNextFuncAndClearTimer)(
+        self->header.current_function, &self->header.functionInfo_ID
+    );
+}
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/effect_manager/effectMgr_loop.s")
+void effectMgr_loop(effectMgr* self) {}
 
-void func_8005AF8C(void) {}
+void func_8005AF8C() {}
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/effect_manager/func_8005AF94.s")
+void func_8005AF94() {}

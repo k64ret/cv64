@@ -310,7 +310,7 @@ segments:
       - [0x00092E70, data, object]
       - [0x00093F70, .data, fade]
       - [0x00094030, data]
-      - [0x0009B960, data, effect_manager]
+      - [0x0009B960, .data, effect_manager]
       - [0x0009B970, data]
 
       - [0x000A3320, rodata, 4D80]
