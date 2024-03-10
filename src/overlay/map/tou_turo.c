@@ -166,7 +166,7 @@ void cv64_ovl_touturo_door_entrance_close_door(cv64_ovl_touturo_door_t* self) {
             effect = (*createEffectObjectUnderEffectMgr)(EFFECT_ID_1, NULL, 0);
 
             if (effect != NULL) {
-                (*func_8005B78C)(effect, 3);
+                (*effect_setMaxFrameSpeed)(effect, 3);
                 (*effect_setPosition)(
                     effect,
                     model->position.x + 3.0f,

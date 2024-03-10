@@ -384,7 +384,7 @@ segments:
     follows_vram: main
     bss_size: 0x20C0
     subsegments:
-      - [0x000A8420, asm, common/interactuable]
+      - [0x000A8420, c, common/interactuables]
       - [0x000A9560, asm]
       - [0x000AA130, c, common/cutscene_manager]
       - [0x000AA6E0, asm, common/cutscene_trigger]
@@ -442,7 +442,7 @@ segments:
       - [0x000EA9B0, asm, common/actor_creator]
       - [0x000EB700, asm]   # Contains object 0x00BA's code
       - [0x000EDA60, data]
-      - [0x000EE750, data]
+      - [0x000EE750, .data, common/interactuables]
       - [0x000EE770, .data, common/cutscene_manager]
       - [0x000EE790, data]
       - [0x000EE7B0, data]
