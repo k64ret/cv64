@@ -20,14 +20,14 @@ options:
     - linker/symbol_addrs_makerom.txt
     - linker/symbol_addrs_overlays.txt
     - linker/symbol_addrs_assets.txt
-  disassemble_all: False
-  migrate_rodata_to_functions: False
-  find_file_boundaries: True
+  disassemble_all: false
+  migrate_rodata_to_functions: false
+  find_file_boundaries: true
   header_encoding: ASCII
   generated_c_preamble: |
     #include "cv64.h"
-  o_as_suffix: False
-  use_legacy_include_asm: False
+  o_as_suffix: false
+  use_legacy_include_asm: false
   mips_abi_float_regs: o32
   asm_function_macro: glabel
   asm_jtbl_label_macro: jlabel
