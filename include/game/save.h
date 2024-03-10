@@ -2,10 +2,10 @@
 #define SAVE_H
 
 #include "event_flags.h"
+#include "item.h"
 #include <ultra64.h>
 
 #define NUM_EVENT_FLAGS  16
-#define NUM_ITEMS        41 // Total number of items, not including the white jewel
 #define SIZE_ITEMS_ARRAY 64 // Size of the whole items array
 
 #define REINHARDT 0

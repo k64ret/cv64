@@ -5,6 +5,7 @@
 #include "objects/effect/pickableItemFlash.h"
 #include "objects/menu/mfds.h"
 #include "actor.h"
+#include "item.h"
 
 #define ITEM_FADE_TIMER self->header.timer
 
@@ -52,7 +53,7 @@ typedef struct {
     cv64_model_inf_t* model;
     u8 field_0x28[12];
     f32 height;
-    u16 interactuable_settings_table_array_ID; // ID in `interactuable_settings_table`
+    u16 table_index; // ID in `interactuable_settings_table`
     u8 field_0x3A[2];
     s32 interacting_with_interactuable;
     s32 textbox_is_active;

@@ -6,7 +6,8 @@
 #include "objects/camera/pointLight.h"
 #include "actor.h"
 
-#define EFFECT_ID_1 1
+#define EFFECT_ID_1                   0x01
+#define EFFECT_ID_PICKABLE_ITEM_FLASH 0x25
 
 typedef struct {
     u32 flags;
@@ -85,5 +86,7 @@ effect_setPosition(cv64_effect_t* self, f32 x, f32 y, f32 z, u16 param_5);
 extern void
 effect_setScale(cv64_effect_t* self, f32 x, f32 y, f32 z, u16 param_5);
 extern void effect_setMaxFrameSpeed(cv64_effect_t* self, u16 max_frame_speed);
+extern u8 effect_isMarkForDeletion(cv64_effect_t* self);
+extern void effect_markForDeletion(cv64_effect_t* self);
 
 #endif // CV64_EFFECT_H

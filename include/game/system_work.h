@@ -116,8 +116,10 @@ typedef struct {
     s16 map_is_setup;
     u8 field74_0x2641a;
     u8 field75_0x2641b;
-    s32 map_assets_file_IDs[3]; // [0] = map, [1] = pickable_items, [2] =
-                                // skybox_assets
+    // [0] = map
+    // [1] = pickable_items
+    // [2] = skybox_assets
+    s32 map_assets_file_IDs[3];
     s16 map_ID;
     s16 map_entrance_ID;
     cv64_rgba_t map_fade_in_color;
