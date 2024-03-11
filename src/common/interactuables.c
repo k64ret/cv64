@@ -178,7 +178,95 @@ void interactuables_init(interactuables* self) {
 
 #pragma GLOBAL_ASM("../asm/nonmatchings/common/interactuables/interactuables_loop.s")
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/common/interactuables/interactuables_initCheck.s")
+// clang-format on
+
+void interactuables_initCheck(interactuables* self) {
+    interactuables_settings* var_v1 =
+        &interactuables_settings_table[self->table_index];
+    cv64_save_state_t* save = &sys.SaveStruct_gameplay;
+    mfds_state* temp_v0;
+    mfds_state* var_v0;
+    u16 temp_v0_2;
+
+    if (var_v1->type == ITEM_KIND_ITEM) {
+        temp_v0_2 =
+            itemModelSettings_getEntryFromList(
+                interactuables_settings_table[self->table_index].item_or_text_ID
+            )
+                ->item_ID;
+        temp_v0 = item_prepareTextbox(temp_v0_2);
+
+        if (temp_v0 == NULL)
+            return;
+
+        self->pickableItemFlash_or_textbox.flash = (pickableItemFlash*) temp_v0;
+        var_v1 = &interactuables_settings_table[self->table_index];
+
+        if (interactuables_settings_table[self->table_index].item_or_text_ID ==
+            ITEM_ID_THE_CONTRACT) {
+            ((cv64_object_t*) (*object_createAndSetChild)(&self->header, 0x213B)
+            )
+                ->alloc_data[0] = self;
+            var_v1 = &interactuables_settings_table[self->table_index];
+        }
+
+        if (interactuables_settings_table[self->table_index].item_or_text_ID ==
+            ITEM_ID_WHITE_JEWEL) {
+            sys.FREEZE_PLAYER = TRUE;
+            sys.FREEZE_ENEMIES = TRUE;
+            cameraMgr_setReadingTextState(sys.ptr_cameraMgr, 1);
+            self->header.timer = 0;
+            var_v1 = &interactuables_settings_table[self->table_index];
+        }
+    }
+
+    if (interactuables_settings_table[self->table_index].type ==
+        ITEM_KIND_TEXT_SPOT) {
+        if (interactuables_settings_table[self->table_index].flags & 4) {
+            if (save->event_flags[self->map_event_flag_ID] &
+                interactuables_settings_table[self->table_index].event_flag) {
+                self->header.destroy(self);
+                return;
+            }
+        }
+
+        if (interactuables_settings_table[self->table_index].flags & 8) {
+            if (!(save->event_flags[self->map_event_flag_ID] &
+                  interactuables_settings_table[self->table_index].event_flag
+                )) {
+                interactuables_stopInteraction(self);
+                (*object_curLevel_goToFunc)(
+                    self->header.current_function,
+                    &self->header.functionInfo_ID,
+                    1
+                );
+                return;
+            }
+        }
+
+        // clang-format off
+        // This code is asinine LOL
+        var_v0 = (interactuables_settings_table[self->table_index].flags & 0x10)
+            ? map_getMessageFromPool(interactuables_settings_table[self->table_index].item_or_text_ID, 0)
+            : map_getMessageFromPool(interactuables_settings_table[self->table_index].item_or_text_ID, 0);
+        // clang-format on
+
+        sys.FREEZE_PLAYER = TRUE, sys.FREEZE_ENEMIES = TRUE;
+
+        if (var_v0 == NULL)
+            return;
+
+        self->pickableItemFlash_or_textbox.flash = (pickableItemFlash*) var_v0;
+        cameraMgr_setReadingTextState(sys.ptr_cameraMgr, 1);
+        self->header.timer = 0;
+    }
+
+    (*object_curLevel_goToNextFuncAndClearTimer)(
+        self->header.current_function, &self->header.functionInfo_ID
+    );
+}
+
+// clang-format off
 
 #pragma GLOBAL_ASM("../asm/nonmatchings/common/interactuables/interactuables_selectTextboxOption.s")
 
