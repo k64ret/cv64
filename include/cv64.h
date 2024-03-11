@@ -20,6 +20,7 @@ extern void func_8001248C_1308C();
 extern void func_8000C6D0();
 extern void func_80012400();
 extern void func_80005658();
+extern u32 getMapEventFlagID(u16 stage_ID);
 
 #define NPTR             0
 #define ARRAY_COUNT(arr) (s32)(sizeof(arr) / sizeof(arr[0]))

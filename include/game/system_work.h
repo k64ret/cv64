@@ -10,6 +10,7 @@
 #include "cutscene.h"
 #include "cutscene_ID.h"
 #include "objects/player/player.h"
+#include "objects/camera/cameraMgr.h"
 #include <ultra64.h>
 
 typedef union {
@@ -108,7 +109,7 @@ typedef struct {
     u16 player_grabbed_by_vampire_timer_or_frozen;
     s16 current_boss_actor_ID;
     u8 field67_0x263c2[6];
-    void* ptr_cameraMgr;              // cameraMgr*
+    cameraMgr* ptr_cameraMgr;
     void* ptr_playerCameraController; // playerCameraController*
     u8 field70_0x263d0[4];
     Matrix44F another_viewing_matrix;

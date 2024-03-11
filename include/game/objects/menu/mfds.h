@@ -1,5 +1,5 @@
-#ifndef MFSD_H
-#define MFSD_H
+#ifndef MFDS_H
+#define MFDS_H
 
 // Textbox structs
 
@@ -187,5 +187,7 @@ extern u16* convertUTF16ToCustomTextFormat(u16* text_buffer);
 extern void textbox_setHeightAndWidth(
     mfds_state* self, u32 index, u8 text_height, u8 text_width
 );
+extern mfds_state*
+map_getMessageFromPool(u32 text_ID, u32 textbox_display_time);
 
 #endif

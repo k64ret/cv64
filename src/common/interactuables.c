@@ -1,4 +1,9 @@
+#include "cv64.h"
 #include "objects/cutscene/interactuables.h"
+#include "objects/player/player.h"
+#include "gfx/struct_47.h"
+#include "random.h"
+#include "system_work.h"
 
 cv64_interactuables_func_t interactuables_functions[] = {
     interactuables_init,

@@ -26,6 +26,6 @@ typedef struct {
     cv64_actor_settings_t* settings;
 } pointLight;
 
-void pointLight_entrypoint(pointLight* self);
+extern void pointLight_entrypoint(pointLight* self);
 
 #endif

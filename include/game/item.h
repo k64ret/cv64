@@ -1,7 +1,7 @@
 #ifndef ITEM_H
 #define ITEM_H
 
-#include <ultra64.h>
+#include "objects/menu/mfds.h"
 
 #define NUM_ITEMS 41 // Total number of items, not including the white jewel
 
@@ -25,6 +25,7 @@ typedef struct {
 
 extern s8 item_addAmountToInventory(s32 item, s32 amount);
 extern s8 item_removeAmountFromInventory(s32 item, s32 amount);
+extern mfds_state* item_prepareTextbox(s32 item);
 extern item_model_settings* itemModelSettings_getEntryFromList(s32 item);
 
 extern item_model_settings item_model_settings_list[NUM_ITEMS];
