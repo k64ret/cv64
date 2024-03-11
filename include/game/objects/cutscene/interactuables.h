@@ -53,7 +53,10 @@ typedef struct {
     cv64_model_inf_t* model;
     u8 field_0x28[12];
     f32 height;
-    u16 table_index; // ID in `interactuable_settings_table`
+    /**
+     * ID in `interactuable_settings_table`
+     */
+    u16 table_index;
     u8 field_0x3A[2];
     s32 interacting_with_interactuable;
     s32 textbox_is_active;
