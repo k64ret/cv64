@@ -10,11 +10,7 @@
 #define ITEM_MODEL_SETTINGS_FLAG_SPINS                 0x01
 #define ITEM_MODEL_SETTINGS_FLAG_APPEARS_IN_RENON_SHOP 0x40
 
-/**
- * Segment address = 0x06005DE0
- */
-// extern const u32 ITEM_MATERIAL_DL;
-#define ITEM_MATERIAL_DL (Gfx*) 0x06005DE0
+extern const u32 ITEM_MATERIAL_DL;
 
 typedef struct {
     u32 dlist;
@@ -46,21 +42,21 @@ typedef enum cv64_item_id {
     ITEM_ID_HEALING_KIT = 8,
     ITEM_ID_PURIFYING = 9,
     ITEM_ID_CURE_AMPOULE = 10,
-    ITEM_ID_POUT_POURRI_UNUSED = 11,
+    ITEM_ID_POUT_POURRI = 11, // Unused
     ITEM_ID_POWERUP = 12,
     ITEM_ID_KNIFE = 13,
     ITEM_ID_HOLY_WATER = 14,
     ITEM_ID_CROSS = 15,
     ITEM_ID_AXE = 16,
-    ITEM_ID_WOODEN_STAKE_UNUSED = 17,
-    ITEM_ID_ROSE_UNUSED = 18,
+    ITEM_ID_WOODEN_STAKE = 17, // Unused
+    ITEM_ID_ROSE = 18,         // Unused
     ITEM_ID_THE_CONTRACT = 19,
-    ITEM_ID_ENGAGEMENT_RING_UNUSED = 20,
+    ITEM_ID_ENGAGEMENT_RING = 20, // Unused
     ITEM_ID_MAGICAL_NITRO = 21,
     ITEM_ID_MANDRAGORA = 22,
     ITEM_ID_SUN_CARD = 23,
     ITEM_ID_MOON_CARD = 24,
-    ITEM_ID_INCANDESCENT_GAZE_UNUSED = 25,
+    ITEM_ID_INCANDESCENT_GAZE = 25, // Unused
     ITEM_ID_ARCHIVES_KEY = 26,
     ITEM_ID_LEFT_TOWER_KEY = 27,
     ITEM_ID_STOREROOM_KEY = 28,
@@ -76,8 +72,7 @@ typedef enum cv64_item_id {
     ITEM_ID_CLOCKTOWER_KEY3 = 38,
     ITEM_ID_GOLD_500 = 39,
     ITEM_ID_GOLD_300 = 40,
-    ITEM_ID_GOLD_100 = 41,
-    ITEM_ID_POWERUP__VISIBLE_VANISH = 0x33
+    ITEM_ID_GOLD_100 = 41
 } cv64_item_id_t;
 
 extern s8 item_addAmountToInventory(s32 item, s32 amount);

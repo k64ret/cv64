@@ -110,10 +110,12 @@ void cv64_ovl_touturo_door_exit_check_event_flags(cv64_ovl_touturo_door_t* self
 ) {
     cv64_model_inf_t* model = self->model;
 
-    if (sys.SaveStruct_gameplay.event_flags[EVENT_FLAG_ID_CLOCK_TOWER] &
-            EVENT_FLAG_CLOCK_TOWER_DEFEATED_DEATH ||
-        sys.SaveStruct_gameplay.event_flags[EVENT_FLAG_ID_CLOCK_TOWER] &
-            EVENT_FLAG_CLOCK_TOWER_DEFEATED_ACTRISE) {
+    if (CHECK_EVENT_FLAGS(
+            EVENT_FLAG_ID_CLOCK_TOWER, EVENT_FLAG_CLOCK_TOWER_DEFEATED_DEATH
+        ) ||
+        CHECK_EVENT_FLAGS(
+            EVENT_FLAG_ID_CLOCK_TOWER, EVENT_FLAG_CLOCK_TOWER_DEFEATED_ACTRISE
+        )) {
         model->position.y = 35.0f;
     } else {
         model->position.y = 0.0f;
@@ -128,8 +130,10 @@ void cv64_ovl_touturo_door_entrance_check_event_flags(
 ) {
     cv64_model_inf_t* model = self->model;
 
-    if (sys.SaveStruct_gameplay.event_flags[EVENT_FLAG_ID_MISC_STAGES] &
-        EVENT_FLAG_MISC_STAGES_ENTERED_ROOM_OF_CLOCKS) {
+    if (CHECK_EVENT_FLAGS(
+            EVENT_FLAG_ID_MISC_STAGES,
+            EVENT_FLAG_MISC_STAGES_ENTERED_ROOM_OF_CLOCKS
+        )) {
         model->position.y = 6.0f;
         (*object_curLevel_goToFunc)(
             self->header.current_function,
@@ -137,8 +141,10 @@ void cv64_ovl_touturo_door_entrance_check_event_flags(
             TOU_TURO_FUNC_801578FC
         );
     } else {
-        sys.SaveStruct_gameplay.event_flags[EVENT_FLAG_ID_MISC_STAGES] |=
-            EVENT_FLAG_MISC_STAGES_ENTERED_ROOM_OF_CLOCKS;
+        SET_EVENT_FLAGS(
+            EVENT_FLAG_ID_MISC_STAGES,
+            EVENT_FLAG_MISC_STAGES_ENTERED_ROOM_OF_CLOCKS
+        );
         (*object_curLevel_goToNextFuncAndClearTimer)(
             self->header.current_function, &self->header.functionInfo_ID
         );

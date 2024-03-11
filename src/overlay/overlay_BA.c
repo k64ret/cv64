@@ -33,8 +33,10 @@ void obj213F_isDraculaCutsceneWatched(object_213F* self) {
     cv64_model_inf_t* player_model;
 
     if ((ptr_PlayerData != NULL) &&
-        (sys.SaveStruct_gameplay.event_flags[EVENT_FLAG_ID_CASTLE_WALL_MAIN] &
-         EVENT_FLAG_CASTLE_WALL_MAIN_WATCHED_DRACULA_CUTSCENE)) {
+        CHECK_EVENT_FLAGS(
+            EVENT_FLAG_ID_CASTLE_WALL_MAIN,
+            EVENT_FLAG_CASTLE_WALL_MAIN_WATCHED_DRACULA_CUTSCENE
+        )) {
         player_model = ptr_PlayerData->visualData.model;
 
         if (300.0f < player_model->position.y) {
