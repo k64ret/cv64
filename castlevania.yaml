@@ -469,6 +469,7 @@ segments:
       - [0x0010D8E0, data]
       - [0x0010D900, data]
       - [0x0010DC60, data]
+      - [0x0010DD50, rodata, common/interactuables]
       - [0x0010E070, .rodata, common/stage_select]
       - [0x0010E0F0, rodata]
       - [0x0010E1E0, rodata]
