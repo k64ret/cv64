@@ -8,6 +8,9 @@
 #include "random.h"
 #include "system_work.h"
 
+extern f64 D_8018AB60_10DD50;
+extern f64 D_8018AB68_10DD58;
+
 cv64_interactuables_func_t interactuables_functions[] = {
     interactuables_init,
     interactuables_loop,
@@ -67,8 +70,9 @@ void interactuables_init(interactuables* self) {
             // i.e. if the item's associated bitflag is set
             if ((self->event_flag != 0) &&
                 (sys.SaveStruct_gameplay.event_flags[self->map_event_flag_ID] &
-                 (0, self->event_flag)
-                )) { // (0, self->event_flag) needed to avoid v0 / t8 regswap
+                 (0, self->event_flag
+                 ) // (0, self->event_flag) needed to avoid v0 / t8 regswap
+                )) {
                 self->header.destroy(self);
                 return;
             }
@@ -139,13 +143,13 @@ void interactuables_init(interactuables* self) {
                      .item_or_text_ID == ITEM_ID_AXE) ||
                 (interactuables_settings_table[self->table_index]
                      .item_or_text_ID == ITEM_ID_CROSS)) {
-                item_model->position.y += 3.2;
-                self->position.y += 3.2;
-                self->height += 3.2;
+                item_model->position.y += D_8018AB60_10DD50;
+                self->position.y += D_8018AB60_10DD50;
+                self->height += D_8018AB60_10DD50;
                 item_model->angle.roll += 0x1000;
             }
 
-            item_model->position.y += 0.1;
+            item_model->position.y += D_8018AB68_10DD58;
             self->trigger_X_size =
                 interactuables_settings_table[self->table_index].trigger_size;
         }
