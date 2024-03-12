@@ -6,6 +6,18 @@
 #include <ultra64.h>
 
 #define CV64_BIT(num) (1 << (num))
+/**
+ * Check if `bits` is set in `value`.
+ */
+#define BITS_HAS(value, bits) ((value) & (bits))
+/**
+ * Set `bit` in `value`.
+ */
+#define BITS_SET(value, bits) ((value) |= (bits))
+/**
+ * Unset `bit` in `value`.
+ */
+#define BITS_UNSET(value, bits) ((value) &= ~(bits))
 
 typedef u8 Addr[];
 

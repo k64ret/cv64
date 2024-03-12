@@ -231,7 +231,9 @@ void interactuables_initCheck(interactuables* self) {
     // If checking a text spot...
     if (interactuables_settings_table[self->table_index].type ==
         ITEM_KIND_TEXT_SPOT) {
-        if (interactuables_settings_table[self->table_index].flags & 4) {
+        if (BITS_HAS(
+                interactuables_settings_table[self->table_index].flags, 4
+            )) {
             // Destroy it if its associated event flag is set
             if (CHECK_EVENT_FLAGS(
                     self->map_event_flag_ID,
@@ -242,7 +244,9 @@ void interactuables_initCheck(interactuables* self) {
             }
         }
 
-        if (interactuables_settings_table[self->table_index].flags & 8) {
+        if (BITS_HAS(
+                interactuables_settings_table[self->table_index].flags, 8
+            )) {
             // Disable it if its associated event flag is NOT set
             if (!CHECK_EVENT_FLAGS(
                     self->map_event_flag_ID,
@@ -261,7 +265,7 @@ void interactuables_initCheck(interactuables* self) {
         // clang-format off
         // Get the message associated to the text spot
         // This code is asinine LOL
-        textbox = (interactuables_settings_table[self->table_index].flags & 0x10)
+        textbox = (BITS_HAS(interactuables_settings_table[self->table_index].flags, 0x10))
             ? map_getMessageFromPool(interactuables_settings_table[self->table_index].item_or_text_ID, 0)
             : map_getMessageFromPool(interactuables_settings_table[self->table_index].item_or_text_ID, 0);
 
