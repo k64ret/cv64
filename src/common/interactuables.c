@@ -9,6 +9,8 @@
 #include "random.h"
 #include "system_work.h"
 
+#define MENU_SAVEGAME 0x2137
+
 extern f64 D_8018AB60_10DD50;
 extern f64 D_8018AB68_10DD58;
 
@@ -277,7 +279,7 @@ void interactuables_initCheck(interactuables* self) {
         if (textbox == NULL)
             return;
 
-        self->pickableItemFlash_or_textbox.flash = (pickableItemFlash*) textbox;
+        self->pickableItemFlash_or_textbox.textbox = (mfds_state*) textbox;
         cameraMgr_setReadingTextState(sys.ptr_cameraMgr, TRUE);
         ITEM_FADE_TIMER = 0;
     }
@@ -291,7 +293,70 @@ void interactuables_initCheck(interactuables* self) {
 
 #pragma GLOBAL_ASM("../asm/nonmatchings/common/interactuables/interactuables_selectTextboxOption.s")
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/common/interactuables/interactuables_stopCheck.s")
+// clang-format on
+
+void interactuables_stopCheck(interactuables* self) {
+    u32 temp[2];
+
+    if (interactuables_settings_table[self->table_index].type ==
+        ITEM_KIND_ITEM) {
+        if (interactuables_settings_table[self->table_index].item_or_text_ID ==
+            ITEM_ID_WHITE_JEWEL) {
+            if (objectList_findFirstObjectByID(MENU_SAVEGAME) == NULL) {
+                sys.FREEZE_PLAYER = FALSE;
+                sys.FREEZE_ENEMIES = FALSE;
+
+                cameraMgr_setReadingTextState(sys.ptr_cameraMgr, FALSE);
+                interactuables_stopInteraction(self);
+                (*object_curLevel_goToFunc)(
+                    self->header.current_function,
+                    &self->header.functionInfo_ID,
+                    INTERACTUABLES_LOOP
+                );
+            }
+        } else {
+            if (self->pickableItemFlash_or_textbox.textbox ==
+                (mfds_state*) -1) {
+                interactuables_stopInteraction(self);
+                (*object_curLevel_goToFunc)(
+                    self->header.current_function,
+                    &self->header.functionInfo_ID,
+                    INTERACTUABLES_LOOP
+                );
+
+                return;
+            }
+
+            (*object_curLevel_goToNextFuncAndClearTimer)(
+                self->header.current_function, &self->header.functionInfo_ID
+            );
+        }
+    }
+
+    if ((interactuables_settings_table[self->table_index].type ==
+         ITEM_KIND_TEXT_SPOT) &&
+        lensAreClosed()) {
+        sys.FREEZE_PLAYER = FALSE;
+        sys.FREEZE_ENEMIES = FALSE;
+        cameraMgr_setReadingTextState(sys.ptr_cameraMgr, FALSE);
+
+        if (interactuables_settings_table[self->table_index].flags & 2) {
+            (*object_curLevel_goToNextFuncAndClearTimer)(
+                self->header.current_function, &self->header.functionInfo_ID
+            );
+            return;
+        }
+
+        interactuables_stopInteraction(self);
+        (*object_curLevel_goToFunc)(
+            self->header.current_function,
+            &self->header.functionInfo_ID,
+            INTERACTUABLES_LOOP
+        );
+    }
+}
+
+// clang-format off
 
 #pragma GLOBAL_ASM("../asm/nonmatchings/common/interactuables/interactuables_destroy.s")
 
