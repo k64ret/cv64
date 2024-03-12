@@ -4,6 +4,7 @@
 #include "gfx/camera.h"
 #include "gfx/struct_47.h"
 #include "objects/cutscene/interactuables.h"
+#include "objects/menu/contractMgr.h"
 #include "objects/player/player.h"
 #include "random.h"
 #include "system_work.h"
@@ -185,58 +186,67 @@ void interactuables_init(interactuables* self) {
 // clang-format on
 
 void interactuables_initCheck(interactuables* self) {
-    interactuables_settings* var_v1 =
+    interactuables_settings* settings =
         &interactuables_settings_table[self->table_index];
-    cv64_save_state_t* save = &sys.SaveStruct_gameplay;
-    mfds_state* temp_v0;
-    mfds_state* var_v0;
-    u16 temp_v0_2;
+    mfds_state* textbox;
+    contractMgr* contract;
 
-    if (var_v1->type == ITEM_KIND_ITEM) {
-        temp_v0_2 =
+    // If picking up an item...
+    if (settings->type == ITEM_KIND_ITEM) {
+        // Setup and display the item name textbox
+        textbox = item_prepareTextbox(
             itemModelSettings_getEntryFromList(
                 interactuables_settings_table[self->table_index].item_or_text_ID
             )
-                ->item_ID;
-        temp_v0 = item_prepareTextbox(temp_v0_2);
+                ->item_ID
+        );
 
-        if (temp_v0 == NULL)
+        if (textbox == NULL)
             return;
 
-        self->pickableItemFlash_or_textbox.flash = (pickableItemFlash*) temp_v0;
-        var_v1 = &interactuables_settings_table[self->table_index];
+        self->pickableItemFlash_or_textbox.flash = (pickableItemFlash*) textbox;
 
+        // If picking up the contract, create `contractMgr`, which begins
+        // the cutscene and warps you to Renon's shop
         if (interactuables_settings_table[self->table_index].item_or_text_ID ==
             ITEM_ID_THE_CONTRACT) {
-            ((cv64_object_t*) (*object_createAndSetChild)(&self->header, 0x213B)
-            )
-                ->alloc_data[0] = self;
-            var_v1 = &interactuables_settings_table[self->table_index];
+            contract = (contractMgr*) (*object_createAndSetChild)(
+                &self->header, MENU_CONTRACTMGR
+            );
+            contract->contract_item = self;
         }
 
+        // If trying to pick up a White Jewel, freeze the players and all enemies in place
+        // and begin reading its textbox. Don't actually pick it up
         if (interactuables_settings_table[self->table_index].item_or_text_ID ==
             ITEM_ID_WHITE_JEWEL) {
             sys.FREEZE_PLAYER = TRUE;
             sys.FREEZE_ENEMIES = TRUE;
-            cameraMgr_setReadingTextState(sys.ptr_cameraMgr, 1);
-            self->header.timer = 0;
-            var_v1 = &interactuables_settings_table[self->table_index];
+            cameraMgr_setReadingTextState(sys.ptr_cameraMgr, TRUE);
+            ITEM_FADE_TIMER = 0;
+            settings = &interactuables_settings_table[self->table_index];
         }
     }
 
+    // If checking a text spot...
     if (interactuables_settings_table[self->table_index].type ==
         ITEM_KIND_TEXT_SPOT) {
         if (interactuables_settings_table[self->table_index].flags & 4) {
-            if (save->event_flags[self->map_event_flag_ID] &
-                interactuables_settings_table[self->table_index].event_flag) {
+            // Destroy it if its associated event flag is set
+            if (CHECK_EVENT_FLAGS(
+                    self->map_event_flag_ID,
+                    interactuables_settings_table[self->table_index].event_flag
+                )) {
                 self->header.destroy(self);
                 return;
             }
         }
 
         if (interactuables_settings_table[self->table_index].flags & 8) {
-            if (!(save->event_flags[self->map_event_flag_ID] &
-                  interactuables_settings_table[self->table_index].event_flag
+            // Disable it if its associated event flag is NOT set
+            if (!CHECK_EVENT_FLAGS(
+                    self->map_event_flag_ID,
+                    interactuables_settings_table[self->table_index].event_flag
                 )) {
                 interactuables_stopInteraction(self);
                 (*object_curLevel_goToFunc)(
@@ -249,20 +259,23 @@ void interactuables_initCheck(interactuables* self) {
         }
 
         // clang-format off
+        // Get the message associated to the text spot
         // This code is asinine LOL
-        var_v0 = (interactuables_settings_table[self->table_index].flags & 0x10)
+        textbox = (interactuables_settings_table[self->table_index].flags & 0x10)
             ? map_getMessageFromPool(interactuables_settings_table[self->table_index].item_or_text_ID, 0)
             : map_getMessageFromPool(interactuables_settings_table[self->table_index].item_or_text_ID, 0);
+
+        // Freeze the player and all enemies in place, then begin reading the message
+        sys.FREEZE_PLAYER = TRUE, // comma needed for matching
+        sys.FREEZE_ENEMIES = TRUE;
         // clang-format on
 
-        sys.FREEZE_PLAYER = TRUE, sys.FREEZE_ENEMIES = TRUE;
-
-        if (var_v0 == NULL)
+        if (textbox == NULL)
             return;
 
-        self->pickableItemFlash_or_textbox.flash = (pickableItemFlash*) var_v0;
-        cameraMgr_setReadingTextState(sys.ptr_cameraMgr, 1);
-        self->header.timer = 0;
+        self->pickableItemFlash_or_textbox.flash = (pickableItemFlash*) textbox;
+        cameraMgr_setReadingTextState(sys.ptr_cameraMgr, TRUE);
+        ITEM_FADE_TIMER = 0;
     }
 
     (*object_curLevel_goToNextFuncAndClearTimer)(
