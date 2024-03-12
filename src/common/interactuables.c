@@ -204,7 +204,7 @@ void interactuables_initCheck(interactuables* self) {
         if (textbox == NULL)
             return;
 
-        self->pickableItemFlash_or_textbox.flash = (pickableItemFlash*) textbox;
+        self->pickableItemFlash_or_textbox.textbox = (mfds_state*) textbox;
 
         // If picking up the contract, create `contractMgr`, which begins
         // the cutscene and warps you to Renon's shop
