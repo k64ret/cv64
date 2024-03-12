@@ -1,6 +1,7 @@
 #include "cv64.h"
 #include "actor.h"
 #include "effect.h"
+#include "event_flags.h"
 #include "gfx/camera.h"
 #include "gfx/struct_47.h"
 #include "objects/cutscene/interactuables.h"
@@ -72,9 +73,9 @@ void interactuables_init(interactuables* self) {
             // Don't spawn the item if it has been picked up already
             // i.e. if the item's associated bitflag is set
             if ((self->event_flag != 0) &&
-                (sys.SaveStruct_gameplay.event_flags[self->map_event_flag_ID] &
-                 (0, self->event_flag
-                 ) // (0, self->event_flag) needed to avoid v0 / t8 regswap
+                // (0, self->event_flag) needed to avoid v0 / t8 regswap
+                CHECK_EVENT_FLAGS(
+                    self->map_event_flag_ID, (0, self->event_flag)
                 )) {
                 self->header.destroy(self);
                 return;
@@ -116,14 +117,20 @@ void interactuables_init(interactuables* self) {
             }
             // item_model->material_dlist = &ITEM_MATERIAL_DL;
             item_model->material_dlist = ITEM_MATERIAL_DL;
-            if (interactuables_settings_table[self->table_index].flags &
-                0x800) {
+            if (BITS_HAS(
+                    interactuables_settings_table[self->table_index].flags,
+                    ITEM_INVISIBLE
+                )) {
                 BITS_SET(item_model->type, ~0x7FFF);
             }
-            if (self->flags & 1) {
-                BITS_SET(item_model->flags, 0x800);
+
+            if (BITS_HAS(self->flags, ITEM_VANISH)) {
+                BITS_SET(item_model->flags, ITEM_INVISIBLE);
             } else {
-                BITS_SET(item_model->flags, 0x840);
+                BITS_SET(
+                    item_model->flags,
+                    ITEM_INVISIBLE | TEXT_SPOT_IF_YES_ACTIVATE_LEVER
+                );
             }
 
             CV64_COLOR_RGBA_TO_U32(item_model->primitive_color) = 0xFFFFFFFF;
