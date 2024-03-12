@@ -68,7 +68,7 @@ void GameStateMgr_setupGameState(GameStateMgr* self) {
          currentSlot++) {
         temp2 = *currentSlot & 0x7FC00000;
         if (*currentSlot != 0) {
-            *currentSlot &= 0x803FFFFF;
+            BITS_ASSIGN_MASK(*currentSlot, 0x803FFFFF);
             if (*currentSlot > 0) {
                 *currentSlot =
                     (s32) object_createAndSetChild(self, *currentSlot) &

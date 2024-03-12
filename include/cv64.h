@@ -7,17 +7,33 @@
 
 #define CV64_BIT(num) (1 << (num))
 /**
+ * Apply `mask` on top of `value`.
+ */
+#define BITS_MASK(value, mask) ((value) & (mask))
+/**
+ * Apply `mask` on top of `value` and assign result to `value`.
+ */
+#define BITS_ASSIGN_MASK(value, mask) ((value) &= (mask))
+/**
  * Check if `bits` is set in `value`.
  */
-#define BITS_HAS(value, bits) ((value) & (bits))
+#define BITS_HAS(value, bits) BITS_MASK(value, bits)
 /**
- * Set `bit` in `value`.
+ * Check if `bits` is set in `value`.
+ */
+#define BITS_NOT_HAS(value, bits) !BITS_HAS(value, bits)
+/**
+ * Set `bits` in `value`.
  */
 #define BITS_SET(value, bits) ((value) |= (bits))
 /**
- * Unset `bit` in `value`.
+ * Unset `bits` in `value`.
  */
 #define BITS_UNSET(value, bits) ((value) &= ~(bits))
+/**
+ * Apply `mask` on top of `value` and assign result to `value`.
+ */
+#define BITS_ASSIGN_MASK(value, mask) ((value) &= (mask))
 
 typedef u8 Addr[];
 

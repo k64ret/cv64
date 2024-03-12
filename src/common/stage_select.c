@@ -153,7 +153,7 @@ void stageSelect_initLens(stageSelect* self) {
         lens = self->lens;
         if (lens != NULL) {
             (*windowWork_setParams)(lens, 0, 7, 5, 1.6f, 1.0f, NULL);
-            lens->flags &= ~WINDOW_CLOSING;
+            BITS_UNSET(lens->flags, WINDOW_CLOSING);
             BITS_SET(lens->flags, WINDOW_OPENING);
         }
         (*object_curLevel_goToNextFuncAndClearTimer)(
@@ -185,7 +185,7 @@ void stageSelect_moveLens(stageSelect* self) {
         if ((sys.controllers[0].buttons_pressed & A_BUTTON) ||
             (sys.controllers[0].buttons_pressed &
              (START_BUTTON | RECENTER_BUTTON))) {
-            lens->flags &= ~WINDOW_OPENING;
+            BITS_UNSET(lens->flags, WINDOW_OPENING);
             BITS_SET(lens->flags, WINDOW_CLOSING);
             (*object_curLevel_goToNextFuncAndClearTimer)(
                 self->header.current_function, &self->header.functionInfo_ID
@@ -240,7 +240,7 @@ void stageSelect_warpToStage(stageSelect* self) {
         // clang-format on
 
         sys.field89_0x2644c = 0;
-        sys.cutscene_flags &= ~CUTSCENE_FLAG_PLAYING;
+        BITS_UNSET(sys.cutscene_flags, CUTSCENE_FLAG_PLAYING);
         sys.current_boss_actor_ID = 0;
 
         switch (self->current_option) {

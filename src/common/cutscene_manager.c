@@ -117,7 +117,7 @@ void cutsceneMgr_loop(cutsceneMgr* self) {
         ) == NULL) {
         if (cutscene_settings[self->cutscene_ID - 1].overlay &
             CUTSCENE_OVERLAY_FILM_REEL) {
-            sys.cutscene_flags &= ~CUTSCENE_FLAG_FILM_REEL_EFFECT;
+            BITS_UNSET(sys.cutscene_flags, CUTSCENE_FLAG_FILM_REEL_EFFECT);
         }
         (*object_curLevel_goToNextFuncAndClearTimer)(
             self->header.current_function, &self->header.functionInfo_ID
@@ -149,9 +149,11 @@ void cutsceneMgr_stopCutscene(cutsceneMgr* self) {
     }
 
     if (!(sys.cutscene_flags & CUTSCENE_FLAG_20)) {
-        sys.cutscene_flags &= ~CUTSCENE_FLAG_PLAYING;
+        BITS_UNSET(sys.cutscene_flags, CUTSCENE_FLAG_PLAYING);
         if (!(sys.cutscene_flags & CUTSCENE_FLAG_10)) {
-            sys.cutscene_flags &= ~CUTSCENE_FLAG_DISPLAY_WIDESCREEN_BORDERS;
+            BITS_UNSET(
+                sys.cutscene_flags, CUTSCENE_FLAG_DISPLAY_WIDESCREEN_BORDERS
+            );
         }
     }
 

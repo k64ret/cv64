@@ -124,8 +124,9 @@ object_create(cv64_object_hdr_t* parent, cv64_object_id_t ID) {
     cv64_object_hdr_t* new_object = object_allocate(ID);
 
     if (new_object != NULL) {
-        ID &= 0x7FF; // Grab the part of the "ID" field that contains the actual
-                     // ID of the object
+        // Grab the part of the "ID" field that contains the actual ID of the object
+        BITS_ASSIGN_MASK(ID, 0x7FF);
+
         if (objects_file_info[ID - 1] != NULL &&
             func_8000EE18(ptr_Object_0003, new_object) == -1) {
             return NULL;
@@ -157,8 +158,9 @@ object_createAndSetChild(cv64_object_hdr_t* parent, cv64_object_id_t ID) {
     new_object = object_allocate(ID);
 
     if (new_object != NULL) {
-        ID &= 0x7FF; // Grab the part of the "ID" field that contains the actual
-                     // ID of the object
+        // Grab the part of the "ID" field that contains the actual ID of the object
+        BITS_ASSIGN_MASK(ID, 0x7FF);
+
         if (objects_file_info[ID - 1] != NULL &&
             func_8000EE18(ptr_Object_0003, new_object) == -1) {
             return NULL;
@@ -197,7 +199,7 @@ object_findFirstObjectByID(cv64_object_id_t ID, cv64_object_t* current_object) {
     // The ID of the object actually consists of a flag variable (upper byte)
     // and the actual ID part (lower byte)
     // Only the ID part of it.
-    ID &= 0x7FF;
+    BITS_ASSIGN_MASK(ID, 0x7FF);
 
     // Go through each object sequentially, and when the first object of a given
     // ID is found return a pointer to that object.
@@ -231,8 +233,8 @@ cv64_object_t* object_findObjectBetweenIDRange(
 ) {
     s32 current_obj_ID;
 
-    min_ID &= 0x7FF;
-    max_ID &= 0x7FF;
+    BITS_ASSIGN_MASK(min_ID, 0x7FF);
+    BITS_ASSIGN_MASK(max_ID, 0x7FF);
     current_object++;
     for (; (u32) current_object < (u32) object_list_free_slot;
          current_object++) {
@@ -309,7 +311,7 @@ cv64_object_t* func_8000211C_2D1C(s32 ID) {
     cv64_object_t* var_v0;
 
     if (ID & OBJ_FLAG_MAP_OVERLAY) {
-        ID &= 0x7FF;
+        BITS_ASSIGN_MASK(ID, 0x7FF);
 
         for (var_v0 = objectList_findFirstObjectByID(ID); var_v0 != NULL;
              var_v0 = object_findFirstObjectByID(ID, var_v0)) {
