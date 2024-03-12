@@ -53,7 +53,7 @@ void cv64_ovl_konamilogo_init(cv64_ovl_konamilogo_t* self) {
     model->size.x = 0.9975f;
     model->size.y = 1.005f;
     CV64_COLOR_RGBA_TO_U32(sys.background_color) = 0x000000FF; // Black (opaque)
-    model->flags |= FIG_FLAG_0800;
+    BITS_SET(model->flags, FIG_FLAG_0800);
     CV64_COLOR_RGBA_TO_U32(model->primitive_color) =
         0xFFFFFF00; // White (transparent)
 

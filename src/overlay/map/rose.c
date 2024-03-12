@@ -49,7 +49,7 @@ void cv64_ovl_rose_ventilator_init(cv64_ovl_rose_ventilator_t* self) {
         self->model = model;
         model->dlist = &ROSE_VENTILATOR_DL;
         model->assets_file_ID = sys.map_assets_file_IDs[0];
-        model->flags |= (FIG_FLAG_0800 | FIG_FLAG_0100);
+        BITS_SET(model->flags, FIG_FLAG_0800 | FIG_FLAG_0100);
         CV64_COLOR_RGBA_TO_U32(model->primitive_color) =
             CV64_COLOR_RGBA_TO_U32(sys.primitive_color);
         CV64_COLOR_RGBA_TO_U32(model->fog_color) =
@@ -128,12 +128,12 @@ void cv64_ovl_rose_door_init(cv64_ovl_rose_door_t* self) {
     (*actor_model_set_pos_and_angle)(self, model);
     model->assets_file_ID = sys.map_assets_file_IDs[0];
     model->dlist = &ROSE_DOOR_DL;
-    model->flags |= (FIG_FLAG_0800 | FIG_FLAG_0100);
+    BITS_SET(model->flags, FIG_FLAG_0800 | FIG_FLAG_0100);
     CV64_COLOR_RGBA_TO_U32(model->primitive_color) =
         CV64_COLOR_RGBA_TO_U32(sys.primitive_color);
     CV64_COLOR_RGBA_TO_U32(model->fog_color) =
         CV64_COLOR_RGBA_TO_U32(sys.background_color);
-    self->header.ID |= OBJ_FLAG_STAGE_OBJECT;
+    BITS_SET(self->header.ID, OBJ_FLAG_STAGE_OBJECT);
     map_actor_model =
         (*getMapActorModelEntryFromArray)(model->dlist, model->assets_file_ID);
     model->map_actor_model = map_actor_model;

@@ -331,7 +331,7 @@ cv64_object_t* func_8000211C_2D1C(s32 ID) {
 void* object_allocEntryInList(
     cv64_object_t* self, s32 heap_kind, u32 size, s32 alloc_data_index
 ) {
-    self->field_0x20 |= (1 << alloc_data_index);
+    BITS_SET(self->field_0x20, 1 << alloc_data_index);
     self->alloc_data[alloc_data_index] = heap_alloc(heap_kind, size);
     return self->alloc_data[alloc_data_index];
 }
@@ -344,7 +344,7 @@ void* object_allocEntryInList(
 void* object_allocEntryInListAndClear(
     cv64_object_t* self, s32 heap_kind, u32 size, s32 alloc_data_index
 ) {
-    self->field_0x20 |= (1 << alloc_data_index);
+    BITS_SET(self->field_0x20, 1 << alloc_data_index);
     self->alloc_data[alloc_data_index] = heap_alloc(heap_kind, size);
     memory_clear(self->alloc_data[alloc_data_index], size);
     return self->alloc_data[alloc_data_index];
@@ -353,7 +353,7 @@ void* object_allocEntryInListAndClear(
 void* func_80002264_2E64(
     cv64_object_t* self, u32 size, s32 heap_kind, s32 alloc_data_index
 ) {
-    self->field_0x22 |= (1 << alloc_data_index);
+    BITS_SET(self->field_0x22, 1 << alloc_data_index);
     self->alloc_data[alloc_data_index] = func_80001008_1C08(size, heap_kind);
     return self->alloc_data[alloc_data_index];
 }

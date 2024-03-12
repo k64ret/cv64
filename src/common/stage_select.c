@@ -73,7 +73,7 @@ void stageSelect_initGraphics(stageSelect* self) {
         self->red_background_model = bg_model;
         bg_model->assets_file_ID = NI_ASSETS_MENU;
         bg_model->dlist = &MENU_RED_BACKGROUND_DL;
-        bg_model->flags |= FIG_FLAG_0800;
+        BITS_SET(bg_model->flags, FIG_FLAG_0800);
         CV64_COLOR_RGBA_TO_U32(bg_model->primitive_color) =
             (s8) 0x000000FF; // Slight fakematch?
         bg_model->position.x = 0.0f;
@@ -154,7 +154,7 @@ void stageSelect_initLens(stageSelect* self) {
         if (lens != NULL) {
             (*windowWork_setParams)(lens, 0, 7, 5, 1.6f, 1.0f, NULL);
             lens->flags &= ~WINDOW_CLOSING;
-            lens->flags |= WINDOW_OPENING;
+            BITS_SET(lens->flags, WINDOW_OPENING);
         }
         (*object_curLevel_goToNextFuncAndClearTimer)(
             self->header.current_function, &self->header.functionInfo_ID
@@ -186,7 +186,7 @@ void stageSelect_moveLens(stageSelect* self) {
             (sys.controllers[0].buttons_pressed &
              (START_BUTTON | RECENTER_BUTTON))) {
             lens->flags &= ~WINDOW_OPENING;
-            lens->flags |= WINDOW_CLOSING;
+            BITS_SET(lens->flags, WINDOW_CLOSING);
             (*object_curLevel_goToNextFuncAndClearTimer)(
                 self->header.current_function, &self->header.functionInfo_ID
             );
@@ -267,7 +267,7 @@ void stageSelect_warpToStage(stageSelect* self) {
                 break;
 
             case COURTYARD:
-                sys.cutscene_flags |= CUTSCENE_FLAG_10;
+                BITS_SET(sys.cutscene_flags, CUTSCENE_FLAG_10);
                 sys.entrance_cutscene_ID = 9;
                 sys.map_ID = NAKANIWA;
                 sys.map_fade_out_time = 30;
@@ -344,10 +344,10 @@ void stageSelect_closeTextboxes(stageSelect* self) {
     // TODO: (WINDOW_CLOSING | WINDOW_OPENING) represents flag 0x300.
     // However, we don't know if that specific flag represents something
     // not related to opening / closing the lens
-    self->lens->flags |= (WINDOW_CLOSING | WINDOW_OPENING);
+    BITS_SET(self->lens->flags, WINDOW_CLOSING | WINDOW_OPENING);
     for (self->text_ID = 0; self->text_ID < STAGE_SELECT_NUM_OPTIONS + 1;
          self->text_ID++) {
-        textbox_array[self->text_ID]->flags |= CLOSE_TEXTBOX;
+        BITS_SET(textbox_array[self->text_ID]->flags, CLOSE_TEXTBOX);
     }
     (*heap_free)(HEAP_KIND_MENU_DATA);
 }

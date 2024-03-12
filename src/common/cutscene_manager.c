@@ -87,7 +87,7 @@ void cutsceneMgr_createCutscene(cutsceneMgr* self) {
         &self->header, cutscene_settings[(*cutscene_ID_ptr) - 1].object_ID
     );
     if (self->cutscene_object != NULL) {
-        sys.cutscene_flags |= CUTSCENE_FLAG_PLAYING;
+        BITS_SET(sys.cutscene_flags, CUTSCENE_FLAG_PLAYING);
     }
 
     (*object_curLevel_goToNextFuncAndClearTimer)(

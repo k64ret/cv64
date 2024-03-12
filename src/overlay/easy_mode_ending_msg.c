@@ -74,7 +74,7 @@ void cv64_ovl_easyending_loop(cv64_ovl_easyending_t* self) {
     self->active_time++;
     if ((self->active_time > 120) &&
         (sys.controllers[0].buttons_pressed & A_BUTTON)) {
-        *textbox_flags |= CLOSE_TEXTBOX;
+        BITS_SET(*textbox_flags, CLOSE_TEXTBOX);
         sys.SaveStruct_gameplay.money = 0;
         sys.SaveStruct_gameplay.time_saved_counter = 0;
         sys.SaveStruct_gameplay.death_counter = 0;

@@ -76,7 +76,7 @@ void GameStateMgr_setupGameState(GameStateMgr* self) {
             }
             if (1) {
             }
-            *currentSlot |= temp2;
+            BITS_SET(*currentSlot, temp2);
         } else {
             break;
         }

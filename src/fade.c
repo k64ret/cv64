@@ -45,7 +45,7 @@ Gfx cv64_dl_fade_with_outline[] = {
 
 void fade_setAllFlags(s16 flags) { sys.fade_flags = flags; }
 
-void fade_setFlag(s16 flag) { sys.fade_flags |= flag; }
+void fade_setFlag(s16 flag) { BITS_SET(sys.fade_flags, flag); }
 
 void fade_removeFlag(s16 flag) { sys.fade_flags &= ~flag; }
 

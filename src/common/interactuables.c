@@ -118,12 +118,12 @@ void interactuables_init(interactuables* self) {
             item_model->material_dlist = ITEM_MATERIAL_DL;
             if (interactuables_settings_table[self->table_index].flags &
                 0x800) {
-                item_model->type |= ~0x7FFF;
+                BITS_SET(item_model->type, ~0x7FFF);
             }
             if (self->flags & 1) {
-                item_model->flags |= 0x800;
+                BITS_SET(item_model->flags, 0x800);
             } else {
-                item_model->flags |= 0x840;
+                BITS_SET(item_model->flags, 0x840);
             }
 
             CV64_COLOR_RGBA_TO_U32(item_model->primitive_color) = 0xFFFFFFFF;
@@ -340,7 +340,9 @@ void interactuables_stopCheck(interactuables* self) {
         sys.FREEZE_ENEMIES = FALSE;
         cameraMgr_setReadingTextState(sys.ptr_cameraMgr, FALSE);
 
-        if (interactuables_settings_table[self->table_index].flags & 2) {
+        if (BITS_HAS(
+                interactuables_settings_table[self->table_index].flags, 2
+            )) {
             (*object_curLevel_goToNextFuncAndClearTimer)(
                 self->header.current_function, &self->header.functionInfo_ID
             );

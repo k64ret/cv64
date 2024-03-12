@@ -155,7 +155,7 @@ void gamestate_create(s32 game_state) {
 
     // Set GameStateMgr params (flags, destroy function, game state ID and game
     // state info)
-    ptr_GameStateMgr->flags |= OBJ_EXEC_FLAG_TOP;
+    BITS_SET(ptr_GameStateMgr->flags, OBJ_EXEC_FLAG_TOP);
     ptr_GameStateMgr->destroy = GameStateMgr_destroy;
     ptr_GameStateMgr->current_game_state = game_state;
     memory_copy(
