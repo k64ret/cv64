@@ -10,8 +10,6 @@
 #include "random.h"
 #include "system_work.h"
 
-#define MENU_SAVEGAME 0x2137
-
 typedef struct {
     u8 field_0x00[6];
     s16 field_0x06;
