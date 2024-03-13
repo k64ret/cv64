@@ -506,11 +506,62 @@ void interactuables_stopCheck(interactuables* self) {
     }
 }
 
-// clang-format off
+void interactuables_destroy(interactuables* self) {
+    if (interactuables_settings_table[self->table_index].type ==
+        ITEM_KIND_ITEM) {
+        // If we picked the contract, remove it from the inventory and stop its interaction
+        if (interactuables_settings_table[self->table_index].item_or_text_ID ==
+            ITEM_ID_THE_CONTRACT) {
+            // Technically speaking, the contract gets added temporarily to your inventory after picking it up
+            // until exiting Renon's shop.
+            // This could also be a leftover from early development, where using the contract would've consumed
+            // 1 point (see: https://tcrf.net/Castlevania_(Nintendo_64)/Unused_Items)
+            (*item_removeAmountFromInventory)(ITEM_ID_THE_CONTRACT, 1);
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/common/interactuables/interactuables_destroy.s")
+            if (objectList_findFirstObjectByID(MENU_CONTRACTMGR) == NULL) {
+                interactuables_stopInteraction(self);
+                (*object_curLevel_goToFunc)(
+                    self->header.current_function,
+                    &self->header.functionInfo_ID,
+                    INTERACTUABLES_LOOP
+                );
+            }
 
-// clang-format on
+            return;
+        } else {
+            if (self->event_flag != 0) {
+                // Set the appropiate event flag, if the item is meant to set one
+                SET_EVENT_FLAGS(self->map_event_flag_ID, self->event_flag);
+
+                // Unlock the Special1 and Special2 rewards after picking them up
+                if (interactuables_settings_table[self->table_index]
+                        .item_or_text_ID == ITEM_ID_SPECIAL1) {
+                    BITS_SET(
+                        sys.SaveStruct_gameplay.flags,
+                        SAVE_FLAG_HARD_MODE_UNLOCKED
+                    );
+                }
+
+                if (interactuables_settings_table[self->table_index]
+                        .item_or_text_ID == ITEM_ID_SPECIAL2) {
+                    if (sys.SaveStruct_gameplay.character != REINHARDT) {
+                        BITS_SET(
+                            sys.SaveStruct_gameplay.flags,
+                            SAVE_FLAG_HAVE_CARRIE_ALT_COSTUME
+                        );
+                    } else {
+                        BITS_SET(
+                            sys.SaveStruct_gameplay.flags,
+                            SAVE_FLAG_HAVE_REINHARDT_ALT_COSTUME
+                        );
+                    }
+                }
+            }
+        }
+    }
+
+    self->header.destroy(self);
+}
 
 void interactuables_stopInteraction(interactuables* self) {
     self->pickableItemFlash_or_textbox.flash = NULL;
