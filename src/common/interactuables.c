@@ -12,6 +12,43 @@
 
 #define MENU_SAVEGAME 0x2137
 
+typedef struct {
+    u8 field_0x00[6];
+    s16 field_0x06;
+    u8 field_0x08[20];
+} struct_56;
+
+typedef struct {
+    void* field_0x00; // A function pointer
+    struct_56* field_0x04;
+    u32 dlist;
+    s32 file_ID;
+    s32 event_flag_ID;
+    u32 event_flag;
+    s32 sound_ID;
+} struct_21;
+
+typedef struct {
+    cv64_object_hdr_t header;
+    u8 field_0x20[4];
+    cv64_model_inf_t model;
+    u8 field_0x28[12];
+    struct_56* field_0x34;
+    void* field_0x38; // A function pointer
+    struct_21* field_0x3C;
+    s32 field_0x40;
+    s32 field_0x44;
+    s32 current_lever_pull_time;
+    s32 max_lever_pull_time;
+    s32 model_pitch;
+    u8 field_0x54[24];
+    s32 activate;
+    cv64_actor_settings_t* settings;
+} actorLever;
+
+extern actorLever*
+actorLever_activate(s16 actor_ID, u16 variable_1, u32 activate);
+
 extern f64 D_8018AB60_10DD50;
 extern f64 D_8018AB68_10DD58;
 
@@ -296,11 +333,115 @@ void interactuables_initCheck(interactuables* self) {
     );
 }
 
-// clang-format off
+void interactuables_selectTextboxOption(interactuables* self) {
+    saveGame* saveGameObj;
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/common/interactuables/interactuables_selectTextboxOption.s")
+    if (interactuables_settings_table[self->table_index].type ==
+        ITEM_KIND_ITEM) {
+        if (interactuables_settings_table[self->table_index].item_or_text_ID ==
+            ITEM_ID_WHITE_JEWEL) {
+            mfds_state* textbox = self->pickableItemFlash_or_textbox.textbox;
 
-// clang-format on
+            switch (textbox->textbox_option) {
+                default:
+                    break;
+                case 0:
+                    return;
+                case 1:
+                    saveGameObj = (saveGame*) object_createAndSetChild(
+                        &self->header, MENU_SAVEGAME
+                    ),
+                    saveGameObj->save_crystal_number = (s16) self->event_flag;
+                    break;
+                case 2:
+                    sys.FREEZE_PLAYER = FALSE, sys.FREEZE_ENEMIES = FALSE;
+                    cameraMgr_setReadingTextState(sys.ptr_cameraMgr, FALSE);
+                    interactuables_stopInteraction(self);
+                    (*object_curLevel_goToFunc)(
+                        self->header.current_function,
+                        &self->header.functionInfo_ID,
+                        INTERACTUABLES_LOOP
+                    );
+                    return;
+            }
+        }
+    }
+
+    if (interactuables_settings_table[self->table_index].type ==
+        (u32) ITEM_KIND_TEXT_SPOT) {
+        if (interactuables_settings_table[self->table_index].flags & 0x10) {
+            mfds_state* textbox = self->pickableItemFlash_or_textbox.textbox;
+
+            switch (textbox->textbox_option) {
+                default:
+                    break;
+                case 0:
+                    return;
+                case 1:
+                    if (BITS_HAS(
+                            interactuables_settings_table[self->table_index]
+                                .flags,
+                            TEXT_SPOT_IF_YES_START_CUTSCENE
+                        )) {
+                        sys.FREEZE_PLAYER = FALSE, sys.FREEZE_ENEMIES = FALSE;
+                        cameraMgr_setReadingTextState(sys.ptr_cameraMgr, FALSE);
+                        sys.cutscene_ID =
+                            interactuables_settings_table[self->table_index]
+                                .cutscene_ID_or_actor_ID;
+                    }
+
+                    // Empty `if` needed for matching
+                    if (1) {
+                    }
+
+                    if (BITS_HAS(
+                            interactuables_settings_table[self->table_index]
+                                .flags,
+                            TEXT_SPOT_IF_YES_SET_BITFLAG
+                        )) {
+                        SET_EVENT_FLAGS(
+                            self->map_event_flag_ID,
+                            interactuables_settings_table[self->table_index]
+                                .event_flag
+                        );
+                    }
+
+                    // Empty `if` needed for matching
+                    if (1) {
+                    }
+
+                    if (BITS_HAS(
+                            interactuables_settings_table[self->table_index]
+                                .flags,
+                            TEXT_SPOT_IF_YES_ACTIVATE_LEVER
+                        )) {
+                        (*actorLever_activate)(
+                            interactuables_settings_table[self->table_index]
+                                .cutscene_ID_or_actor_ID,
+                            interactuables_settings_table[self->table_index]
+                                .actor_variable_1,
+                            TRUE
+                        );
+                    }
+
+                    if (BITS_HAS(
+                            interactuables_settings_table[self->table_index]
+                                .flags,
+                            TEXT_SPOT_IF_YES_PULL_LEVER
+                        )) {
+                        BITS_SET(sys.pull_lever, TRUE);
+                    }
+                    break;
+                case 2:
+                    break;
+            }
+        }
+    }
+
+    (*object_curLevel_goToNextFuncAndClearTimer)(
+        self->header.current_function, &self->header.functionInfo_ID
+    );
+}
 
 void interactuables_stopCheck(interactuables* self) {
     u32 temp[2];

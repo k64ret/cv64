@@ -103,4 +103,18 @@ typedef struct cv64_save_state {
     u32 money_spent_on_Renon;
 } cv64_save_state_t; // Size = 0xE0
 
+typedef struct {
+    cv64_object_hdr_t header;
+    u8 field_0x20[20];
+    s32 field_0x34;
+    s32 saveFile_errors;
+    u8 field_0x3C[4];
+    s16 save_crystal_number;
+    u8 field_0x42[2];
+    s32 field_0x44;
+    void* saveGameResults; // saveGameResults*
+    mfds_state* textbox;
+    u8 field_0x50[36];
+} saveGame;
+
 #endif
