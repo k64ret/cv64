@@ -103,6 +103,26 @@ typedef struct cv64_save_state {
     u32 money_spent_on_Renon;
 } cv64_save_state_t; // Size = 0xE0
 
+// clang-format off
+
+typedef enum cv64_save_flags {
+    SAVE_FLAG_GAME_WAS_SAVED_MID_PLAY    = 0x00000001,
+    SAVE_FLAG_EASY                       = 0x00000010,
+    SAVE_FLAG_NORMAL                     = 0x00000020,
+    SAVE_FLAG_HARD                       = 0x00000040,
+    SAVE_FLAG_HARD_MODE_UNLOCKED         = 0x00000100,
+    SAVE_FLAG_HAVE_REINHARDT_ALT_COSTUME = 0x00000200,
+    SAVE_FLAG_HAVE_CARRIE_ALT_COSTUME    = 0x00000400,
+    SAVE_FLAG_REINDHART_GOOD_ENDING      = 0x00020000,
+    SAVE_FLAG_CARRIE_GOOD_ENDING         = 0x00040000,
+    SAVE_FLAG_REINDHART_BAD_ENDING       = 0x00080000,
+    SAVE_FLAG_CARRIE_BAD_ENDING          = 0x00100000,
+    SAVE_FLAG_COSTUME_IS_BEING_USED      = 0x40000000,
+    SAVE_FLAG_CAN_EXPLODE_ON_JUMPING     = 0x80000000
+} cv64_save_flags_t;
+
+// clang-format on
+
 typedef struct {
     cv64_object_hdr_t header;
     u8 field_0x20[20];

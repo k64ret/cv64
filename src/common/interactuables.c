@@ -528,33 +528,32 @@ void interactuables_destroy(interactuables* self) {
             }
 
             return;
-        } else {
-            if (self->event_flag != 0) {
-                // Set the appropiate event flag, if the item is meant to set one
-                SET_EVENT_FLAGS(self->map_event_flag_ID, self->event_flag);
+        }
 
-                // Unlock the Special1 and Special2 rewards after picking them up
-                if (interactuables_settings_table[self->table_index]
-                        .item_or_text_ID == ITEM_ID_SPECIAL1) {
+        if (self->event_flag != 0) {
+            // Set the appropiate event flag, if the item is meant to set one
+            SET_EVENT_FLAGS(self->map_event_flag_ID, self->event_flag);
+
+            // Unlock the Special1 and Special2 rewards after picking them up
+            if (interactuables_settings_table[self->table_index]
+                    .item_or_text_ID == ITEM_ID_SPECIAL1) {
+                BITS_SET(
+                    sys.SaveStruct_gameplay.flags, SAVE_FLAG_HARD_MODE_UNLOCKED
+                );
+            }
+
+            if (interactuables_settings_table[self->table_index]
+                    .item_or_text_ID == ITEM_ID_SPECIAL2) {
+                if (sys.SaveStruct_gameplay.character != REINHARDT) {
                     BITS_SET(
                         sys.SaveStruct_gameplay.flags,
-                        SAVE_FLAG_HARD_MODE_UNLOCKED
+                        SAVE_FLAG_HAVE_CARRIE_ALT_COSTUME
                     );
-                }
-
-                if (interactuables_settings_table[self->table_index]
-                        .item_or_text_ID == ITEM_ID_SPECIAL2) {
-                    if (sys.SaveStruct_gameplay.character != REINHARDT) {
-                        BITS_SET(
-                            sys.SaveStruct_gameplay.flags,
-                            SAVE_FLAG_HAVE_CARRIE_ALT_COSTUME
-                        );
-                    } else {
-                        BITS_SET(
-                            sys.SaveStruct_gameplay.flags,
-                            SAVE_FLAG_HAVE_REINHARDT_ALT_COSTUME
-                        );
-                    }
+                } else {
+                    BITS_SET(
+                        sys.SaveStruct_gameplay.flags,
+                        SAVE_FLAG_HAVE_REINHARDT_ALT_COSTUME
+                    );
                 }
             }
         }
