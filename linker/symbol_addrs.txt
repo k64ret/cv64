@@ -1,11 +1,54 @@
-// src/gamestate.c
+// src/gamestate.c =============================================================
 
 gamestate_create = 0x80000460; // type:func
 gamestate_change = 0x80000510; // type:func
 
-// End of src/gamestate.c
+// End of src/gamestate.c ======================================================
 
-// src/object_flow.c
+// src/object.c ================================================================
+
+// .text
+object_isValid                         = 0x80001680; // type:func
+object_free                            = 0x800016A8; // type:func
+clearAllObjects                        = 0x8000177C; // type:func
+object_allocate                        = 0x800017DC; // type:func
+updateObjectListFreeSlot               = 0x80001868; // type:func
+object_create                          = 0x800018AC; // type:func
+object_createAndSetChild               = 0x80001980; // type:func
+object_findFirstObjectByID             = 0x80001A80; // type:func
+objectList_findFirstObjectByID         = 0x80001AD0; // type:func
+object_findObjectBetweenIDRange        = 0x80001AF4; // type:func
+objectList_findObjectBetweenRange      = 0x80001B50; // type:func
+object_findObjectByIDAndType           = 0x80001B74; // type:func
+func_80001BE4_27E4                     = 0x80001BE4; // type:func
+func_80001CA0_28A0                     = 0x80001CA0; // type:func
+func_80001DD4_29D4                     = 0x80001DD4; // type:func
+func_80001EB4_2AB4                     = 0x80001EB4; // type:func
+findNextMapObjectInstance              = 0x8000204C; // type:func
+findFirstMapObjectInstance             = 0x800020D8; // type:func
+func_8000211C_2D1C                     = 0x8000211C; // type:func
+object_allocEntryInList                = 0x8000219C; // type:func
+object_allocEntryInListAndClear        = 0x800021F4; // type:func
+func_80002264_2E64                     = 0x80002264; // type:func
+func_800022BC_2EBC                     = 0x800022BC; // type:func
+GameStateMgr_execute                   = 0x80002334; // type:func
+object_executeChildObject              = 0x800023D4; // type:func
+object_execute                         = 0x800024AC; // type:func
+func_80002570_3170                     = 0x80002570; // type:func
+func_800026D8_32D8                     = 0x800026D8; // type:func
+object_destroyChildrenAndModelInfo     = 0x80002740; // type:func
+GameStateMgr_destroy                   = 0x800027B4; // type:func
+func_800027BC_33BC                     = 0x800027BC; // type:func
+func_8000287C_347C                     = 0x8000287C; // type:func
+
+// .data
+Objects_functions                      = 0x80092274; // size:0x2216
+objects_array                          = 0x80342060;
+objects_number_of_instances_per_object = 0x8034CE60;
+
+// End of src/object.c =========================================================
+
+// src/object_flow.c ===========================================================
 
 object_doNothing                               = 0x8000E860; // type:func
 object_goToNextFuncNoCondition                 = 0x8000E868; // type:func
@@ -22,9 +65,9 @@ GameStateMgr_setupGameState                    = 0x8000EB64; // type:func
 GameStateMgr_executeGameStateUncappedFramerate = 0x8000EC24; // type:func
 GameStateMgr_executeGameStateCappedFramerate   = 0x8000ECB0; // type:func
 
-// End of src/object_flow.c
+// End of src/object_flow.c ====================================================
 
-// src/effect_manager.c
+// src/effect_manager.c ========================================================
 
 // .text
 effectMgr_entrypoint = 0x8005AEC0; // type:func
@@ -39,9 +82,9 @@ effectMgr_functions  = 0x8009AD60; // size:0x08
 // .bss
 ptr_effectMgr        = 0x800DD0D0;
 
-// End of src/effect_manager.c
+// End of src/effect_manager.c =================================================
 
-// src/common/interactuable.c
+// src/common/interactuable.c ==================================================
 
 // .text
 interactuables_entrypoint = 0x80125230; // type:func
@@ -56,9 +99,9 @@ interactuables_stopInteraction = 0x80126354; // type:func
 // .data
 interactuables_functions = 0x8016B560; // size:0x18
 
-// End of src/common/interactuable.c
+// End of src/common/interactuable.c ===========================================
 
-// src/common/cutscene_manager.c
+// src/common/cutscene_manager.c ===============================================
 
 // .text
 cutsceneMgr                                = 0x8034238C;
@@ -73,7 +116,7 @@ cutsceneMgr_entrypoint                     = 0x80126F40; // type:func
 // .data
 cutsceneMgr_functions                      = 0x8016B580;
 
-// End of src/common/cutscene_manager.c
+// End of src/common/cutscene_manager.c ========================================
 
 memory_clear = 0x80000770;
 memory_copy = 0x800008d0;
@@ -1372,8 +1415,7 @@ controller_player = 0x800d79b0;
 game_time_prev = 0x800a7904;
 another_display_list = 0x80363ac0;
 sys = 0x80363ab8;
-DMAMgr_functions = 0x80093cf0;
-Objects_functions = 0x80092274;
+DMAMgr_functions = 0x80093CF0; // size:0x24
 DAT_80342148 = 0x80342148;
 initial_magic_ball_size = 0x800a4aa0;
 PlayerData = 0x80350798;
@@ -1478,48 +1520,6 @@ fade_calc                 = 0x8000e6c4; // type:func
 // .rodata
 
 // End of src/fade.c
-
-// src/object.c
-
-// .text
-object_isValid                         = 0x80001680; // type:func
-object_free                            = 0x800016A8; // type:func
-clearAllObjects                        = 0x8000177C; // type:func
-object_allocate                        = 0x800017DC; // type:func
-updateObjectListFreeSlot               = 0x80001868; // type:func
-object_create                          = 0x800018AC; // type:func
-object_createAndSetChild               = 0x80001980; // type:func
-object_findFirstObjectByID             = 0x80001A80; // type:func
-objectList_findFirstObjectByID         = 0x80001AD0; // type:func
-object_findObjectBetweenIDRange        = 0x80001AF4; // type:func
-objectList_findObjectBetweenRange      = 0x80001B50; // type:func
-object_findObjectByIDAndType           = 0x80001B74; // type:func
-func_80001BE4_27E4                     = 0x80001BE4; // type:func
-func_80001CA0_28A0                     = 0x80001CA0; // type:func
-func_80001DD4_29D4                     = 0x80001DD4; // type:func
-func_80001EB4_2AB4                     = 0x80001EB4; // type:func
-findNextMapObjectInstance              = 0x8000204C; // type:func
-findFirstMapObjectInstance             = 0x800020D8; // type:func
-func_8000211C_2D1C                     = 0x8000211C; // type:func
-object_allocEntryInList                = 0x8000219C; // type:func
-object_allocEntryInListAndClear        = 0x800021F4; // type:func
-func_80002264_2E64                     = 0x80002264; // type:func
-func_800022BC_2EBC                     = 0x800022BC; // type:func
-GameStateMgr_execute                   = 0x80002334; // type:func
-object_executeChildObject              = 0x800023D4; // type:func
-object_execute                         = 0x800024AC; // type:func
-func_80002570_3170                     = 0x80002570; // type:func
-func_800026D8_32D8                     = 0x800026D8; // type:func
-object_destroyChildrenAndModelInfo     = 0x80002740; // type:func
-GameStateMgr_destroy                   = 0x800027B4; // type:func
-func_800027BC_33BC                     = 0x800027BC; // type:func
-func_8000287C_347C                     = 0x8000287C; // type:func
-
-// .data
-objects_array                          = 0x80342060;
-objects_number_of_instances_per_object = 0x8034CE60;
-
-// End of src/object.c
 
 D_8009342C_9402C = 0x8009342C; // ignore:true
 objects_file_info         = 0x80093430; // rom:0x00094030 size:0x8A8
@@ -1757,7 +1757,7 @@ collision_triangle_array_type_ID = 0x8018eb00;
 fileSelectController_functions = 0x80181070;
 mark_functions = 0x801817b0;
 scroll_functions = 0x80181560;
-DAT_80092f50 = 0x80092f50;
+DAT_80092f50 = 0x80092F50;
 text_color_anim_data_table = 0x8016d0a0;
 subweapon_jewel_count = 0x80096c44;
 gAudioCurrSoundsStack = 0x80122380;
@@ -1808,3 +1808,4 @@ func_8000C740 = 0x8000C740;
 func_80005658 = 0x80005658;
 effect_isMarkForDeletion = 0x8005d244;
 effect_markForDeletion = 0x8005d230;
+D_80093D20_94920 = 0x80093D20; // size:0x1C
