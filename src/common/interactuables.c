@@ -327,11 +327,6 @@ void interactuables_initCheck(interactuables* self) {
     );
 }
 
-#ifdef NON_MATCHING
-// clang-format off
-#pragma GLOBAL_ASM("../asm/nonmatchings/common/interactuables/interactuables_selectTextboxOption.s")
-// clang-format on
-#else
 void interactuables_selectTextboxOption(interactuables* self) {
     saveGame* saveGameObj;
 
@@ -441,7 +436,6 @@ void interactuables_selectTextboxOption(interactuables* self) {
         self->header.current_function, &self->header.functionInfo_ID
     );
 }
-#endif
 
 void interactuables_stopCheck(interactuables* self) {
     u32 temp[2];

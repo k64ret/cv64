@@ -38,7 +38,7 @@ typedef struct {
     u16 flags;
     u8 field_0x06[2];
     u32 event_flag;
-    s16 cutscene_ID_or_actor_ID;
+    u16 cutscene_ID_or_actor_ID;
     s16 actor_variable_1;
     u16 trigger_size; // Only used for text spots
     u8 field_0x12[2];
