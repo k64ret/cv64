@@ -1,4 +1,5 @@
 -D_LANGUAGE_C
+-DNON_MATCHING
 -Iinclude
 -Iinclude/ultra64
 -Iinclude/game

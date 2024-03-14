@@ -47,9 +47,6 @@ typedef struct {
 extern actorLever*
 actorLever_activate(s16 actor_ID, u16 variable_1, u32 activate);
 
-extern f64 D_8018AB60_10DD50;
-extern f64 D_8018AB68_10DD58;
-
 cv64_interactuables_func_t interactuables_functions[] = {
     interactuables_init,
     interactuables_loop,
@@ -63,6 +60,11 @@ void interactuables_entrypoint(interactuables* self) {
     ENTER(self, interactuables_functions);
 }
 
+#ifdef NON_MATCHING
+// clang-format off
+#pragma GLOBAL_ASM("../asm/nonmatchings/common/interactuables/interactuables_init.s")
+// clang-format on
+#else
 void interactuables_init(interactuables* self) {
     cv64_actor_settings_t* settings;
     u32 sp18;
@@ -188,13 +190,13 @@ void interactuables_init(interactuables* self) {
                      .item_or_text_ID == ITEM_ID_AXE) ||
                 (interactuables_settings_table[self->table_index]
                      .item_or_text_ID == ITEM_ID_CROSS)) {
-                item_model->position.y += D_8018AB60_10DD50;
-                self->position.y += D_8018AB60_10DD50;
-                self->height += D_8018AB60_10DD50;
+                item_model->position.y += 3.2;
+                self->position.y += 3.2;
+                self->height += 3.2;
                 item_model->angle.roll += 0x1000;
             }
 
-            item_model->position.y += D_8018AB68_10DD58;
+            item_model->position.y += 0.1;
             self->trigger_X_size =
                 interactuables_settings_table[self->table_index].trigger_size;
         }
@@ -222,6 +224,7 @@ void interactuables_init(interactuables* self) {
         );
     }
 }
+#endif
 
 // clang-format off
 
@@ -331,6 +334,11 @@ void interactuables_initCheck(interactuables* self) {
     );
 }
 
+#ifdef NON_MATCHING
+// clang-format off
+#pragma GLOBAL_ASM("../asm/nonmatchings/common/interactuables/interactuables_selectTextboxOption.s")
+// clang-format on
+#else
 void interactuables_selectTextboxOption(interactuables* self) {
     saveGame* saveGameObj;
 
@@ -440,6 +448,7 @@ void interactuables_selectTextboxOption(interactuables* self) {
         self->header.current_function, &self->header.functionInfo_ID
     );
 }
+#endif
 
 void interactuables_stopCheck(interactuables* self) {
     u32 temp[2];
