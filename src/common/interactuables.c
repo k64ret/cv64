@@ -60,11 +60,6 @@ void interactuables_entrypoint(interactuables* self) {
     ENTER(self, interactuables_functions);
 }
 
-#ifdef NON_MATCHING
-// clang-format off
-#pragma GLOBAL_ASM("../asm/nonmatchings/common/interactuables/interactuables_init.s")
-// clang-format on
-#else
 void interactuables_init(interactuables* self) {
     cv64_actor_settings_t* settings;
     u32 sp18;
@@ -152,8 +147,7 @@ void interactuables_init(interactuables* self) {
             } else {
                 item_model->dlist = item_appearence_settings->dlist;
             }
-            // item_model->material_dlist = &ITEM_MATERIAL_DL;
-            item_model->material_dlist = ITEM_MATERIAL_DL;
+            item_model->material_dlist = &ITEM_MATERIAL_DL;
             if (BITS_HAS(
                     interactuables_settings_table[self->table_index].flags,
                     ITEM_INVISIBLE
@@ -224,7 +218,6 @@ void interactuables_init(interactuables* self) {
         );
     }
 }
-#endif
 
 // clang-format off
 
