@@ -219,11 +219,151 @@ void interactuables_init(interactuables* self) {
     }
 }
 
-// clang-format off
+void interactuables_loop(interactuables* self) {
+    cv64_model_inf_t* model;
+    f32 current_height;
+    pickableItemFlash* flash_effect_obj;
+    s32 model_alpha;
+    f32 temp;
+    u16 item;
+    interactuables_settings* settings;
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/common/interactuables/interactuables_loop.s")
+    if (interactuables_settings_table[self->table_index].type ==
+        ITEM_KIND_ITEM) {
+        model = self->model;
 
-// clang-format on
+        if (self->pickableItemFlash_or_textbox.flash != NULL) {
+            if ((*effect_isMarkForDeletion)(
+                    self->pickableItemFlash_or_textbox.flash
+                ) != FALSE) {
+                self->pickableItemFlash_or_textbox.flash = NULL;
+            }
+        }
+
+        if (actor_checkSpawn(
+                self, model->position.x, model->position.y, model->position.z
+            ) == FALSE) {
+            if (self->time_when_flash_appears_over_item ==
+                self->current_flash_inactive_time) {
+                if (!(interactuables_settings_table[self->table_index].flags &
+                      0x400) &&
+                    !(sys.cutscene_flags & 1) &&
+                    (self->item_dont_vanish_or_flash == FALSE)) {
+                    self->pickableItemFlash_or_textbox.flash =
+                        (pickableItemFlash*) (*createEffectObjectUnderEffectMgr)(
+                            0x25, common_camera_effects, 0
+                        );
+                    if (self->pickableItemFlash_or_textbox.flash != NULL) {
+                        (*effect_setPosition)(
+                            self->pickableItemFlash_or_textbox.flash,
+                            model->position.x,
+                            interactuables_settings_table[self->table_index]
+                                    .cutscene_ID_or_actor_ID +
+                                model->position.y,
+                            model->position.z,
+                            8
+                        );
+                    }
+                }
+                self->current_flash_inactive_time = 0;
+                self->time_when_flash_appears_over_item =
+                    (u16) ((*random_range)(30) + 120);
+            } else {
+                self->current_flash_inactive_time++;
+            }
+
+            if (self->flags & 1) {
+                if ((interactuables_settings_table[self->table_index]
+                         .item_or_text_ID > 0) &&
+                    (interactuables_settings_table[self->table_index]
+                         .item_or_text_ID < 6)) {
+                    model->angle.yaw += 0x400;
+                } else {
+                    model->angle.yaw += 0x800;
+                }
+            }
+        }
+
+        if (((interactuables_settings*) ((s32) interactuables_settings_table +
+                                         self->table_index * 0x14))
+                ->flags &
+            1) {
+            if (self->item_dont_vanish_or_flash == FALSE) {
+                if (ITEM_FADE_TIMER++ > 300U) {
+                    if (((interactuables_settings*) ((s32
+                                                     ) interactuables_settings_table +
+                                                     self->table_index * 0x14))
+                            ->type == ITEM_KIND_ITEM) {
+                        model = self->model;
+
+                        model_alpha = model->primitive_color.A - 8;
+
+                        if (model_alpha < 0) {
+                            model->primitive_color.A = 0;
+                            self->header.destroy(self);
+
+                            return;
+                        } else
+                            model->primitive_color.A = model_alpha;
+                    }
+                }
+
+                if (self->height != self->position.y) {
+                    temp =
+                        (f32) (++self->item_falling_height_multiplier * 1.96);
+
+                    current_height = self->position.y - temp;
+
+                    if (current_height < self->height) {
+                        self->position.y = self->height;
+                        self->item_falling_height_multiplier = 0;
+                    } else
+                        self->position.y = current_height;
+                }
+            }
+            model->position.x = self->position.x,
+            model->position.y = self->position.y,
+            model->position.z = self->position.z;
+        }
+
+        switch (
+            ((interactuables_settings*) ((s32) interactuables_settings_table +
+                                         self->table_index * 0x14))
+                ->item_or_text_ID
+        ) {
+            default:
+                break;
+
+            case ITEM_ID_WHITE_JEWEL:
+                if (sys.contPak_file_no < 0) {
+                    CV64_COLOR_RGBA_TO_U32(model->primitive_color) = 0xFFFFFF40;
+                } else {
+                    CV64_COLOR_RGBA_TO_U32(model->primitive_color) = 0xFFFFFFFF;
+                }
+                break;
+        }
+    }
+
+    if (self->interacting_with_interactuable == TRUE) {
+        switch (interactuables_settings_table[self->table_index].type) {
+            default:
+                break;
+
+            case ITEM_KIND_ITEM:
+                if (self->pickableItemFlash_or_textbox.flash != NULL) {
+                    (*effect_markForDeletion)(
+                        self->pickableItemFlash_or_textbox.flash
+                    );
+                }
+                break;
+        }
+
+        self->pickableItemFlash_or_textbox.flash = NULL;
+        (*object_curLevel_goToNextFuncAndClearTimer)(
+            self->header.current_function, &self->header.functionInfo_ID
+        );
+    }
+}
 
 void interactuables_initCheck(interactuables* self) {
     interactuables_settings* settings =

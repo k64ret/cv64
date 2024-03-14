@@ -38,7 +38,7 @@ typedef struct cv64_object_hdr_t {
     /**
      * Misc. timer whose purpose depends on the object
      */
-    s16 timer;
+    u16 timer;
     s16 field_0x06;
     cv64_object_func_inf_t current_function[3];
     s16 functionInfo_ID;
