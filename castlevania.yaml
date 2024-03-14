@@ -76,6 +76,7 @@ segments:
       - [0x00004BC0, asm]
       - [0x00004D80, asm]               # Nisitenma-Ichigo related functions + atan2 functions
       - [0x00004FE0, asm, figure]       # Figure-type structs (model_info, camera and struct_47)
+      # - [0x000057B4, asm, camera]
       - [0x0000D270, asm]
       - [0x0000DD70, asm]
       - [0x0000F190, c, fade]
@@ -310,7 +311,7 @@ segments:
       - [0x00092E70, data, object]
       - [0x00093750, data, 4D80]
       - [0x00093B50, data] # Symbol DAT_80092f50
-      # - [0x00093B58, data]
+      # - [0x00093B58, data, figure] # `camera_params_array` - maybe file split within `figure.s`?
       - [0x00093EE0, data, figure]
       - [0x00093F60, data, D270]
       - [0x00093F70, .data, fade]
@@ -319,6 +320,11 @@ segments:
       - [0x000948F0, data, DMAMgr]
       - [0x00094920, data, 113D0]
       - [0x00094940, data, 12900]
+      - [0x0009B8D0, data, 56B60]
+      - [0x0009B8E0, data, 57050]
+      - [0x0009B900, data, 574C0]
+      - [0x0009B940, data, 5B620]
+      - [0x0009B950, data, 5B7E0]
       - [0x0009B960, .data, effect_manager]
       - [0x0009B970, data]
 
