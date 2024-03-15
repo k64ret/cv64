@@ -2,6 +2,7 @@
 #include "actor.h"
 #include "effect.h"
 #include "event_flags.h"
+#include "cutscene.h"
 #include "gfx/camera.h"
 #include "gfx/struct_47.h"
 #include "objects/cutscene/interactuables.h"
@@ -9,42 +10,6 @@
 #include "objects/player/player.h"
 #include "random.h"
 #include "system_work.h"
-
-typedef struct {
-    u8 field_0x00[6];
-    s16 field_0x06;
-    u8 field_0x08[20];
-} struct_56;
-
-typedef struct {
-    void* field_0x00; // A function pointer
-    struct_56* field_0x04;
-    u32 dlist;
-    s32 file_ID;
-    s32 event_flag_ID;
-    u32 event_flag;
-    s32 sound_ID;
-} struct_21;
-
-typedef struct {
-    cv64_object_hdr_t header;
-    u8 field_0x20[4];
-    cv64_model_inf_t model;
-    u8 field_0x28[12];
-    struct_56* field_0x34;
-    void* field_0x38; // A function pointer
-    struct_21* field_0x3C;
-    s32 field_0x40;
-    s32 field_0x44;
-    s32 current_lever_pull_time;
-    s32 max_lever_pull_time;
-    s32 model_pitch;
-    u8 field_0x54[24];
-    s32 activate;
-    cv64_actor_settings_t* settings;
-} actorLever;
-
-extern actorLever* actorLever_activate(s16 actor_ID, u16 variable_1, u32 activate);
 
 cv64_interactuables_func_t interactuables_functions[] = {
     interactuables_init,
@@ -490,7 +455,7 @@ void interactuables_selectTextboxOption(interactuables* self) {
                             interactuables_settings_table[self->table_index].flags,
                             TEXT_SPOT_IF_YES_ACTIVATE_LEVER
                         )) {
-                        (*actorLever_activate)(
+                        (*cutscene_setActorStateIfMatchingVariable1)(
                             interactuables_settings_table[self->table_index]
                                 .cutscene_ID_or_actor_ID,
                             interactuables_settings_table[self->table_index].actor_variable_1,

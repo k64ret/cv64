@@ -400,7 +400,7 @@ typedef enum cv64_object_id_raw {
     ID_OBJECT_16C                    = 0x16C,
     ID_OBJECT_16D                    = 0x16D,
     ID_OBJECT_16E                    = 0x16E,
-    ID_OBJECT_16F                    = 0x16F,
+    ID_LEVER                         = 0x16F,
     ID_OBJECT_170                    = 0x170,
     ID_OBJECT_171                    = 0x171,
     ID_OBJECT_172                    = 0x172,
@@ -664,6 +664,7 @@ typedef enum cv64_object_id {
     MENU_STAGE_SELECT                  = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_STAGE_SELECT),
 
     // Stage object
+    STAGE_OBJECT_LEVER                 = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_LEVER),
     STAGE_OBJECT_MEIRO_TEIEN_OBJ_01B5  = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_MEIRO_TEIEN_OBJ_01B5),
     STAGE_OBJECT_ROSE_VENTILATOR       = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_ROSE_VENTILATOR),
     STAGE_OBJECT_ROSE_DOOR             = CV64_OBJECT_ID(OBJ_KIND_STAGE_OBJECT, ID_ROSE_DOOR)

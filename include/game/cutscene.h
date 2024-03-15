@@ -1,7 +1,7 @@
 #ifndef CUTSCENE_H
 #define CUTSCENE_H
 
-#include "object.h"
+#include "actor.h"
 
 #define NUM_CUTSCENES 61
 
@@ -55,5 +55,7 @@ extern cutscene_parameters cutscene_settings[NUM_CUTSCENES];
 #define WIDESCREEN_BORDERS 1
 
 extern void cutscene_setCameraClippingAndScissoring(s16 top_edge_coords);
+extern cv64_actor_t*
+cutscene_setActorStateIfMatchingVariable1(s16 actor_ID, u16 variable_1, u32 state);
 
 #endif

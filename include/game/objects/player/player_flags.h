@@ -6,7 +6,7 @@ enum player_flags {
     JOGGING                                     = 0x00000002,
     WALKING                                     = 0x00000004,
     CROUCHING                                   = 0x00000008,
-    PLAY_TIRED_SFX_WHILE_IDLING_WITH_LOW_HEALTH = 0x00000020, // Unused
+    PLAY_TIRED_SFX_WHILE_IDLING_WITH_LOW_HEALTH = 0x00000020, // Unused. Used in LoD
     OPENING_DOOR                                = 0x00000040,
     ACTION_PERFORMED                            = 0x00000080, // pressed C-Right over item or door
     ATTACK_IS_ACTIVE                            = 0x00000200,
