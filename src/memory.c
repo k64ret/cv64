@@ -26,8 +26,9 @@ void heap_writebackDCache(void) {
     cv64_heap_inf_t* current_heap;
 
     first = &heaps[0], current_heap = &heaps[HEAP_NUM - 1];
+
     do {
-        if (current_heap->flags & HEAP_WRITE_BACK_CACHE_TO_RAM) {
+        if (BITS_HAS(current_heap->flags, HEAP_WRITE_BACK_CACHE_TO_RAM)) {
             osWritebackDCache(current_heap->heap_start, current_heap->size);
         }
         current_heap--;
@@ -54,14 +55,15 @@ void* func_80001008_1C08(cv64_heap_kind_t heap_kind, u32 size) {
     data = (u32) heap_alloc(heap_kind, size * 2);
     if (data == NULL) {
         return NULL;
-    } else {
-        data_header = data - sizeof(cv64_heapblock_hdr_t);
-        data_header->data_ptrs[0] = data;
-        BITS_SET(data_header->flags, HEAP_BLOCK_4000);
-        data_header->data_ptrs[1] = data + size;
-        data_header->field_0x08 = data_header->data_ptrs[sys.current_dlist_buffer];
-        return &data_header->field_0x08;
     }
+
+    data_header = data - sizeof(cv64_heapblock_hdr_t);
+    data_header->data_ptrs[0] = data;
+    BITS_SET(data_header->flags, HEAP_BLOCK_4000);
+    data_header->data_ptrs[1] = data + size;
+    data_header->field_0x08 = data_header->data_ptrs[sys.current_dlist_buffer];
+
+    return &data_header->field_0x08;
 }
 
 #pragma GLOBAL_ASM("../asm/nonmatchings/memory/heapBlock_free.s")
@@ -100,11 +102,11 @@ void object_curLevel_goToNextFunc(
     u16* entry_to_clean;
 
     functionInfo_entry = &current_functionInfo[*functionInfo_ID];
-    entry_to_clean = functionInfo_entry + 1;
-    (*functionInfo_entry)++; // Set current entry to next function
-    while (entry_to_clean < (u16*) functionInfo_ID) {
+
+    for (entry_to_clean = functionInfo_entry + 1, (*functionInfo_entry)++;
+         entry_to_clean < (u16*) functionInfo_ID;
+         entry_to_clean++) {
         *entry_to_clean = 0;
-        entry_to_clean++;
     }
 }
 
@@ -114,14 +116,16 @@ void object_prevLevel_goToNextFunc(
     u16* functionInfo_entry;
     u16* entry_to_clean;
 
-    if (*functionInfo_ID > 0) {
-        functionInfo_entry = &current_functionInfo[*functionInfo_ID];
-        functionInfo_entry--;
-        (*functionInfo_entry)++;
-        for (entry_to_clean = functionInfo_entry + 1; entry_to_clean < (u16*) functionInfo_ID;
-             entry_to_clean++) {
-            *entry_to_clean = 0;
-        }
+    if (*functionInfo_ID <= 0)
+        return;
+
+    functionInfo_entry = &current_functionInfo[*functionInfo_ID];
+    functionInfo_entry--;
+    (*functionInfo_entry)++;
+
+    for (entry_to_clean = functionInfo_entry + 1; entry_to_clean < (u16*) functionInfo_ID;
+         entry_to_clean++) {
+        *entry_to_clean = 0;
     }
 }
 
@@ -133,13 +137,14 @@ void object_nextLevel_goToNextFunc(
 
     functionInfo_entry = &current_functionInfo[*functionInfo_ID];
     functionInfo_entry++;
-    if (functionInfo_entry < (u16*) functionInfo_ID) {
-        entry_to_clean = functionInfo_entry + 1;
-        (*functionInfo_entry)++;
-        while (entry_to_clean < (u16*) functionInfo_ID) {
-            *entry_to_clean = 0;
-            entry_to_clean++;
-        }
+
+    if (functionInfo_entry >= (u16*) functionInfo_ID)
+        return;
+
+    for (entry_to_clean = functionInfo_entry + 1, (*functionInfo_entry)++;
+         entry_to_clean < (u16*) functionInfo_ID;
+         entry_to_clean++) {
+        *entry_to_clean = 0;
     }
 }
 
@@ -152,6 +157,7 @@ void object_curLevel_goToNextFuncAndClearTimer(
     functionInfo_entry = &current_functionInfo[*functionInfo_ID];
     functionInfo_entry->whole++;   // Set current function to the next function
     functionInfo_entry->timer = 0; // Set timer to 0
+
     for (entry_to_clean = functionInfo_entry + 1;
          (cv64_object_func_inf_t*) entry_to_clean < (cv64_object_func_inf_t*) functionInfo_ID;
          entry_to_clean++) {
@@ -167,6 +173,7 @@ void object_curLevel_goToPrevFunc(
 
     functionInfo_entry = &current_functionInfo[*functionInfo_ID];
     functionInfo_entry->whole--;
+
     for (entry_to_clean = (u16*) functionInfo_entry + 1; entry_to_clean < (u16*) functionInfo_ID;
          entry_to_clean++) {
         *entry_to_clean = 0;
@@ -179,14 +186,16 @@ void object_prevLevel_goToPrevFunc(
     u16* functionInfo_entry;
     u16* entry_to_clean;
 
-    if (*functionInfo_ID > 0) {
-        functionInfo_entry = &current_functionInfo[*functionInfo_ID];
-        functionInfo_entry--;
-        (*functionInfo_entry)--;
-        for (entry_to_clean = functionInfo_entry + 1; entry_to_clean < (u16*) functionInfo_ID;
-             entry_to_clean++) {
-            *entry_to_clean = 0;
-        }
+    if (*functionInfo_ID <= 0)
+        return;
+
+    functionInfo_entry = &current_functionInfo[*functionInfo_ID];
+    functionInfo_entry--;
+    (*functionInfo_entry)--;
+
+    for (entry_to_clean = functionInfo_entry + 1; entry_to_clean < (u16*) functionInfo_ID;
+         entry_to_clean++) {
+        *entry_to_clean = 0;
     }
 }
 
@@ -198,13 +207,14 @@ void object_nextLevel_goToPrevFunc(
 
     functionInfo_entry = &current_functionInfo[*functionInfo_ID];
     functionInfo_entry++;
-    if (functionInfo_entry < (u16*) functionInfo_ID) {
-        entry_to_clean = functionInfo_entry + 1;
-        (*functionInfo_entry)--;
-        while (entry_to_clean < (u16*) functionInfo_ID) {
-            *entry_to_clean = 0;
-            entry_to_clean++;
-        }
+
+    if (functionInfo_entry >= (u16*) functionInfo_ID)
+        return;
+
+    for (entry_to_clean = functionInfo_entry + 1, (*functionInfo_entry)--;
+         entry_to_clean < (u16*) functionInfo_ID;
+         entry_to_clean++) {
+        *entry_to_clean = 0;
     }
 }
 
@@ -216,9 +226,11 @@ void object_curLevel_goToPrevFuncAndClearTimer(
 
     functionInfo_entry = &current_functionInfo[*functionInfo_ID];
     (*functionInfo_entry)--;
+
     // clang-format off
     (u8) (*functionInfo_entry) = 0;
     // clang-format on
+
     for (entry_to_clean = functionInfo_entry + 1; entry_to_clean < (u16*) functionInfo_ID;
          entry_to_clean++) {
         *entry_to_clean = 0;
@@ -233,6 +245,7 @@ void object_curLevel_goToFunc(
 
     functionInfo_entry = &current_functionInfo[*functionInfo_ID];
     *functionInfo_entry = function;
+
     for (entry_to_clean = functionInfo_entry + 1; entry_to_clean < (u16*) functionInfo_ID;
          entry_to_clean++) {
         *entry_to_clean = 0;
@@ -247,6 +260,7 @@ void object_curLevel_goToFuncInLevel(
 
     functionInfo_entry = &current_functionInfo[level];
     *functionInfo_entry = function;
+
     for (entry_to_clean = functionInfo_entry + 1; entry_to_clean < (u16*) functionInfo_ID;
          entry_to_clean++) {
         *entry_to_clean = 0;
@@ -259,14 +273,16 @@ void object_prevLevel_goToFunc(
     u16* functionInfo_entry;
     u16* entry_to_clean;
 
-    if (*functionInfo_ID > 0) {
-        functionInfo_entry = &current_functionInfo[*functionInfo_ID];
-        functionInfo_entry--;
-        *functionInfo_entry = function;
-        for (entry_to_clean = functionInfo_entry + 1; entry_to_clean < (u16*) functionInfo_ID;
-             entry_to_clean++) {
-            *entry_to_clean = 0;
-        }
+    if (*functionInfo_ID <= 0)
+        return;
+
+    functionInfo_entry = &current_functionInfo[*functionInfo_ID];
+    functionInfo_entry--;
+    *functionInfo_entry = function;
+
+    for (entry_to_clean = functionInfo_entry + 1; entry_to_clean < (u16*) functionInfo_ID;
+         entry_to_clean++) {
+        *entry_to_clean = 0;
     }
 }
 
@@ -278,13 +294,15 @@ void object_nextLevel_goToFunc(
 
     functionInfo_entry = &current_functionInfo[*functionInfo_ID];
     functionInfo_entry++;
-    if (functionInfo_entry < (u16*) functionInfo_ID) {
-        entry_to_clean = functionInfo_entry + 1;
-        (*functionInfo_entry)--; // Unneeded
-        *functionInfo_entry = function;
-        while (entry_to_clean < (u16*) functionInfo_ID) {
-            *entry_to_clean = 0;
-            entry_to_clean++;
-        }
+
+    if (functionInfo_entry >= (u16*) functionInfo_ID)
+        return;
+
+    entry_to_clean = functionInfo_entry + 1;
+    (*functionInfo_entry)--; // Unneeded
+
+    for (*functionInfo_entry = function; entry_to_clean < (u16*) functionInfo_ID;
+         entry_to_clean++) {
+        *entry_to_clean = 0;
     }
 }
