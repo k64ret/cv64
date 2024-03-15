@@ -146,7 +146,10 @@ typedef struct {
     void* field_0x44;
     void* field_0x48;
     void* field_0x4C;
-    u16* mfds_menu_string_and_mfds_item_form; // This may be a union?
+    union {
+        u16* mfds_menu_string;
+        u16* mfds_item_form;
+    };
     mfds_number_work* number;
     mfds_color_animation_state* color_animation_state;
     window_work* window;

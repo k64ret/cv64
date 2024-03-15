@@ -78,7 +78,10 @@ typedef struct cv64_object_file_info {
      * Can be either a pointer to another struct that holds the information,
      * or simply the NI file ID The first byte is used as a "flag"
      */
-    u32 addr_or_file_ID;
+    union {
+        u32 addr;
+        u32 file_ID;
+    };
     u32 file_padding;
 } cv64_object_file_info_t;
 

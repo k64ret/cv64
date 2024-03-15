@@ -30,6 +30,9 @@
 #define FIG_FLAG_0100 0x0100
 #define FIG_FLAG_0800 0x0800
 
+// Misc. flags that aren't part of the set above
+#define FIG_VARIABLE_TEXTURE_AND_PALETTE 0x40000000
+
 typedef struct {
     s16 type;
     u16 flags;

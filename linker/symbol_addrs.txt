@@ -89,7 +89,7 @@ ptr_effectMgr        = 0x800DD0D0;
 // .text
 interactuables_entrypoint = 0x80125230; // type:func
 interactuables_init = 0x801252a0; // type:func
-interactuables_loop = 0x80125764; // type:func
+interactuables_main = 0x80125764; // type:func
 interactuables_initCheck = 0x80125b60; // type:func
 interactuables_selectTextboxOption = 0x80125d84; // type:func
 interactuables_stopCheck = 0x80126004; // type:func
