@@ -8,6 +8,13 @@
 
 #define STAGE_SELECT_NUM_OPTIONS 8
 
+/**
+* Time since the current option was selected.
+* This is never updated, so it's always 0
+* in practice.
+*/
+#define OPTION_SELECTION_TIMER self->header.timer
+
 typedef enum stage_select_option_enum {
     FOREST            = 0,
     INSIDE_OF_RAMPART = 1,

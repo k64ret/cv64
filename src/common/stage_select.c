@@ -170,7 +170,7 @@ void stageSelect_moveLens(stageSelect* self) {
             );
         } else {
             (*menuButton_selectNextOption)(
-                &self->current_option, &self->header.timer, STAGE_SELECT_NUM_OPTIONS
+                &self->current_option, &OPTION_SELECTION_TIMER, STAGE_SELECT_NUM_OPTIONS
             );
         }
         return;
