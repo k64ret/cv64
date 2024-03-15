@@ -16,9 +16,7 @@
 void (*cv64_ovl_creditsmgr_funcs[])(creditsMgr* self
 ) = {creditsMgr_init, creditsMgr_loop, creditsMgr_exit};
 
-void creditsMgr_entrypoint(creditsMgr* self) {
-    ENTER(self, cv64_ovl_creditsmgr_funcs);
-}
+void creditsMgr_entrypoint(creditsMgr* self) { ENTER(self, cv64_ovl_creditsmgr_funcs); }
 
 // https://decomp.me/scratch/JvchH
 void creditsMgr_init(creditsMgr* self) {

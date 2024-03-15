@@ -31,10 +31,8 @@ typedef struct {
 } struct_47;
 
 extern struct_47* func_80004C40(u16 type);
-extern void* func_80004CE8(
-    void* current,
-    void* prev
-); // TODO: Put this in another header
+extern void* func_80004CE8(void* current,
+                           void* prev); // TODO: Put this in another header
 extern struct_47* D_8018CDE0[3];
 
 #endif

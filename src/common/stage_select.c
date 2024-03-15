@@ -25,9 +25,7 @@ const char cv64_stage_select_unused_str_2[] = "Mfds Set OK!!\n";
 const char cv64_stage_select_unused_str_3[] = "Rens Set OK!!\n";
 const char cv64_stage_select_unused_str_4[] = "Slect Stage : %02d\n";
 
-void stageSelect_entrypoint(stageSelect* self) {
-    ENTER(self, stageSelect_functions);
-}
+void stageSelect_entrypoint(stageSelect* self) { ENTER(self, stageSelect_functions); }
 
 void stageSelect_loadAssetsFile(stageSelect* self) {
     if (((*fade_isFading)() == FALSE) && ((ptr_DMAMgr->DMAChunkMgr != NULL))) {
@@ -40,18 +38,12 @@ void stageSelect_loadAssetsFile(stageSelect* self) {
             HEAP_WRITE_BACK_CACHE_TO_RAM
         );
         self->assets_file_end = NULL;
-        self->assets_file_start =
-            (*heap_alloc)(HEAP_KIND_MENU_DATA, NI_ASSETS_MENU_BUFFER_SIZE);
+        self->assets_file_start = (*heap_alloc)(HEAP_KIND_MENU_DATA, NI_ASSETS_MENU_BUFFER_SIZE);
         DMAMgr_loadNisitenmaIchigoFile(
-            ptr_DMAMgr,
-            NI_ASSETS_MENU,
-            (u32) self->assets_file_start,
-            &self->assets_file_end
+            ptr_DMAMgr, NI_ASSETS_MENU, (u32) self->assets_file_start, &self->assets_file_end
         );
         NisitenmaIchigo_checkAndStoreLoadedFile(NI_ASSETS_MENU);
-        (*object_allocEntryInList)(
-            self, HEAP_KIND_MULTIPURPOSE, sizeof(mfds_state* [10]), 0
-        );
+        (*object_allocEntryInList)(self, HEAP_KIND_MULTIPURPOSE, sizeof(mfds_state* [10]), 0);
         (*object_curLevel_goToNextFuncAndClearTimer)(
             self->header.current_function, &self->header.functionInfo_ID
         );
@@ -64,18 +56,14 @@ void stageSelect_initGraphics(stageSelect* self) {
 
     if (self->assets_file_end != NULL) {
         heapBlock_updateBlockMaxSize(
-            self->assets_file_start,
-            (u32) self->assets_file_end - (u32) self->assets_file_start
+            self->assets_file_start, (u32) self->assets_file_end - (u32) self->assets_file_start
         );
-        bg_model = modelInfo_createRootNode(
-            FIG_TYPE_HUD_ELEMENT, common_camera_8009B444
-        );
+        bg_model = modelInfo_createRootNode(FIG_TYPE_HUD_ELEMENT, common_camera_8009B444);
         self->red_background_model = bg_model;
         bg_model->assets_file_ID = NI_ASSETS_MENU;
         bg_model->dlist = &MENU_RED_BACKGROUND_DL;
         BITS_SET(bg_model->flags, FIG_FLAG_0800);
-        CV64_COLOR_RGBA_TO_U32(bg_model->primitive_color) =
-            (s8) 0x000000FF; // Slight fakematch?
+        CV64_COLOR_RGBA_TO_U32(bg_model->primitive_color) = (s8) 0x000000FF; // Slight fakematch?
         bg_model->position.x = 0.0f;
         bg_model->position.y = 0.0f;
         bg_model->position.z = 0.0f;
@@ -83,8 +71,7 @@ void stageSelect_initGraphics(stageSelect* self) {
         bg_model->size.y = 1.0f;
         bg_model->size.z = 1.0f;
 
-        for (self->text_ID = 0; self->text_ID < STAGE_SELECT_NUM_OPTIONS + 1;
-             self->text_ID++) {
+        for (self->text_ID = 0; self->text_ID < STAGE_SELECT_NUM_OPTIONS + 1; self->text_ID++) {
             textbox_array[self->text_ID] = (*textbox_create)(
                 self,
                 common_camera_8009B444,
@@ -96,21 +83,14 @@ void stageSelect_initGraphics(stageSelect* self) {
                 textbox_array[self->text_ID]->palette = TEXT_COLOR_WHITE;
                 if (self->text_ID != 0) {
                     (*textbox_setPos)(
-                        textbox_array[self->text_ID],
-                        30,
-                        (self->text_ID * 23) + 23,
-                        1
+                        textbox_array[self->text_ID], 30, (self->text_ID * 23) + 23, 1
                     );
                 } else {
                     textbox_array[self->text_ID]->palette = TEXT_COLOR_BEIGE;
                     (*textbox_setPos)(textbox_array[self->text_ID], 100, 10, 1);
-                    (*textbox_setHeightAndWidth)(
-                        textbox_array[self->text_ID], 1, 2, 1
-                    );
+                    (*textbox_setHeightAndWidth)(textbox_array[self->text_ID], 1, 2, 1);
                 }
-                (*textbox_setDimensions)(
-                    textbox_array[self->text_ID], 1, 300, 0, 0
-                );
+                (*textbox_setDimensions)(textbox_array[self->text_ID], 1, 300, 0, 0);
                 (*textbox_setMessagePtr)(
                     textbox_array[self->text_ID],
                     text_getMessageFromPool(stageSelect_text, self->text_ID),
@@ -131,18 +111,16 @@ void stageSelect_initLens(stageSelect* self) {
     mfds_state** textbox_array = self->textboxes;
 
     if ((*fade_isFading)() == FALSE) {
-        for (self->text_ID = 0; self->text_ID < STAGE_SELECT_NUM_OPTIONS + 1;
-             self->text_ID++) {
-            if ((textbox_array[self->text_ID]->flags & TEXTBOX_IS_ACTIVE) ==
-                FALSE) {
+        for (self->text_ID = 0; self->text_ID < STAGE_SELECT_NUM_OPTIONS + 1; self->text_ID++) {
+            if ((textbox_array[self->text_ID]->flags & TEXTBOX_IS_ACTIVE) == FALSE) {
                 return;
             }
         }
         self->lens = (*lens_create)(
             self,
             common_camera_HUD,
-            (WINDOW_FLAG_800000 | WINDOW_FLAG_80 | WINDOW_FLAG_20 |
-             WINDOW_FLAG_10 | WINDOW_FLAG_4 | WINDOW_FLAG_1),
+            (WINDOW_FLAG_800000 | WINDOW_FLAG_80 | WINDOW_FLAG_20 | WINDOW_FLAG_10 | WINDOW_FLAG_4 |
+             WINDOW_FLAG_1),
             -120.0f,
             61.0f,
             10.0f,
@@ -174,8 +152,7 @@ void stageSelect_moveLens(stageSelect* self) {
             self->lens_move_offset = 1;
         }
         lens->position.y =
-            (self->lens_move_offset * self->lens_move_vertical_difference) +
-            self->text_ID;
+            (self->lens_move_offset * self->lens_move_vertical_difference) + self->text_ID;
         self->lens_transition_rate += 1.0;
         return;
     }
@@ -183,8 +160,7 @@ void stageSelect_moveLens(stageSelect* self) {
     previous_option = self->previous_option;
     if (current_option == (u32) previous_option) {
         if ((sys.controllers[0].buttons_pressed & A_BUTTON) ||
-            (sys.controllers[0].buttons_pressed &
-             (START_BUTTON | RECENTER_BUTTON))) {
+            (sys.controllers[0].buttons_pressed & (START_BUTTON | RECENTER_BUTTON))) {
             BITS_UNSET(lens->flags, WINDOW_OPENING);
             BITS_SET(lens->flags, WINDOW_CLOSING);
             (*object_curLevel_goToNextFuncAndClearTimer)(
@@ -192,9 +168,7 @@ void stageSelect_moveLens(stageSelect* self) {
             );
         } else {
             (*menuButton_selectNextOption)(
-                &self->current_option,
-                &self->header.timer,
-                STAGE_SELECT_NUM_OPTIONS
+                &self->current_option, &self->header.timer, STAGE_SELECT_NUM_OPTIONS
             );
         }
         return;
@@ -345,8 +319,7 @@ void stageSelect_closeTextboxes(stageSelect* self) {
     // However, we don't know if that specific flag represents something
     // not related to opening / closing the lens
     BITS_SET(self->lens->flags, WINDOW_CLOSING | WINDOW_OPENING);
-    for (self->text_ID = 0; self->text_ID < STAGE_SELECT_NUM_OPTIONS + 1;
-         self->text_ID++) {
+    for (self->text_ID = 0; self->text_ID < STAGE_SELECT_NUM_OPTIONS + 1; self->text_ID++) {
         BITS_SET(textbox_array[self->text_ID]->flags, CLOSE_TEXTBOX);
     }
     (*heap_free)(HEAP_KIND_MENU_DATA);

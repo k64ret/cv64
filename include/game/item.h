@@ -25,10 +25,7 @@ typedef struct {
     u8 field_0x0F;
 } item_model_settings;
 
-typedef enum cv64_item_kind {
-    ITEM_KIND_ITEM = 1,
-    ITEM_KIND_TEXT_SPOT = 2
-} cv64_item_kind_t;
+typedef enum cv64_item_kind { ITEM_KIND_ITEM = 1, ITEM_KIND_TEXT_SPOT = 2 } cv64_item_kind_t;
 
 typedef enum cv64_item_id {
     ITEM_ID_NOTHING = 0,

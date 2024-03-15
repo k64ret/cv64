@@ -31,6 +31,7 @@ f32 vec3f_magnitude(vec3f* src) {
     return sqrtf((src->z * src->z) + ((src->x * src->x) + (src->y * src->y)));
 }
 
+// Possibly scaleVectorPreservingDirection
 f32 vec3f_80011440(vec3f* dest, vec3f* src, f32 scalar) {
     f32 magn;
 
@@ -89,6 +90,7 @@ void vec3f_complement(vec3f* dest, vec3f* src) {
     dest->z = -src->z;
 }
 
+// Possibly calculateVectorMagnitudePercentages
 f32 vec3f_80011614(vec3f* dest, vec3f* src) {
     f32 magn;
 
@@ -114,6 +116,7 @@ void vec3f_crossProduct(vec3f* dest, vec3f* src1, vec3f* src2) {
     dest->z = temp3;
 }
 
+// Possibly `vec3f_angle_between`
 f32 vec3f_80011710(vec3f* arg0, vec3f* arg1) {
     f32 temp1 = vec3f_dotProduct(arg0, arg1);
     f32 temp2 = vec3f_magnitude(arg0);
@@ -127,10 +130,10 @@ void vec3f_set(vec3f* vec, f32 x, f32 y, f32 z) {
     vec->z = z;
 }
 
-void vec3f_multiplyByOne(vec3f* dest) {
-    vec3f_multiplyScalar(dest, dest, 1.0f);
-}
+// Possibly `vec3f_identity`
+void vec3f_multiplyByOne(vec3f* dest) { vec3f_multiplyScalar(dest, dest, 1.0f); }
 
+// Possibly `vec3f_lerp`
 void vec3f_800117a4(vec3f* dest, vec3f* src1, vec3f* src2, f32 scalar) {
     vec3f temp1;
     vec3f temp2;
@@ -140,25 +143,25 @@ void vec3f_800117a4(vec3f* dest, vec3f* src1, vec3f* src2, f32 scalar) {
     vec3f_add(dest, &temp1, &temp2);
 }
 
+// Possibly `vec3f_reflect`
 void vec3f_80011808(vec3f* dest, vec3f* src1, vec3f* src2) {
     vec3f temp;
 
     vec3f_multiplyScalar(
-        &temp,
-        src2,
-        (vec3f_dotProduct(src1, src2) / vec3f_dotProduct(src2, src2)) * 2
+        &temp, src2, (vec3f_dotProduct(src1, src2) / vec3f_dotProduct(src2, src2)) * 2
     );
     vec3f_substract(dest, src1, &temp);
 }
 
+// Possibly transformVectorByMatrix
 // https://decomp.me/scratch/jpCsM
 void func_80011880(vec3f* dest, vec3f* src, Matrix44F* mtx) {
-    f32 temp_fa0 = ((mtx[0][0][0] * src->x) + (mtx[0][1][0] * src->y)) +
-        (mtx[0][2][0] * src->z) + mtx[0][3][0];
-    f32 temp_fa1 = ((mtx[0][0][1] * src->x) + (mtx[0][1][1] * src->y)) +
-        (mtx[0][2][1] * src->z) + mtx[0][3][1];
-    f32 temp_fv1 = ((mtx[0][0][2] * src->x) + (mtx[0][1][2] * src->y)) +
-        (mtx[0][2][2] * src->z) + mtx[0][3][2];
+    f32 temp_fa0 = ((mtx[0][0][0] * src->x) + (mtx[0][1][0] * src->y)) + (mtx[0][2][0] * src->z) +
+        mtx[0][3][0];
+    f32 temp_fa1 = ((mtx[0][0][1] * src->x) + (mtx[0][1][1] * src->y)) + (mtx[0][2][1] * src->z) +
+        mtx[0][3][1];
+    f32 temp_fv1 = ((mtx[0][0][2] * src->x) + (mtx[0][1][2] * src->y)) + (mtx[0][2][2] * src->z) +
+        mtx[0][3][2];
 
     dest->x = temp_fa0;
     dest->y = temp_fa1;
@@ -168,25 +171,19 @@ void func_80011880(vec3f* dest, vec3f* src, Matrix44F* mtx) {
 void func_80011914_12514(vec3f* dest, vec3f* src, vec3f* rotation, s32 angle) {
     Matrix44F mtx;
 
-    guAlignF(
-        mtx,
-        ANGLE_FIXED_POINT_TO_DEGREES(angle),
-        rotation->x,
-        rotation->y,
-        rotation->z
-    );
+    guAlignF(mtx, ANGLE_FIXED_POINT_TO_DEGREES(angle), rotation->x, rotation->y, rotation->z);
     func_80011880(dest, src, mtx);
 }
 
+// Possibly subtractProjectedVector
 void func_80011984_12584(vec3f* arg0, vec3f* arg1, vec3f* arg2) {
     vec3f sp24;
 
-    vec3f_multiplyScalar(
-        &sp24, arg2, vec3f_dotProduct(arg1, arg2) / vec3f_dotProduct(arg2, arg2)
-    );
+    vec3f_multiplyScalar(&sp24, arg2, vec3f_dotProduct(arg1, arg2) / vec3f_dotProduct(arg2, arg2));
     vec3f_substract(arg0, arg1, &sp24);
 }
 
+// Either calculatePointProjectionOnLineSegment or projectedVectorFromLine
 void func_800119F0_125F0(vec3f* arg0, vec3f* arg1, vec3f* arg2, vec3f* arg3) {
     f32 var_fv1;
     vec3f sp30;

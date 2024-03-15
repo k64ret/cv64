@@ -81,10 +81,8 @@ typedef struct cv64_effect {
 extern cv64_effect_t* createEffectObjectUnderEffectMgr(
     u16 effect_obj_info_array_index, camera* display_camera, u32 visual_flags
 );
-extern void
-effect_setPosition(cv64_effect_t* self, f32 x, f32 y, f32 z, u16 param_5);
-extern void
-effect_setScale(cv64_effect_t* self, f32 x, f32 y, f32 z, u16 param_5);
+extern void effect_setPosition(cv64_effect_t* self, f32 x, f32 y, f32 z, u16 param_5);
+extern void effect_setScale(cv64_effect_t* self, f32 x, f32 y, f32 z, u16 param_5);
 extern void effect_setMaxFrameSpeed(cv64_effect_t* self, u16 max_frame_speed);
 extern u8 effect_isMarkForDeletion(cv64_effect_t* self);
 extern void effect_markForDeletion(cv64_effect_t* self);

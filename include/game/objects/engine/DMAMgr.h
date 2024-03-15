@@ -15,11 +15,11 @@ typedef struct {
     u8 chunk_buffer[2048];
     u8* ROM_address_chunk;
     u8* ROM_address_chunk_current_byte_to_load; // Added by +1
-    s32 data_chunk_read_limit;    // Ex. 0xA800, Substracted by -800 when
-                                  // "file_bytes_left_to_read" is equal to this
-                                  // variable
-    s32 data_bytes_left_to_read;  // Ex. 0xAFFF, Substracted by -1
-    s32 chunk_bytes_left_to_read; // Substracted by -1
+    s32 data_chunk_read_limit;                  // Ex. 0xA800, Substracted by -800 when
+                                                // "file_bytes_left_to_read" is equal to this
+                                                // variable
+    s32 data_bytes_left_to_read;                // Ex. 0xAFFF, Substracted by -1
+    s32 chunk_bytes_left_to_read;               // Substracted by -1
     u16 field_0x814;
     u16 field_0x816;
     u8* ptr_byte_to_load_from_chunk_buffer;
@@ -48,8 +48,7 @@ typedef struct {
 } DMAMgr;
 
 extern DMAMgr* ptr_DMAMgr;
-extern void* DMAMgr_loadNisitenmaIchigoFile(
-    DMAMgr* this, s32 file_ID, u32 dest_start, void* param_4
-);
+extern void*
+DMAMgr_loadNisitenmaIchigoFile(DMAMgr* this, s32 file_ID, u32 dest_start, void* param_4);
 
 #endif

@@ -25,17 +25,14 @@ void (*cv64_ovl_obj213F_funcs[])(object_213F* self) = {
     obj213F_destroy
 };
 
-void obj213F_entrypoint(object_213F* self) {
-    ENTER(self, cv64_ovl_obj213F_funcs);
-}
+void obj213F_entrypoint(object_213F* self) { ENTER(self, cv64_ovl_obj213F_funcs); }
 
 void obj213F_isDraculaCutsceneWatched(object_213F* self) {
     cv64_model_inf_t* player_model;
 
     if ((ptr_PlayerData != NULL) &&
         CHECK_EVENT_FLAGS(
-            EVENT_FLAG_ID_CASTLE_WALL_MAIN,
-            EVENT_FLAG_CASTLE_WALL_MAIN_WATCHED_DRACULA_CUTSCENE
+            EVENT_FLAG_ID_CASTLE_WALL_MAIN, EVENT_FLAG_CASTLE_WALL_MAIN_WATCHED_DRACULA_CUTSCENE
         )) {
         player_model = ptr_PlayerData->visualData.model;
 

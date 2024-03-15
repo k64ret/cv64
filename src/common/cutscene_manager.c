@@ -11,9 +11,7 @@ cv64_cutscenemgr_func_t cutsceneMgr_functions[] = {
     cutsceneMgr_stopCutscene
 };
 
-void cutsceneMgr_entrypoint(cutsceneMgr* self) {
-    ENTER(self, cutsceneMgr_functions);
-}
+void cutsceneMgr_entrypoint(cutsceneMgr* self) { ENTER(self, cutsceneMgr_functions); }
 
 void cutsceneMgr_main(cutsceneMgr* self) {
     actorVisualData* visual_data;
@@ -31,8 +29,7 @@ void cutsceneMgr_main(cutsceneMgr* self) {
     } else if (ptr_PlayerData != NULL) {
         visual_data = &ptr_PlayerData->visualData;
 
-        if ((visual_data->flags & DEAD) ||
-            (sys.SaveStruct_gameplay.player_status & DEAD)) {
+        if ((visual_data->flags & DEAD) || (sys.SaveStruct_gameplay.player_status & DEAD)) {
             sys.entrance_cutscene_ID = CUTSCENE_ID_NONE;
             sys.cutscene_ID = CUTSCENE_ID_NONE;
         } else {
@@ -60,9 +57,7 @@ void cutsceneMgr_createCutscene(cutsceneMgr* self) {
     if (self->cutscene_ID == CUTSCENE_ID_NONE) {
         sys.cutscene_ID = CUTSCENE_ID_NONE;
         (*object_curLevel_goToFunc)(
-            self->header.current_function,
-            &self->header.functionInfo_ID,
-            CUTSCENEMGR_MAIN
+            self->header.current_function, &self->header.functionInfo_ID, CUTSCENEMGR_MAIN
         );
         return;
     }
@@ -79,8 +74,7 @@ void cutsceneMgr_createCutscene(cutsceneMgr* self) {
         sys.cutscene_flags = cutscene_flags | CUTSCENE_FLAG_FILM_REEL_EFFECT;
         if ((self && self) && self) {
         }
-        self->csFilmReel =
-            object_createAndSetChild(&self->header, CUTSCENE_CSFILMREEL);
+        self->csFilmReel = object_createAndSetChild(&self->header, CUTSCENE_CSFILMREEL);
     }
 
     self->cutscene_object = object_createAndSetChild(
@@ -96,8 +90,7 @@ void cutsceneMgr_createCutscene(cutsceneMgr* self) {
 }
 
 void cutsceneMgr_setCameraClippingAndScissoring(cutsceneMgr* self) {
-    if (cutscene_settings[self->cutscene_ID - 1].overlay &
-        CUTSCENE_OVERLAY_WIDESCREEN_BORDERS) {
+    if (cutscene_settings[self->cutscene_ID - 1].overlay & CUTSCENE_OVERLAY_WIDESCREEN_BORDERS) {
         if (sys.cutscene_flags & CUTSCENE_FLAG_DISPLAY_WIDESCREEN_BORDERS) {
             cutscene_setCameraClippingAndScissoring(WIDESCREEN_BORDERS);
             (*object_curLevel_goToNextFuncAndClearTimer)(
@@ -112,11 +105,9 @@ void cutsceneMgr_setCameraClippingAndScissoring(cutsceneMgr* self) {
 }
 
 void cutsceneMgr_loop(cutsceneMgr* self) {
-    if (objectList_findFirstObjectByID(
-            cutscene_settings[self->cutscene_ID - 1].object_ID
-        ) == NULL) {
-        if (cutscene_settings[self->cutscene_ID - 1].overlay &
-            CUTSCENE_OVERLAY_FILM_REEL) {
+    if (objectList_findFirstObjectByID(cutscene_settings[self->cutscene_ID - 1].object_ID) ==
+        NULL) {
+        if (cutscene_settings[self->cutscene_ID - 1].overlay & CUTSCENE_OVERLAY_FILM_REEL) {
             BITS_UNSET(sys.cutscene_flags, CUTSCENE_FLAG_FILM_REEL_EFFECT);
         }
         (*object_curLevel_goToNextFuncAndClearTimer)(
@@ -136,14 +127,12 @@ void cutsceneMgr_stopCutscene(cutsceneMgr* self) {
     }
 
     if (!(sys.cutscene_flags & CUTSCENE_FLAG_10) &&
-        (cutscene_settings[self->cutscene_ID - 1].overlay &
-         CUTSCENE_OVERLAY_WIDESCREEN_BORDERS)) {
+        (cutscene_settings[self->cutscene_ID - 1].overlay & CUTSCENE_OVERLAY_WIDESCREEN_BORDERS)) {
         cutscene_setCameraClippingAndScissoring(FULLSCREEN);
     }
 
     if ((sys.cutscene_ID != CUTSCENE_ID_NONE) &&
-        (sys.cutscene_ID == cutscene_settings[self->cutscene_ID - 1].cutscene_ID
-        ) &&
+        (sys.cutscene_ID == cutscene_settings[self->cutscene_ID - 1].cutscene_ID) &&
         (sys.cutscene_ID != CUTSCENE_ID_NONE)) {
         sys.cutscene_ID = CUTSCENE_ID_NONE;
     }
@@ -151,9 +140,7 @@ void cutsceneMgr_stopCutscene(cutsceneMgr* self) {
     if (!(sys.cutscene_flags & CUTSCENE_FLAG_20)) {
         BITS_UNSET(sys.cutscene_flags, CUTSCENE_FLAG_PLAYING);
         if (!(sys.cutscene_flags & CUTSCENE_FLAG_10)) {
-            BITS_UNSET(
-                sys.cutscene_flags, CUTSCENE_FLAG_DISPLAY_WIDESCREEN_BORDERS
-            );
+            BITS_UNSET(sys.cutscene_flags, CUTSCENE_FLAG_DISPLAY_WIDESCREEN_BORDERS);
         }
     }
 
@@ -173,8 +160,6 @@ void cutsceneMgr_stopCutscene(cutsceneMgr* self) {
     }
 
     (*object_curLevel_goToFunc)(
-        self->header.current_function,
-        &self->header.functionInfo_ID,
-        CUTSCENEMGR_MAIN
+        self->header.current_function, &self->header.functionInfo_ID, CUTSCENEMGR_MAIN
     );
 }

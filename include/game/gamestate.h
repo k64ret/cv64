@@ -24,9 +24,8 @@ typedef enum cv64_gamestate_id {
 } cv64_gamestate_id_t;
 // clang-format on
 
-#define NUM_GSS_SLOTS 16
-#define GSS_SLOT(flags, function_or_objID)                                     \
-    (((flags) << 24) | (s32) function_or_objID)
+#define NUM_GSS_SLOTS                      16
+#define GSS_SLOT(flags, function_or_objID) (((flags) << 24) | (s32) function_or_objID)
 
 /*
  * NOTE:

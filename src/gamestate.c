@@ -142,8 +142,7 @@ GameStateMgr* ptr_GameStateMgr;
 
 void gamestate_create(s32 game_state) {
     // Set target framerate
-    sys.code_execution_max_delay =
-        gameState_settings[game_state - 1].code_execution_max_delay;
+    sys.code_execution_max_delay = gameState_settings[game_state - 1].code_execution_max_delay;
 
     // This is inside a loop to make it so that
     // the game softlocks in case GameStateMgr

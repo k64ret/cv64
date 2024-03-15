@@ -29,23 +29,18 @@ void cv64_ovl_konamilogo_entrypoint(cv64_ovl_konamilogo_t* self) {
 }
 
 void cv64_ovl_konamilogo_check_btn_press(cv64_ovl_konamilogo_t* self) {
-    if ((sys.controllers[0].buttons_pressed |
-         sys.controllers[1].buttons_pressed |
-         sys.controllers[2].buttons_pressed |
-         sys.controllers[3].buttons_pressed) &
+    if ((sys.controllers[0].buttons_pressed | sys.controllers[1].buttons_pressed |
+         sys.controllers[2].buttons_pressed | sys.controllers[3].buttons_pressed) &
         (START_BUTTON | RECENTER_BUTTON)) {
         (*object_curLevel_goToFunc)(
-            self->header.current_function,
-            &self->header.functionInfo_ID,
-            KONAMILOGO_KCEK_WAIT
+            self->header.current_function, &self->header.functionInfo_ID, KONAMILOGO_KCEK_WAIT
         );
     }
 }
 
 void cv64_ovl_konamilogo_init(cv64_ovl_konamilogo_t* self) {
     cv64_object_func_inf_t* curFunc;
-    cv64_model_inf_t* model =
-        (*modelInfo_createRootNode)(FIG_TYPE_HUD_ELEMENT, common_camera_HUD);
+    cv64_model_inf_t* model = (*modelInfo_createRootNode)(FIG_TYPE_HUD_ELEMENT, common_camera_HUD);
 
     self->model = model;
     model->dlist = &KONAMI_LOGO_DL;
@@ -54,14 +49,10 @@ void cv64_ovl_konamilogo_init(cv64_ovl_konamilogo_t* self) {
     model->size.y = 1.005f;
     CV64_COLOR_RGBA_TO_U32(sys.background_color) = 0x000000FF; // Black (opaque)
     BITS_SET(model->flags, FIG_FLAG_0800);
-    CV64_COLOR_RGBA_TO_U32(model->primitive_color) =
-        0xFFFFFF00; // White (transparent)
+    CV64_COLOR_RGBA_TO_U32(model->primitive_color) = 0xFFFFFF00; // White (transparent)
 
     GO_TO_NEXT_FUNC(
-        self,
-        cv64_ovl_konamilogo_funcs,
-        curFunc,
-        (*object_curLevel_goToNextFuncAndClearTimer)
+        self, cv64_ovl_konamilogo_funcs, curFunc, (*object_curLevel_goToNextFuncAndClearTimer)
     );
 }
 
@@ -83,15 +74,13 @@ void cv64_ovl_konamilogo_fade_in(cv64_ovl_konamilogo_t* self) {
 }
 
 void cv64_ovl_konamilogo_wait(cv64_ovl_konamilogo_t* self) {
-    s32 timer =
-        self->header.current_function[self->header.functionInfo_ID].timer;
+    s32 timer = self->header.current_function[self->header.functionInfo_ID].timer;
 
     if (timer >= 169) {
         (*object_curLevel_goToNextFuncAndClearTimer)(
             self->header.current_function, &self->header.functionInfo_ID
         );
-        timer =
-            self->header.current_function[self->header.functionInfo_ID].timer;
+        timer = self->header.current_function[self->header.functionInfo_ID].timer;
     }
     if (timer >= 21) {
         cv64_ovl_konamilogo_check_btn_press(self);
@@ -138,8 +127,7 @@ void cv64_ovl_konamilogo_kcek_wait(cv64_ovl_konamilogo_t* self) {
         model->primitive_color.A = 0xFF;
     }
     model->dlist = &KCEK_LOGO_DL;
-    if ((s32) self->header.current_function[self->header.functionInfo_ID]
-            .timer >= 97) {
+    if ((s32) self->header.current_function[self->header.functionInfo_ID].timer >= 97) {
         (*object_curLevel_goToNextFuncAndClearTimer)(
             self->header.current_function, &self->header.functionInfo_ID
         );

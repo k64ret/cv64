@@ -10,6 +10,7 @@ AlignOperands: false
 BinPackArguments: false
 BinPackParameters: false
 BreakStringLiterals: false
+ColumnLimit: 100
 IndentCaseLabels: true
 IndentPPDirectives: BeforeHash
 LineEnding: LF

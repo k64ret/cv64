@@ -12,11 +12,8 @@
 #include "gfx/camera.h"
 #include "objects/menu/textboxAdvanceArrow.h"
 
-void (*cv64_ovl_textboxadvancearrow_funcs[])(textboxAdvanceArrow* self) = {
-    textboxAdvanceArrow_init,
-    textboxAdvanceArrow_loop,
-    textboxAdvanceArrow_destroy
-};
+void (*cv64_ovl_textboxadvancearrow_funcs[])(textboxAdvanceArrow* self
+) = {textboxAdvanceArrow_init, textboxAdvanceArrow_loop, textboxAdvanceArrow_destroy};
 
 void textboxAdvanceArrow_entrypoint(textboxAdvanceArrow* self) {
     ENTER(self, cv64_ovl_textboxadvancearrow_funcs);
@@ -29,12 +26,10 @@ void textboxAdvanceArrow_init(textboxAdvanceArrow* self) {
     temp = (*func_80004C40)(FIG_TYPE_STRUCT_47);
     self->field_0x28 = temp;
     (*func_80004CE8)(temp, common_camera_HUD);
-    temp->primitive_color.R = temp->primitive_color.G =
-        temp->primitive_color.B = 0xA0;
+    temp->primitive_color.R = temp->primitive_color.G = temp->primitive_color.B = 0xA0;
     temp->field5_0x3c = 1;
     temp->blend_color.R = temp->blend_color.G = temp->blend_color.B = 0xCF;
-    (s8) temp->fog_color.R =
-        0xF0; // The s8 typecast is needed for matching here
+    (s8) temp->fog_color.R = 0xF0; // The s8 typecast is needed for matching here
     temp->fog_color.G = 0;
     temp->fog_color.B = 0x10;
     model = (*modelInfo_createRootNode)(FIG_TYPE_HUD_ELEMENT, temp);
@@ -63,8 +58,7 @@ void textboxAdvanceArrow_loop(textboxAdvanceArrow* self) {
     u32 new_var;
 
     self->fade_timer++;
-    if ((fade_timer_prev > 9) !=
-        (((fade_timer_prev > 9) != FALSE) * 0)) { // Likely a fakematch
+    if ((fade_timer_prev > 9) != (((fade_timer_prev > 9) != FALSE) * 0)) { // Likely a fakematch
         new_var = model->primitive_color.R;
         red = new_var;
         if (red < 8.5) {
@@ -83,6 +77,4 @@ void textboxAdvanceArrow_loop(textboxAdvanceArrow* self) {
     }
 }
 
-void textboxAdvanceArrow_destroy(textboxAdvanceArrow* self) {
-    self->header.destroy(self);
-}
+void textboxAdvanceArrow_destroy(textboxAdvanceArrow* self) { self->header.destroy(self); }

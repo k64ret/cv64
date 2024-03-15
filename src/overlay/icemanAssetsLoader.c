@@ -16,8 +16,7 @@
 
 void func_0F000150(cv64_object_hdr_t* self);
 
-void (*cv64_ovl_icemanAssetsLoader_funcs[])(cv64_object_hdr_t* self
-) = {func_0F000150};
+void (*cv64_ovl_icemanAssetsLoader_funcs[])(cv64_object_hdr_t* self) = {func_0F000150};
 
 void mudAndLavaManAssetsLoader_entrypoint(mudAndLavaManAssetsLoader* self) {
     ENTER(self, cv64_ovl_icemanAssetsLoader_funcs);
