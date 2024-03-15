@@ -41,9 +41,9 @@ void cv64_ovl_easyending_init(cv64_ovl_easyending_t* self) {
     self->ending_textbox = new_textbox;
     (*textbox_setPos)(new_textbox, 30, 110, 1);
     (*textbox_setDimensions)(new_textbox, 6, 250, 0, 0);
-    new_textbox->palette = TEXT_COLOR_WHITE;
+    new_textbox->palette      = TEXT_COLOR_WHITE;
     new_textbox->display_time = 0;
-    message_ptr = (*text_getMessageFromPool)(cv64_ovl_easyending_msg, 0);
+    message_ptr               = (*text_getMessageFromPool)(cv64_ovl_easyending_msg, 0);
     (*textbox_setMessagePtr)(
         new_textbox, GET_UNMAPPED_ADDRESS(NI_OVL_EASY_MODE_ENDING_MSG, message_ptr), NULL, 0
     );
@@ -66,33 +66,33 @@ void cv64_ovl_easyending_loop(cv64_ovl_easyending_t* self) {
     self->active_time++;
     if ((self->active_time > 120) && (sys.controllers[0].buttons_pressed & A_BUTTON)) {
         BITS_SET(*textbox_flags, CLOSE_TEXTBOX);
-        sys.SaveStruct_gameplay.money = 0;
-        sys.SaveStruct_gameplay.time_saved_counter = 0;
-        sys.SaveStruct_gameplay.death_counter = 0;
-        sys.SaveStruct_gameplay.field55_0xbc = 0;
-        sys.SaveStruct_gameplay.field59_0xc0 = 0;
-        sys.SaveStruct_gameplay.field63_0xc4 = 0;
-        sys.SaveStruct_gameplay.field67_0xc8 = 0;
-        sys.SaveStruct_gameplay.field69_0xca = 0;
-        sys.SaveStruct_gameplay.field71_0xcc = 0;
-        sys.SaveStruct_gameplay.field75_0xd0 = 0;
-        sys.SaveStruct_gameplay.field77_0xd2 = 0;
-        sys.SaveStruct_gameplay.field79_0xd4 = 0;
-        sys.SaveStruct_gameplay.field83_0xd8 = 0;
-        sys.SaveStruct_gameplay.money_spent_on_Renon = 0;
-        sys.SaveStruct_gameplay.player_status = 0;
-        sys.SaveStruct_gameplay.life = 100;
-        sys.SaveStruct_gameplay.field13_0x5c = 100;
-        sys.SaveStruct_gameplay.subweapon = SUBWEAPON_NONE;
-        sys.current_PowerUp_level = 0;
+        sys.SaveStruct_gameplay.money                                = 0;
+        sys.SaveStruct_gameplay.time_saved_counter                   = 0;
+        sys.SaveStruct_gameplay.death_counter                        = 0;
+        sys.SaveStruct_gameplay.field55_0xbc                         = 0;
+        sys.SaveStruct_gameplay.field59_0xc0                         = 0;
+        sys.SaveStruct_gameplay.field63_0xc4                         = 0;
+        sys.SaveStruct_gameplay.field67_0xc8                         = 0;
+        sys.SaveStruct_gameplay.field69_0xca                         = 0;
+        sys.SaveStruct_gameplay.field71_0xcc                         = 0;
+        sys.SaveStruct_gameplay.field75_0xd0                         = 0;
+        sys.SaveStruct_gameplay.field77_0xd2                         = 0;
+        sys.SaveStruct_gameplay.field79_0xd4                         = 0;
+        sys.SaveStruct_gameplay.field83_0xd8                         = 0;
+        sys.SaveStruct_gameplay.money_spent_on_Renon                 = 0;
+        sys.SaveStruct_gameplay.player_status                        = 0;
+        sys.SaveStruct_gameplay.life                                 = 100;
+        sys.SaveStruct_gameplay.field13_0x5c                         = 100;
+        sys.SaveStruct_gameplay.subweapon                            = SUBWEAPON_NONE;
+        sys.current_PowerUp_level                                    = 0;
         sys.SaveStruct_gameplay.health_depletion_rate_while_poisoned = 0;
-        sys.SaveStruct_gameplay.current_hour_VAMP = 0;
-        sys.SaveStruct_gameplay.week = 0;
-        sys.SaveStruct_gameplay.day = 0;
-        sys.SaveStruct_gameplay.hour = 0;
-        sys.SaveStruct_gameplay.minute = 0;
-        sys.SaveStruct_gameplay.seconds = 0;
-        sys.SaveStruct_gameplay.milliseconds = 0;
+        sys.SaveStruct_gameplay.current_hour_VAMP                    = 0;
+        sys.SaveStruct_gameplay.week                                 = 0;
+        sys.SaveStruct_gameplay.day                                  = 0;
+        sys.SaveStruct_gameplay.hour                                 = 0;
+        sys.SaveStruct_gameplay.minute                               = 0;
+        sys.SaveStruct_gameplay.seconds                              = 0;
+        sys.SaveStruct_gameplay.milliseconds                         = 0;
 
         // clang-format off
 

@@ -58,14 +58,14 @@ void cv64_ovl_touturo_door_init(cv64_ovl_touturo_door_t* self) {
     BITS_SET(model->flags, FIG_FLAG_0800 | FIG_FLAG_0100);
 
     model->assets_file_ID = sys.map_assets_file_IDs[0];
-    model->dlist = cv64_ovl_touturo_door_dlists[settings->variable_1];
+    model->dlist          = cv64_ovl_touturo_door_dlists[settings->variable_1];
 
     CV64_COLOR_RGBA_TO_U32(model->primitive_color) = CV64_COLOR_RGBA_TO_U32(sys.primitive_color);
-    CV64_COLOR_RGBA_TO_U32(model->fog_color) = CV64_COLOR_RGBA_TO_U32(sys.background_color);
+    CV64_COLOR_RGBA_TO_U32(model->fog_color)       = CV64_COLOR_RGBA_TO_U32(sys.background_color);
 
     BITS_SET(self->header.ID, OBJ_FLAG_STAGE_OBJECT);
 
-    self->map_actor_model = getMapActorModelEntryFromArray(model->dlist, model->assets_file_ID);
+    self->map_actor_model  = getMapActorModelEntryFromArray(model->dlist, model->assets_file_ID);
     model->map_actor_model = self->map_actor_model;
 
     self->close_time = 30;
@@ -77,7 +77,7 @@ void cv64_ovl_touturo_door_init(cv64_ovl_touturo_door_t* self) {
 
 void cv64_ovl_touturo_door_loop(cv64_ovl_touturo_door_t* self) {
     cv64_actor_settings_t* settings = self->settings;
-    cv64_model_inf_t* model = self->model;
+    cv64_model_inf_t* model         = self->model;
 
     if ((*actor_checkSpawn)(
             self, settings->position.x, settings->position.y, settings->position.z

@@ -155,7 +155,7 @@ void gamestate_create(s32 game_state) {
     // Set GameStateMgr params (flags, destroy function, game state ID and game
     // state info)
     BITS_SET(ptr_GameStateMgr->flags, OBJ_EXEC_FLAG_TOP);
-    ptr_GameStateMgr->destroy = GameStateMgr_destroy;
+    ptr_GameStateMgr->destroy            = GameStateMgr_destroy;
     ptr_GameStateMgr->current_game_state = game_state;
     memory_copy(
         &gameState_settings[game_state - 1].slots,
@@ -166,7 +166,7 @@ void gamestate_create(s32 game_state) {
 
 void gamestate_change(s32 game_state) {
     ptr_GameStateMgr->current_game_state = -game_state;
-    ptr_GameStateMgr->exitingGameState = TRUE;
+    ptr_GameStateMgr->exitingGameState   = TRUE;
 }
 
 void func_80000534(void) {}

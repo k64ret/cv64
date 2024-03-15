@@ -42,11 +42,11 @@ void cv64_ovl_konamilogo_init(cv64_ovl_konamilogo_t* self) {
     cv64_object_func_inf_t* curFunc;
     cv64_model_inf_t* model = (*modelInfo_createRootNode)(FIG_TYPE_HUD_ELEMENT, common_camera_HUD);
 
-    self->model = model;
-    model->dlist = &KONAMI_LOGO_DL;
-    model->assets_file_ID = NI_ASSETS_KONAMI_KCEK_LOGOS;
-    model->size.x = 0.9975f;
-    model->size.y = 1.005f;
+    self->model                                  = model;
+    model->dlist                                 = &KONAMI_LOGO_DL;
+    model->assets_file_ID                        = NI_ASSETS_KONAMI_KCEK_LOGOS;
+    model->size.x                                = 0.9975f;
+    model->size.y                                = 1.005f;
     CV64_COLOR_RGBA_TO_U32(sys.background_color) = 0x000000FF; // Black (opaque)
     BITS_SET(model->flags, FIG_FLAG_0800);
     CV64_COLOR_RGBA_TO_U32(model->primitive_color) = 0xFFFFFF00; // White (transparent)
@@ -105,7 +105,7 @@ void cv64_ovl_konamilogo_kcek_fade_in(cv64_ovl_konamilogo_t* self) {
     cv64_model_inf_t* model = self->model;
 
     model->size.x = 0.995f;
-    model->dlist = &KCEK_LOGO_DL;
+    model->dlist  = &KCEK_LOGO_DL;
     if (model->primitive_color.A < 0xFC) {
         model->primitive_color.A += 0x03;
     } else {

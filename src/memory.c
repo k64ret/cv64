@@ -12,14 +12,16 @@ void heap_init(
     s32 heap_size,
     u32 additional_flags
 ) {
-    heaps[kind].flags = additional_flags | HEAP_ACTIVE;
-    heaps[kind].size = ALIGN8(heap_size);
+    heaps[kind].flags      = additional_flags | HEAP_ACTIVE;
+    heaps[kind].size       = ALIGN8(heap_size);
     heaps[kind].heap_start = ALIGN8(first_block_ptr);
     first_block_ptr->flags = HEAP_BLOCK_FREE;
-    first_block_ptr->size = heaps[kind].size - sizeof(cv64_heapblock_hdr_t);
+    first_block_ptr->size  = heaps[kind].size - sizeof(cv64_heapblock_hdr_t);
 }
 
-void heap_free(cv64_heap_kind_t kind) { heaps[kind].flags = HEAP_INACTIVE; }
+void heap_free(cv64_heap_kind_t kind) {
+    heaps[kind].flags = HEAP_INACTIVE;
+}
 
 void heap_writebackDCache(void) {
     cv64_heap_inf_t* first;
@@ -39,7 +41,9 @@ void heap_writebackDCache(void) {
 
 void func_80000D68_1968(s32 arg0, u32 arg1) {}
 
-s32 func_80000D74_1974(s32 arg0) { return 0; }
+s32 func_80000D74_1974(s32 arg0) {
+    return 0;
+}
 
 #pragma GLOBAL_ASM("../asm/nonmatchings/memory/heap_alloc.s")
 
@@ -57,11 +61,11 @@ void* func_80001008_1C08(cv64_heap_kind_t heap_kind, u32 size) {
         return NULL;
     }
 
-    data_header = data - sizeof(cv64_heapblock_hdr_t);
+    data_header               = data - sizeof(cv64_heapblock_hdr_t);
     data_header->data_ptrs[0] = data;
     BITS_SET(data_header->flags, HEAP_BLOCK_4000);
     data_header->data_ptrs[1] = data + size;
-    data_header->field_0x08 = data_header->data_ptrs[sys.current_dlist_buffer];
+    data_header->field_0x08   = data_header->data_ptrs[sys.current_dlist_buffer];
 
     return &data_header->field_0x08;
 }
@@ -243,7 +247,7 @@ void object_curLevel_goToFunc(
     u16* functionInfo_entry;
     u16* entry_to_clean;
 
-    functionInfo_entry = &current_functionInfo[*functionInfo_ID];
+    functionInfo_entry  = &current_functionInfo[*functionInfo_ID];
     *functionInfo_entry = function;
 
     for (entry_to_clean = functionInfo_entry + 1; entry_to_clean < (u16*) functionInfo_ID;
@@ -258,7 +262,7 @@ void object_curLevel_goToFuncInLevel(
     u16* functionInfo_entry;
     u16* entry_to_clean;
 
-    functionInfo_entry = &current_functionInfo[level];
+    functionInfo_entry  = &current_functionInfo[level];
     *functionInfo_entry = function;
 
     for (entry_to_clean = functionInfo_entry + 1; entry_to_clean < (u16*) functionInfo_ID;

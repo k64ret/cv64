@@ -5,8 +5,13 @@ IndentWidth: 4
 ---
 Language: Cpp
 AlignAfterOpenBracket: BlockIndent
+AlignConsecutiveAssignments: true
+AlignConsecutiveBitFields: true
+# AlignConsecutiveDeclarations: true
 AlignConsecutiveMacros: true
 AlignOperands: false
+AllowShortEnumsOnASingleLine: false
+AllowShortFunctionsOnASingleLine: Empty
 BinPackArguments: false
 BinPackParameters: false
 BreakStringLiterals: false

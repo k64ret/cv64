@@ -142,8 +142,8 @@ cv64_object_hdr_t* object_create(cv64_object_hdr_t* parent, cv64_object_id_t ID)
 
         if (parent != NULL) {
             new_object->parent = parent;
-            new_object->next = parent->child;
-            parent->child = new_object;
+            new_object->next   = parent->child;
+            parent->child      = new_object;
         }
 
         new_object->destroy = &object_destroyChildrenAndModelInfo;

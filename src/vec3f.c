@@ -5,7 +5,7 @@ f32 func_80011310_11F10(f32 src) {
     f32 sqrt;
 
     src_squared = src * src;
-    sqrt = (src_squared > 1.0f) ? 0.0f : sqrtf(1.0f - src_squared);
+    sqrt        = (src_squared > 1.0f) ? 0.0f : sqrtf(1.0f - src_squared);
 
     return atan2f(sqrt, src);
 }
@@ -15,7 +15,7 @@ f32 func_80011370_11F70(f32 src) {
     f32 sqrt;
 
     src_squared = src * src;
-    sqrt = (src_squared > 1.0f) ? 0.0f : sqrtf(1.0f - src_squared);
+    sqrt        = (src_squared > 1.0f) ? 0.0f : sqrtf(1.0f - src_squared);
 
     return atan2f(src, sqrt);
 }
@@ -131,7 +131,9 @@ void vec3f_set(vec3f* vec, f32 x, f32 y, f32 z) {
 }
 
 // Possibly `vec3f_identity`
-void vec3f_multiplyByOne(vec3f* dest) { vec3f_multiplyScalar(dest, dest, 1.0f); }
+void vec3f_multiplyByOne(vec3f* dest) {
+    vec3f_multiplyScalar(dest, dest, 1.0f);
+}
 
 // Possibly `vec3f_lerp`
 void vec3f_800117a4(vec3f* dest, vec3f* src1, vec3f* src2, f32 scalar) {

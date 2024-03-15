@@ -55,7 +55,9 @@ cv64_interactuables_func_t interactuables_functions[] = {
     interactuables_destroy
 };
 
-void interactuables_entrypoint(interactuables* self) { ENTER(self, interactuables_functions); }
+void interactuables_entrypoint(interactuables* self) {
+    ENTER(self, interactuables_functions);
+}
 
 void interactuables_init(interactuables* self) {
     cv64_actor_settings_t* settings;
@@ -128,7 +130,7 @@ void interactuables_init(interactuables* self) {
             );
             self->flags = item_appearence_settings->flags;
             if (item_appearence_settings->texture != 0xFF) {
-                item_model->dlist = item_appearence_settings->dlist | 0x40000000;
+                item_model->dlist   = item_appearence_settings->dlist | 0x40000000;
                 item_model->texture = item_appearence_settings->texture;
                 item_model->palette = item_appearence_settings->palette;
             } else {
@@ -174,9 +176,9 @@ void interactuables_init(interactuables* self) {
 
         if ((interactuables_settings_table[self->table_index].type == ITEM_KIND_TEXT_SPOT) &&
             (settings != NULL)) {
-            self->position.x = settings->position.x;
-            self->position.y = settings->position.y;
-            self->position.z = settings->position.z;
+            self->position.x     = settings->position.x;
+            self->position.y     = settings->position.y;
+            self->position.z     = settings->position.z;
             self->trigger_X_size = settings->variable_2;
             self->trigger_Z_size = settings->variable_3;
         }
@@ -184,9 +186,9 @@ void interactuables_init(interactuables* self) {
         // The time it takes for the flash that appears over an item is selected
         // by randomly selecting a number between 120 and 150 frames
         // (4 and 5 seconds)
-        self->time_when_flash_appears_over_item = (u16) ((*random_range)(30) + 120);
-        ITEM_FADE_TIMER = 0;
-        self->item_falling_height_multiplier = 0;
+        self->time_when_flash_appears_over_item  = (u16) ((*random_range)(30) + 120);
+        ITEM_FADE_TIMER                          = 0;
+        self->item_falling_height_multiplier     = 0;
         self->pickableItemFlash_or_textbox.flash = NULL;
         (*object_curLevel_goToNextFuncAndClearTimer)(
             self->header.current_function, &self->header.functionInfo_ID
@@ -233,7 +235,7 @@ void interactuables_loop(interactuables* self) {
                         );
                     }
                 }
-                self->current_flash_inactive_time = 0;
+                self->current_flash_inactive_time       = 0;
                 self->time_when_flash_appears_over_item = (u16) ((*random_range)(30) + 120);
             } else {
                 self->current_flash_inactive_time++;
@@ -278,7 +280,7 @@ void interactuables_loop(interactuables* self) {
                     current_height = self->position.y - temp;
 
                     if (current_height < self->height) {
-                        self->position.y = self->height;
+                        self->position.y                     = self->height;
                         self->item_falling_height_multiplier = 0;
                     } else
                         self->position.y = current_height;
@@ -354,11 +356,11 @@ void interactuables_initCheck(interactuables* self) {
         // and begin reading its textbox. Don't actually pick it up
         if (interactuables_settings_table[self->table_index].item_or_text_ID ==
             ITEM_ID_WHITE_JEWEL) {
-            sys.FREEZE_PLAYER = TRUE;
+            sys.FREEZE_PLAYER  = TRUE;
             sys.FREEZE_ENEMIES = TRUE;
             cameraMgr_setReadingTextState(sys.ptr_cameraMgr, TRUE);
             ITEM_FADE_TIMER = 0;
-            settings = &interactuables_settings_table[self->table_index];
+            settings        = &interactuables_settings_table[self->table_index];
         }
     }
 
@@ -521,7 +523,7 @@ void interactuables_stopCheck(interactuables* self) {
         if (interactuables_settings_table[self->table_index].item_or_text_ID ==
             ITEM_ID_WHITE_JEWEL) {
             if (objectList_findFirstObjectByID(MENU_SAVEGAME) == NULL) {
-                sys.FREEZE_PLAYER = FALSE;
+                sys.FREEZE_PLAYER  = FALSE;
                 sys.FREEZE_ENEMIES = FALSE;
 
                 cameraMgr_setReadingTextState(sys.ptr_cameraMgr, FALSE);
@@ -552,7 +554,7 @@ void interactuables_stopCheck(interactuables* self) {
 
     if ((interactuables_settings_table[self->table_index].type == ITEM_KIND_TEXT_SPOT) &&
         lensAreClosed()) {
-        sys.FREEZE_PLAYER = FALSE;
+        sys.FREEZE_PLAYER  = FALSE;
         sys.FREEZE_ENEMIES = FALSE;
         cameraMgr_setReadingTextState(sys.ptr_cameraMgr, FALSE);
 
@@ -619,7 +621,7 @@ void interactuables_destroy(interactuables* self) {
 
 void interactuables_stopInteraction(interactuables* self) {
     self->pickableItemFlash_or_textbox.flash = NULL;
-    ITEM_FADE_TIMER = 0;
-    self->textbox_is_active = FALSE;
-    self->interacting_with_interactuable = FALSE;
+    ITEM_FADE_TIMER                          = 0;
+    self->textbox_is_active                  = FALSE;
+    self->interacting_with_interactuable     = FALSE;
 }

@@ -25,7 +25,9 @@ const char cv64_stage_select_unused_str_2[] = "Mfds Set OK!!\n";
 const char cv64_stage_select_unused_str_3[] = "Rens Set OK!!\n";
 const char cv64_stage_select_unused_str_4[] = "Slect Stage : %02d\n";
 
-void stageSelect_entrypoint(stageSelect* self) { ENTER(self, stageSelect_functions); }
+void stageSelect_entrypoint(stageSelect* self) {
+    ENTER(self, stageSelect_functions);
+}
 
 void stageSelect_loadAssetsFile(stageSelect* self) {
     if (((*fade_isFading)() == FALSE) && ((ptr_DMAMgr->DMAChunkMgr != NULL))) {
@@ -37,7 +39,7 @@ void stageSelect_loadAssetsFile(stageSelect* self) {
             HEAP_MENU_DATA_SIZE,
             HEAP_WRITE_BACK_CACHE_TO_RAM
         );
-        self->assets_file_end = NULL;
+        self->assets_file_end   = NULL;
         self->assets_file_start = (*heap_alloc)(HEAP_KIND_MENU_DATA, NI_ASSETS_MENU_BUFFER_SIZE);
         DMAMgr_loadNisitenmaIchigoFile(
             ptr_DMAMgr, NI_ASSETS_MENU, (u32) self->assets_file_start, &self->assets_file_end
@@ -60,16 +62,16 @@ void stageSelect_initGraphics(stageSelect* self) {
         );
         bg_model = modelInfo_createRootNode(FIG_TYPE_HUD_ELEMENT, common_camera_8009B444);
         self->red_background_model = bg_model;
-        bg_model->assets_file_ID = NI_ASSETS_MENU;
-        bg_model->dlist = &MENU_RED_BACKGROUND_DL;
+        bg_model->assets_file_ID   = NI_ASSETS_MENU;
+        bg_model->dlist            = &MENU_RED_BACKGROUND_DL;
         BITS_SET(bg_model->flags, FIG_FLAG_0800);
         CV64_COLOR_RGBA_TO_U32(bg_model->primitive_color) = (s8) 0x000000FF; // Slight fakematch?
-        bg_model->position.x = 0.0f;
-        bg_model->position.y = 0.0f;
-        bg_model->position.z = 0.0f;
-        bg_model->size.x = 1.0f;
-        bg_model->size.y = 1.0f;
-        bg_model->size.z = 1.0f;
+        bg_model->position.x                              = 0.0f;
+        bg_model->position.y                              = 0.0f;
+        bg_model->position.z                              = 0.0f;
+        bg_model->size.x                                  = 1.0f;
+        bg_model->size.y                                  = 1.0f;
+        bg_model->size.z                                  = 1.0f;
 
         for (self->text_ID = 0; self->text_ID < STAGE_SELECT_NUM_OPTIONS + 1; self->text_ID++) {
             textbox_array[self->text_ID] = (*textbox_create)(
@@ -148,7 +150,7 @@ void stageSelect_moveLens(stageSelect* self) {
     if (self->lens_are_moving != FALSE) {
         self->lens_move_offset = self->lens_transition_rate / 4;
         if (self->lens_move_offset >= 1.) {
-            self->lens_are_moving = FALSE;
+            self->lens_are_moving  = FALSE;
             self->lens_move_offset = 1;
         }
         lens->position.y =
@@ -156,7 +158,7 @@ void stageSelect_moveLens(stageSelect* self) {
         self->lens_transition_rate += 1.0;
         return;
     }
-    current_option = self->current_option;
+    current_option  = self->current_option;
     previous_option = self->previous_option;
     if (current_option == (u32) previous_option) {
         if ((sys.controllers[0].buttons_pressed & A_BUTTON) ||
@@ -173,11 +175,11 @@ void stageSelect_moveLens(stageSelect* self) {
         }
         return;
     }
-    self->lens_are_moving = TRUE;
-    self->previous_option = current_option;
-    self->text_ID = (61 - ((f64) previous_option * 23));
-    self->next_text_ID = (61 - ((f64) current_option * 23));
-    self->lens_transition_rate = 0;
+    self->lens_are_moving               = TRUE;
+    self->previous_option               = current_option;
+    self->text_ID                       = (61 - ((f64) previous_option * 23));
+    self->next_text_ID                  = (61 - ((f64) current_option * 23));
+    self->lens_transition_rate          = 0;
     self->lens_move_vertical_difference = self->next_text_ID - self->text_ID;
 }
 
@@ -188,24 +190,24 @@ void stageSelect_warpToStage(stageSelect* self) {
     if ((lens->flags & (WINDOW_FLAG_4000 | WINDOW_FLAG_8000)) >> 0xE != FALSE) {
         stageSelect_closeTextboxes(self);
 
-        sys.SaveStruct_gameplay.map_ID = NONE;
+        sys.SaveStruct_gameplay.map_ID          = NONE;
         sys.SaveStruct_gameplay.map_entrance_ID = NONE;
-        sys.SaveStruct_gameplay.life = 100;
-        sys.SaveStruct_gameplay.field13_0x5c = 100;
-        sys.SaveStruct_gameplay.subweapon = SUBWEAPON_NONE;
-        sys.SaveStruct_gameplay.money = 0;
-        sys.SaveStruct_gameplay.player_status = 0;
+        sys.SaveStruct_gameplay.life            = 100;
+        sys.SaveStruct_gameplay.field13_0x5c    = 100;
+        sys.SaveStruct_gameplay.subweapon       = SUBWEAPON_NONE;
+        sys.SaveStruct_gameplay.money           = 0;
+        sys.SaveStruct_gameplay.player_status   = 0;
 
         // Remove inventory items
         // clang-format off
         for (i = 1; i < NUM_ITEMS + 1; i++) sys.SaveStruct_gameplay.items.array[i - 1] = 0;
         // clang-format on
 
-        sys.SaveStruct_gameplay.week = 0;
-        sys.SaveStruct_gameplay.day = 0;
-        sys.SaveStruct_gameplay.hour = 0;
-        sys.SaveStruct_gameplay.minute = 0;
-        sys.SaveStruct_gameplay.seconds = 0;
+        sys.SaveStruct_gameplay.week         = 0;
+        sys.SaveStruct_gameplay.day          = 0;
+        sys.SaveStruct_gameplay.hour         = 0;
+        sys.SaveStruct_gameplay.minute       = 0;
+        sys.SaveStruct_gameplay.seconds      = 0;
         sys.SaveStruct_gameplay.milliseconds = 0;
 
         // Clear event flags
@@ -220,53 +222,53 @@ void stageSelect_warpToStage(stageSelect* self) {
         switch (self->current_option) {
             case FOREST:
                 sys.entrance_cutscene_ID = 60;
-                sys.map_fade_out_time = 30;
-                sys.map_fade_in_time = 30;
-                sys.map_ID = MORI;
-                sys.map_entrance_ID = 0;
-                sys.map_fade_in_color.R = 0;
-                sys.map_fade_in_color.G = 0;
-                sys.map_fade_in_color.B = 0;
+                sys.map_fade_out_time    = 30;
+                sys.map_fade_in_time     = 30;
+                sys.map_ID               = MORI;
+                sys.map_entrance_ID      = 0;
+                sys.map_fade_in_color.R  = 0;
+                sys.map_fade_in_color.G  = 0;
+                sys.map_fade_in_color.B  = 0;
                 break;
 
             case INSIDE_OF_RAMPART:
                 sys.entrance_cutscene_ID = 4;
-                sys.map_ID = TOUOKUJI;
-                sys.map_fade_out_time = 30;
-                sys.map_fade_in_time = 30;
-                sys.map_entrance_ID = 0;
-                sys.map_fade_in_color.R = 0;
-                sys.map_fade_in_color.G = 0;
-                sys.map_fade_in_color.B = 0;
+                sys.map_ID               = TOUOKUJI;
+                sys.map_fade_out_time    = 30;
+                sys.map_fade_in_time     = 30;
+                sys.map_entrance_ID      = 0;
+                sys.map_fade_in_color.R  = 0;
+                sys.map_fade_in_color.G  = 0;
+                sys.map_fade_in_color.B  = 0;
                 break;
 
             case COURTYARD:
                 BITS_SET(sys.cutscene_flags, CUTSCENE_FLAG_10);
                 sys.entrance_cutscene_ID = 9;
-                sys.map_ID = NAKANIWA;
-                sys.map_fade_out_time = 30;
-                sys.map_fade_in_time = 30;
-                sys.map_entrance_ID = 0;
-                sys.map_fade_in_color.R = 0;
-                sys.map_fade_in_color.G = 0;
-                sys.map_fade_in_color.B = 0;
+                sys.map_ID               = NAKANIWA;
+                sys.map_fade_out_time    = 30;
+                sys.map_fade_in_time     = 30;
+                sys.map_entrance_ID      = 0;
+                sys.map_fade_in_color.R  = 0;
+                sys.map_fade_in_color.G  = 0;
+                sys.map_fade_in_color.B  = 0;
                 break;
 
             case EXECUTION_TOWER:
-                sys.map_ID = SHOKEI_TOU;
-                sys.map_fade_out_time = 30;
-                sys.map_fade_in_time = 30;
-                sys.map_entrance_ID = 0;
+                sys.map_ID              = SHOKEI_TOU;
+                sys.map_fade_out_time   = 30;
+                sys.map_fade_in_time    = 30;
+                sys.map_entrance_ID     = 0;
                 sys.map_fade_in_color.R = 0;
                 sys.map_fade_in_color.G = 0;
                 sys.map_fade_in_color.B = 0;
                 break;
 
             case CLOCK_TOWER:
-                sys.map_ID = TOKEITOU_NAI;
-                sys.map_fade_out_time = 30;
-                sys.map_fade_in_time = 30;
-                sys.map_entrance_ID = 0;
+                sys.map_ID              = TOKEITOU_NAI;
+                sys.map_fade_out_time   = 30;
+                sys.map_fade_in_time    = 30;
+                sys.map_entrance_ID     = 0;
                 sys.map_fade_in_color.R = 0;
                 sys.map_fade_in_color.G = 0;
                 sys.map_fade_in_color.B = 0;
@@ -277,28 +279,28 @@ void stageSelect_warpToStage(stageSelect* self) {
                 sys.map_ID = TURO_TOKEITOU, // Comma needed for matching
                 sys.map_entrance_ID = 1;
                 // clang-format on
-                sys.map_fade_out_time = 30;
-                sys.map_fade_in_time = 30;
+                sys.map_fade_out_time   = 30;
+                sys.map_fade_in_time    = 30;
                 sys.map_fade_in_color.R = 0;
                 sys.map_fade_in_color.G = 0;
                 sys.map_fade_in_color.B = 0;
                 break;
 
             case VS_ACTRIESE:
-                sys.map_ID = TURO_TOKEITOU;
-                sys.map_fade_out_time = 30;
-                sys.map_fade_in_time = 30;
-                sys.map_entrance_ID = 0;
+                sys.map_ID              = TURO_TOKEITOU;
+                sys.map_fade_out_time   = 30;
+                sys.map_fade_in_time    = 30;
+                sys.map_entrance_ID     = 0;
                 sys.map_fade_in_color.R = 0;
                 sys.map_fade_in_color.G = 0;
                 sys.map_fade_in_color.B = 0;
                 break;
 
             case VS_BEHIMOS:
-                sys.map_ID = HONMARU_B1F;
-                sys.map_fade_out_time = 30;
-                sys.map_fade_in_time = 30;
-                sys.map_entrance_ID = 0;
+                sys.map_ID              = HONMARU_B1F;
+                sys.map_fade_out_time   = 30;
+                sys.map_fade_in_time    = 30;
+                sys.map_entrance_ID     = 0;
                 sys.map_fade_in_color.R = 0;
                 sys.map_fade_in_color.G = 0;
                 sys.map_fade_in_color.B = 0;

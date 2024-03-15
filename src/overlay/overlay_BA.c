@@ -25,7 +25,9 @@ void (*cv64_ovl_obj213F_funcs[])(object_213F* self) = {
     obj213F_destroy
 };
 
-void obj213F_entrypoint(object_213F* self) { ENTER(self, cv64_ovl_obj213F_funcs); }
+void obj213F_entrypoint(object_213F* self) {
+    ENTER(self, cv64_ovl_obj213F_funcs);
+}
 
 void obj213F_isDraculaCutsceneWatched(object_213F* self) {
     cv64_model_inf_t* player_model;
@@ -61,4 +63,6 @@ void obj213F_playSound(object_213F* self) {
     );
 }
 
-void obj213F_destroy(object_213F* self) { self->header.destroy(self); }
+void obj213F_destroy(object_213F* self) {
+    self->header.destroy(self);
+}

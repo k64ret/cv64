@@ -9,14 +9,14 @@
 #define STAGE_SELECT_NUM_OPTIONS 8
 
 typedef enum stage_select_option_enum {
-    FOREST = 0,
+    FOREST            = 0,
     INSIDE_OF_RAMPART = 1,
-    COURTYARD = 2,
-    EXECUTION_TOWER = 3,
-    CLOCK_TOWER = 4,
-    VS_DEATH = 5,
-    VS_ACTRIESE = 6,
-    VS_BEHIMOS = 7
+    COURTYARD         = 2,
+    EXECUTION_TOWER   = 3,
+    CLOCK_TOWER       = 4,
+    VS_DEATH          = 5,
+    VS_ACTRIESE       = 6,
+    VS_BEHIMOS        = 7
 } stage_select_option_enum_t;
 
 typedef struct {

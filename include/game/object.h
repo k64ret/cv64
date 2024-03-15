@@ -178,7 +178,7 @@ extern cv64_object_t* object_list_free_slot;
 // Commas at the end of statements needed for matching
 #define ENTER(self, functions_array)                                                               \
     s16 funcID;                                                                                    \
-    funcID = self->header.functionInfo_ID + 1;                                                     \
+    funcID                       = self->header.functionInfo_ID + 1;                               \
     self->header.functionInfo_ID = funcID, self->header.current_function[funcID].timer++;          \
     functions_array[self->header.current_function[funcID].function](self);                         \
     self->header.functionInfo_ID--;

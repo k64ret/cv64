@@ -16,7 +16,9 @@
 void (*cv64_ovl_creditsmgr_funcs[])(creditsMgr* self
 ) = {creditsMgr_init, creditsMgr_loop, creditsMgr_exit};
 
-void creditsMgr_entrypoint(creditsMgr* self) { ENTER(self, cv64_ovl_creditsmgr_funcs); }
+void creditsMgr_entrypoint(creditsMgr* self) {
+    ENTER(self, cv64_ovl_creditsmgr_funcs);
+}
 
 // https://decomp.me/scratch/JvchH
 void creditsMgr_init(creditsMgr* self) {
@@ -37,7 +39,7 @@ void creditsMgr_init(creditsMgr* self) {
             (*object_createAndSetChild)(self, CUTSCENE_CUTSCENEMGR);
         }
         sys.field89_0x2644c = 0;
-        sys.cutscene_ID = CUTSCENE_ID_CREDITS;
+        sys.cutscene_ID     = CUTSCENE_ID_CREDITS;
         (*object_curLevel_goToNextFuncAndClearTimer)(
             self->header.current_function, &self->header.functionInfo_ID
         );

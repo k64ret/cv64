@@ -13,23 +13,23 @@
 #define INTERACTUABLES_SETTINGS_TYPE_TEXT_SPOT 2
 
 typedef enum cv64_interactuables_settings_flag {
-    ITEM_VANISH = 0x0001,
+    ITEM_VANISH                         = 0x0001,
     TEXT_SPOT_DESTROY_AFTER_INTERACTION = 0x0002,
     TEXT_SPOT_DESTROY_IF_BITFLAG_IS_SET = 0x0004,
-    TEXT_SPOT_ENABLE_IF_BITFLAG_IS_SET = 0x0008,
+    TEXT_SPOT_ENABLE_IF_BITFLAG_IS_SET  = 0x0008,
     /**
      * Yes / No selection textbox
      */
     TEXT_SPOT_DO_ACTION_AFTER_SELECTING_OPTION = 0x0010,
-    TEXT_SPOT_IF_YES_START_CUTSCENE = 0x0020,
-    TEXT_SPOT_IF_YES_ACTIVATE_LEVER = 0x0040,
-    TEXT_SPOT_IF_YES_SET_BITFLAG = 0x0080,
+    TEXT_SPOT_IF_YES_START_CUTSCENE            = 0x0020,
+    TEXT_SPOT_IF_YES_ACTIVATE_LEVER            = 0x0040,
+    TEXT_SPOT_IF_YES_SET_BITFLAG               = 0x0080,
     /**
      * Yes / No selection textbox
      */
     TEXT_SPOT_IF_YES_PULL_LEVER = 0x0100,
-    ITEM_DOES_NOT_FLASH = 0x0400,
-    ITEM_INVISIBLE = 0x0800
+    ITEM_DOES_NOT_FLASH         = 0x0400,
+    ITEM_INVISIBLE              = 0x0800
 } cv64_interactuables_settings_flag_t;
 
 typedef struct {

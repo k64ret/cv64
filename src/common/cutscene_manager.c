@@ -11,7 +11,9 @@ cv64_cutscenemgr_func_t cutsceneMgr_functions[] = {
     cutsceneMgr_stopCutscene
 };
 
-void cutsceneMgr_entrypoint(cutsceneMgr* self) { ENTER(self, cutsceneMgr_functions); }
+void cutsceneMgr_entrypoint(cutsceneMgr* self) {
+    ENTER(self, cutsceneMgr_functions);
+}
 
 void cutsceneMgr_main(cutsceneMgr* self) {
     actorVisualData* visual_data;
@@ -31,7 +33,7 @@ void cutsceneMgr_main(cutsceneMgr* self) {
 
         if ((visual_data->flags & DEAD) || (sys.SaveStruct_gameplay.player_status & DEAD)) {
             sys.entrance_cutscene_ID = CUTSCENE_ID_NONE;
-            sys.cutscene_ID = CUTSCENE_ID_NONE;
+            sys.cutscene_ID          = CUTSCENE_ID_NONE;
         } else {
             (*object_curLevel_goToNextFuncAndClearTimer)(
                 self->header.current_function, &self->header.functionInfo_ID
@@ -68,8 +70,8 @@ void cutsceneMgr_createCutscene(cutsceneMgr* self) {
     }
 
     cutscene_overlay = cutscene_settings[self->cutscene_ID - 1].overlay;
-    cutscene_ID_ptr = &self->cutscene_ID;
-    cutscene_flags = sys.cutscene_flags;
+    cutscene_ID_ptr  = &self->cutscene_ID;
+    cutscene_flags   = sys.cutscene_flags;
     if (cutscene_overlay & CUTSCENE_OVERLAY_FILM_REEL) {
         sys.cutscene_flags = cutscene_flags | CUTSCENE_FLAG_FILM_REEL_EFFECT;
         if ((self && self) && self) {
@@ -114,7 +116,7 @@ void cutsceneMgr_loop(cutsceneMgr* self) {
             self->header.current_function, &self->header.functionInfo_ID
         );
     } else if ((sys.controllers[0].buttons_pressed & (START_BUTTON | RECENTER_BUTTON)) && (2 < sys.cutscene_ID)) {
-        cutscene* cutscene_obj = self->cutscene_object;
+        cutscene* cutscene_obj      = self->cutscene_object;
         cutscene_obj->skip_cutscene = TRUE;
     }
 }

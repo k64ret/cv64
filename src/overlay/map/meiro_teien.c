@@ -11,4 +11,6 @@
 
 // Only one map-exclusive object is defined for the Maze Garden map,
 // but it only removes itself from memory the moment it spawns.
-void obj01B5_entrypoint(object_01B5* self) { self->header.destroy(self); }
+void obj01B5_entrypoint(object_01B5* self) {
+    self->header.destroy(self);
+}

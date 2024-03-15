@@ -43,11 +43,17 @@ Gfx cv64_dl_fade_with_outline[] = {
     gsSPEndDisplayList(),
 };
 
-void fade_setAllFlags(s16 flags) { sys.fade_flags = flags; }
+void fade_setAllFlags(s16 flags) {
+    sys.fade_flags = flags;
+}
 
-void fade_setFlag(s16 flag) { BITS_SET(sys.fade_flags, flag); }
+void fade_setFlag(s16 flag) {
+    BITS_SET(sys.fade_flags, flag);
+}
 
-void fade_removeFlag(s16 flag) { BITS_UNSET(sys.fade_flags, flag); }
+void fade_removeFlag(s16 flag) {
+    BITS_UNSET(sys.fade_flags, flag);
+}
 
 void fade_setColor(u8 R, u8 G, u8 B) {
     sys.fade_color.R = R;
@@ -66,7 +72,7 @@ void fade_setColor(u8 R, u8 G, u8 B) {
 
 // The matching version
 void fade_setSettings(s16 flags, u16 fade_time, u8 R, u8 G, u8 B) {
-    sys.fade_flags = flags;
+    sys.fade_flags    = flags;
     sys.fade_max_time = fade_time;
 
     sys.fade_current_time = (flags & FADE_OUT) ? 1 : fade_time - 1;
