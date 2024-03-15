@@ -91,7 +91,7 @@ void interactuables_init(interactuables* self) {
             item_appearence_settings = itemModelSettings_getEntryFromList(
                 interactuables_settings_table[self->table_index].item
             );
-            self->flags = item_appearence_settings->flags;
+            self->item_model_settings_flags = item_appearence_settings->flags;
 
             // Make the item be able to have variable texture and / or palette.
             // This is used for the Sun / Moon card, and for the keys.
@@ -109,10 +109,10 @@ void interactuables_init(interactuables* self) {
                 BITS_SET(item_model->type, ~0x7FFF);
             }
 
-            if (BITS_HAS(self->flags, ITEM_VANISH)) {
-                BITS_SET(item_model->flags, ITEM_INVISIBLE);
+            if (BITS_HAS(self->item_model_settings_flags, ITEM_MODEL_SETTINGS_FLAG_SPINS)) {
+                BITS_SET(item_model->flags, FIG_FLAG_0800);
             } else {
-                BITS_SET(item_model->flags, ITEM_INVISIBLE | TEXT_SPOT_IF_YES_ACTIVATE_LEVER);
+                BITS_SET(item_model->flags, FIG_FLAG_0800 | FIG_FLAG_0040);
             }
 
             CV64_COLOR_RGBA_TO_U32(item_model->primitive_color) = 0xFFFFFFFF;
@@ -183,10 +183,12 @@ void interactuables_main(interactuables* self) {
         if (actor_checkSpawn(self, model->position.x, model->position.y, model->position.z) ==
             FALSE) {
             if (self->time_when_flash_appears_over_item == self->current_flash_inactive_time) {
-                if (!(interactuables_settings_table[self->table_index].flags & 0x400) &&
-                    !(sys.cutscene_flags & 1) && (self->item_doesnt_flash == FALSE)) {
+                if (!(interactuables_settings_table[self->table_index].flags & ITEM_DOES_NOT_FLASH
+                    ) &&
+                    !(sys.cutscene_flags & CUTSCENE_FLAG_PLAYING) &&
+                    (self->item_doesnt_flash == FALSE)) {
                     self->flash = (pickableItemFlash*) (*createEffectObjectUnderEffectMgr)(
-                        0x25, common_camera_effects, 0
+                        EFFECT_ID_PICKABLE_ITEM_FLASH, common_camera_effects, 0
                     );
                     if (self->flash != NULL) {
                         (*effect_setPosition)(
@@ -196,7 +198,7 @@ void interactuables_main(interactuables* self) {
                                     .pickable_item_flash_height +
                                 model->position.y,
                             model->position.z,
-                            8
+                            POSITION_EQUAL_TO_VISUAL_INFO
                         );
                     }
                 }
@@ -206,9 +208,10 @@ void interactuables_main(interactuables* self) {
                 self->current_flash_inactive_time++;
             }
 
-            if (self->flags & 1) {
-                if ((interactuables_settings_table[self->table_index].item >= 1) &&
-                    (interactuables_settings_table[self->table_index].item <= 5)) {
+            if (self->item_model_settings_flags & ITEM_MODEL_SETTINGS_FLAG_SPINS) {
+                if ((interactuables_settings_table[self->table_index].item >= ITEM_ID_WHITE_JEWEL
+                    ) &&
+                    (interactuables_settings_table[self->table_index].item <= ITEM_ID_SPECIAL2)) {
                     model->angle.yaw += 0x400;
                 } else {
                     model->angle.yaw += 0x800;
@@ -219,7 +222,7 @@ void interactuables_main(interactuables* self) {
         if (((interactuables_settings*) ((s32) interactuables_settings_table +
                                          self->table_index * 0x14))
                 ->flags &
-            1) {
+            ITEM_VANISH) {
             if (self->item_doesnt_vanish == FALSE) {
                 if (ITEM_FADE_TIMER++ > 300U) {
                     if (((interactuables_settings*) ((s32) interactuables_settings_table +
@@ -328,7 +331,10 @@ void interactuables_initCheck(interactuables* self) {
 
     // If checking a text spot...
     if (interactuables_settings_table[self->table_index].type == ITEM_KIND_TEXT_SPOT) {
-        if (BITS_HAS(interactuables_settings_table[self->table_index].flags, 4)) {
+        if (BITS_HAS(
+                interactuables_settings_table[self->table_index].flags,
+                TEXT_SPOT_DESTROY_IF_EVENT_FLAG_IS_SET
+            )) {
             // Destroy it if its associated event flag is set
             if (CHECK_EVENT_FLAGS(
                     self->map_event_flag_ID,
@@ -339,7 +345,10 @@ void interactuables_initCheck(interactuables* self) {
             }
         }
 
-        if (BITS_HAS(interactuables_settings_table[self->table_index].flags, 8)) {
+        if (BITS_HAS(
+                interactuables_settings_table[self->table_index].flags,
+                TEXT_SPOT_DISABLE_IF_EVENT_FLAG_IS_NOT_SET
+            )) {
             // Disable it if its associated event flag is NOT set
             if (!CHECK_EVENT_FLAGS(
                     self->map_event_flag_ID,
@@ -347,7 +356,9 @@ void interactuables_initCheck(interactuables* self) {
                 )) {
                 interactuables_stopInteraction(self);
                 (*object_curLevel_goToFunc)(
-                    self->header.current_function, &self->header.functionInfo_ID, 1
+                    self->header.current_function,
+                    &self->header.functionInfo_ID,
+                    INTERACTUABLES_MAIN
                 );
                 return;
             }
@@ -355,7 +366,8 @@ void interactuables_initCheck(interactuables* self) {
 
         // clang-format off
         // Get the message associated to the text spot
-        textbox = (BITS_HAS(interactuables_settings_table[self->table_index].flags, 0x10))
+        // @bug No matter if flag 0x10 is set or not, the game will grab the very same string
+        textbox = (BITS_HAS(interactuables_settings_table[self->table_index].flags, TEXT_SPOT_DO_ACTION_AFTER_SELECTING_OPTION))
             ? map_getMessageFromPool(interactuables_settings_table[self->table_index].text_ID, 0)
             : map_getMessageFromPool(interactuables_settings_table[self->table_index].text_ID, 0);
 
@@ -409,7 +421,8 @@ void interactuables_selectTextboxOption(interactuables* self) {
     }
 
     if (interactuables_settings_table[self->table_index].type == (u32) ITEM_KIND_TEXT_SPOT) {
-        if (interactuables_settings_table[self->table_index].flags & 0x10) {
+        if (interactuables_settings_table[self->table_index].flags &
+            TEXT_SPOT_DO_ACTION_AFTER_SELECTING_OPTION) {
             mfds_state* textbox = self->textbox;
 
             switch (textbox->textbox_option) {
@@ -516,7 +529,10 @@ void interactuables_stopCheck(interactuables* self) {
         sys.FREEZE_ENEMIES = FALSE;
         cameraMgr_setReadingTextState(sys.ptr_cameraMgr, FALSE);
 
-        if (BITS_HAS(interactuables_settings_table[self->table_index].flags, 2)) {
+        if (BITS_HAS(
+                interactuables_settings_table[self->table_index].flags,
+                TEXT_SPOT_DESTROY_AFTER_INTERACTION
+            )) {
             (*object_curLevel_goToNextFuncAndClearTimer)(
                 self->header.current_function, &self->header.functionInfo_ID
             );

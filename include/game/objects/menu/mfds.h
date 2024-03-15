@@ -67,8 +67,9 @@ typedef struct {
     vec2s position;
     vec2s field_0x16;
     u8 field_0x1A;
-    u8 field_0x1B;
-    u8 field_0x1C[18];
+    u8 num_options;
+    u8 current_option;
+    u8 field_0x1C[17];
     u8 display_time;
     u8 field_0x2F;
     mfds_color_animation_state* color_animation_state;

@@ -9,6 +9,24 @@
 #define EFFECT_ID_1                   0x01
 #define EFFECT_ID_PICKABLE_ITEM_FLASH 0x25
 
+/**
+* These defines are used for the last arguments
+* of some of the `effect` setters.
+*
+* They indicate how the position, angle, scale, etc,
+* should be manipulated when it gets stored in `effect_visual_info`
+*/
+#define POSITION_MULTIPLIED_BY_VISUAL_INFO 2
+#define POSITION_PLUS_VISUAL_INFO          4
+#define POSITION_EQUAL_TO_VISUAL_INFO      8
+
+#define ANGLE_PLUS_VISUAL_INFO     4
+#define ANGLE_EQUAL_TO_VISUAL_INFO 8
+
+#define SIZE_MULTIPLIED_BY_VISUAL_INFO 2
+#define SIZE_PLUS_VISUAL_INFO          4
+#define SIZE_EQUAL_TO_VISUAL_INFO      8
+
 typedef struct {
     u32 flags;
     u16 color_intensity_transition_current_time;
@@ -81,8 +99,10 @@ typedef struct cv64_effect {
 extern cv64_effect_t* createEffectObjectUnderEffectMgr(
     u16 effect_obj_info_array_index, camera* display_camera, u32 visual_flags
 );
-extern void effect_setPosition(cv64_effect_t* self, f32 x, f32 y, f32 z, u16 param_5);
-extern void effect_setScale(cv64_effect_t* self, f32 x, f32 y, f32 z, u16 param_5);
+
+extern void effect_setPosition(cv64_effect_t* self, f32 x, f32 y, f32 z, u16 arg4);
+extern void effect_setAngle(cv64_effect_t* self, s16 pitch, s16 yaw, s16 roll, u16 arg4);
+extern void effect_setScale(cv64_effect_t* self, f32 x, f32 y, f32 z, u16 arg4);
 extern void effect_setMaxFrameSpeed(cv64_effect_t* self, u16 max_frame_speed);
 extern u8 effect_isMarkForDeletion(cv64_effect_t* self);
 extern void effect_markForDeletion(cv64_effect_t* self);

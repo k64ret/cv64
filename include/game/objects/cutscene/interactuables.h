@@ -13,10 +13,10 @@
 #define INTERACTUABLES_SETTINGS_TYPE_TEXT_SPOT 2
 
 typedef enum cv64_interactuables_settings_flag {
-    ITEM_VANISH                            = 0x0001,
-    TEXT_SPOT_DESTROY_AFTER_INTERACTION    = 0x0002,
-    TEXT_SPOT_DESTROY_IF_EVENT_FLAG_IS_SET = 0x0004,
-    TEXT_SPOT_ENABLE_IF_EVENT_FLAG_IS_SET  = 0x0008,
+    ITEM_VANISH                                = 0x0001,
+    TEXT_SPOT_DESTROY_AFTER_INTERACTION        = 0x0002,
+    TEXT_SPOT_DESTROY_IF_EVENT_FLAG_IS_SET     = 0x0004,
+    TEXT_SPOT_DISABLE_IF_EVENT_FLAG_IS_NOT_SET = 0x0008,
     /**
      * Yes / No selection textbox
      */
@@ -75,7 +75,7 @@ typedef struct {
     u32 time_when_flash_appears_over_item;
     cv64_rgba_t primitive_color;
     u16 map_event_flag_ID;
-    u16 flags;
+    u16 item_model_settings_flags;
     u32 event_flag; // Save event flag that gets set when interacting with the item
     s16 trigger_X_size;
     s16 trigger_Z_size;

@@ -26,6 +26,7 @@
 #define FIG_TYPE_HIDE                 0x8000
 
 // Flags
+#define FIG_FLAG_0040 0x0040
 #define FIG_FLAG_0080 0x0080
 #define FIG_FLAG_0100 0x0100
 #define FIG_FLAG_0800 0x0800
