@@ -133,7 +133,7 @@ void cv64_ovl_rose_door_init(cv64_ovl_rose_door_t* self) {
     height_settings->height         = 25.0f;
     height_settings->closing_speed  = 0.0f;
     model->position.y               = height_settings->height + height_settings->initial_height;
-    if (settings->variable_1 != FALSE) {
+    if (ROSE_DOOR_DONT_CLOSE) {
         (*object_nextLevel_goToFunc)(
             self->header.current_function, &self->header.functionInfo_ID, ROSE_DOOR_STATE_IDLE
         );

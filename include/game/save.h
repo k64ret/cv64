@@ -65,7 +65,7 @@ typedef struct cv64_save_state {
     s16 sound_mode;
     s16 character;
     u16 life;
-    u16 field13_0x5c; // Maybe related to the scrapped Magic meter?
+    u16 field_0x5C; // Maybe related to the scrapped S / E meter?
     u16 subweapon;
     u32 money;
     union {

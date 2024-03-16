@@ -15,6 +15,23 @@
 #define INTERACTUABLES_SETTINGS_TYPE_ITEM      1
 #define INTERACTUABLES_SETTINGS_TYPE_TEXT_SPOT 2
 
+// Variable 1: ID + 1 in `interactuables_settings_table` to get the settings from
+#define INTERACTUABLE_SETTINGS_TABLE_ENTRY_ID settings->variable_1
+
+// Variable 2:
+// Items: Upper 2-bytes of the event flag
+#define ITEM_EVENT_FLAG_UPPER_2BYTES settings->variable_2
+// Text spots: Size of the trigger (X)
+#define TEXT_SPOT_X_SIZE settings->variable_2
+
+// Variable 3:
+// Items: Lower 2-bytes of the event flag
+#define ITEM_EVENT_FLAG_LOWER_2BYTES settings->variable_3
+// White Jewel: Spawn number
+#define WHITE_JEWEL_SPAWN_NUMBER settings->variable_3
+// Text spots: Size of the trigger (X)
+#define TEXT_SPOT_Z_SIZE settings->variable_3
+
 typedef enum cv64_interactuables_settings_flag {
     ITEM_VANISH_OR_UPDATE_POSITION             = 0x0001,
     TEXT_SPOT_DESTROY_AFTER_INTERACTION        = 0x0002,
@@ -50,7 +67,7 @@ typedef struct {
         u16 pickable_item_flash_height;
     };
     u16 actor_variable_1;
-    u16 trigger_size; // Only used for text spots
+    u16 trigger_size;
     u8 field_0x12[2];
 } interactuables_settings;
 

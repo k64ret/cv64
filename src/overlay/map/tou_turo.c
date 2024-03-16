@@ -58,7 +58,7 @@ void cv64_ovl_touturo_door_init(cv64_ovl_touturo_door_t* self) {
     BITS_SET(model->flags, FIG_FLAG_0800 | FIG_FLAG_0100);
 
     model->assets_file_ID = MAP_ASSETS_FILE_ID;
-    model->dlist          = cv64_ovl_touturo_door_dlists[settings->variable_1];
+    model->dlist          = cv64_ovl_touturo_door_dlists[TOU_TURO_DOOR_TYPE];
 
     model->primitive_color.integer = sys.primitive_color.integer;
     model->fog_color.integer       = sys.background_color.integer;
@@ -87,7 +87,7 @@ void cv64_ovl_touturo_door_loop(cv64_ovl_touturo_door_t* self) {
     } else {
         model->primitive_color.integer = sys.primitive_color.integer;
         model->fog_color.integer       = sys.background_color.integer;
-        if (settings->variable_1 == 0) {
+        if (TOU_TURO_DOOR_TYPE == TOU_TURO_EXIT_DOOR) {
             ENTER(self, cv64_ovl_touturo_door_exit_funcs);
         } else {
             ENTER(self, cv64_ovl_touturo_door_entrance_funcs);

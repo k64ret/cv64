@@ -38,7 +38,7 @@ void interactuables_init(interactuables* self) {
     if (settings != NULL) {
         // In the actor settings, the table ID is stored + 1.
         // Substract -1 to get the actual ID
-        self->table_index = settings->variable_1 - 1;
+        self->table_index = INTERACTUABLE_SETTINGS_TABLE_ENTRY_ID - 1;
     } else {
         // Set the table ID to -1 (invalid entry)
         self->table_index--;
@@ -49,14 +49,16 @@ void interactuables_init(interactuables* self) {
             if (interactuables_settings_table[self->table_index].type == ITEM_KIND_ITEM) {
                 if (interactuables_settings_table[self->table_index].item == ITEM_ID_WHITE_JEWEL) {
                     // Set White Jewel spawn number
-                    self->event_flag = settings->variable_3;
+                    self->event_flag = WHITE_JEWEL_SPAWN_NUMBER;
                 } else {
                     // Set item event flag (variable_2 = upper 2-bytes, variable_3 -> lower 2-bytes)
-                    self->event_flag = settings->variable_3 + (settings->variable_2 << 0x10);
+                    self->event_flag =
+                        ITEM_EVENT_FLAG_LOWER_2BYTES + (ITEM_EVENT_FLAG_UPPER_2BYTES << 0x10);
                 }
             } else {
                 // Text spots don't set event flags, so doing this is useless
-                self->event_flag = settings->variable_3 + (settings->variable_2 << 0x10);
+                self->event_flag =
+                    ITEM_EVENT_FLAG_LOWER_2BYTES + (ITEM_EVENT_FLAG_UPPER_2BYTES << 0x10);
             }
         } else {
             // Extra empty "else" needed for matching
@@ -158,8 +160,8 @@ void interactuables_init(interactuables* self) {
             self->position.x     = settings->position.x;
             self->position.y     = settings->position.y;
             self->position.z     = settings->position.z;
-            self->trigger_X_size = settings->variable_2;
-            self->trigger_Z_size = settings->variable_3;
+            self->trigger_X_size = TEXT_SPOT_X_SIZE;
+            self->trigger_Z_size = TEXT_SPOT_Z_SIZE;
         }
 
         // The time it takes for the flash that appears over an item is selected
