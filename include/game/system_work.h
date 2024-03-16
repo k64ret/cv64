@@ -160,8 +160,8 @@ typedef struct {
      * [0] = map [1] = pickable_items [2] = skybox_assets
      */
     s32 map_assets_file_IDs[3];
-    s16 map_ID;
-    s16 map_entrance_ID;
+    s16 map;
+    s16 spawn;
     cv64_rgba_t map_fade_in_color;
     s16 map_fade_out_time;
     s16 map_fade_in_time;

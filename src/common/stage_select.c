@@ -190,13 +190,13 @@ void stageSelect_warpToStage(stageSelect* self) {
     if (BITS_MASK(lens->flags, WINDOW_FLAG_4000 | WINDOW_FLAG_8000) >> 0xE != FALSE) {
         stageSelect_closeTextboxes(self);
 
-        sys.SaveStruct_gameplay.map_ID          = NONE;
-        sys.SaveStruct_gameplay.map_entrance_ID = NONE;
-        sys.SaveStruct_gameplay.life            = 100;
-        sys.SaveStruct_gameplay.field13_0x5c    = 100;
-        sys.SaveStruct_gameplay.subweapon       = SUBWEAPON_NONE;
-        sys.SaveStruct_gameplay.money           = 0;
-        sys.SaveStruct_gameplay.player_status   = 0;
+        sys.SaveStruct_gameplay.map           = NONE;
+        sys.SaveStruct_gameplay.spawn         = NONE;
+        sys.SaveStruct_gameplay.life          = 100;
+        sys.SaveStruct_gameplay.field13_0x5c  = 100;
+        sys.SaveStruct_gameplay.subweapon     = SUBWEAPON_NONE;
+        sys.SaveStruct_gameplay.money         = 0;
+        sys.SaveStruct_gameplay.player_status = 0;
 
         // Remove inventory items
         // clang-format off
@@ -224,8 +224,8 @@ void stageSelect_warpToStage(stageSelect* self) {
                 sys.entrance_cutscene_ID = 60;
                 sys.map_fade_out_time    = 30;
                 sys.map_fade_in_time     = 30;
-                sys.map_ID               = MORI;
-                sys.map_entrance_ID      = 0;
+                sys.map                  = MORI;
+                sys.spawn                = 0;
                 sys.map_fade_in_color.r  = 0;
                 sys.map_fade_in_color.g  = 0;
                 sys.map_fade_in_color.b  = 0;
@@ -233,10 +233,10 @@ void stageSelect_warpToStage(stageSelect* self) {
 
             case INSIDE_OF_RAMPART:
                 sys.entrance_cutscene_ID = 4;
-                sys.map_ID               = TOUOKUJI;
+                sys.map                  = TOUOKUJI;
                 sys.map_fade_out_time    = 30;
                 sys.map_fade_in_time     = 30;
-                sys.map_entrance_ID      = 0;
+                sys.spawn                = 0;
                 sys.map_fade_in_color.r  = 0;
                 sys.map_fade_in_color.g  = 0;
                 sys.map_fade_in_color.b  = 0;
@@ -245,30 +245,30 @@ void stageSelect_warpToStage(stageSelect* self) {
             case COURTYARD:
                 BITS_SET(sys.cutscene_flags, CUTSCENE_FLAG_10);
                 sys.entrance_cutscene_ID = 9;
-                sys.map_ID               = NAKANIWA;
+                sys.map                  = NAKANIWA;
                 sys.map_fade_out_time    = 30;
                 sys.map_fade_in_time     = 30;
-                sys.map_entrance_ID      = 0;
+                sys.spawn                = 0;
                 sys.map_fade_in_color.r  = 0;
                 sys.map_fade_in_color.g  = 0;
                 sys.map_fade_in_color.b  = 0;
                 break;
 
             case EXECUTION_TOWER:
-                sys.map_ID              = SHOKEI_TOU;
+                sys.map                 = SHOKEI_TOU;
                 sys.map_fade_out_time   = 30;
                 sys.map_fade_in_time    = 30;
-                sys.map_entrance_ID     = 0;
+                sys.spawn               = 0;
                 sys.map_fade_in_color.r = 0;
                 sys.map_fade_in_color.g = 0;
                 sys.map_fade_in_color.b = 0;
                 break;
 
             case CLOCK_TOWER:
-                sys.map_ID              = TOKEITOU_NAI;
+                sys.map                 = TOKEITOU_NAI;
                 sys.map_fade_out_time   = 30;
                 sys.map_fade_in_time    = 30;
-                sys.map_entrance_ID     = 0;
+                sys.spawn               = 0;
                 sys.map_fade_in_color.r = 0;
                 sys.map_fade_in_color.g = 0;
                 sys.map_fade_in_color.b = 0;
@@ -276,8 +276,8 @@ void stageSelect_warpToStage(stageSelect* self) {
 
             case VS_DEATH:
                 // clang-format off
-                sys.map_ID = TURO_TOKEITOU, // Comma needed for matching
-                sys.map_entrance_ID = 1;
+                sys.map = TURO_TOKEITOU, // Comma needed for matching
+                sys.spawn = 1;
                 // clang-format on
                 sys.map_fade_out_time   = 30;
                 sys.map_fade_in_time    = 30;
@@ -287,20 +287,20 @@ void stageSelect_warpToStage(stageSelect* self) {
                 break;
 
             case VS_ACTRIESE:
-                sys.map_ID              = TURO_TOKEITOU;
+                sys.map                 = TURO_TOKEITOU;
                 sys.map_fade_out_time   = 30;
                 sys.map_fade_in_time    = 30;
-                sys.map_entrance_ID     = 0;
+                sys.spawn               = 0;
                 sys.map_fade_in_color.r = 0;
                 sys.map_fade_in_color.g = 0;
                 sys.map_fade_in_color.b = 0;
                 break;
 
             case VS_BEHIMOS:
-                sys.map_ID              = HONMARU_B1F;
+                sys.map                 = HONMARU_B1F;
                 sys.map_fade_out_time   = 30;
                 sys.map_fade_in_time    = 30;
-                sys.map_entrance_ID     = 0;
+                sys.spawn               = 0;
                 sys.map_fade_in_color.r = 0;
                 sys.map_fade_in_color.g = 0;
                 sys.map_fade_in_color.b = 0;

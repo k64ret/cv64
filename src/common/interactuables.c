@@ -44,7 +44,7 @@ void interactuables_init(interactuables* self) {
         self->table_index--;
     }
     if (ptr_PlayerData != NULL) {
-        self->map_event_flag_ID = getMapEventFlagID(sys.SaveStruct_gameplay.map_ID);
+        self->map_event_flag_ID = getMapEventFlagID(sys.SaveStruct_gameplay.map);
         if (settings != NULL) {
             if (interactuables_settings_table[self->table_index].type == ITEM_KIND_ITEM) {
                 if (interactuables_settings_table[self->table_index].item == ITEM_ID_WHITE_JEWEL) {

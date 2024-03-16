@@ -82,8 +82,8 @@ typedef struct cv64_save_state {
     u32 player_status;
     u16 health_depletion_rate_while_poisoned;
     u16 current_hour_VAMP; // If greater than 24, you turn into vampire
-    s16 map_ID;
-    s16 map_entrance_ID;
+    s16 map;
+    s16 spawn;
     u8 save_crystal_number;
     u8 field50_0xb1;
     u8 field51_0xb2;
