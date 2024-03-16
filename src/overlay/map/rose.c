@@ -47,7 +47,7 @@ void cv64_ovl_rose_ventilator_init(cv64_ovl_rose_ventilator_t* self) {
     } else {
         self->model           = model;
         model->dlist          = &ROSE_VENTILATOR_DL;
-        model->assets_file_ID = sys.map_assets_file_IDs[0];
+        model->assets_file_ID = MAP_ASSETS_FILE_ID;
         BITS_SET(model->flags, FIG_FLAG_0800 | FIG_FLAG_0100);
         CV64_COLOR_RGBA_TO_U32(model->primitive_color) =
             CV64_COLOR_RGBA_TO_U32(sys.primitive_color);
@@ -117,7 +117,7 @@ void cv64_ovl_rose_door_init(cv64_ovl_rose_door_t* self) {
 
     self->model = model;
     (*actor_model_set_pos_and_angle)(self, model);
-    model->assets_file_ID = sys.map_assets_file_IDs[0];
+    model->assets_file_ID = MAP_ASSETS_FILE_ID;
     model->dlist          = &ROSE_DOOR_DL;
     BITS_SET(model->flags, FIG_FLAG_0800 | FIG_FLAG_0100);
     CV64_COLOR_RGBA_TO_U32(model->primitive_color) = CV64_COLOR_RGBA_TO_U32(sys.primitive_color);

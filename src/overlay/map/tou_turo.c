@@ -57,7 +57,7 @@ void cv64_ovl_touturo_door_init(cv64_ovl_touturo_door_t* self) {
     actor_model_set_pos_and_angle(self, model);
     BITS_SET(model->flags, FIG_FLAG_0800 | FIG_FLAG_0100);
 
-    model->assets_file_ID = sys.map_assets_file_IDs[0];
+    model->assets_file_ID = MAP_ASSETS_FILE_ID;
     model->dlist          = cv64_ovl_touturo_door_dlists[settings->variable_1];
 
     CV64_COLOR_RGBA_TO_U32(model->primitive_color) = CV64_COLOR_RGBA_TO_U32(sys.primitive_color);

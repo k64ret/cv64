@@ -13,6 +13,10 @@
 #include "objects/camera/cameraMgr.h"
 #include <ultra64.h>
 
+#define MAP_ASSETS_FILE_ID    sys.map_assets_file_IDs[0]
+#define ITEM_ASSETS_FILE_ID   sys.map_assets_file_IDs[1]
+#define SKYBOX_ASSETS_FILE_ID sys.map_assets_file_IDs[2]
+
 typedef union {
     s16 field_s16;
     f32 field_f32;

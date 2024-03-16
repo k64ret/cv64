@@ -89,7 +89,7 @@ void interactuables_init(interactuables* self) {
                 item_model->position.y = self->position.y;
                 item_model->position.z = self->position.z;
             }
-            item_model->assets_file_ID = sys.map_assets_file_IDs[1];
+            item_model->assets_file_ID = ITEM_ASSETS_FILE_ID;
 
             // Configure some of the model variables by loading them from
             // the item model settings table
