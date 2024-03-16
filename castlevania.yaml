@@ -180,13 +180,19 @@ segments:
       - [0x000750B0, asm]
       - [0x00075730, asm]
       - [0x00076AE0, asm]
-      - [0x00079B70, asm]
-      - [0x0007A4A0, asm]
-      - [0x0007CBB0, asm]
-      - [0x0007E080, asm]
-      - [0x00080030, asm]
-      - [0x000801D0, asm]
-      - [0x00080460, asm]
+      
+      # These are mostly identical between other N64 Konami games,
+      # so they probably come from an internal library
+      - [0x00079B70, asm, audio/audioMgr]
+      - [0x0007A4A0, asm, audio/audio]
+      - [0x0007CBB0, asm]   # Handles audio sequences
+      - [0x0007E080, asm]   # Handles audio sequences commands?
+
+      # libultra (N64 SDK)
+      - [0x0007FEE0, asm, libultra/os/sendmesg]
+      - [0x00080030, asm, libultra/io/pfsfreeblocks]
+      - [0x000801D0, asm, libultra/gu/perspective]
+      - [0x00080460, asm, libultra/os/recvmesg]
       - [0x000805A0, asm]
       - [0x000808F0, asm]
       - [0x00080BC0, asm]
@@ -368,7 +374,7 @@ segments:
       - [0x000A75F0, rodata]
       - [0x000A7790, rodata]
       - [0x000A78C0, rodata]
-      - [0x000A78E0, rodata]
+      - [0x000A78E0, rodata, libultra/gu/perspective]
       - [0x000A78F0, rodata]
       - [0x000A7980, rodata]
       - [0x000A79D0, rodata]
