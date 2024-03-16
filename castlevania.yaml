@@ -180,7 +180,7 @@ segments:
       - [0x000750B0, asm]
       - [0x00075730, asm]
       - [0x00076AE0, asm]
-      
+
       # These are mostly identical between other N64 Konami games,
       # so they probably come from an internal library
       - [0x00079B70, asm, audio/audioMgr]
@@ -309,7 +309,7 @@ segments:
       - [0x00090640, asm]
       - [0x000906E0, asm]
       - [0x00090760, asm]
-      - [0x00090770, asm]
+      - [0x00090770, asm, libultra/io/aisetnextbuf]
       - [0x00090820, asm, libultra/io/spsetpc]
       - [0x000908D0, bin] # RSP microcode
       - [0x00090920, data]
@@ -333,6 +333,7 @@ segments:
       - [0x0009B950, data, 5B7E0]
       - [0x0009B960, .data, effect_manager]
       - [0x0009B970, data]
+      - [0x000A3310, data, libultra/io/aisetnextbuf]
 
       - [0x000A3320, rodata, 4D80]
       - [0x000A3330, rodata, figure]
