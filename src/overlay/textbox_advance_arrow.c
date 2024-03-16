@@ -47,7 +47,7 @@ void textboxAdvanceArrow_init(textboxAdvanceArrow* self) {
     self->disable_arrow            = FALSE;
     self->fade_timer               = 0;
     (*object_curLevel_goToNextFuncAndClearTimer)(
-        self->header.current_function, &self->header.functionInfo_ID
+        self->header.current_function, &self->header.function_info_ID
     );
 }
 
@@ -72,7 +72,7 @@ void textboxAdvanceArrow_loop(textboxAdvanceArrow* self) {
     }
     if (self->disable_arrow) {
         (*object_curLevel_goToNextFuncAndClearTimer)(
-            self->header.current_function, &self->header.functionInfo_ID
+            self->header.current_function, &self->header.function_info_ID
         );
     }
 }

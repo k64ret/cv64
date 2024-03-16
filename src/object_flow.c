@@ -6,7 +6,7 @@
 #define LOCAL_GO_TO_NEXT_FUNC(object)                                                              \
     do {                                                                                           \
         (*object_curLevel_goToNextFuncAndClearTimer)(                                              \
-            (object)->header.current_function, &(object)->header.functionInfo_ID                   \
+            (object)->header.current_function, &(object)->header.function_info_ID                  \
         );                                                                                         \
     } while (0)
 
@@ -26,13 +26,13 @@ void object_goToNextFuncNoCondition(cv64_object_t* self) { LOCAL_GO_TO_NEXT_FUNC
 // clang-format on
 
 void object_goToNextFuncIfTimerIsTwo(cv64_object_t* self) {
-    if (self->header.current_function[self->header.functionInfo_ID].timer == 2) {
+    if (self->header.current_function[self->header.function_info_ID].timer == 2) {
         LOCAL_GO_TO_NEXT_FUNC(self);
     }
 }
 
 void object_goToNextFuncIfTimerIsThree(cv64_object_t* self) {
-    if (self->header.current_function[self->header.functionInfo_ID].timer == 3) {
+    if (self->header.current_function[self->header.function_info_ID].timer == 3) {
         LOCAL_GO_TO_NEXT_FUNC(self);
     }
 }

@@ -172,7 +172,7 @@ void interactuables_init(interactuables* self) {
         self->item_falling_height_multiplier    = 0;
         self->flash                             = NULL;
         (*object_curLevel_goToNextFuncAndClearTimer)(
-            self->header.current_function, &self->header.functionInfo_ID
+            self->header.current_function, &self->header.function_info_ID
         );
     }
 }
@@ -311,7 +311,7 @@ void interactuables_main(interactuables* self) {
 
         self->flash = NULL;
         (*object_curLevel_goToNextFuncAndClearTimer)(
-            self->header.current_function, &self->header.functionInfo_ID
+            self->header.current_function, &self->header.function_info_ID
         );
     }
 }
@@ -378,7 +378,7 @@ void interactuables_initCheck(interactuables* self) {
                 interactuables_stopInteraction(self);
                 (*object_curLevel_goToFunc)(
                     self->header.current_function,
-                    &self->header.functionInfo_ID,
+                    &self->header.function_info_ID,
                     INTERACTUABLES_MAIN
                 );
                 return;
@@ -408,7 +408,7 @@ void interactuables_initCheck(interactuables* self) {
     }
 
     (*object_curLevel_goToNextFuncAndClearTimer)(
-        self->header.current_function, &self->header.functionInfo_ID
+        self->header.current_function, &self->header.function_info_ID
     );
 }
 
@@ -440,7 +440,7 @@ void interactuables_selectTextboxOption(interactuables* self) {
                     interactuables_stopInteraction(self);
                     (*object_curLevel_goToFunc)(
                         self->header.current_function,
-                        &self->header.functionInfo_ID,
+                        &self->header.function_info_ID,
                         INTERACTUABLES_MAIN
                     );
                     return;
@@ -517,7 +517,7 @@ void interactuables_selectTextboxOption(interactuables* self) {
     }
 
     (*object_curLevel_goToNextFuncAndClearTimer)(
-        self->header.current_function, &self->header.functionInfo_ID
+        self->header.current_function, &self->header.function_info_ID
     );
 }
 
@@ -536,7 +536,7 @@ void interactuables_stopCheck(interactuables* self) {
 
                 (*object_curLevel_goToFunc)(
                     self->header.current_function,
-                    &self->header.functionInfo_ID,
+                    &self->header.function_info_ID,
                     INTERACTUABLES_MAIN
                 );
             }
@@ -551,14 +551,14 @@ void interactuables_stopCheck(interactuables* self) {
                 interactuables_stopInteraction(self);
                 (*object_curLevel_goToFunc)(
                     self->header.current_function,
-                    &self->header.functionInfo_ID,
+                    &self->header.function_info_ID,
                     INTERACTUABLES_MAIN
                 );
                 return;
             }
 
             (*object_curLevel_goToNextFuncAndClearTimer)(
-                self->header.current_function, &self->header.functionInfo_ID
+                self->header.current_function, &self->header.function_info_ID
             );
         }
     }
@@ -574,14 +574,14 @@ void interactuables_stopCheck(interactuables* self) {
                 TEXT_SPOT_DESTROY_AFTER_INTERACTION
             )) {
             (*object_curLevel_goToNextFuncAndClearTimer)(
-                self->header.current_function, &self->header.functionInfo_ID
+                self->header.current_function, &self->header.function_info_ID
             );
             return;
         }
 
         interactuables_stopInteraction(self);
         (*object_curLevel_goToFunc)(
-            self->header.current_function, &self->header.functionInfo_ID, INTERACTUABLES_MAIN
+            self->header.current_function, &self->header.function_info_ID, INTERACTUABLES_MAIN
         );
     }
 }
@@ -600,7 +600,7 @@ void interactuables_destroy(interactuables* self) {
                 interactuables_stopInteraction(self);
                 (*object_curLevel_goToFunc)(
                     self->header.current_function,
-                    &self->header.functionInfo_ID,
+                    &self->header.function_info_ID,
                     INTERACTUABLES_MAIN
                 );
             }

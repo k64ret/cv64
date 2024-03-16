@@ -57,7 +57,7 @@ void cv64_ovl_rose_ventilator_init(cv64_ovl_rose_ventilator_t* self) {
         speed_settings->time_until_changing_max_speed = BITS_MASK((*rand)(), 0x1FF) + 30;
         (*actor_model_set_pos_and_angle)(self, model);
         (*object_curLevel_goToNextFuncAndClearTimer)(
-            self->header.current_function, &self->header.functionInfo_ID
+            self->header.current_function, &self->header.function_info_ID
         );
     }
 }
@@ -88,7 +88,7 @@ void cv64_ovl_rose_ventilator_loop(cv64_ovl_rose_ventilator_t* self) {
         */
         // clang-format on
         (*object_curLevel_goToNextFuncAndClearTimer)(
-            self->header.current_function, &self->header.functionInfo_ID
+            self->header.current_function, &self->header.function_info_ID
         );
     } else {
         model->angle.pitch -= speed_settings->current_speed;
@@ -127,7 +127,7 @@ void cv64_ovl_rose_door_init(cv64_ovl_rose_door_t* self) {
     model->map_actor_model = map_actor_model;
     self->map_actor_model  = map_actor_model;
     (*object_curLevel_goToNextFuncAndClearTimer)(
-        self->header.current_function, &self->header.functionInfo_ID
+        self->header.current_function, &self->header.function_info_ID
     );
     height_settings->initial_height = model->position.y;
     height_settings->height         = 25.0f;
@@ -135,7 +135,7 @@ void cv64_ovl_rose_door_init(cv64_ovl_rose_door_t* self) {
     model->position.y               = height_settings->height + height_settings->initial_height;
     if (ROSE_DOOR_DONT_CLOSE) {
         (*object_nextLevel_goToFunc)(
-            self->header.current_function, &self->header.functionInfo_ID, ROSE_DOOR_STATE_IDLE
+            self->header.current_function, &self->header.function_info_ID, ROSE_DOOR_STATE_IDLE
         );
     }
 }
@@ -174,7 +174,7 @@ void cv64_ovl_rose_door_state_startClosing(cv64_ovl_rose_door_t* self) {
         // ((sys.SaveStruct_gameplay.character == REINHARDT) ? 0.5f : 1.0f));
         height_settings->closing_speed = 0.0f;
         (*object_curLevel_goToNextFuncAndClearTimer)(
-            self->header.current_function, &self->header.functionInfo_ID
+            self->header.current_function, &self->header.function_info_ID
         );
     }
 }
@@ -196,7 +196,7 @@ void cv64_ovl_rose_door_state_closing(cv64_ovl_rose_door_t* self) {
         }
         height_settings->height = 0.0f;
         (*object_curLevel_goToNextFuncAndClearTimer)(
-            self->header.current_function, &self->header.functionInfo_ID
+            self->header.current_function, &self->header.function_info_ID
         );
     }
 }

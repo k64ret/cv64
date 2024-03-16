@@ -47,7 +47,7 @@ void stageSelect_loadAssetsFile(stageSelect* self) {
         NisitenmaIchigo_checkAndStoreLoadedFile(NI_ASSETS_MENU);
         (*object_allocEntryInList)(self, HEAP_KIND_MULTIPURPOSE, sizeof(mfds_state* [10]), 0);
         (*object_curLevel_goToNextFuncAndClearTimer)(
-            self->header.current_function, &self->header.functionInfo_ID
+            self->header.current_function, &self->header.function_info_ID
         );
     }
 }
@@ -103,7 +103,7 @@ void stageSelect_initGraphics(stageSelect* self) {
         }
         (*atari_work_table_init)();
         (*object_curLevel_goToNextFuncAndClearTimer)(
-            self->header.current_function, &self->header.functionInfo_ID
+            self->header.current_function, &self->header.function_info_ID
         );
     }
 }
@@ -137,7 +137,7 @@ void stageSelect_initLens(stageSelect* self) {
             BITS_SET(lens->flags, WINDOW_OPENING);
         }
         (*object_curLevel_goToNextFuncAndClearTimer)(
-            self->header.current_function, &self->header.functionInfo_ID
+            self->header.current_function, &self->header.function_info_ID
         );
     }
 }
@@ -166,7 +166,7 @@ void stageSelect_moveLens(stageSelect* self) {
             BITS_UNSET(lens->flags, WINDOW_OPENING);
             BITS_SET(lens->flags, WINDOW_CLOSING);
             (*object_curLevel_goToNextFuncAndClearTimer)(
-                self->header.current_function, &self->header.functionInfo_ID
+                self->header.current_function, &self->header.function_info_ID
             );
         } else {
             (*menuButton_selectNextOption)(
@@ -309,7 +309,7 @@ void stageSelect_warpToStage(stageSelect* self) {
 
         gamestate_change(GAMESTATE_GAMEPLAY);
         (*object_curLevel_goToNextFuncAndClearTimer)(
-            self->header.current_function, &self->header.functionInfo_ID
+            self->header.current_function, &self->header.function_info_ID
         );
     }
 }

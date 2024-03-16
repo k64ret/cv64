@@ -40,7 +40,7 @@ void obj213F_isDraculaCutsceneWatched(object_213F* self) {
 
         if (300.0f < player_model->position.y) {
             (*object_curLevel_goToNextFuncAndClearTimer)(
-                self->header.current_function, &self->header.functionInfo_ID
+                self->header.current_function, &self->header.function_info_ID
             );
         }
     }
@@ -51,7 +51,7 @@ void obj213F_isPlayerDroppingDown(object_213F* self) {
 
     if (model->position.y < 300.0f) {
         (*object_curLevel_goToNextFuncAndClearTimer)(
-            self->header.current_function, &self->header.functionInfo_ID
+            self->header.current_function, &self->header.function_info_ID
         );
     }
 }
@@ -59,7 +59,7 @@ void obj213F_isPlayerDroppingDown(object_213F* self) {
 void obj213F_playSound(object_213F* self) {
     (*play_sound)(SD_2E9);
     (*object_curLevel_goToNextFuncAndClearTimer)(
-        self->header.current_function, &self->header.functionInfo_ID
+        self->header.current_function, &self->header.function_info_ID
     );
 }
 

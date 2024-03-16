@@ -71,7 +71,7 @@ void cv64_ovl_touturo_door_init(cv64_ovl_touturo_door_t* self) {
     self->close_time = 30;
 
     (*object_curLevel_goToNextFuncAndClearTimer)(
-        self->header.current_function, &self->header.functionInfo_ID
+        self->header.current_function, &self->header.function_info_ID
     );
 }
 
@@ -105,7 +105,7 @@ void cv64_ovl_touturo_door_exit_check_event_flags(cv64_ovl_touturo_door_t* self)
         model->position.y = 0.0f;
     }
     (*object_curLevel_goToNextFuncAndClearTimer)(
-        self->header.current_function, &self->header.functionInfo_ID
+        self->header.current_function, &self->header.function_info_ID
     );
 }
 
@@ -117,12 +117,12 @@ void cv64_ovl_touturo_door_entrance_check_event_flags(cv64_ovl_touturo_door_t* s
         )) {
         model->position.y = 6.0f;
         (*object_curLevel_goToFunc)(
-            self->header.current_function, &self->header.functionInfo_ID, TOU_TURO_FUNC_801578FC
+            self->header.current_function, &self->header.function_info_ID, TOU_TURO_FUNC_801578FC
         );
     } else {
         SET_EVENT_FLAGS(EVENT_FLAG_ID_MISC_STAGES, EVENT_FLAG_MISC_STAGES_ENTERED_ROOM_OF_CLOCKS);
         (*object_curLevel_goToNextFuncAndClearTimer)(
-            self->header.current_function, &self->header.functionInfo_ID
+            self->header.current_function, &self->header.function_info_ID
         );
     }
 }
@@ -164,7 +164,7 @@ void cv64_ovl_touturo_door_entrance_close_door(cv64_ovl_touturo_door_t* self) {
 
         (*play_sound_in_position)(SD_TOU_TURO_DOOR_CLOSE, &model->position);
         (*object_curLevel_goToNextFuncAndClearTimer)(
-            self->header.current_function, &self->header.functionInfo_ID
+            self->header.current_function, &self->header.function_info_ID
         );
     }
 }

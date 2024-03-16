@@ -53,7 +53,7 @@ void cv64_ovl_easyending_init(cv64_ovl_easyending_t* self) {
         30
     );
     (*object_curLevel_goToNextFuncAndClearTimer)(
-        self->header.current_function, &self->header.functionInfo_ID
+        self->header.current_function, &self->header.function_info_ID
     );
 }
 
@@ -106,7 +106,7 @@ void cv64_ovl_easyending_loop(cv64_ovl_easyending_t* self) {
         (*atari_work_table_init)();
         self->active_time = 0;
         (*object_curLevel_goToNextFuncAndClearTimer)(
-            self->header.current_function, &self->header.functionInfo_ID
+            self->header.current_function, &self->header.function_info_ID
         );
     }
 }

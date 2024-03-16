@@ -26,7 +26,7 @@ void cutsceneMgr_main(cutsceneMgr* self) {
     // This check is here so that those cutscenes can play outside of the gameplay state.
     if (sys.cutscene_ID < 3) {
         (*object_curLevel_goToNextFuncAndClearTimer)(
-            self->header.current_function, &self->header.functionInfo_ID
+            self->header.current_function, &self->header.function_info_ID
         );
     } else if (ptr_PlayerData != NULL) {
         visual_data = &ptr_PlayerData->visualData;
@@ -37,7 +37,7 @@ void cutsceneMgr_main(cutsceneMgr* self) {
             sys.cutscene_ID          = CUTSCENE_ID_NONE;
         } else {
             (*object_curLevel_goToNextFuncAndClearTimer)(
-                self->header.current_function, &self->header.functionInfo_ID
+                self->header.current_function, &self->header.function_info_ID
             );
         }
     }
@@ -60,7 +60,7 @@ void cutsceneMgr_createCutscene(cutsceneMgr* self) {
     if (self->cutscene_ID == CUTSCENE_ID_NONE) {
         sys.cutscene_ID = CUTSCENE_ID_NONE;
         (*object_curLevel_goToFunc)(
-            self->header.current_function, &self->header.functionInfo_ID, CUTSCENEMGR_MAIN
+            self->header.current_function, &self->header.function_info_ID, CUTSCENEMGR_MAIN
         );
         return;
     }
@@ -88,7 +88,7 @@ void cutsceneMgr_createCutscene(cutsceneMgr* self) {
     }
 
     (*object_curLevel_goToNextFuncAndClearTimer)(
-        self->header.current_function, &self->header.functionInfo_ID
+        self->header.current_function, &self->header.function_info_ID
     );
 }
 
@@ -99,12 +99,12 @@ void cutsceneMgr_setCameraClippingAndScissoring(cutsceneMgr* self) {
         if (BITS_HAS(sys.cutscene_flags, CUTSCENE_FLAG_DISPLAY_WIDESCREEN_BORDERS)) {
             cutscene_setCameraClippingAndScissoring(WIDESCREEN_BORDERS);
             (*object_curLevel_goToNextFuncAndClearTimer)(
-                self->header.current_function, &self->header.functionInfo_ID
+                self->header.current_function, &self->header.function_info_ID
             );
         }
     } else {
         (*object_curLevel_goToNextFuncAndClearTimer)(
-            self->header.current_function, &self->header.functionInfo_ID
+            self->header.current_function, &self->header.function_info_ID
         );
     }
 }
@@ -118,7 +118,7 @@ void cutsceneMgr_loop(cutsceneMgr* self) {
             BITS_UNSET(sys.cutscene_flags, CUTSCENE_FLAG_FILM_REEL_EFFECT);
         }
         (*object_curLevel_goToNextFuncAndClearTimer)(
-            self->header.current_function, &self->header.functionInfo_ID
+            self->header.current_function, &self->header.function_info_ID
         );
     } else if (BITS_HAS(sys.controllers[0].buttons_pressed, START_BUTTON | RECENTER_BUTTON) && (2 < sys.cutscene_ID)) {
         cutscene* cutscene_obj      = self->cutscene_object;
@@ -162,13 +162,13 @@ void cutsceneMgr_stopCutscene(cutsceneMgr* self) {
     if (settings->make_player_idle_after_cutscene) {
         (*object_curLevel_goToFuncInLevel)(
             sys.ptr_PlayerObject->header.current_function,
-            &sys.ptr_PlayerObject->header.functionInfo_ID,
+            &sys.ptr_PlayerObject->header.function_info_ID,
             0,
             PLAYER_IDLE
         );
     }
 
     (*object_curLevel_goToFunc)(
-        self->header.current_function, &self->header.functionInfo_ID, CUTSCENEMGR_MAIN
+        self->header.current_function, &self->header.function_info_ID, CUTSCENEMGR_MAIN
     );
 }

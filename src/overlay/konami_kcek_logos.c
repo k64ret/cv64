@@ -33,7 +33,7 @@ void cv64_ovl_konamilogo_check_btn_press(cv64_ovl_konamilogo_t* self) {
          sys.controllers[2].buttons_pressed | sys.controllers[3].buttons_pressed) &
         (START_BUTTON | RECENTER_BUTTON)) {
         (*object_curLevel_goToFunc)(
-            self->header.current_function, &self->header.functionInfo_ID, KONAMILOGO_KCEK_WAIT
+            self->header.current_function, &self->header.function_info_ID, KONAMILOGO_KCEK_WAIT
         );
     }
 }
@@ -64,7 +64,7 @@ void cv64_ovl_konamilogo_fade_in(cv64_ovl_konamilogo_t* self) {
     } else {
         model->primitive_color.a = 0xFF;
         (*object_curLevel_goToNextFuncAndClearTimer)(
-            self->header.current_function, &self->header.functionInfo_ID
+            self->header.current_function, &self->header.function_info_ID
         );
     }
     sys.background_color.r = model->primitive_color.a;
@@ -74,13 +74,13 @@ void cv64_ovl_konamilogo_fade_in(cv64_ovl_konamilogo_t* self) {
 }
 
 void cv64_ovl_konamilogo_wait(cv64_ovl_konamilogo_t* self) {
-    s32 timer = self->header.current_function[self->header.functionInfo_ID].timer;
+    s32 timer = self->header.current_function[self->header.function_info_ID].timer;
 
     if (timer >= 169) {
         (*object_curLevel_goToNextFuncAndClearTimer)(
-            self->header.current_function, &self->header.functionInfo_ID
+            self->header.current_function, &self->header.function_info_ID
         );
-        timer = self->header.current_function[self->header.functionInfo_ID].timer;
+        timer = self->header.current_function[self->header.function_info_ID].timer;
     }
     if (timer >= 21) {
         cv64_ovl_konamilogo_check_btn_press(self);
@@ -95,7 +95,7 @@ void cv64_ovl_konamilogo_fade_out(cv64_ovl_konamilogo_t* self) {
     } else {
         model->primitive_color.a = 0x00;
         (*object_curLevel_goToNextFuncAndClearTimer)(
-            self->header.current_function, &self->header.functionInfo_ID
+            self->header.current_function, &self->header.function_info_ID
         );
     }
     cv64_ovl_konamilogo_check_btn_press(self);
@@ -111,7 +111,7 @@ void cv64_ovl_konamilogo_kcek_fade_in(cv64_ovl_konamilogo_t* self) {
     } else {
         model->primitive_color.a = 0xFF;
         (*object_curLevel_goToNextFuncAndClearTimer)(
-            self->header.current_function, &self->header.functionInfo_ID
+            self->header.current_function, &self->header.function_info_ID
         );
     }
     cv64_ovl_konamilogo_check_btn_press(self);
@@ -127,9 +127,9 @@ void cv64_ovl_konamilogo_kcek_wait(cv64_ovl_konamilogo_t* self) {
         model->primitive_color.a = 0xFF;
     }
     model->dlist = &KCEK_LOGO_DL;
-    if ((s32) self->header.current_function[self->header.functionInfo_ID].timer >= 97) {
+    if ((s32) self->header.current_function[self->header.function_info_ID].timer >= 97) {
         (*object_curLevel_goToNextFuncAndClearTimer)(
-            self->header.current_function, &self->header.functionInfo_ID
+            self->header.current_function, &self->header.function_info_ID
         );
     }
 }

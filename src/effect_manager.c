@@ -14,7 +14,7 @@ void effectMgr_init(effectMgr* self) {
         modelInfo_createRootNode(FIG_TYPE_HIERARCHY_ROOT, common_camera_game_view);
     ptr_effectMgr = self;
     (*object_curLevel_goToNextFuncAndClearTimer)(
-        self->header.current_function, &self->header.functionInfo_ID
+        self->header.current_function, &self->header.function_info_ID
     );
 }
 

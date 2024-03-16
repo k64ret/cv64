@@ -41,7 +41,7 @@ typedef struct cv64_object_hdr_t {
     u16 timer;
     s16 field_0x06;
     cv64_object_func_inf_t current_function[3];
-    s16 functionInfo_ID;
+    s16 function_info_ID;
     /**
      * Officially called "OBJ_destruct"
      */
@@ -111,43 +111,43 @@ void object_execute(cv64_object_hdr_t* self);
 void func_800026D8_32D8(cv64_object_hdr_t* self);
 void object_destroyChildrenAndModelInfo(cv64_object_hdr_t* self);
 void object_curLevel_goToFunc(
-    cv64_object_func_inf_t current_functionInfo[], s16* functionInfo_ID, s32 function
+    cv64_object_func_inf_t current_functionInfo[], s16* function_info_ID, s32 function
 );
 void object_curLevel_goToNextFunc(
-    cv64_object_func_inf_t current_functionInfo[], s16* functionInfo_ID
+    cv64_object_func_inf_t current_functionInfo[], s16* function_info_ID
 );
 void object_prevLevel_goToNextFunc(
-    cv64_object_func_inf_t current_functionInfo[], s16* functionInfo_ID
+    cv64_object_func_inf_t current_functionInfo[], s16* function_info_ID
 );
 void object_nextLevel_goToNextFunc(
-    cv64_object_func_inf_t current_functionInfo[], s16* functionInfo_ID
+    cv64_object_func_inf_t current_functionInfo[], s16* function_info_ID
 );
 void object_curLevel_goToNextFuncAndClearTimer(
-    cv64_object_func_inf_t current_functionInfo[], s16* functionInfo_ID
+    cv64_object_func_inf_t current_functionInfo[], s16* function_info_ID
 );
 void object_curLevel_goToPrevFunc(
-    cv64_object_func_inf_t current_functionInfo[], s16* functionInfo_ID
+    cv64_object_func_inf_t current_functionInfo[], s16* function_info_ID
 );
 void object_prevLevel_goToPrevFunc(
-    cv64_object_func_inf_t current_functionInfo[], s16* functionInfo_ID
+    cv64_object_func_inf_t current_functionInfo[], s16* function_info_ID
 );
 void object_nextLevel_goToPrevFunc(
-    cv64_object_func_inf_t current_functionInfo[], s16* functionInfo_ID
+    cv64_object_func_inf_t current_functionInfo[], s16* function_info_ID
 );
 void object_curLevel_goToPrevFuncAndClearTimer(
-    cv64_object_func_inf_t current_functionInfo[], s16* functionInfo_ID
+    cv64_object_func_inf_t current_functionInfo[], s16* function_info_ID
 );
 void object_curLevel_goToFunc(
-    cv64_object_func_inf_t current_functionInfo[], s16* functionInfo_ID, s32 function
+    cv64_object_func_inf_t current_functionInfo[], s16* function_info_ID, s32 function
 );
 void object_curLevel_goToFuncInLevel(
-    cv64_object_func_inf_t current_functionInfo[], s16* functionInfo_ID, s16 level, s32 function
+    cv64_object_func_inf_t current_functionInfo[], s16* function_info_ID, s16 level, s32 function
 );
 void object_prevLevel_goToFunc(
-    cv64_object_func_inf_t current_functionInfo[], s16* functionInfo_ID, s32 function
+    cv64_object_func_inf_t current_functionInfo[], s16* function_info_ID, s32 function
 );
 void object_nextLevel_goToFunc(
-    cv64_object_func_inf_t current_functionInfo[], s16* functionInfo_ID, s32 function
+    cv64_object_func_inf_t current_functionInfo[], s16* function_info_ID, s32 function
 );
 void object_doNothing(cv64_object_t* self);
 void object_goToNextFuncNoCondition(cv64_object_t* self);
@@ -181,25 +181,25 @@ extern cv64_object_t* object_list_free_slot;
 // Commas at the end of statements needed for matching
 #define ENTER(self, functions_array)                                                               \
     s16 funcID;                                                                                    \
-    funcID                       = self->header.functionInfo_ID + 1;                               \
-    self->header.functionInfo_ID = funcID, self->header.current_function[funcID].timer++;          \
+    funcID                        = self->header.function_info_ID + 1;                             \
+    self->header.function_info_ID = funcID, self->header.current_function[funcID].timer++;         \
     functions_array[self->header.current_function[funcID].function](self);                         \
-    self->header.functionInfo_ID--;
+    self->header.function_info_ID--;
 
 // cv64_object_func_inf_t* curFunc;
 #define GO_TO_FUNC(self, functions_array, curFunc, object_curLevel_goToFunc, function_array_ID)    \
     (*object_curLevel_goToFunc)(                                                                   \
-        self->header.current_function, &self->header.functionInfo_ID, function_array_ID            \
+        self->header.current_function, &self->header.function_info_ID, function_array_ID           \
     );                                                                                             \
-    curFunc = &self->header.current_function[self->header.functionInfo_ID];                        \
+    curFunc = &self->header.current_function[self->header.function_info_ID];                       \
     curFunc->timer++, functions_array[curFunc->function](self);
 
 // cv64_object_func_inf_t* curFunc;
 #define GO_TO_NEXT_FUNC(self, functions_array, curFunc, object_curLevel_goToNextFuncAndClearTimer) \
     (*object_curLevel_goToNextFuncAndClearTimer)(                                                  \
-        self->header.current_function, &self->header.functionInfo_ID                               \
+        self->header.current_function, &self->header.function_info_ID                              \
     );                                                                                             \
-    curFunc = &self->header.current_function[self->header.functionInfo_ID];                        \
+    curFunc = &self->header.current_function[self->header.function_info_ID];                       \
     curFunc->timer++, functions_array[curFunc->function](self);
 
 #endif // OBJECT_H

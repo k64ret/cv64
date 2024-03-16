@@ -138,7 +138,7 @@ cv64_object_hdr_t* object_create(cv64_object_hdr_t* parent, cv64_object_id_t ID)
             return NULL;
         }
 
-        new_object->functionInfo_ID = -1;
+        new_object->function_info_ID = -1;
 
         if (parent != NULL) {
             new_object->parent = parent;
@@ -172,7 +172,7 @@ cv64_object_hdr_t* object_createAndSetChild(cv64_object_hdr_t* parent, cv64_obje
             return NULL;
         }
 
-        new_object->functionInfo_ID = -1;
+        new_object->function_info_ID = -1;
 
         if (parent != NULL) {
             new_object->parent = parent;
