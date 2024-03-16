@@ -49,9 +49,8 @@ void cv64_ovl_rose_ventilator_init(cv64_ovl_rose_ventilator_t* self) {
         model->dlist          = &ROSE_VENTILATOR_DL;
         model->assets_file_ID = MAP_ASSETS_FILE_ID;
         BITS_SET(model->flags, FIG_FLAG_0800 | FIG_FLAG_0100);
-        CV64_COLOR_RGBA_TO_U32(model->primitive_color) =
-            CV64_COLOR_RGBA_TO_U32(sys.primitive_color);
-        CV64_COLOR_RGBA_TO_U32(model->fog_color) = CV64_COLOR_RGBA_TO_U32(sys.background_color);
+        model->primitive_color.integer = sys.primitive_color.integer;
+        model->fog_color.integer       = sys.background_color.integer;
         (*modelInfo_setMapActorModel)(model, &ROSE_VENTILATOR_DL);
         speed_settings->current_speed = speed_settings->max_speed = ((*rand)() & 0xFFF) + 16;
         speed_settings->time_until_changing_max_speed             = ((*rand)() & 0x1FF) + 30;
@@ -66,8 +65,8 @@ void cv64_ovl_rose_ventilator_loop(cv64_ovl_rose_ventilator_t* self) {
     cv64_model_inf_t* model                        = self->model;
     cv64_ovl_rose_ventilator_cfg_t* speed_settings = &self->speed_settings;
 
-    CV64_COLOR_RGBA_TO_U32(model->primitive_color) = CV64_COLOR_RGBA_TO_U32(sys.primitive_color);
-    CV64_COLOR_RGBA_TO_U32(model->fog_color)       = CV64_COLOR_RGBA_TO_U32(sys.background_color);
+    model->primitive_color.integer = sys.primitive_color.integer;
+    model->fog_color.integer       = sys.background_color.integer;
     if ((*actor_checkSpawn)(self, model->position.x, model->position.y, model->position.z) !=
         FALSE) {
         // clang-format off
@@ -120,8 +119,8 @@ void cv64_ovl_rose_door_init(cv64_ovl_rose_door_t* self) {
     model->assets_file_ID = MAP_ASSETS_FILE_ID;
     model->dlist          = &ROSE_DOOR_DL;
     BITS_SET(model->flags, FIG_FLAG_0800 | FIG_FLAG_0100);
-    CV64_COLOR_RGBA_TO_U32(model->primitive_color) = CV64_COLOR_RGBA_TO_U32(sys.primitive_color);
-    CV64_COLOR_RGBA_TO_U32(model->fog_color)       = CV64_COLOR_RGBA_TO_U32(sys.background_color);
+    model->primitive_color.integer = sys.primitive_color.integer;
+    model->fog_color.integer       = sys.background_color.integer;
     BITS_SET(self->header.ID, OBJ_FLAG_STAGE_OBJECT);
     map_actor_model        = (*getMapActorModelEntryFromArray)(model->dlist, model->assets_file_ID);
     model->map_actor_model = map_actor_model;
@@ -144,8 +143,8 @@ void cv64_ovl_rose_door_loop(cv64_ovl_rose_door_t* self) {
     cv64_model_inf_t* model                   = self->model;
     cv64_ovl_rose_door_cfg_t* height_settings = &self->height_settings;
 
-    CV64_COLOR_RGBA_TO_U32(model->primitive_color) = CV64_COLOR_RGBA_TO_U32(sys.primitive_color);
-    CV64_COLOR_RGBA_TO_U32(model->fog_color)       = CV64_COLOR_RGBA_TO_U32(sys.background_color);
+    model->primitive_color.integer = sys.primitive_color.integer;
+    model->fog_color.integer       = sys.background_color.integer;
 
     if ((*actor_checkSpawn)(self, model->position.x, model->position.y, model->position.z) !=
         FALSE) {

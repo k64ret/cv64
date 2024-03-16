@@ -121,15 +121,14 @@ void interactuables_init(interactuables* self) {
                 BITS_SET(item_model->flags, FIG_FLAG_0800 | FIG_FLAG_0040);
             }
 
-            CV64_COLOR_RGBA_TO_U32(item_model->primitive_color) = 0xFFFFFFFF;
+            item_model->primitive_color.integer = 0xFFFFFFFF;
             // Make all White Jewels semi-transparent if not playing in a save file
             if ((interactuables_settings_table[self->table_index].item == ITEM_ID_WHITE_JEWEL) &&
                 (sys.contPak_file_no < 0)) {
-                CV64_COLOR_RGBA_TO_U32(item_model->primitive_color) = 0xFFFFFF40;
+                item_model->primitive_color.integer = 0xFFFFFF40;
             }
-            CV64_COLOR_RGBA_TO_U32(self->primitive_color) =
-                CV64_COLOR_RGBA_TO_U32(item_model->primitive_color);
-            item_model->primitive_color.A = item_appearence_settings->transparency;
+            self->primitive_color.integer = item_model->primitive_color.integer;
+            item_model->primitive_color.a = item_appearence_settings->transparency;
 
             item_model->size.x *= item_appearence_settings->size;
             item_model->size.y *= item_appearence_settings->size;
@@ -248,15 +247,15 @@ void interactuables_main(interactuables* self) {
                     if (INTERACTUABLES_SETTINGS_TABLE_ENTRY->type == ITEM_KIND_ITEM) {
                         model = self->model;
                         // Gradually decrease the transparency
-                        model_alpha = model->primitive_color.A - 8;
+                        model_alpha = model->primitive_color.a - 8;
 
                         // Once it's done fading out, destroy the item
                         if (model_alpha < 0) {
-                            model->primitive_color.A = 0;
+                            model->primitive_color.a = 0;
                             self->header.destroy(self);
                             return;
                         } else
-                            model->primitive_color.A = model_alpha;
+                            model->primitive_color.a = model_alpha;
                     }
                 }
 
@@ -285,9 +284,9 @@ void interactuables_main(interactuables* self) {
             case ITEM_ID_WHITE_JEWEL:
                 // Make White Jewels semi-transparent if not playing in a save file
                 if (sys.contPak_file_no < 0) {
-                    CV64_COLOR_RGBA_TO_U32(model->primitive_color) = 0xFFFFFF40;
+                    model->primitive_color.integer = 0xFFFFFF40;
                 } else {
-                    CV64_COLOR_RGBA_TO_U32(model->primitive_color) = 0xFFFFFFFF;
+                    model->primitive_color.integer = 0xFFFFFFFF;
                 }
                 break;
         }

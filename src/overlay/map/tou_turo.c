@@ -60,8 +60,8 @@ void cv64_ovl_touturo_door_init(cv64_ovl_touturo_door_t* self) {
     model->assets_file_ID = MAP_ASSETS_FILE_ID;
     model->dlist          = cv64_ovl_touturo_door_dlists[settings->variable_1];
 
-    CV64_COLOR_RGBA_TO_U32(model->primitive_color) = CV64_COLOR_RGBA_TO_U32(sys.primitive_color);
-    CV64_COLOR_RGBA_TO_U32(model->fog_color)       = CV64_COLOR_RGBA_TO_U32(sys.background_color);
+    model->primitive_color.integer = sys.primitive_color.integer;
+    model->fog_color.integer       = sys.background_color.integer;
 
     BITS_SET(self->header.ID, OBJ_FLAG_STAGE_OBJECT);
 
@@ -85,9 +85,8 @@ void cv64_ovl_touturo_door_loop(cv64_ovl_touturo_door_t* self) {
         self->header.destroy(self);
         return;
     } else {
-        CV64_COLOR_RGBA_TO_U32(model->primitive_color) =
-            CV64_COLOR_RGBA_TO_U32(sys.primitive_color);
-        CV64_COLOR_RGBA_TO_U32(model->fog_color) = CV64_COLOR_RGBA_TO_U32(sys.background_color);
+        model->primitive_color.integer = sys.primitive_color.integer;
+        model->fog_color.integer       = sys.background_color.integer;
         if (settings->variable_1 == 0) {
             ENTER(self, cv64_ovl_touturo_door_exit_funcs);
         } else {

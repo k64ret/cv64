@@ -65,13 +65,13 @@ void stageSelect_initGraphics(stageSelect* self) {
         bg_model->assets_file_ID   = NI_ASSETS_MENU;
         bg_model->dlist            = &MENU_RED_BACKGROUND_DL;
         BITS_SET(bg_model->flags, FIG_FLAG_0800);
-        CV64_COLOR_RGBA_TO_U32(bg_model->primitive_color) = (s8) 0x000000FF; // Slight fakematch?
-        bg_model->position.x                              = 0.0f;
-        bg_model->position.y                              = 0.0f;
-        bg_model->position.z                              = 0.0f;
-        bg_model->size.x                                  = 1.0f;
-        bg_model->size.y                                  = 1.0f;
-        bg_model->size.z                                  = 1.0f;
+        bg_model->primitive_color.integer = (s8) 0x000000FF; // Slight fakematch?
+        bg_model->position.x              = 0.0f;
+        bg_model->position.y              = 0.0f;
+        bg_model->position.z              = 0.0f;
+        bg_model->size.x                  = 1.0f;
+        bg_model->size.y                  = 1.0f;
+        bg_model->size.z                  = 1.0f;
 
         for (self->text_ID = 0; self->text_ID < STAGE_SELECT_NUM_OPTIONS + 1; self->text_ID++) {
             textbox_array[self->text_ID] = (*textbox_create)(
@@ -226,9 +226,9 @@ void stageSelect_warpToStage(stageSelect* self) {
                 sys.map_fade_in_time     = 30;
                 sys.map_ID               = MORI;
                 sys.map_entrance_ID      = 0;
-                sys.map_fade_in_color.R  = 0;
-                sys.map_fade_in_color.G  = 0;
-                sys.map_fade_in_color.B  = 0;
+                sys.map_fade_in_color.r  = 0;
+                sys.map_fade_in_color.g  = 0;
+                sys.map_fade_in_color.b  = 0;
                 break;
 
             case INSIDE_OF_RAMPART:
@@ -237,9 +237,9 @@ void stageSelect_warpToStage(stageSelect* self) {
                 sys.map_fade_out_time    = 30;
                 sys.map_fade_in_time     = 30;
                 sys.map_entrance_ID      = 0;
-                sys.map_fade_in_color.R  = 0;
-                sys.map_fade_in_color.G  = 0;
-                sys.map_fade_in_color.B  = 0;
+                sys.map_fade_in_color.r  = 0;
+                sys.map_fade_in_color.g  = 0;
+                sys.map_fade_in_color.b  = 0;
                 break;
 
             case COURTYARD:
@@ -249,9 +249,9 @@ void stageSelect_warpToStage(stageSelect* self) {
                 sys.map_fade_out_time    = 30;
                 sys.map_fade_in_time     = 30;
                 sys.map_entrance_ID      = 0;
-                sys.map_fade_in_color.R  = 0;
-                sys.map_fade_in_color.G  = 0;
-                sys.map_fade_in_color.B  = 0;
+                sys.map_fade_in_color.r  = 0;
+                sys.map_fade_in_color.g  = 0;
+                sys.map_fade_in_color.b  = 0;
                 break;
 
             case EXECUTION_TOWER:
@@ -259,9 +259,9 @@ void stageSelect_warpToStage(stageSelect* self) {
                 sys.map_fade_out_time   = 30;
                 sys.map_fade_in_time    = 30;
                 sys.map_entrance_ID     = 0;
-                sys.map_fade_in_color.R = 0;
-                sys.map_fade_in_color.G = 0;
-                sys.map_fade_in_color.B = 0;
+                sys.map_fade_in_color.r = 0;
+                sys.map_fade_in_color.g = 0;
+                sys.map_fade_in_color.b = 0;
                 break;
 
             case CLOCK_TOWER:
@@ -269,9 +269,9 @@ void stageSelect_warpToStage(stageSelect* self) {
                 sys.map_fade_out_time   = 30;
                 sys.map_fade_in_time    = 30;
                 sys.map_entrance_ID     = 0;
-                sys.map_fade_in_color.R = 0;
-                sys.map_fade_in_color.G = 0;
-                sys.map_fade_in_color.B = 0;
+                sys.map_fade_in_color.r = 0;
+                sys.map_fade_in_color.g = 0;
+                sys.map_fade_in_color.b = 0;
                 break;
 
             case VS_DEATH:
@@ -281,9 +281,9 @@ void stageSelect_warpToStage(stageSelect* self) {
                 // clang-format on
                 sys.map_fade_out_time   = 30;
                 sys.map_fade_in_time    = 30;
-                sys.map_fade_in_color.R = 0;
-                sys.map_fade_in_color.G = 0;
-                sys.map_fade_in_color.B = 0;
+                sys.map_fade_in_color.r = 0;
+                sys.map_fade_in_color.g = 0;
+                sys.map_fade_in_color.b = 0;
                 break;
 
             case VS_ACTRIESE:
@@ -291,9 +291,9 @@ void stageSelect_warpToStage(stageSelect* self) {
                 sys.map_fade_out_time   = 30;
                 sys.map_fade_in_time    = 30;
                 sys.map_entrance_ID     = 0;
-                sys.map_fade_in_color.R = 0;
-                sys.map_fade_in_color.G = 0;
-                sys.map_fade_in_color.B = 0;
+                sys.map_fade_in_color.r = 0;
+                sys.map_fade_in_color.g = 0;
+                sys.map_fade_in_color.b = 0;
                 break;
 
             case VS_BEHIMOS:
@@ -301,9 +301,9 @@ void stageSelect_warpToStage(stageSelect* self) {
                 sys.map_fade_out_time   = 30;
                 sys.map_fade_in_time    = 30;
                 sys.map_entrance_ID     = 0;
-                sys.map_fade_in_color.R = 0;
-                sys.map_fade_in_color.G = 0;
-                sys.map_fade_in_color.B = 0;
+                sys.map_fade_in_color.r = 0;
+                sys.map_fade_in_color.g = 0;
+                sys.map_fade_in_color.b = 0;
                 break;
         }
 
