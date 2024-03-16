@@ -30,10 +30,6 @@
  * Unset `bits` in `value`.
  */
 #define BITS_UNSET(value, bits) ((value) &= ~(bits))
-/**
- * Apply `mask` on top of `value` and assign result to `value`.
- */
-#define BITS_ASSIGN_MASK(value, mask) ((value) &= (mask))
 
 typedef u8 Addr[];
 
@@ -57,17 +53,13 @@ extern u32 getMapEventFlagID(s16 stage_ID);
 #define SCREEN_WIDTH  320
 #define SCREEN_HEIGHT 240
 
-// clang-format off
-
 /**
  * Obtain the un-mapped address of data from a Nisitenma-Ichigo file
  * This is needed if data is trying to be accessed when said data is not mapped by the TLB
  * (which usually happens with data within overlays)
  */
-#define GET_UNMAPPED_ADDRESS(file_ID, data_ptr)                                                     \
-    (u32) sys.Nisitenma_Ichigo_loaded_files_ptr[file_ID] + ((u32) data_ptr & 0xFFFFFF)
-
-// clang-format on
+#define GET_UNMAPPED_ADDRESS(file_ID, data_ptr)                                                    \
+    (u32) sys.Nisitenma_Ichigo_loaded_files_ptr[file_ID] + BITS_MASK((u32) data_ptr, 0xFFFFFF)
 
 extern const u32 MENU_RED_BACKGROUND_DL;
 #define NI_ASSETS_MENU_BUFFER_SIZE 0x30000

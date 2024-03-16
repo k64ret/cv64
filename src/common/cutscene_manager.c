@@ -31,7 +31,8 @@ void cutsceneMgr_main(cutsceneMgr* self) {
     } else if (ptr_PlayerData != NULL) {
         visual_data = &ptr_PlayerData->visualData;
 
-        if ((visual_data->flags & DEAD) || (sys.SaveStruct_gameplay.player_status & DEAD)) {
+        if (BITS_HAS(visual_data->flags, DEAD) ||
+            BITS_HAS(sys.SaveStruct_gameplay.player_status, DEAD)) {
             sys.entrance_cutscene_ID = CUTSCENE_ID_NONE;
             sys.cutscene_ID          = CUTSCENE_ID_NONE;
         } else {
@@ -65,14 +66,14 @@ void cutsceneMgr_createCutscene(cutsceneMgr* self) {
     }
 
     cutscene_overlay = cutscene_settings[self->cutscene_ID - 1].overlay;
-    if (cutscene_overlay & CUTSCENE_OVERLAY_FADE) {
+    if (BITS_HAS(cutscene_overlay, CUTSCENE_OVERLAY_FADE)) {
         (*fade_setSettings)(FADE_OUT, 10, 0, 0, 0);
     }
 
     cutscene_overlay = cutscene_settings[self->cutscene_ID - 1].overlay;
     cutscene_ID_ptr  = &self->cutscene_ID;
     cutscene_flags   = sys.cutscene_flags;
-    if (cutscene_overlay & CUTSCENE_OVERLAY_FILM_REEL) {
+    if (BITS_HAS(cutscene_overlay, CUTSCENE_OVERLAY_FILM_REEL)) {
         sys.cutscene_flags = cutscene_flags | CUTSCENE_FLAG_FILM_REEL_EFFECT;
         if ((self && self) && self) {
         }
@@ -92,8 +93,10 @@ void cutsceneMgr_createCutscene(cutsceneMgr* self) {
 }
 
 void cutsceneMgr_setCameraClippingAndScissoring(cutsceneMgr* self) {
-    if (cutscene_settings[self->cutscene_ID - 1].overlay & CUTSCENE_OVERLAY_WIDESCREEN_BORDERS) {
-        if (sys.cutscene_flags & CUTSCENE_FLAG_DISPLAY_WIDESCREEN_BORDERS) {
+    if (BITS_HAS(
+            cutscene_settings[self->cutscene_ID - 1].overlay, CUTSCENE_OVERLAY_WIDESCREEN_BORDERS
+        )) {
+        if (BITS_HAS(sys.cutscene_flags, CUTSCENE_FLAG_DISPLAY_WIDESCREEN_BORDERS)) {
             cutscene_setCameraClippingAndScissoring(WIDESCREEN_BORDERS);
             (*object_curLevel_goToNextFuncAndClearTimer)(
                 self->header.current_function, &self->header.functionInfo_ID
@@ -109,13 +112,15 @@ void cutsceneMgr_setCameraClippingAndScissoring(cutsceneMgr* self) {
 void cutsceneMgr_loop(cutsceneMgr* self) {
     if (objectList_findFirstObjectByID(cutscene_settings[self->cutscene_ID - 1].object_ID) ==
         NULL) {
-        if (cutscene_settings[self->cutscene_ID - 1].overlay & CUTSCENE_OVERLAY_FILM_REEL) {
+        if (BITS_HAS(
+                cutscene_settings[self->cutscene_ID - 1].overlay, CUTSCENE_OVERLAY_FILM_REEL
+            )) {
             BITS_UNSET(sys.cutscene_flags, CUTSCENE_FLAG_FILM_REEL_EFFECT);
         }
         (*object_curLevel_goToNextFuncAndClearTimer)(
             self->header.current_function, &self->header.functionInfo_ID
         );
-    } else if ((sys.controllers[0].buttons_pressed & (START_BUTTON | RECENTER_BUTTON)) && (2 < sys.cutscene_ID)) {
+    } else if (BITS_HAS(sys.controllers[0].buttons_pressed, START_BUTTON | RECENTER_BUTTON) && (2 < sys.cutscene_ID)) {
         cutscene* cutscene_obj      = self->cutscene_object;
         cutscene_obj->skip_cutscene = TRUE;
     }
@@ -128,8 +133,10 @@ void cutsceneMgr_stopCutscene(cutsceneMgr* self) {
         return;
     }
 
-    if (!(sys.cutscene_flags & CUTSCENE_FLAG_10) &&
-        (cutscene_settings[self->cutscene_ID - 1].overlay & CUTSCENE_OVERLAY_WIDESCREEN_BORDERS)) {
+    if (BITS_NOT_HAS(sys.cutscene_flags, CUTSCENE_FLAG_10) &&
+        BITS_HAS(
+            cutscene_settings[self->cutscene_ID - 1].overlay, CUTSCENE_OVERLAY_WIDESCREEN_BORDERS
+        )) {
         cutscene_setCameraClippingAndScissoring(FULLSCREEN);
     }
 
@@ -139,15 +146,15 @@ void cutsceneMgr_stopCutscene(cutsceneMgr* self) {
         sys.cutscene_ID = CUTSCENE_ID_NONE;
     }
 
-    if (!(sys.cutscene_flags & CUTSCENE_FLAG_20)) {
+    if (BITS_NOT_HAS(sys.cutscene_flags, CUTSCENE_FLAG_20)) {
         BITS_UNSET(sys.cutscene_flags, CUTSCENE_FLAG_PLAYING);
-        if (!(sys.cutscene_flags & CUTSCENE_FLAG_10)) {
+        if (BITS_NOT_HAS(sys.cutscene_flags, CUTSCENE_FLAG_10)) {
             BITS_UNSET(sys.cutscene_flags, CUTSCENE_FLAG_DISPLAY_WIDESCREEN_BORDERS);
         }
     }
 
     settings = &cutscene_settings[self->cutscene_ID - 1];
-    if (settings->overlay & CUTSCENE_OVERLAY_FADE) {
+    if (BITS_HAS(settings->overlay, CUTSCENE_OVERLAY_FADE)) {
         (*fade_setSettings)(FADE_IN, 10, 0, 0, 0);
     }
 

@@ -79,7 +79,7 @@ void func_8013B4F0_BE6E0() {
 u32 isMenuDataHeapActive() {
     u32 is_active;
 
-    is_active = heaps[HEAP_KIND_MENU_DATA].flags & HEAP_ACTIVE;
+    is_active = BITS_HAS(heaps[HEAP_KIND_MENU_DATA].flags, HEAP_ACTIVE);
     if (is_active == FALSE) {
         return FALSE;
     }

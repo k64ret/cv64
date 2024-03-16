@@ -52,8 +52,9 @@ void cv64_ovl_rose_ventilator_init(cv64_ovl_rose_ventilator_t* self) {
         model->primitive_color.integer = sys.primitive_color.integer;
         model->fog_color.integer       = sys.background_color.integer;
         (*modelInfo_setMapActorModel)(model, &ROSE_VENTILATOR_DL);
-        speed_settings->current_speed = speed_settings->max_speed = ((*rand)() & 0xFFF) + 16;
-        speed_settings->time_until_changing_max_speed             = ((*rand)() & 0x1FF) + 30;
+        speed_settings->current_speed = speed_settings->max_speed =
+            BITS_MASK((*rand)(), 0xFFF) + 16;
+        speed_settings->time_until_changing_max_speed = BITS_MASK((*rand)(), 0x1FF) + 30;
         (*actor_model_set_pos_and_angle)(self, model);
         (*object_curLevel_goToNextFuncAndClearTimer)(
             self->header.current_function, &self->header.functionInfo_ID
@@ -98,8 +99,8 @@ void cv64_ovl_rose_ventilator_loop(cv64_ovl_rose_ventilator_t* self) {
         }
         speed_settings->time_until_changing_max_speed--;
         if (speed_settings->time_until_changing_max_speed == 0) {
-            speed_settings->max_speed                     = ((*rand)() & 0xFFF) + 16;
-            speed_settings->time_until_changing_max_speed = ((*rand)() & 0x1FF) + 30;
+            speed_settings->max_speed                     = BITS_MASK((*rand)(), 0xFFF) + 16;
+            speed_settings->time_until_changing_max_speed = BITS_MASK((*rand)(), 0x1FF) + 30;
         }
     }
 }

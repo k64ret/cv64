@@ -63,11 +63,12 @@ void GameStateMgr_setupGameState(GameStateMgr* self) {
     for (currentSlot = ARRAY_START(self->current_game_state_slots);
          currentSlot < ARRAY_END(self->current_game_state_slots);
          currentSlot++) {
-        temp2 = *currentSlot & 0x7FC00000;
+        temp2 = BITS_MASK(*currentSlot, 0x7FC00000);
         if (*currentSlot != 0) {
             BITS_ASSIGN_MASK(*currentSlot, 0x803FFFFF);
             if (*currentSlot > 0) {
-                *currentSlot = (s32) object_createAndSetChild(self, *currentSlot) & 0x7FFFFFFF;
+                *currentSlot =
+                    BITS_MASK((s32) object_createAndSetChild(self, *currentSlot), 0x7FFFFFFF);
             }
             if (1) {
             }
@@ -87,15 +88,15 @@ void GameStateMgr_executeGameStateUncappedFramerate(GameStateMgr* self) {
          currentSlot < ARRAY_END(self->current_game_state_slots);
          currentSlot++) {
         slotData = *currentSlot;
-        if (slotData == 0) {
+
+        if (slotData == 0)
             break;
+
+        if (slotData < 0) {
+            function = BITS_MASK(slotData, 0x803FFFFF);
+            function();
         } else {
-            if (slotData < 0) {
-                function = slotData & 0x803FFFFF;
-                function();
-            } else {
-                object_execute(K0BASE | (slotData & 0x803FFFFF));
-            }
+            object_execute(K0BASE | BITS_MASK(slotData, 0x803FFFFF));
         }
     }
 }
@@ -109,16 +110,16 @@ void GameStateMgr_executeGameStateCappedFramerate(GameStateMgr* self, u32 execut
          currentSlot < ARRAY_END(self->current_game_state_slots);
          currentSlot++) {
         slotData = *currentSlot;
-        if (slotData == 0) {
+
+        if (slotData == 0)
             break;
-        } else {
-            if (slotData & execution_flags) {
-                if (slotData < 0) {
-                    function = slotData & 0x803FFFFF;
-                    function();
-                } else {
-                    object_execute(K0BASE | (slotData & 0x803FFFFF));
-                }
+
+        if (BITS_HAS(slotData, execution_flags)) {
+            if (slotData < 0) {
+                function = BITS_MASK(slotData, 0x803FFFFF);
+                function();
+            } else {
+                object_execute(K0BASE | BITS_MASK(slotData, 0x803FFFFF));
             }
         }
     }

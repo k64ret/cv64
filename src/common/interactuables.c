@@ -198,9 +198,10 @@ void interactuables_main(interactuables* self) {
             FALSE) {
             // Periodically create the flash effect
             if (self->time_when_flash_appears_over_item == self->current_flash_inactive_time) {
-                if (!(interactuables_settings_table[self->table_index].flags & ITEM_DOES_NOT_FLASH
+                if (BITS_NOT_HAS(
+                        interactuables_settings_table[self->table_index].flags, ITEM_DOES_NOT_FLASH
                     ) &&
-                    !(sys.cutscene_flags & CUTSCENE_FLAG_PLAYING) &&
+                    BITS_NOT_HAS(sys.cutscene_flags, CUTSCENE_FLAG_PLAYING) &&
                     (self->item_doesnt_flash == FALSE)) {
                     // Create the effect
                     self->flash = (pickableItemFlash*) (*createEffectObjectUnderEffectMgr)(
@@ -228,7 +229,7 @@ void interactuables_main(interactuables* self) {
                 self->current_flash_inactive_time++;
             }
 
-            if (self->item_model_settings_flags & ITEM_MODEL_SETTINGS_FLAG_SPINS) {
+            if (BITS_HAS(self->item_model_settings_flags, ITEM_MODEL_SETTINGS_FLAG_SPINS)) {
                 // Jewels spin slower than the other items
                 if ((interactuables_settings_table[self->table_index].item >= ITEM_ID_WHITE_JEWEL
                     ) &&
@@ -240,7 +241,7 @@ void interactuables_main(interactuables* self) {
             }
         }
 
-        if (INTERACTUABLES_SETTINGS_TABLE_ENTRY->flags & ITEM_VANISH_OR_UPDATE_POSITION) {
+        if (BITS_HAS(INTERACTUABLES_SETTINGS_TABLE_ENTRY->flags, ITEM_VANISH_OR_UPDATE_POSITION)) {
             if (self->item_doesnt_vanish_or_fall == FALSE) {
                 // Start fading out after 10 seconds
                 if (ITEM_FADE_TIMER++ > 300U) {

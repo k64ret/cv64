@@ -456,11 +456,11 @@ void object_execute(cv64_object_hdr_t* self) {
     if (BITS_HAS(self->ID, OBJ_FLAG_MAP_OVERLAY)) {
         if (BITS_NOT_HAS(self->flags, OBJ_EXEC_FLAG_PAUSE)) {
             mapOverlay(self);
-            Objects_functions[(self->ID & 0x7FF) - 1](self);
+            Objects_functions[BITS_MASK(self->ID, 0x7FF) - 1](self);
             unmapOverlay(self);
         }
     } else if (BITS_NOT_HAS(self->flags, OBJ_EXEC_FLAG_PAUSE)) {
-        Objects_functions[(self->ID & 0x7FF) - 1](self);
+        Objects_functions[BITS_MASK(self->ID, 0x7FF) - 1](self);
     }
 
     if (self->child != NULL) {

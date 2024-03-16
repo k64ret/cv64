@@ -114,7 +114,7 @@ void stageSelect_initLens(stageSelect* self) {
 
     if ((*fade_isFading)() == FALSE) {
         for (self->text_ID = 0; self->text_ID < STAGE_SELECT_NUM_OPTIONS + 1; self->text_ID++) {
-            if ((textbox_array[self->text_ID]->flags & TEXTBOX_IS_ACTIVE) == FALSE) {
+            if (BITS_NOT_HAS(textbox_array[self->text_ID]->flags, TEXTBOX_IS_ACTIVE)) {
                 return;
             }
         }
@@ -161,8 +161,8 @@ void stageSelect_moveLens(stageSelect* self) {
     current_option  = self->current_option;
     previous_option = self->previous_option;
     if (current_option == (u32) previous_option) {
-        if ((sys.controllers[0].buttons_pressed & A_BUTTON) ||
-            (sys.controllers[0].buttons_pressed & (START_BUTTON | RECENTER_BUTTON))) {
+        if (BITS_HAS(sys.controllers[0].buttons_pressed, A_BUTTON) ||
+            BITS_HAS(sys.controllers[0].buttons_pressed, START_BUTTON | RECENTER_BUTTON)) {
             BITS_UNSET(lens->flags, WINDOW_OPENING);
             BITS_SET(lens->flags, WINDOW_CLOSING);
             (*object_curLevel_goToNextFuncAndClearTimer)(
@@ -187,7 +187,7 @@ void stageSelect_warpToStage(stageSelect* self) {
     s16 i, j;
     window_work* lens = self->lens;
 
-    if ((lens->flags & (WINDOW_FLAG_4000 | WINDOW_FLAG_8000)) >> 0xE != FALSE) {
+    if (BITS_MASK(lens->flags, WINDOW_FLAG_4000 | WINDOW_FLAG_8000) >> 0xE != FALSE) {
         stageSelect_closeTextboxes(self);
 
         sys.SaveStruct_gameplay.map_ID          = NONE;
