@@ -40,45 +40,32 @@ void* allocStructInObjectEntryList(
     u32 temp;
 
     if (isMenuDataHeapActive()) {
-        data = (*object_allocEntryInList)(
-            object, HEAP_KIND_MENU_DATA, size, alloc_data_index
-        );
+        data = (*object_allocEntryInList)(object, HEAP_KIND_MENU_DATA, size, alloc_data_index);
         if (data == NULL) {
-            data = (*object_allocEntryInList)(
-                object, HEAP_KIND_MULTIPURPOSE, size, alloc_data_index
-            );
+            data =
+                (*object_allocEntryInList)(object, HEAP_KIND_MULTIPURPOSE, size, alloc_data_index);
         } else {
             // Empty else needed for matching
         }
     } else {
-        data = (*object_allocEntryInList)(
-            object, HEAP_KIND_MULTIPURPOSE, size, alloc_data_index
-        );
+        data = (*object_allocEntryInList)(object, HEAP_KIND_MULTIPURPOSE, size, alloc_data_index);
     }
     return data;
 }
 
-void* func_8013B454_BE644(
-    const char* name, cv64_object_t* object, u32 size, s32 alloc_data_index
-) {
+void* func_8013B454_BE644(const char* name, cv64_object_t* object, u32 size, s32 alloc_data_index) {
     void* data;
     u32 temp;
 
     if (isMenuDataHeapActive()) {
-        data = (*func_80002264_2E64)(
-            object, HEAP_KIND_MENU_DATA, size, alloc_data_index
-        );
+        data = (*func_80002264_2E64)(object, HEAP_KIND_MENU_DATA, size, alloc_data_index);
         if (data == NULL) {
-            data = (*func_80002264_2E64)(
-                object, HEAP_KIND_MULTIPURPOSE, size, alloc_data_index
-            );
+            data = (*func_80002264_2E64)(object, HEAP_KIND_MULTIPURPOSE, size, alloc_data_index);
         } else {
             // Empty else needed for matching
         }
     } else {
-        data = (*func_80002264_2E64)(
-            object, HEAP_KIND_MULTIPURPOSE, size, alloc_data_index
-        );
+        data = (*func_80002264_2E64)(object, HEAP_KIND_MULTIPURPOSE, size, alloc_data_index);
     }
     return data;
 }
@@ -92,7 +79,7 @@ void func_8013B4F0_BE6E0() {
 u32 isMenuDataHeapActive() {
     u32 is_active;
 
-    is_active = heaps[HEAP_KIND_MENU_DATA].flags & HEAP_ACTIVE;
+    is_active = BITS_HAS(heaps[HEAP_KIND_MENU_DATA].flags, HEAP_ACTIVE);
     if (is_active == FALSE) {
         return FALSE;
     }

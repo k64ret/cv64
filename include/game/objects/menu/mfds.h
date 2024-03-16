@@ -1,5 +1,5 @@
-#ifndef MFSD_H
-#define MFSD_H
+#ifndef MFDS_H
+#define MFDS_H
 
 // Textbox structs
 
@@ -67,8 +67,9 @@ typedef struct {
     vec2s position;
     vec2s field_0x16;
     u8 field_0x1A;
-    u8 field_0x1B;
-    u8 field_0x1C[18];
+    u8 num_options;
+    u8 current_option;
+    u8 field_0x1C[17];
     u8 display_time;
     u8 field_0x2F;
     mfds_color_animation_state* color_animation_state;
@@ -146,7 +147,10 @@ typedef struct {
     void* field_0x44;
     void* field_0x48;
     void* field_0x4C;
-    u16* mfds_menu_string_and_mfds_item_form; // This may be a union?
+    union {
+        u16* mfds_menu_string;
+        u16* mfds_item_form;
+    };
     mfds_number_work* number;
     mfds_color_animation_state* color_animation_state;
     window_work* window;
@@ -157,18 +161,13 @@ typedef struct {
     mfds_state* state;
 } obj_mfds;
 
-extern mfds_state*
-textbox_create(void* parent_object, camera* display_camera, u32 flags);
-extern void textbox_setDimensions(
-    mfds_state* self, s8 height, s16 width, u8 param_4, u8 character_spacing
-);
+extern mfds_state* textbox_create(void* parent_object, camera* display_camera, u32 flags);
+extern void
+textbox_setDimensions(mfds_state* self, s8 height, s16 width, u8 param_4, u8 character_spacing);
 extern void textbox_setPos(mfds_state* self, u16 x, u16 y, s32 unused);
-extern void textbox_setMessagePtr(
-    mfds_state* self, u16* text, u16* item_amount_number_text, s16 number
-);
-extern void textbox_enableLens(
-    mfds_state* self, u32 window_work_flags, f32 window_closing_speed
-);
+extern void
+textbox_setMessagePtr(mfds_state* self, u16* text, u16* item_amount_number_text, s16 number);
+extern void textbox_enableLens(mfds_state* self, u32 window_work_flags, f32 window_closing_speed);
 extern u16* text_getMessageFromPool(u16* message_pool_base_ptr, s32 id);
 extern void textbox_setScaleAndSomethingElse(
     mfds_state* self,
@@ -184,8 +183,7 @@ extern void text_convertIntNumberToText(u32, u16*, u8, u32);
 extern u16* text_findCharInString(u16* text, u16 char_to_find);
 extern mfds_color_anim_data text_color_anim_data_table[4][8];
 extern u16* convertUTF16ToCustomTextFormat(u16* text_buffer);
-extern void textbox_setHeightAndWidth(
-    mfds_state* self, u32 index, u8 text_height, u8 text_width
-);
+extern void textbox_setHeightAndWidth(mfds_state* self, u32 index, u8 text_height, u8 text_width);
+extern mfds_state* map_getMessageFromPool(u32 text_ID, u32 textbox_display_time);
 
 #endif

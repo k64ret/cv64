@@ -33,13 +33,14 @@ void obj213F_isDraculaCutsceneWatched(object_213F* self) {
     cv64_model_inf_t* player_model;
 
     if ((ptr_PlayerData != NULL) &&
-        (sys.SaveStruct_gameplay.event_flags[EVENT_FLAG_ID_CASTLE_WALL_MAIN] &
-         EVENT_FLAG_CASTLE_WALL_MAIN_WATCHED_DRACULA_CUTSCENE)) {
+        CHECK_EVENT_FLAGS(
+            EVENT_FLAG_ID_CASTLE_WALL_MAIN, EVENT_FLAG_CASTLE_WALL_MAIN_WATCHED_DRACULA_CUTSCENE
+        )) {
         player_model = ptr_PlayerData->visualData.model;
 
         if (300.0f < player_model->position.y) {
             (*object_curLevel_goToNextFuncAndClearTimer)(
-                self->header.current_function, &self->header.functionInfo_ID
+                self->header.current_function, &self->header.function_info_ID
             );
         }
     }
@@ -50,7 +51,7 @@ void obj213F_isPlayerDroppingDown(object_213F* self) {
 
     if (model->position.y < 300.0f) {
         (*object_curLevel_goToNextFuncAndClearTimer)(
-            self->header.current_function, &self->header.functionInfo_ID
+            self->header.current_function, &self->header.function_info_ID
         );
     }
 }
@@ -58,8 +59,10 @@ void obj213F_isPlayerDroppingDown(object_213F* self) {
 void obj213F_playSound(object_213F* self) {
     (*play_sound)(SD_2E9);
     (*object_curLevel_goToNextFuncAndClearTimer)(
-        self->header.current_function, &self->header.functionInfo_ID
+        self->header.current_function, &self->header.function_info_ID
     );
 }
 
-void obj213F_destroy(object_213F* self) { self->header.destroy(self); }
+void obj213F_destroy(object_213F* self) {
+    self->header.destroy(self);
+}

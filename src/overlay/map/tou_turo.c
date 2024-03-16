@@ -33,11 +33,9 @@ extern cv64_ovl_touturo_door_exit_func_t cv64_ovl_touturo_door_exit_funcs[];
 // = {
 //     cv64_ovl_touturo_door_entrance_check_event_flags,
 //     cv64_ovl_touturo_door_entrance_close_door, func_801578FC};
-extern cv64_ovl_touturo_door_entrance_func_t
-    cv64_ovl_touturo_door_entrance_funcs[];
+extern cv64_ovl_touturo_door_entrance_func_t cv64_ovl_touturo_door_entrance_funcs[];
 
-const char cv64_ovl_touturo_unused_str[] =
-    "ERROR P27TOBIRA : EFFECT SPAWN ERROR\n";
+const char cv64_ovl_touturo_unused_str[] = "ERROR P27TOBIRA : EFFECT SPAWN ERROR\n";
 
 void cv64_ovl_touturo_door_entrypoint(cv64_ovl_touturo_door_t* self) {
     ENTER(self, cv64_ovl_touturo_door_funcs);
@@ -51,54 +49,45 @@ void cv64_ovl_touturo_door_init(cv64_ovl_touturo_door_t* self) {
     if (settings) {
     } // Needed for matching
 
-    model = self->model =
-        modelInfo_createRootNode(FIG_TYPE_STANDALONE, D_8018CDE0[0]);
+    model = self->model = modelInfo_createRootNode(FIG_TYPE_STANDALONE, D_8018CDE0[0]);
 
     if (model) {
     } // Needed for matching
 
     actor_model_set_pos_and_angle(self, model);
-    model->flags |= (FIG_FLAG_0800 | FIG_FLAG_0100);
+    BITS_SET(model->flags, FIG_FLAG_0800 | FIG_FLAG_0100);
 
-    model->assets_file_ID = sys.map_assets_file_IDs[0];
-    model->dlist = cv64_ovl_touturo_door_dlists[settings->variable_1];
+    model->assets_file_ID = MAP_ASSETS_FILE_ID;
+    model->dlist          = cv64_ovl_touturo_door_dlists[TOU_TURO_DOOR_TYPE];
 
-    CV64_COLOR_RGBA_TO_U32(model->primitive_color) =
-        CV64_COLOR_RGBA_TO_U32(sys.primitive_color);
-    CV64_COLOR_RGBA_TO_U32(model->fog_color) =
-        CV64_COLOR_RGBA_TO_U32(sys.background_color);
+    model->primitive_color.integer = sys.primitive_color.integer;
+    model->fog_color.integer       = sys.background_color.integer;
 
-    self->header.ID |= OBJ_FLAG_STAGE_OBJECT;
+    BITS_SET(self->header.ID, OBJ_FLAG_STAGE_OBJECT);
 
-    self->map_actor_model =
-        getMapActorModelEntryFromArray(model->dlist, model->assets_file_ID);
+    self->map_actor_model  = getMapActorModelEntryFromArray(model->dlist, model->assets_file_ID);
     model->map_actor_model = self->map_actor_model;
 
     self->close_time = 30;
 
     (*object_curLevel_goToNextFuncAndClearTimer)(
-        self->header.current_function, &self->header.functionInfo_ID
+        self->header.current_function, &self->header.function_info_ID
     );
 }
 
 void cv64_ovl_touturo_door_loop(cv64_ovl_touturo_door_t* self) {
     cv64_actor_settings_t* settings = self->settings;
-    cv64_model_inf_t* model = self->model;
+    cv64_model_inf_t* model         = self->model;
 
     if ((*actor_checkSpawn)(
-            self,
-            settings->position.x,
-            settings->position.y,
-            settings->position.z
+            self, settings->position.x, settings->position.y, settings->position.z
         ) != FALSE) {
         self->header.destroy(self);
         return;
     } else {
-        CV64_COLOR_RGBA_TO_U32(model->primitive_color) =
-            CV64_COLOR_RGBA_TO_U32(sys.primitive_color);
-        CV64_COLOR_RGBA_TO_U32(model->fog_color) =
-            CV64_COLOR_RGBA_TO_U32(sys.background_color);
-        if (settings->variable_1 == 0) {
+        model->primitive_color.integer = sys.primitive_color.integer;
+        model->fog_color.integer       = sys.background_color.integer;
+        if (TOU_TURO_DOOR_TYPE == TOU_TURO_EXIT_DOOR) {
             ENTER(self, cv64_ovl_touturo_door_exit_funcs);
         } else {
             ENTER(self, cv64_ovl_touturo_door_entrance_funcs);
@@ -106,41 +95,34 @@ void cv64_ovl_touturo_door_loop(cv64_ovl_touturo_door_t* self) {
     }
 }
 
-void cv64_ovl_touturo_door_exit_check_event_flags(cv64_ovl_touturo_door_t* self
-) {
+void cv64_ovl_touturo_door_exit_check_event_flags(cv64_ovl_touturo_door_t* self) {
     cv64_model_inf_t* model = self->model;
 
-    if (sys.SaveStruct_gameplay.event_flags[EVENT_FLAG_ID_CLOCK_TOWER] &
-            EVENT_FLAG_CLOCK_TOWER_DEFEATED_DEATH ||
-        sys.SaveStruct_gameplay.event_flags[EVENT_FLAG_ID_CLOCK_TOWER] &
-            EVENT_FLAG_CLOCK_TOWER_DEFEATED_ACTRISE) {
+    if (CHECK_EVENT_FLAGS(EVENT_FLAG_ID_CLOCK_TOWER, EVENT_FLAG_CLOCK_TOWER_DEFEATED_DEATH) ||
+        CHECK_EVENT_FLAGS(EVENT_FLAG_ID_CLOCK_TOWER, EVENT_FLAG_CLOCK_TOWER_DEFEATED_ACTRISE)) {
         model->position.y = 35.0f;
     } else {
         model->position.y = 0.0f;
     }
     (*object_curLevel_goToNextFuncAndClearTimer)(
-        self->header.current_function, &self->header.functionInfo_ID
+        self->header.current_function, &self->header.function_info_ID
     );
 }
 
-void cv64_ovl_touturo_door_entrance_check_event_flags(
-    cv64_ovl_touturo_door_t* self
-) {
+void cv64_ovl_touturo_door_entrance_check_event_flags(cv64_ovl_touturo_door_t* self) {
     cv64_model_inf_t* model = self->model;
 
-    if (sys.SaveStruct_gameplay.event_flags[EVENT_FLAG_ID_MISC_STAGES] &
-        EVENT_FLAG_MISC_STAGES_ENTERED_ROOM_OF_CLOCKS) {
+    if (CHECK_EVENT_FLAGS(
+            EVENT_FLAG_ID_MISC_STAGES, EVENT_FLAG_MISC_STAGES_ENTERED_ROOM_OF_CLOCKS
+        )) {
         model->position.y = 6.0f;
         (*object_curLevel_goToFunc)(
-            self->header.current_function,
-            &self->header.functionInfo_ID,
-            TOU_TURO_FUNC_801578FC
+            self->header.current_function, &self->header.function_info_ID, TOU_TURO_FUNC_801578FC
         );
     } else {
-        sys.SaveStruct_gameplay.event_flags[EVENT_FLAG_ID_MISC_STAGES] |=
-            EVENT_FLAG_MISC_STAGES_ENTERED_ROOM_OF_CLOCKS;
+        SET_EVENT_FLAGS(EVENT_FLAG_ID_MISC_STAGES, EVENT_FLAG_MISC_STAGES_ENTERED_ROOM_OF_CLOCKS);
         (*object_curLevel_goToNextFuncAndClearTimer)(
-            self->header.current_function, &self->header.functionInfo_ID
+            self->header.current_function, &self->header.function_info_ID
         );
     }
 }
@@ -152,8 +134,7 @@ void cv64_ovl_touturo_door_entrance_close_door(cv64_ovl_touturo_door_t* self) {
     cv64_model_inf_t* model = self->model;
 
     model->position.y -=
-        (0.8166666666666667 *
-         (((self->close_time / 30.0f) * self->close_time) / 30.0f));
+        (0.8166666666666667 * (((self->close_time / 30.0f) * self->close_time) / 30.0f));
     self->close_time++;
 
     if (model->position.y <= 6.0f) {
@@ -166,7 +147,7 @@ void cv64_ovl_touturo_door_entrance_close_door(cv64_ovl_touturo_door_t* self) {
             effect = (*createEffectObjectUnderEffectMgr)(EFFECT_ID_1, NULL, 0);
 
             if (effect != NULL) {
-                (*func_8005B78C)(effect, 3);
+                (*effect_setMaxFrameSpeed)(effect, 3);
                 (*effect_setPosition)(
                     effect,
                     model->position.x + 3.0f,
@@ -183,7 +164,7 @@ void cv64_ovl_touturo_door_entrance_close_door(cv64_ovl_touturo_door_t* self) {
 
         (*play_sound_in_position)(SD_TOU_TURO_DOOR_CLOSE, &model->position);
         (*object_curLevel_goToNextFuncAndClearTimer)(
-            self->header.current_function, &self->header.functionInfo_ID
+            self->header.current_function, &self->header.function_info_ID
         );
     }
 }

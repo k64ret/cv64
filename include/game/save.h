@@ -2,10 +2,10 @@
 #define SAVE_H
 
 #include "event_flags.h"
+#include "item.h"
 #include <ultra64.h>
 
 #define NUM_EVENT_FLAGS  16
-#define NUM_ITEMS        41 // Total number of items, not including the white jewel
 #define SIZE_ITEMS_ARRAY 64 // Size of the whole items array
 
 #define REINHARDT 0
@@ -18,37 +18,37 @@
 #define SUBWEAPON_AXE        4
 
 typedef enum cv64_map_ID {
-    MORI = 0,
-    TOU = 1,
-    TOUOKUJI = 2,
-    NAKANIWA = 3,
-    BEKKAN_1F = 4,
-    BEKKAN_2F = 5,
-    MEIRO_TEIEN = 6,
-    CHIKA_KODO = 7,
-    CHIKA_SUIRO = 8,
-    HONMARU_B1F = 9,
-    HONMARU_1F = 10,
-    HONMARU_2F = 11,
+    MORI              = 0,
+    TOU               = 1,
+    TOUOKUJI          = 2,
+    NAKANIWA          = 3,
+    BEKKAN_1F         = 4,
+    BEKKAN_2F         = 5,
+    MEIRO_TEIEN       = 6,
+    CHIKA_KODO        = 7,
+    CHIKA_SUIRO       = 8,
+    HONMARU_B1F       = 9,
+    HONMARU_1F        = 10,
+    HONMARU_2F        = 11,
     HONMARU_3F_MINAMI = 12,
     HONMARU_4F_MINAMI = 13,
-    HONMARU_3F_KITA = 14,
-    HONMARU_5F = 15,
-    SHOKEI_TOU = 16,
-    MAHOU_TOU = 17,
-    KAGAKU_TOU = 18,
-    KETTOU_TOU = 19,
-    TURO_TOKEITOU = 20,
-    TENSHU = 21,
-    ENDING_DUMMY = 22,
-    TOKEITOU_NAI = 23,
-    DRACULA = 24,
-    ROSE = 25,
-    BEKKAN_BOSS = 26,
-    TOU_TURO = 27,
-    ENDING = 28,
-    TEST_GRID = 29,
-    NONE = -1
+    HONMARU_3F_KITA   = 14,
+    HONMARU_5F        = 15,
+    SHOKEI_TOU        = 16,
+    MAHOU_TOU         = 17,
+    KAGAKU_TOU        = 18,
+    KETTOU_TOU        = 19,
+    TURO_TOKEITOU     = 20,
+    TENSHU            = 21,
+    ENDING_DUMMY      = 22,
+    TOKEITOU_NAI      = 23,
+    DRACULA           = 24,
+    ROSE              = 25,
+    BEKKAN_BOSS       = 26,
+    TOU_TURO          = 27,
+    ENDING            = 28,
+    TEST_GRID         = 29,
+    NONE              = -1
 } cv64_map_ID_t;
 
 typedef struct cv64_save_state {
@@ -65,7 +65,7 @@ typedef struct cv64_save_state {
     s16 sound_mode;
     s16 character;
     u16 life;
-    u16 field13_0x5c; // Maybe related to the scrapped Magic meter?
+    u16 field_0x5C; // Maybe related to the scrapped S / E meter?
     u16 subweapon;
     u32 money;
     union {
@@ -82,8 +82,8 @@ typedef struct cv64_save_state {
     u32 player_status;
     u16 health_depletion_rate_while_poisoned;
     u16 current_hour_VAMP; // If greater than 24, you turn into vampire
-    s16 map_ID;
-    s16 map_entrance_ID;
+    s16 map;
+    s16 spawn;
     u8 save_crystal_number;
     u8 field50_0xb1;
     u8 field51_0xb2;
@@ -102,5 +102,25 @@ typedef struct cv64_save_state {
     s32 field83_0xd8;
     u32 money_spent_on_Renon;
 } cv64_save_state_t; // Size = 0xE0
+
+// clang-format off
+
+typedef enum cv64_save_flags {
+    SAVE_FLAG_GAME_WAS_SAVED_MID_PLAY    = 0x00000001,
+    SAVE_FLAG_EASY                       = 0x00000010,
+    SAVE_FLAG_NORMAL                     = 0x00000020,
+    SAVE_FLAG_HARD                       = 0x00000040,
+    SAVE_FLAG_HARD_MODE_UNLOCKED         = 0x00000100,
+    SAVE_FLAG_HAVE_REINHARDT_ALT_COSTUME = 0x00000200,
+    SAVE_FLAG_HAVE_CARRIE_ALT_COSTUME    = 0x00000400,
+    SAVE_FLAG_REINDHART_GOOD_ENDING      = 0x00020000,
+    SAVE_FLAG_CARRIE_GOOD_ENDING         = 0x00040000,
+    SAVE_FLAG_REINDHART_BAD_ENDING       = 0x00080000,
+    SAVE_FLAG_CARRIE_BAD_ENDING          = 0x00100000,
+    SAVE_FLAG_COSTUME_IS_BEING_USED      = 0x40000000,
+    SAVE_FLAG_CAN_EXPLODE_ON_JUMPING     = 0x80000000
+} cv64_save_flags_t;
+
+// clang-format on
 
 #endif

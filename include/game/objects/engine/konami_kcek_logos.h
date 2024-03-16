@@ -12,18 +12,15 @@ typedef struct cv64_ovl_konamilogo {
     u8 padding2[OBJECT_SIZE - 0x28];
 } cv64_ovl_konamilogo_t;
 
-void cv64_ovl_konamilogo_entrypoint(cv64_ovl_konamilogo_t* self); // 0x801cfcd0
-void cv64_ovl_konamilogo_check_btn_press(cv64_ovl_konamilogo_t* self
-);                                                              // 0x801cfd40
-void cv64_ovl_konamilogo_init(cv64_ovl_konamilogo_t* self);     // 0x801cfda0
-void cv64_ovl_konamilogo_fade_in(cv64_ovl_konamilogo_t* self);  // 0x801cfe7c
-void cv64_ovl_konamilogo_wait(cv64_ovl_konamilogo_t* self);     // 0x801cff08
-void cv64_ovl_konamilogo_fade_out(cv64_ovl_konamilogo_t* self); // 0x801cff7c
-void cv64_ovl_konamilogo_kcek_fade_in(cv64_ovl_konamilogo_t* self
-);                                                               // 0x801cffdc
-void cv64_ovl_konamilogo_kcek_wait(cv64_ovl_konamilogo_t* self); // 0x801d0058
-void cv64_ovl_konamilogo_kcek_fade_out(cv64_ovl_konamilogo_t* self
-); // 0x801d00e0
+void cv64_ovl_konamilogo_entrypoint(cv64_ovl_konamilogo_t* self);      // 0x801cfcd0
+void cv64_ovl_konamilogo_check_btn_press(cv64_ovl_konamilogo_t* self); // 0x801cfd40
+void cv64_ovl_konamilogo_init(cv64_ovl_konamilogo_t* self);            // 0x801cfda0
+void cv64_ovl_konamilogo_fade_in(cv64_ovl_konamilogo_t* self);         // 0x801cfe7c
+void cv64_ovl_konamilogo_wait(cv64_ovl_konamilogo_t* self);            // 0x801cff08
+void cv64_ovl_konamilogo_fade_out(cv64_ovl_konamilogo_t* self);        // 0x801cff7c
+void cv64_ovl_konamilogo_kcek_fade_in(cv64_ovl_konamilogo_t* self);    // 0x801cffdc
+void cv64_ovl_konamilogo_kcek_wait(cv64_ovl_konamilogo_t* self);       // 0x801d0058
+void cv64_ovl_konamilogo_kcek_fade_out(cv64_ovl_konamilogo_t* self);   // 0x801d00e0
 
 typedef void (*cv64_ovl_konamilogo_func_t)(cv64_ovl_konamilogo_t*);
 

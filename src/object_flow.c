@@ -3,18 +3,17 @@
 #include "game/fade.h"
 #include "object.h"
 
-#define LOCAL_GO_TO_NEXT_FUNC(object)                                          \
-    do {                                                                       \
-        (*object_curLevel_goToNextFuncAndClearTimer)(                          \
-            (object)->header.current_function,                                 \
-            &(object)->header.functionInfo_ID                                  \
-        );                                                                     \
+#define LOCAL_GO_TO_NEXT_FUNC(object)                                                              \
+    do {                                                                                           \
+        (*object_curLevel_goToNextFuncAndClearTimer)(                                              \
+            (object)->header.current_function, &(object)->header.function_info_ID                  \
+        );                                                                                         \
     } while (0)
 
-#define FADE_OUT_AND_GO_TO_NEXT_FUNC(fade_time, object)                        \
-    do {                                                                       \
-        (*fade_setSettings)(FADE_OUT, (s16) (fade_time), 0, 0, 0);             \
-        LOCAL_GO_TO_NEXT_FUNC(object);                                         \
+#define FADE_OUT_AND_GO_TO_NEXT_FUNC(fade_time, object)                                            \
+    do {                                                                                           \
+        (*fade_setSettings)(FADE_OUT, (s16) (fade_time), 0, 0, 0);                                 \
+        LOCAL_GO_TO_NEXT_FUNC(object);                                                             \
     } while (0)
 
 void object_doNothing(cv64_object_t* self) {}
@@ -27,15 +26,13 @@ void object_goToNextFuncNoCondition(cv64_object_t* self) { LOCAL_GO_TO_NEXT_FUNC
 // clang-format on
 
 void object_goToNextFuncIfTimerIsTwo(cv64_object_t* self) {
-    if (self->header.current_function[self->header.functionInfo_ID].timer ==
-        2) {
+    if (self->header.current_function[self->header.function_info_ID].timer == 2) {
         LOCAL_GO_TO_NEXT_FUNC(self);
     }
 }
 
 void object_goToNextFuncIfTimerIsThree(cv64_object_t* self) {
-    if (self->header.current_function[self->header.functionInfo_ID].timer ==
-        3) {
+    if (self->header.current_function[self->header.function_info_ID].timer == 3) {
         LOCAL_GO_TO_NEXT_FUNC(self);
     }
 }
@@ -66,17 +63,16 @@ void GameStateMgr_setupGameState(GameStateMgr* self) {
     for (currentSlot = ARRAY_START(self->current_game_state_slots);
          currentSlot < ARRAY_END(self->current_game_state_slots);
          currentSlot++) {
-        temp2 = *currentSlot & 0x7FC00000;
+        temp2 = BITS_MASK(*currentSlot, 0x7FC00000);
         if (*currentSlot != 0) {
-            *currentSlot &= 0x803FFFFF;
+            BITS_ASSIGN_MASK(*currentSlot, 0x803FFFFF);
             if (*currentSlot > 0) {
                 *currentSlot =
-                    (s32) object_createAndSetChild(self, *currentSlot) &
-                    0x7FFFFFFF;
+                    BITS_MASK((s32) object_createAndSetChild(self, *currentSlot), 0x7FFFFFFF);
             }
             if (1) {
             }
-            *currentSlot |= temp2;
+            BITS_SET(*currentSlot, temp2);
         } else {
             break;
         }
@@ -92,22 +88,20 @@ void GameStateMgr_executeGameStateUncappedFramerate(GameStateMgr* self) {
          currentSlot < ARRAY_END(self->current_game_state_slots);
          currentSlot++) {
         slotData = *currentSlot;
-        if (slotData == 0) {
+
+        if (slotData == 0)
             break;
+
+        if (slotData < 0) {
+            function = BITS_MASK(slotData, 0x803FFFFF);
+            function();
         } else {
-            if (slotData < 0) {
-                function = slotData & 0x803FFFFF;
-                function();
-            } else {
-                object_execute(K0BASE | (slotData & 0x803FFFFF));
-            }
+            object_execute(K0BASE | BITS_MASK(slotData, 0x803FFFFF));
         }
     }
 }
 
-void GameStateMgr_executeGameStateCappedFramerate(
-    GameStateMgr* self, u32 execution_flags
-) {
+void GameStateMgr_executeGameStateCappedFramerate(GameStateMgr* self, u32 execution_flags) {
     s32* currentSlot;
     s32 slotData;
     void (*function)();
@@ -116,16 +110,16 @@ void GameStateMgr_executeGameStateCappedFramerate(
          currentSlot < ARRAY_END(self->current_game_state_slots);
          currentSlot++) {
         slotData = *currentSlot;
-        if (slotData == 0) {
+
+        if (slotData == 0)
             break;
-        } else {
-            if (slotData & execution_flags) {
-                if (slotData < 0) {
-                    function = slotData & 0x803FFFFF;
-                    function();
-                } else {
-                    object_execute(K0BASE | (slotData & 0x803FFFFF));
-                }
+
+        if (BITS_HAS(slotData, execution_flags)) {
+            if (slotData < 0) {
+                function = BITS_MASK(slotData, 0x803FFFFF);
+                function();
+            } else {
+                object_execute(K0BASE | BITS_MASK(slotData, 0x803FFFFF));
             }
         }
     }

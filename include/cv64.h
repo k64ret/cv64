@@ -6,20 +6,44 @@
 #include <ultra64.h>
 
 #define CV64_BIT(num) (1 << (num))
+/**
+ * Apply `mask` on top of `value`.
+ */
+#define BITS_MASK(value, mask) ((value) & (mask))
+/**
+ * Apply `mask` on top of `value` and assign result to `value`.
+ */
+#define BITS_ASSIGN_MASK(value, mask) ((value) &= (mask))
+/**
+ * Check if `bits` is set in `value`.
+ */
+#define BITS_HAS(value, bits) BITS_MASK(value, bits)
+/**
+ * Check if `bits` is set in `value`.
+ */
+#define BITS_NOT_HAS(value, bits) !BITS_HAS(value, bits)
+/**
+ * Set `bits` in `value`.
+ */
+#define BITS_SET(value, bits) ((value) |= (bits))
+/**
+ * Unset `bits` in `value`.
+ */
+#define BITS_UNSET(value, bits) ((value) &= ~(bits))
 
 typedef u8 Addr[];
 
 extern Gfx* gDisplayListHead; // 0x800B49E0
 
 extern void end_master_display_list();
-extern s32
-menuButton_selectNextOption(s32* option, s16* param_2, s16 number_of_options);
+extern s32 menuButton_selectNextOption(s32* option, s16* param_2, s16 number_of_options);
 extern u32 NisitenmaIchigo_checkAndStoreLoadedFile(u32 file_ID);
 extern void func_800010A0_1CA0();
 extern void func_8001248C_1308C();
 extern void func_8000C6D0();
 extern void func_80012400();
 extern void func_80005658();
+extern u32 getMapEventFlagID(s16 stage_ID);
 
 #define NPTR             0
 #define ARRAY_COUNT(arr) (s32)(sizeof(arr) / sizeof(arr[0]))
@@ -29,17 +53,13 @@ extern void func_80005658();
 #define SCREEN_WIDTH  320
 #define SCREEN_HEIGHT 240
 
-// clang-format off
-
 /**
  * Obtain the un-mapped address of data from a Nisitenma-Ichigo file
  * This is needed if data is trying to be accessed when said data is not mapped by the TLB
  * (which usually happens with data within overlays)
  */
-#define GET_UNMAPPED_ADDRESS(file_ID, data_ptr)                                                     \
-    (u32) sys.Nisitenma_Ichigo_loaded_files_ptr[file_ID] + ((u32) data_ptr & 0xFFFFFF)
-
-// clang-format on
+#define GET_UNMAPPED_ADDRESS(file_ID, data_ptr)                                                    \
+    (u32) sys.Nisitenma_Ichigo_loaded_files_ptr[file_ID] + BITS_MASK((u32) data_ptr, 0xFFFFFF)
 
 extern const u32 MENU_RED_BACKGROUND_DL;
 #define NI_ASSETS_MENU_BUFFER_SIZE 0x30000

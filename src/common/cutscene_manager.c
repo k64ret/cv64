@@ -26,18 +26,18 @@ void cutsceneMgr_main(cutsceneMgr* self) {
     // This check is here so that those cutscenes can play outside of the gameplay state.
     if (sys.cutscene_ID < 3) {
         (*object_curLevel_goToNextFuncAndClearTimer)(
-            self->header.current_function, &self->header.functionInfo_ID
+            self->header.current_function, &self->header.function_info_ID
         );
     } else if (ptr_PlayerData != NULL) {
         visual_data = &ptr_PlayerData->visualData;
 
-        if ((visual_data->flags & DEAD) ||
-            (sys.SaveStruct_gameplay.player_status & DEAD)) {
+        if (BITS_HAS(visual_data->flags, DEAD) ||
+            BITS_HAS(sys.SaveStruct_gameplay.player_status, DEAD)) {
             sys.entrance_cutscene_ID = CUTSCENE_ID_NONE;
-            sys.cutscene_ID = CUTSCENE_ID_NONE;
+            sys.cutscene_ID          = CUTSCENE_ID_NONE;
         } else {
             (*object_curLevel_goToNextFuncAndClearTimer)(
-                self->header.current_function, &self->header.functionInfo_ID
+                self->header.current_function, &self->header.function_info_ID
             );
         }
     }
@@ -60,70 +60,68 @@ void cutsceneMgr_createCutscene(cutsceneMgr* self) {
     if (self->cutscene_ID == CUTSCENE_ID_NONE) {
         sys.cutscene_ID = CUTSCENE_ID_NONE;
         (*object_curLevel_goToFunc)(
-            self->header.current_function,
-            &self->header.functionInfo_ID,
-            CUTSCENEMGR_MAIN
+            self->header.current_function, &self->header.function_info_ID, CUTSCENEMGR_MAIN
         );
         return;
     }
 
     cutscene_overlay = cutscene_settings[self->cutscene_ID - 1].overlay;
-    if (cutscene_overlay & CUTSCENE_OVERLAY_FADE) {
+    if (BITS_HAS(cutscene_overlay, CUTSCENE_OVERLAY_FADE)) {
         (*fade_setSettings)(FADE_OUT, 10, 0, 0, 0);
     }
 
     cutscene_overlay = cutscene_settings[self->cutscene_ID - 1].overlay;
-    cutscene_ID_ptr = &self->cutscene_ID;
-    cutscene_flags = sys.cutscene_flags;
-    if (cutscene_overlay & CUTSCENE_OVERLAY_FILM_REEL) {
+    cutscene_ID_ptr  = &self->cutscene_ID;
+    cutscene_flags   = sys.cutscene_flags;
+    if (BITS_HAS(cutscene_overlay, CUTSCENE_OVERLAY_FILM_REEL)) {
         sys.cutscene_flags = cutscene_flags | CUTSCENE_FLAG_FILM_REEL_EFFECT;
         if ((self && self) && self) {
         }
-        self->csFilmReel =
-            object_createAndSetChild(&self->header, CUTSCENE_CSFILMREEL);
+        self->csFilmReel = object_createAndSetChild(&self->header, CUTSCENE_CSFILMREEL);
     }
 
     self->cutscene_object = object_createAndSetChild(
         &self->header, cutscene_settings[(*cutscene_ID_ptr) - 1].object_ID
     );
     if (self->cutscene_object != NULL) {
-        sys.cutscene_flags |= CUTSCENE_FLAG_PLAYING;
+        BITS_SET(sys.cutscene_flags, CUTSCENE_FLAG_PLAYING);
     }
 
     (*object_curLevel_goToNextFuncAndClearTimer)(
-        self->header.current_function, &self->header.functionInfo_ID
+        self->header.current_function, &self->header.function_info_ID
     );
 }
 
 void cutsceneMgr_setCameraClippingAndScissoring(cutsceneMgr* self) {
-    if (cutscene_settings[self->cutscene_ID - 1].overlay &
-        CUTSCENE_OVERLAY_WIDESCREEN_BORDERS) {
-        if (sys.cutscene_flags & CUTSCENE_FLAG_DISPLAY_WIDESCREEN_BORDERS) {
+    if (BITS_HAS(
+            cutscene_settings[self->cutscene_ID - 1].overlay, CUTSCENE_OVERLAY_WIDESCREEN_BORDERS
+        )) {
+        if (BITS_HAS(sys.cutscene_flags, CUTSCENE_FLAG_DISPLAY_WIDESCREEN_BORDERS)) {
             cutscene_setCameraClippingAndScissoring(WIDESCREEN_BORDERS);
             (*object_curLevel_goToNextFuncAndClearTimer)(
-                self->header.current_function, &self->header.functionInfo_ID
+                self->header.current_function, &self->header.function_info_ID
             );
         }
     } else {
         (*object_curLevel_goToNextFuncAndClearTimer)(
-            self->header.current_function, &self->header.functionInfo_ID
+            self->header.current_function, &self->header.function_info_ID
         );
     }
 }
 
 void cutsceneMgr_loop(cutsceneMgr* self) {
-    if (objectList_findFirstObjectByID(
-            cutscene_settings[self->cutscene_ID - 1].object_ID
-        ) == NULL) {
-        if (cutscene_settings[self->cutscene_ID - 1].overlay &
-            CUTSCENE_OVERLAY_FILM_REEL) {
-            sys.cutscene_flags &= ~CUTSCENE_FLAG_FILM_REEL_EFFECT;
+    if (objectList_findFirstObjectByID(cutscene_settings[self->cutscene_ID - 1].object_ID) ==
+        NULL) {
+        if (BITS_HAS(
+                cutscene_settings[self->cutscene_ID - 1].overlay, CUTSCENE_OVERLAY_FILM_REEL
+            )) {
+            BITS_UNSET(sys.cutscene_flags, CUTSCENE_FLAG_FILM_REEL_EFFECT);
         }
         (*object_curLevel_goToNextFuncAndClearTimer)(
-            self->header.current_function, &self->header.functionInfo_ID
+            self->header.current_function, &self->header.function_info_ID
         );
-    } else if ((sys.controllers[0].buttons_pressed & (START_BUTTON | RECENTER_BUTTON)) && (2 < sys.cutscene_ID)) {
-        cutscene* cutscene_obj = self->cutscene_object;
+    } else if (BITS_HAS(sys.controllers[0].buttons_pressed, START_BUTTON | RECENTER_BUTTON) && (2 < sys.cutscene_ID)) {
+        cutscene* cutscene_obj      = self->cutscene_object;
         cutscene_obj->skip_cutscene = TRUE;
     }
 }
@@ -135,28 +133,28 @@ void cutsceneMgr_stopCutscene(cutsceneMgr* self) {
         return;
     }
 
-    if (!(sys.cutscene_flags & CUTSCENE_FLAG_10) &&
-        (cutscene_settings[self->cutscene_ID - 1].overlay &
-         CUTSCENE_OVERLAY_WIDESCREEN_BORDERS)) {
+    if (BITS_NOT_HAS(sys.cutscene_flags, CUTSCENE_FLAG_10) &&
+        BITS_HAS(
+            cutscene_settings[self->cutscene_ID - 1].overlay, CUTSCENE_OVERLAY_WIDESCREEN_BORDERS
+        )) {
         cutscene_setCameraClippingAndScissoring(FULLSCREEN);
     }
 
     if ((sys.cutscene_ID != CUTSCENE_ID_NONE) &&
-        (sys.cutscene_ID == cutscene_settings[self->cutscene_ID - 1].cutscene_ID
-        ) &&
+        (sys.cutscene_ID == cutscene_settings[self->cutscene_ID - 1].cutscene_ID) &&
         (sys.cutscene_ID != CUTSCENE_ID_NONE)) {
         sys.cutscene_ID = CUTSCENE_ID_NONE;
     }
 
-    if (!(sys.cutscene_flags & CUTSCENE_FLAG_20)) {
-        sys.cutscene_flags &= ~CUTSCENE_FLAG_PLAYING;
-        if (!(sys.cutscene_flags & CUTSCENE_FLAG_10)) {
-            sys.cutscene_flags &= ~CUTSCENE_FLAG_DISPLAY_WIDESCREEN_BORDERS;
+    if (BITS_NOT_HAS(sys.cutscene_flags, CUTSCENE_FLAG_20)) {
+        BITS_UNSET(sys.cutscene_flags, CUTSCENE_FLAG_PLAYING);
+        if (BITS_NOT_HAS(sys.cutscene_flags, CUTSCENE_FLAG_10)) {
+            BITS_UNSET(sys.cutscene_flags, CUTSCENE_FLAG_DISPLAY_WIDESCREEN_BORDERS);
         }
     }
 
     settings = &cutscene_settings[self->cutscene_ID - 1];
-    if (settings->overlay & CUTSCENE_OVERLAY_FADE) {
+    if (BITS_HAS(settings->overlay, CUTSCENE_OVERLAY_FADE)) {
         (*fade_setSettings)(FADE_IN, 10, 0, 0, 0);
     }
 
@@ -164,15 +162,13 @@ void cutsceneMgr_stopCutscene(cutsceneMgr* self) {
     if (settings->make_player_idle_after_cutscene) {
         (*object_curLevel_goToFuncInLevel)(
             sys.ptr_PlayerObject->header.current_function,
-            &sys.ptr_PlayerObject->header.functionInfo_ID,
+            &sys.ptr_PlayerObject->header.function_info_ID,
             0,
             PLAYER_IDLE
         );
     }
 
     (*object_curLevel_goToFunc)(
-        self->header.current_function,
-        &self->header.functionInfo_ID,
-        CUTSCENEMGR_MAIN
+        self->header.current_function, &self->header.function_info_ID, CUTSCENEMGR_MAIN
     );
 }

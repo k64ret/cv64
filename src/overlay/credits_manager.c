@@ -39,9 +39,9 @@ void creditsMgr_init(creditsMgr* self) {
             (*object_createAndSetChild)(self, CUTSCENE_CUTSCENEMGR);
         }
         sys.field89_0x2644c = 0;
-        sys.cutscene_ID = CUTSCENE_ID_CREDITS;
+        sys.cutscene_ID     = CUTSCENE_ID_CREDITS;
         (*object_curLevel_goToNextFuncAndClearTimer)(
-            self->header.current_function, &self->header.functionInfo_ID
+            self->header.current_function, &self->header.function_info_ID
         );
     }
 }
@@ -61,7 +61,7 @@ void creditsMgr_loop(creditsMgr* self) {
         if (self->field_0x34[3] == 2) {
             (*fade_setSettings)(FADE_OUT, 30, 0, 0, 0);
             (*object_curLevel_goToNextFuncAndClearTimer)(
-                self->header.current_function, &self->header.functionInfo_ID
+                self->header.current_function, &self->header.function_info_ID
             );
         }
     }

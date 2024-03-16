@@ -8,8 +8,8 @@ typedef enum cv64_fade_flag {
      * Shows a black outline in the edges of all models while fading
      */
     FADE_WITH_OUTLINE = 0x0001,
-    FADE_IN = 0x4000,
-    FADE_OUT = 0x8000
+    FADE_IN           = 0x4000,
+    FADE_OUT          = 0x8000
 } cv64_fade_flag_t;
 
 void fade_setAllFlags(s16 flags);

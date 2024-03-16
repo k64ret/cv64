@@ -72,7 +72,7 @@ typedef enum cv64_object_id_raw {
     ID_OBJECT_024                    = 0x024,
     ID_OBJECT_025                    = 0x025,
     ID_OBJECT_026                    = 0x026,
-    ID_OBJECT_027                    = 0x027,
+    ID_INTERACTUABLES                = 0x027,
     ID_OBJECT_028                    = 0x028,
     ID_OBJECT_029                    = 0x029,
     ID_CUTSCENEMGR                   = 0x02A,
@@ -262,7 +262,7 @@ typedef enum cv64_object_id_raw {
     ID_OBJECT_0E2                    = 0x0E2,
     ID_OBJECT_0E3                    = 0x0E3,
     ID_OBJECT_0E4                    = 0x0E4,
-    ID_OBJECT_0E5                    = 0x0E5,
+    ID_PICKABLE_ITEM_FLASH           = 0x0E5,
     ID_OBJECT_0E6                    = 0x0E6,
     ID_OBJECT_0E7                    = 0x0E7,
     ID_OBJECT_0E8                    = 0x0E8,
@@ -344,11 +344,11 @@ typedef enum cv64_object_id_raw {
     ID_OBJECT_134                    = 0x134,
     ID_OBJECT_135                    = 0x135,
     ID_OBJECT_136                    = 0x136,
-    ID_OBJECT_137                    = 0x137,
+    ID_SAVEGAME                      = 0x137,
     ID_OBJECT_138                    = 0x138,
     ID_OBJECT_139                    = 0x139,
     ID_OBJECT_13A                    = 0x13A,
-    ID_OBJECT_13B                    = 0x13B,
+    ID_CONTRACTMGR                   = 0x13B,
     ID_OBJECT_13C                    = 0x13C,
     ID_OBJECT_13D                    = 0x13D,
     ID_OBJECT_13E                    = 0x13E,
@@ -400,7 +400,7 @@ typedef enum cv64_object_id_raw {
     ID_OBJECT_16C                    = 0x16C,
     ID_OBJECT_16D                    = 0x16D,
     ID_OBJECT_16E                    = 0x16E,
-    ID_OBJECT_16F                    = 0x16F,
+    ID_LEVER                         = 0x16F,
     ID_OBJECT_170                    = 0x170,
     ID_OBJECT_171                    = 0x171,
     ID_OBJECT_172                    = 0x172,
@@ -624,6 +624,7 @@ typedef enum cv64_object_id {
     ENGINE_GAME_OVER                   = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_GAME_OVER),
 
     // Cutscene
+    CUTSCENE_INTERACTUABLES            = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_INTERACTUABLES),
     CUTSCENE_CUTSCENEMGR               = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_CUTSCENEMGR),
     CUTSCENE_CSFILMREEL                = CV64_OBJECT_ID(OBJ_KIND_MAP_OVERLAY, ID_CSFILMREEL),
     CUTSCENE_CUTSCENE_FOREST_BLESSING  = CV64_OBJECT_ID(OBJ_KIND_MAP_OVERLAY, ID_CUTSCENE_FOREST_BLESSING),
@@ -654,12 +655,16 @@ typedef enum cv64_object_id {
 
     // Effect
     EFFECT_EFFECTMGR                   = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_EFFECTMGR),
+    EFFECT_PICKABLE_ITEM_FLASH         = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_PICKABLE_ITEM_FLASH),
 
     // Menu
     MENU_GAMEPLAY_MENUMGR              = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_GAMEPLAY_MENUMGR),
+    MENU_SAVEGAME                      = CV64_OBJECT_ID(OBJ_KIND_MAP_OVERLAY, ID_SAVEGAME),
+    MENU_CONTRACTMGR                   = CV64_OBJECT_ID(OBJ_KIND_MAP_OVERLAY, ID_CONTRACTMGR),
     MENU_STAGE_SELECT                  = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_STAGE_SELECT),
 
     // Stage object
+    STAGE_OBJECT_LEVER                 = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_LEVER),
     STAGE_OBJECT_MEIRO_TEIEN_OBJ_01B5  = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_MEIRO_TEIEN_OBJ_01B5),
     STAGE_OBJECT_ROSE_VENTILATOR       = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_ROSE_VENTILATOR),
     STAGE_OBJECT_ROSE_DOOR             = CV64_OBJECT_ID(OBJ_KIND_STAGE_OBJECT, ID_ROSE_DOOR)

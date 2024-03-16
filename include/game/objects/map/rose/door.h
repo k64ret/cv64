@@ -5,6 +5,9 @@
 #include "gfx/model_info.h"
 #include "map_actor_model.h"
 
+// Variable 1 = Don't close door
+#define ROSE_DOOR_DONT_CLOSE settings->variable_1
+
 typedef struct cv64_ovl_rose_door_cfg {
     f32 initial_height;
     f32 height;
@@ -12,7 +15,6 @@ typedef struct cv64_ovl_rose_door_cfg {
 } cv64_ovl_rose_door_cfg_t;
 
 // ID: 0x1221
-// Variable 1 = Don't close door
 typedef struct cv64_ovl_rose_door {
     cv64_object_hdr_t header;
     u8 field_0x4[4];

@@ -1,0 +1,5 @@
+func_name = "CHANGEME"
+compiler_type = "ido"
+
+[weight_overrides]
+perm_temp_for_expr = 100

@@ -3,6 +3,15 @@
 
 #include "cv64.h"
 
+#define CHECK_EVENT_FLAGS(event_flag_ID, value)                                                    \
+    BITS_HAS(sys.SaveStruct_gameplay.event_flags[event_flag_ID], value)
+
+#define SET_EVENT_FLAGS(event_flag_ID, value)                                                      \
+    BITS_SET(sys.SaveStruct_gameplay.event_flags[event_flag_ID], value)
+
+#define REMOVE_EVENT_FLAGS(event_flag_ID, value)                                                   \
+    BITS_UNSET(sys.SaveStruct_gameplay.event_flags[event_flag_ID], value)
+
 /*
  *  Event flag ID
  */

@@ -20,14 +20,14 @@ options:
     - linker/symbol_addrs_makerom.txt
     - linker/symbol_addrs_overlays.txt
     - linker/symbol_addrs_assets.txt
-  disassemble_all: False
-  migrate_rodata_to_functions: False
-  find_file_boundaries: True
+  disassemble_all: false
+  migrate_rodata_to_functions: false
+  find_file_boundaries: true
   header_encoding: ASCII
   generated_c_preamble: |
     #include "cv64.h"
-  o_as_suffix: False
-  use_legacy_include_asm: False
+  o_as_suffix: false
+  use_legacy_include_asm: false
   mips_abi_float_regs: o32
   asm_function_macro: glabel
   asm_jtbl_label_macro: jlabel
@@ -76,6 +76,7 @@ segments:
       - [0x00004BC0, asm]
       - [0x00004D80, asm]               # Nisitenma-Ichigo related functions + atan2 functions
       - [0x00004FE0, asm, figure]       # Figure-type structs (model_info, camera and struct_47)
+      # - [0x000057B4, asm, camera]
       - [0x0000D270, asm]
       - [0x0000DD70, asm]
       - [0x0000F190, c, fade]
@@ -308,8 +309,22 @@ segments:
       - [0x00090920, data]
       - [0x00092B50, .data, gamestate]
       - [0x00092E70, data, object]
+      - [0x00093750, data, 4D80]
+      - [0x00093B50, data] # Symbol DAT_80092f50
+      # - [0x00093B58, data, figure] # `camera_params_array` - maybe file split within `figure.s`?
+      - [0x00093EE0, data, figure]
+      - [0x00093F60, data, D270]
       - [0x00093F70, .data, fade]
-      - [0x00094030, data]
+      - [0x00094030, data, F960]
+      - [0x000948E0, data, 10100]
+      - [0x000948F0, data, DMAMgr]
+      - [0x00094920, data, 113D0]
+      - [0x00094940, data, 12900]
+      - [0x0009B8D0, data, 56B60]
+      - [0x0009B8E0, data, 57050]
+      - [0x0009B900, data, 574C0]
+      - [0x0009B940, data, 5B620]
+      - [0x0009B950, data, 5B7E0]
       - [0x0009B960, .data, effect_manager]
       - [0x0009B970, data]
 
@@ -371,7 +386,7 @@ segments:
       - [0x000A7D40, rodata]
       - { start: 0x000A8420, type: .bss, vram: 0x800A7820, name: gamestate }
       - { start: 0x000A8420, type: .bss, vram: 0x800A7830, name: object }
-      - { start: 0x000A8420, type: .bss, vram: 0x800A7840, name: object_0002  }  # Only contains ptr_Object_0002.
+      - { start: 0x000A8420, type: .bss, vram: 0x800A7840, name: object_0002 }  # Only contains ptr_Object_0002.
       - { start: 0x000A8420, type: bss, vram: 0x800A7850, name: figure }
       - { start: 0x000A8420, type: bss, vram: 0x800A78A0, name: F960 }
       - { start: 0x000A8420, type: .bss, vram: 0x800DD0D0, name: effect_manager }
@@ -384,7 +399,7 @@ segments:
     follows_vram: main
     bss_size: 0x20C0
     subsegments:
-      - [0x000A8420, asm, common/interactuable]
+      - [0x000A8420, c, common/interactuables]
       - [0x000A9560, asm]
       - [0x000AA130, c, common/cutscene_manager]
       - [0x000AA6E0, asm, common/cutscene_trigger]
@@ -442,7 +457,7 @@ segments:
       - [0x000EA9B0, asm, common/actor_creator]
       - [0x000EB700, asm]   # Contains object 0x00BA's code
       - [0x000EDA60, data]
-      - [0x000EE750, data]
+      - [0x000EE750, .data, common/interactuables]
       - [0x000EE770, .data, common/cutscene_manager]
       - [0x000EE790, data]
       - [0x000EE7B0, data]
@@ -469,6 +484,8 @@ segments:
       - [0x0010D8E0, data]
       - [0x0010D900, data]
       - [0x0010DC60, data]
+      - [0x0010DD50, .rodata, common/interactuables]
+      - [0x0010DD70, rodata]
       - [0x0010E070, .rodata, common/stage_select]
       - [0x0010E0F0, rodata]
       - [0x0010E1E0, rodata]
@@ -653,8 +670,8 @@ segments:
     vram: 0x803D13E0
     exclusive_ram_id: ovl_player
     subsegments:
-      - [0x00697040, c, overlay/reinhardt]
-      - [0x006A25E0, c, overlay/reinhardt_scarf]
+      - [0x00697040, asm, overlay/reinhardt]
+      - [0x006A25E0, asm, overlay/reinhardt_scarf]
       - [0x006A2B50, data, overlay/reinhardt]
       - [0x006A4100, data, overlay/reinhardt_scarf]
 
@@ -664,10 +681,10 @@ segments:
     vram: 0x803D13E0
     exclusive_ram_id: ovl_player
     subsegments:
-      - [0x006A42D0, c, overlay/carrie]
-      - [0x006AF090, c, overlay/carrie_skirt]
-      - [0x006AFEA0, c, overlay/carrie_rightstrip]
-      - [0x006B0210, c, overlay/carrie_leftstrip]
+      - [0x006A42D0, asm, overlay/carrie]
+      - [0x006AF090, asm, overlay/carrie_skirt]
+      - [0x006AFEA0, asm, overlay/carrie_rightstrip]
+      - [0x006B0210, asm, overlay/carrie_leftstrip]
       - [0x006B0590, data, overlay/carrie]
       - [0x006B0B20, data, overlay/carrie_skirt]
       - [0x006B0E80, data, overlay/carrie_rightstrip]
@@ -748,8 +765,8 @@ segments:
     vram: 0x8018EB10
     exclusive_ram_id: ovl_map_objects
     subsegments:
-      - [0x006C3300, c, overlay/map/6C3300]
-      - [0x006C3B50, c, overlay/map/6C3B50]
+      - [0x006C3300, asm, overlay/map/6C3300]
+      - [0x006C3B50, asm, overlay/map/6C3B50]
       - [0x006C4D70, data, overlay/map/6C3300]
       - [0x006C4FE0, data, overlay/map/6C3B50]
       - [0x006C5040, rodata, overlay/map/6C3B50]
@@ -768,7 +785,7 @@ segments:
     vram: 0x8018EB10
     exclusive_ram_id: ovl_map_objects
     subsegments:
-      - [0x006C5110, c, overlay/map/chika_kodo]
+      - [0x006C5110, asm, overlay/map/chika_kodo]
       - [0x006C74A0, data, overlay/map/chika_kodo]
 
   - name: CHIKA_SUIRO # Underground Waterway
@@ -777,7 +794,7 @@ segments:
     vram: 0x8018EB10
     exclusive_ram_id: ovl_map_objects
     subsegments:
-      - [0x006C77D0, c, overlay/map/chika_suiro]
+      - [0x006C77D0, asm, overlay/map/chika_suiro]
       - [0x006C85A0, data, overlay/map/chika_suiro]
       - [0x006C8670, rodata, overlay/map/chika_suiro]
 
@@ -787,7 +804,7 @@ segments:
     vram: 0x8018EB10
     exclusive_ram_id: ovl_map_objects
     subsegments:
-      - [0x006C86A0, c, overlay/map/honmaru_b1f]
+      - [0x006C86A0, asm, overlay/map/honmaru_b1f]
       - [0x006C9B00, data, overlay/map/honmaru_b1f]
       - [0x006C9BC0, rodata, overlay/map/honmaru_b1f]
 
@@ -797,7 +814,7 @@ segments:
     vram: 0x8018EB10
     exclusive_ram_id: ovl_map_objects
     subsegments:
-      - [0x006C9BF0, c, overlay/map/honmaru_1f]
+      - [0x006C9BF0, asm, overlay/map/honmaru_1f]
       - [0x006CB780, data, overlay/map/honmaru_1f]
       - [0x006CB820, rodata, overlay/map/honmaru_1f]
 
@@ -807,7 +824,7 @@ segments:
     vram: 0x8018EB10
     exclusive_ram_id: ovl_map_objects
     subsegments:
-      # - [0x006CB850, c, overlay/map/honmaru_2f]
+      # - [0x006CB850, asm, overlay/map/honmaru_2f]
       - [0x006CB850, asm, overlay/map/honmaru_2f]
       - [0x006CCDE0, data, overlay/map/honmaru_2f]
       - [0x006CCFA0, rodata, overlay/map/honmaru_2f]
@@ -818,7 +835,7 @@ segments:
     vram: 0x8018EB10
     exclusive_ram_id: ovl_map_objects
     subsegments:
-      - [0x006CD050, c, overlay/map/honmaru_3f_minami]
+      - [0x006CD050, asm, overlay/map/honmaru_3f_minami]
       - [0x006CD640, data, overlay/map/honmaru_3f_minami]
       - [0x006CD720, rodata, overlay/map/honmaru_3f_minami]
 
@@ -828,7 +845,7 @@ segments:
     vram: 0x8018EB10
     exclusive_ram_id: ovl_map_objects
     subsegments:
-      - [0x006CD740, c, overlay/map/honmaru_4f_minami]
+      - [0x006CD740, asm, overlay/map/honmaru_4f_minami]
       - [0x006CE350, data, overlay/map/honmaru_4f_minami]
       - [0x006CE470, rodata, overlay/map/honmaru_4f_minami]
 
@@ -838,7 +855,7 @@ segments:
     vram: 0x8018EB10
     exclusive_ram_id: ovl_map_objects
     subsegments:
-      - [0x006CE4B0, c, overlay/map/honmaru_3f_kita]
+      - [0x006CE4B0, asm, overlay/map/honmaru_3f_kita]
       - [0x006CE8F0, data, overlay/map/honmaru_3f_kita]
       - [0x006CE980, rodata, overlay/map/honmaru_3f_kita]
 
@@ -848,7 +865,7 @@ segments:
     vram: 0x8018EB10
     exclusive_ram_id: ovl_map_objects
     subsegments:
-      - [0x006CE9A0, c, overlay/map/honmaru_5f]
+      - [0x006CE9A0, asm, overlay/map/honmaru_5f]
       - [0x006CF3B0, data, overlay/map/honmaru_5f]
       - [0x006CF3F0, rodata, overlay/map/honmaru_5f]
 
@@ -858,8 +875,8 @@ segments:
     vram: 0x8018EB10
     exclusive_ram_id: ovl_map_objects
     subsegments:
-      - [0x006CF420, c, overlay/map/6CF420]
-      - [0x006D2840, c, overlay/map/6D2840]
+      - [0x006CF420, asm, overlay/map/6CF420]
+      - [0x006D2840, asm, overlay/map/6D2840]
       - [0x006D30C0, data, overlay/map/6CF420]
       - [0x006D3530, data, overlay/map/6D2840]
       # - [0x006D3584, rodata, overlay/map/6CF420]
@@ -870,7 +887,7 @@ segments:
     vram: 0x8018EB10
     exclusive_ram_id: ovl_map_objects
     subsegments:
-      # - [0x006D35A0, c, overlay/map/mahou_tou]
+      # - [0x006D35A0, asm, overlay/map/mahou_tou]
       - [0x006D35A0, asm, overlay/map/mahou_tou]
       - [0x006D7170, data, overlay/map/mahou_tou]
       # - [0x006D7478, rodata, overlay/map/mahou_tou]
@@ -882,9 +899,9 @@ segments:
     vram: 0x8018EB10
     exclusive_ram_id: ovl_map_objects
     subsegments:
-      # - [0x006D74F0, c, overlay/map/6D74F0]
+      # - [0x006D74F0, asm, overlay/map/6D74F0]
       - [0x006D74F0, asm, overlay/map/6D74F0]
-      # - [0x006E1FC0, c, overlay/map/6E1FC0]
+      # - [0x006E1FC0, asm, overlay/map/6E1FC0]
       - [0x006E1FC0, asm, overlay/map/6E1FC0]
       - [0x006E2150, data, overlay/map/6D74F0]
       - [0x006E31C0, data, overlay/map/6E1FC0]
@@ -895,7 +912,7 @@ segments:
     vram: 0x8018EB10
     exclusive_ram_id: ovl_map_objects
     subsegments:
-      # - [0x006E31D0, c, overlay/map/kettou_tou]
+      # - [0x006E31D0, asm, overlay/map/kettou_tou]
       - [0x006E31D0, asm, overlay/map/kettou_tou]
       - [0x006E7F20, data, overlay/map/kettou_tou]
       - [0x006E8550, rodata, overlay/map/kettou_tou]
@@ -906,8 +923,8 @@ segments:
     vram: 0x8018EB10
     exclusive_ram_id: ovl_map_objects
     subsegments:
-      - [0x006E86B0, c, overlay/map/6E86B0]
-      - [0x006E96D0, c, overlay/map/6E96D0]
+      - [0x006E86B0, asm, overlay/map/6E86B0]
+      - [0x006E96D0, asm, overlay/map/6E96D0]
       - [0x006EA1D0, data, overlay/map/6E86B0]
       - [0x006EA3B0, data, overlay/map/6E96D0]
       - [0x006EA460, rodata, overlay/map/6E86B0] # Not sure if this rodata belongs to the first/second translation unit
@@ -919,7 +936,7 @@ segments:
     vram: 0x8018EB10
     exclusive_ram_id: ovl_map_objects
     subsegments:
-      - [0x006EA480, c, overlay/map/tenshu]
+      - [0x006EA480, asm, overlay/map/tenshu]
       - [0x006EBBD0, data, overlay/map/tenshu]
       - [0x006EBCE0, rodata, overlay/map/tenshu]
 
@@ -939,7 +956,7 @@ segments:
     vram: 0x8018EB10
     exclusive_ram_id: ovl_map_objects
     subsegments:
-      - [0x006F0150, c, overlay/map/dracula]
+      - [0x006F0150, asm, overlay/map/dracula]
       - [0x006F09E0, data, overlay/map/dracula]
       - [0x006F0A20, rodata, overlay/map/dracula]
 
@@ -959,7 +976,7 @@ segments:
     vram: 0x8018EB10
     exclusive_ram_id: ovl_map_objects
     subsegments:
-      - [0x006F11B0, c, overlay/map/bekkan_boss]
+      - [0x006F11B0, asm, overlay/map/bekkan_boss]
       - [0x006F1B00, data, overlay/map/bekkan_boss]
       - [0x006F1B40, rodata, overlay/map/bekkan_boss]
 
@@ -979,7 +996,7 @@ segments:
     vram: 0x8018EB10
     exclusive_ram_id: ovl_map_objects
     subsegments:
-      # - [0x006F21D0, c, overlay/map/ending]
+      # - [0x006F21D0, asm, overlay/map/ending]
       - [0x006F21D0, asm, overlay/map/ending]
       - [0x006F39C0, data, overlay/map/ending]
       - [0x006F3B80, rodata, overlay/map/ending]

@@ -20,8 +20,7 @@ typedef struct {
     cv64_model_inf_t* lower_stripe;
     cv64_model_inf_t* lens_flash; // The flash seen in the upper right corner
     cv64_model_inf_t* lens_background;
-    cv64_model_inf_t*
-        lens_background_overlay; // Overlay color for the lens background
+    cv64_model_inf_t* lens_background_overlay; // Overlay color for the lens background
     void* field_0x50;
     void* field_0x54;
     void* field_0x58;
@@ -44,5 +43,7 @@ extern window_work* lens_create(
     f32 width,
     f32 closing_speed
 );
+
+extern u32 lensAreClosed(void);
 
 #endif

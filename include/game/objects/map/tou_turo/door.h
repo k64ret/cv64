@@ -6,12 +6,16 @@
 #include "map_actor_model.h"
 #include "object.h"
 
+// Variable 1 = Door type
+#define TOU_TURO_DOOR_TYPE     settings->variable_1
+#define TOU_TURO_EXIT_DOOR     0
+#define TOU_TURO_ENTRANCE_DOOR 1
+
 extern const u32 TOUTURO_DOOR_EXIT_DL;
 extern const u32 TOUTURO_DOOR_ENTRANCE_DL;
 
 // ID: 0x1224
 // Real name: P27TOBIRA
-// Variable 1 = Door type (see below)
 typedef struct cv64_ovl_touturo_door {
     cv64_object_hdr_t header;
     u8 padding1[4];
@@ -32,15 +36,12 @@ extern void cv64_ovl_touturo_door_loop(cv64_ovl_touturo_door_t* self);
 
 // Type 0: Door that exists to Clock Tower
 typedef void (*cv64_ovl_touturo_door_exit_func_t)(cv64_ovl_touturo_door_t*);
-extern void
-cv64_ovl_touturo_door_exit_check_event_flags(cv64_ovl_touturo_door_t* self);
+extern void cv64_ovl_touturo_door_exit_check_event_flags(cv64_ovl_touturo_door_t* self);
 
 // Type 1: Door the player enters the map from
 typedef void (*cv64_ovl_touturo_door_entrance_func_t)(cv64_ovl_touturo_door_t*);
-extern void
-cv64_ovl_touturo_door_entrance_check_event_flags(cv64_ovl_touturo_door_t* self);
-extern void
-cv64_ovl_touturo_door_entrance_close_door(cv64_ovl_touturo_door_t* self);
+extern void cv64_ovl_touturo_door_entrance_check_event_flags(cv64_ovl_touturo_door_t* self);
+extern void cv64_ovl_touturo_door_entrance_close_door(cv64_ovl_touturo_door_t* self);
 
 typedef enum cv64_ovl_touturo_door_entrance_func_id {
     TOU_TURO_DOOR_ENTRANCE_CHECK_EVENT_FLAGS,

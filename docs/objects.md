@@ -49,7 +49,7 @@ typedef struct cv64_object_hdr {
     s16 timer;
     s16 field_0x06;
     cv64_object_func_inf_t current_function[3];
-    s16 functionInfo_ID;
+    s16 function_info_ID;
     void (*destroy)(void*); // Officially called "OBJ_destruct"
     struct cv64_object_hdr_t* parent;
     struct cv64_object_hdr_t* next;
@@ -123,7 +123,7 @@ has passed before it can begin to disappear after awhile.
 [^4]: The `interactuables` object handles pickable items and text spots that you
 can read during gameplay when pressing C-Right on a Nintendo 64 controller.
 
-### `current_function` and `functionInfo_ID`
+### `current_function` and `function_info_ID`
 
 See the section: [How the code of an object executes](#how-the-code-of-an-object-executes)
 
@@ -349,7 +349,7 @@ execute.
 
 An object can have up to three "levels" of function pointers to execute
 functions from, so the game will first execute the functions in level 0, then
-level 1, then level 2, if needed. The `functionInfo_ID` variable in the object
+level 1, then level 2, if needed. The `function_info_ID` variable in the object
 header is used to know which level to look at (set to -1 by default).
 
 An example of all three levels being used can be found in the Player's actor,
