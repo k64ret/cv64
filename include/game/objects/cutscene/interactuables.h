@@ -7,6 +7,9 @@
 #include "actor.h"
 #include "item.h"
 
+// Pickable items and text spots, all of which are
+// interacted with using C-Right
+
 #define ITEM_FADE_TIMER self->header.timer
 
 #define INTERACTUABLES_SETTINGS_TYPE_ITEM      1

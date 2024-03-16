@@ -1,4 +1,3 @@
-#include "cv64.h"
 #include "actor.h"
 #include "effect.h"
 #include "event_flags.h"
@@ -8,6 +7,7 @@
 #include "objects/cutscene/interactuables.h"
 #include "objects/menu/contractMgr.h"
 #include "objects/player/player.h"
+#include "objects/menu/saveGame.h"
 #include "random.h"
 #include "system_work.h"
 
@@ -108,6 +108,7 @@ void interactuables_init(interactuables* self) {
             } else {
                 item_model->dlist = item_appearence_settings->dlist;
             }
+
             item_model->material_dlist = &ITEM_MATERIAL_DL;
             if (BITS_HAS(interactuables_settings_table[self->table_index].flags, ITEM_INVISIBLE)) {
                 // Hide the item model
