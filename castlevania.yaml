@@ -308,7 +308,7 @@ segments:
       - [0x00090490, asm]
       - [0x00090640, asm]
       - [0x000906E0, asm]
-      - [0x00090760, asm]
+      - [0x00090760, asm, libultra/audio/syndelete]
       - [0x00090770, asm, libultra/io/aisetnextbuf]
       - [0x00090820, asm, libultra/io/ai]
       - [0x00090850, asm, libultra/io/vigetcurrframebuf]
