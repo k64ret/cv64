@@ -489,7 +489,9 @@ void interactuables_selectTextboxOption(interactuables* self) {
                     if (1) {
                     }
 
-                    // Change the state of a specific actor (like levers, doors, etc)
+                    // Change the state of a specific actor.
+                    // In practice, this is only used for levers
+                    // to change their "raised up" state into a "pull" state
                     if (BITS_HAS(
                             interactuables_settings_table[self->table_index].flags,
                             TEXT_SPOT_IF_YES_CHANGE_ACTOR_STATE
@@ -497,7 +499,7 @@ void interactuables_selectTextboxOption(interactuables* self) {
                         (*cutscene_setActorStateIfMatchingVariable1)(
                             interactuables_settings_table[self->table_index].actor_ID,
                             interactuables_settings_table[self->table_index].actor_variable_1,
-                            1
+                            LEVER_STATE_PULL
                         );
                     }
 

@@ -3,6 +3,9 @@
 
 #include "actor.h"
 
+#define LEVER_STATE_RAISED_UP 0
+#define LEVER_STATE_PULL      1
+
 typedef struct {
     u8 field_0x00[6];
     s16 field_0x06;

@@ -29,7 +29,7 @@
 #define ITEM_EVENT_FLAG_LOWER_2BYTES settings->variable_3
 // White Jewel: Spawn number
 #define WHITE_JEWEL_SPAWN_NUMBER settings->variable_3
-// Text spots: Size of the trigger (X)
+// Text spots: Size of the trigger (Z)
 #define TEXT_SPOT_Z_SIZE settings->variable_3
 
 typedef enum cv64_interactuables_settings_flag {
