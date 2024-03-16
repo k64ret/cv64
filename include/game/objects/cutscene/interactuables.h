@@ -13,7 +13,7 @@
 #define INTERACTUABLES_SETTINGS_TYPE_TEXT_SPOT 2
 
 typedef enum cv64_interactuables_settings_flag {
-    ITEM_VANISH                                = 0x0001,
+    ITEM_VANISH_OR_UPDATE_POSITION             = 0x0001,
     TEXT_SPOT_DESTROY_AFTER_INTERACTION        = 0x0002,
     TEXT_SPOT_DESTROY_IF_EVENT_FLAG_IS_SET     = 0x0004,
     TEXT_SPOT_DISABLE_IF_EVENT_FLAG_IS_NOT_SET = 0x0008,
@@ -22,7 +22,7 @@ typedef enum cv64_interactuables_settings_flag {
      */
     TEXT_SPOT_DO_ACTION_AFTER_SELECTING_OPTION = 0x0010,
     TEXT_SPOT_IF_YES_START_CUTSCENE            = 0x0020,
-    TEXT_SPOT_IF_YES_ACTIVATE_LEVER            = 0x0040,
+    TEXT_SPOT_IF_YES_CHANGE_ACTOR_STATE        = 0x0040,
     TEXT_SPOT_IF_YES_SET_EVENT_FLAG            = 0x0080,
     /**
      * Yes / No selection textbox
@@ -57,7 +57,7 @@ typedef struct {
     u8 field_0x04[4];
     cv64_model_inf_t* model;
     u8 field_0x28[12];
-    f32 height;
+    f32 item_falling_target_height;
     /**
      * ID in `interactuable_settings_table`
      */
@@ -66,7 +66,7 @@ typedef struct {
     u32 interacting_with_interactuable;
     u32 textbox_is_active;
     union {
-        u16 item_doesnt_vanish;
+        u16 item_doesnt_vanish_or_fall;
         u16 item_doesnt_flash;
     };
     u16 item_falling_height_multiplier;
