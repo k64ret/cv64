@@ -193,7 +193,7 @@ void stageSelect_warpToStage(stageSelect* self) {
         sys.SaveStruct_gameplay.map           = NONE;
         sys.SaveStruct_gameplay.spawn         = NONE;
         sys.SaveStruct_gameplay.life          = 100;
-        sys.SaveStruct_gameplay.field13_0x5c  = 100;
+        sys.SaveStruct_gameplay.field_0x5C    = 100;
         sys.SaveStruct_gameplay.subweapon     = SUBWEAPON_NONE;
         sys.SaveStruct_gameplay.money         = 0;
         sys.SaveStruct_gameplay.player_status = 0;

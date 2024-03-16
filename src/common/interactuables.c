@@ -5,6 +5,7 @@
 #include "gfx/camera.h"
 #include "gfx/struct_47.h"
 #include "objects/cutscene/interactuables.h"
+#include "objects/map/lever.h"
 #include "objects/menu/contractMgr.h"
 #include "objects/player/player.h"
 #include "objects/menu/saveGame.h"

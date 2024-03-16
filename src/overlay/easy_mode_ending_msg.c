@@ -82,7 +82,7 @@ void cv64_ovl_easyending_loop(cv64_ovl_easyending_t* self) {
         sys.SaveStruct_gameplay.money_spent_on_Renon                 = 0;
         sys.SaveStruct_gameplay.player_status                        = 0;
         sys.SaveStruct_gameplay.life                                 = 100;
-        sys.SaveStruct_gameplay.field13_0x5c                         = 100;
+        sys.SaveStruct_gameplay.field_0x5C                           = 100;
         sys.SaveStruct_gameplay.subweapon                            = SUBWEAPON_NONE;
         sys.current_PowerUp_level                                    = 0;
         sys.SaveStruct_gameplay.health_depletion_rate_while_poisoned = 0;
