@@ -95,6 +95,22 @@ ptr_effectMgr        = 0x800DD0D0;
 // End of src/effect_manager.c =================================================
 
 
+// asm/libultra/audio/synallocfx.s =============================================
+
+// .text
+alSynAllocFx = 0x8008FA40; // type:func
+
+// End of asm/libultra/audio/synallocfx.s ======================================
+
+
+// asm/libultra/audio/synstopvoice.s ===========================================
+
+// .text
+alSynStopVoice = 0x8008FAE0; // type:func
+
+// End of asm/libultra/audio/synstopvoice.s ====================================
+
+
 // asm/libultra/audio/syndelete.s ==============================================
 
 // .text
@@ -597,8 +613,6 @@ __ull_to_d = 0x8008f824;
 __ull_to_f = 0x8008f858;
 osStartThread = 0x8008f890;
 osViSetYScale = 0x8008f9e0;
-alSynAllocFx = 0x8008fa40;
-alSynStopVoice = 0x8008fae0;
 playerCanInteractWithInteractuable = 0x801268e4;
 getMapEventFlagID = 0x80126cec;
 checkCutsceneTimeRangeTrigger = 0x80127e84;
