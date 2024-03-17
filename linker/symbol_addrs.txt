@@ -95,6 +95,22 @@ ptr_effectMgr        = 0x800DD0D0;
 // End of src/effect_manager.c =================================================
 
 
+// asm/libultra/os/startthread.s ===============================================
+
+// .text
+osStartThread = 0x8008F890; // type:func
+
+// End of asm/libultra/os/startthread.s ========================================
+
+
+// asm/libultra/io/visetyscale.s ===============================================
+
+// .text
+osViSetYScale = 0x8008F9E0; // type:func
+
+// End of asm/libultra/io/visetyscale.s ========================================
+
+
 // asm/libultra/audio/synallocfx.s =============================================
 
 // .text
@@ -611,8 +627,6 @@ guRotateRPYF = 0x8008f4e0;
 __f_to_ull = 0x8008f758;
 __ull_to_d = 0x8008f824;
 __ull_to_f = 0x8008f858;
-osStartThread = 0x8008f890;
-osViSetYScale = 0x8008f9e0;
 playerCanInteractWithInteractuable = 0x801268e4;
 getMapEventFlagID = 0x80126cec;
 checkCutsceneTimeRangeTrigger = 0x80127e84;
