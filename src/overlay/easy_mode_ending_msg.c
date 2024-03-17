@@ -36,7 +36,7 @@ void cv64_ovl_easyending_init(cv64_ovl_easyending_t* self) {
     mfds_state* new_textbox;
     u32 message_ptr;
 
-    (*play_sound)(SD_00A);
+    (*play_sound)(SD_CTRL_FADE_OUT_AUDIO_00A);
     new_textbox = (*textbox_create)(self, common_camera_HUD, (OPEN_TEXTBOX | FAST_TEXT_TRANSITION));
     self->ending_textbox = new_textbox;
     (*textbox_setPos)(new_textbox, 30, 110, 1);
