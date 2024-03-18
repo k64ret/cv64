@@ -95,6 +95,22 @@ ptr_effectMgr        = 0x800DD0D0;
 // End of src/effect_manager.c =================================================
 
 
+// asm/libultra/gu/coss.s ======================================================
+
+// .text
+coss = 0x8008C350; // type:func
+
+// End of asm/libultra/gu/coss.s ===============================================
+
+
+// asm/libultra/io/visetspecial.s ==============================================
+
+// .text
+osViSetSpecialFeatures = 0x8008C380; // type:func
+
+// End of asm/libultra/io/visetspecial.s =======================================
+
+
 // asm/libultra/io/visetevent.s ================================================
 
 // .text
@@ -902,8 +918,6 @@ __osViInit = 0x8008bd70;
 __osViSwapContext = 0x8008beb0;
 osPiGetCmdQueue = 0x8008c1b0;
 __cosf = 0x8008c1e0;
-coss = 0x8008c350;
-osViSetSpecialFeatures = 0x8008c380;
 playerCanInteractWithInteractuable = 0x801268e4;
 getMapEventFlagID = 0x80126cec;
 checkCutsceneTimeRangeTrigger = 0x80127e84;
