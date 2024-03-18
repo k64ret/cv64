@@ -95,6 +95,14 @@ ptr_effectMgr        = 0x800DD0D0;
 // End of src/effect_manager.c =================================================
 
 
+// asm/libultra/io/piwrite.s ===================================================
+
+// .text
+osPiWriteIo = 0x8008D760; // type:func
+
+// End of asm/libultra/io/piwrite.s ============================================
+
+
 // asm/libultra/os/maptlbrdb.s =================================================
 
 // .text
