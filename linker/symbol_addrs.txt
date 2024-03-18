@@ -95,6 +95,15 @@ ptr_effectMgr        = 0x800DD0D0;
 // End of src/effect_manager.c =================================================
 
 
+// asm/libultra/io/pfsinitpak.s ================================================
+
+// .text
+osPfsInitPak        = 0x8008CAA0; // type:func
+__osPfsCheckRamArea = 0x8008CCA8; // type:func
+
+// End of asm/libultra/io/pfsinitpak.s =========================================
+
+
 // asm/libultra/io/pfschecker.s ================================================
 
 // .text
@@ -838,8 +847,6 @@ alSynAddPlayer = 0x8008c550;
 osCartRomInit = 0x8008c6d0;
 __osPfsSelectBank = 0x8008c830;
 __osSetFpcCsr = 0x8008c8b0;
-osPfsInitPak = 0x8008caa0;
-pfsinitpak_text_0208 = 0x8008cca8;
 playerCanInteractWithInteractuable = 0x801268e4;
 getMapEventFlagID = 0x80126cec;
 checkCutsceneTimeRangeTrigger = 0x80127e84;

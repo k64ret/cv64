@@ -280,7 +280,7 @@ segments:
       - [0x0008D2D0, asm]
       - [0x0008D430, asm]
       - [0x0008D4B0, asm]
-      - [0x0008D6A0, asm]
+      - [0x0008D6A0, asm, libultra/io/pfsinitpak]
       - [0x0008D9B0, asm, libultra/io/pfschecker]
       - [0x0008E350, asm, libultra/io/aigetlen]
       - [0x0008E360, asm, libultra/io/piwrite]
