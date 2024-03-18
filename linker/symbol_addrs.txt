@@ -95,6 +95,22 @@ ptr_effectMgr        = 0x800DD0D0;
 // End of src/effect_manager.c =================================================
 
 
+// asm/libultra/audio/synaddplayer.s ===========================================
+
+// .text
+alSynAddPlayer = 0x8008C550; // type:func
+
+// End of asm/libultra/audio/synaddplayer.s ====================================
+
+
+// asm/libultra/io/pfsnumfiles.s ===============================================
+
+// .text
+osPfsNumFiles = 0x8008C5A0; // type:func
+
+// End of asm/libultra/io/pfsnumfiles.s ========================================
+
+
 // asm/libultra/io/cartrominit.s ===============================================
 
 // .text
@@ -881,7 +897,6 @@ __cosf = 0x8008c1e0;
 coss = 0x8008c350;
 osViSetSpecialFeatures = 0x8008c380;
 osViSetEvent = 0x8008c4e0;
-alSynAddPlayer = 0x8008c550;
 playerCanInteractWithInteractuable = 0x801268e4;
 getMapEventFlagID = 0x80126cec;
 checkCutsceneTimeRangeTrigger = 0x80127e84;
@@ -1186,7 +1201,6 @@ guTranslate = 0x8008a288;
 guLookAt = 0x8008a998;
 guPosition = 0x8008abc0;
 __osEPiRawStartDma = 0x8008ac30;
-osPfsNumFiles = 0x8008c5a0;
 PlayerMgr_getActorCurrentlyInteractingWith = 0x80126370;
 cutsceneTrigger_entrypoint = 0x801274f0;
 cutsceneTrigger_checkCollision = 0x801276b4;
