@@ -95,6 +95,18 @@ ptr_effectMgr        = 0x800DD0D0;
 // End of src/effect_manager.c =================================================
 
 
+// asm/libultra/libc/xlitob.s ==================================================
+
+// .text
+_Litob           = 0x8008EDC0; // type:func
+
+// .data
+xlitob_data_0000 = 0x800A26C0;
+xlitob_data_0014 = 0x800A26D4;
+
+// End of asm/libultra/libc/xlitob.s ===========================================
+
+
 // asm/libultra/io/pirawwrite.s ================================================
 
 // .text
@@ -1026,7 +1038,6 @@ __osEPiRawStartDma = 0x8008ac30;
 osPfsNumFiles = 0x8008c5a0;
 osPfsFileState = 0x8008c8c0;
 _Ldtob = 0x8008e6e0;
-_Litob = 0x8008edc0;
 PlayerMgr_getActorCurrentlyInteractingWith = 0x80126370;
 cutsceneTrigger_entrypoint = 0x801274f0;
 cutsceneTrigger_checkCollision = 0x801276b4;
@@ -1293,8 +1304,6 @@ osViModeNtscLan1 = 0x800a2600;
 osViModeMpalLan1 = 0x800a2650;
 first = 0x800a26a0;
 __osPfsLastChannel = 0x800a26b0;
-xlitob_data_0000 = 0x800a26c0;
-xlitob_data_0014 = 0x800a26d4;
 perspective_rodata_0000 = 0x800a6ce0;
 __osRcpImTable = 0x800a6cf0;
 rotate_rodata_0000 = 0x800a6d70;
