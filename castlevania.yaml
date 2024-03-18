@@ -301,7 +301,7 @@ segments:
       - [0x0008FD20, asm]
       - [0x00090030, asm]
       - [0x00090040, asm]
-      - [0x00090070, asm]
+      - [0x00090070, asm, libultra/audio/heapalloc]
       - [0x000900D0, asm, libultra/os/getcurrfaultthread]
       - [0x000900E0, asm, libultra/gu/rotaterpy]
       - [0x00090280, asm, libultra/libc/llcvt]
