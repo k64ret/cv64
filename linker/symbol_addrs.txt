@@ -95,6 +95,33 @@ ptr_effectMgr        = 0x800DD0D0;
 // End of src/effect_manager.c =================================================
 
 
+// asm/libultra/gu/rotaterpy.s =================================================
+
+// .text
+guRotateRPYF = 0x8008F4E0; // type:func
+guRotateRPY  = 0x8008F62C; // type:func
+
+// .rodata
+dtor         = 0x800A7120;
+
+// End of asm/libultra/gu/rotaterpy.s ==========================================
+
+
+// asm/libultra/libc/llcvt.s ===================================================
+
+// .text
+__d_to_ll  = 0x8008F680; // type:func
+__f_to_ll  = 0x8008F69C; // type:func
+__d_to_ull = 0x8008F6B8; // type:func
+__f_to_ull = 0x8008F758; // type:func
+__ll_to_d  = 0x8008F7F4; // type:func
+__ll_to_f  = 0x8008F80C; // type:func
+__ull_to_d = 0x8008F824; // type:func
+__ull_to_f = 0x8008F858; // type:func
+
+// End of asm/libultra/libc/llcvt.s ============================================
+
+
 // asm/libultra/os/startthread.s ===============================================
 
 // .text
@@ -623,10 +650,6 @@ __osViGetCurrentContext = 0x8008f430;
 osWritebackDCacheAll = 0x8008f440;
 alHeapDBAlloc = 0x8008f470;
 __osGetCurrFaultedThread = 0x8008f4d0;
-guRotateRPYF = 0x8008f4e0;
-__f_to_ull = 0x8008f758;
-__ull_to_d = 0x8008f824;
-__ull_to_f = 0x8008f858;
 playerCanInteractWithInteractuable = 0x801268e4;
 getMapEventFlagID = 0x80126cec;
 checkCutsceneTimeRangeTrigger = 0x80127e84;
@@ -1238,7 +1261,6 @@ xldtob_rodata_0000 = 0x800a70c0;
 NaN = 0x800a7108;
 Inf = 0x800a710c;
 xldtob_rodata_0058 = 0x800a7118;
-dtor = 0x800a7120;
 llcvt_rodata_0000 = 0x800a7130;
 llcvt_rodata_0008 = 0x800a7138;
 rotate_bss_0000 = 0x801226c0;
@@ -1811,12 +1833,6 @@ atari_center_point_translation_matrix = 0x800d8190;
 atari_size_translation_matrix = 0x800d8150;
 __osCleanupThread = 0x80080c60;
 alFxParamHdl = 0x80086698;
-guRotateRPY = 0x8008f62c;
-__d_to_ll = 0x8008f680;
-__f_to_ll = 0x8008f69c;
-__d_to_ull = 0x8008f6b8;
-__ll_to_d = 0x8008f7f4;
-__ll_to_f = 0x8008f80c;
 target_atari_data_work_pos = 0x800d821c;
 attacker_atari_data_work_pos = 0x800d8228;
 distance_attacker_target_atari_data_vector = 0x800d8234;

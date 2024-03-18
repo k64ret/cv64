@@ -303,8 +303,8 @@ segments:
       - [0x00090040, asm]
       - [0x00090070, asm]
       - [0x000900D0, asm]
-      - [0x000900E0, asm]
-      - [0x00090280, asm]
+      - [0x000900E0, asm, libultra/gu/rotaterpy]
+      - [0x00090280, asm, libultra/libc/llcvt]
       - [0x00090490, asm, libultra/os/startthread]
       - [0x000905E0, asm, libultra/io/visetyscale]
       - [0x00090640, asm, libultra/audio/synallocfx]
@@ -392,6 +392,7 @@ segments:
       - [0x000A7C60, rodata]
       - [0x000A7CB0, rodata]
       - [0x000A7CC0, rodata]
+      - [0x000A7D20, rodata, libultra/gu/rotaterpy]
       - [0x000A7D30, rodata]
       - [0x000A7D40, rodata]
       - { start: 0x000A8420, type: .bss, vram: 0x800A7820, name: gamestate }
