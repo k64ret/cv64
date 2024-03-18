@@ -278,7 +278,7 @@ segments:
       - [0x0008D0E0, asm]
       - [0x0008D150, asm]
       - [0x0008D2D0, asm]
-      - [0x0008D430, asm]
+      - [0x0008D430, asm, libultra/io/pfsselectbank]
       - [0x0008D4B0, hasm, libultra/os/setfpccsr]
       - [0x0008D4C0, asm, libultra/io/pfsfilestate]
       - [0x0008D6A0, asm, libultra/io/pfsinitpak]
