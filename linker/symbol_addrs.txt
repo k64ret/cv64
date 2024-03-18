@@ -95,6 +95,15 @@ ptr_effectMgr        = 0x800DD0D0;
 // End of src/effect_manager.c =================================================
 
 
+// asm/libultra/io/crc.s =======================================================
+
+// .text
+__osContAddressCrc = 0x8008DDC0; // type:func
+__osContDataCrc    = 0x8008DE90; // type:func
+
+// End of asm/libultra/io/crc.s ================================================
+
+
 // asm/libultra/io/epirawwrite.s ===============================================
 
 // .text
@@ -764,8 +773,6 @@ alSynStartVoiceParams = 0x8008d850;
 __osGetCause = 0x8008d930;
 __osContRamWrite = 0x8008d940;
 __osContRamRead = 0x8008db90;
-__osContAddressCrc = 0x8008ddc0;
-__osContDataCrc = 0x8008de90;
 playerCanInteractWithInteractuable = 0x801268e4;
 getMapEventFlagID = 0x80126cec;
 checkCutsceneTimeRangeTrigger = 0x80127e84;
