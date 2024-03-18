@@ -95,6 +95,22 @@ ptr_effectMgr        = 0x800DD0D0;
 // End of src/effect_manager.c =================================================
 
 
+// asm/libultra/os/setfpccsr.s =================================================
+
+// .text
+__osSetFpcCsr = 0x8008C8B0; // type:func
+
+// End of asm/libultra/os/setfpccsr.s ==========================================
+
+
+// asm/libultra/io/pfsfilestate.s ==============================================
+
+// .text
+osPfsFileState = 0x8008C8C0; // type:func
+
+// End of asm/libultra/io/pfsfilestate.s =======================================
+
+
 // asm/libultra/io/pfsinitpak.s ================================================
 
 // .text
@@ -846,7 +862,6 @@ osViSetEvent = 0x8008c4e0;
 alSynAddPlayer = 0x8008c550;
 osCartRomInit = 0x8008c6d0;
 __osPfsSelectBank = 0x8008c830;
-__osSetFpcCsr = 0x8008c8b0;
 playerCanInteractWithInteractuable = 0x801268e4;
 getMapEventFlagID = 0x80126cec;
 checkCutsceneTimeRangeTrigger = 0x80127e84;
@@ -1152,7 +1167,6 @@ guLookAt = 0x8008a998;
 guPosition = 0x8008abc0;
 __osEPiRawStartDma = 0x8008ac30;
 osPfsNumFiles = 0x8008c5a0;
-osPfsFileState = 0x8008c8c0;
 PlayerMgr_getActorCurrentlyInteractingWith = 0x80126370;
 cutsceneTrigger_entrypoint = 0x801274f0;
 cutsceneTrigger_checkCollision = 0x801276b4;
