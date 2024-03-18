@@ -95,6 +95,21 @@ ptr_effectMgr        = 0x800DD0D0;
 // End of src/effect_manager.c =================================================
 
 
+// asm/libultra/libc/xldtob.s ==================================================
+
+// .text
+// xldtob_text_0000  = 0x8008e170; // type:func
+_Ldtob             = 0x8008e6e0; // type:func
+
+// .rodata
+pows               = 0x800A70C0;
+NaN                = 0x800A7108;
+Inf                = 0x800A710C;
+xldtob_rodata_0058 = 0x800A7118;
+
+// End of asm/libultra/libc/xldtob.s ===========================================
+
+
 // asm/libultra/libc/ldiv.s ====================================================
 
 // .text
@@ -737,7 +752,6 @@ __osContAddressCrc = 0x8008ddc0;
 __osContDataCrc = 0x8008de90;
 __osEPiRawWriteIo = 0x8008df30;
 osSetTimer = 0x8008e090;
-xldtob_text_0000 = 0x8008e170;
 playerCanInteractWithInteractuable = 0x801268e4;
 getMapEventFlagID = 0x80126cec;
 checkCutsceneTimeRangeTrigger = 0x80127e84;
@@ -1044,7 +1058,6 @@ guPosition = 0x8008abc0;
 __osEPiRawStartDma = 0x8008ac30;
 osPfsNumFiles = 0x8008c5a0;
 osPfsFileState = 0x8008c8c0;
-_Ldtob = 0x8008e6e0;
 PlayerMgr_getActorCurrentlyInteractingWith = 0x80126370;
 cutsceneTrigger_entrypoint = 0x801274f0;
 cutsceneTrigger_checkCollision = 0x801276b4;
@@ -1339,10 +1352,6 @@ cosf_rodata_0030 = 0x800a7090;
 cosf_rodata_0038 = 0x800a7098;
 cosf_rodata_0040 = 0x800a70a0;
 __libm_qnan_f = 0x800a70b0;
-xldtob_rodata_0000 = 0x800a70c0;
-NaN = 0x800a7108;
-Inf = 0x800a710c;
-xldtob_rodata_0058 = 0x800a7118;
 llcvt_rodata_0000 = 0x800a7130;
 llcvt_rodata_0008 = 0x800a7138;
 rotate_bss_0000 = 0x801226c0;

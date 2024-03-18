@@ -291,7 +291,7 @@ segments:
       - [0x0008E9C0, asm]
       - [0x0008EB30, asm]
       - [0x0008EC90, asm]
-      - [0x0008ED70, asm]
+      - [0x0008ED70, asm, libultra/libc/xldtob]
       - [0x0008F830, asm, libultra/libc/ldiv]
       - [0x0008F9C0, asm, libultra/libc/xlitob]
       - [0x0008FC60, asm] # The libultra symbol in here isn't identified yet
@@ -393,7 +393,7 @@ segments:
       - [0x000A7C50, rodata]
       - [0x000A7C60, rodata]
       - [0x000A7CB0, rodata]
-      - [0x000A7CC0, rodata]
+      - [0x000A7CC0, rodata, libultra/libc/xldtob]
       - [0x000A7D20, rodata, libultra/gu/rotaterpy]
       - [0x000A7D30, rodata]
       - [0x000A7D40, rodata]
