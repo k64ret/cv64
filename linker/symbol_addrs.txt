@@ -95,6 +95,14 @@ ptr_effectMgr        = 0x800DD0D0;
 // End of src/effect_manager.c =================================================
 
 
+// asm/libultra/os/settimer.s ==================================================
+
+// .text
+osSetTimer = 0x8008E090; // type:func
+
+// End of asm/libultra/os/settimer.s ===========================================
+
+
 // asm/libultra/libc/xldtob.s ==================================================
 
 // .text
@@ -751,7 +759,6 @@ __osContRamRead = 0x8008db90;
 __osContAddressCrc = 0x8008ddc0;
 __osContDataCrc = 0x8008de90;
 __osEPiRawWriteIo = 0x8008df30;
-osSetTimer = 0x8008e090;
 playerCanInteractWithInteractuable = 0x801268e4;
 getMapEventFlagID = 0x80126cec;
 checkCutsceneTimeRangeTrigger = 0x80127e84;
