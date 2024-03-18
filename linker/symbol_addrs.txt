@@ -95,6 +95,21 @@ ptr_effectMgr        = 0x800DD0D0;
 // End of src/effect_manager.c =================================================
 
 
+// asm/libultra/gu/cosf.s ======================================================
+
+// .text
+__cosf = 0x8008C1E0; // type:func
+
+// .rodata
+P      = 0x800A7060;
+rpi    = 0x800A7088;
+pihi   = 0x800A7090;
+pilo   = 0x800A7098;
+zero   = 0x800A70A0;
+
+// End of asm/libultra/gu/cosf.s ===============================================
+
+
 // asm/libultra/gu/coss.s ======================================================
 
 // .text
@@ -917,7 +932,6 @@ __osRestoreInt = 0x8008bd50;
 __osViInit = 0x8008bd70;
 __osViSwapContext = 0x8008beb0;
 osPiGetCmdQueue = 0x8008c1b0;
-__cosf = 0x8008c1e0;
 playerCanInteractWithInteractuable = 0x801268e4;
 getMapEventFlagID = 0x80126cec;
 checkCutsceneTimeRangeTrigger = 0x80127e84;
@@ -1508,11 +1522,6 @@ hlL = 0x800a6f50;
 fchar = 0x800a6f54;
 fbit = 0x800a6f5c;
 position_rodata_0000 = 0x800a7050;
-cosf_rodata_0000 = 0x800a7060;
-cosf_rodata_0028 = 0x800a7088;
-cosf_rodata_0030 = 0x800a7090;
-cosf_rodata_0038 = 0x800a7098;
-cosf_rodata_0040 = 0x800a70a0;
 __libm_qnan_f = 0x800a70b0;
 llcvt_rodata_0000 = 0x800a7130;
 llcvt_rodata_0008 = 0x800a7138;
