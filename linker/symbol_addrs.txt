@@ -95,6 +95,14 @@ ptr_effectMgr        = 0x800DD0D0;
 // End of src/effect_manager.c =================================================
 
 
+// asm/libultra/io/vigetcurrcontext.s ==========================================
+
+// .text
+__osViGetCurrentContext = 0x8008F430; // type:func
+
+// End of asm/libultra/io/vigetcurrcontext.s ===================================
+
+
 // asm/libultra/os/writebackdcacheall.s ========================================
 
 // .text
@@ -670,7 +678,6 @@ osPiRawWriteIo = 0x8008f0b0;
 __osSpSetStatus = 0x8008f100;
 __osSpGetStatus = 0x8008f110;
 osCreateViManager = 0x8008f120;
-__osViGetCurrentContext = 0x8008f430;
 playerCanInteractWithInteractuable = 0x801268e4;
 getMapEventFlagID = 0x80126cec;
 checkCutsceneTimeRangeTrigger = 0x80127e84;
