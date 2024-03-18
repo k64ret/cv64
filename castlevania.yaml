@@ -292,7 +292,7 @@ segments:
       - [0x0008EB30, asm]
       - [0x0008EC90, asm]
       - [0x0008ED70, asm]
-      - [0x0008F830, asm]
+      - [0x0008F830, asm, libultra/libc/ldiv]
       - [0x0008F9C0, asm, libultra/libc/xlitob]
       - [0x0008FC60, asm] # The libultra symbol in here isn't identified yet
       - [0x0008FCB0, asm, libultra/io/pirawwrite]
