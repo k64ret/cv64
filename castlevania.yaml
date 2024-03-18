@@ -275,7 +275,7 @@ segments:
       - [0x0008CDB0, asm]
       - [0x0008CDE0, asm]
       - [0x0008CF50, asm]
-      - [0x0008D0E0, asm]
+      - [0x0008D0E0, asm, libultra/io/visetevent]
       - [0x0008D150, asm, libultra/audio/synaddplayer]
       - [0x0008D1A0, asm, libultra/io/pfsnumfiles]
       - [0x0008D2D0, asm, libultra/io/cartrominit]
