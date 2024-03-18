@@ -95,6 +95,30 @@ ptr_effectMgr        = 0x800DD0D0;
 // End of src/effect_manager.c =================================================
 
 
+// asm/libultra/io/pirawwrite.s ================================================
+
+// .text
+osPiRawWriteIo = 0x8008F0B0; // type:func
+
+// End of asm/libultra/io/pirawwrite.s =========================================
+
+
+// asm/libultra/io/spsetstat.s =================================================
+
+// .text
+__osSpSetStatus = 0x8008F100; // type:func
+
+// End of asm/libultra/io/spsetstat.s ==========================================
+
+
+// asm/libultra/io/spgetstat.s =================================================
+
+// .text
+__osSpGetStatus = 0x8008F110; // type:func
+
+// End of asm/libultra/io/spgetstat.s ==========================================
+
+
 // asm/libultra/io/vimgr.s =====================================================
 
 // .text
@@ -695,9 +719,6 @@ osSetTimer = 0x8008e090;
 xldtob_text_0000 = 0x8008e170;
 lldiv = 0x8008ec30;
 ldiv = 0x8008ed30;
-osPiRawWriteIo = 0x8008f0b0;
-__osSpSetStatus = 0x8008f100;
-__osSpGetStatus = 0x8008f110;
 playerCanInteractWithInteractuable = 0x801268e4;
 getMapEventFlagID = 0x80126cec;
 checkCutsceneTimeRangeTrigger = 0x80127e84;
