@@ -95,6 +95,20 @@ ptr_effectMgr        = 0x800DD0D0;
 // End of src/effect_manager.c =================================================
 
 
+// asm/libultra/io/cartrominit.s ===============================================
+
+// .text
+osCartRomInit   = 0x8008C6D0; // type:func
+
+// .data
+first           = 0x800A26A0;
+
+// .bss
+__CartRomHandle = 0x80123F80;
+
+// End of asm/libultra/io/cartrominit.s ========================================
+
+
 // asm/libultra/io/pfsselectbank.s =============================================
 
 // .text
@@ -868,7 +882,6 @@ coss = 0x8008c350;
 osViSetSpecialFeatures = 0x8008c380;
 osViSetEvent = 0x8008c4e0;
 alSynAddPlayer = 0x8008c550;
-osCartRomInit = 0x8008c6d0;
 playerCanInteractWithInteractuable = 0x801268e4;
 getMapEventFlagID = 0x80126cec;
 checkCutsceneTimeRangeTrigger = 0x80127e84;
@@ -1438,7 +1451,6 @@ __osViCurr = 0x800a25a0;
 osViModePalLan1 = 0x800a25b0;
 osViModeNtscLan1 = 0x800a2600;
 osViModeMpalLan1 = 0x800a2650;
-first = 0x800a26a0;
 perspective_rodata_0000 = 0x800a6ce0;
 __osRcpImTable = 0x800a6cf0;
 rotate_rodata_0000 = 0x800a6d70;
