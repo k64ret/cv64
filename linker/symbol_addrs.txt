@@ -95,6 +95,14 @@ ptr_effectMgr        = 0x800DD0D0;
 // End of src/effect_manager.c =================================================
 
 
+// asm/libultra/io/contramwrite.s ==============================================
+
+// .text
+__osContRamWrite = 0x8008D940; // type:func
+
+// End of asm/libultra/io/contramwrite.s =======================================
+
+
 // asm/libultra/io/contramread.s ===============================================
 
 // .text
@@ -782,7 +790,6 @@ osMapTLBRdb = 0x8008d7a0;
 osYieldThread = 0x8008d800;
 alSynStartVoiceParams = 0x8008d850;
 __osGetCause = 0x8008d930;
-__osContRamWrite = 0x8008d940;
 playerCanInteractWithInteractuable = 0x801268e4;
 getMapEventFlagID = 0x80126cec;
 checkCutsceneTimeRangeTrigger = 0x80127e84;

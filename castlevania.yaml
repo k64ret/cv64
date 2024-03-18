@@ -286,7 +286,7 @@ segments:
       - [0x0008E3A0, asm]
       - [0x0008E400, asm]
       - [0x0008E450, asm]
-      - [0x0008E540, asm]
+      - [0x0008E540, asm, libultra/io/contramwrite]
       - [0x0008E790, asm, libultra/io/contramread]
       - [0x0008E9C0, asm, libultra/io/crc]
       - [0x0008EB30, asm, libultra/io/epirawwrite]
