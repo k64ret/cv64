@@ -95,6 +95,24 @@ ptr_effectMgr        = 0x800DD0D0;
 // End of src/effect_manager.c =================================================
 
 
+// asm/libultra/io/pfschecker.s ================================================
+
+// .text
+osPfsChecker   = 0x8008CDB0; // type:func
+corrupted_init = 0x8008D2E8; // type:func
+corrupted      = 0x8008D5B4; // type:func
+
+// End of asm/libultra/io/pfschecker.s =========================================
+
+
+// asm/libultra/io/aigetlen.s ==================================================
+
+// .text
+osAiGetLength = 0x8008D750; // type:func
+
+// End of asm/libultra/io/aigetlen.s ===========================================
+
+
 // asm/libultra/io/piwrite.s ===================================================
 
 // .text
@@ -822,10 +840,6 @@ __osPfsSelectBank = 0x8008c830;
 __osSetFpcCsr = 0x8008c8b0;
 osPfsInitPak = 0x8008caa0;
 pfsinitpak_text_0208 = 0x8008cca8;
-osPfsChecker = 0x8008cdb0;
-corrupted_init = 0x8008d2e8;
-corrupted = 0x8008d5b4;
-osAiGetLength = 0x8008d750;
 playerCanInteractWithInteractuable = 0x801268e4;
 getMapEventFlagID = 0x80126cec;
 checkCutsceneTimeRangeTrigger = 0x80127e84;
