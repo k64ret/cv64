@@ -95,6 +95,14 @@ ptr_effectMgr        = 0x800DD0D0;
 // End of src/effect_manager.c =================================================
 
 
+// asm/libultra/os/writebackdcacheall.s ========================================
+
+// .text
+osWritebackDCacheAll = 0x8008F440; // type:func
+
+// End of asm/libultra/os/writebackdcacheall.s =================================
+
+
 // asm/libultra/audio/heapalloc.s ==============================================
 
 // .text
@@ -663,7 +671,6 @@ __osSpSetStatus = 0x8008f100;
 __osSpGetStatus = 0x8008f110;
 osCreateViManager = 0x8008f120;
 __osViGetCurrentContext = 0x8008f430;
-osWritebackDCacheAll = 0x8008f440;
 playerCanInteractWithInteractuable = 0x801268e4;
 getMapEventFlagID = 0x80126cec;
 checkCutsceneTimeRangeTrigger = 0x80127e84;
