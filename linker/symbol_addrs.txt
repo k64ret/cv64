@@ -95,6 +95,14 @@ ptr_effectMgr        = 0x800DD0D0;
 // End of src/effect_manager.c =================================================
 
 
+// asm/libultra/io/pigetcmdq.s =================================================
+
+// .text
+osPiGetCmdQueue = 0x8008C1B0; // type:func
+
+// End of asm/libultra/io/pigetcmdq.s ==========================================
+
+
 // asm/libultra/gu/cosf.s ======================================================
 
 // .text
@@ -931,7 +939,6 @@ __osDisableInt = 0x8008bce0;
 __osRestoreInt = 0x8008bd50;
 __osViInit = 0x8008bd70;
 __osViSwapContext = 0x8008beb0;
-osPiGetCmdQueue = 0x8008c1b0;
 playerCanInteractWithInteractuable = 0x801268e4;
 getMapEventFlagID = 0x80126cec;
 checkCutsceneTimeRangeTrigger = 0x80127e84;

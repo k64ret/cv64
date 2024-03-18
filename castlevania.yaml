@@ -272,7 +272,7 @@ segments:
       - [0x0008C8E0, asm]
       - [0x0008C970, asm]
       - [0x0008CAB0, asm]
-      - [0x0008CDB0, asm]
+      - [0x0008CDB0, asm, libultra/io/pigetcmdq]
       - [0x0008CDE0, asm, libultra/gu/cosf]
       - [0x0008CF50, asm, libultra/gu/coss]
       - [0x0008CF80, asm, libultra/io/visetspecial]
