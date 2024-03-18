@@ -95,6 +95,14 @@ ptr_effectMgr        = 0x800DD0D0;
 // End of src/effect_manager.c =================================================
 
 
+// asm/libultra/os/maptlbrdb.s =================================================
+
+// .text
+osMapTLBRdb = 0x8008D7A0; // type:func
+
+// End of asm/libultra/os/maptlbrdb.s ==========================================
+
+
 // asm/libultra/os/yeildthread.s ===============================================
 
 // .text
@@ -810,7 +818,6 @@ osPfsChecker = 0x8008cdb0;
 corrupted_init = 0x8008d2e8;
 corrupted = 0x8008d5b4;
 osAiGetLength = 0x8008d750;
-osMapTLBRdb = 0x8008d7a0;
 playerCanInteractWithInteractuable = 0x801268e4;
 getMapEventFlagID = 0x80126cec;
 checkCutsceneTimeRangeTrigger = 0x80127e84;

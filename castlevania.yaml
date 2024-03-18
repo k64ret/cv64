@@ -283,7 +283,7 @@ segments:
       - [0x0008D6A0, asm]
       - [0x0008D9B0, asm]
       - [0x0008E360, asm]
-      - [0x0008E3A0, asm]
+      - [0x0008E3A0, hasm, libultra/os/maptlbrdb]
       - [0x0008E400, asm, libultra/os/yieldthread]
       - [0x0008E450, asm, libultra/audio/synstartvoiceparam]
       - [0x0008E530, hasm, libultra/os/getcause]
