@@ -298,7 +298,7 @@ segments:
       - [0x0008FCB0, asm]
       - [0x0008FD00, asm]
       - [0x0008FD10, asm]
-      - [0x0008FD20, asm]
+      - [0x0008FD20, asm, libultra/io/vimgr]
       - [0x00090030, asm, libultra/io/vigetcurrcontext]
       - [0x00090040, hasm, libultra/os/writebackdcacheall]
       - [0x00090070, asm, libultra/audio/heapalloc]
@@ -336,6 +336,7 @@ segments:
       - [0x0009B950, data, 5B7E0]
       - [0x0009B960, .data, effect_manager]
       - [0x0009B970, data]
+      - [0x000A32F0, data, libultra/io/vimgr]
       - [0x000A3310, data, libultra/io/aisetnextbuf]
 
       - [0x000A3320, rodata, 4D80]
@@ -402,6 +403,8 @@ segments:
       - { start: 0x000A8420, type: bss, vram: 0x800A78A0, name: F960 }
       - { start: 0x000A8420, type: .bss, vram: 0x800DD0D0, name: effect_manager }
       - { start: 0x000A8420, type: bss, vram: 0x800DD0E0 }
+      # - { start: 0x000A8420, type: bss, vram: 0x80124000, name: libultra/io/vimgr }
+      # - { start: 0x000A8420, type: bss, vram: 0x80125220 }
 
   - name: common
     type: code

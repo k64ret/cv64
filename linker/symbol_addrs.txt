@@ -95,6 +95,27 @@ ptr_effectMgr        = 0x800DD0D0;
 // End of src/effect_manager.c =================================================
 
 
+// asm/libultra/io/vimgr.s =====================================================
+
+// .text
+osCreateViManager = 0x8008F120; // type:func
+viMgrMain         = 0x8008F2A0; // type:func
+
+// .data
+__osViDevMgr          = 0x800A26F0;
+__additional_scanline = 0x800A270C;
+
+// .bss
+viMgrThread           = 0x80124000;
+__osViMesgQueue       = 0x801251B0;
+viMgrMesgBuff         = 0x801251C8;
+viEventViMesg         = 0x801251E0;
+viEventCounterMesg    = 0x801251F8;
+viRetrace             = 0x80125210;
+
+// End of asm/libultra/io/vimgr.s ==============================================
+
+
 // asm/libultra/io/vigetcurrcontext.s ==========================================
 
 // .text
@@ -677,7 +698,6 @@ ldiv = 0x8008ed30;
 osPiRawWriteIo = 0x8008f0b0;
 __osSpSetStatus = 0x8008f100;
 __osSpGetStatus = 0x8008f110;
-osCreateViManager = 0x8008f120;
 playerCanInteractWithInteractuable = 0x801268e4;
 getMapEventFlagID = 0x80126cec;
 checkCutsceneTimeRangeTrigger = 0x80127e84;
@@ -986,7 +1006,6 @@ osPfsNumFiles = 0x8008c5a0;
 osPfsFileState = 0x8008c8c0;
 _Ldtob = 0x8008e6e0;
 _Litob = 0x8008edc0;
-viMgrMain = 0x8008f2a0;
 PlayerMgr_getActorCurrentlyInteractingWith = 0x80126370;
 cutsceneTrigger_entrypoint = 0x801274f0;
 cutsceneTrigger_checkCollision = 0x801276b4;
@@ -1255,8 +1274,6 @@ first = 0x800a26a0;
 __osPfsLastChannel = 0x800a26b0;
 xlitob_data_0000 = 0x800a26c0;
 xlitob_data_0014 = 0x800a26d4;
-__osViDevMgr = 0x800a26f0;
-__additional_scanline = 0x800a270c;
 perspective_rodata_0000 = 0x800a6ce0;
 __osRcpImTable = 0x800a6cf0;
 rotate_rodata_0000 = 0x800a6d70;
@@ -1311,10 +1328,6 @@ position_bss_0000 = 0x80123f30;
 __osBaseCounter = 0x80123f68;
 __osViIntrCount = 0x80123f6c;
 __osTimerCounter = 0x80123f70;
-viMgrThread = 0x80124000;
-viMgrMesgBuff = 0x801251c8;
-viEventViMesg = 0x801251e0;
-viEventCounterMesg = 0x801251f8;
 ptr_PlayerData = 0x800d7af8;
 Player_health = 0x80389c3e;
 Player_gold = 0x80389c44;
@@ -1356,7 +1369,6 @@ ALHeap = 0x800e22d8;
 ALGlobals = 0x800dd750;
 ALPlayer_client = 0x800e22c0;
 __osPiMesgQueue = 0x80123d90;
-__osViMesgQueue = 0x801251b0;
 sCrashScreenThread = 0x800d5f40;
 crashScreen_mesgQueue = 0x800d70f0;
 crashScreen_mesg = 0x800d7108;
@@ -1442,7 +1454,6 @@ __osExceptionPreamble = 0x80080370;
 heap_allocWithAlignment = 0x80000e58;
 ROM_compressed_files_table = 0x8009503c;
 compressed_file__ID_from_ROMFileTable = 0x800a78c8;
-viRetrace = 0x80125210;
 getTimeOfDay = 0x8003ec20;
 isPlayerDamagedOrDead = 0x8003c99c;
 object_curLevel_goToFuncInLevel = 0x800015c4;
