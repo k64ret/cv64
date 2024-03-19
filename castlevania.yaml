@@ -236,7 +236,7 @@ segments:
       - [0x00088930, asm]
       - [0x00088C30, asm]
       - [0x00089780, asm]
-      - [0x00089840, asm]
+      - [0x00089840, hasm, libultra/gu/sqrtf]
       - [0x00089850, asm, libultra/os/afterprenmi]
       - [0x00089870, asm, libultra/io/contquery]
       - [0x00089920, asm, libultra/gu/random]
