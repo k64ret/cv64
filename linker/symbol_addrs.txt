@@ -95,6 +95,19 @@ ptr_effectMgr        = 0x800DD0D0;
 // End of src/effect_manager.c =================================================
 
 
+// asm/libultra/io/motor.s =====================================================
+
+// .text
+__osMotorAccess   = 0x80083190; // type:func
+__osMakeMotorData = 0x800832F8; // type:func
+osMotorInit       = 0x80083404; // type:func
+
+// .bss
+__MotorDataBuf    = 0x801229B0;
+
+// End of asm/libultra/io/motor.s ==============================================
+
+
 // asm/libultra/io/pfsallocatefile.s ===========================================
 
 // .text
@@ -1525,8 +1538,6 @@ __osPfsGetOneChannelData = 0x80082e14;
 guMtxIdentF = 0x80082fb0;
 guMtxL2F = 0x80083068;
 osViSetMode = 0x80083120;
-_MakeMotorData = 0x800832f8;
-osMotorInit = 0x80083404;
 playerCanInteractWithInteractuable = 0x801268e4;
 getMapEventFlagID = 0x80126cec;
 checkCutsceneTimeRangeTrigger = 0x80127e84;
@@ -1813,7 +1824,6 @@ guPerspective = 0x8007f800;
 osDestroyThread = 0x80080cb0;
 __ll_mod = 0x800822c8;
 guMtxIdent = 0x80083038;
-__osMotorAccess = 0x80083190;
 PlayerMgr_getActorCurrentlyInteractingWith = 0x80126370;
 cutsceneTrigger_entrypoint = 0x801274f0;
 cutsceneTrigger_checkCollision = 0x801276b4;
@@ -2077,7 +2087,6 @@ __osEepromTimerQ = 0x80122798;
 __osEepromTimerMsg = 0x801227b0;
 align_bss_0000 = 0x801227e0;
 __osFinalrom = 0x801227f0;
-__MotorDataBuf = 0x801229b0;
 ptr_PlayerData = 0x800d7af8;
 Player_health = 0x80389c3e;
 Player_gold = 0x80389c44;
