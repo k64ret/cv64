@@ -249,7 +249,7 @@ segments:
       - [0x0008A9A0, asm]
       - [0x0008AA40, asm]
       - [0x0008AAC0, asm]
-      - [0x0008AAF0, asm]
+      - [0x0008AAF0, hasm, libultra/os/invaldcache]
       - [0x0008ABA0, asm, libultra/audio/synsetfxmix]
       - [0x0008AC40, asm, libultra/audio/save]
       - [0x0008AD00, asm, libultra/io/pfsrepairid]
