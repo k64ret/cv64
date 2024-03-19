@@ -677,6 +677,14 @@ xlitob_data_0014 = 0x800A26D4;
 // End of asm/libultra/libc/xlitob.s ===========================================
 
 
+// asm/libultra/io/sirawwrite.s ================================================
+
+// .text
+__osSiRawWriteIo = 0x8008F060; // type:func
+
+// End of asm/libultra/io/sirawwrite.s =========================================
+
+
 // asm/libultra/io/pirawwrite.s ================================================
 
 // .text
