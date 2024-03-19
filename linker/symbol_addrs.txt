@@ -95,6 +95,15 @@ ptr_effectMgr        = 0x800DD0D0;
 // End of src/effect_manager.c =================================================
 
 
+// asm/libultra/audio/auxbus.s =================================================
+
+// .text
+alAuxBusParam = 0x80086FA0; // type:func
+alAuxBusPull  = 0x80086FD0; // type:func
+
+// End of asm/libultra/audio/auxbus.s ==========================================
+
+
 // asm/libultra/audio/env.s ====================================================
 
 // .text
@@ -1650,7 +1659,6 @@ __osPiRawStartDma = 0x800843f0;
 _freePVoice = 0x80085938;
 alMainBusPull = 0x80086220;
 alFxPull = 0x80086340;
-alAuxBusPull = 0x80086fd0;
 PlayerMgr_getActorCurrentlyInteractingWith = 0x80126370;
 cutsceneTrigger_entrypoint = 0x801274f0;
 cutsceneTrigger_checkCollision = 0x801276b4;
