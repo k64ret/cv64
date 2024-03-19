@@ -257,7 +257,7 @@ segments:
       - [0x0008AE10, asm]
       - [0x0008AE40, asm]
       - [0x0008AEE0, asm]
-      - [0x0008B130, asm]
+      - [0x0008B130, asm, libultra/io/epirawread]
       - [0x0008B290, asm, libultra/io/viswapbuf]
       - [0x0008B2E0, asm, libultra/gu/lookat]
       - [0x0008B610, asm, libultra/gu/position]

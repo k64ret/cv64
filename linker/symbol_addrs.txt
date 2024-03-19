@@ -95,6 +95,14 @@ ptr_effectMgr        = 0x800DD0D0;
 // End of src/effect_manager.c =================================================
 
 
+// asm/libultra/io/epirawread.s ================================================
+
+// .text
+__osEPiRawReadIo = 0x8008A530; // type:func
+
+// End of asm/libultra/io/epirawread.s =========================================
+
+
 // asm/libultra/io/viswapbuf.s =================================================
 
 // .text
@@ -1092,7 +1100,6 @@ guTranslateF = 0x8008a240;
 osJamMesg = 0x8008a2e0;
 osSetThreadPri = 0x8008a430;
 osGetThreadPri = 0x8008a510;
-__osEPiRawReadIo = 0x8008a530;
 playerCanInteractWithInteractuable = 0x801268e4;
 getMapEventFlagID = 0x80126cec;
 checkCutsceneTimeRangeTrigger = 0x80127e84;
