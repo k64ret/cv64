@@ -422,6 +422,7 @@ segments:
       - { start: 0x000A8420, type: bss, vram: 0x800A78A0, name: F960 }
       - { start: 0x000A8420, type: .bss, vram: 0x800DD0D0, name: effect_manager }
       - { start: 0x000A8420, type: bss, vram: 0x800DD0E0 }
+      - { start: 0x000A8420, type: bss, vram: 0x80123F40, name: libultra/os/timerintr }
       - { start: 0x000A8420, type: bss, vram: 0x80123F80, name: libultra/io/cartrominit }
       - { start: 0x000A8420, type: bss, vram: 0x80124000, name: libultra/io/vimgr }
       # - { start: 0x000A8420, type: bss, vram: 0x80125220 }
