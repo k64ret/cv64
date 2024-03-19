@@ -245,7 +245,7 @@ segments:
       - [0x0008A670, asm]
       - [0x0008A830, asm]
       - [0x0008A880, asm]
-      - [0x0008A960, asm]
+      - [0x0008A960, asm, libultra/audio/heapinit]
       - [0x0008A9A0, asm, libultra/libc/string]
       - [0x0008AA40, hasm, libultra/os/invalicache]
       - [0x0008AAC0, asm, libultra/os/createmesgqueue]
