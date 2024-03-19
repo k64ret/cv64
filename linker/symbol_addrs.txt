@@ -95,6 +95,25 @@ ptr_effectMgr        = 0x800DD0D0;
 // End of src/effect_manager.c =================================================
 
 
+// asm/libultra/audio/reverb.s =================================================
+
+// .text
+alFxPull           = 0x80086340; // type:func
+alFxParam          = 0x80086680; // type:func
+alFxParamHdl       = 0x80086698; // type:func
+_loadOutputBuffer  = 0x800868F4; // type:func
+_loadBuffer        = 0x80086B14; // type:func
+_saveBuffer        = 0x80086CAC; // type:func
+_filterBuffer      = 0x80086E40; // type:func
+_doModFunc         = 0x80086EF0; // type:func
+
+// .rodata
+reverb_rodata_0000 = 0x800A6E80; // type:jtbl
+reverb_CONVERT     = 0x800A6EA0;
+
+// End of asm/libultra/audio/reverb.s ==========================================
+
+
 // asm/libultra/audio/auxbus.s =================================================
 
 // .text
@@ -1361,12 +1380,6 @@ alResampleNew = 0x8008606c;
 alAuxBusNew = 0x800860f8;
 alMainBusNew = 0x8008614c;
 alSaveNew = 0x800861a0;
-alFxParam = 0x80086680;
-_loadOutputBuffer = 0x800868f4;
-_loadBuffer = 0x80086b14;
-_saveBuffer = 0x80086cac;
-_filterBuffer = 0x80086e40;
-_doModFunc = 0x80086ef0;
 playerCanInteractWithInteractuable = 0x801268e4;
 getMapEventFlagID = 0x80126cec;
 checkCutsceneTimeRangeTrigger = 0x80127e84;
@@ -1658,7 +1671,6 @@ __osDevMgrMain = 0x80083fe0;
 __osPiRawStartDma = 0x800843f0;
 _freePVoice = 0x80085938;
 alMainBusPull = 0x80086220;
-alFxPull = 0x80086340;
 PlayerMgr_getActorCurrentlyInteractingWith = 0x80126370;
 cutsceneTrigger_entrypoint = 0x801274f0;
 cutsceneTrigger_checkCollision = 0x801276b4;
@@ -1924,8 +1936,6 @@ align_rodata_0000 = 0x800a6e20;
 devmgr_rodata_0000 = 0x800a6e30;
 drvrNew_rodata_0000 = 0x800a6e60;
 CONVERT = 0x800a6e78;
-reverb_rodata_0000 = 0x800a6e80;
-reverb_rodata_0020 = 0x800a6ea0;
 __libm_qnan_f = 0x800a70b0;
 llcvt_rodata_0000 = 0x800a7130;
 llcvt_rodata_0008 = 0x800a7138;
@@ -2486,7 +2496,6 @@ prt_80040c08_6bd09446 = 0x80040c08;
 atari_center_point_translation_matrix = 0x800d8190;
 atari_size_translation_matrix = 0x800d8150;
 __osCleanupThread = 0x80080c60;
-alFxParamHdl = 0x80086698;
 target_atari_data_work_pos = 0x800d821c;
 attacker_atari_data_work_pos = 0x800d8228;
 distance_attacker_target_atari_data_vector = 0x800d8234;
