@@ -95,6 +95,33 @@ ptr_effectMgr        = 0x800DD0D0;
 // End of src/effect_manager.c =================================================
 
 
+// asm/libultra/libc/xprintf.s =================================================
+
+// .text
+_Putfld = 0x80088D90; // type:func
+_Printf = 0x80089400; // type:func
+
+// .data
+spaces  = 0x800a24e0;
+zeroes  = 0x800a2504;
+
+// .rodata
+hlL     = 0x800A6F50;
+fchar   = 0x800A6F54;
+fbit    = 0x800A6F5C;
+// jtbl_800A6F74_A7B74 = 0x800A6F74; // type:jtbl
+
+// End of asm/libultra/libc/xprintf.s ==========================================
+
+
+// asm/libultra/audio/filter.s =================================================
+
+// .text
+alFilterNew = 0x80089A50; // type:func
+
+// End of asm/libultra/audio/filter.s ==========================================
+
+
 // asm/libultra/gu/ortho.s =====================================================
 
 // .text
@@ -1236,9 +1263,6 @@ osContStartQuery = 0x80088c70;
 osContGetQuery = 0x80088cf4;
 guRandom = 0x80088d20;
 osUnmapTLB = 0x80088d50;
-_Putfld = 0x80088d90;
-_Printf = 0x80089400;
-alFilterNew = 0x80089a50;
 playerCanInteractWithInteractuable = 0x801268e4;
 getMapEventFlagID = 0x80126cec;
 checkCutsceneTimeRangeTrigger = 0x80127e84;
@@ -1791,8 +1815,6 @@ env_data_0000 = 0x800a2380;
 env_data_0100 = 0x800a2480;
 __osPreNMI = 0x800a24c0;
 xseed = 0x800a24d0;
-xprintf_data_0000 = 0x800a24e0;
-xprintf_data_0024 = 0x800a2504;
 osViModePalLan1 = 0x800a25b0;
 osViModeNtscLan1 = 0x800a2600;
 osViModeMpalLan1 = 0x800a2650;
@@ -1814,9 +1836,6 @@ env_rodata_0000 = 0x800a6eb0;
 resample_rodata_0000 = 0x800a6f10;
 resample_rodata_0028 = 0x800a6f38;
 resample_rodata_0030 = 0x800a6f40;
-hlL = 0x800a6f50;
-fchar = 0x800a6f54;
-fbit = 0x800a6f5c;
 __libm_qnan_f = 0x800a70b0;
 llcvt_rodata_0000 = 0x800a7130;
 llcvt_rodata_0008 = 0x800a7138;
