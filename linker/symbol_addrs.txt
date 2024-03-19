@@ -95,6 +95,14 @@ ptr_effectMgr        = 0x800DD0D0;
 // End of src/effect_manager.c =================================================
 
 
+// asm/libultra/audio/synsetpan.s ==============================================
+
+// .text
+alSynSetPan = 0x800844C0; // type:func
+
+// End of asm/libultra/audio/synsetpan.s =======================================
+
+
 // asm/libultra/os/getcount.s ==================================================
 
 // .text
@@ -1450,7 +1458,6 @@ __osPfsGetInitData = 0x80083c50;
 alSynSetPitch = 0x80083d20;
 __osProbeTLB = 0x80083db0;
 osCreatePiManager = 0x80083e70;
-alSynSetPan = 0x800844c0;
 playerCanInteractWithInteractuable = 0x801268e4;
 getMapEventFlagID = 0x80126cec;
 checkCutsceneTimeRangeTrigger = 0x80127e84;

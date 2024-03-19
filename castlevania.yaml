@@ -223,7 +223,7 @@ segments:
       - [0x000845E0, asm]
       - [0x000849B0, asm]
       - [0x00084A70, asm]
-      - [0x000850C0, asm]
+      - [0x000850C0, asm, libultra/audio/synsetpan]
       - [0x00085150, hasm, libultra/os/getcount]
       - [0x00085160, asm, libultra/io/contpfs]
       - [0x00085CE0, asm, libultra/io/pidma]
