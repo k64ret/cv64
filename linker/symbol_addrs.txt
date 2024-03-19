@@ -95,6 +95,16 @@ ptr_effectMgr        = 0x800DD0D0;
 // End of src/effect_manager.c =================================================
 
 
+// asm/libultra/libc/string.s ==================================================
+
+// .text
+memcpy = 0x80089DA0; // type:func
+strlen = 0x80089DCC; // type:func
+strchr = 0x80089DF4; // type:func
+
+// End of asm/libultra/libc/string.s ===========================================
+
+
 // asm/libultra/os/invalicache.s ===============================================
 
 // .text
@@ -1192,8 +1202,6 @@ guOrthoF = 0x80089a70;
 osUnmapTLBAll = 0x80089c30;
 osEPiStartDma = 0x80089c80;
 alHeapInit = 0x80089d60;
-memcpy = 0x80089da0;
-strchr = 0x80089df4;
 playerCanInteractWithInteractuable = 0x801268e4;
 getMapEventFlagID = 0x80126cec;
 checkCutsceneTimeRangeTrigger = 0x80127e84;
@@ -1709,7 +1717,6 @@ playerCameraController_updateCameraRotationSpeed = 0x8006bc50;
 playerCameraController_8006bcf4 = 0x8006bcf4;
 loadMusicSequenceFromROM = 0x8007b2f0;
 env_text_0BC8 = 0x80087c78;
-strlen = 0x80089dcc;
 text_findCharInString = 0x80132404;
 HUD_updateHealthBar = 0x80138224;
 HUD_updateSubweaponGraphic = 0x801386ac;
