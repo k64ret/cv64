@@ -95,6 +95,22 @@ ptr_effectMgr        = 0x800DD0D0;
 // End of src/effect_manager.c =================================================
 
 
+// asm/libultra/audio/synthesizer.s ============================================
+
+// .text
+alSynNew              = 0x800853C0; // type:func
+alAudioFrame          = 0x800856C0; // type:func
+__allocParam          = 0x80085890; // type:func
+__freeParam           = 0x800858C0; // type:func
+_collectPVoices       = 0x800858D8; // type:func
+_freePVoice           = 0x80085938; // type:func
+_timeToSamplesNoRound = 0x80085970; // type:func
+_timeToSamples        = 0x800859BC; // type:func
+__nextSampleTime      = 0x800859E4; // type:func
+
+// End of asm/libultra/audio/synthesizer.s =====================================
+
+
 // asm/libultra/audio/drvrnew.s ================================================
 
 // .text
@@ -1400,14 +1416,6 @@ __osCheckId = 0x80084d30;
 __osPfsRWInode = 0x80084e04;
 osPiStartDma = 0x800850e0;
 osPfsFindFile = 0x800851f0;
-alSynNew = 0x800853c0;
-alAudioFrame = 0x800856c0;
-__allocParam = 0x80085890;
-__freeParam = 0x800858c0;
-_collectPVoices = 0x800858d8;
-_timeToSamplesNoRound = 0x80085970;
-_timeToSamples = 0x800859bc;
-__nextSampleTime = 0x800859e4;
 playerCanInteractWithInteractuable = 0x801268e4;
 getMapEventFlagID = 0x80126cec;
 checkCutsceneTimeRangeTrigger = 0x80127e84;
@@ -1697,7 +1705,6 @@ guMtxIdent = 0x80083038;
 __osMotorAccess = 0x80083190;
 __osDevMgrMain = 0x80083fe0;
 __osPiRawStartDma = 0x800843f0;
-_freePVoice = 0x80085938;
 PlayerMgr_getActorCurrentlyInteractingWith = 0x80126370;
 cutsceneTrigger_entrypoint = 0x801274f0;
 cutsceneTrigger_checkCollision = 0x801276b4;
