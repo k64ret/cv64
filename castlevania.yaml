@@ -220,6 +220,7 @@ segments:
       - [0x00083AB0, asm]
       - [0x00083D20, asm]
       - [0x00083D90, asm]
+      - [0x00084160, asm, libultra/io/pfsallocatefile]
       - [0x000845E0, asm, libultra/io/pfsisplug]
       - [0x00084920, asm, libultra/audio/synsetpitch]
       - [0x000849B0, hasm, libultra/os/probetlb]
