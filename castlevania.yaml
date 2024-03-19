@@ -307,7 +307,7 @@ segments:
       - [0x0008ED70, asm, libultra/libc/xldtob]
       - [0x0008F830, asm, libultra/libc/ldiv]
       - [0x0008F9C0, asm, libultra/libc/xlitob]
-      - [0x0008FC60, asm] # The libultra symbol in here isn't identified yet
+      - [0x0008FC60, asm, libultra/io/sirawwrite]
       - [0x0008FCB0, asm, libultra/io/pirawwrite]
       - [0x0008FD00, asm, libultra/io/spsetstat]
       - [0x0008FD10, asm, libultra/io/spgetstat]
