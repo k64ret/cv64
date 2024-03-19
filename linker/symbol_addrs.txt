@@ -95,6 +95,33 @@ ptr_effectMgr        = 0x800DD0D0;
 // End of src/effect_manager.c =================================================
 
 
+// asm/libultra/audio/drvrnew.s ================================================
+
+// .text
+init_lpfilter       = 0x80085A40; // type:func
+alFxNew             = 0x80085AE0; // type:func
+alEnvmixerNew       = 0x80085F1C; // type:func
+alLoadNew           = 0x80085FC4; // type:func
+alResampleNew       = 0x8008606C; // type:func
+alAuxBusNew         = 0x800860F8; // type:func
+alMainBusNew        = 0x8008614C; // type:func
+alSaveNew           = 0x800861A0; // type:func
+
+// .data
+SMALLROOM_PARAMS    = 0x800A21D0;
+BIGROOM_PARAMS      = 0x800A2238;
+ECHO_PARAMS         = 0x800A22C0;
+CHORUS_PARAMS       = 0x800A22E8;
+FLANGE_PARAMS       = 0x800A2310;
+NULL_PARAMS         = 0x800A2338;
+
+// .rodata
+drvrNew_rodata_0000 = 0x800A6E60; // type:jtbl
+drvrnew_CONVERT     = 0x800A6E78;
+
+// End of asm/libultra/audio/drvrnew.s =========================================
+
+
 // asm/libultra/audio/mainbus.s ================================================
 
 // .text
@@ -1381,14 +1408,6 @@ _collectPVoices = 0x800858d8;
 _timeToSamplesNoRound = 0x80085970;
 _timeToSamples = 0x800859bc;
 __nextSampleTime = 0x800859e4;
-init_lpfilter = 0x80085a40;
-alFxNew = 0x80085ae0;
-alEnvmixerNew = 0x80085f1c;
-alLoadNew = 0x80085fc4;
-alResampleNew = 0x8008606c;
-alAuxBusNew = 0x800860f8;
-alMainBusNew = 0x8008614c;
-alSaveNew = 0x800861a0;
 playerCanInteractWithInteractuable = 0x801268e4;
 getMapEventFlagID = 0x80126cec;
 checkCutsceneTimeRangeTrigger = 0x80127e84;
@@ -1923,12 +1942,6 @@ __osPiTable = 0x800a21ac;
 __osCurrentHandle = 0x800a21b0;
 __osPfsInodeCacheChannel = 0x800a21c0;
 __osPfsInodeCacheBank = 0x800a21c4;
-SMALLROOM_PARAMS = 0x800a21d0;
-BIGROOM_PARAMS = 0x800a2238;
-ECHO_PARAMS = 0x800a22c0;
-CHORUS_PARAMS = 0x800a22e8;
-FLANGE_PARAMS = 0x800a2310;
-NULL_PARAMS = 0x800a2338;
 osViModePalLan1 = 0x800a25b0;
 osViModeNtscLan1 = 0x800a2600;
 osViModeMpalLan1 = 0x800a2650;
@@ -1942,8 +1955,6 @@ sinf_rodata_0038 = 0x800a6db8;
 sinf_rodata_0040 = 0x800a6dc0;
 align_rodata_0000 = 0x800a6e20;
 devmgr_rodata_0000 = 0x800a6e30;
-drvrNew_rodata_0000 = 0x800a6e60;
-CONVERT = 0x800a6e78;
 __libm_qnan_f = 0x800a70b0;
 llcvt_rodata_0000 = 0x800a7130;
 llcvt_rodata_0008 = 0x800a7138;
