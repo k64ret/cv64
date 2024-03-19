@@ -95,6 +95,17 @@ ptr_effectMgr        = 0x800DD0D0;
 // End of src/effect_manager.c =================================================
 
 
+// asm/libultra/audio/load.s ===================================================
+
+// .text
+alLoadParam  = 0x80088030; // type:func
+alRaw16Pull  = 0x80088204; // type:func
+_decodeChunk = 0x800885B0; // type:func
+alAdpcmPull  = 0x800886DC; // type:func
+
+// End of asm/libultra/audio/load.s ============================================
+
+
 // asm/libultra/os/seteventmesg.s ==============================================
 
 // .text
@@ -1315,8 +1326,6 @@ env_text_05E8 = 0x80087698;
 _frexpf = 0x80087980;
 _ldexpf = 0x80087a6c;
 alResampleParam = 0x80087d30;
-alLoadParam = 0x80088030;
-load_text_0580 = 0x800885b0;
 playerCanInteractWithInteractuable = 0x801268e4;
 getMapEventFlagID = 0x80126cec;
 checkCutsceneTimeRangeTrigger = 0x80127e84;
@@ -1612,8 +1621,6 @@ alFxPull = 0x80086340;
 alAuxBusPull = 0x80086fd0;
 alEnvmixerPull = 0x800870b0;
 alResamplePull = 0x80087e1c;
-alRaw16Pull = 0x80088204;
-alAdpcmPull = 0x800886dc;
 PlayerMgr_getActorCurrentlyInteractingWith = 0x80126370;
 cutsceneTrigger_entrypoint = 0x801274f0;
 cutsceneTrigger_checkCollision = 0x801276b4;

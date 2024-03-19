@@ -234,7 +234,7 @@ segments:
       - [0x00087BA0, asm]
       - [0x00087CB0, asm]
       - [0x00088930, asm]
-      - [0x00088C30, asm]
+      - [0x00088C30, asm, libultra/audio/load]
       - [0x00089780, asm, libultra/os/seteventmesg]
       - [0x00089840, hasm, libultra/gu/sqrtf]
       - [0x00089850, asm, libultra/os/afterprenmi]
