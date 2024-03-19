@@ -95,6 +95,35 @@ ptr_effectMgr        = 0x800DD0D0;
 // End of src/effect_manager.c =================================================
 
 
+// asm/libultra/io/viswapbuf.s =================================================
+
+// .text
+osViSwapBuffer = 0x8008A690; // type:func
+
+// End of asm/libultra/io/viswapbuf.s ==========================================
+
+
+// asm/libultra/gu/lookat.s ====================================================
+
+// .text
+guLookAtF = 0x8008A6E0; // type:func
+guLookAt  = 0x8008A998; // type:func
+
+// End of asm/libultra/gu/lookat.s =============================================
+
+
+// asm/libultra/gu/position.s ==================================================
+
+// .text
+guPositionF   = 0x8008AA10; // type:func
+guPosition    = 0x8008ABC0; // type:func
+
+// .rodata
+position_dtor = 0x800A7050;
+
+// End of asm/libultra/gu/position.s ===========================================
+
+
 // asm/libultra/io/epirawdma.s =================================================
 
 // .text
@@ -575,7 +604,7 @@ guRotateRPYF = 0x8008F4E0; // type:func
 guRotateRPY  = 0x8008F62C; // type:func
 
 // .rodata
-dtor         = 0x800A7120;
+rotate_dtor  = 0x800A7120;
 
 // End of asm/libultra/gu/rotaterpy.s ==========================================
 
@@ -1064,9 +1093,6 @@ osJamMesg = 0x8008a2e0;
 osSetThreadPri = 0x8008a430;
 osGetThreadPri = 0x8008a510;
 __osEPiRawReadIo = 0x8008a530;
-osViSwapBuffer = 0x8008a690;
-guLookAtF = 0x8008a6e0;
-guPositionF = 0x8008aa10;
 playerCanInteractWithInteractuable = 0x801268e4;
 getMapEventFlagID = 0x80126cec;
 checkCutsceneTimeRangeTrigger = 0x80127e84;
@@ -1368,8 +1394,6 @@ guOrtho = 0x80089bc4;
 alSavePull = 0x8008a040;
 osPfsRepairId = 0x8008a100;
 guTranslate = 0x8008a288;
-guLookAt = 0x8008a998;
-guPosition = 0x8008abc0;
 PlayerMgr_getActorCurrentlyInteractingWith = 0x80126370;
 cutsceneTrigger_entrypoint = 0x801274f0;
 cutsceneTrigger_checkCollision = 0x801276b4;
@@ -1652,7 +1676,6 @@ resample_rodata_0030 = 0x800a6f40;
 hlL = 0x800a6f50;
 fchar = 0x800a6f54;
 fbit = 0x800a6f5c;
-position_rodata_0000 = 0x800a7050;
 __libm_qnan_f = 0x800a70b0;
 llcvt_rodata_0000 = 0x800a7130;
 llcvt_rodata_0008 = 0x800a7138;
@@ -2283,3 +2306,4 @@ func_80005658 = 0x80005658;
 effect_isMarkForDeletion = 0x8005d244;
 effect_markForDeletion = 0x8005d230;
 D_80093D20_94920 = 0x80093D20; // size:0x1C
+guMtxF2L = 0x80082EB0; // type:func
