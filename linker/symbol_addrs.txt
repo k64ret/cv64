@@ -95,6 +95,19 @@ ptr_effectMgr        = 0x800DD0D0;
 // End of src/effect_manager.c =================================================
 
 
+// asm/libultra/io/pfsisplug.s =================================================
+
+// .text
+osPfsIsPlug        = 0x800839E0; // type:func
+__osPfsRequestData = 0x80083B80; // type:func
+__osPfsGetInitData = 0x80083C50; // type:func
+
+// .bss
+__osPfsPifRam = 0x80122AB0;
+
+// End of asm/libultra/io/pfsisplug.s ==========================================
+
+
 // asm/libultra/audio/synsetpitch.s ============================================
 
 // .text
@@ -1507,9 +1520,6 @@ _MakeMotorData = 0x800832f8;
 osMotorInit = 0x80083404;
 osPfsAllocateFile = 0x80083560;
 __osPfsDeclearPage = 0x80083894;
-osPfsIsPlug = 0x800839e0;
-__osPfsRequestData = 0x80083b80;
-__osPfsGetInitData = 0x80083c50;
 playerCanInteractWithInteractuable = 0x801268e4;
 getMapEventFlagID = 0x80126cec;
 checkCutsceneTimeRangeTrigger = 0x80127e84;
