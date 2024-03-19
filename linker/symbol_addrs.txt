@@ -95,6 +95,20 @@ ptr_effectMgr        = 0x800DD0D0;
 // End of src/effect_manager.c =================================================
 
 
+// asm/libultra/audio/resample.s ===============================================
+
+// .text
+alResampleParam      = 0x80087D30; // type:func
+alResamplePull       = 0x80087E1C; // type:func
+
+// .rodata
+resample_rodata_0000 = 0x800A6F10; // type:jtbl
+resample_rodata_0028 = 0x800A6F38;
+resample_rodata_0030 = 0x800A6F40;
+
+// End of asm/libultra/audio/resample.s ========================================
+
+
 // asm/libultra/audio/load.s ===================================================
 
 // .text
@@ -1325,7 +1339,6 @@ alEnvmixerParam = 0x800875b8;
 env_text_05E8 = 0x80087698;
 _frexpf = 0x80087980;
 _ldexpf = 0x80087a6c;
-alResampleParam = 0x80087d30;
 playerCanInteractWithInteractuable = 0x801268e4;
 getMapEventFlagID = 0x80126cec;
 checkCutsceneTimeRangeTrigger = 0x80127e84;
@@ -1620,7 +1633,6 @@ alMainBusPull = 0x80086220;
 alFxPull = 0x80086340;
 alAuxBusPull = 0x80086fd0;
 alEnvmixerPull = 0x800870b0;
-alResamplePull = 0x80087e1c;
 PlayerMgr_getActorCurrentlyInteractingWith = 0x80126370;
 cutsceneTrigger_entrypoint = 0x801274f0;
 cutsceneTrigger_checkCollision = 0x801276b4;
@@ -1892,9 +1904,6 @@ CONVERT = 0x800a6e78;
 reverb_rodata_0000 = 0x800a6e80;
 reverb_rodata_0020 = 0x800a6ea0;
 env_rodata_0000 = 0x800a6eb0;
-resample_rodata_0000 = 0x800a6f10;
-resample_rodata_0028 = 0x800a6f38;
-resample_rodata_0030 = 0x800a6f40;
 __libm_qnan_f = 0x800a70b0;
 llcvt_rodata_0000 = 0x800a7130;
 llcvt_rodata_0008 = 0x800a7138;
