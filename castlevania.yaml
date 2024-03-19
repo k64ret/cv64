@@ -269,7 +269,7 @@ segments:
       - [0x0008C590, asm]
       - [0x0008C610, asm]
       - [0x0008C670, asm]
-      - [0x0008C8E0, asm]
+      - [0x0008C8E0, hasm, libultra/os/interrupt]
       - [0x0008C970, asm, libultra/io/vi]
       - [0x0008CAB0, asm, libultra/io/viswapcontext]
       - [0x0008CDB0, asm, libultra/io/pigetcmdq]
