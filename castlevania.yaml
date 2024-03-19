@@ -266,7 +266,7 @@ segments:
       - [0x0008C1E0, asm]
       - [0x0008C270, asm]
       - [0x0008C280, asm]
-      - [0x0008C590, asm]
+      - [0x0008C590, asm, libultra/audio/copy]
       - [0x0008C610, asm, libultra/os/resetglobalintmask]
       - [0x0008C670, asm, libultra/io/pfsdeletefile]
       - [0x0008C8E0, hasm, libultra/os/interrupt]

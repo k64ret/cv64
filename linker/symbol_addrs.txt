@@ -95,6 +95,14 @@ ptr_effectMgr        = 0x800DD0D0;
 // End of src/effect_manager.c =================================================
 
 
+// asm/libultra/audio/copy.s ===================================================
+
+// .text
+alCopy = 0x8008B990; // type:func
+
+// End of asm/libultra/audio/copy.s ============================================
+
+
 // asm/libultra/os/resetglobalintmask.s ========================================
 
 // .text
@@ -978,7 +986,6 @@ osAiSetFrequency = 0x8008b490;
 guNormalize = 0x8008b5e0;
 __osSetCompare = 0x8008b670;
 _bcopy = 0x8008b680;
-alCopy = 0x8008b990;
 playerCanInteractWithInteractuable = 0x801268e4;
 getMapEventFlagID = 0x80126cec;
 checkCutsceneTimeRangeTrigger = 0x80127e84;
