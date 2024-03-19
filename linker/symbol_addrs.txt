@@ -95,6 +95,39 @@ ptr_effectMgr        = 0x800DD0D0;
 // End of src/effect_manager.c =================================================
 
 
+// asm/libultra/gu/translate.s =================================================
+
+// .text
+guTranslateF = 0x8008A240; // type:func
+guTranslate  = 0x8008A288; // type:func
+
+// End of asm/libultra/gu/translate.s ==========================================
+
+
+// asm/libultra/os/jammesg.s ===================================================
+
+// .text
+osJamMesg = 0x8008A2E0; // type:func
+
+// End of asm/libultra/os/jammesg.s ============================================
+
+
+// asm/libultra/os/setthreadpri.s ==============================================
+
+// .text
+osSetThreadPri = 0x8008A430; // type:func
+
+// End of asm/libultra/os/setthreadpri.s =======================================
+
+
+// asm/libultra/os/getthreadpri.s ==============================================
+
+// .text
+osGetThreadPri = 0x8008A510; // type:func
+
+// End of asm/libultra/os/getthreadpri.s =======================================
+
+
 // asm/libultra/io/epirawread.s ================================================
 
 // .text
@@ -1096,10 +1129,6 @@ alSaveParam = 0x8008a0cc;
 alSynGetFXRef = 0x8008a160;
 __osSpDeviceBusy = 0x8008a1e0;
 __osSiDeviceBusy = 0x8008a210;
-guTranslateF = 0x8008a240;
-osJamMesg = 0x8008a2e0;
-osSetThreadPri = 0x8008a430;
-osGetThreadPri = 0x8008a510;
 playerCanInteractWithInteractuable = 0x801268e4;
 getMapEventFlagID = 0x80126cec;
 checkCutsceneTimeRangeTrigger = 0x80127e84;
@@ -1400,7 +1429,6 @@ alAdpcmPull = 0x800886dc;
 guOrtho = 0x80089bc4;
 alSavePull = 0x8008a040;
 osPfsRepairId = 0x8008a100;
-guTranslate = 0x8008a288;
 PlayerMgr_getActorCurrentlyInteractingWith = 0x80126370;
 cutsceneTrigger_entrypoint = 0x801274f0;
 cutsceneTrigger_checkCollision = 0x801276b4;
