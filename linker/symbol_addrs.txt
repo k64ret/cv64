@@ -95,6 +95,14 @@ ptr_effectMgr        = 0x800DD0D0;
 // End of src/effect_manager.c =================================================
 
 
+// asm/libultra/io/visetmode.s =================================================
+
+// .text
+osViSetMode = 0x80083120; // type:func
+
+// End of asm/libultra/io/visetmode.s ==========================================
+
+
 // asm/libultra/io/motor.s =====================================================
 
 // .text
@@ -1537,7 +1545,6 @@ __osPfsRequestOneChannel = 0x80082d50;
 __osPfsGetOneChannelData = 0x80082e14;
 guMtxIdentF = 0x80082fb0;
 guMtxL2F = 0x80083068;
-osViSetMode = 0x80083120;
 playerCanInteractWithInteractuable = 0x801268e4;
 getMapEventFlagID = 0x80126cec;
 checkCutsceneTimeRangeTrigger = 0x80127e84;
