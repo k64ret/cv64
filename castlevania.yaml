@@ -225,7 +225,7 @@ segments:
       - [0x00084A70, asm]
       - [0x000850C0, asm]
       - [0x00085150, asm]
-      - [0x00085160, asm]
+      - [0x00085160, asm, libultra/io/contpfs]
       - [0x00085CE0, asm, libultra/io/pidma]
       - [0x00085DF0, asm, libultra/io/pfssearchfile]
       - [0x00085FC0, asm, libultra/audio/synthesizer]
@@ -351,6 +351,7 @@ segments:
       - [0x0009B950, data, 5B7E0]
       - [0x0009B960, .data, effect_manager]
       - [0x0009B970, data]
+      - [0x000A2DC0, data, libultra/io/contpfs]
       - [0x000A2DD0, data, libultra/audio/drvrnew]
       - [0x000A2F80, data, libultra/audio/env]
       - [0x000A30C0, data, libultra/os/seteventmesg]
@@ -431,6 +432,7 @@ segments:
       - { start: 0x000A8420, type: bss, vram: 0x800A78A0, name: F960 }
       - { start: 0x000A8420, type: .bss, vram: 0x800DD0D0, name: effect_manager }
       - { start: 0x000A8420, type: bss, vram: 0x800DD0E0 }
+      - { start: 0x000A8420, type: bss, vram: 0x80123DB0, name: libultra/io/contpfs }
       - { start: 0x000A8420, type: bss, vram: 0x80123EB0, name: libultra/os/seteventmesg }
       - { start: 0x000A8420, type: bss, vram: 0x80123F30, name: libultra/gu/position }
       - { start: 0x000A8420, type: bss, vram: 0x80123F40, name: libultra/os/timerintr }

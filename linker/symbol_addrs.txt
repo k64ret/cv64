@@ -95,6 +95,27 @@ ptr_effectMgr        = 0x800DD0D0;
 // End of src/effect_manager.c =================================================
 
 
+// asm/libultra/io/contpfs.s ===================================================
+
+// .text
+__osSumcalc              = 0x80084560; // type:func
+__osIdCheckSum           = 0x800845D4; // type:func
+__osRepairPackId         = 0x800846D0; // type:func
+__osCheckPackId          = 0x80084A20; // type:func
+__osGetId                = 0x80084B84; // type:func
+__osCheckId              = 0x80084D30; // type:func
+__osPfsRWInode           = 0x80084E04; // type:func
+
+// .data
+__osPfsInodeCacheChannel = 0x800A21C0;
+__osPfsInodeCacheBank    = 0x800A21C4;
+
+// .bss
+__osPfsInodeCache        = 0x80123DB0;
+
+// End of asm/libultra/io/contpfs.s ============================================
+
+
 // asm/libultra/io/pidma.s =====================================================
 
 // .text
@@ -1423,13 +1444,6 @@ __osProbeTLB = 0x80083db0;
 osCreatePiManager = 0x80083e70;
 alSynSetPan = 0x800844c0;
 osGetCount = 0x80084550;
-__osSumcalc = 0x80084560;
-__osIdCheckSum = 0x800845d4;
-__osRepairPackId = 0x800846d0;
-__osCheckPackId = 0x80084a20;
-__osGetId = 0x80084b84;
-__osCheckId = 0x80084d30;
-__osPfsRWInode = 0x80084e04;
 playerCanInteractWithInteractuable = 0x801268e4;
 getMapEventFlagID = 0x80126cec;
 checkCutsceneTimeRangeTrigger = 0x80127e84;
@@ -1961,8 +1975,6 @@ __osPiDevMgr = 0x800a2190;
 player_bss_003C = 0x800a2198;
 __osPiTable = 0x800a21ac;
 __osCurrentHandle = 0x800a21b0;
-__osPfsInodeCacheChannel = 0x800a21c0;
-__osPfsInodeCacheBank = 0x800a21c4;
 osViModePalLan1 = 0x800a25b0;
 osViModeNtscLan1 = 0x800a2600;
 osViModeMpalLan1 = 0x800a2650;
@@ -1993,7 +2005,6 @@ __Dom1SpeedParam = 0x80122af7;
 __Dom2SpeedParam = 0x80122b6f;
 piMgrThread = 0x80122be0;
 piMgrMesgBuff = 0x80123da8;
-__osPfsInodeCache = 0x80123db0;
 ptr_PlayerData = 0x800d7af8;
 Player_health = 0x80389c3e;
 Player_gold = 0x80389c44;
