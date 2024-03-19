@@ -95,6 +95,14 @@ ptr_effectMgr        = 0x800DD0D0;
 // End of src/effect_manager.c =================================================
 
 
+// asm/libultra/os/invalicache.s ===============================================
+
+// .text
+osInvalICache = 0x80089E40; // type:func
+
+// End of asm/libultra/os/invalicache.s ========================================
+
+
 // asm/libultra/os/createmesgqueue.s ===========================================
 
 // .text
@@ -1186,7 +1194,6 @@ osEPiStartDma = 0x80089c80;
 alHeapInit = 0x80089d60;
 memcpy = 0x80089da0;
 strchr = 0x80089df4;
-osInvalICache = 0x80089e40;
 playerCanInteractWithInteractuable = 0x801268e4;
 getMapEventFlagID = 0x80126cec;
 checkCutsceneTimeRangeTrigger = 0x80127e84;

@@ -247,7 +247,7 @@ segments:
       - [0x0008A880, asm]
       - [0x0008A960, asm]
       - [0x0008A9A0, asm]
-      - [0x0008AA40, asm]
+      - [0x0008AA40, hasm, libultra/os/invalicache]
       - [0x0008AAC0, asm, libultra/os/createmesgqueue]
       - [0x0008AAF0, hasm, libultra/os/invaldcache]
       - [0x0008ABA0, asm, libultra/audio/synsetfxmix]
