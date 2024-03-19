@@ -95,6 +95,35 @@ ptr_effectMgr        = 0x800DD0D0;
 // End of src/effect_manager.c =================================================
 
 
+// asm/libultra/os/timerintr.s =================================================
+
+// .text
+__osTimerServicesInit = 0x8008B040; // type:func
+__osTimerInterrupt    = 0x8008B0CC; // type:func
+__osSetTimerIntr      = 0x8008B244; // type:func
+__osInsertTimer       = 0x8008B2B8; // type:func
+
+// .data
+__osTimerList         = 0x800A2530;
+
+// .bss
+__osBaseTimer         = 0x80123F40;
+__osCurrentTime       = 0x80123F60;
+__osBaseCounter       = 0x80123F68;
+__osViIntrCount       = 0x80123F6C;
+__osTimerCounter      = 0x80123F70;
+
+// End of asm/libultra/os/timerintr.s ==========================================
+
+
+// asm/libultra/os/setglobalintmask.s ==========================================
+
+// .text
+__osSetGlobalIntMask = 0x8008B440; // type:func
+
+// End of asm/libultra/os/setglobalintmask.s ===================================
+
+
 // asm/libultra/io/aisetfreq.s =================================================
 
 // .text
@@ -1009,11 +1038,6 @@ guPositionF = 0x8008aa10;
 osSpTaskYielded = 0x8008ae10;
 _bcmp = 0x8008ae90;
 osGetTime = 0x8008afb0;
-__osTimerServicesInit = 0x8008b040;
-__osTimerInterrupt = 0x8008b0cc;
-__osSetTimerIntr = 0x8008b244;
-__osInsertTimer = 0x8008b2b8;
-__osSetGlobalIntMask = 0x8008b440;
 playerCanInteractWithInteractuable = 0x801268e4;
 getMapEventFlagID = 0x80126cec;
 checkCutsceneTimeRangeTrigger = 0x80127e84;
@@ -1576,7 +1600,6 @@ __osPreNMI = 0x800a24c0;
 xseed = 0x800a24d0;
 xprintf_data_0000 = 0x800a24e0;
 xprintf_data_0024 = 0x800a2504;
-__osTimerList = 0x800a2530;
 osViModePalLan1 = 0x800a25b0;
 osViModeNtscLan1 = 0x800a2600;
 osViModeMpalLan1 = 0x800a2650;
@@ -1622,9 +1645,6 @@ piMgrMesgBuff = 0x80123da8;
 __osPfsInodeCache = 0x80123db0;
 __osEventStateTab = 0x80123eb0;
 position_bss_0000 = 0x80123f30;
-__osBaseCounter = 0x80123f68;
-__osViIntrCount = 0x80123f6c;
-__osTimerCounter = 0x80123f70;
 ptr_PlayerData = 0x800d7af8;
 Player_health = 0x80389c3e;
 Player_gold = 0x80389c44;
@@ -1702,7 +1722,6 @@ someROMLoadedFile_bytesLeftToRead = 0x800d5e48;
 someROMLoadedFile_lastIndex = 0x800d5e4c;
 someROMLoadedFile_address = 0x800d5e44;
 someROMLoadedFile_currentReadingAddress = 0x800d5e40;
-__osCurrentTime = 0x80123f60;
 processMeter_render = 0x80019e68;
 contPak_notInserted = 0x800d7490;
 contPak_getFileState = 0x8001a770;
