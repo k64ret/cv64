@@ -95,6 +95,26 @@ ptr_effectMgr        = 0x800DD0D0;
 // End of src/effect_manager.c =================================================
 
 
+// asm/libultra/io/pimgr.s =====================================================
+
+// .text
+osCreatePiManager = 0x80083E70; // type:func
+
+// .data
+__osPiDevMgr      = 0x800A2190;
+__osPiTable       = 0x800A21AC;
+__osCurrentHandle = 0x800A21B0;
+
+// .bss
+__Dom1SpeedParam  = 0x80122AF7;
+__Dom2SpeedParam  = 0x80122B6F;
+piMgrThread       = 0x80122be0;
+__osPiMesgQueue   = 0x80123d90;
+piMgrMesgBuff     = 0x80123da8;
+
+// End of asm/libultra/io/pimgr.s ==============================================
+
+
 // asm/libultra/io/devmgr.s ====================================================
 
 // .text
@@ -1476,7 +1496,6 @@ __osPfsRequestData = 0x80083b80;
 __osPfsGetInitData = 0x80083c50;
 alSynSetPitch = 0x80083d20;
 __osProbeTLB = 0x80083db0;
-osCreatePiManager = 0x80083e70;
 playerCanInteractWithInteractuable = 0x801268e4;
 getMapEventFlagID = 0x80126cec;
 checkCutsceneTimeRangeTrigger = 0x80127e84;
@@ -2002,10 +2021,7 @@ osViClock = 0x800a0ff8;
 __osShutdown = 0x800a0ffc;
 __OSGlobalIntMask = 0x800a1000;
 __osThreadTail = 0x800a1f40;
-__osPiDevMgr = 0x800a2190;
 player_bss_003C = 0x800a2198;
-__osPiTable = 0x800a21ac;
-__osCurrentHandle = 0x800a21b0;
 osViModePalLan1 = 0x800a25b0;
 osViModeNtscLan1 = 0x800a2600;
 osViModeMpalLan1 = 0x800a2650;
@@ -2031,10 +2047,6 @@ __osEepromTimerMsg = 0x801227b0;
 align_bss_0000 = 0x801227e0;
 __osFinalrom = 0x801227f0;
 __MotorDataBuf = 0x801229b0;
-__Dom1SpeedParam = 0x80122af7;
-__Dom2SpeedParam = 0x80122b6f;
-piMgrThread = 0x80122be0;
-piMgrMesgBuff = 0x80123da8;
 ptr_PlayerData = 0x800d7af8;
 Player_health = 0x80389c3e;
 Player_gold = 0x80389c44;
@@ -2075,7 +2087,6 @@ audioHeap = 0x800e22f8;
 ALHeap = 0x800e22d8;
 ALGlobals = 0x800dd750;
 ALPlayer_client = 0x800e22c0;
-__osPiMesgQueue = 0x80123d90;
 sCrashScreenThread = 0x800d5f40;
 crashScreen_mesgQueue = 0x800d70f0;
 crashScreen_mesg = 0x800d7108;
