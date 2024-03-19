@@ -95,6 +95,14 @@ ptr_effectMgr        = 0x800DD0D0;
 // End of src/effect_manager.c =================================================
 
 
+// asm/libultra/gu/normalize.s =================================================
+
+// .text
+guNormalize = 0x8008B5E0; // type:func
+
+// End of asm/libultra/gu/normalize.s ==========================================
+
+
 // asm/libultra/os/setcompare.s ================================================
 
 // .text
@@ -999,7 +1007,6 @@ __osSetTimerIntr = 0x8008b244;
 __osInsertTimer = 0x8008b2b8;
 __osSetGlobalIntMask = 0x8008b440;
 osAiSetFrequency = 0x8008b490;
-guNormalize = 0x8008b5e0;
 playerCanInteractWithInteractuable = 0x801268e4;
 getMapEventFlagID = 0x80126cec;
 checkCutsceneTimeRangeTrigger = 0x80127e84;

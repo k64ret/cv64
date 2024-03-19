@@ -263,7 +263,7 @@ segments:
       - [0x0008BBB0, asm]
       - [0x0008BC40, asm]
       - [0x0008C090, asm]
-      - [0x0008C1E0, asm]
+      - [0x0008C1E0, asm, libultra/gu/normalize]
       - [0x0008C270, hasm, libultra/os/setcompare]
       - [0x0008C280, hasm, libultra/libc/bcopy]
       - [0x0008C590, asm, libultra/audio/copy]
