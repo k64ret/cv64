@@ -95,6 +95,14 @@ ptr_effectMgr        = 0x800DD0D0;
 // End of src/effect_manager.c =================================================
 
 
+// asm/libultra/os/probetlb.s ==================================================
+
+// .text
+__osProbeTLB = 0x80083DB0; // type:func
+
+// End of asm/libultra/os/probetlb.s ===========================================
+
+
 // asm/libultra/io/pimgr.s =====================================================
 
 // .text
@@ -1495,7 +1503,6 @@ osPfsIsPlug = 0x800839e0;
 __osPfsRequestData = 0x80083b80;
 __osPfsGetInitData = 0x80083c50;
 alSynSetPitch = 0x80083d20;
-__osProbeTLB = 0x80083db0;
 playerCanInteractWithInteractuable = 0x801268e4;
 getMapEventFlagID = 0x80126cec;
 checkCutsceneTimeRangeTrigger = 0x80127e84;
