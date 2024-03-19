@@ -95,6 +95,20 @@ ptr_effectMgr        = 0x800DD0D0;
 // End of src/effect_manager.c =================================================
 
 
+// asm/libultra/os/seteventmesg.s ==============================================
+
+// .text
+osSetEventMesg    = 0x80088B80; // type:func
+
+// .data
+__osPreNMI        = 0x800a24c0;
+
+// .bss
+__osEventStateTab = 0x80123eb0;
+
+// End of asm/libultra/os/seteventmesg.s =======================================
+
+
 // asm/libultra/gu/sqrtf.s =====================================================
 
 // .text
@@ -343,11 +357,14 @@ guLookAt  = 0x8008A998; // type:func
 // asm/libultra/gu/position.s ==================================================
 
 // .text
-guPositionF   = 0x8008AA10; // type:func
-guPosition    = 0x8008ABC0; // type:func
+guPositionF       = 0x8008AA10; // type:func
+guPosition        = 0x8008ABC0; // type:func
 
 // .rodata
-position_dtor = 0x800A7050;
+position_dtor     = 0x800A7050;
+
+// .bss
+position_bss_0000 = 0x80123f30;
 
 // End of asm/libultra/gu/position.s ===========================================
 
@@ -1300,7 +1317,6 @@ _ldexpf = 0x80087a6c;
 alResampleParam = 0x80087d30;
 alLoadParam = 0x80088030;
 load_text_0580 = 0x800885b0;
-osSetEventMesg = 0x80088b80;
 playerCanInteractWithInteractuable = 0x801268e4;
 getMapEventFlagID = 0x80126cec;
 checkCutsceneTimeRangeTrigger = 0x80127e84;
@@ -1851,7 +1867,6 @@ FLANGE_PARAMS = 0x800a2310;
 NULL_PARAMS = 0x800a2338;
 env_data_0000 = 0x800a2380;
 env_data_0100 = 0x800a2480;
-__osPreNMI = 0x800a24c0;
 osViModePalLan1 = 0x800a25b0;
 osViModeNtscLan1 = 0x800a2600;
 osViModeMpalLan1 = 0x800a2650;
@@ -1891,8 +1906,6 @@ __Dom2SpeedParam = 0x80122b6f;
 piMgrThread = 0x80122be0;
 piMgrMesgBuff = 0x80123da8;
 __osPfsInodeCache = 0x80123db0;
-__osEventStateTab = 0x80123eb0;
-position_bss_0000 = 0x80123f30;
 ptr_PlayerData = 0x800d7af8;
 Player_health = 0x80389c3e;
 Player_gold = 0x80389c44;
