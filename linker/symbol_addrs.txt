@@ -95,6 +95,25 @@ ptr_effectMgr        = 0x800DD0D0;
 // End of src/effect_manager.c =================================================
 
 
+// asm/libultra/io/devmgr.s ====================================================
+
+// .text
+__osDevMgrMain     = 0x80083FE0; // type:func
+
+// .rodata
+devmgr_rodata_0000 = 0x800A6E30; // type:jtbl
+
+// End of asm/libultra/io/devmgr.s =============================================
+
+
+// asm/libultra/io/pirawdma.s ==================================================
+
+// .text
+__osPiRawStartDma = 0x800843F0; // type:func
+
+// End of asm/libultra/io/pirawdma.s ===========================================
+
+
 // asm/libultra/audio/synsetpan.s ==============================================
 
 // .text
@@ -1745,8 +1764,6 @@ osDestroyThread = 0x80080cb0;
 __ll_mod = 0x800822c8;
 guMtxIdent = 0x80083038;
 __osMotorAccess = 0x80083190;
-__osDevMgrMain = 0x80083fe0;
-__osPiRawStartDma = 0x800843f0;
 PlayerMgr_getActorCurrentlyInteractingWith = 0x80126370;
 cutsceneTrigger_entrypoint = 0x801274f0;
 cutsceneTrigger_checkCollision = 0x801276b4;
@@ -2001,7 +2018,6 @@ sinf_rodata_0030 = 0x800a6db0;
 sinf_rodata_0038 = 0x800a6db8;
 sinf_rodata_0040 = 0x800a6dc0;
 align_rodata_0000 = 0x800a6e20;
-devmgr_rodata_0000 = 0x800a6e30;
 __libm_qnan_f = 0x800a70b0;
 llcvt_rodata_0000 = 0x800a7130;
 llcvt_rodata_0008 = 0x800a7138;
