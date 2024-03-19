@@ -95,6 +95,14 @@ ptr_effectMgr        = 0x800DD0D0;
 // End of src/effect_manager.c =================================================
 
 
+// asm/libultra/io/pidma.s =====================================================
+
+// .text
+osPiStartDma = 0x800850E0; // type:func
+
+// End of asm/libultra/io/pidma.s ==============================================
+
+
 // asm/libultra/io/pfssearchfile.s =============================================
 
 // .text
@@ -1422,7 +1430,6 @@ __osCheckPackId = 0x80084a20;
 __osGetId = 0x80084b84;
 __osCheckId = 0x80084d30;
 __osPfsRWInode = 0x80084e04;
-osPiStartDma = 0x800850e0;
 playerCanInteractWithInteractuable = 0x801268e4;
 getMapEventFlagID = 0x80126cec;
 checkCutsceneTimeRangeTrigger = 0x80127e84;
