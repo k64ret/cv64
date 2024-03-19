@@ -95,6 +95,14 @@ ptr_effectMgr        = 0x800DD0D0;
 // End of src/effect_manager.c =================================================
 
 
+// asm/libultra/libc/bcopy.s ===================================================
+
+// .text
+_bcopy = 0x8008B680; // type:func
+
+// End of asm/libultra/libc/bcopy.s ============================================
+
+
 // asm/libultra/audio/copy.s ===================================================
 
 // .text
@@ -985,7 +993,6 @@ __osSetGlobalIntMask = 0x8008b440;
 osAiSetFrequency = 0x8008b490;
 guNormalize = 0x8008b5e0;
 __osSetCompare = 0x8008b670;
-_bcopy = 0x8008b680;
 playerCanInteractWithInteractuable = 0x801268e4;
 getMapEventFlagID = 0x80126cec;
 checkCutsceneTimeRangeTrigger = 0x80127e84;
