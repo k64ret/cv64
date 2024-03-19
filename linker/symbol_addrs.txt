@@ -95,6 +95,29 @@ ptr_effectMgr        = 0x800DD0D0;
 // End of src/effect_manager.c =================================================
 
 
+// asm/libultra/audio/env.s ====================================================
+
+// .text
+alEnvmixerPull   = 0x800870B0; // type:func
+alEnvmixerParam  = 0x800875B8; // type:func
+_pullSubFrame    = 0x80087698; // type:func
+_frexpf          = 0x80087980; // type:func
+_ldexpf          = 0x80087A6C; // type:func
+_getRate         = 0x80087A94; // type:func
+_getVol          = 0x80087C78; // type:func
+
+// .data
+eqpower          = 0x800A2380; // size:0x100
+env_data_0100    = 0x800A2480;
+
+// .rodata
+env_rodata_0000  = 0x800A6EB0; // type:jtbl
+M_LN2            = 0x800A6EF8;
+D_800A6F00_A7B00 = 0x800A6F00;
+
+// End of asm/libultra/audio/env.s =============================================
+
+
 // asm/libultra/audio/resample.s ===============================================
 
 // .text
@@ -1335,10 +1358,6 @@ _loadBuffer = 0x80086b14;
 _saveBuffer = 0x80086cac;
 _filterBuffer = 0x80086e40;
 _doModFunc = 0x80086ef0;
-alEnvmixerParam = 0x800875b8;
-env_text_05E8 = 0x80087698;
-_frexpf = 0x80087980;
-_ldexpf = 0x80087a6c;
 playerCanInteractWithInteractuable = 0x801268e4;
 getMapEventFlagID = 0x80126cec;
 checkCutsceneTimeRangeTrigger = 0x80127e84;
@@ -1632,7 +1651,6 @@ _freePVoice = 0x80085938;
 alMainBusPull = 0x80086220;
 alFxPull = 0x80086340;
 alAuxBusPull = 0x80086fd0;
-alEnvmixerPull = 0x800870b0;
 PlayerMgr_getActorCurrentlyInteractingWith = 0x80126370;
 cutsceneTrigger_entrypoint = 0x801274f0;
 cutsceneTrigger_checkCollision = 0x801276b4;
@@ -1849,7 +1867,6 @@ shadow_create = 0x80061280;
 playerCameraController_updateCameraRotationSpeed = 0x8006bc50;
 playerCameraController_8006bcf4 = 0x8006bcf4;
 loadMusicSequenceFromROM = 0x8007b2f0;
-env_text_0BC8 = 0x80087c78;
 text_findCharInString = 0x80132404;
 HUD_updateHealthBar = 0x80138224;
 HUD_updateSubweaponGraphic = 0x801386ac;
@@ -1884,8 +1901,6 @@ ECHO_PARAMS = 0x800a22c0;
 CHORUS_PARAMS = 0x800a22e8;
 FLANGE_PARAMS = 0x800a2310;
 NULL_PARAMS = 0x800a2338;
-env_data_0000 = 0x800a2380;
-env_data_0100 = 0x800a2480;
 osViModePalLan1 = 0x800a25b0;
 osViModeNtscLan1 = 0x800a2600;
 osViModeMpalLan1 = 0x800a2650;
@@ -1903,7 +1918,6 @@ drvrNew_rodata_0000 = 0x800a6e60;
 CONVERT = 0x800a6e78;
 reverb_rodata_0000 = 0x800a6e80;
 reverb_rodata_0020 = 0x800a6ea0;
-env_rodata_0000 = 0x800a6eb0;
 __libm_qnan_f = 0x800a70b0;
 llcvt_rodata_0000 = 0x800a7130;
 llcvt_rodata_0008 = 0x800a7138;
