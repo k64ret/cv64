@@ -230,7 +230,7 @@ segments:
       - [0x00085DF0, asm]
       - [0x00085FC0, asm]
       - [0x00086640, asm]
-      - [0x00086DF0, asm]
+      - [0x00086DF0, asm, libultra/audio/mainbus]
       - [0x00086F40, asm, libultra/audio/reverb]
       - [0x00087BA0, asm, libultra/audio/auxbus]
       - [0x00087CB0, asm, libultra/audio/env]
