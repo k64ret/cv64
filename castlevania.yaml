@@ -227,7 +227,7 @@ segments:
       - [0x00085150, asm]
       - [0x00085160, asm]
       - [0x00085CE0, asm]
-      - [0x00085DF0, asm]
+      - [0x00085DF0, asm, libultra/io/pfssearchfile]
       - [0x00085FC0, asm, libultra/audio/synthesizer]
       - [0x00086640, asm, libultra/audio/drvrnew]
       - [0x00086DF0, asm, libultra/audio/mainbus]
