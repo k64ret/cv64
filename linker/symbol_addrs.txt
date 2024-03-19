@@ -95,6 +95,23 @@ ptr_effectMgr        = 0x800DD0D0;
 // End of src/effect_manager.c =================================================
 
 
+// asm/libultra/gu/ortho.s =====================================================
+
+// .text
+guOrthoF = 0x80089A70; // type:func
+guOrtho  = 0x80089BC4; // type:func
+
+// End of asm/libultra/gu/ortho.s ==============================================
+
+
+// asm/libultra/os/unmaptlball.s ===============================================
+
+// .text
+osUnmapTLBAll = 0x80089C30; // type:func
+
+// End of asm/libultra/os/unmaptlball.s ========================================
+
+
 // asm/libultra/io/epidma.s ====================================================
 
 // .text
@@ -1214,8 +1231,6 @@ osUnmapTLB = 0x80088d50;
 _Putfld = 0x80088d90;
 _Printf = 0x80089400;
 alFilterNew = 0x80089a50;
-guOrthoF = 0x80089a70;
-osUnmapTLBAll = 0x80089c30;
 playerCanInteractWithInteractuable = 0x801268e4;
 getMapEventFlagID = 0x80126cec;
 checkCutsceneTimeRangeTrigger = 0x80127e84;
@@ -1513,7 +1528,6 @@ alEnvmixerPull = 0x800870b0;
 alResamplePull = 0x80087e1c;
 alRaw16Pull = 0x80088204;
 alAdpcmPull = 0x800886dc;
-guOrtho = 0x80089bc4;
 PlayerMgr_getActorCurrentlyInteractingWith = 0x80126370;
 cutsceneTrigger_entrypoint = 0x801274f0;
 cutsceneTrigger_checkCollision = 0x801276b4;
