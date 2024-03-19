@@ -260,7 +260,7 @@ segments:
       - [0x0008B130, asm]
       - [0x0008B290, asm]
       - [0x0008B830, asm]
-      - [0x0008BBB0, asm]
+      - [0x0008BBB0, asm, libultra/os/gettime]
       - [0x0008BC40, asm, libultra/os/timerintr]
       - [0x0008C040, asm, libultra/os/setglobalintmask]
       - [0x0008C090, asm, libultra/io/aisetfreq]

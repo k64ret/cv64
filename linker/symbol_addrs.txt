@@ -95,6 +95,14 @@ ptr_effectMgr        = 0x800DD0D0;
 // End of src/effect_manager.c =================================================
 
 
+// asm/libultra/os/gettime.s ===================================================
+
+// .text
+osGetTime = 0x8008AFB0; // type:func
+
+// End of asm/libultra/os/gettime.s ============================================
+
+
 // asm/libultra/os/timerintr.s =================================================
 
 // .text
@@ -1037,7 +1045,6 @@ guLookAtF = 0x8008a6e0;
 guPositionF = 0x8008aa10;
 osSpTaskYielded = 0x8008ae10;
 _bcmp = 0x8008ae90;
-osGetTime = 0x8008afb0;
 playerCanInteractWithInteractuable = 0x801268e4;
 getMapEventFlagID = 0x80126cec;
 checkCutsceneTimeRangeTrigger = 0x80127e84;
