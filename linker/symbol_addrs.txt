@@ -95,6 +95,14 @@ ptr_effectMgr        = 0x800DD0D0;
 // End of src/effect_manager.c =================================================
 
 
+// asm/libultra/io/aisetfreq.s =================================================
+
+// .text
+osAiSetFrequency = 0x8008B490; // type:func
+
+// End of asm/libultra/io/aisetfreq.s ==========================================
+
+
 // asm/libultra/gu/normalize.s =================================================
 
 // .text
@@ -1006,7 +1014,6 @@ __osTimerInterrupt = 0x8008b0cc;
 __osSetTimerIntr = 0x8008b244;
 __osInsertTimer = 0x8008b2b8;
 __osSetGlobalIntMask = 0x8008b440;
-osAiSetFrequency = 0x8008b490;
 playerCanInteractWithInteractuable = 0x801268e4;
 getMapEventFlagID = 0x80126cec;
 checkCutsceneTimeRangeTrigger = 0x80127e84;
