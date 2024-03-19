@@ -95,6 +95,30 @@ ptr_effectMgr        = 0x800DD0D0;
 // End of src/effect_manager.c =================================================
 
 
+// asm/libultra/io/epirawdma.s =================================================
+
+// .text
+__osEPiRawStartDma = 0x8008AC30; // type:func
+
+// End of asm/libultra/io/epirawdma.s ==========================================
+
+
+// asm/libultra/io/sptaskyielded.s =============================================
+
+// .text
+osSpTaskYielded = 0x8008AE10; // type:func
+
+// End of asm/libultra/io/sptaskyielded.s ======================================
+
+
+// asm/libultra/libc/bcmp.s ====================================================
+
+// .text
+_bcmp = 0x8008AE90; // type:func
+
+// End of asm/libultra/libc/bcmp.s =============================================
+
+
 // asm/libultra/os/gettime.s ===================================================
 
 // .text
@@ -1043,8 +1067,6 @@ __osEPiRawReadIo = 0x8008a530;
 osViSwapBuffer = 0x8008a690;
 guLookAtF = 0x8008a6e0;
 guPositionF = 0x8008aa10;
-osSpTaskYielded = 0x8008ae10;
-_bcmp = 0x8008ae90;
 playerCanInteractWithInteractuable = 0x801268e4;
 getMapEventFlagID = 0x80126cec;
 checkCutsceneTimeRangeTrigger = 0x80127e84;
@@ -1348,7 +1370,6 @@ osPfsRepairId = 0x8008a100;
 guTranslate = 0x8008a288;
 guLookAt = 0x8008a998;
 guPosition = 0x8008abc0;
-__osEPiRawStartDma = 0x8008ac30;
 PlayerMgr_getActorCurrentlyInteractingWith = 0x80126370;
 cutsceneTrigger_entrypoint = 0x801274f0;
 cutsceneTrigger_checkCollision = 0x801276b4;
