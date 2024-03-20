@@ -95,6 +95,21 @@ ptr_effectMgr        = 0x800DD0D0;
 // End of src/effect_manager.c =================================================
 
 
+// asm/libultra/gu/sinf.s ======================================================
+
+// .text
+sinf             = 0x8007FCF0; // type:func
+
+// .rodata
+sinf_rodata_0000 = 0x800A6D80;
+sinf_rodata_0028 = 0x800A6DA8;
+sinf_rodata_0030 = 0x800A6DB0;
+sinf_rodata_0038 = 0x800A6DB8;
+sinf_rodata_0040 = 0x800A6DC0;
+
+// End of asm/libultra/gu/sinf.s ===============================================
+
+
 // asm/libultra/libc/bzero.s ===================================================
 
 // .text
@@ -1619,7 +1634,6 @@ alUnlink = 0x8007fa40;
 alLink = 0x8007fa70;
 alClose = 0x8007fa94;
 alInit = 0x8007facc;
-sinf = 0x8007fcf0;
 sins = 0x8007feb0;
 alSynSetVol = 0x8007ff20;
 _VirtualToPhysicalTask = 0x8007ffc0;
@@ -2187,11 +2201,6 @@ osViModeMpalLan1 = 0x800a2650;
 perspective_rodata_0000 = 0x800a6ce0;
 __osRcpImTable = 0x800a6cf0;
 rotate_rodata_0000 = 0x800a6d70;
-sinf_rodata_0000 = 0x800a6d80;
-sinf_rodata_0028 = 0x800a6da8;
-sinf_rodata_0030 = 0x800a6db0;
-sinf_rodata_0038 = 0x800a6db8;
-sinf_rodata_0040 = 0x800a6dc0;
 align_rodata_0000 = 0x800a6e20;
 __libm_qnan_f = 0x800a70b0;
 rotate_bss_0000 = 0x801226c0;

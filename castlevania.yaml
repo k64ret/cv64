@@ -427,7 +427,7 @@ segments:
       - [0x000A78C0, rodata]
       - [0x000A78E0, rodata, libultra/gu/perspective]
       - [0x000A78F0, rodata]
-      - [0x000A7980, rodata]
+      - [0x000A7980, rodata, libultra/gu/sinf]
       - [0x000A79D0, rodata, libultra/os/exceptasm]
       - [0x000A7A20, rodata, libultra/gu/rotate]
       - [0x000A7A30, rodata, libultra/io/devmgr]
