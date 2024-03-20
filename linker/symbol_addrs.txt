@@ -95,6 +95,30 @@ ptr_effectMgr        = 0x800DD0D0;
 // End of src/effect_manager.c =================================================
 
 
+// asm/libultra/audio/synsetfxparam.s ==========================================
+
+// .text
+alSynSetFXParam = 0x800824B0; // type:func
+
+// End of asm/libultra/audio/synsetfxparam.s ===================================
+
+
+// asm/libultra/io/vigetnextframebuf.s =========================================
+
+// .text
+osViGetNextFramebuffer = 0x800824F0; // type:func
+
+// End of asm/libultra/io/vigetnextframebuf.s ==================================
+
+
+// asm/libultra/audio/synstartvoice.s ==========================================
+
+// .text
+alSynStartVoice = 0x80082530; // type:func
+
+// End of asm/libultra/audio/synstartvoice.s ===================================
+
+
 // asm/libultra/io/sprawdma.s ==================================================
 
 // .text
@@ -1607,9 +1631,6 @@ __ll_mul = 0x80082238;
 _bzero = 0x80082390;
 __osSetSR = 0x80082490;
 __osGetSR = 0x800824a0;
-alSynSetFXParam = 0x800824b0;
-osViGetNextFramebuffer = 0x800824f0;
-alSynStartVoice = 0x80082530;
 playerCanInteractWithInteractuable = 0x801268e4;
 getMapEventFlagID = 0x80126cec;
 checkCutsceneTimeRangeTrigger = 0x80127e84;
