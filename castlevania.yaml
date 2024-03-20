@@ -211,7 +211,7 @@ segments:
       - [0x00082CD0, asm]
       - [0x00083090, asm]
       - [0x000830B0, asm]
-      - [0x000831C0, asm]
+      - [0x000831C0, asm, libultra/io/sprawdma]
       - [0x00083250, asm, libultra/io/sirawdma]
       - [0x00083300, asm, libultra/io/viblack]
       - [0x00083370, asm, libultra/io/pirawread]
