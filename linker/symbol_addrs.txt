@@ -95,6 +95,14 @@ ptr_effectMgr        = 0x800DD0D0;
 // End of src/effect_manager.c =================================================
 
 
+// asm/libultra/io/sirawread.s =================================================
+
+// .text
+__osSiRawReadIo = 0x800827C0; // type:func
+
+// End of asm/libultra/io/sirawread.s ==========================================
+
+
 // asm/libultra/io/sptaskyield.s ===============================================
 
 // .text
@@ -1574,7 +1582,6 @@ __osSpRawStartDma = 0x800825c0;
 __osSiRawStartDma = 0x80082650;
 osViBlack = 0x80082700;
 __osPiRawReadIo = 0x80082770;
-__osSiRawReadIo = 0x800827c0;
 playerCanInteractWithInteractuable = 0x801268e4;
 getMapEventFlagID = 0x80126cec;
 checkCutsceneTimeRangeTrigger = 0x80127e84;
@@ -2731,3 +2738,4 @@ func_80005658 = 0x80005658;
 effect_isMarkForDeletion = 0x8005d244;
 effect_markForDeletion = 0x8005d230;
 D_80093D20_94920 = 0x80093D20; // size:0x1C
+devAddr = 0xA0000000;
