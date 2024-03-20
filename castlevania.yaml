@@ -215,7 +215,7 @@ segments:
       - [0x00083250, asm]
       - [0x00083300, asm]
       - [0x000833C0, asm]
-      - [0x00083410, asm]
+      - [0x00083410, asm, libultra/io/sptaskyield]
       - [0x00083430, asm, libultra/io/pfsreadwritefile]
       - [0x00083880, asm, libultra/io/pfsgetstatus]
       - [0x00083AB0, asm, libultra/gu/mtxutil]

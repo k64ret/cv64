@@ -95,6 +95,14 @@ ptr_effectMgr        = 0x800DD0D0;
 // End of src/effect_manager.c =================================================
 
 
+// asm/libultra/io/sptaskyield.s ===============================================
+
+// .text
+osSpTaskYield = 0x80082810; // type:func
+
+// End of asm/libultra/io/sptaskyield.s ========================================
+
+
 // asm/libultra/io/pfsreadwritefile.s ==========================================
 
 // .text
@@ -1567,7 +1575,6 @@ __osSiRawStartDma = 0x80082650;
 osViBlack = 0x80082700;
 __osPiRawReadIo = 0x80082770;
 __osSiRawReadIo = 0x800827c0;
-osSpTaskYield = 0x80082810;
 playerCanInteractWithInteractuable = 0x801268e4;
 getMapEventFlagID = 0x80126cec;
 checkCutsceneTimeRangeTrigger = 0x80127e84;
