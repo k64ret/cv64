@@ -1271,14 +1271,18 @@ rotate_dtor  = 0x800A7120;
 // asm/libultra/libc/llcvt.s ===================================================
 
 // .text
-__d_to_ll  = 0x8008F680; // type:func
-__f_to_ll  = 0x8008F69C; // type:func
-__d_to_ull = 0x8008F6B8; // type:func
-__f_to_ull = 0x8008F758; // type:func
-__ll_to_d  = 0x8008F7F4; // type:func
-__ll_to_f  = 0x8008F80C; // type:func
-__ull_to_d = 0x8008F824; // type:func
-__ull_to_f = 0x8008F858; // type:func
+__d_to_ll         = 0x8008F680; // type:func
+__f_to_ll         = 0x8008F69C; // type:func
+__d_to_ull        = 0x8008F6B8; // type:func
+__f_to_ull        = 0x8008F758; // type:func
+__ll_to_d         = 0x8008F7F4; // type:func
+__ll_to_f         = 0x8008F80C; // type:func
+__ull_to_d        = 0x8008F824; // type:func
+__ull_to_f        = 0x8008F858; // type:func
+
+// .rodata
+llcvt_rodata_0000 = 0x800A7130;
+llcvt_rodata_0008 = 0x800A7138;
 
 // End of asm/libultra/libc/llcvt.s ============================================
 
@@ -2190,8 +2194,6 @@ sinf_rodata_0038 = 0x800a6db8;
 sinf_rodata_0040 = 0x800a6dc0;
 align_rodata_0000 = 0x800a6e20;
 __libm_qnan_f = 0x800a70b0;
-llcvt_rodata_0000 = 0x800a7130;
-llcvt_rodata_0008 = 0x800a7138;
 rotate_bss_0000 = 0x801226c0;
 siacs_bss_0000 = 0x80122710;
 __osPiAccessQueue = 0x80122718;
@@ -2675,7 +2677,7 @@ rspF3DEX2Start = 0x8008fda0;
 gGraphicTasks = 0x800ac000;
 gfx_queue = 0x800abfc0;
 gGraphicTasks_MesgQ = 0x800abff8;
-rspF3DEX2DataStart = 0x800a7140;
+rspF3DEX2DataStart = 0x800a7140; // name_end:rspF3DEX2DataEnd
 gGfxSPTaskStack = 0x800d59f0;
 gGfxSPTaskOutputBuffer = 0x800b59f0;
 gGfxSPTaskYieldBuffer = 0x800b49f0;

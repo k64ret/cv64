@@ -442,8 +442,9 @@ segments:
       - [0x000A7CB0, rodata]
       - [0x000A7CC0, rodata, libultra/libc/xldtob]
       - [0x000A7D20, rodata, libultra/gu/rotaterpy]
-      - [0x000A7D30, rodata]
-      - [0x000A7D40, rodata]
+      - [0x000A7D30, rodata, libultra/libc/llcvt]
+      - [0x000A7D40, rodata, 17040]
+      - [0x000A8160, rodata, audio/audioMgr]
 
       - { start: 0x000A8420, type: .bss, vram: 0x800A7820, name: gamestate }
       - { start: 0x000A8420, type: .bss, vram: 0x800A7830, name: object }
