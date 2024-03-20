@@ -213,7 +213,7 @@ segments:
       - [0x000830B0, asm]
       - [0x000831C0, asm]
       - [0x00083250, asm]
-      - [0x00083300, asm]
+      - [0x00083300, asm, libultra/io/viblack]
       - [0x00083370, asm, libultra/io/pirawread]
       - [0x000833C0, asm, libultra/io/sirawread]
       - [0x00083410, asm, libultra/io/sptaskyield]
