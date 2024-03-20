@@ -95,6 +95,16 @@ ptr_effectMgr        = 0x800DD0D0;
 // End of src/effect_manager.c =================================================
 
 
+// asm/libultra/io/pfsgetstatus.s ==============================================
+
+// .text
+__osPfsGetStatus         = 0x80082C80; // type:func
+__osPfsRequestOneChannel = 0x80082D50; // type:func
+__osPfsGetOneChannelData = 0x80082E14; // type:func
+
+// End of asm/libultra/io/pfsgetstatus.s =======================================
+
+
 // asm/libultra/gu/mtxutil.s ===================================================
 
 // .text
@@ -1551,9 +1561,6 @@ __osSiRawReadIo = 0x800827c0;
 osSpTaskYield = 0x80082810;
 pfsreadwritefile_text_0000 = 0x80082830;
 osPfsReadWriteFile = 0x80082904;
-__osPfsGetStatus = 0x80082c80;
-__osPfsRequestOneChannel = 0x80082d50;
-__osPfsGetOneChannelData = 0x80082e14;
 playerCanInteractWithInteractuable = 0x801268e4;
 getMapEventFlagID = 0x80126cec;
 checkCutsceneTimeRangeTrigger = 0x80127e84;

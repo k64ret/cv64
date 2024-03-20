@@ -216,7 +216,7 @@ segments:
       - [0x00083300, asm]
       - [0x000833C0, asm]
       - [0x00083410, asm]
-      - [0x00083880, asm]
+      - [0x00083880, asm, libultra/io/pfsgetstatus]
       - [0x00083AB0, asm, libultra/gu/mtxutil]
       - [0x00083D20, asm, libultra/io/visetmode]
       - [0x00083D90, asm, libultra/io/motor]
