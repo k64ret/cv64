@@ -439,7 +439,7 @@ segments:
       - [0x000A7B50, rodata, libultra/libc/xprintf]
       - [0x000A7C50, rodata, libultra/gu/position]
       - [0x000A7C60, rodata, libultra/gu/cosf]
-      - [0x000A7CB0, rodata]
+      - [0x000A7CB0, rodata, libultra/gu/libm_vals]
       - [0x000A7CC0, rodata, libultra/libc/xldtob]
       - [0x000A7D20, rodata, libultra/gu/rotaterpy]
       - [0x000A7D30, rodata, libultra/libc/llcvt]
