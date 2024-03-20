@@ -95,6 +95,22 @@ ptr_effectMgr        = 0x800DD0D0;
 // End of src/effect_manager.c =================================================
 
 
+// asm/libultra/libc/bzero.s ===================================================
+
+// .text
+_bzero = 0x80082390; // type:func
+
+// End of asm/libultra/libc/bzero.s ============================================
+
+
+// asm/libultra/os/setsr.s =====================================================
+
+// .text
+__osSetSR = 0x80082490; // type:func
+
+// End of asm/libultra/os/setsr.s ==============================================
+
+
 // asm/libultra/os/getsr.s =====================================================
 
 // .text
@@ -1636,8 +1652,6 @@ __ull_rem = 0x800820fc;
 __ull_div = 0x80082138;
 __ll_div = 0x800821dc;
 __ll_mul = 0x80082238;
-_bzero = 0x80082390;
-__osSetSR = 0x80082490;
 playerCanInteractWithInteractuable = 0x801268e4;
 getMapEventFlagID = 0x80126cec;
 checkCutsceneTimeRangeTrigger = 0x80127e84;
