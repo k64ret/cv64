@@ -95,6 +95,17 @@ ptr_effectMgr        = 0x800DD0D0;
 // End of src/effect_manager.c =================================================
 
 
+// asm/libultra/gu/mtxutil.s ===================================================
+
+// .text
+guMtxF2L    = 0x80082EB0; // type:func
+guMtxIdentF = 0x80082FB0; // type:func
+guMtxIdent  = 0x80083038; // type:func
+guMtxL2F    = 0x80083068; // type:func
+
+// End of asm/libultra/gu/mtxutil.s ============================================
+
+
 // asm/libultra/io/visetmode.s =================================================
 
 // .text
@@ -1543,8 +1554,6 @@ osPfsReadWriteFile = 0x80082904;
 __osPfsGetStatus = 0x80082c80;
 __osPfsRequestOneChannel = 0x80082d50;
 __osPfsGetOneChannelData = 0x80082e14;
-guMtxIdentF = 0x80082fb0;
-guMtxL2F = 0x80083068;
 playerCanInteractWithInteractuable = 0x801268e4;
 getMapEventFlagID = 0x80126cec;
 checkCutsceneTimeRangeTrigger = 0x80127e84;
@@ -1830,7 +1839,6 @@ prepareSoundToPlayAndSetVolume = 0x80079e04;
 guPerspective = 0x8007f800;
 osDestroyThread = 0x80080cb0;
 __ll_mod = 0x800822c8;
-guMtxIdent = 0x80083038;
 PlayerMgr_getActorCurrentlyInteractingWith = 0x80126370;
 cutsceneTrigger_entrypoint = 0x801274f0;
 cutsceneTrigger_checkCollision = 0x801276b4;
@@ -2702,4 +2710,3 @@ func_80005658 = 0x80005658;
 effect_isMarkForDeletion = 0x8005d244;
 effect_markForDeletion = 0x8005d230;
 D_80093D20_94920 = 0x80093D20; // size:0x1C
-guMtxF2L = 0x80082EB0; // type:func
