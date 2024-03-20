@@ -291,11 +291,12 @@ __osPiTable       = 0x800A21AC;
 __osCurrentHandle = 0x800A21B0;
 
 // .bss
-__Dom1SpeedParam  = 0x80122AF7;
-__Dom2SpeedParam  = 0x80122B6F;
-piMgrThread       = 0x80122be0;
-__osPiMesgQueue   = 0x80123d90;
-piMgrMesgBuff     = 0x80123da8;
+__Dom1SpeedParam  = 0x80122AF0;
+__Dom2SpeedParam  = 0x80122B68;
+piThread       = 0x80122be0;
+piStackThread = 0x80122D90;
+piEventQueue   = 0x80123D90;
+piEventBuf     = 0x80123DA8;
 
 // End of asm/libultra/io/pimgr.s ==============================================
 

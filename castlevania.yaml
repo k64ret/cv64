@@ -203,12 +203,12 @@ segments:
       - [0x00081A00, asm]
       - [0x00081E00, asm]
       - [0x00082010, asm]
-      - [0x000821F0, asm]
-      - [0x00082650, asm]
-      - [0x00082880, asm]
-      - [0x00082900, asm]
-      - [0x00082980, asm]
-      - [0x00082CD0, asm]
+      - [0x000821F0, asm, libultra/gu/rotate]
+      - [0x00082650, asm, libultra/al/synallocvoice]
+      - [0x00082880, asm, libultra/os/virtualtophysical]
+      - [0x00082900, hasm, libultra/os/writebackdcache]
+      - [0x00082980, asm, libultra/os/initialize]
+      - [0x00082CD0, asm, libultra/libc/ll]
       - [0x00082F90, hasm, libultra/libc/bzero]
       - [0x00083090, hasm, libultra/os/setsr]
       - [0x000830A0, hasm, libultra/os/getsr]
@@ -340,6 +340,7 @@ segments:
       - [0x00090850, asm, libultra/io/vigetcurrframebuf]
       - [0x00090890, asm, libultra/io/spsetpc]
       - [0x000908D0, bin] # RSP microcode
+
       - [0x00090920, data]
       - [0x00092B50, .data, gamestate]
       - [0x00092E70, data, object]
@@ -421,7 +422,7 @@ segments:
       - [0x000A78F0, rodata]
       - [0x000A7980, rodata]
       - [0x000A79D0, rodata]
-      - [0x000A7A20, rodata]
+      - [0x000A7A20, rodata, libultra/gu/rotate]
       - [0x000A7A30, rodata, libultra/io/devmgr]
       - [0x000A7A50, rodata, libultra/audio/synthesizer]
       - [0x000A7A60, rodata, libultra/audio/drvrnew]
@@ -436,6 +437,7 @@ segments:
       - [0x000A7D20, rodata, libultra/gu/rotaterpy]
       - [0x000A7D30, rodata]
       - [0x000A7D40, rodata]
+
       - { start: 0x000A8420, type: .bss, vram: 0x800A7820, name: gamestate }
       - { start: 0x000A8420, type: .bss, vram: 0x800A7830, name: object }
       - { start: 0x000A8420, type: .bss, vram: 0x800A7840, name: object_0002 }  # Only contains ptr_Object_0002.
@@ -443,9 +445,9 @@ segments:
       - { start: 0x000A8420, type: bss, vram: 0x800A78A0, name: F960 }
       - { start: 0x000A8420, type: .bss, vram: 0x800DD0D0, name: effect_manager }
       - { start: 0x000A8420, type: bss, vram: 0x800DD0E0 }
-      # - { start: 0x000A8420, type: bss, vram: 0x801229B0, name: libultra/io/motor }
-      # - { start: 0x000A8420, type: bss, vram: 0x80122AB0, name: libultra/io/pfsisplug }
-      # - { start: 0x000A8420, type: bss, vram: 0x80122AF7, name: libultra/io/pimgr }
+      - { start: 0x000A8420, type: bss, vram: 0x801229B0, name: libultra/io/motor }
+      - { start: 0x000A8420, type: bss, vram: 0x80122AB0, name: libultra/io/pfsisplug }
+      - { start: 0x000A8420, type: bss, vram: 0x80122AF0, name: libultra/io/pimgr }
       - { start: 0x000A8420, type: bss, vram: 0x80123DB0, name: libultra/io/contpfs }
       - { start: 0x000A8420, type: bss, vram: 0x80123EB0, name: libultra/os/seteventmesg }
       - { start: 0x000A8420, type: bss, vram: 0x80123F30, name: libultra/gu/position }
