@@ -210,6 +210,7 @@ segments:
       - [0x00082980, asm]
       - [0x00082CD0, asm]
       - [0x00083090, asm]
+      - [0x000830A0, hasm, libultra/os/getsr]
       - [0x000830B0, asm, libultra/audio/synsetfxparam]
       - [0x000830F0, asm, libultra/io/vigetnextframebuf]
       - [0x00083130, asm, libultra/audio/synstartvoice]

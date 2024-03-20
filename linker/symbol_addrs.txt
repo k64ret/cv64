@@ -95,6 +95,14 @@ ptr_effectMgr        = 0x800DD0D0;
 // End of src/effect_manager.c =================================================
 
 
+// asm/libultra/os/getsr.s =====================================================
+
+// .text
+__osGetSR = 0x800824A0; // type:func
+
+// End of asm/libultra/os/getsr.s ==============================================
+
+
 // asm/libultra/audio/synsetfxparam.s ==========================================
 
 // .text
@@ -1630,7 +1638,6 @@ __ll_div = 0x800821dc;
 __ll_mul = 0x80082238;
 _bzero = 0x80082390;
 __osSetSR = 0x80082490;
-__osGetSR = 0x800824a0;
 playerCanInteractWithInteractuable = 0x801268e4;
 getMapEventFlagID = 0x80126cec;
 checkCutsceneTimeRangeTrigger = 0x80127e84;
