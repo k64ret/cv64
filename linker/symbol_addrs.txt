@@ -95,6 +95,18 @@ ptr_effectMgr        = 0x800DD0D0;
 // End of src/effect_manager.c =================================================
 
 
+// asm/libultra/gu/align.s =====================================================
+
+// .text
+guAlignF          = 0x8007FB00; // type:func
+guAlign           = 0x8007FC94; // type:func
+
+// .rodata
+align_rodata_0000 = 0x800A6D70;
+
+// End of asm/libultra/gu/align.s ==============================================
+
+
 // asm/libultra/gu/sinf.s ======================================================
 
 // .text
@@ -108,6 +120,48 @@ sinf_rodata_0038 = 0x800A6DB8;
 sinf_rodata_0040 = 0x800A6DC0;
 
 // End of asm/libultra/gu/sinf.s ===============================================
+
+
+// asm/libultra/gu/rotate.s ====================================================
+
+// .text
+
+// .rodata
+rotate_rodata_0000 = 0x800A6E20;
+
+// End of asm/libultra/gu/rotate.s =============================================
+
+
+// asm/libultra/os/initialize.s ================================================
+
+// .text
+osInitialize       = 0x80081D80; // type:func
+__createSpeedParam = 0x80082028; // type:func
+
+// .data
+osClockRate        = 0x800A0FF0; // type:u64
+osViClock          = 0x800A0FF8;
+__osShutdown       = 0x800A0FFC;
+__OSGlobalIntMask  = 0x800A1000; // type:u32 size:0x04
+
+// End of asm/libultra/os/initialize.s =========================================
+
+
+// asm/libultra/libc/ll.s ======================================================
+
+// .text
+__ull_rshift  = 0x800820D0; // type:func
+__ull_rem     = 0x800820FC; // type:func
+__ull_div     = 0x80082138; // type:func
+__ll_lshift   = 0x80082174; // type:func
+__ll_rem      = 0x800821A0; // type:func
+__ll_div      = 0x800821DC; // type:func
+__ll_mul      = 0x80082238; // type:func
+__ull_divremi = 0x80082268; // type:func
+__ll_mod      = 0x800822C8; // type:func
+__ll_rshift   = 0x80082364; // type:func
+
+// End of asm/libultra/libc/ll.s ===============================================
 
 
 // asm/libultra/libc/bzero.s ===================================================
@@ -1481,8 +1535,6 @@ vec3f_multiplyByOne = 0x80011780;
 vec3f_800117a4 = 0x800117a4;
 vec3f_80011808 = 0x80011808;
 func_80011880 = 0x80011880;
-guAlignF = 0x8007fb00;
-guAlign = 0x8007fc94;
 increaseOrDecreaseByZeroPointFive = 0x80011b18;
 isSongIDMusic = 0x800129a8;
 setSongToPlay = 0x80014a28;
@@ -1665,12 +1717,6 @@ _allocatePVoice = 0x80081a50;
 alSynAllocVoice = 0x80081b38;
 osVirtualToPhysical = 0x80081c80;
 osWritebackDCache = 0x80081d00;
-osInitialize = 0x80081d80;
-__createSpeedParam = 0x80082028;
-__ull_rem = 0x800820fc;
-__ull_div = 0x80082138;
-__ll_div = 0x800821dc;
-__ll_mul = 0x80082238;
 playerCanInteractWithInteractuable = 0x801268e4;
 getMapEventFlagID = 0x80126cec;
 checkCutsceneTimeRangeTrigger = 0x80127e84;
@@ -1955,7 +2001,6 @@ prepareMuteSoundToPlayAndSetStereoLocation = 0x80079dd4;
 prepareSoundToPlayAndSetVolume = 0x80079e04;
 guPerspective = 0x8007f800;
 osDestroyThread = 0x80080cb0;
-__ll_mod = 0x800822c8;
 PlayerMgr_getActorCurrentlyInteractingWith = 0x80126370;
 cutsceneTrigger_entrypoint = 0x801274f0;
 cutsceneTrigger_checkCollision = 0x801276b4;
@@ -2190,9 +2235,6 @@ __osActiveQueue = 0x800a0fac;
 __osRunningThread = 0x800a0fb0;
 __osPiAccessQueueEnabled = 0x800a0fc0;
 __osContinitialized = 0x800a0fd0;
-osViClock = 0x800a0ff8;
-__osShutdown = 0x800a0ffc;
-__OSGlobalIntMask = 0x800a1000;
 __osThreadTail = 0x800a1f40;
 player_bss_003C = 0x800a2198;
 osViModePalLan1 = 0x800a25b0;
@@ -2200,8 +2242,6 @@ osViModeNtscLan1 = 0x800a2600;
 osViModeMpalLan1 = 0x800a2650;
 perspective_rodata_0000 = 0x800a6ce0;
 __osRcpImTable = 0x800a6cf0;
-rotate_rodata_0000 = 0x800a6d70;
-align_rodata_0000 = 0x800a6e20;
 __libm_qnan_f = 0x800a70b0;
 rotate_bss_0000 = 0x801226c0;
 siacs_bss_0000 = 0x80122710;
@@ -2311,11 +2351,6 @@ fade_color = 0x80387ad8;
 max_fade_time = 0x80387ade;
 textbox_printNumber = 0x8012ce3c;
 controller_disconnectController = 0x80016cb0;
-__ll_rshift = 0x80082364;
-__ull_divremi = 0x80082268;
-__ll_lshift = 0x80082174;
-__ll_rem = 0x800821a0;
-__ull_rshift = 0x800820d0;
 selection_text_idle_time = 0x80180484;
 some_timer_SHORT = 0x80387d74;
 gameplayMenuMgr_initHUDParams = 0x80136894;
@@ -2498,7 +2533,6 @@ EASY_text = 0x8018131c;
 NORMAL_text = 0x8018132c;
 HARD_text = 0x8018133c;
 PlayerController_functions = 0x80096694;
-osClockRate = 0x800a0ff0;
 a_file_ID = 0x80181978;
 another_file_ID = 0x80389ed4;
 file_load_array = 0x803881b8;
