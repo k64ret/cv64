@@ -349,7 +349,7 @@ typedef enum cv64_object_id_raw {
     ID_OBJECT_139                    = 0x139,
     ID_OBJECT_13A                    = 0x13A,
     ID_CONTRACTMGR                   = 0x13B,
-    ID_OBJECT_13C                    = 0x13C,
+    ID_RENON_BRIEFCASE               = 0x13C,
     ID_OBJECT_13D                    = 0x13D,
     ID_OBJECT_13E                    = 0x13E,
     ID_OBJECT_13F                    = 0x13F,
@@ -661,6 +661,7 @@ typedef enum cv64_object_id {
     MENU_GAMEPLAY_MENUMGR              = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_GAMEPLAY_MENUMGR),
     MENU_SAVEGAME                      = CV64_OBJECT_ID(OBJ_KIND_MAP_OVERLAY, ID_SAVEGAME),
     MENU_CONTRACTMGR                   = CV64_OBJECT_ID(OBJ_KIND_MAP_OVERLAY, ID_CONTRACTMGR),
+    MENU_RENON_BRIEFCASE               = CV64_OBJECT_ID(OBJ_KIND_MAP_OVERLAY, ID_RENON_BRIEFCASE),
     MENU_STAGE_SELECT                  = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_STAGE_SELECT),
 
     // Stage object
