@@ -3,6 +3,9 @@
 #include "gfx/model_info.h"
 #include "animation.h"
 
+/**
+ * ID: 0x213C
+ */
 typedef struct cv64_ovl_renonbriefcase {
     cv64_object_hdr_t header;
     u8 field_0x20[8];
