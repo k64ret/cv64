@@ -5,6 +5,14 @@ gamestate_change = 0x80000510; // type:func
 
 // End of src/gamestate.c ======================================================
 
+
+// src/memory.c ================================================================
+
+// .text
+
+// End of src/memory.c =========================================================
+
+
 // src/object.c ================================================================
 
 // .text
@@ -48,6 +56,7 @@ objects_number_of_instances_per_object = 0x8034CE60;
 
 // End of src/object.c =========================================================
 
+
 // src/object_flow.c ===========================================================
 
 object_doNothing                               = 0x8000E860; // type:func
@@ -67,6 +76,7 @@ GameStateMgr_executeGameStateCappedFramerate   = 0x8000ECB0; // type:func
 
 // End of src/object_flow.c ====================================================
 
+
 // src/effect_manager.c ========================================================
 
 // .text
@@ -84,22 +94,1360 @@ ptr_effectMgr        = 0x800DD0D0;
 
 // End of src/effect_manager.c =================================================
 
+
+// asm/libultra/gu/align.s =====================================================
+
+// .text
+guAlignF          = 0x8007FB00; // type:func
+guAlign           = 0x8007FC94; // type:func
+
+// .rodata
+align_rodata_0000 = 0x800A6D70;
+
+// End of asm/libultra/gu/align.s ==============================================
+
+
+// asm/libultra/gu/sinf.s ======================================================
+
+// .text
+sinf             = 0x8007FCF0; // type:func
+
+// .rodata
+sinf_rodata_0000 = 0x800A6D80;
+sinf_rodata_0028 = 0x800A6DA8;
+sinf_rodata_0030 = 0x800A6DB0;
+sinf_rodata_0038 = 0x800A6DB8;
+sinf_rodata_0040 = 0x800A6DC0;
+
+// End of asm/libultra/gu/sinf.s ===============================================
+
+
+// asm/libultra/gu/rotate.s ====================================================
+
+// .text
+
+// .rodata
+rotate_rodata_0000 = 0x800A6E20;
+
+// End of asm/libultra/gu/rotate.s =============================================
+
+
+// asm/libultra/os/initialize.s ================================================
+
+// .text
+osInitialize       = 0x80081D80; // type:func
+__createSpeedParam = 0x80082028; // type:func
+
+// .data
+osClockRate        = 0x800A0FF0; // type:u64
+osViClock          = 0x800A0FF8;
+__osShutdown       = 0x800A0FFC;
+__OSGlobalIntMask  = 0x800A1000; // type:u32 size:0x04
+
+// End of asm/libultra/os/initialize.s =========================================
+
+
+// asm/libultra/libc/ll.s ======================================================
+
+// .text
+__ull_rshift  = 0x800820D0; // type:func
+__ull_rem     = 0x800820FC; // type:func
+__ull_div     = 0x80082138; // type:func
+__ll_lshift   = 0x80082174; // type:func
+__ll_rem      = 0x800821A0; // type:func
+__ll_div      = 0x800821DC; // type:func
+__ll_mul      = 0x80082238; // type:func
+__ull_divremi = 0x80082268; // type:func
+__ll_mod      = 0x800822C8; // type:func
+__ll_rshift   = 0x80082364; // type:func
+
+// End of asm/libultra/libc/ll.s ===============================================
+
+
+// asm/libultra/libc/bzero.s ===================================================
+
+// .text
+_bzero = 0x80082390; // type:func
+
+// End of asm/libultra/libc/bzero.s ============================================
+
+
+// asm/libultra/os/setsr.s =====================================================
+
+// .text
+__osSetSR = 0x80082490; // type:func
+
+// End of asm/libultra/os/setsr.s ==============================================
+
+
+// asm/libultra/os/getsr.s =====================================================
+
+// .text
+__osGetSR = 0x800824A0; // type:func
+
+// End of asm/libultra/os/getsr.s ==============================================
+
+
+// asm/libultra/audio/synsetfxparam.s ==========================================
+
+// .text
+alSynSetFXParam = 0x800824B0; // type:func
+
+// End of asm/libultra/audio/synsetfxparam.s ===================================
+
+
+// asm/libultra/io/vigetnextframebuf.s =========================================
+
+// .text
+osViGetNextFramebuffer = 0x800824F0; // type:func
+
+// End of asm/libultra/io/vigetnextframebuf.s ==================================
+
+
+// asm/libultra/audio/synstartvoice.s ==========================================
+
+// .text
+alSynStartVoice = 0x80082530; // type:func
+
+// End of asm/libultra/audio/synstartvoice.s ===================================
+
+
+// asm/libultra/io/sprawdma.s ==================================================
+
+// .text
+__osSpRawStartDma = 0x800825C0; // type:func
+
+// End of asm/libultra/io/sprawdma.s ===========================================
+
+
+// asm/libultra/io/sirawdma.s ==================================================
+
+// .text
+__osSiRawStartDma = 0x80082650; // type:func
+
+// End of asm/libultra/io/sirawdma.s ===========================================
+
+
+// asm/libultra/io/viblack.s ===================================================
+
+// .text
+osViBlack = 0x80082700; // type:func
+
+// End of asm/libultra/io/viblack.s ============================================
+
+
+// asm/libultra/io/pirawread.s =================================================
+
+// .text
+__osPiRawReadIo = 0x80082770; // type:func
+
+// End of asm/libultra/io/pirawread.s ==========================================
+
+
+// asm/libultra/io/sirawread.s =================================================
+
+// .text
+__osSiRawReadIo = 0x800827C0; // type:func
+
+// End of asm/libultra/io/sirawread.s ==========================================
+
+
+// asm/libultra/io/sptaskyield.s ===============================================
+
+// .text
+osSpTaskYield = 0x80082810; // type:func
+
+// End of asm/libultra/io/sptaskyield.s ========================================
+
+
+// asm/libultra/io/pfsreadwritefile.s ==========================================
+
+// .text
+__osPfsGetNextPage = 0x80082830; // type:func
+osPfsReadWriteFile = 0x80082904; // type:func
+
+// End of asm/libultra/io/pfsreadwritefile.s ===================================
+
+
+// asm/libultra/io/pfsgetstatus.s ==============================================
+
+// .text
+__osPfsGetStatus         = 0x80082C80; // type:func
+__osPfsRequestOneChannel = 0x80082D50; // type:func
+__osPfsGetOneChannelData = 0x80082E14; // type:func
+
+// End of asm/libultra/io/pfsgetstatus.s =======================================
+
+
+// asm/libultra/gu/mtxutil.s ===================================================
+
+// .text
+guMtxF2L    = 0x80082EB0; // type:func
+guMtxIdentF = 0x80082FB0; // type:func
+guMtxIdent  = 0x80083038; // type:func
+guMtxL2F    = 0x80083068; // type:func
+
+// End of asm/libultra/gu/mtxutil.s ============================================
+
+
+// asm/libultra/io/visetmode.s =================================================
+
+// .text
+osViSetMode = 0x80083120; // type:func
+
+// End of asm/libultra/io/visetmode.s ==========================================
+
+
+// asm/libultra/io/motor.s =====================================================
+
+// .text
+__osMotorAccess   = 0x80083190; // type:func
+__osMakeMotorData = 0x800832F8; // type:func
+osMotorInit       = 0x80083404; // type:func
+
+// .bss
+__MotorDataBuf    = 0x801229B0;
+
+// End of asm/libultra/io/motor.s ==============================================
+
+
+// asm/libultra/io/pfsallocatefile.s ===========================================
+
+// .text
+osPfsAllocateFile  = 0x80083560; // type:func
+__osPfsDeclearPage = 0x80083894; // type:func
+
+// End of asm/libultra/io/pfsallocatefile.s ====================================
+
+
+// asm/libultra/io/pfsisplug.s =================================================
+
+// .text
+osPfsIsPlug        = 0x800839E0; // type:func
+__osPfsRequestData = 0x80083B80; // type:func
+__osPfsGetInitData = 0x80083C50; // type:func
+
+// .bss
+__osPfsPifRam = 0x80122AB0;
+
+// End of asm/libultra/io/pfsisplug.s ==========================================
+
+
+// asm/libultra/audio/synsetpitch.s ============================================
+
+// .text
+alSynSetPitch = 0x80083D20; // type:func
+
+// End of asm/libultra/audio/synsetpitch.s =====================================
+
+
+// asm/libultra/os/probetlb.s ==================================================
+
+// .text
+__osProbeTLB = 0x80083DB0; // type:func
+
+// End of asm/libultra/os/probetlb.s ===========================================
+
+
+// asm/libultra/io/pimgr.s =====================================================
+
+// .text
+osCreatePiManager = 0x80083E70; // type:func
+
+// .data
+__osPiDevMgr      = 0x800A2190;
+__osPiTable       = 0x800A21AC;
+__osCurrentHandle = 0x800A21B0;
+
+// .bss
+__Dom1SpeedParam  = 0x80122AF0;
+__Dom2SpeedParam  = 0x80122B68;
+piThread       = 0x80122be0;
+piStackThread = 0x80122D90;
+piEventQueue   = 0x80123D90;
+piEventBuf     = 0x80123DA8;
+
+// End of asm/libultra/io/pimgr.s ==============================================
+
+
+// asm/libultra/io/devmgr.s ====================================================
+
+// .text
+__osDevMgrMain     = 0x80083FE0; // type:func
+
+// .rodata
+devmgr_rodata_0000 = 0x800A6E30; // type:jtbl
+
+// End of asm/libultra/io/devmgr.s =============================================
+
+
+// asm/libultra/io/pirawdma.s ==================================================
+
+// .text
+__osPiRawStartDma = 0x800843F0; // type:func
+
+// End of asm/libultra/io/pirawdma.s ===========================================
+
+
+// asm/libultra/audio/synsetpan.s ==============================================
+
+// .text
+alSynSetPan = 0x800844C0; // type:func
+
+// End of asm/libultra/audio/synsetpan.s =======================================
+
+
+// asm/libultra/os/getcount.s ==================================================
+
+// .text
+osGetCount = 0x80084550; // type:func
+
+// End of asm/libultra/os/getcount.s ===========================================
+
+
+// asm/libultra/io/contpfs.s ===================================================
+
+// .text
+__osSumcalc              = 0x80084560; // type:func
+__osIdCheckSum           = 0x800845D4; // type:func
+__osRepairPackId         = 0x800846D0; // type:func
+__osCheckPackId          = 0x80084A20; // type:func
+__osGetId                = 0x80084B84; // type:func
+__osCheckId              = 0x80084D30; // type:func
+__osPfsRWInode           = 0x80084E04; // type:func
+
+// .data
+__osPfsInodeCacheChannel = 0x800A21C0;
+__osPfsInodeCacheBank    = 0x800A21C4;
+
+// .bss
+__osPfsInodeCache        = 0x80123DB0;
+
+// End of asm/libultra/io/contpfs.s ============================================
+
+
+// asm/libultra/io/pidma.s =====================================================
+
+// .text
+osPiStartDma = 0x800850E0; // type:func
+
+// End of asm/libultra/io/pidma.s ==============================================
+
+
+// asm/libultra/io/pfssearchfile.s =============================================
+
+// .text
+osPfsFindFile = 0x800851F0; // type:func
+
+// End of asm/libultra/io/pfssearchfile.s ======================================
+
+
+// asm/libultra/audio/synthesizer.s ============================================
+
+// .text
+alSynNew              = 0x800853C0; // type:func
+alAudioFrame          = 0x800856C0; // type:func
+__allocParam          = 0x80085890; // type:func
+__freeParam           = 0x800858C0; // type:func
+_collectPVoices       = 0x800858D8; // type:func
+_freePVoice           = 0x80085938; // type:func
+_timeToSamplesNoRound = 0x80085970; // type:func
+_timeToSamples        = 0x800859BC; // type:func
+__nextSampleTime      = 0x800859E4; // type:func
+
+// End of asm/libultra/audio/synthesizer.s =====================================
+
+
+// asm/libultra/audio/drvrnew.s ================================================
+
+// .text
+init_lpfilter       = 0x80085A40; // type:func
+alFxNew             = 0x80085AE0; // type:func
+alEnvmixerNew       = 0x80085F1C; // type:func
+alLoadNew           = 0x80085FC4; // type:func
+alResampleNew       = 0x8008606C; // type:func
+alAuxBusNew         = 0x800860F8; // type:func
+alMainBusNew        = 0x8008614C; // type:func
+alSaveNew           = 0x800861A0; // type:func
+
+// .data
+SMALLROOM_PARAMS    = 0x800A21D0;
+BIGROOM_PARAMS      = 0x800A2238;
+ECHO_PARAMS         = 0x800A22C0;
+CHORUS_PARAMS       = 0x800A22E8;
+FLANGE_PARAMS       = 0x800A2310;
+NULL_PARAMS         = 0x800A2338;
+
+// .rodata
+drvrNew_rodata_0000 = 0x800A6E60; // type:jtbl
+drvrnew_CONVERT     = 0x800A6E78;
+
+// End of asm/libultra/audio/drvrnew.s =========================================
+
+
+// asm/libultra/audio/mainbus.s ================================================
+
+// .text
+alMainBusParam = 0x800861F0; // type:func
+alMainBusPull  = 0x80086220; // type:func
+
+// End of asm/libultra/audio/mainbus.s =========================================
+
+
+// asm/libultra/audio/reverb.s =================================================
+
+// .text
+alFxPull           = 0x80086340; // type:func
+alFxParam          = 0x80086680; // type:func
+alFxParamHdl       = 0x80086698; // type:func
+_loadOutputBuffer  = 0x800868F4; // type:func
+_loadBuffer        = 0x80086B14; // type:func
+_saveBuffer        = 0x80086CAC; // type:func
+_filterBuffer      = 0x80086E40; // type:func
+_doModFunc         = 0x80086EF0; // type:func
+
+// .rodata
+reverb_rodata_0000 = 0x800A6E80; // type:jtbl
+reverb_CONVERT     = 0x800A6EA0;
+
+// End of asm/libultra/audio/reverb.s ==========================================
+
+
+// asm/libultra/audio/auxbus.s =================================================
+
+// .text
+alAuxBusParam = 0x80086FA0; // type:func
+alAuxBusPull  = 0x80086FD0; // type:func
+
+// End of asm/libultra/audio/auxbus.s ==========================================
+
+
+// asm/libultra/audio/env.s ====================================================
+
+// .text
+alEnvmixerPull   = 0x800870B0; // type:func
+alEnvmixerParam  = 0x800875B8; // type:func
+_pullSubFrame    = 0x80087698; // type:func
+_frexpf          = 0x80087980; // type:func
+_ldexpf          = 0x80087A6C; // type:func
+_getRate         = 0x80087A94; // type:func
+_getVol          = 0x80087C78; // type:func
+
+// .data
+eqpower          = 0x800A2380; // size:0x100
+env_data_0100    = 0x800A2480;
+
+// .rodata
+env_rodata_0000  = 0x800A6EB0; // type:jtbl
+M_LN2            = 0x800A6EF8;
+D_800A6F00_A7B00 = 0x800A6F00;
+
+// End of asm/libultra/audio/env.s =============================================
+
+
+// asm/libultra/audio/resample.s ===============================================
+
+// .text
+alResampleParam      = 0x80087D30; // type:func
+alResamplePull       = 0x80087E1C; // type:func
+
+// .rodata
+resample_rodata_0000 = 0x800A6F10; // type:jtbl
+resample_rodata_0028 = 0x800A6F38;
+resample_rodata_0030 = 0x800A6F40;
+
+// End of asm/libultra/audio/resample.s ========================================
+
+
+// asm/libultra/audio/load.s ===================================================
+
+// .text
+alLoadParam  = 0x80088030; // type:func
+alRaw16Pull  = 0x80088204; // type:func
+_decodeChunk = 0x800885B0; // type:func
+alAdpcmPull  = 0x800886DC; // type:func
+
+// End of asm/libultra/audio/load.s ============================================
+
+
+// asm/libultra/os/seteventmesg.s ==============================================
+
+// .text
+osSetEventMesg    = 0x80088B80; // type:func
+
+// .data
+__osPreNMI        = 0x800a24c0;
+
+// .bss
+__osEventStateTab = 0x80123eb0;
+
+// End of asm/libultra/os/seteventmesg.s =======================================
+
+
+// asm/libultra/gu/sqrtf.s =====================================================
+
+// .text
+sqrtf = 0x80088C40; // type:func
+
+// End of asm/libultra/gu/sqrtf.s ==============================================
+
+
+// asm/libultra/os/afterprenmi.s ===============================================
+
+// .text
+osAfterPreNMI = 0x80088C50; // type:func
+
+// End of asm/libultra/os/afterprenmi.s ========================================
+
+
+// asm/libultra/io/contquery.s =================================================
+
+// .text
+osContStartQuery = 0x80088C70; // type:func
+osContGetQuery   = 0x80088CF4; // type:func
+
+// End of asm/libultra/io/contquery.s ==========================================
+
+
+// asm/libultra/gu/random.s ====================================================
+
+// .text
+guRandom = 0x80088D20; // type:func
+
+// .data
+xseed    = 0x800A24D0;
+
+// End of asm/libultra/gu/random.s =============================================
+
+
+// asm/libultra/os/unmaptlb.s ==================================================
+
+// .text
+osUnmapTLB = 0x80088D50; // type:func
+
+// End of asm/libultra/os/unmaptlb.s ===========================================
+
+
+// asm/libultra/libc/xprintf.s =================================================
+
+// .text
+_Putfld = 0x80088D90; // type:func
+_Printf = 0x80089400; // type:func
+
+// .data
+spaces  = 0x800a24e0;
+zeroes  = 0x800a2504;
+
+// .rodata
+hlL     = 0x800A6F50;
+fchar   = 0x800A6F54;
+fbit    = 0x800A6F5C;
+// jtbl_800A6F74_A7B74 = 0x800A6F74; // type:jtbl
+
+// End of asm/libultra/libc/xprintf.s ==========================================
+
+
+// asm/libultra/audio/filter.s =================================================
+
+// .text
+alFilterNew = 0x80089A50; // type:func
+
+// End of asm/libultra/audio/filter.s ==========================================
+
+
+// asm/libultra/gu/ortho.s =====================================================
+
+// .text
+guOrthoF = 0x80089A70; // type:func
+guOrtho  = 0x80089BC4; // type:func
+
+// End of asm/libultra/gu/ortho.s ==============================================
+
+
+// asm/libultra/os/unmaptlball.s ===============================================
+
+// .text
+osUnmapTLBAll = 0x80089C30; // type:func
+
+// End of asm/libultra/os/unmaptlball.s ========================================
+
+
+// asm/libultra/io/epidma.s ====================================================
+
+// .text
+osEPiStartDma = 0x80089C80; // type:func
+
+// End of asm/libultra/io/epidma.s =============================================
+
+
+// asm/libultra/audio/heapinit.s ===============================================
+
+// .text
+alHeapInit = 0x80089D60; // type:func
+
+// End of asm/libultra/audio/heapinit.s ========================================
+
+
+// asm/libultra/libc/string.s ==================================================
+
+// .text
+memcpy = 0x80089DA0; // type:func
+strlen = 0x80089DCC; // type:func
+strchr = 0x80089DF4; // type:func
+
+// End of asm/libultra/libc/string.s ===========================================
+
+
+// asm/libultra/os/invalicache.s ===============================================
+
+// .text
+osInvalICache = 0x80089E40; // type:func
+
+// End of asm/libultra/os/invalicache.s ========================================
+
+
+// asm/libultra/os/createmesgqueue.s ===========================================
+
+// .text
+osCreateMesgQueue = 0x80089EC0; // type:func
+
+// End of asm/libultra/os/createmesgqueue.s ====================================
+
+
+// asm/libultra/os/invaldcache.s ===============================================
+
+// .text
+osInvalDCache = 0x80089EF0; // type:func
+
+// End of asm/libultra/os/invaldcache.s ========================================
+
+
+// asm/libultra/audio/synsetfxmix.s ============================================
+
+// .text
+alSynSetFXMix = 0x80089FA0; // type:func
+
+// End of asm/libultra/audio/synsetfxmix.s =====================================
+
+
+// asm/libultra/audio/save.s ===================================================
+
+// .text
+alSavePull  = 0x8008A040; // type:func
+alSaveParam = 0x8008A0CC; // type:func
+
+// End of asm/libultra/audio/save.s ============================================
+
+
+// asm/libultra/io/pfsrepairid.s ===============================================
+
+// .text
+osPfsRepairId = 0x8008A100; // type:func
+
+// End of asm/libultra/io/pfsrepairid.s ========================================
+
+
+// asm/libultra/audio/syngetfxref.s ============================================
+
+// .text
+alSynGetFXRef = 0x8008A160; // type:func
+
+// End of asm/libultra/audio/syngetfxref.s =====================================
+
+
+// asm/libultra/io/sp.s ========================================================
+
+// .text
+__osSpDeviceBusy = 0x8008A1E0; // type:func
+
+// End of asm/libultra/io/sp.s =================================================
+
+
+// asm/libultra/io/si.s ========================================================
+
+// .text
+__osSiDeviceBusy = 0x8008A210; // type:func
+
+// End of asm/libultra/io/si.s =================================================
+
+
+// asm/libultra/gu/translate.s =================================================
+
+// .text
+guTranslateF = 0x8008A240; // type:func
+guTranslate  = 0x8008A288; // type:func
+
+// End of asm/libultra/gu/translate.s ==========================================
+
+
+// asm/libultra/os/jammesg.s ===================================================
+
+// .text
+osJamMesg = 0x8008A2E0; // type:func
+
+// End of asm/libultra/os/jammesg.s ============================================
+
+
+// asm/libultra/os/setthreadpri.s ==============================================
+
+// .text
+osSetThreadPri = 0x8008A430; // type:func
+
+// End of asm/libultra/os/setthreadpri.s =======================================
+
+
+// asm/libultra/os/getthreadpri.s ==============================================
+
+// .text
+osGetThreadPri = 0x8008A510; // type:func
+
+// End of asm/libultra/os/getthreadpri.s =======================================
+
+
+// asm/libultra/io/epirawread.s ================================================
+
+// .text
+__osEPiRawReadIo = 0x8008A530; // type:func
+
+// End of asm/libultra/io/epirawread.s =========================================
+
+
+// asm/libultra/io/viswapbuf.s =================================================
+
+// .text
+osViSwapBuffer = 0x8008A690; // type:func
+
+// End of asm/libultra/io/viswapbuf.s ==========================================
+
+
+// asm/libultra/gu/lookat.s ====================================================
+
+// .text
+guLookAtF = 0x8008A6E0; // type:func
+guLookAt  = 0x8008A998; // type:func
+
+// End of asm/libultra/gu/lookat.s =============================================
+
+
+// asm/libultra/gu/position.s ==================================================
+
+// .text
+guPositionF       = 0x8008AA10; // type:func
+guPosition        = 0x8008ABC0; // type:func
+
+// .rodata
+position_dtor     = 0x800A7050;
+
+// .bss
+position_bss_0000 = 0x80123f30;
+
+// End of asm/libultra/gu/position.s ===========================================
+
+
+// asm/libultra/io/epirawdma.s =================================================
+
+// .text
+__osEPiRawStartDma = 0x8008AC30; // type:func
+
+// End of asm/libultra/io/epirawdma.s ==========================================
+
+
+// asm/libultra/io/sptaskyielded.s =============================================
+
+// .text
+osSpTaskYielded = 0x8008AE10; // type:func
+
+// End of asm/libultra/io/sptaskyielded.s ======================================
+
+
+// asm/libultra/libc/bcmp.s ====================================================
+
+// .text
+_bcmp = 0x8008AE90; // type:func
+
+// End of asm/libultra/libc/bcmp.s =============================================
+
+
+// asm/libultra/os/gettime.s ===================================================
+
+// .text
+osGetTime = 0x8008AFB0; // type:func
+
+// End of asm/libultra/os/gettime.s ============================================
+
+
+// asm/libultra/os/timerintr.s =================================================
+
+// .text
+__osTimerServicesInit = 0x8008B040; // type:func
+__osTimerInterrupt    = 0x8008B0CC; // type:func
+__osSetTimerIntr      = 0x8008B244; // type:func
+__osInsertTimer       = 0x8008B2B8; // type:func
+
+// .data
+__osTimerList         = 0x800A2530;
+
+// .bss
+__osBaseTimer         = 0x80123F40;
+__osCurrentTime       = 0x80123F60;
+__osBaseCounter       = 0x80123F68;
+__osViIntrCount       = 0x80123F6C;
+__osTimerCounter      = 0x80123F70;
+
+// End of asm/libultra/os/timerintr.s ==========================================
+
+
+// asm/libultra/os/setglobalintmask.s ==========================================
+
+// .text
+__osSetGlobalIntMask = 0x8008B440; // type:func
+
+// End of asm/libultra/os/setglobalintmask.s ===================================
+
+
+// asm/libultra/io/aisetfreq.s =================================================
+
+// .text
+osAiSetFrequency = 0x8008B490; // type:func
+
+// End of asm/libultra/io/aisetfreq.s ==========================================
+
+
+// asm/libultra/gu/normalize.s =================================================
+
+// .text
+guNormalize = 0x8008B5E0; // type:func
+
+// End of asm/libultra/gu/normalize.s ==========================================
+
+
+// asm/libultra/os/setcompare.s ================================================
+
+// .text
+__osSetCompare = 0x8008B670; // type:func
+
+// End of asm/libultra/os/setcompare.s =========================================
+
+
+// asm/libultra/libc/bcopy.s ===================================================
+
+// .text
+_bcopy = 0x8008B680; // type:func
+
+// End of asm/libultra/libc/bcopy.s ============================================
+
+
+// asm/libultra/audio/copy.s ===================================================
+
+// .text
+alCopy = 0x8008B990; // type:func
+
+// End of asm/libultra/audio/copy.s ============================================
+
+
+// asm/libultra/os/resetglobalintmask.s ========================================
+
+// .text
+__osResetGlobalIntMask = 0x8008BA10; // type:func
+
+// End of asm/libultra/os/resetglobalintmask.s =================================
+
+
+// asm/libultra/io/pfsdeletefile.s =============================================
+
+// .text
+osPfsDeleteFile     = 0x8008BA70; // type:func
+__osPfsReleasePages = 0x8008BC48; // type:func
+
+// End of asm/libultra/io/pfsdeletefile.s ======================================
+
+
+// asm/libultra/os/interrupt.s =================================================
+
+// .text
+__osDisableInt = 0x8008BCE0; // type:func
+__osRestoreInt = 0x8008BD50; // type:func
+
+// End of asm/libultra/os/interrupt.s ==========================================
+
+
+// asm/libultra/io/vi.s ========================================================
+
+// .text
+__osViInit  = 0x8008BD70; // type:func
+
+// .data
+vi          = 0x800A2540;
+__osViCurr  = 0x800A25A0;
+__osViNext  = 0x800A25A4;
+
+// End of asm/libultra/io/vi.s =================================================
+
+
+// asm/libultra/io/viswapcontext.s =============================================
+
+// .text
+__osViSwapContext = 0x8008BEB0; // type:func
+
+// End of asm/libultra/io/viswapcontext.s ======================================
+
+
+// asm/libultra/io/pigetcmdq.s =================================================
+
+// .text
+osPiGetCmdQueue = 0x8008C1B0; // type:func
+
+// End of asm/libultra/io/pigetcmdq.s ==========================================
+
+
+// asm/libultra/gu/cosf.s ======================================================
+
+// .text
+__cosf = 0x8008C1E0; // type:func
+
+// .rodata
+P      = 0x800A7060;
+rpi    = 0x800A7088;
+pihi   = 0x800A7090;
+pilo   = 0x800A7098;
+zero   = 0x800A70A0;
+
+// End of asm/libultra/gu/cosf.s ===============================================
+
+
+// asm/libultra/gu/coss.s ======================================================
+
+// .text
+coss = 0x8008C350; // type:func
+
+// End of asm/libultra/gu/coss.s ===============================================
+
+
+// asm/libultra/io/visetspecial.s ==============================================
+
+// .text
+osViSetSpecialFeatures = 0x8008C380; // type:func
+
+// End of asm/libultra/io/visetspecial.s =======================================
+
+
+// asm/libultra/io/visetevent.s ================================================
+
+// .text
+osViSetEvent = 0x8008C4E0; // type:func
+
+// End of asm/libultra/io/visetevent.s =========================================
+
+
+// asm/libultra/audio/synaddplayer.s ===========================================
+
+// .text
+alSynAddPlayer = 0x8008C550; // type:func
+
+// End of asm/libultra/audio/synaddplayer.s ====================================
+
+
+// asm/libultra/io/pfsnumfiles.s ===============================================
+
+// .text
+osPfsNumFiles = 0x8008C5A0; // type:func
+
+// End of asm/libultra/io/pfsnumfiles.s ========================================
+
+
+// asm/libultra/io/cartrominit.s ===============================================
+
+// .text
+osCartRomInit   = 0x8008C6D0; // type:func
+
+// .data
+first           = 0x800A26A0;
+
+// .bss
+__CartRomHandle = 0x80123F80;
+
+// End of asm/libultra/io/cartrominit.s ========================================
+
+
+// asm/libultra/io/pfsselectbank.s =============================================
+
+// .text
+__osPfsSelectBank = 0x8008C830; // type:func
+
+// End of asm/libultra/io/pfsselectbank.s ======================================
+
+
+// asm/libultra/os/setfpccsr.s =================================================
+
+// .text
+__osSetFpcCsr = 0x8008C8B0; // type:func
+
+// End of asm/libultra/os/setfpccsr.s ==========================================
+
+
+// asm/libultra/io/pfsfilestate.s ==============================================
+
+// .text
+osPfsFileState = 0x8008C8C0; // type:func
+
+// End of asm/libultra/io/pfsfilestate.s =======================================
+
+
+// asm/libultra/io/pfsinitpak.s ================================================
+
+// .text
+osPfsInitPak        = 0x8008CAA0; // type:func
+__osPfsCheckRamArea = 0x8008CCA8; // type:func
+
+// End of asm/libultra/io/pfsinitpak.s =========================================
+
+
+// asm/libultra/io/pfschecker.s ================================================
+
+// .text
+osPfsChecker   = 0x8008CDB0; // type:func
+corrupted_init = 0x8008D2E8; // type:func
+corrupted      = 0x8008D5B4; // type:func
+
+// End of asm/libultra/io/pfschecker.s =========================================
+
+
+// asm/libultra/io/aigetlen.s ==================================================
+
+// .text
+osAiGetLength = 0x8008D750; // type:func
+
+// End of asm/libultra/io/aigetlen.s ===========================================
+
+
+// asm/libultra/io/piwrite.s ===================================================
+
+// .text
+osPiWriteIo = 0x8008D760; // type:func
+
+// End of asm/libultra/io/piwrite.s ============================================
+
+
+// asm/libultra/os/maptlbrdb.s =================================================
+
+// .text
+osMapTLBRdb = 0x8008D7A0; // type:func
+
+// End of asm/libultra/os/maptlbrdb.s ==========================================
+
+
+// asm/libultra/os/yeildthread.s ===============================================
+
+// .text
+osYieldThread = 0x8008D800; // type:func
+
+// End of asm/libultra/os/yeildthread.s ========================================
+
+
+// asm/libultra/audio/synstartvoiceparam.s =====================================
+
+// .text
+alSynStartVoiceParams = 0x8008D850; // type:func
+
+// End of asm/libultra/audio/synstartvoiceparam.s ==============================
+
+
+// asm/libultra/os/getcause.s ==================================================
+
+// .text
+__osGetCause = 0x8008D930; // type:func
+
+// End of asm/libultra/os/getcause.s ===========================================
+
+
+// asm/libultra/io/contramwrite.s ==============================================
+
+// .text
+__osContRamWrite = 0x8008D940; // type:func
+
+// End of asm/libultra/io/contramwrite.s =======================================
+
+
+// asm/libultra/io/contramread.s ===============================================
+
+// .text
+__osContRamRead    = 0x8008DB90; // type:func
+
+// .data
+__osPfsLastChannel = 0x800A26B0;
+
+// End of asm/libultra/io/contramread.s ========================================
+
+
+// asm/libultra/io/crc.s =======================================================
+
+// .text
+__osContAddressCrc = 0x8008DDC0; // type:func
+__osContDataCrc    = 0x8008DE90; // type:func
+
+// End of asm/libultra/io/crc.s ================================================
+
+
+// asm/libultra/io/epirawwrite.s ===============================================
+
+// .text
+__osEPiRawWriteIo = 0x8008DF30; // type:func
+
+// End of asm/libultra/io/epirawwrite.s ========================================
+
+
+// asm/libultra/os/settimer.s ==================================================
+
+// .text
+osSetTimer = 0x8008E090; // type:func
+
+// End of asm/libultra/os/settimer.s ===========================================
+
+
+// asm/libultra/libc/xldtob.s ==================================================
+
+// .text
+// xldtob_text_0000  = 0x8008e170; // type:func
+_Ldtob             = 0x8008e6e0; // type:func
+
+// .rodata
+pows               = 0x800A70C0;
+NaN                = 0x800A7108;
+Inf                = 0x800A710C;
+xldtob_rodata_0058 = 0x800A7118;
+
+// End of asm/libultra/libc/xldtob.s ===========================================
+
+
+// asm/libultra/libc/ldiv.s ====================================================
+
+// .text
+lldiv = 0x8008EC30; // type:func
+ldiv  = 0x8008ED30; // type:func
+
+// End of asm/libultra/libc/ldiv.s =============================================
+
+
+// asm/libultra/libc/xlitob.s ==================================================
+
+// .text
+_Litob           = 0x8008EDC0; // type:func
+
+// .data
+xlitob_data_0000 = 0x800A26C0;
+xlitob_data_0014 = 0x800A26D4;
+
+// End of asm/libultra/libc/xlitob.s ===========================================
+
+
+// asm/libultra/io/sirawwrite.s ================================================
+
+// .text
+__osSiRawWriteIo = 0x8008F060; // type:func
+
+// End of asm/libultra/io/sirawwrite.s =========================================
+
+
+// asm/libultra/io/pirawwrite.s ================================================
+
+// .text
+osPiRawWriteIo = 0x8008F0B0; // type:func
+
+// End of asm/libultra/io/pirawwrite.s =========================================
+
+
+// asm/libultra/io/spsetstat.s =================================================
+
+// .text
+__osSpSetStatus = 0x8008F100; // type:func
+
+// End of asm/libultra/io/spsetstat.s ==========================================
+
+
+// asm/libultra/io/spgetstat.s =================================================
+
+// .text
+__osSpGetStatus = 0x8008F110; // type:func
+
+// End of asm/libultra/io/spgetstat.s ==========================================
+
+
+// asm/libultra/io/vimgr.s =====================================================
+
+// .text
+osCreateViManager = 0x8008F120; // type:func
+viMgrMain         = 0x8008F2A0; // type:func
+
+// .data
+__osViDevMgr          = 0x800A26F0;
+__additional_scanline = 0x800A270C;
+
+// .bss
+viMgrThread           = 0x80124000;
+__osViMesgQueue       = 0x801251B0;
+viMgrMesgBuff         = 0x801251C8;
+viEventViMesg         = 0x801251E0;
+viEventCounterMesg    = 0x801251F8;
+viRetrace             = 0x80125210;
+
+// End of asm/libultra/io/vimgr.s ==============================================
+
+
+// asm/libultra/io/vigetcurrcontext.s ==========================================
+
+// .text
+__osViGetCurrentContext = 0x8008F430; // type:func
+
+// End of asm/libultra/io/vigetcurrcontext.s ===================================
+
+
+// asm/libultra/os/writebackdcacheall.s ========================================
+
+// .text
+osWritebackDCacheAll = 0x8008F440; // type:func
+
+// End of asm/libultra/os/writebackdcacheall.s =================================
+
+
+// asm/libultra/audio/heapalloc.s ==============================================
+
+// .text
+alHeapDBAlloc = 0x8008F470; // type:func
+
+// End of asm/libultra/audio/heapalloc.s =======================================
+
+
+// asm/libultra/os/getcurrfaultthread.s ========================================
+
+// .text
+__osGetCurrFaultedThread = 0x8008F4D0; // type:func
+
+// End of asm/libultra/os/getcurrfaultthread.s =================================
+
+
+// asm/libultra/gu/rotaterpy.s =================================================
+
+// .text
+guRotateRPYF = 0x8008F4E0; // type:func
+guRotateRPY  = 0x8008F62C; // type:func
+
+// .rodata
+rotate_dtor  = 0x800A7120;
+
+// End of asm/libultra/gu/rotaterpy.s ==========================================
+
+
+// asm/libultra/libc/llcvt.s ===================================================
+
+// .text
+__d_to_ll         = 0x8008F680; // type:func
+__f_to_ll         = 0x8008F69C; // type:func
+__d_to_ull        = 0x8008F6B8; // type:func
+__f_to_ull        = 0x8008F758; // type:func
+__ll_to_d         = 0x8008F7F4; // type:func
+__ll_to_f         = 0x8008F80C; // type:func
+__ull_to_d        = 0x8008F824; // type:func
+__ull_to_f        = 0x8008F858; // type:func
+
+// .rodata
+llcvt_rodata_0000 = 0x800A7130;
+llcvt_rodata_0008 = 0x800A7138;
+
+// End of asm/libultra/libc/llcvt.s ============================================
+
+
+// asm/libultra/os/startthread.s ===============================================
+
+// .text
+osStartThread = 0x8008F890; // type:func
+
+// End of asm/libultra/os/startthread.s ========================================
+
+
+// asm/libultra/io/visetyscale.s ===============================================
+
+// .text
+osViSetYScale = 0x8008F9E0; // type:func
+
+// End of asm/libultra/io/visetyscale.s ========================================
+
+
+// asm/libultra/audio/synallocfx.s =============================================
+
+// .text
+alSynAllocFx = 0x8008FA40; // type:func
+
+// End of asm/libultra/audio/synallocfx.s ======================================
+
+
+// asm/libultra/audio/synstopvoice.s ===========================================
+
+// .text
+alSynStopVoice = 0x8008FAE0; // type:func
+
+// End of asm/libultra/audio/synstopvoice.s ====================================
+
+
+// asm/libultra/audio/syndelete.s ==============================================
+
+// .text
+alSynDelete = 0x8008FB60; // type:func
+
+// End of asm/libultra/audio/syndelete.s =======================================
+
+
+// asm/libultra/io/aisetnextbuf.s ==============================================
+
+// .text
+osAiSetNextBuffer = 0x8008FB70; // type:func
+
+// .data
+hdwrBugFlag       = 0x800A2710;
+
+// End of asm/libultra/io/aisetnextbuf.s =======================================
+
+
+// asm/libultra/io/ai.s ========================================================
+
+// .text
+__osAiDeviceBusy = 0x8008FC20; // type:func
+
+// End of asm/libultra/io/ai.s =================================================
+
+
+// asm/libultra/io/vigetcurrframebuf.s =========================================
+
+// .text
+osViGetCurrentFramebuffer = 0x8008FC50; // type:func
+
+// End of asm/libultra/io/vigetcurrframebuf.s ==================================
+
+
+// asm/libultra/io/spsetpc.s ===================================================
+
+// .text
+__osSpSetPc = 0x8008FC90; // type:func
+
+// End of asm/libultra/io/spsetpc.s ============================================
+
+
 // src/common/interactuable.c ==================================================
 
 // .text
-interactuables_entrypoint = 0x80125230; // type:func
-interactuables_init = 0x801252a0; // type:func
-interactuables_main = 0x80125764; // type:func
-interactuables_initCheck = 0x80125b60; // type:func
-interactuables_selectTextboxOption = 0x80125d84; // type:func
-interactuables_stopCheck = 0x80126004; // type:func
-interactuables_destroy = 0x801261dc; // type:func
-interactuables_stopInteraction = 0x80126354; // type:func
+interactuables_entrypoint          = 0x80125230; // type:func
+interactuables_init                = 0x801252A0; // type:func
+interactuables_main                = 0x80125764; // type:func
+interactuables_initCheck           = 0x80125B60; // type:func
+interactuables_selectTextboxOption = 0x80125D84; // type:func
+interactuables_stopCheck           = 0x80126004; // type:func
+interactuables_destroy             = 0x801261DC; // type:func
+interactuables_stopInteraction     = 0x80126354; // type:func
 
 // .data
-interactuables_functions = 0x8016B560; // size:0x18
+interactuables_functions           = 0x8016B560; // size:0x18
 
 // End of src/common/interactuable.c ===========================================
+
 
 // src/common/cutscene_manager.c ===============================================
 
@@ -117,6 +1465,7 @@ cutsceneMgr_entrypoint                     = 0x80126F40; // type:func
 cutsceneMgr_functions                      = 0x8016B580;
 
 // End of src/common/cutscene_manager.c ========================================
+
 
 memory_clear = 0x80000770;
 memory_copy = 0x800008d0;
@@ -186,8 +1535,6 @@ vec3f_multiplyByOne = 0x80011780;
 vec3f_800117a4 = 0x800117a4;
 vec3f_80011808 = 0x80011808;
 func_80011880 = 0x80011880;
-guAlignF = 0x8007fb00;
-guAlign = 0x8007fc94;
 increaseOrDecreaseByZeroPointFive = 0x80011b18;
 isSongIDMusic = 0x800129a8;
 setSongToPlay = 0x80014a28;
@@ -339,7 +1686,6 @@ alUnlink = 0x8007fa40;
 alLink = 0x8007fa70;
 alClose = 0x8007fa94;
 alInit = 0x8007facc;
-sinf = 0x8007fcf0;
 sins = 0x8007feb0;
 alSynSetVol = 0x8007ff20;
 _VirtualToPhysicalTask = 0x8007ffc0;
@@ -371,183 +1717,6 @@ _allocatePVoice = 0x80081a50;
 alSynAllocVoice = 0x80081b38;
 osVirtualToPhysical = 0x80081c80;
 osWritebackDCache = 0x80081d00;
-osInitialize = 0x80081d80;
-__createSpeedParam = 0x80082028;
-__ull_rem = 0x800820fc;
-__ull_div = 0x80082138;
-__ll_div = 0x800821dc;
-__ll_mul = 0x80082238;
-_bzero = 0x80082390;
-__osSetSR = 0x80082490;
-__osGetSR = 0x800824a0;
-alSynSetFXParam = 0x800824b0;
-osViGetNextFramebuffer = 0x800824f0;
-alSynStartVoice = 0x80082530;
-__osSpRawStartDma = 0x800825c0;
-__osSiRawStartDma = 0x80082650;
-osViBlack = 0x80082700;
-__osPiRawReadIo = 0x80082770;
-__osSiRawReadIo = 0x800827c0;
-osSpTaskYield = 0x80082810;
-pfsreadwritefile_text_0000 = 0x80082830;
-osPfsReadWriteFile = 0x80082904;
-__osPfsGetStatus = 0x80082c80;
-__osPfsRequestOneChannel = 0x80082d50;
-__osPfsGetOneChannelData = 0x80082e14;
-guMtxIdentF = 0x80082fb0;
-guMtxL2F = 0x80083068;
-osViSetMode = 0x80083120;
-_MakeMotorData = 0x800832f8;
-osMotorInit = 0x80083404;
-osPfsAllocateFile = 0x80083560;
-__osPfsDeclearPage = 0x80083894;
-osPfsIsPlug = 0x800839e0;
-__osPfsRequestData = 0x80083b80;
-__osPfsGetInitData = 0x80083c50;
-alSynSetPitch = 0x80083d20;
-__osProbeTLB = 0x80083db0;
-osCreatePiManager = 0x80083e70;
-alSynSetPan = 0x800844c0;
-osGetCount = 0x80084550;
-__osSumcalc = 0x80084560;
-__osIdCheckSum = 0x800845d4;
-__osRepairPackId = 0x800846d0;
-__osCheckPackId = 0x80084a20;
-__osGetId = 0x80084b84;
-__osCheckId = 0x80084d30;
-__osPfsRWInode = 0x80084e04;
-osPiStartDma = 0x800850e0;
-osPfsFindFile = 0x800851f0;
-alSynNew = 0x800853c0;
-alAudioFrame = 0x800856c0;
-__allocParam = 0x80085890;
-__freeParam = 0x800858c0;
-_collectPVoices = 0x800858d8;
-_timeToSamplesNoRound = 0x80085970;
-_timeToSamples = 0x800859bc;
-__nextSampleTime = 0x800859e4;
-init_lpfilter = 0x80085a40;
-alFxNew = 0x80085ae0;
-alEnvmixerNew = 0x80085f1c;
-alLoadNew = 0x80085fc4;
-alResampleNew = 0x8008606c;
-alAuxBusNew = 0x800860f8;
-alMainBusNew = 0x8008614c;
-alSaveNew = 0x800861a0;
-alFxParam = 0x80086680;
-_loadOutputBuffer = 0x800868f4;
-_loadBuffer = 0x80086b14;
-_saveBuffer = 0x80086cac;
-_filterBuffer = 0x80086e40;
-_doModFunc = 0x80086ef0;
-alEnvmixerParam = 0x800875b8;
-env_text_05E8 = 0x80087698;
-_frexpf = 0x80087980;
-_ldexpf = 0x80087a6c;
-alResampleParam = 0x80087d30;
-alLoadParam = 0x80088030;
-load_text_0580 = 0x800885b0;
-osSetEventMesg = 0x80088b80;
-sqrtf = 0x80088c40;
-osAfterPreNMI = 0x80088c50;
-osContStartQuery = 0x80088c70;
-osContGetQuery = 0x80088cf4;
-guRandom = 0x80088d20;
-osUnmapTLB = 0x80088d50;
-_Putfld = 0x80088d90;
-_Printf = 0x80089400;
-alFilterNew = 0x80089a50;
-guOrthoF = 0x80089a70;
-osUnmapTLBAll = 0x80089c30;
-osEPiStartDma = 0x80089c80;
-alHeapInit = 0x80089d60;
-memcpy = 0x80089da0;
-strchr = 0x80089df4;
-osInvalICache = 0x80089e40;
-osCreateMesgQueue = 0x80089ec0;
-osInvalDCache = 0x80089ef0;
-alSynSetFXMix = 0x80089fa0;
-alSaveParam = 0x8008a0cc;
-alSynGetFXRef = 0x8008a160;
-__osSpDeviceBusy = 0x8008a1e0;
-__osSiDeviceBusy = 0x8008a210;
-guTranslateF = 0x8008a240;
-osJamMesg = 0x8008a2e0;
-osSetThreadPri = 0x8008a430;
-osGetThreadPri = 0x8008a510;
-__osEPiRawReadIo = 0x8008a530;
-osViSwapBuffer = 0x8008a690;
-guLookAtF = 0x8008a6e0;
-guPositionF = 0x8008aa10;
-osSpTaskYielded = 0x8008ae10;
-_bcmp = 0x8008ae90;
-osGetTime = 0x8008afb0;
-__osTimerServicesInit = 0x8008b040;
-__osTimerInterrupt = 0x8008b0cc;
-__osSetTimerIntr = 0x8008b244;
-__osInsertTimer = 0x8008b2b8;
-__osSetGlobalIntMask = 0x8008b440;
-osAiSetFrequency = 0x8008b490;
-guNormalize = 0x8008b5e0;
-__osSetCompare = 0x8008b670;
-_bcopy = 0x8008b680;
-alCopy = 0x8008b990;
-__osResetGlobalIntMask = 0x8008ba10;
-osPfsDeleteFile = 0x8008ba70;
-__osPfsReleasePages = 0x8008bc48;
-__osDisableInt = 0x8008bce0;
-__osRestoreInt = 0x8008bd50;
-__osViInit = 0x8008bd70;
-__osViSwapContext = 0x8008beb0;
-osPiGetCmdQueue = 0x8008c1b0;
-__cosf = 0x8008c1e0;
-coss = 0x8008c350;
-osViSetSpecialFeatures = 0x8008c380;
-osViSetEvent = 0x8008c4e0;
-alSynAddPlayer = 0x8008c550;
-osCartRomInit = 0x8008c6d0;
-__osPfsSelectBank = 0x8008c830;
-__osSetFpcCsr = 0x8008c8b0;
-osPfsInitPak = 0x8008caa0;
-pfsinitpak_text_0208 = 0x8008cca8;
-osPfsChecker = 0x8008cdb0;
-corrupted_init = 0x8008d2e8;
-corrupted = 0x8008d5b4;
-osAiGetLength = 0x8008d750;
-osMapTLBRdb = 0x8008d7a0;
-osYieldThread = 0x8008d800;
-alSynStartVoiceParams = 0x8008d850;
-__osGetCause = 0x8008d930;
-__osContRamWrite = 0x8008d940;
-__osContRamRead = 0x8008db90;
-__osContAddressCrc = 0x8008ddc0;
-__osContDataCrc = 0x8008de90;
-__osEPiRawWriteIo = 0x8008df30;
-osSetTimer = 0x8008e090;
-xldtob_text_0000 = 0x8008e170;
-lldiv = 0x8008ec30;
-ldiv = 0x8008ed30;
-osPiRawWriteIo = 0x8008f0b0;
-__osSpSetStatus = 0x8008f100;
-__osSpGetStatus = 0x8008f110;
-osCreateViManager = 0x8008f120;
-__osViGetCurrentContext = 0x8008f430;
-osWritebackDCacheAll = 0x8008f440;
-alHeapDBAlloc = 0x8008f470;
-__osGetCurrFaultedThread = 0x8008f4d0;
-guRotateRPYF = 0x8008f4e0;
-__f_to_ull = 0x8008f758;
-__ull_to_d = 0x8008f824;
-__ull_to_f = 0x8008f858;
-osStartThread = 0x8008f890;
-osViSetYScale = 0x8008f9e0;
-alSynAllocFx = 0x8008fa40;
-alSynStopVoice = 0x8008fae0;
-alSynDelete = 0x8008fb60;
-osAiSetNextBuffer = 0x8008fb70;
-__osAiDeviceBusy = 0x8008fc20;
-osViGetCurrentFramebuffer = 0x8008fc50;
-__osSpSetPc = 0x8008fc90;
 playerCanInteractWithInteractuable = 0x801268e4;
 getMapEventFlagID = 0x80126cec;
 checkCutsceneTimeRangeTrigger = 0x80127e84;
@@ -832,31 +2001,6 @@ prepareMuteSoundToPlayAndSetStereoLocation = 0x80079dd4;
 prepareSoundToPlayAndSetVolume = 0x80079e04;
 guPerspective = 0x8007f800;
 osDestroyThread = 0x80080cb0;
-__ll_mod = 0x800822c8;
-guMtxIdent = 0x80083038;
-__osMotorAccess = 0x80083190;
-__osDevMgrMain = 0x80083fe0;
-__osPiRawStartDma = 0x800843f0;
-_freePVoice = 0x80085938;
-alMainBusPull = 0x80086220;
-alFxPull = 0x80086340;
-alAuxBusPull = 0x80086fd0;
-alEnvmixerPull = 0x800870b0;
-alResamplePull = 0x80087e1c;
-alRaw16Pull = 0x80088204;
-alAdpcmPull = 0x800886dc;
-guOrtho = 0x80089bc4;
-alSavePull = 0x8008a040;
-osPfsRepairId = 0x8008a100;
-guTranslate = 0x8008a288;
-guLookAt = 0x8008a998;
-guPosition = 0x8008abc0;
-__osEPiRawStartDma = 0x8008ac30;
-osPfsNumFiles = 0x8008c5a0;
-osPfsFileState = 0x8008c8c0;
-_Ldtob = 0x8008e6e0;
-_Litob = 0x8008edc0;
-viMgrMain = 0x8008f2a0;
 PlayerMgr_getActorCurrentlyInteractingWith = 0x80126370;
 cutsceneTrigger_entrypoint = 0x801274f0;
 cutsceneTrigger_checkCollision = 0x801276b4;
@@ -1073,8 +2217,6 @@ shadow_create = 0x80061280;
 playerCameraController_updateCameraRotationSpeed = 0x8006bc50;
 playerCameraController_8006bcf4 = 0x8006bcf4;
 loadMusicSequenceFromROM = 0x8007b2f0;
-env_text_0BC8 = 0x80087c78;
-strlen = 0x80089dcc;
 text_findCharInString = 0x80132404;
 HUD_updateHealthBar = 0x80138224;
 HUD_updateSubweaponGraphic = 0x801386ac;
@@ -1093,76 +2235,14 @@ __osActiveQueue = 0x800a0fac;
 __osRunningThread = 0x800a0fb0;
 __osPiAccessQueueEnabled = 0x800a0fc0;
 __osContinitialized = 0x800a0fd0;
-osViClock = 0x800a0ff8;
-__osShutdown = 0x800a0ffc;
-__OSGlobalIntMask = 0x800a1000;
 __osThreadTail = 0x800a1f40;
-__osPiDevMgr = 0x800a2190;
 player_bss_003C = 0x800a2198;
-__osPiTable = 0x800a21ac;
-__osCurrentHandle = 0x800a21b0;
-__osPfsInodeCacheChannel = 0x800a21c0;
-__osPfsInodeCacheBank = 0x800a21c4;
-SMALLROOM_PARAMS = 0x800a21d0;
-BIGROOM_PARAMS = 0x800a2238;
-ECHO_PARAMS = 0x800a22c0;
-CHORUS_PARAMS = 0x800a22e8;
-FLANGE_PARAMS = 0x800a2310;
-NULL_PARAMS = 0x800a2338;
-env_data_0000 = 0x800a2380;
-env_data_0100 = 0x800a2480;
-__osPreNMI = 0x800a24c0;
-xseed = 0x800a24d0;
-xprintf_data_0000 = 0x800a24e0;
-xprintf_data_0024 = 0x800a2504;
-__osTimerList = 0x800a2530;
-sViContexts = 0x800a2540;
-__osViCurr = 0x800a25a0;
 osViModePalLan1 = 0x800a25b0;
 osViModeNtscLan1 = 0x800a2600;
 osViModeMpalLan1 = 0x800a2650;
-first = 0x800a26a0;
-__osPfsLastChannel = 0x800a26b0;
-xlitob_data_0000 = 0x800a26c0;
-xlitob_data_0014 = 0x800a26d4;
-__osViDevMgr = 0x800a26f0;
-__additional_scanline = 0x800a270c;
-hdwrBugFlag = 0x800a2710;
 perspective_rodata_0000 = 0x800a6ce0;
 __osRcpImTable = 0x800a6cf0;
-rotate_rodata_0000 = 0x800a6d70;
-sinf_rodata_0000 = 0x800a6d80;
-sinf_rodata_0028 = 0x800a6da8;
-sinf_rodata_0030 = 0x800a6db0;
-sinf_rodata_0038 = 0x800a6db8;
-sinf_rodata_0040 = 0x800a6dc0;
-align_rodata_0000 = 0x800a6e20;
-devmgr_rodata_0000 = 0x800a6e30;
-drvrNew_rodata_0000 = 0x800a6e60;
-CONVERT = 0x800a6e78;
-reverb_rodata_0000 = 0x800a6e80;
-reverb_rodata_0020 = 0x800a6ea0;
-env_rodata_0000 = 0x800a6eb0;
-resample_rodata_0000 = 0x800a6f10;
-resample_rodata_0028 = 0x800a6f38;
-resample_rodata_0030 = 0x800a6f40;
-hlL = 0x800a6f50;
-fchar = 0x800a6f54;
-fbit = 0x800a6f5c;
-position_rodata_0000 = 0x800a7050;
-cosf_rodata_0000 = 0x800a7060;
-cosf_rodata_0028 = 0x800a7088;
-cosf_rodata_0030 = 0x800a7090;
-cosf_rodata_0038 = 0x800a7098;
-cosf_rodata_0040 = 0x800a70a0;
 __libm_qnan_f = 0x800a70b0;
-xldtob_rodata_0000 = 0x800a70c0;
-NaN = 0x800a7108;
-Inf = 0x800a710c;
-xldtob_rodata_0058 = 0x800a7118;
-dtor = 0x800a7120;
-llcvt_rodata_0000 = 0x800a7130;
-llcvt_rodata_0008 = 0x800a7138;
 rotate_bss_0000 = 0x801226c0;
 siacs_bss_0000 = 0x80122710;
 __osPiAccessQueue = 0x80122718;
@@ -1172,21 +2252,6 @@ __osEepromTimerQ = 0x80122798;
 __osEepromTimerMsg = 0x801227b0;
 align_bss_0000 = 0x801227e0;
 __osFinalrom = 0x801227f0;
-__MotorDataBuf = 0x801229b0;
-__Dom1SpeedParam = 0x80122af7;
-__Dom2SpeedParam = 0x80122b6f;
-piMgrThread = 0x80122be0;
-piMgrMesgBuff = 0x80123da8;
-__osPfsInodeCache = 0x80123db0;
-__osEventStateTab = 0x80123eb0;
-position_bss_0000 = 0x80123f30;
-__osBaseCounter = 0x80123f68;
-__osViIntrCount = 0x80123f6c;
-__osTimerCounter = 0x80123f70;
-viMgrThread = 0x80124000;
-viMgrMesgBuff = 0x801251c8;
-viEventViMesg = 0x801251e0;
-viEventCounterMesg = 0x801251f8;
 ptr_PlayerData = 0x800d7af8;
 Player_health = 0x80389c3e;
 Player_gold = 0x80389c44;
@@ -1227,8 +2292,6 @@ audioHeap = 0x800e22f8;
 ALHeap = 0x800e22d8;
 ALGlobals = 0x800dd750;
 ALPlayer_client = 0x800e22c0;
-__osPiMesgQueue = 0x80123d90;
-__osViMesgQueue = 0x801251b0;
 sCrashScreenThread = 0x800d5f40;
 crashScreen_mesgQueue = 0x800d70f0;
 crashScreen_mesg = 0x800d7108;
@@ -1265,7 +2328,6 @@ someROMLoadedFile_bytesLeftToRead = 0x800d5e48;
 someROMLoadedFile_lastIndex = 0x800d5e4c;
 someROMLoadedFile_address = 0x800d5e44;
 someROMLoadedFile_currentReadingAddress = 0x800d5e40;
-__osCurrentTime = 0x80123f60;
 processMeter_render = 0x80019e68;
 contPak_notInserted = 0x800d7490;
 contPak_getFileState = 0x8001a770;
@@ -1289,11 +2351,6 @@ fade_color = 0x80387ad8;
 max_fade_time = 0x80387ade;
 textbox_printNumber = 0x8012ce3c;
 controller_disconnectController = 0x80016cb0;
-__ll_rshift = 0x80082364;
-__ull_divremi = 0x80082268;
-__ll_lshift = 0x80082174;
-__ll_rem = 0x800821a0;
-__ull_rshift = 0x800820d0;
 selection_text_idle_time = 0x80180484;
 some_timer_SHORT = 0x80387d74;
 gameplayMenuMgr_initHUDParams = 0x80136894;
@@ -1314,7 +2371,6 @@ __osExceptionPreamble = 0x80080370;
 heap_allocWithAlignment = 0x80000e58;
 ROM_compressed_files_table = 0x8009503c;
 compressed_file__ID_from_ROMFileTable = 0x800a78c8;
-viRetrace = 0x80125210;
 getTimeOfDay = 0x8003ec20;
 isPlayerDamagedOrDead = 0x8003c99c;
 object_curLevel_goToFuncInLevel = 0x800015c4;
@@ -1477,7 +2533,6 @@ EASY_text = 0x8018131c;
 NORMAL_text = 0x8018132c;
 HARD_text = 0x8018133c;
 PlayerController_functions = 0x80096694;
-osClockRate = 0x800a0ff0;
 a_file_ID = 0x80181978;
 another_file_ID = 0x80389ed4;
 file_load_array = 0x803881b8;
@@ -1665,7 +2720,7 @@ rspF3DEX2Start = 0x8008fda0;
 gGraphicTasks = 0x800ac000;
 gfx_queue = 0x800abfc0;
 gGraphicTasks_MesgQ = 0x800abff8;
-rspF3DEX2DataStart = 0x800a7140;
+rspF3DEX2DataStart = 0x800a7140; // name_end:rspF3DEX2DataEnd
 gGfxSPTaskStack = 0x800d59f0;
 gGfxSPTaskOutputBuffer = 0x800b59f0;
 gGfxSPTaskYieldBuffer = 0x800b49f0;
@@ -1732,13 +2787,6 @@ prt_80040c08_6bd09446 = 0x80040c08;
 atari_center_point_translation_matrix = 0x800d8190;
 atari_size_translation_matrix = 0x800d8150;
 __osCleanupThread = 0x80080c60;
-alFxParamHdl = 0x80086698;
-guRotateRPY = 0x8008f62c;
-__d_to_ll = 0x8008f680;
-__f_to_ll = 0x8008f69c;
-__d_to_ull = 0x8008f6b8;
-__ll_to_d = 0x8008f7f4;
-__ll_to_f = 0x8008f80c;
 target_atari_data_work_pos = 0x800d821c;
 attacker_atari_data_work_pos = 0x800d8228;
 distance_attacker_target_atari_data_vector = 0x800d8234;
@@ -1806,3 +2854,4 @@ func_80005658 = 0x80005658;
 effect_isMarkForDeletion = 0x8005d244;
 effect_markForDeletion = 0x8005d230;
 D_80093D20_94920 = 0x80093D20; // size:0x1C
+// devAddr = 0xA0000000;
