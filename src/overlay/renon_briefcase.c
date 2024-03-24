@@ -26,7 +26,7 @@ hierarchy cv64_ovl_renonbriefcase_hierarchy = {
 
 // clang-format on
 
-u32 cv64_ovl_renonbriefcase_anim_rot_data[] = {
+u32 cv64_ovl_renonbriefcase_open_anim_rot_data[] = {
     0x00000000, 0x00000000, 0x00000005, 0x0E400000, 0xB1C00000, ANIM_FLAG_LAST_KEYFRAME
 };
 
@@ -91,7 +91,7 @@ void cv64_ovl_renonbriefcase_init(cv64_ovl_renonbriefcase_t* self) {
 
     (*animationInfo_create)(anim_info, RENON_BRIEFCASE_NUMBER_OF_LIMBS, 0);
     (*animationInfo_setParams)(
-        anim_info, &cv64_ovl_renonbriefcase_anim_rot_data, RENON_BRIEFCASE_ANIM_SPEED
+        anim_info, &cv64_ovl_renonbriefcase_open_anim_rot_data, RENON_BRIEFCASE_ANIM_SPEED
     );
     (*func_8000B774)(anim_info, model);
 
