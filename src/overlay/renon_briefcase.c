@@ -1,3 +1,12 @@
+/**
+ * File: renon_briefcase.c
+ * Description: Handles the small cutscene that shows the briefcase spinning
+ *              prior to entering Renon's Shop
+ * Associated objects: 0x213C
+ *
+ * Mapped by the TLB? = Yes
+ */
+
 #include "objects/menu/renon_briefcase.h"
 #include "gfx/camera.h"
 #include "sound.h"
