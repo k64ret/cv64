@@ -1,4 +1,6 @@
 #include "objects/menu/renon_briefcase.h"
+#include "gfx/camera.h"
+#include "sound.h"
 
 // extern cv64_ovl_renonbriefcase_func_t cv64_ovl_renonbriefcase_funcs[];
 

@@ -44,11 +44,16 @@ extern void func_8000C6D0();
 extern void func_80012400();
 extern void func_80005658();
 extern u32 getMapEventFlagID(s16 stage_ID);
+/**
+ * Given a start and end value within a range,
+ * returns the percentage of the relative position of value in that range.
+ */
+extern f32 computeNormalizedPosition(f32 value, f32 start_value, f32 end_value);
 
 #define NPTR             0
-#define ARRAY_COUNT(arr) (s32)(sizeof(arr) / sizeof(arr[0]))
-#define ARRAY_START(arr) &arr[0]                // Get start address of array
-#define ARRAY_END(arr)   &arr[ARRAY_COUNT(arr)] // Get end address of array
+#define ARRAY_COUNT(arr) (s32)(sizeof(arr) / sizeof(arr[0])) // Get number of elements in the array
+#define ARRAY_START(arr) &arr[0]                             // Get start address of array
+#define ARRAY_END(arr)   &arr[ARRAY_COUNT(arr)]              // Get end address of array
 
 #define SCREEN_WIDTH  320
 #define SCREEN_HEIGHT 240

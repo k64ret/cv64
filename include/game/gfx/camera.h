@@ -109,4 +109,6 @@ extern camera* common_camera_8009B448;  // Used for the scrolls?
 extern camera* common_camera_8009B44C;  // Used for the pause menu scroll?
 extern camera* common_camera_HUD;       // Used for the gameplay HUD and text
 
+extern void camera_setParams(camera* self, s32 index);
+
 #endif
