@@ -17,9 +17,9 @@
 hierarchy cv64_ovl_renonbriefcase_hierarchy = {
     NI_ASSETS_RENON_BRIEFCASE,
     {
-        // RENON_BRIEFCASE_LOWER_LID
+        // RENON_BRIEFCASE_LOWER_LID_DL
         {0x060026E0, CREATE_NEXT_NODE,    {0, 7, -75}},
-        // RENON_BRIEFCASE_UPPER_LID
+        // RENON_BRIEFCASE_UPPER_LID_DL
         {0x06002A40, DONT_CREATE_SIBLING, {0, 0, 0}}
     }
 };

@@ -13,8 +13,8 @@ MENU_RED_BACKGROUND_DL = 0x06016D10; // segment:ni_pause_menu
 
 ITEM_MATERIAL_DL = 0x06005DE0; // segment:ni_pickable_items
 
-RENON_BRIEFCASE_LOWER_LID = 0x060026E0; // segment:ni_renon_briefcase
-RENON_BRIEFCASE_UPPER_LID = 0x06002A40; // segment:ni_renon_briefcase
+RENON_BRIEFCASE_LOWER_LID_DL = 0x060026E0; // segment:ni_renon_briefcase
+RENON_BRIEFCASE_UPPER_LID_DL = 0x06002A40; // segment:ni_renon_briefcase
 
 // test_grid_txt   = 0x06000000; // segment:NI_ASSETS_TEST_GRID
 // test_grid_tlut  = 0x06000800; // segment:NI_ASSETS_TEST_GRID
