@@ -45,9 +45,11 @@ extern u8 func_800139D4(u16 sound_ID, f32, f32 volume);
 // Does nothing. Its code is empty
 #define SD_CTRL_00F 0x00F
 
-#define SD_TOU_TURO_DOOR_CLOSE 0x11B
-#define SD_ROSE_DOOR_CLOSE     0x27B
-#define SD_ROSE_DOOR_CLOSING   0x29B
-#define SD_2E9                 0x2E9
+#define SD_TOU_TURO_DOOR_CLOSE    0x11B
+#define SD_RENON_BRIEFCASE_SPIN_1 0x21A
+#define SD_RENON_BRIEFCASE_SPIN_2 0x21A
+#define SD_ROSE_DOOR_CLOSE        0x27B
+#define SD_ROSE_DOOR_CLOSING      0x29B
+#define SD_2E9                    0x2E9
 
 #endif
