@@ -16,4 +16,9 @@ typedef struct cv64_ovl_renonbriefcase {
     u8 field_0x68[12];
 } cv64_ovl_renonbriefcase_t;
 
+void cv64_ovl_renonbriefcase_entrypoint(cv64_ovl_renonbriefcase_t* self);
+void cv64_ovl_renonbriefcase_init(cv64_ovl_renonbriefcase_t* self);
+void cv64_ovl_renonbriefcase_loop(cv64_ovl_renonbriefcase_t* self);
+void cv64_ovl_renonbriefcase_destroy(cv64_ovl_renonbriefcase_t* self);
+
 typedef void (*cv64_ovl_renonbriefcase_func_t)(cv64_ovl_renonbriefcase_t*);

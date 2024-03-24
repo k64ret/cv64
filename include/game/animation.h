@@ -3,6 +3,9 @@
 
 #include "gfx/model_info.h"
 
+#define ANIM_FLAG_LOOP          0x20
+#define ANIM_FLAG_LAST_KEYFRAME 0x40
+
 typedef struct {
     u8 flags;
     u8 field_0x01;

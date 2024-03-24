@@ -73,6 +73,7 @@ extern const u32 MENU_RED_BACKGROUND_DL;
 #define NI_ASSETS_KONAMI_KCEK_LOGOS 0x5D
 #define NI_ASSETS_MENU              0x60
 #define NI_ASSETS_FILE_SELECT       0x65
+#define NI_ASSETS_RENON_BRIEFCASE   0x67
 #define NI_OVL_EASY_MODE_ENDING_MSG 0xBB
 
 #endif // CV64_H
