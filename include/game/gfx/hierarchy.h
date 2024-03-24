@@ -3,6 +3,7 @@
 
 #include "math.h"
 
+// Hierarchy node flags
 #define ALLOW_CHANGING_TEXTURE_AND_PALETTE 0x2000
 #define CREATE_NEXT_NODE                   0x4000
 #define DONT_CREATE_SIBLING                0x8000

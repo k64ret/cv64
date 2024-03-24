@@ -3,8 +3,8 @@
 
 #include "gfx/model_info.h"
 
-#define ANIM_FLAG_LOOP          0x20
-#define ANIM_FLAG_LAST_KEYFRAME 0x40
+#define ANIM_FLAG_LOOP          0x20000000
+#define ANIM_FLAG_LAST_KEYFRAME 0x40000000
 
 typedef struct {
     u8 flags;

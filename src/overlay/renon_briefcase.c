@@ -3,18 +3,22 @@
 #include "sound.h"
 #include "system_work.h"
 
+// clang-format off
+
 hierarchy cv64_ovl_renonbriefcase_hierarchy = {
     NI_ASSETS_RENON_BRIEFCASE,
-    {{0x060026E0, CREATE_NEXT_NODE, {0, 7, -75}}, {0x06002A40, DONT_CREATE_SIBLING, {0, 0, 0}}}
+    {
+        // RENON_BRIEFCASE_LOWER_LID
+        {0x060026E0, CREATE_NEXT_NODE,    {0, 7, -75}},
+        // RENON_BRIEFCASE_UPPER_LID
+        {0x06002A40, DONT_CREATE_SIBLING, {0, 0, 0}}
+    }
 };
 
+// clang-format on
+
 u32 cv64_ovl_renonbriefcase_anim_rot_data[] = {
-    0x00000000,
-    0x00000000,
-    0x00000005,
-    0x0E400000,
-    0xB1C00000,
-    0x40000000 // ANIM_FLAG_LAST_KEYFRAME
+    0x00000000, 0x00000000, 0x00000005, 0x0E400000, 0xB1C00000, ANIM_FLAG_LAST_KEYFRAME
 };
 
 cv64_ovl_renonbriefcase_func_t cv64_ovl_renonbriefcase_funcs[] = {

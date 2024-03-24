@@ -21,4 +21,7 @@ void cv64_ovl_renonbriefcase_init(cv64_ovl_renonbriefcase_t* self);
 void cv64_ovl_renonbriefcase_loop(cv64_ovl_renonbriefcase_t* self);
 void cv64_ovl_renonbriefcase_destroy(cv64_ovl_renonbriefcase_t* self);
 
+extern const u32 RENON_BRIEFCASE_LOWER_LID;
+extern const u32 RENON_BRIEFCASE_UPPER_LID;
+
 typedef void (*cv64_ovl_renonbriefcase_func_t)(cv64_ovl_renonbriefcase_t*);
