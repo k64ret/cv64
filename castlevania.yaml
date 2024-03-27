@@ -2407,7 +2407,7 @@ segments:
     subsegments:
       - [0x00E612A0, c, overlay/renon_briefcase]
       - [0x00E618B0, .data, overlay/renon_briefcase]
-      - [0x00E618F0, rodata, overlay/renon_briefcase]
+      - [0x00E618F0, .rodata, overlay/renon_briefcase]
 
   - name: ni_ovl_overlay_BA
     type: code
