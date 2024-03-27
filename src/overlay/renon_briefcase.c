@@ -18,9 +18,9 @@ hierarchy cv64_ovl_renonbriefcase_hierarchy = {
     NI_ASSETS_RENON_BRIEFCASE,
     {
         // RENON_BRIEFCASE_LOWER_LID_DL
-        {0x060026E0, CREATE_NEXT_NODE,    {0, 7, -75}},
+        { 0x060026E0, CREATE_NEXT_NODE,    { 0, 7, -75 } },
         // RENON_BRIEFCASE_UPPER_LID_DL
-        {0x06002A40, DONT_CREATE_SIBLING, {0, 0, 0}}
+        { 0x06002A40, DONT_CREATE_SIBLING, { 0, 0, 0 } }
     }
 };
 
@@ -70,7 +70,7 @@ void cv64_ovl_renonbriefcase_init(cv64_ovl_renonbriefcase_t* self) {
         &cv64_ovl_renonbriefcase_hierarchy
     );
     model = self->model;
-    model->flags |= (FIG_FLAG_0800 | FIG_FLAG_0080);
+    BITS_SET(model->flags, FIG_FLAG_0800 | FIG_FLAG_0080);
     model->primitive_color.integer = 0xFFFFFFFF;
     model->angle.pitch             = 0;
     model->angle.yaw               = 0x4000;
