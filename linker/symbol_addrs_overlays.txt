@@ -1,4 +1,4 @@
-// src/overlay/stage_select.c
+// src/overlay/stage_select.c ==================================================
 // .text
 stageSelect_entrypoint              = 0x8012A520; // type:func segment:common
 stageSelect_loadAssetsFile          = 0x8012A590; // type:func segment:common
@@ -21,8 +21,10 @@ stageSelect_closeTextboxes          = 0x8012AEA0; // type:func segment:common
 // .L8012ADF4_ADFE4                  = 0x8018AEEC; // type:jtbl_label segment:common
 // .L8012AE20_AE010                  = 0x8018AEF0; // type:jtbl_label segment:common
 // .L8012AE48_AE038                  = 0x8018AEF4; // type:jtbl_label segment:common
-// End of src/overlay/stage_select.c
+// End of src/overlay/stage_select.c ===========================================
 
+
+// src/overlay/konami_kcek_logos.c =============================================
 // .text
 cv64_ovl_konamilogo_entrypoint      = 0x801CFCD0; // type:func segment:konami_kcek_logos
 cv64_ovl_konamilogo_check_btn_press = 0x801CFD40; // type:func segment:konami_kcek_logos
@@ -35,8 +37,10 @@ cv64_ovl_konamilogo_kcek_wait       = 0x801D0058; // type:func segment:konami_kc
 cv64_ovl_konamilogo_kcek_fade_out   = 0x801D00E0; // type:func segment:konami_kcek_logos
 // .data
 cv64_ovl_konamilogo_funcs           = 0x801D0160; // segment:konami_kcek_logos size:0x20
+// End of src/overlay/konami_kcek_logos.c ======================================
 
-// src/overlay/map/rose.c
+
+// src/overlay/map/rose.c ======================================================
 // .text
 cv64_ovl_rose_ventilator_entrypoint   = 0x8018EB10; // type:func segment:ROSE
 cv64_ovl_rose_ventilator_init         = 0x8018EB80; // type:func segment:ROSE
@@ -55,9 +59,10 @@ cv64_ovl_rose_door_state_funcs        = 0x8018F220; // segment:ROSE size:0x0C
 D_8018F230                            = 0x8018F230; // type:asciz segment:ROSE size:0x22
 D_8018F258                            = 0x8018F258; // segment:ROSE size:0x08
 D_8018F260                            = 0x8018F260; // segment:ROSE size:0x08
-// End of src/overlay/map/rose.c
+// End of src/overlay/map/rose.c ===============================================
 
-// src/overlay/map/tou_turo.c
+
+// src/overlay/map/tou_turo.c ==================================================
 // .text
 cv64_ovl_touturo_door_entrypoint                 = 0x8018EB10; // type:func segment:TOU_TURO
 cv64_ovl_touturo_door_init                       = 0x8018EB80; // type:func segment:TOU_TURO
@@ -72,9 +77,10 @@ cv64_ovl_touturo_door_exit_funcs                 = 0x8018F100; // segment:TOU_TU
 cv64_ovl_touturo_door_entrance_funcs             = 0x8018F108; // segment:TOU_TURO rom:0x006F2178 size:0x0C
 // .rodata
 cv64_ovl_touturo_unused_str                      = 0x8018F120; // type:asciz segment:TOU_TURO size:0x26
-// End of src/overlay/map/tou_turo.c
+// End of src/overlay/map/tou_turo.c ===========================================
 
-// src/overlay/credits_manager.c
+
+// src/overlay/credits_manager.c ===============================================
 // .text
 creditsMgr_entrypoint     = 0x0F000000; // type:func segment:ni_ovl_credits_manager
 creditsMgr_init           = 0x0F000070; // type:func segment:ni_ovl_credits_manager
@@ -82,9 +88,10 @@ creditsMgr_loop           = 0x0F00016C; // type:func segment:ni_ovl_credits_mana
 creditsMgr_exit           = 0x0F0001F0; // type:func segment:ni_ovl_credits_manager
 // .data
 cv64_ovl_creditsmgr_funcs = 0x0F000230; // segment:ni_ovl_credits_manager size:0x0C
-// End of src/overlay/credits_manager.c
+// End of src/overlay/credits_manager.c ========================================
 
-// src/overlay/textbox_advance_arrow.c
+
+// src/overlay/textbox_advance_arrow.c =========================================
 // .text
 textboxAdvanceArrow_entrypoint     = 0x0F000000; // type:func segment:ni_ovl_textbox_advance_arrow
 textboxAdvanceArrow_init           = 0x0F000070; // type:func segment:ni_ovl_textbox_advance_arrow
@@ -92,9 +99,23 @@ textboxAdvanceArrow_loop           = 0x0F000190; // type:func segment:ni_ovl_tex
 textboxAdvanceArrow_destroy        = 0x0F00037C; // type:func segment:ni_ovl_textbox_advance_arrow
 // .data
 cv64_ovl_textboxadvancearrow_funcs = 0x0F0003A0; // segment:ni_ovl_textbox_advance_arrow size:0x0C
-// End of src/overlay/textbox_advance_arrow.c
+// End of src/overlay/textbox_advance_arrow.c ==================================
 
-// src/overlay/overlay_BA.c
+
+// src/overlay/renon_briefcase.c ===============================================
+// .text
+cv64_ovl_renonbriefcase_entrypoint    = 0x0F000000; // type:func segment:ni_ovl_renon_briefcase
+cv64_ovl_renonbriefcase_init          = 0x0F000070; // type:func segment:ni_ovl_renon_briefcase
+cv64_ovl_renonbriefcase_loop          = 0x0F00028C; // type:func segment:ni_ovl_renon_briefcase
+cv64_ovl_renonbriefcase_destroy       = 0x0F0005DC; // type:func segment:ni_ovl_renon_briefcase
+// .data
+cv64_ovl_renonbriefcase_hierarchy     = 0x0F000610; // segment:ni_ovl_renon_briefcase size:0x1C
+cv64_ovl_renonbriefcase_open_anim_rot_data = 0x0F00062C; // type:u32 segment:ni_ovl_renon_briefcase size:0x18
+cv64_ovl_renonbriefcase_funcs         = 0x0F000644; // segment:ni_ovl_renon_briefcase size:0x0C
+// End of src/overlay/renon_briefcase.c ========================================
+
+
+// src/overlay/overlay_BA.c ====================================================
 // .text
 obj213F_entrypoint               = 0x0F000000; // type:func segment:ni_ovl_overlay_BA
 obj213F_isDraculaCutsceneWatched = 0x0F000070; // type:func segment:ni_ovl_overlay_BA
@@ -103,9 +124,10 @@ obj213F_playSound                = 0x0F000130; // type:func segment:ni_ovl_overl
 obj213F_destroy                  = 0x0F000174; // type:func segment:ni_ovl_overlay_BA
 // .data
 cv64_ovl_obj213F_funcs           = 0x0F0001A0; // segment:ni_ovl_overlay_BA size:0x0C
-// End of src/overlay/overlay_BA.c
+// End of src/overlay/overlay_BA.c =============================================
 
-// src/overlay/easy_mode_ending_msg.c
+
+// src/overlay/easy_mode_ending_msg.c ==========================================
 // .text
 cv64_ovl_easyending_entrypoint = 0x0F000000; // type:func segment:ni_ovl_easy_mode_ending_msg
 cv64_ovl_easyending_init       = 0x0F000070; // type:func segment:ni_ovl_easy_mode_ending_msg
@@ -114,4 +136,4 @@ cv64_ovl_easyending_destroy    = 0x0F0002E0; // type:func segment:ni_ovl_easy_mo
 // .data
 cv64_ovl_easyending_msg        = 0x0F000350; // type:u16 segment:ni_ovl_easy_mode_ending_msg size:0xF0
 cv64_ovl_easyending_funcs      = 0x0F000440; // segment:ni_ovl_easy_mode_ending_msg size:0x0C
-// End of src/overlay/easy_mode_ending_msg.c
+// End of src/overlay/easy_mode_ending_msg.c ===================================

@@ -2,6 +2,7 @@
 #define MODEL_INFO_H
 
 #include "gfx/color.h"
+#include "gfx/hierarchy.h"
 #include "map_actor_model.h"
 #include "math.h"
 #include <ultra64.h>
@@ -45,5 +46,7 @@ extern cv64_model_inf_t* modelInfo_createRootNode(u32 type, void* parent);
 extern cv64_model_inf_t* modelInfo_createNextNode(u32 parent_type, void* parent);
 extern void modelInfo_showModelAndItsChildren(cv64_model_inf_t*, u16);
 extern void modelInfo_hideModelAndItsChildren(cv64_model_inf_t*, u16);
+extern cv64_model_inf_t*
+modelInfo_buildHierarchy(u32 type, cv64_model_inf_t* self, hierarchy* mdl_hierarchy);
 
 #endif
