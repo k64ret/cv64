@@ -113,10 +113,12 @@ void cv64_ovl_renonbriefcase_loop(cv64_ovl_renonbriefcase_t* self) {
     if (self->current_cutscene_time < 90.0) {
         // Move the briefcase towards the camera
         model->position.z -= ((model->position.z - 300.0f) / 90.0);
+
         // Rotate the briefcase in circles
         model->angle.pitch += 3640.88897705078125;
         model->angle.yaw += 2730.66673278808594;
         model->angle.roll -= 3640.88897705078125;
+
         // Play the "spinning" sound every third of a second
         if ((self->current_cutscene_time % 10) == 0) {
             // Update the sound's volume based on the briefcase's
@@ -127,6 +129,7 @@ void cv64_ovl_renonbriefcase_loop(cv64_ovl_renonbriefcase_t* self) {
                          10.0f,
                          400.0f
                 );
+
             // Unused since `PLAY_SD_RENON_BRIEFCASE_SPIN_2` is always set to `false`
             if (PLAY_SD_RENON_BRIEFCASE_SPIN_2) {
                 (*func_800139D4)(SD_RENON_BRIEFCASE_SPIN_2, 0.0f, volume);
