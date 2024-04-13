@@ -6,7 +6,7 @@
 #include "gfx/light.h"
 #include "animation.h"
 
-#define PAGE_NUMBER_OF_LIMBS 7
+#define PAGE_NUMBER_OF_LIMBS 6 + 1
 
 typedef enum page_work_flags {
     PAGE_1                           = 0x01,
@@ -22,7 +22,7 @@ typedef enum page_work_flags {
 typedef struct {
     light* page_light;
     u8 flags;
-    u8 anim_ID;
+    u8 flip_anim_keyframe;
     u8 field_0x06[2];
     f32 anim_speed;
     vec3f position;

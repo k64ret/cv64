@@ -7,7 +7,7 @@
 #include "animation.h"
 
 #define PLAY_SD_RENON_BRIEFCASE_SPIN_2  self->field_0x34[1]
-#define RENON_BRIEFCASE_NUMBER_OF_LIMBS 3
+#define RENON_BRIEFCASE_NUMBER_OF_LIMBS 2 + 1
 #define RENON_BRIEFCASE_ANIM_SPEED      1.0f
 
 // ID: 0x213C

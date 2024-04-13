@@ -25,11 +25,12 @@ hierarchy cv64_ovl_renonbriefcase_hierarchy = {
     }
 };
 
-// clang-format on
+u8 cv64_ovl_renonbriefcase_open_anim_rot_data[2][12] = {
+    { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x05 },
+    { 0x0E, 0x40, 0x00, 0x00, 0xB1, 0xC0, 0x00, 0x00, 0x40, 0x00, 0x00, 0x00 }
+};
 
-u8 cv64_ovl_renonbriefcase_open_anim_rot_data[] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-                                                   0x00, 0x00, 0x00, 0x05, 0x0E, 0x40, 0x00, 0x00,
-                                                   0xB1, 0xC0, 0x00, 0x00, 0x40, 0x00, 0x00, 0x00};
+// clang-format on
 
 cv64_ovl_renonbriefcase_func_t cv64_ovl_renonbriefcase_funcs[] = {
     cv64_ovl_renonbriefcase_init, cv64_ovl_renonbriefcase_loop, cv64_ovl_renonbriefcase_destroy
@@ -96,7 +97,7 @@ void cv64_ovl_renonbriefcase_init(cv64_ovl_renonbriefcase_t* self) {
     // Initialize briefcase animation
     (*animationInfo_create)(anim_info, RENON_BRIEFCASE_NUMBER_OF_LIMBS, 0);
     (*animationInfo_setParams)(
-        anim_info, &cv64_ovl_renonbriefcase_open_anim_rot_data, RENON_BRIEFCASE_ANIM_SPEED
+        anim_info, &cv64_ovl_renonbriefcase_open_anim_rot_data[0][0], RENON_BRIEFCASE_ANIM_SPEED
     );
     (*animationInfo_animateFrame)(anim_info, model);
 

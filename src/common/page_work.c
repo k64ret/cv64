@@ -7,7 +7,7 @@ page_work* pageWork_create(
     f32 pos_X,
     f32 pos_Y,
     f32 pos_Z,
-    u8 anim_ID,
+    u8 flip_anim_keyframe,
     f32 anim_speed
 ) {
     page_work* work;
@@ -18,13 +18,13 @@ page_work* pageWork_create(
         (*allocStructInObjectEntryList)("page_work", page_obj, sizeof(page_work), 15);
         work = page_obj->work;
         if (work != NULL) {
-            work->page_light = page_light;
-            work->flags      = flags;
-            work->position.x = pos_X;
-            work->position.y = pos_Y;
-            work->position.z = pos_Z;
-            work->anim_ID    = anim_ID;
-            work->anim_speed = anim_speed;
+            work->page_light         = page_light;
+            work->flags              = flags;
+            work->position.x         = pos_X;
+            work->position.y         = pos_Y;
+            work->position.z         = pos_Z;
+            work->flip_anim_keyframe = flip_anim_keyframe;
+            work->anim_speed         = anim_speed;
         } else {
             return NULL;
         }

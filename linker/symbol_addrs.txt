@@ -1480,7 +1480,7 @@ page_destroy                              = 0x8014f830; // type:func segment:com
 page_1_hierarchy                          = 0x801815c0; // segment:common size:0x4C
 page_2_hierarchy                          = 0x8018160c; // segment:common size:0x4C
 page_3_hierarchy                          = 0x80181658; // segment:common size:0x4C
-page_anims_rot_data                       = 0x801816A4; // segment:common size:0xFC
+page_flip_anim_rot_data                       = 0x801816A4; // segment:common size:0xFC
 page_functions                            = 0x801817A0; // segment:common size:0x10
 
 // End of src/common/page.c ========================================
