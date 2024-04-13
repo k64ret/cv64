@@ -3,7 +3,7 @@
 #include "event_flags.h"
 #include "cutscene.h"
 #include "gfx/camera.h"
-#include "gfx/struct_47.h"
+#include "gfx/light.h"
 #include "objects/cutscene/interactuables.h"
 #include "objects/map/lever.h"
 #include "objects/menu/contractMgr.h"

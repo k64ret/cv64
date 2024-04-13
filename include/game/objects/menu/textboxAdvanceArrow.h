@@ -3,7 +3,7 @@
 
 #include "object.h"
 #include "gfx/model_info.h"
-#include "gfx/struct_47.h"
+#include "gfx/light.h"
 #include "window.h"
 
 // ID: 0x2138
@@ -11,7 +11,7 @@ typedef struct {
     cv64_object_hdr_t header;
     u8 field_0x20[4];
     cv64_model_inf_t* model;
-    struct_47* field_0x28;
+    light* arrow_light;
     u8 field_0x2C[12];
     s32 fade_timer;
     u8 field_0x3C[28];

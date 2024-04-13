@@ -10,7 +10,7 @@
 #include "objects/map/rose/rose.h"
 #include "actor.h"
 #include "gfx/figure.h"
-#include "gfx/struct_47.h"
+#include "gfx/light.h"
 #include "objects/player/player.h"
 #include "random.h"
 #include "sound.h"

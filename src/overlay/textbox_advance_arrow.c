@@ -20,22 +20,23 @@ void textboxAdvanceArrow_entrypoint(textboxAdvanceArrow* self) {
 }
 
 void textboxAdvanceArrow_init(textboxAdvanceArrow* self) {
-    struct_47* temp;
+    light* arrow_light;
     cv64_model_inf_t* model;
 
-    temp             = (*func_80004C40)(FIG_TYPE_STRUCT_47);
-    self->field_0x28 = temp;
-    (*func_80004CE8)(temp, common_camera_HUD);
-    temp->primitive_color.r = temp->primitive_color.g = temp->primitive_color.b = 0xA0;
-    temp->field5_0x3c                                                           = 1;
-    temp->blend_color.r = temp->blend_color.g = temp->blend_color.b = 0xCF;
-    (s8) temp->fog_color.r = 0xF0; // The s8 typecast is needed for matching here
-    temp->fog_color.g      = 0;
-    temp->fog_color.b      = 0x10;
-    model                  = (*modelInfo_createRootNode)(FIG_TYPE_HUD_ELEMENT, temp);
-    self->model            = model;
-    model->dlist           = &TEXTBOX_ADVANCE_ARROW_DL;
-    model->assets_file_ID  = NI_ASSETS_FILE_SELECT;
+    arrow_light       = (*light_create)(FIG_TYPE_LIGHT);
+    self->arrow_light = arrow_light;
+    (*figure_setChild)(arrow_light, common_camera_HUD);
+    arrow_light->primitive_color.r     = arrow_light->primitive_color.g =
+        arrow_light->primitive_color.b = 0xA0;
+    arrow_light->field5_0x3c           = 1;
+    arrow_light->blend_color.r = arrow_light->blend_color.g = arrow_light->blend_color.b = 0xCF;
+    (s8) arrow_light->fog_color.r = 0xF0; // The s8 typecast is needed for matching here
+    arrow_light->fog_color.g      = 0;
+    arrow_light->fog_color.b      = 0x10;
+    model                         = (*modelInfo_createRootNode)(FIG_TYPE_HUD_ELEMENT, arrow_light);
+    self->model                   = model;
+    model->dlist                  = &TEXTBOX_ADVANCE_ARROW_DL;
+    model->assets_file_ID         = NI_ASSETS_FILE_SELECT;
     BITS_SET(model->flags, FIG_FLAG_0080);
     BITS_SET(model->flags, FIG_FLAG_0800);
     model->primitive_color.integer = 0xFF0000FF; // Red (opaque)
