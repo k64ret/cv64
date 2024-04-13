@@ -116,7 +116,7 @@ void page_init(page* self) {
     // Setup animation
     (*animationInfo_create)(current_anim_info, PAGE_NUMBER_OF_LIMBS, 0);
     (*animationInfo_setParams)(
-        current_anim_info, &page_anims_rot_data[work->anim_ID], work->anim_speed
+        current_anim_info, &page_anims_rot_data[work->anim_ID][0], work->anim_speed
     );
     (*animationInfo_animateFrame)(current_anim_info, model);
 
