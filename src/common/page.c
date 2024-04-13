@@ -73,7 +73,7 @@ void page_init(page* self) {
     animationMgr* animMgr             = &self->animMgr;
     animation_info* current_anim_info = &animMgr->current_anim;
     page_work* work                   = self->work;
-    u8 page_type                      = work->flags & 3;
+    u8 page_type                      = GET_PAGE_TYPE(work->flags);
 
     // Create the model (each page has a different texture)
     switch (page_type) {

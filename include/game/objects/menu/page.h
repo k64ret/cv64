@@ -7,6 +7,7 @@
 #include "animation.h"
 
 #define PAGE_NUMBER_OF_LIMBS 6 + 1
+#define GET_PAGE_TYPE(value) value & 3
 
 typedef enum page_work_flags {
     PAGE_1                           = 0x01,
