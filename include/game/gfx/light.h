@@ -1,5 +1,5 @@
-#ifndef STRUCT_47_H
-#define STRUCT_47_H
+#ifndef LIGHT_H
+#define LIGHT_H
 
 #include "gfx/color.h"
 #include <ultra64.h>
@@ -13,10 +13,10 @@ typedef struct {
 typedef struct {
     s16 type;
     u16 flags;
-    struct struct_47* prev;
-    struct struct_47* sibling;
-    struct struct_47* next;
-    struct struct_47* parent;
+    struct light* prev;
+    struct light* sibling;
+    struct light* next;
+    struct light* parent;
     u8 field1_0x14[28];
     void* field2_0x30;
     struct_48* field3_0x34;
@@ -28,11 +28,9 @@ typedef struct {
     cv64_rgba_t blend_color;
     cv64_rgba_t fog_color;
     u8 field11_0x78[48];
-} struct_47;
+} light;
 
-extern struct_47* func_80004C40(u16 type);
-extern void* func_80004CE8(void* current,
-                           void* prev); // TODO: Put this in another header
-extern struct_47* D_8018CDE0[3];
+extern light* light_create(u16 type);
+extern light* D_8018CDE0[3];
 
 #endif

@@ -3,8 +3,17 @@
 
 #include "gfx/model_info.h"
 
+// Flags for animation data
 #define ANIM_FLAG_LOOP          0x20000000
 #define ANIM_FLAG_LAST_KEYFRAME 0x40000000
+
+// Flags for `animation_info`
+#define ANIM_INFO_FLAG_LOOP  0x01
+#define ANIM_INFO_FLAG_PAUSE 0x08
+/**
+ * Maybe also mirror animation? Set when you're grabbed by the Weretiger
+ */
+#define ANIM_INFO_FLAG_DONT_SMOOTH_OUT_POSITION_TRANSITION 0x10
 
 typedef struct {
     u8 flags;
@@ -52,6 +61,6 @@ typedef struct {
 
 extern void animationInfo_create(animation_info* self, u8 number_of_limbs, u8);
 extern void animationInfo_setParams(animation_info* self, void* rotation_data, f32 speed);
-extern s32 func_8000B774(animation_info* self, cv64_model_inf_t* model);
+extern s32 animationInfo_animateFrame(animation_info* self, cv64_model_inf_t* model);
 
 #endif

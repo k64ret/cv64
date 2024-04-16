@@ -13,7 +13,7 @@
 #include "effect.h"
 #include "objects/map/tou_turo/door.h"
 #include "system_work.h"
-#include "gfx/struct_47.h"
+#include "gfx/light.h"
 #include <ultra64.h>
 
 // cv64_ovl_touturo_door_func_t cv64_ovl_touturo_door_funcs[] =

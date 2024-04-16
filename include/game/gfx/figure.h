@@ -4,7 +4,7 @@
 #include <ultra64.h>
 
 // Types and functions common to figure-type structs (model_info, camera,
-// struct_47)
+// light)
 
 #define FIG_SIZE      0xA8
 #define FIG_ARRAY_MAX 512
@@ -14,7 +14,7 @@
 #define FIG_TYPE_MAP_PIECE          0x0008
 #define FIG_TYPE_HUD_ELEMENT        0x0010
 #define FIG_TYPE_HIERARCHY_NODE     0x0040 // "offset", according to leftover strings
-#define FIG_TYPE_STRUCT_47          0x0080
+#define FIG_TYPE_LIGHT              0x0080
 #define FIG_TYPE_CAMERA_ORTHO       0x0100
 #define FIG_TYPE_CAMERA_PERSPECTIVE 0x0200
 #define FIG_TYPE_0400               0x0400
@@ -53,6 +53,9 @@ typedef struct {
 
 extern figHeader* fig_allocate(s16 type);
 extern void clearAllFigs();
+extern void figure_showModelAndChildren(figHeader*, u16);
+extern void figure_hideSelfAndChildren(figHeader*, u16);
+extern void* figure_setChild(figHeader* new_child, figHeader* self);
 
 extern figure figures_array[FIG_ARRAY_MAX];
 

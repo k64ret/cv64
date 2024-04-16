@@ -110,7 +110,7 @@ cv64_ovl_renonbriefcase_loop          = 0x0F00028C; // type:func segment:ni_ovl_
 cv64_ovl_renonbriefcase_destroy       = 0x0F0005DC; // type:func segment:ni_ovl_renon_briefcase
 // .data
 cv64_ovl_renonbriefcase_hierarchy     = 0x0F000610; // segment:ni_ovl_renon_briefcase size:0x1C
-cv64_ovl_renonbriefcase_open_anim_rot_data = 0x0F00062C; // type:u32 segment:ni_ovl_renon_briefcase size:0x18
+cv64_ovl_renonbriefcase_open_anim_rot_data = 0x0F00062C; // type:u8 segment:ni_ovl_renon_briefcase size:0x18
 cv64_ovl_renonbriefcase_funcs         = 0x0F000644; // segment:ni_ovl_renon_briefcase size:0x0C
 // End of src/overlay/renon_briefcase.c ========================================
 

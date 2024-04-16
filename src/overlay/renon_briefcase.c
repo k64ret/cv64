@@ -14,6 +14,7 @@
 
 // clang-format off
 
+// TODO: `extern const u32` for the dlists
 hierarchy cv64_ovl_renonbriefcase_hierarchy = {
     NI_ASSETS_RENON_BRIEFCASE,
     {
@@ -24,11 +25,12 @@ hierarchy cv64_ovl_renonbriefcase_hierarchy = {
     }
 };
 
-// clang-format on
-
-u32 cv64_ovl_renonbriefcase_open_anim_rot_data[] = {
-    0x00000000, 0x00000000, 0x00000005, 0x0E400000, 0xB1C00000, ANIM_FLAG_LAST_KEYFRAME
+u8 cv64_ovl_renonbriefcase_open_anim_rot_data[2][12] = {
+    { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x05 },
+    { 0x0E, 0x40, 0x00, 0x00, 0xB1, 0xC0, 0x00, 0x00, 0x40, 0x00, 0x00, 0x00 }
 };
+
+// clang-format on
 
 cv64_ovl_renonbriefcase_func_t cv64_ovl_renonbriefcase_funcs[] = {
     cv64_ovl_renonbriefcase_init, cv64_ovl_renonbriefcase_loop, cv64_ovl_renonbriefcase_destroy
@@ -95,9 +97,9 @@ void cv64_ovl_renonbriefcase_init(cv64_ovl_renonbriefcase_t* self) {
     // Initialize briefcase animation
     (*animationInfo_create)(anim_info, RENON_BRIEFCASE_NUMBER_OF_LIMBS, 0);
     (*animationInfo_setParams)(
-        anim_info, &cv64_ovl_renonbriefcase_open_anim_rot_data, RENON_BRIEFCASE_ANIM_SPEED
+        anim_info, &cv64_ovl_renonbriefcase_open_anim_rot_data[0][0], RENON_BRIEFCASE_ANIM_SPEED
     );
-    (*func_8000B774)(anim_info, model);
+    (*animationInfo_animateFrame)(anim_info, model);
 
     (*fade_setSettings)(FADE_IN, 15, 0xFF, 0xFF, 0xFF);
     (*object_curLevel_goToNextFuncAndClearTimer)(
@@ -152,7 +154,7 @@ void cv64_ovl_renonbriefcase_loop(cv64_ovl_renonbriefcase_t* self) {
     // The animation is set to play for 60 frames,
     // but it will only play for 19 frames on practice
     if ((u32) (self->current_cutscene_time - 90.0) <= 60.0) {
-        (*func_8000B774)(&self->anim_info, model);
+        (*animationInfo_animateFrame)(&self->anim_info, model);
     }
 
     self->current_cutscene_time++;

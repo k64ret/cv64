@@ -75,7 +75,7 @@ segments:
       - [0x00003550, asm]               # Matrix operations
       - [0x00004BC0, asm]
       - [0x00004D80, asm]               # Nisitenma-Ichigo related functions + atan2 functions
-      - [0x00004FE0, asm, figure]       # Figure-type structs (model_info, camera and struct_47)
+      - [0x00004FE0, asm, figure]       # Figure-type structs (model_info, camera and light)
       # - [0x000057B4, asm, camera]
       - [0x0000D270, asm]
       - [0x0000DD70, asm]
@@ -84,7 +84,7 @@ segments:
       - [0x0000F960, asm]               # File load-related. Object 0x0003's code is located here
       - [0x00010100, asm]
       - [0x000101C0, asm, DMAMgr]
-      - [0x000113D0, asm]              # struct_47, Objects 0x006D, 0x006E and 0x006F's code
+      - [0x000113D0, asm]              # light, Objects 0x006D, 0x006E and 0x006F's code
       - [0x00011F10, c, vec3f]
       - [0x00012700, asm]              # Appears to contain float-rounding functions?
       - [0x00012900, asm]
@@ -500,8 +500,9 @@ segments:
       - [0x000C7160, asm, common/file_select]
       - [0x000CB5A0, asm, common/scroll]
       - [0x000D1A20, asm, common/necronomicon]   # Handles the book seen in the Data screen
-      - [0x000D25F0, asm, common/page]    # Handles a Necronomicon's page
-      - [0x000D2A50, asm, common/page_work]
+      - [0x000D25F0, asm, common/necro_work]
+      - [0x000D26A0, c, common/page]    # Handles a Necronomicon's page
+      - [0x000D2A50, c, common/page_work]
       - [0x000D2B10, asm, common/mark]
       - [0x000D2E90, asm, common/mark_work]
       - [0x000D2FE0, asm, common/glance]
@@ -548,6 +549,8 @@ segments:
       - [0x001042A0, data]
       - [0x00104550, data]
       - [0x00104660, data]
+      - [0x001047B0, .data, common/page]
+      - [0x001049A0, data]
       - [0x001049C0, data]
       - [0x00104AD0, data]
       - [0x00104B40, data]
@@ -570,7 +573,8 @@ segments:
       - [0x0010E8F0, rodata]
       - [0x0010EFC0, rodata]
       - [0x0010EFD0, rodata]
-      - [0x0010EFE0, rodata]
+      - [0x0010EFE0, .rodata, common/page_work]
+      - [0x0010EFF0, rodata]
       - [0x0010F010, rodata]
       - [0x0010F020, rodata]
       - [0x0010F090, rodata]

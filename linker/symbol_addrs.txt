@@ -1467,6 +1467,34 @@ cutsceneMgr_functions                      = 0x8016B580;
 // End of src/common/cutscene_manager.c ========================================
 
 
+// src/common/page.c ===============================================
+
+// .text
+page_entrypoint                           = 0x8014f4b0; // type:func segment:common
+page_isWorkCreated                        = 0x8014f520; // type:func segment:common
+page_init                                 = 0x8014f558; // type:func segment:common
+page_loop                                 = 0x8014f748; // type:func segment:common
+page_destroy                              = 0x8014f830; // type:func segment:common
+
+// .data
+page_1_hierarchy                          = 0x801815c0; // segment:common size:0x4C
+page_2_hierarchy                          = 0x8018160c; // segment:common size:0x4C
+page_3_hierarchy                          = 0x80181658; // segment:common size:0x4C
+page_flip_anim_rot_data                       = 0x801816A4; // segment:common size:0xFC
+page_functions                            = 0x801817A0; // segment:common size:0x10
+
+// End of src/common/page.c ========================================
+
+// src/common/page_work.c ===============================================
+
+// .text
+pageWork_create                           = 0x8014f860; // type:func segment:common
+
+// .rodata
+D_8018BDF0                                = 0x8018bdf0; // type:asciz segment:common size:0x0A
+
+// End of src/common/page_work.c ========================================
+
 memory_clear = 0x80000770;
 memory_copy = 0x800008d0;
 heap_init = 0x80000c28;
@@ -1486,8 +1514,8 @@ fig_isValid = 0x800043e0;
 fig_destroySelfAndChildren_1 = 0x80004408;
 fig_destroySelfAndChildren_2 = 0x800045b8;
 clearAllFigs = 0x80004770;
-modelInfo_hideModelAndItsChildren = 0x80004838;
-modelInfo_showModelAndItsChildren = 0x8000496c;
+figure_hideSelfAndChildren = 0x80004838;
+figure_showModelAndChildren = 0x8000496c;
 fig_allocate = 0x80004b28;
 camera_setParams = 0x80004bb4;
 camera_create = 0x80004c04;
@@ -1500,7 +1528,7 @@ modelInfo_setPosVec3s = 0x80009330;
 animation_animateTranslationFrame = 0x800095e0;
 animationInfo_create = 0x8000b454;
 animationInfo_setParams = 0x8000b5b8;
-func_8000B774 = 0x8000B774;
+animationInfo_animateFrame = 0x8000B774;
 animationMgr_create = 0x8000b8d8;
 animationMgr_setAnimParams = 0x8000b9b8;
 animationMgr_setAnimParamsWithoutSmoothingPosTransition = 0x8000ba4c;
@@ -2078,7 +2106,6 @@ scroll_entrypoint = 0x801483b0;
 scroll_isScrollStateCreated = 0x80148420;
 scroll_destroy = 0x8014ab3c;
 necroWork_create = 0x8014f400;
-pageWork_create = 0x8014f860;
 mark_entrypoint = 0x8014f920;
 mark_isMarkWorkCreated = 0x8014f990;
 mark_init = 0x8014f9c8;
@@ -2845,8 +2872,7 @@ figures_array = 0x8034EAB8;
 func_8000EE18 = 0x8000EE18;
 func_801578FC = 0x801578FC;
 effect_setMaxFrameSpeed = 0x8005B78C;
-func_80004C40 = 0x80004C40;
-func_80004CE8 = 0x80004CE8;
+light_create = 0x80004C40;
 windowWork_setParams = 0x801365EC;
 func_8000C6D0 = 0x8000C6D0;
 func_80012400 = 0x80012400;
@@ -2858,3 +2884,4 @@ computeNormalizedPosition = 0x80011BCC;
 func_800139D4 = 0x800139D4;
 D_80093D20_94920 = 0x80093D20; // size:0x1C
 // devAddr = 0xA0000000;
+figure_setChild = 0x80004ce8;
