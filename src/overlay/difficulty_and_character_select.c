@@ -1,4 +1,7 @@
-#include "cv64.h"
+#include "objects/menu/mfds.h"
+#include "objects/effect/distortion.h"
+#include "objects/menu/characterSelect.h"
+#include "system_work.h"
 
 // clang-format off
 
