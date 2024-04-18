@@ -2335,12 +2335,16 @@ segments:
     vram: 0x0F000000
     exclusive_ram_id: nisitenma_ichigo_overlays
 
-  - name: ni_ovl_difficulty_select
-    type: bin
+  - name: ni_ovl_difficulty_and_character_select
+    type: code
     # start: 0x00B56516
     start: 0x00E58990
     vram: 0x0F000000
     exclusive_ram_id: nisitenma_ichigo_overlays
+    subsegments:
+      - [0x00E58990, c, overlay/difficulty_and_character_select]
+      - [0x00E59BD0, data, overlay/difficulty_and_character_select]
+      - [0x00E59CA0, rodata, overlay/difficulty_and_character_select]
 
   - name: ni_ovl_game_over
     type: bin

@@ -137,3 +137,31 @@ cv64_ovl_easyending_destroy    = 0x0F0002E0; // type:func segment:ni_ovl_easy_mo
 cv64_ovl_easyending_msg        = 0x0F000350; // type:u16 segment:ni_ovl_easy_mode_ending_msg size:0xF0
 cv64_ovl_easyending_funcs      = 0x0F000440; // segment:ni_ovl_easy_mode_ending_msg size:0x0C
 // End of src/overlay/easy_mode_ending_msg.c ===================================
+
+// src/overlay/difficulty_and_character_select.c =============================================
+// .text
+characterSelect_entrypoint      = 0x0F000000; // type:func segment:ni_ovl_difficulty_and_character_select
+difficultySelect_loop      = 0x0F000070; // type:func segment:ni_ovl_difficulty_and_character_select
+characterSelect_areStructsCreated      = 0x0F0004B0; // type:func segment:ni_ovl_difficulty_and_character_select
+characterSelect_init      = 0x0F000504; // type:func segment:ni_ovl_difficulty_and_character_select
+characterSelect_showScroll      = 0x0F0008EC; // type:func segment:ni_ovl_difficulty_and_character_select
+characterSelect_createLens      = 0x0F000968; // type:func segment:ni_ovl_difficulty_and_character_select
+characterSelect_selectOption      = 0x0F000B08; // type:func segment:ni_ovl_difficulty_and_character_select
+characterSelect_optionSelected      = 0x0F000FE8; // type:func segment:ni_ovl_difficulty_and_character_select
+characterSelect_destroy      = 0x0F001134; // type:func segment:ni_ovl_difficulty_and_character_select
+characterSelect_determineCharacterToSelect      = 0x0F001174; // type:func segment:ni_ovl_difficulty_and_character_select
+// .data
+level_select_text                   = 0x0F001240; // type:u16 segment:ni_ovl_difficulty_and_character_select size:0x90
+reinhardt_lens_pos_X                   = 0x0F0012D0; // type:f32 segment:ni_ovl_difficulty_and_character_select
+reinhardt_lens_pos_Y                   = 0x0F0012D4; // type:f32 segment:ni_ovl_difficulty_and_character_select
+carrie_lens_pos_X                   = 0x0F0012D8; // type:f32 segment:ni_ovl_difficulty_and_character_select
+carrie_lens_pos_Y                   = 0x0F0012DC; // type:f32 segment:ni_ovl_difficulty_and_character_select
+characterSelect_functions                   = 0x0F0012E0; // segment:ni_ovl_difficulty_and_character_select size:0x20
+// .rodata
+difficulty_and_character_select_unused_str_1 = 0x0F001310; // type:asciz segment:ni_ovl_difficulty_and_character_select size:0x0C
+difficulty_and_character_select_unused_str_2 = 0x0F00131C; // type:asciz segment:ni_ovl_difficulty_and_character_select size:0x14
+jump_table_0F001330 = 0x0F001330; // type:jtbl_label segment:ni_ovl_difficulty_and_character_select size:0x18
+reinhardt_portrait_size                   = 0x0F001348; // type:f32 segment:ni_ovl_difficulty_and_character_select
+carrie_portrait_size                   = 0x0F00134C; // type:f32 segment:ni_ovl_difficulty_and_character_select
+D_0F001350                   = 0x0F001350; // type:f32 segment:ni_ovl_difficulty_and_character_select
+// End of src/overlay/difficulty_and_character_select.c ======================================
