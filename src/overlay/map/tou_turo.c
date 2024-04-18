@@ -63,7 +63,7 @@ void cv64_ovl_touturo_door_init(cv64_ovl_touturo_door_t* self) {
     model->primitive_color.integer = sys.primitive_color.integer;
     model->fog_color.integer       = sys.background_color.integer;
 
-    BITS_SET(self->header.ID, OBJ_FLAG_STAGE_OBJECT);
+    BITS_SET(self->header.ID, OBJ_FLAG_ENABLE_COLLISION);
 
     self->map_actor_model  = getMapActorModelEntryFromArray(model->dlist, model->assets_file_ID);
     model->map_actor_model = self->map_actor_model;

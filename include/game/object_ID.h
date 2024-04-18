@@ -7,28 +7,42 @@
 
 /**
  * The flags that are part of the `ID` field of `cv64_object_hdr_t`, NOT
- * `field_0x02`. Used with `cv64_object_id_t`.
+ * `flags`. Only used with `cv64_object_id_t`.
  */
 typedef enum cv64_object_kind {
     OBJ_KIND_NONE         = 0x00,
     /**
-     * Non-enemy map actors. Sometimes 0x18 is used as well.
+     * If `OBJ_KIND_ENABLE_COLLISION` is set, this flag will make it so that
+     * the actor can move alongside the collision. Used in the Tunnel's gondolas
+     * or the Tower of Execution's moving platforms.
      */
-    OBJ_KIND_STAGE_OBJECT = 0x10,
+    OBJ_KIND_MOVE_ALONGSIDE_COLLISION = 0x08,
+    /**
+     * If the object has any associated hard collision,
+     * such as map_actor_model's collision, this will enable it.
+     */
+    OBJ_KIND_ENABLE_COLLISION = 0x10,
     OBJ_KIND_MAP_OVERLAY  = 0x20,
     OBJ_KIND_DESTROY      = 0x80
 } cv64_object_kind_t;
 
 /**
  * Same as `cv64_object_kind_t` but with the additional zeroes, so that we can
- * use inside code
+ * use them inside code
  */
 typedef enum cv64_object_flag {
     OBJ_FLAG_NONE         = 0x0000,
     /**
-     * Non-enemy map actors. Sometimes 0x18 is used as well.
+     * If `OBJ_FLAG_ENABLE_COLLISION` is set, this flag will make it so that
+     * the actor can move alongside the collision. Used in the Tunnel's gondolas
+     * or the Tower of Execution's moving platforms
      */
-    OBJ_FLAG_STAGE_OBJECT = 0x1000,
+    OBJ_FLAG_MOVE_ALONGSIDE_COLLISION = 0x0800,
+    /**
+     * If the object has any associated hard collision,
+     * such as map_actor_model's collision, this will enable it.
+     */
+    OBJ_FLAG_ENABLE_COLLISION = 0x1000,
     OBJ_FLAG_MAP_OVERLAY  = 0x2000,
     OBJ_FLAG_DESTROY      = 0x8000
 } cv64_object_flag_t;
@@ -683,8 +697,8 @@ typedef enum cv64_object_id {
     STAGE_OBJECT_LEVER                 = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_LEVER),
     STAGE_OBJECT_MEIRO_TEIEN_OBJ_01B5  = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_MEIRO_TEIEN_OBJ_01B5),
     STAGE_OBJECT_ROSE_VENTILATOR       = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_ROSE_VENTILATOR),
-    STAGE_OBJECT_ROSE_DOOR             = CV64_OBJECT_ID(OBJ_KIND_STAGE_OBJECT, ID_ROSE_DOOR),
-    STAGE_OBJECT_TOU_TURO_DOOR         = CV64_OBJECT_ID(OBJ_KIND_STAGE_OBJECT, ID_TOU_TURO_DOOR)
+    STAGE_OBJECT_ROSE_DOOR             = CV64_OBJECT_ID(OBJ_KIND_MOVE_ALONGSIDE_COLLISION, ID_ROSE_DOOR),
+    STAGE_OBJECT_TOU_TURO_DOOR         = CV64_OBJECT_ID(OBJ_KIND_MOVE_ALONGSIDE_COLLISION, ID_TOU_TURO_DOOR)
 } cv64_object_id_t;
 
 // clang-format on
