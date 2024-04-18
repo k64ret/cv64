@@ -75,7 +75,7 @@ void cv64_ovl_renonbriefcase_init(cv64_ovl_renonbriefcase_t* self) {
         &cv64_ovl_renonbriefcase_hierarchy
     );
     model = self->model;
-    BITS_SET(model->flags, FIG_FLAG_0800 | FIG_FLAG_0080);
+    BITS_SET(model->flags, FIG_FLAG_APPLY_PRIMITIVE_COLOR | FIG_FLAG_0080);
     model->primitive_color.integer = 0xFFFFFFFF;
     model->angle.pitch             = 0;
     model->angle.yaw               = 0x4000;

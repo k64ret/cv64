@@ -1,3 +1,13 @@
+/**
+ * File: difficulty_and_character_select.c
+ * Description:
+ *   Handles both the character selection screen when selecting a new game,
+ *   as well as the difficulty selection.
+ * Associated objects: 0x212E
+ *
+ * Mapped by the TLB? = Yes
+ */
+
 #include "objects/menu/mfds.h"
 #include "objects/effect/distortion.h"
 #include "objects/menu/characterSelect.h"

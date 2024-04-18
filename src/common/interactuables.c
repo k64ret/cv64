@@ -119,9 +119,13 @@ void interactuables_init(interactuables* self) {
             }
 
             if (BITS_HAS(self->item_model_settings_flags, ITEM_MODEL_SETTINGS_FLAG_SPINS)) {
-                BITS_SET(item_model->flags, FIG_FLAG_0800);
+                BITS_SET(item_model->flags, FIG_FLAG_APPLY_PRIMITIVE_COLOR);
             } else {
-                BITS_SET(item_model->flags, FIG_FLAG_0800 | FIG_FLAG_0040);
+                // Make it so that the item model always looks at the camera if not spinning.
+                // This is necessary for item models that only consists of one texture.
+                BITS_SET(
+                    item_model->flags, FIG_FLAG_APPLY_PRIMITIVE_COLOR | FIG_FLAG_LOOK_AT_CAMERA_YAW
+                );
             }
 
             item_model->primitive_color.integer = 0xFFFFFFFF;

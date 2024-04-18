@@ -48,7 +48,7 @@ void cv64_ovl_konamilogo_init(cv64_ovl_konamilogo_t* self) {
     model->size.x                = 0.9975f;
     model->size.y                = 1.005f;
     sys.background_color.integer = 0x000000FF; // Black (opaque)
-    BITS_SET(model->flags, FIG_FLAG_0800);
+    BITS_SET(model->flags, FIG_FLAG_APPLY_PRIMITIVE_COLOR);
     model->primitive_color.integer = 0xFFFFFF00; // White (transparent)
 
     GO_TO_NEXT_FUNC(

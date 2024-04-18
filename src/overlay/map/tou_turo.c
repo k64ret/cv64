@@ -55,7 +55,7 @@ void cv64_ovl_touturo_door_init(cv64_ovl_touturo_door_t* self) {
     } // Needed for matching
 
     actor_model_set_pos_and_angle(self, model);
-    BITS_SET(model->flags, FIG_FLAG_0800 | FIG_FLAG_0100);
+    BITS_SET(model->flags, FIG_FLAG_APPLY_PRIMITIVE_COLOR | FIG_FLAG_APPLY_FOG_COLOR);
 
     model->assets_file_ID = MAP_ASSETS_FILE_ID;
     model->dlist          = cv64_ovl_touturo_door_dlists[TOU_TURO_DOOR_TYPE];

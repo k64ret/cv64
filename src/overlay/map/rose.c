@@ -48,7 +48,7 @@ void cv64_ovl_rose_ventilator_init(cv64_ovl_rose_ventilator_t* self) {
         self->model           = model;
         model->dlist          = &ROSE_VENTILATOR_DL;
         model->assets_file_ID = MAP_ASSETS_FILE_ID;
-        BITS_SET(model->flags, FIG_FLAG_0800 | FIG_FLAG_0100);
+        BITS_SET(model->flags, FIG_FLAG_APPLY_PRIMITIVE_COLOR | FIG_FLAG_APPLY_FOG_COLOR);
         model->primitive_color.integer = sys.primitive_color.integer;
         model->fog_color.integer       = sys.background_color.integer;
         (*modelInfo_setMapActorModel)(model, &ROSE_VENTILATOR_DL);
@@ -119,7 +119,7 @@ void cv64_ovl_rose_door_init(cv64_ovl_rose_door_t* self) {
     (*actor_model_set_pos_and_angle)(self, model);
     model->assets_file_ID = MAP_ASSETS_FILE_ID;
     model->dlist          = &ROSE_DOOR_DL;
-    BITS_SET(model->flags, FIG_FLAG_0800 | FIG_FLAG_0100);
+    BITS_SET(model->flags, FIG_FLAG_APPLY_PRIMITIVE_COLOR | FIG_FLAG_APPLY_FOG_COLOR);
     model->primitive_color.integer = sys.primitive_color.integer;
     model->fog_color.integer       = sys.background_color.integer;
     BITS_SET(self->header.ID, OBJ_FLAG_ENABLE_COLLISION);

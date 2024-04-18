@@ -38,7 +38,7 @@ void textboxAdvanceArrow_init(textboxAdvanceArrow* self) {
     model->dlist                  = &TEXTBOX_ADVANCE_ARROW_DL;
     model->assets_file_ID         = NI_ASSETS_FILE_SELECT;
     BITS_SET(model->flags, FIG_FLAG_0080);
-    BITS_SET(model->flags, FIG_FLAG_0800);
+    BITS_SET(model->flags, FIG_FLAG_APPLY_PRIMITIVE_COLOR);
     model->primitive_color.integer = 0xFF0000FF; // Red (opaque)
     model->size.x                  = 1.3f;
     model->size.y                  = 1.3f;

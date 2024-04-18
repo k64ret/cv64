@@ -26,10 +26,13 @@
 #define FIG_TYPE_HIDE                 0x8000
 
 // Flags
-#define FIG_FLAG_0040 0x0040
-#define FIG_FLAG_0080 0x0080
-#define FIG_FLAG_0100 0x0100
-#define FIG_FLAG_0800 0x0800
+#define FIG_FLAG_LOOK_AT_CAMERA_PITCH    0x0020
+#define FIG_FLAG_LOOK_AT_CAMERA_YAW      0x0040
+#define FIG_FLAG_0080                    0x0080
+#define FIG_FLAG_APPLY_FOG_COLOR         0x0100
+#define FIG_FLAG_APPLY_BLEND_COLOR       0x0200
+#define FIG_FLAG_APPLY_ENVIRONMENT_COLOR 0x0400
+#define FIG_FLAG_APPLY_PRIMITIVE_COLOR   0x0800
 
 // Misc. flags that aren't part of the set above
 #define FIG_VARIABLE_TEXTURE_AND_PALETTE 0x40000000

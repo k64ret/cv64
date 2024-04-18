@@ -64,7 +64,7 @@ void stageSelect_initGraphics(stageSelect* self) {
         self->red_background_model = bg_model;
         bg_model->assets_file_ID   = NI_ASSETS_MENU;
         bg_model->dlist            = &MENU_RED_BACKGROUND_DL;
-        BITS_SET(bg_model->flags, FIG_FLAG_0800);
+        BITS_SET(bg_model->flags, FIG_FLAG_APPLY_PRIMITIVE_COLOR);
         bg_model->primitive_color.integer = (s8) 0x000000FF; // Slight fakematch?
         bg_model->position.x              = 0.0f;
         bg_model->position.y              = 0.0f;

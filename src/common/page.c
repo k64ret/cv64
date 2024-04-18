@@ -105,7 +105,7 @@ void page_init(page* self) {
     // Assign the model's lighting
     // Set model flags, size and visibility
     (*figure_setChild)(model, work->page_light);
-    model->flags |= FIG_FLAG_0080;
+    BITS_SET(model->flags, FIG_FLAG_0080);
     model->size.z = 1.0f;
     model->size.y = 1.0f;
     model->size.x = 1.0f;
