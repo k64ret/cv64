@@ -44,7 +44,7 @@ void cv64_ovl_konamilogo_init(cv64_ovl_konamilogo_t* self) {
 
     self->model                  = model;
     model->dlist                 = &KONAMI_LOGO_DL;
-    model->assets_file_ID        = NI_ASSETS_KONAMI_KCEK_LOGOS;
+    model->assets_file_ID        = NI_ASSETS_KONAMI_AND_KCEK_LOGOS;
     model->size.x                = 0.9975f;
     model->size.y                = 1.005f;
     sys.background_color.integer = 0x000000FF; // Black (opaque)

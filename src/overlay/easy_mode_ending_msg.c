@@ -45,7 +45,7 @@ void cv64_ovl_easyending_init(cv64_ovl_easyending_t* self) {
     new_textbox->display_time = 0;
     message_ptr               = (*text_getMessageFromPool)(cv64_ovl_easyending_msg, 0);
     (*textbox_setMessagePtr)(
-        new_textbox, GET_UNMAPPED_ADDRESS(NI_OVL_EASY_MODE_ENDING_MSG, message_ptr), NULL, 0
+        new_textbox, GET_UNMAPPED_ADDRESS(NI_OVERLAY_EASY_MODE_ENDING_MSG, message_ptr), NULL, 0
     );
     (*textbox_enableLens)(
         new_textbox,
