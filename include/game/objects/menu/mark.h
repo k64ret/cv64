@@ -35,11 +35,23 @@ typedef struct {
     mark_work* work;
 } mark;
 
-void mark_entrypoint(mark* self);
-void mark_isWorkCreated(mark* self);
-void mark_init(mark* self);
-void mark_loop(mark* self);
-void mark_destroy(mark* self);
+extern void mark_entrypoint(mark* self);
+extern void mark_isWorkCreated(mark* self);
+extern void mark_init(mark* self);
+extern void mark_loop(mark* self);
+extern void mark_destroy(mark* self);
+extern mark_work* markWork_create(
+    void* parent,
+    camera* display_camera,
+    u8 flags,
+    f32 pos_X,
+    f32 pos_Y,
+    f32 pos_Z,
+    f32 size_X,
+    f32 size_Y,
+    f32 size_Z,
+    f32 display_anim_speed
+);
 
 typedef void (*mark_func_t)(mark*);
 

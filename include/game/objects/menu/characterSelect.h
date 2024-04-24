@@ -5,11 +5,25 @@
 #include "gfx/model_info.h"
 #include "objects/menu/mfds.h"
 #include "objects/menu/mark.h"
+#include "objects/menu/scroll.h"
+#include "objects/menu/miniScroll.h"
+
+#define ENABLED_PALETTE  0
+#define DISABLED_PALETTE 1 // Unused
 
 typedef enum pc_select_work_flags {
     ENABLE_REINHARDT = 0x01,
     ENABLE_CARRIE    = 0x02
 } pc_select_work_flags;
+
+typedef enum difficulty_select_state_enum {
+    CREATE_SCROLL               = 0, // Default state
+    CREATE_TEXT_NON_HARD_MODE   = 1,
+    CREATE_TEXT_HARD_MODE       = 2,
+    WAIT_UNTIL_SCROLL_IS_OPENED = 3,
+    SELECT_OPTION               = 4,
+    EXIT                        = 5
+} difficulty_select_state_enum;
 
 typedef struct {
     light* field_0x00;
@@ -73,5 +87,10 @@ void characterSelect_destroy(characterSelect* self);
 void characterSelect_determineCharacterToSelect(characterSelect* self);
 
 typedef void (*characterSelect_func_t)(characterSelect*);
+
+extern const u32 REINHARDT_PORTRAIT_DL;
+extern const u32 REINHARDT_PORTRAIT_MATERIAL_DL;
+extern const u32 CARRIE_PORTRAIT_DL;
+extern const u32 CARRIE_PORTRAIT_MATERIAL_DL;
 
 #endif // CHARACTER_SELECT_H

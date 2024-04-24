@@ -38,7 +38,7 @@ void cv64_ovl_rose_ventilator_entrypoint(cv64_ovl_rose_ventilator_t* self) {
 
 void cv64_ovl_rose_ventilator_init(cv64_ovl_rose_ventilator_t* self) {
     cv64_ovl_rose_ventilator_cfg_t* speed_settings = &self->speed_settings;
-    cv64_model_inf_t* model = (*modelInfo_createRootNode)(FIG_TYPE_STANDALONE, D_8018CDE0[0]);
+    cv64_model_inf_t* model = (*modelInfo_createAndSetChild)(FIG_TYPE_STANDALONE, D_8018CDE0[0]);
     u32 unused;
 
     if (model == NULL) {
@@ -113,7 +113,7 @@ void cv64_ovl_rose_door_init(cv64_ovl_rose_door_t* self) {
     cv64_map_actor_model_t* map_actor_model;
     cv64_actor_settings_t* settings           = self->settings;
     cv64_ovl_rose_door_cfg_t* height_settings = &self->height_settings;
-    cv64_model_inf_t* model = (*modelInfo_createRootNode)(FIG_TYPE_STANDALONE, D_8018CDE0[0]);
+    cv64_model_inf_t* model = (*modelInfo_createAndSetChild)(FIG_TYPE_STANDALONE, D_8018CDE0[0]);
 
     self->model = model;
     (*actor_model_set_pos_and_angle)(self, model);

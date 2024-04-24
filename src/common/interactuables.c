@@ -80,7 +80,7 @@ void interactuables_init(interactuables* self) {
         if (interactuables_settings_table[self->table_index].type == ITEM_KIND_ITEM) {
             // Create and setup the item model
             item_model =
-                modelInfo_createRootNode(FIG_TYPE_0400 | FIG_TYPE_HIERARCHY_NODE, D_8018CDE0[2]);
+                modelInfo_createAndSetChild(FIG_TYPE_0400 | FIG_TYPE_HIERARCHY_NODE, D_8018CDE0[2]);
             self->model = item_model;
             if (settings != NULL) {
                 actor_model_set_pos(self, item_model);

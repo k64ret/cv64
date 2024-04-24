@@ -60,7 +60,7 @@ void stageSelect_initGraphics(stageSelect* self) {
         heapBlock_updateBlockMaxSize(
             self->assets_file_start, (u32) self->assets_file_end - (u32) self->assets_file_start
         );
-        bg_model = modelInfo_createRootNode(FIG_TYPE_HUD_ELEMENT, common_camera_8009B444);
+        bg_model = modelInfo_createAndSetChild(FIG_TYPE_HUD_ELEMENT, common_camera_8009B444);
         self->red_background_model = bg_model;
         bg_model->assets_file_ID   = NI_ASSETS_MENU;
         bg_model->dlist            = &MENU_RED_BACKGROUND_DL;

@@ -49,7 +49,7 @@ void cv64_ovl_touturo_door_init(cv64_ovl_touturo_door_t* self) {
     if (settings) {
     } // Needed for matching
 
-    model = self->model = modelInfo_createRootNode(FIG_TYPE_STANDALONE, D_8018CDE0[0]);
+    model = self->model = modelInfo_createAndSetChild(FIG_TYPE_STANDALONE, D_8018CDE0[0]);
 
     if (model) {
     } // Needed for matching
