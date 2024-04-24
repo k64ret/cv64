@@ -2417,7 +2417,7 @@ segments:
       - [0x00E618B0, .data, overlay/renon_briefcase]
       - [0x00E618F0, .rodata, overlay/renon_briefcase]
 
-  - name: ni_ovl_OVL_BA
+  - name: ni_ovl_overlay_BA
     type: code
     # start: 0x00B5BF68
     start: 0x00E61930
