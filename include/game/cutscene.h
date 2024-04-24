@@ -26,9 +26,9 @@ typedef struct {
     u8 field_0x73;
 } cutscene;
 
-#define CUTSCENE_OVL_FILM_REEL          1 // Unused
-#define CUTSCENE_OVL_WIDESCREEN_BORDERS 2
-#define CUTSCENE_OVL_FADE               8
+#define CUTSCENE_overlay_FILM_REEL          1 // Unused
+#define CUTSCENE_overlay_WIDESCREEN_BORDERS 2
+#define CUTSCENE_overlay_FADE               8
 
 typedef struct {
     u16 object_ID;

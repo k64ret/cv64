@@ -117,13 +117,13 @@ cv64_ovl_renonbriefcase_funcs         = 0x0F000644; // segment:ni_ovl_renon_brie
 
 // src/overlay/overlay_BA.c ====================================================
 // .text
-obj213F_entrypoint               = 0x0F000000; // type:func segment:ni_ovl_OVL_BA
-obj213F_isDraculaCutsceneWatched = 0x0F000070; // type:func segment:ni_ovl_OVL_BA
-obj213F_isPlayerDroppingDown     = 0x0F0000DC; // type:func segment:ni_ovl_OVL_BA
-obj213F_playSound                = 0x0F000130; // type:func segment:ni_ovl_OVL_BA
-obj213F_destroy                  = 0x0F000174; // type:func segment:ni_ovl_OVL_BA
+obj213F_entrypoint               = 0x0F000000; // type:func segment:ni_ovl_overlay_BA
+obj213F_isDraculaCutsceneWatched = 0x0F000070; // type:func segment:ni_ovl_overlay_BA
+obj213F_isPlayerDroppingDown     = 0x0F0000DC; // type:func segment:ni_ovl_overlay_BA
+obj213F_playSound                = 0x0F000130; // type:func segment:ni_ovl_overlay_BA
+obj213F_destroy                  = 0x0F000174; // type:func segment:ni_ovl_overlay_BA
 // .data
-cv64_ovl_obj213F_funcs           = 0x0F0001A0; // segment:ni_ovl_OVL_BA size:0x0C
+cv64_ovl_obj213F_funcs           = 0x0F0001A0; // segment:ni_ovl_overlay_BA size:0x0C
 // End of src/overlay/overlay_BA.c =============================================
 
 
