@@ -2586,7 +2586,7 @@ ptr_player_animations_translation_data = 0x8016c884;
 ptr_player_animations_rotation_data = 0x8016c75c;
 cutscene_settings = 0x8016B5C0;
 kingSkeleton_objectFiles = 0x80095b78;
-gameState_konamiLogo_OVL_info = 0x800958b0;
+gameState_konamiLogo_overlay_info = 0x800958b0;
 
 // src/fade.c
 
@@ -2663,9 +2663,9 @@ Nisitenma_Ichigo_files_segment_addresses = 0x80094830;
 loadingZone_main_functions = 0x80186dd8;
 loadingZone_createEasyModeEnding_functions = 0x80186e00;
 cutscene_additional_settings_array = 0x8016b824;
-currently_mapped_OVL_evenpaddr = 0x800a78a8;
-currently_mapped_OVL_size = 0x800a78b8;
-currently_mapped_OVL_vaddr = 0x800a78b0;
+currently_mapped_overlay_evenpaddr = 0x800a78a8;
+currently_mapped_overlay_size = 0x800a78b8;
+currently_mapped_overlay_vaddr = 0x800a78b0;
 mapped_files_array_index = 0x800a78a4;
 cutsceneTrigger_functions = 0x8016b5a0;
 pickableItemFlash_functions = 0x8009ace0;
@@ -2795,7 +2795,7 @@ vec3f_magnitudeSquared = 0x8003d538;
 modelInfo_setPosVec3f = 0x8003cf74;
 textboxObject_functions = 0x8016d07c;
 play_character_health_fulfilled_sound_after_recovering_health = 0x80180494;
-map_objects_OVL_file_info = 0x80095fd0;
+map_objects_overlay_file_info = 0x80095fd0;
 camera_params_array_indexes = 0x80185358;
 shadow_functions = 0x8009ac30;
 Carrie_init_functions = 0x803ddb6c;
