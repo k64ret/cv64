@@ -17,3 +17,6 @@ build/
 *.bin
 *.zip
 *.hexproj
+
+# Ignored misc. files
+ctx.c

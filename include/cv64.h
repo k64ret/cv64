@@ -180,7 +180,7 @@ extern const u32 MENU_RED_BACKGROUND_DL;
 #define NI_ASSETS_CUTSCENE_2C                  0x6C
 #define NI_ASSETS_CUTSCENE_2E                  0x6D
 #define NI_ASSETS_CUTSCENE_3F                  0x6E
-#define NI_ASSETS_CUTSCENE_2C                  0x6F
+#define NI_ASSETS_CUTSCENE_2D                  0x6F
 #define NI_ASSETS_CUTSCENE_0A                  0x70
 #define NI_ASSETS_SMILEY_FACE                  0x71
 #define NI_OVL_CERBERUS                        0x72
