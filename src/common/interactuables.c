@@ -640,6 +640,6 @@ void interactuables_destroy(interactuables* self) {
 void interactuables_stopInteraction(interactuables* self) {
     self->textbox                        = NULL;
     ITEM_FADE_TIMER                      = 0;
-    self->TEXT_IS_PARSED                 = FALSE;
+    self->textbox_is_active              = FALSE;
     self->interacting_with_interactuable = FALSE;
 }

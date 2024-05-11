@@ -17,6 +17,8 @@
 #define TEXT_COLOR_BEIGE 2
 #define TEXT_COLOR_BROWN 3
 
+// Common menu text IDs
+// Used in the `menu_text_ID` of `mfds_state`
 #define MENU_TEXT_REINHARDT 10
 #define MENU_TEXT_CARRIE    11
 #define MENU_TEXT_CORNELL   12  // Unused
