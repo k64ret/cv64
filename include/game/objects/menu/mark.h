@@ -6,12 +6,12 @@
 #include "object.h"
 
 typedef enum mark_work_flags {
-    DRAW_CIRCLE                        = 0x01,
-    DRAW_CROSS                         = 0x02,
-    DISPLAY                            = 0x04,
-    DESTROY                            = 0x08,
-    DONT_DISPLAY                       = 0x10, // See 0x8014FC18
-    DESTROY_AFTER_FINISHING_DISPLAYING = 0x20
+    MARK_FLAG_DRAW_CIRCLE                        = 0x01,
+    MARK_FLAG_DRAW_CROSS                         = 0x02,
+    MARK_FLAG_DISPLAY                            = 0x04,
+    MARK_FLAG_DESTROY                            = 0x08,
+    MARK_FLAG_DONT_DISPLAY                       = 0x10, // See 0x8014FC18
+    MARK_FLAG_DESTROY_AFTER_FINISHING_DISPLAYING = 0x20
 } mark_work_flags;
 
 typedef struct {

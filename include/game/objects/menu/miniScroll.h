@@ -5,6 +5,12 @@
 #include "gfx/camera.h"
 #include "object.h"
 
+typedef enum miniScroll_flags {
+    MINISCROLL_FLAG_00000001 = 0x00000001,
+    MINISCROLL_FLAG_00000004 = 0x00000004,
+    MINISCROLL_FLAG_08000000 = 0x08000000
+} miniScroll_flags;
+
 // ID: 0x213E
 typedef struct {
     cv64_object_hdr_t header;

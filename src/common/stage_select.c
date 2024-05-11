@@ -114,7 +114,7 @@ void stageSelect_initLens(stageSelect* self) {
 
     if ((*fade_isFading)() == FALSE) {
         for (self->text_ID = 0; self->text_ID < STAGE_SELECT_NUM_OPTIONS + 1; self->text_ID++) {
-            if (BITS_NOT_HAS(textbox_array[self->text_ID]->flags, TEXTBOX_IS_ACTIVE)) {
+            if (BITS_NOT_HAS(textbox_array[self->text_ID]->flags, TEXT_IS_PARSED)) {
                 return;
             }
         }

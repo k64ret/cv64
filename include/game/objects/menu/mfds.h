@@ -17,9 +17,16 @@
 #define TEXT_COLOR_BEIGE 2
 #define TEXT_COLOR_BROWN 3
 
+#define MENU_TEXT_REINHARDT 10
+#define MENU_TEXT_CARRIE    11
+#define MENU_TEXT_CORNELL   12  // Unused
+#define MENU_TEXT_COLLER    13  // Unused
+
 typedef enum cv64_textbox_flag {
     MENU_TEXT_ID_PRINTS_ITEM        = CV64_BIT(0),
     MENU_TEXT_ID_PRINTS_MENU_STRING = CV64_BIT(1),
+    MFDS_FLAG_00000004              = CV64_BIT(2),
+    MFDS_FLAG_00000008              = CV64_BIT(3),
     PRINT_NUMBER                    = CV64_BIT(4),
     DISPLAY_LENS                    = CV64_BIT(6),      // Aka enable window_work
     ALLOC_TEXTBOX_IN_MENU_DATA_HEAP = CV64_BIT(14),
@@ -32,7 +39,7 @@ typedef enum cv64_textbox_flag {
     OPEN_TEXTBOX                    = CV64_BIT(27),
     CLOSE_LENS                      = CV64_BIT(28),
     MFDS_FLAG_20000000              = CV64_BIT(29),
-    TEXTBOX_IS_ACTIVE               = CV64_BIT(30),     // TODO: Double-check this
+    TEXT_IS_PARSED                  = CV64_BIT(30),     // The text is completely processed
     HIDE_TEXTBOX                    = CV64_BIT(31)
 } cv64_textbox_flag_t;
 
@@ -177,7 +184,7 @@ extern void textbox_setScaleAndSomethingElse(
     f32 scale_X,
     f32 scale_Y,
     u8 param_7,
-    u8 param_8
+    u8 leave_space_for_selection_arrow
 );
 extern void text_convertIntNumberToText(u32, u16*, u8, u32);
 extern u16* text_findCharInString(u16* text, u16 char_to_find);

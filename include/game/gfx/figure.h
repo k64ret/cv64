@@ -35,7 +35,8 @@
 #define FIG_FLAG_APPLY_PRIMITIVE_COLOR   0x0800
 
 // Misc. flags that aren't part of the set above
-#define FIG_VARIABLE_TEXTURE_AND_PALETTE 0x40000000
+#define FIG_VARIABLE_TEXTURE_AND_PALETTE              0x40000000
+#define FIG_APPLY_VARIABLE_TEXTURE_AND_PALETTE(dlist) (FIG_VARIABLE_TEXTURE_AND_PALETTE | dlist)
 
 typedef struct {
     s16 type;

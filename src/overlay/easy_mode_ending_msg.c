@@ -120,7 +120,7 @@ void cv64_ovl_easyending_destroy(cv64_ovl_easyending_t* self) {
         if (BITS_NOT_HAS(textbox_flags, MFDS_FLAG_20000000) &&
             BITS_NOT_HAS(textbox_flags, CLOSE_LENS) &&
             BITS_NOT_HAS(textbox_flags, MFDS_FLAG_2000000)) {
-            if (BITS_NOT_HAS(textbox_flags, TEXTBOX_IS_ACTIVE)) {
+            if (BITS_NOT_HAS(textbox_flags, TEXT_IS_PARSED)) {
                 self->ending_textbox->flags = textbox_flags | CLOSE_TEXTBOX;
             }
             self->header.destroy(self);

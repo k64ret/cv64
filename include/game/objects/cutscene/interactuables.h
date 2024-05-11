@@ -220,7 +220,7 @@ typedef struct {
     u16 table_index;
     u8 field_0x3A[2];
     u32 interacting_with_interactuable;
-    u32 textbox_is_active;
+    u32 TEXT_IS_PARSED;
     union {
         u16 item_doesnt_vanish_or_fall;
         u16 item_doesnt_flash;

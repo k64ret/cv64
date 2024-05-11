@@ -22,6 +22,7 @@ typedef enum cv64_window_flag {
     WINDOW_FLAG_8000   = CV64_BIT(15),
     WINDOW_FLAG_40000  = CV64_BIT(18),
     WINDOW_HIDE        = CV64_BIT(19),
+    WINDOW_FLAG_200000 = CV64_BIT(21),
     WINDOW_FLAG_800000 = CV64_BIT(23)
 } cv64_window_flag_t;
 

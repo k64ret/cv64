@@ -6,25 +6,26 @@
 #include "objects/menu/mark.h"
 
 typedef enum scroll_state_flags {
-    WHITE_DOWELS = 0x10,
-    OPENED       = 0x20,
-    OPENING      = 0x40,
-    CLOSING      = 0x80,
-    HIDE         = 0xC0
+    SCROLL_STATE_FLAG_02           = 0x02,
+    SCROLL_STATE_FLAG_WHITE_DOWELS = 0x10,
+    SCROLL_STATE_FLAG_OPENED       = 0x20,
+    SCROLL_STATE_FLAG_OPENING      = 0x40,
+    SCROLL_STATE_FLAG_CLOSING      = 0x80,
+    SCROLL_STATE_FLAG_HIDE         = 0xC0
 } scroll_state_flags;
 
 typedef enum scroll_state_params {
-    DATA                 = 1,
-    SELECT               = 2,
-    COPY                 = 3,
-    DELETE               = 4,
-    PLAYER_SELECT        = 5,
-    OPTION               = 6,
-    BUTTON_CONFIG        = 7,
-    SOUND_MODE           = 8,
-    PAUSE_MENU_ITEM_LIST = 9,
-    RENON_SHOP_ITEM_LIST = 10,
-    WIDE                 = 0x80
+    SCROLL_STATE_PARAMS_DATA                 = 1,
+    SCROLL_STATE_PARAMS_SELECT               = 2,
+    SCROLL_STATE_PARAMS_COPY                 = 3,
+    SCROLL_STATE_PARAMS_DELETE               = 4,
+    SCROLL_STATE_PARAMS_PLAYER_SELECT        = 5,
+    SCROLL_STATE_PARAMS_OPTION               = 6,
+    SCROLL_STATE_PARAMS_BUTTON_CONFIG        = 7,
+    SCROLL_STATE_PARAMS_SOUND_MODE           = 8,
+    SCROLL_STATE_PARAMS_PAUSE_MENU_ITEM_LIST = 9,
+    SCROLL_STATE_PARAMS_RENON_SHOP_ITEM_LIST = 10,
+    SCROLL_STATE_PARAMS_WIDE                 = 0x80
 } scroll_state_params;
 
 typedef struct {
@@ -89,7 +90,7 @@ typedef struct {
 extern scroll_state* createScrollState(
     void* parent,
     void* param_2,
-    void* display_camera,
+    void* param_3,
     u32 flags,
     u8 params,
     f32 pos_X,

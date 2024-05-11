@@ -8,6 +8,29 @@
 #include "objects/menu/scroll.h"
 #include "objects/menu/miniScroll.h"
 
+#define NUM_CHARACTERS 2
+/**
+ * Originally there were going to be two additional
+ * playable characteres: Cornell and Coller.
+ *
+ * `characterSelect_create` still sets the number of characters to 4,
+ * but the `difficulty_and_character_select` overlay has hardcoded checks
+ * to prevent more than 2 character slots to be selected.
+ */
+#define NUM_CHARACTERS_EARLY 4
+
+/**
+ * In early versions of the game, it was possible for character slots
+ * to be disabled / locked, preventing a character from being selected.
+ * This would make their portraits colored in dark gold color
+ * (https://tcrf.net/images/7/74/CV64_early_character_selection_screen.jpg)
+ *
+ * The final game still retains that functionality and even has the dark gold palettes
+ * that would have been used to color the disabled icons.
+ * However, those palettes belonged to an early rendition of the character portraits that's
+ * no longer in the game, so enabling this feature will make the character portraits
+ * look corrupted.
+ */
 #define ENABLED_PALETTE  0
 #define DISABLED_PALETTE 1 // Unused
 
@@ -26,9 +49,9 @@ typedef enum difficulty_select_state_enum {
 } difficulty_select_state_enum;
 
 typedef struct {
-    light* field_0x00;
-    light* field_0x04;
-    light* field_0x08;
+    light* scroll_dowels_light;
+    light* scroll_elements_light;
+    light* lens_light;
     u8 flags;
     u8 field_0x0D[3];
     vec3f field_0x10;
@@ -38,9 +61,9 @@ typedef struct {
     * The character ID that's going to be set into the SaveStruct +1
     */
     u8 player_character;
-    s8 lens_not_moving;
+    u8 lens_not_moving;
     /**
-    * Always set to 0, and copied to `lens_not_moving` when selecting a character
+    * Always set to FALSE, and copied to `lens_not_moving` when selecting a character
     */
     s8 field_0x20;
     u8 field_0x21;
@@ -52,39 +75,48 @@ typedef struct {
     u8 field_0x35[7];
 } pc_select_work;
 
-// ID: 0x212E
 typedef struct {
-    cv64_object_hdr_t header;
-    u8 field_0x20[4];
-    cv64_model_inf_t* character_portraits[2];
-    u8 field_0x2C[8];
     union {
         u32 difficulty_select_state;
-        void* scroll_state; // scroll_state*
+        scroll_state* scrollState;
     };
     union {
-        void* miniScroll; // miniScroll*
-        lens_obj* lens;
+        miniScroll* mini_scroll;
+        window_work* lens;
     };
-    mfds_state* character_names[2];
+    union {
+        mfds_state* character_names[NUM_CHARACTERS];
+        mfds_state* difficulty_text;
+    };
     u8 field_0x44[8];
     mark_work* mark;
     u8 field_0x50[20];
     f32 lens_pos_multiplier;
     vec2f lens_pos;
     pc_select_work* work;
+} characterSelectInner;
+
+// ID: 0x212E
+typedef struct {
+    cv64_object_hdr_t header;
+    u8 field_0x20[4];
+    cv64_model_inf_t* character_portraits[NUM_CHARACTERS];
+    u8 field_0x2C[8];
+    characterSelectInner inner;
 } characterSelect;
 
 void characterSelect_entrypoint(characterSelect* self);
 void difficultySelect_loop(characterSelect* self);
 void characterSelect_areStructsCreated(characterSelect* self);
 void characterSelect_init(characterSelect* self);
-void characterSelect_showScroll(characterSelect* self);
+void characterSelect_openScroll(characterSelect* self);
 void characterSelect_createLens(characterSelect* self);
 void characterSelect_selectOption(characterSelect* self);
 void characterSelect_optionSelected(characterSelect* self);
 void characterSelect_destroy(characterSelect* self);
-void characterSelect_determineCharacterToSelect(characterSelect* self);
+void characterSelect_determineCharacterToSelect(
+    pc_select_work* work, s8 new_character_option_offset
+);
 
 typedef void (*characterSelect_func_t)(characterSelect*);
 
