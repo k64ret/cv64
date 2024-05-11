@@ -23,7 +23,9 @@
            // room
 #define FIG_TYPE_HIERARCHY_FIRST_NODE 0x1000
 #define FIG_TYPE_HIERARCHY_ROOT       0x2000 // "super", according to leftover strings
+#define FIG_TYPE_SHOW                 0x7FFF
 #define FIG_TYPE_HIDE                 0x8000
+#define FIG_TYPE_DATA                 0x8000 // Used for the `data` fields in actors
 
 // Flags
 #define FIG_FLAG_LOOK_AT_CAMERA_PITCH    0x0020

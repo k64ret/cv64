@@ -52,7 +52,7 @@ void cv64_ovl_konamilogo_init(cv64_ovl_konamilogo_t* self) {
     BITS_SET(model->flags, FIG_FLAG_APPLY_PRIMITIVE_COLOR);
     model->primitive_color.integer = 0xFFFFFF00; // White (transparent)
 
-    GO_TO_NEXT_FUNC(
+    GO_TO_NEXT_FUNC_NOW(
         self, cv64_ovl_konamilogo_funcs, curFunc, (*object_curLevel_goToNextFuncAndClearTimer)
     );
 }

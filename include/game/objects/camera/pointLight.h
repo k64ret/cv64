@@ -1,7 +1,8 @@
 #ifndef POINT_LIGHT_H
 #define POINT_LIGHT_H
 
-#include "actor.h"
+#include "object.h"
+#include "gfx/model_info.h"
 
 typedef struct {
     u8 field_0x00[8];
@@ -23,7 +24,7 @@ typedef struct {
     u8 field_0x20[20];
     pointLightData data;
     u8 field_0x5C[20];
-    cv64_actor_settings_t* settings;
+    void* settings;
 } pointLight;
 
 extern void pointLight_entrypoint(pointLight* self);

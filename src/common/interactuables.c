@@ -115,7 +115,7 @@ void interactuables_init(interactuables* self) {
             item_model->material_dlist = &ITEM_MATERIAL_DL;
             if (BITS_HAS(interactuables_settings_table[self->table_index].flags, ITEM_INVISIBLE)) {
                 // Hide the item model
-                BITS_SET(item_model->type, ~0x7FFF);
+                BITS_SET(item_model->type, ~FIG_TYPE_SHOW);
             }
 
             if (BITS_HAS(self->item_model_settings_flags, ITEM_MODEL_SETTINGS_FLAG_SPINS)) {

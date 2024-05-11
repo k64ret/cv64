@@ -44,7 +44,8 @@ typedef enum cv64_object_flag {
      */
     OBJ_FLAG_ENABLE_COLLISION = 0x1000,
     OBJ_FLAG_MAP_OVERLAY  = 0x2000,
-    OBJ_FLAG_DESTROY      = 0x8000
+    OBJ_FLAG_DESTROY      = 0x8000,
+    OBJ_TYPE_DATA         = 0x8000     // Used for the `data` fields in actors
 } cv64_object_flag_t;
 
 typedef enum cv64_object_id_raw {
@@ -157,7 +158,7 @@ typedef enum cv64_object_id_raw {
     ID_OBJECT_06B                    = 0x06B,
     ID_PLAYER_CAMERA_CONTROLLER      = 0x06C,
     ID_OBJECT_06D                    = 0x06D,
-    ID_OBJECT_06E                    = 0x06E,
+    ID_MODEL_LIGHTING                = 0x06E,
     ID_POINT_LIGHT                   = 0x06F,
     ID_REINHARDT                     = 0x070,
     ID_REINHARDT_ALT                 = 0x071,
@@ -210,10 +211,10 @@ typedef enum cv64_object_id_raw {
     ID_OBJECT_0A0                    = 0x0A0,
     ID_OBJECT_0A1                    = 0x0A1,
     ID_OBJECT_0A2                    = 0x0A2,
-    ID_OBJECT_0A3                    = 0x0A3,
+    ID_MUD_MAN_ASSETS_LOADER         = 0x0A3,
     ID_BLOOD_MAN_ASSETS_LOADER       = 0x0A4,
     ID_ICE_MAN_ASSETS_LOADER         = 0x0A5,
-    ID_MUD_MAN_ASSETS_LOADER         = 0x0A6,
+    ID_OPENING_BAT                   = 0x0A6,
     ID_OBJECT_0A7                    = 0x0A7,
     ID_OBJECT_0A8                    = 0x0A8,
     ID_OBJECT_0A9                    = 0x0A9,
@@ -650,7 +651,7 @@ typedef enum cv64_object_id {
     CAMERA_OBJ_06B                     = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_OBJECT_06B),
     CAMERA_PLAYER_CAMERA_CONTROLLER    = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_PLAYER_CAMERA_CONTROLLER),
     CAMERA_OBJ_06D                     = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_OBJECT_06D),
-    CAMERA_OBJ_06E                     = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_OBJECT_06E),
+    CAMERA_MODEL_LIGHTING              = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_MODEL_LIGHTING),
     CAMERA_POINT_LIGHT                 = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_POINT_LIGHT),
 
     // Player
@@ -668,9 +669,10 @@ typedef enum cv64_object_id {
     // Enemy
     ENEMY_GARDENER                     = CV64_OBJECT_ID(OBJ_KIND_MAP_OVERLAY, ID_GARDENER),
     ENEMY_DEMON_DRACULA_ASSETS_LOADER  = CV64_OBJECT_ID(OBJ_KIND_MAP_OVERLAY, ID_DEMON_DRACULA_ASSETS_LOADER),
-    ENEMY_BLOOD_MAN_ASSETS_LOADER  = CV64_OBJECT_ID(OBJ_KIND_MAP_OVERLAY, ID_BLOOD_MAN_ASSETS_LOADER),
-    ENEMY_ICE_MAN_ASSETS_LOADER  = CV64_OBJECT_ID(OBJ_KIND_MAP_OVERLAY, ID_ICE_MAN_ASSETS_LOADER),
-    ENEMY_MUD_MAN_ASSETS_LOADER  = CV64_OBJECT_ID(OBJ_KIND_MAP_OVERLAY, ID_MUD_MAN_ASSETS_LOADER),
+    ENEMY_MUD_MAN_ASSETS_LOADER        = CV64_OBJECT_ID(OBJ_KIND_MAP_OVERLAY, ID_MUD_MAN_ASSETS_LOADER),
+    ENEMY_BLOOD_MAN_ASSETS_LOADER      = CV64_OBJECT_ID(OBJ_KIND_MAP_OVERLAY, ID_BLOOD_MAN_ASSETS_LOADER),
+    ENEMY_ICE_MAN_ASSETS_LOADER        = CV64_OBJECT_ID(OBJ_KIND_MAP_OVERLAY, ID_ICE_MAN_ASSETS_LOADER),
+    ENEMY_OPENING_BAT                  = CV64_OBJECT_ID(OBJ_KIND_MAP_OVERLAY, ID_OPENING_BAT),
 
     // Effect
     EFFECT_EFFECTMGR                   = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_EFFECTMGR),

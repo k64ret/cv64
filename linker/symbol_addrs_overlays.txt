@@ -165,3 +165,16 @@ reinhardt_portrait_size                   = 0x0F001348; // type:f32 segment:ni_o
 carrie_portrait_size                   = 0x0F00134C; // type:f32 segment:ni_ovl_difficulty_and_character_select
 D_0F001350                   = 0x0F001350; // type:f32 segment:ni_ovl_difficulty_and_character_select
 // End of src/overlay/difficulty_and_character_select.c ======================================
+
+// src/overlay/openingBat.c =============================================
+// .text
+openingBat_entrypoint      = 0x0F000000; // type:func segment:ni_ovl_opening_bat
+openingBat_createData      = 0x0F000070; // type:func segment:ni_ovl_opening_bat
+openingBat_init            = 0x0F00012C; // type:func segment:ni_ovl_opening_bat
+openingBat_loop            = 0x0F0003B0; // type:func segment:ni_ovl_opening_bat
+openingBat_destroy         = 0x0F000400; // type:func segment:ni_ovl_opening_bat
+// .data
+openingBat_hierarchy                   = 0x0F000430; // segment:ni_ovl_opening_bat size:0x40
+openingBat_materialDlist               = 0x0F000470; // segment:ni_ovl_opening_bat size:0x30
+openingBat_functions                   = 0x0F0004A0; // segment:ni_ovl_opening_bat size:0x10
+// End of src/overlay/openingBat.c ======================================

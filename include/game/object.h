@@ -186,16 +186,24 @@ extern cv64_object_t* object_list_free_slot;
     functions_array[self->header.current_function[funcID].function](self);                         \
     self->header.function_info_ID--;
 
+// Goes to a given function in the array the moment after the function ID is changed
+// (so it doesn't wait for the next frame to execute the function)
 // cv64_object_func_inf_t* curFunc;
-#define GO_TO_FUNC(self, functions_array, curFunc, object_curLevel_goToFunc, function_array_ID)    \
+#define GO_TO_FUNC_NOW(                                                                            \
+    self, functions_array, curFunc, object_curLevel_goToFunc, function_array_ID                    \
+)                                                                                                  \
     (*object_curLevel_goToFunc)(                                                                   \
         self->header.current_function, &self->header.function_info_ID, function_array_ID           \
     );                                                                                             \
     curFunc = &self->header.current_function[self->header.function_info_ID];                       \
     curFunc->timer++, functions_array[curFunc->function](self);
 
+// Goes to the next function in the array the moment after the function ID is changed
+// (so it doesn't wait for the next frame to execute the function)
 // cv64_object_func_inf_t* curFunc;
-#define GO_TO_NEXT_FUNC(self, functions_array, curFunc, object_curLevel_goToNextFuncAndClearTimer) \
+#define GO_TO_NEXT_FUNC_NOW(                                                                       \
+    self, functions_array, curFunc, object_curLevel_goToNextFuncAndClearTimer                      \
+)                                                                                                  \
     (*object_curLevel_goToNextFuncAndClearTimer)(                                                  \
         self->header.current_function, &self->header.function_info_ID                              \
     );                                                                                             \

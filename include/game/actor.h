@@ -4,8 +4,9 @@
 #include "gfx/model_info.h"
 #include "object.h"
 #include "atari.h"
-#include "objects/camera/object_006E.h"
+#include "objects/camera/modelLighting.h"
 #include "animation.h"
+#include "actor_settings.h"
 #include <ultra64.h>
 
 // For "axis" argument from checkIfOutsideEntityIsInsideMainEntityRadius()
@@ -14,27 +15,11 @@
 #define AXIS_Z   4
 #define AXIS_XYZ 8
 
-typedef union {
-    u8 difficulty__spawn_setting_1; // Difficulty = 4 upper bits, Spawn setting
-                                    // 1 = 4 lower bits
-    u8 spawn_setting_2;
-    u16 difficulty__spawn_settings;
-} actor_settings_spawn_settings_union;
-
-typedef struct cv64_actor_settings {
-    vec3s position;
-    s16 actor_ID;
-    u16 variable_1;
-    u16 variable_2;
-    u16 variable_3;
-    actor_settings_spawn_settings_union difficulty__spawn_settings;
-} cv64_actor_settings_t;
-
 typedef struct {
     u32 flags;
     atari_base_work* atari_base;
     cv64_model_inf_t* model;
-    object_006E* obj_006E;
+    modelLighting* lighting;
     animationMgr animMgr;
 } actorVisualData;
 
@@ -54,5 +39,6 @@ extern void func_801578FC(cv64_actor_t* actor);
 extern u32 checkIfOutsideEntityIsInsideMainEntityRadius(
     cv64_model_inf_t* player_model, cv64_model_inf_t* actor_model, f32 actor_spawn_radius, u32 axis
 );
+extern u8 Actor_getPosAndVariable1(cv64_actor_t* actor, vec3f* position, u16* variable_1);
 
 #endif

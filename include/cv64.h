@@ -33,6 +33,7 @@
 
 typedef u8 Addr[];
 
+extern u32 D_80092F50;
 extern Gfx* gDisplayListHead; // 0x800B49E0
 
 extern void end_master_display_list();
