@@ -66,14 +66,14 @@ void cutsceneMgr_createCutscene(cutsceneMgr* self) {
     }
 
     cutscene_overlay = cutscene_settings[self->cutscene_ID - 1].overlay;
-    if (BITS_HAS(cutscene_overlay, CUTSCENE_overlay_FADE)) {
+    if (BITS_HAS(cutscene_overlay, CUTSCENE_OVERLAY_FADE)) {
         (*fade_setSettings)(FADE_OUT, 10, 0, 0, 0);
     }
 
     cutscene_overlay = cutscene_settings[self->cutscene_ID - 1].overlay;
     cutscene_ID_ptr  = &self->cutscene_ID;
     cutscene_flags   = sys.cutscene_flags;
-    if (BITS_HAS(cutscene_overlay, CUTSCENE_overlay_FILM_REEL)) {
+    if (BITS_HAS(cutscene_overlay, CUTSCENE_OVERLAY_FILM_REEL)) {
         sys.cutscene_flags = cutscene_flags | CUTSCENE_FLAG_FILM_REEL_EFFECT;
         if ((self && self) && self) {
         }
@@ -94,7 +94,7 @@ void cutsceneMgr_createCutscene(cutsceneMgr* self) {
 
 void cutsceneMgr_setCameraClippingAndScissoring(cutsceneMgr* self) {
     if (BITS_HAS(
-            cutscene_settings[self->cutscene_ID - 1].overlay, CUTSCENE_overlay_WIDESCREEN_BORDERS
+            cutscene_settings[self->cutscene_ID - 1].overlay, CUTSCENE_OVERLAY_WIDESCREEN_BORDERS
         )) {
         if (BITS_HAS(sys.cutscene_flags, CUTSCENE_FLAG_DISPLAY_WIDESCREEN_BORDERS)) {
             cutscene_setCameraClippingAndScissoring(WIDESCREEN_BORDERS);
@@ -113,7 +113,7 @@ void cutsceneMgr_loop(cutsceneMgr* self) {
     if (objectList_findFirstObjectByID(cutscene_settings[self->cutscene_ID - 1].object_ID) ==
         NULL) {
         if (BITS_HAS(
-                cutscene_settings[self->cutscene_ID - 1].overlay, CUTSCENE_overlay_FILM_REEL
+                cutscene_settings[self->cutscene_ID - 1].overlay, CUTSCENE_OVERLAY_FILM_REEL
             )) {
             BITS_UNSET(sys.cutscene_flags, CUTSCENE_FLAG_FILM_REEL_EFFECT);
         }
@@ -135,7 +135,7 @@ void cutsceneMgr_stopCutscene(cutsceneMgr* self) {
 
     if (BITS_NOT_HAS(sys.cutscene_flags, CUTSCENE_FLAG_10) &&
         BITS_HAS(
-            cutscene_settings[self->cutscene_ID - 1].overlay, CUTSCENE_overlay_WIDESCREEN_BORDERS
+            cutscene_settings[self->cutscene_ID - 1].overlay, CUTSCENE_OVERLAY_WIDESCREEN_BORDERS
         )) {
         cutscene_setCameraClippingAndScissoring(FULLSCREEN);
     }
@@ -154,7 +154,7 @@ void cutsceneMgr_stopCutscene(cutsceneMgr* self) {
     }
 
     settings = &cutscene_settings[self->cutscene_ID - 1];
-    if (BITS_HAS(settings->overlay, CUTSCENE_overlay_FADE)) {
+    if (BITS_HAS(settings->overlay, CUTSCENE_OVERLAY_FADE)) {
         (*fade_setSettings)(FADE_IN, 10, 0, 0, 0);
     }
 

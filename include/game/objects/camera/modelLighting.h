@@ -5,7 +5,7 @@
 #include "objects/camera/pointLight.h"
 #include "gfx/light.h"
 
-#define SIZE_AND_LIST_INDEX(size, index) ((size << 0x10) | (index & 0x0F))
+#define SIZE_AND_LIST_INDEX(size, index) (((size) << 0x10) | ((index) & 0x0F))
 
 typedef struct {
     u32 field_0x00;
