@@ -62,5 +62,8 @@ typedef struct {
 extern void animationInfo_create(animation_info* self, u8 number_of_limbs, u8);
 extern void animationInfo_setParams(animation_info* self, void* rotation_data, f32 speed);
 extern s32 animationInfo_animateFrame(animation_info* self, cv64_model_inf_t* model);
+extern void animationMgr_create(
+    animationMgr* self, u8 number_of_limbs, u8 anim_switch_time, void* param_4, u8 param_5
+);
 
 #endif

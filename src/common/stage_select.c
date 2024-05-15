@@ -60,11 +60,11 @@ void stageSelect_initGraphics(stageSelect* self) {
         heapBlock_updateBlockMaxSize(
             self->assets_file_start, (u32) self->assets_file_end - (u32) self->assets_file_start
         );
-        bg_model = modelInfo_createRootNode(FIG_TYPE_HUD_ELEMENT, common_camera_8009B444);
+        bg_model = modelInfo_createAndSetChild(FIG_TYPE_HUD_ELEMENT, common_camera_8009B444);
         self->red_background_model = bg_model;
         bg_model->assets_file_ID   = NI_ASSETS_MENU;
         bg_model->dlist            = &MENU_RED_BACKGROUND_DL;
-        BITS_SET(bg_model->flags, FIG_FLAG_0800);
+        BITS_SET(bg_model->flags, FIG_FLAG_APPLY_PRIMITIVE_COLOR);
         bg_model->primitive_color.integer = (s8) 0x000000FF; // Slight fakematch?
         bg_model->position.x              = 0.0f;
         bg_model->position.y              = 0.0f;
@@ -114,7 +114,7 @@ void stageSelect_initLens(stageSelect* self) {
 
     if ((*fade_isFading)() == FALSE) {
         for (self->text_ID = 0; self->text_ID < STAGE_SELECT_NUM_OPTIONS + 1; self->text_ID++) {
-            if (BITS_NOT_HAS(textbox_array[self->text_ID]->flags, TEXTBOX_IS_ACTIVE)) {
+            if (BITS_NOT_HAS(textbox_array[self->text_ID]->flags, TEXT_IS_PARSED)) {
                 return;
             }
         }

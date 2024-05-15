@@ -7,30 +7,45 @@
 
 /**
  * The flags that are part of the `ID` field of `cv64_object_hdr_t`, NOT
- * `field_0x02`. Used with `cv64_object_id_t`.
+ * `flags`. Only used with `cv64_object_id_t`.
  */
 typedef enum cv64_object_kind {
     OBJ_KIND_NONE         = 0x00,
     /**
-     * Non-enemy map actors. Sometimes 0x18 is used as well.
+     * If `OBJ_KIND_ENABLE_COLLISION` is set, this flag will make it so that
+     * the actor can move alongside the collision. Used in the Tunnel's gondolas
+     * or the Tower of Execution's moving platforms.
      */
-    OBJ_KIND_STAGE_OBJECT = 0x10,
+    OBJ_KIND_MOVE_ALONGSIDE_COLLISION = 0x08,
+    /**
+     * If the object has any associated hard collision,
+     * such as map_actor_model's collision, this will enable it.
+     */
+    OBJ_KIND_ENABLE_COLLISION = 0x10,
     OBJ_KIND_MAP_OVERLAY  = 0x20,
     OBJ_KIND_DESTROY      = 0x80
 } cv64_object_kind_t;
 
 /**
  * Same as `cv64_object_kind_t` but with the additional zeroes, so that we can
- * use inside code
+ * use them inside code
  */
 typedef enum cv64_object_flag {
     OBJ_FLAG_NONE         = 0x0000,
     /**
-     * Non-enemy map actors. Sometimes 0x18 is used as well.
+     * If `OBJ_FLAG_ENABLE_COLLISION` is set, this flag will make it so that
+     * the actor can move alongside the collision. Used in the Tunnel's gondolas
+     * or the Tower of Execution's moving platforms
      */
-    OBJ_FLAG_STAGE_OBJECT = 0x1000,
+    OBJ_FLAG_MOVE_ALONGSIDE_COLLISION = 0x0800,
+    /**
+     * If the object has any associated hard collision,
+     * such as map_actor_model's collision, this will enable it.
+     */
+    OBJ_FLAG_ENABLE_COLLISION = 0x1000,
     OBJ_FLAG_MAP_OVERLAY  = 0x2000,
-    OBJ_FLAG_DESTROY      = 0x8000
+    OBJ_FLAG_DESTROY      = 0x8000,
+    OBJ_TYPE_DATA         = 0x8000     // Used for the `data` fields in actors
 } cv64_object_flag_t;
 
 typedef enum cv64_object_id_raw {
@@ -138,12 +153,12 @@ typedef enum cv64_object_id_raw {
     ID_OBJECT_066                    = 0x066,
     ID_OBJECT_067                    = 0x067,
     ID_CUTSCENE_CREDITS              = 0x068,
-    ID_OBJECT_069                    = 0x069,
+    ID_DISTORTION                    = 0x069,
     ID_CAMERAMGR                     = 0x06A,
     ID_OBJECT_06B                    = 0x06B,
     ID_PLAYER_CAMERA_CONTROLLER      = 0x06C,
     ID_OBJECT_06D                    = 0x06D,
-    ID_OBJECT_06E                    = 0x06E,
+    ID_MODEL_LIGHTING                = 0x06E,
     ID_POINT_LIGHT                   = 0x06F,
     ID_REINHARDT                     = 0x070,
     ID_REINHARDT_ALT                 = 0x071,
@@ -196,10 +211,10 @@ typedef enum cv64_object_id_raw {
     ID_OBJECT_0A0                    = 0x0A0,
     ID_OBJECT_0A1                    = 0x0A1,
     ID_OBJECT_0A2                    = 0x0A2,
-    ID_OBJECT_0A3                    = 0x0A3,
-    ID_OBJECT_0A4                    = 0x0A4,
-    ID_OBJECT_0A5                    = 0x0A5,
-    ID_OBJECT_0A6                    = 0x0A6,
+    ID_MUD_MAN_ASSETS_LOADER         = 0x0A3,
+    ID_BLOOD_MAN_ASSETS_LOADER       = 0x0A4,
+    ID_ICE_MAN_ASSETS_LOADER         = 0x0A5,
+    ID_OPENING_BAT                   = 0x0A6,
     ID_OBJECT_0A7                    = 0x0A7,
     ID_OBJECT_0A8                    = 0x0A8,
     ID_OBJECT_0A9                    = 0x0A9,
@@ -216,7 +231,7 @@ typedef enum cv64_object_id_raw {
     ID_OBJECT_0B4                    = 0x0B4,
     ID_OBJECT_0B5                    = 0x0B5,
     ID_OBJECT_0B6                    = 0x0B6,
-    ID_OBJECT_0B7                    = 0x0B7,
+    ID_DEMON_DRACULA_ASSETS_LOADER   = 0x0B7,
     ID_OBJECT_0B8                    = 0x0B8,
     ID_OBJECT_0B9                    = 0x0B9,
     ID_OBJECT_0BA                    = 0x0BA,
@@ -328,32 +343,32 @@ typedef enum cv64_object_id_raw {
     ID_OBJECT_124                    = 0x124,
     ID_OBJECT_125                    = 0x125,
     ID_GAMEPLAY_MENUMGR              = 0x126,
-    ID_OBJECT_127                    = 0x127,
-    ID_OBJECT_128                    = 0x128,
+    ID_MFDS                          = 0x127,
+    ID_LENS                          = 0x128,
     ID_OBJECT_129                    = 0x129,
     ID_OBJECT_12A                    = 0x12A,
     ID_OBJECT_12B                    = 0x12B,
     ID_OBJECT_12C                    = 0x12C,
     ID_OBJECT_12D                    = 0x12D,
-    ID_OBJECT_12E                    = 0x12E,
+    ID_CHARACTER_SELECT              = 0x12E,
     ID_OBJECT_12F                    = 0x12F,
     ID_OBJECT_130                    = 0x130,
     ID_PAGE                          = 0x131,
-    ID_OBJECT_132                    = 0x132,
-    ID_OBJECT_133                    = 0x133,
+    ID_SCROLL                        = 0x132,
+    ID_MARK                          = 0x133,
     ID_OBJECT_134                    = 0x134,
     ID_OBJECT_135                    = 0x135,
     ID_OBJECT_136                    = 0x136,
     ID_SAVEGAME                      = 0x137,
-    ID_OBJECT_138                    = 0x138,
+    ID_TEXTBOX_ADVANCE_ARROW         = 0x138,
     ID_OBJECT_139                    = 0x139,
     ID_OBJECT_13A                    = 0x13A,
     ID_CONTRACTMGR                   = 0x13B,
     ID_RENON_BRIEFCASE               = 0x13C,
     ID_OBJECT_13D                    = 0x13D,
-    ID_OBJECT_13E                    = 0x13E,
+    ID_MINI_SCROLL                   = 0x13E,
     ID_OBJECT_13F                    = 0x13F,
-    ID_OBJECT_140                    = 0x140,
+    ID_EASY_ENDING                   = 0x140,
     ID_STAGE_SELECT                  = 0x141,
     ID_OBJECT_142                    = 0x142,
     ID_OBJECT_143                    = 0x143,
@@ -581,7 +596,7 @@ typedef enum cv64_object_id_raw {
     ID_ROSE_DOOR                     = 0x221,
     ID_OBJECT_222                    = 0x222,
     ID_OBJECT_223                    = 0x223,
-    ID_OBJECT_224                    = 0x224,
+    ID_TOU_TURO_DOOR                 = 0x224,
     ID_OBJECT_225                    = 0x225,
     ID_OBJECT_226                    = 0x226,
     ID_OBJECT_227                    = 0x227,
@@ -629,13 +644,14 @@ typedef enum cv64_object_id {
     CUTSCENE_CSFILMREEL                = CV64_OBJECT_ID(OBJ_KIND_MAP_OVERLAY, ID_CSFILMREEL),
     CUTSCENE_CUTSCENE_FOREST_BLESSING  = CV64_OBJECT_ID(OBJ_KIND_MAP_OVERLAY, ID_CUTSCENE_FOREST_BLESSING),
     CUTSCENE_CUTSCENE_CREDITS          = CV64_OBJECT_ID(OBJ_KIND_MAP_OVERLAY, ID_CUTSCENE_CREDITS),
+    CUTSCENE_DISTORTION                = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_DISTORTION),
 
     // Camera
     CAMERA_CAMERAMGR                   = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_CAMERAMGR),
     CAMERA_OBJ_06B                     = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_OBJECT_06B),
     CAMERA_PLAYER_CAMERA_CONTROLLER    = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_PLAYER_CAMERA_CONTROLLER),
     CAMERA_OBJ_06D                     = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_OBJECT_06D),
-    CAMERA_OBJ_06E                     = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_OBJECT_06E),
+    CAMERA_MODEL_LIGHTING              = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_MODEL_LIGHTING),
     CAMERA_POINT_LIGHT                 = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_POINT_LIGHT),
 
     // Player
@@ -652,6 +668,11 @@ typedef enum cv64_object_id {
 
     // Enemy
     ENEMY_GARDENER                     = CV64_OBJECT_ID(OBJ_KIND_MAP_OVERLAY, ID_GARDENER),
+    ENEMY_DEMON_DRACULA_ASSETS_LOADER  = CV64_OBJECT_ID(OBJ_KIND_MAP_OVERLAY, ID_DEMON_DRACULA_ASSETS_LOADER),
+    ENEMY_MUD_MAN_ASSETS_LOADER        = CV64_OBJECT_ID(OBJ_KIND_MAP_OVERLAY, ID_MUD_MAN_ASSETS_LOADER),
+    ENEMY_BLOOD_MAN_ASSETS_LOADER      = CV64_OBJECT_ID(OBJ_KIND_MAP_OVERLAY, ID_BLOOD_MAN_ASSETS_LOADER),
+    ENEMY_ICE_MAN_ASSETS_LOADER        = CV64_OBJECT_ID(OBJ_KIND_MAP_OVERLAY, ID_ICE_MAN_ASSETS_LOADER),
+    ENEMY_OPENING_BAT                  = CV64_OBJECT_ID(OBJ_KIND_MAP_OVERLAY, ID_OPENING_BAT),
 
     // Effect
     EFFECT_EFFECTMGR                   = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_EFFECTMGR),
@@ -659,17 +680,27 @@ typedef enum cv64_object_id {
 
     // Menu
     MENU_GAMEPLAY_MENUMGR              = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_GAMEPLAY_MENUMGR),
+    MENU_MFDS                          = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_MFDS),
+    MENU_LENS                          = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_LENS),
+    MENU_CHARACTER_SELECT              = CV64_OBJECT_ID(OBJ_KIND_MAP_OVERLAY, ID_CHARACTER_SELECT),
     MENU_PAGE                          = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_PAGE),
+    MENU_SCROLL                        = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_SCROLL),
+    MENU_MARK                          = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_MARK),
     MENU_SAVEGAME                      = CV64_OBJECT_ID(OBJ_KIND_MAP_OVERLAY, ID_SAVEGAME),
+    MENU_TEXTBOX_ADVANCE_ARROW         = CV64_OBJECT_ID(OBJ_KIND_MAP_OVERLAY, ID_TEXTBOX_ADVANCE_ARROW),
     MENU_CONTRACTMGR                   = CV64_OBJECT_ID(OBJ_KIND_MAP_OVERLAY, ID_CONTRACTMGR),
     MENU_RENON_BRIEFCASE               = CV64_OBJECT_ID(OBJ_KIND_MAP_OVERLAY, ID_RENON_BRIEFCASE),
+    MENU_MINI_SCROLL                   = CV64_OBJECT_ID(OBJ_KIND_MAP_OVERLAY, ID_MINI_SCROLL),
+    MENU_OBJ_13F                       = CV64_OBJECT_ID(OBJ_KIND_MAP_OVERLAY, ID_OBJECT_13F),
+    MENU_EASY_ENDING                   = CV64_OBJECT_ID(OBJ_KIND_MAP_OVERLAY, ID_EASY_ENDING),
     MENU_STAGE_SELECT                  = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_STAGE_SELECT),
 
     // Stage object
     STAGE_OBJECT_LEVER                 = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_LEVER),
     STAGE_OBJECT_MEIRO_TEIEN_OBJ_01B5  = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_MEIRO_TEIEN_OBJ_01B5),
     STAGE_OBJECT_ROSE_VENTILATOR       = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_ROSE_VENTILATOR),
-    STAGE_OBJECT_ROSE_DOOR             = CV64_OBJECT_ID(OBJ_KIND_STAGE_OBJECT, ID_ROSE_DOOR)
+    STAGE_OBJECT_ROSE_DOOR             = CV64_OBJECT_ID(OBJ_KIND_ENABLE_COLLISION, ID_ROSE_DOOR),
+    STAGE_OBJECT_TOU_TURO_DOOR         = CV64_OBJECT_ID(OBJ_KIND_ENABLE_COLLISION, ID_TOU_TURO_DOOR)
 } cv64_object_id_t;
 
 // clang-format on

@@ -1,7 +1,9 @@
 #ifndef POINT_LIGHT_H
 #define POINT_LIGHT_H
 
-#include "actor.h"
+#include "object.h"
+#include "gfx/model_info.h"
+#include "actor_settings.h"
 
 typedef struct {
     u8 field_0x00[8];

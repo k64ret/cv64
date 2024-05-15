@@ -80,7 +80,7 @@ void interactuables_init(interactuables* self) {
         if (interactuables_settings_table[self->table_index].type == ITEM_KIND_ITEM) {
             // Create and setup the item model
             item_model =
-                modelInfo_createRootNode(FIG_TYPE_0400 | FIG_TYPE_HIERARCHY_NODE, D_8018CDE0[2]);
+                modelInfo_createAndSetChild(FIG_TYPE_0400 | FIG_TYPE_HIERARCHY_NODE, D_8018CDE0[2]);
             self->model = item_model;
             if (settings != NULL) {
                 actor_model_set_pos(self, item_model);
@@ -115,13 +115,17 @@ void interactuables_init(interactuables* self) {
             item_model->material_dlist = &ITEM_MATERIAL_DL;
             if (BITS_HAS(interactuables_settings_table[self->table_index].flags, ITEM_INVISIBLE)) {
                 // Hide the item model
-                BITS_SET(item_model->type, ~0x7FFF);
+                BITS_SET(item_model->type, ~FIG_TYPE_SHOW);
             }
 
             if (BITS_HAS(self->item_model_settings_flags, ITEM_MODEL_SETTINGS_FLAG_SPINS)) {
-                BITS_SET(item_model->flags, FIG_FLAG_0800);
+                BITS_SET(item_model->flags, FIG_FLAG_APPLY_PRIMITIVE_COLOR);
             } else {
-                BITS_SET(item_model->flags, FIG_FLAG_0800 | FIG_FLAG_0040);
+                // Make it so that the item model always looks at the camera if not spinning.
+                // This is necessary for item models that only consists of one texture.
+                BITS_SET(
+                    item_model->flags, FIG_FLAG_APPLY_PRIMITIVE_COLOR | FIG_FLAG_LOOK_AT_CAMERA_YAW
+                );
             }
 
             item_model->primitive_color.integer = 0xFFFFFFFF;

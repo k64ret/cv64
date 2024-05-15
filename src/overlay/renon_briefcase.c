@@ -75,7 +75,7 @@ void cv64_ovl_renonbriefcase_init(cv64_ovl_renonbriefcase_t* self) {
         &cv64_ovl_renonbriefcase_hierarchy
     );
     model = self->model;
-    BITS_SET(model->flags, FIG_FLAG_0800 | FIG_FLAG_0080);
+    BITS_SET(model->flags, FIG_FLAG_APPLY_PRIMITIVE_COLOR | FIG_FLAG_0080);
     model->primitive_color.integer = 0xFFFFFFFF;
     model->angle.pitch             = 0;
     model->angle.yaw               = 0x4000;
@@ -132,7 +132,6 @@ void cv64_ovl_renonbriefcase_loop(cv64_ovl_renonbriefcase_t* self) {
                          400.0f
                 );
 
-            // Unused since `PLAY_SD_RENON_BRIEFCASE_SPIN_2` is always set to `false`
             if (PLAY_SD_RENON_BRIEFCASE_SPIN_2) {
                 (*func_800139D4)(SD_RENON_BRIEFCASE_SPIN_2, 0.0f, volume);
                 PLAY_SD_RENON_BRIEFCASE_SPIN_2 = FALSE;

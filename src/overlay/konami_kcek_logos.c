@@ -40,18 +40,19 @@ void cv64_ovl_konamilogo_check_btn_press(cv64_ovl_konamilogo_t* self) {
 
 void cv64_ovl_konamilogo_init(cv64_ovl_konamilogo_t* self) {
     cv64_object_func_inf_t* curFunc;
-    cv64_model_inf_t* model = (*modelInfo_createRootNode)(FIG_TYPE_HUD_ELEMENT, common_camera_HUD);
+    cv64_model_inf_t* model =
+        (*modelInfo_createAndSetChild)(FIG_TYPE_HUD_ELEMENT, common_camera_HUD);
 
     self->model                  = model;
     model->dlist                 = &KONAMI_LOGO_DL;
-    model->assets_file_ID        = NI_ASSETS_KONAMI_KCEK_LOGOS;
+    model->assets_file_ID        = NI_ASSETS_KONAMI_AND_KCEK_LOGOS;
     model->size.x                = 0.9975f;
     model->size.y                = 1.005f;
     sys.background_color.integer = 0x000000FF; // Black (opaque)
-    BITS_SET(model->flags, FIG_FLAG_0800);
+    BITS_SET(model->flags, FIG_FLAG_APPLY_PRIMITIVE_COLOR);
     model->primitive_color.integer = 0xFFFFFF00; // White (transparent)
 
-    GO_TO_NEXT_FUNC(
+    GO_TO_NEXT_FUNC_NOW(
         self, cv64_ovl_konamilogo_funcs, curFunc, (*object_curLevel_goToNextFuncAndClearTimer)
     );
 }

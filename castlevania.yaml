@@ -352,7 +352,7 @@ segments:
       - [0x00092B50, .data, gamestate]
       - [0x00092E70, data, object]
       - [0x00093750, data, 4D80]
-      - [0x00093B50, data] # Symbol DAT_80092f50
+      - [0x00093B50, data] # Symbol D_80092F50
       # - [0x00093B58, data, figure] # `camera_params_array` - maybe file split within `figure.s`?
       - [0x00093EE0, data, figure]
       - [0x00093F60, data, D270]
@@ -1781,7 +1781,7 @@ segments:
     vram: 0x06000000
     exclusive_ram_id: nisitenma_ichigo_assets
 
-  - name: ni_9ED33A
+  - name: ni_character_select
     type: bin
     # start: 0x009ED33A
     start: 0x00C434B0
@@ -1980,12 +1980,15 @@ segments:
       - [0x00CF5ED0, c, overlay/icemanAssetsLoader]
       - [0x00CF6030, .data, overlay/icemanAssetsLoader]
 
-  - name: ni_A591D6
-    type: bin
+  - name: ni_ovl_opening_bat
+    type: code
     # start: 0x00A591D6
     start: 0x00CF6040
     vram: 0x0F000000
     exclusive_ram_id: nisitenma_ichigo_overlays
+    subsegments:
+      - [0x00CF6040, c, overlay/openingBat]
+      - [0x00CF6470, .data, overlay/openingBat]
 
   - name: ni_ovl_flying_skull
     type: bin
@@ -2335,12 +2338,16 @@ segments:
     vram: 0x0F000000
     exclusive_ram_id: nisitenma_ichigo_overlays
 
-  - name: ni_ovl_difficulty_select
-    type: bin
+  - name: ni_ovl_difficulty_and_character_select
+    type: code
     # start: 0x00B56516
     start: 0x00E58990
     vram: 0x0F000000
     exclusive_ram_id: nisitenma_ichigo_overlays
+    subsegments:
+      - [0x00E58990, c, overlay/difficulty_and_character_select]
+      - [0x00E59BD0, .data, overlay/difficulty_and_character_select]
+      - [0x00E59CA0, .rodata, overlay/difficulty_and_character_select]
 
   - name: ni_ovl_game_over
     type: bin

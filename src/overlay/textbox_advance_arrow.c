@@ -33,12 +33,12 @@ void textboxAdvanceArrow_init(textboxAdvanceArrow* self) {
     (s8) arrow_light->fog_color.r = 0xF0; // The s8 typecast is needed for matching here
     arrow_light->fog_color.g      = 0;
     arrow_light->fog_color.b      = 0x10;
-    model                         = (*modelInfo_createRootNode)(FIG_TYPE_HUD_ELEMENT, arrow_light);
-    self->model                   = model;
-    model->dlist                  = &TEXTBOX_ADVANCE_ARROW_DL;
-    model->assets_file_ID         = NI_ASSETS_FILE_SELECT;
+    model                 = (*modelInfo_createAndSetChild)(FIG_TYPE_HUD_ELEMENT, arrow_light);
+    self->model           = model;
+    model->dlist          = &TEXTBOX_ADVANCE_ARROW_DL;
+    model->assets_file_ID = NI_ASSETS_FILE_SELECT;
     BITS_SET(model->flags, FIG_FLAG_0080);
-    BITS_SET(model->flags, FIG_FLAG_0800);
+    BITS_SET(model->flags, FIG_FLAG_APPLY_PRIMITIVE_COLOR);
     model->primitive_color.integer = 0xFF0000FF; // Red (opaque)
     model->size.x                  = 1.3f;
     model->size.y                  = 1.3f;
