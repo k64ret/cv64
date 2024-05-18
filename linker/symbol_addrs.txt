@@ -1599,7 +1599,6 @@ romCopy = 0x800177ec;
 rmonPrintf = 0x800192e8;
 crashScreen_printThreadData = 0x80019560;
 crashScreen_printExceptionInfo = 0x80019968;
-processMeter_setSizeDivisor = 0x80019ce0;
 contPak_getInsertedStatus = 0x8001a380;
 contPak_initPak = 0x8001a538;
 contPak_allocateFile = 0x8001a5cc;
@@ -1915,8 +1914,6 @@ unusedPrintf = 0x800192a8;
 is_proutSyncPrintf = 0x80019398;
 crashScreen_ThreadEntry = 0x80019a44;
 crashScreen_Init = 0x80019b48;
-processMeter_80019c00 = 0x80019c00;
-processMeter_update = 0x80019cec;
 contPak_initAllPaks = 0x8001a46c;
 contPak_deleteFile = 0x8001a664;
 contPak_initFirstPak = 0x8001abd0;
@@ -2246,8 +2243,6 @@ setup_rsp = 0x800158e0;
 setup_framebuffer = 0x800166f0;
 setup_background_color = 0x800167bc;
 setup_z_buffer = 0x80016968;
-processMeter_renderDivisions = 0x8001a004;
-processMeter_renderBar = 0x8001a0b8;
 shadow_create = 0x80061280;
 playerCameraController_updateCameraRotationSpeed = 0x8006bc50;
 playerCameraController_8006bcf4 = 0x8006bcf4;
@@ -2363,7 +2358,6 @@ someROMLoadedFile_bytesLeftToRead = 0x800d5e48;
 someROMLoadedFile_lastIndex = 0x800d5e4c;
 someROMLoadedFile_address = 0x800d5e44;
 someROMLoadedFile_currentReadingAddress = 0x800d5e40;
-processMeter_render = 0x80019e68;
 contPak_notInserted = 0x800d7490;
 contPak_getFileState = 0x8001a770;
 contPak_getNumFiles = 0x8001a7d4;
@@ -2441,11 +2435,8 @@ interactuables_settings_table = 0x8016a904;
 map_breakables_drop_values_list = 0x80189dd0;
 map_door_bitflags_list = 0x80188210;
 controllers = 0x80387d7c;
-processMeter_greenBarSize = 0x800d7140;
-processMeter_blueBarSize = 0x800d7144;
 _KMC_REG_WPORT = 0xbff08000;
 _KMC_REG_STAT = 0xbff08004;
-processMeter_number_of_divisions = 0x80096ac0;
 map__address_of_actor_list_in_map_file = 0x8018a788;
 map__starting_non_proximity_spawnable_actors = 0x8018a800;
 map_actor_model_model_info = 0x8018a710;
@@ -2605,6 +2596,46 @@ fade_calc                 = 0x8000e6c4; // type:func
 // .rodata
 
 // End of src/fade.c
+
+// src/debug.c ================================================================
+
+// .text
+func_80019BC0_1A7C0 = 0x80019BC0; // type:func
+func_80019BC8_1A7C8 = 0x80019BC8; // type:func
+func_80019BD0_1A7D0 = 0x80019BD0; // type:func
+func_80019BE4_1A7E4 = 0x80019BE4; // type:func
+func_80019BF8_1A7F8 = 0x80019BF8; // type:func
+processMeter_80019C00 = 0x80019C00; // type:func
+processMeter_setSizeDivisor = 0x80019CE0; // type:func
+processMeter_update = 0x80019CEC; // type:func
+processMeter_render = 0x80019E68; // type:func
+processMeter_renderDivisions = 0x8001A004; // type:func
+processMeter_renderBar = 0x8001A0B8; // type:func
+
+// .data
+processMeter_number_of_divisions = 0x80096AC0; // type:s32
+processBar_sizeDivisor = 0x80096AC4; // type:f32
+
+// .rodata
+D_800A3080_A3C80 = 0x800A3080; // type:f64
+D_800A3088_A3C88 = 0x800A3088; // type:f64
+D_800A3090_A3C90 = 0x800A3090; // type:f64
+D_800A3098_A3C98 = 0x800A3098; // type:f64
+D_800A30A0_A3CA0 = 0x800A30A0; // type:asciz
+D_800A30B4_A3CB4 = 0x800A30B4; // type:asciz
+D_800A30C0_A3CC0 = 0x800A30C0; // type:asciz
+D_800A30C8_A3CC8 = 0x800A30C8; // type:asciz
+D_800A30D4_A3CD4 = 0x800A30D4; // type:asciz
+
+// .bss
+processMeter_greenBar_beginTime = 0x800d7120; // type:f64
+processMeter_greenBar_endTime = 0x800d7128; // type:f64
+processMeter_blueBar_beginTime = 0x800d7130; // type:f64
+processMeter_blueBar_endTime = 0x800d7138; // type:f64
+processMeter_greenBarSize = 0x800d7140; // type:f32
+processMeter_blueBarSize = 0x800d7144; // type:f32
+
+// End of src/debug.c =========================================================
 
 D_8009342C_9402C = 0x8009342C; // ignore:true
 objects_file_info         = 0x80093430; // rom:0x00094030 size:0x8A8
@@ -2825,11 +2856,6 @@ attacker_atari_data_work_pos = 0x800d8228;
 distance_attacker_target_atari_data_vector = 0x800d8234;
 distance_attacker_target_atari_data = 0x800d8244;
 atari_work_update_position_data_functions = 0x80098600;
-processMeter_greenBar_beginTime = 0x800d7120;
-processMeter_greenBar_endTime = 0x800d7128;
-processMeter_blueBar_beginTime = 0x800d7130;
-processMeter_blueBar_endTime = 0x800d7138;
-processBar_sizeDivisor = 0x80096ac4;
 __osThreadSave = 0x80122800;
 collision_triangle_array_type_ID = 0x8018eb00;
 fileSelectController_functions = 0x80181070;
