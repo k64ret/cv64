@@ -457,9 +457,10 @@ segments:
       - { start: 0x000A8420, type: .bss, vram: 0x800A7840, name: object_0002 }  # Only contains ptr_Object_0002.
       - { start: 0x000A8420, type: bss, vram: 0x800A7850, name: figure }
       - { start: 0x000A8420, type: bss, vram: 0x800A78A0, name: F960 }
+      # - { start: 0x000A8420, type: bss, vram: 0x800D7CA0, name: debug }
+      # - { start: 0x000A8420, type: bss, vram: 0x800D7150 }
       - { start: 0x000A8420, type: .bss, vram: 0x800DD0D0, name: effect_manager }
       - { start: 0x000A8420, type: bss, vram: 0x800DD0E0 }
-      # - { start: 0x000A8420, type: bss, vram: 0x800D7120, name: debug }
       - { start: 0x000A8420, type: bss, vram: 0x801229B0, name: libultra/io/motor }
       - { start: 0x000A8420, type: bss, vram: 0x80122AB0, name: libultra/io/pfsisplug }
       - { start: 0x000A8420, type: bss, vram: 0x80122AF0, name: libultra/io/pimgr }
