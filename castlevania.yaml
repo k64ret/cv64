@@ -101,7 +101,7 @@ segments:
       - [0x00018430, asm]
       - [0x00018590, asm]
       - [0x0001A160, asm]
-      - [0x0001A7C0, asm]
+      - [0x0001A7C0, asm, debug] # Likely comes from an internal Konami library
       - [0x0001AE50, asm]
       - [0x0001AF80, asm]
       - [0x0001B7D0, asm]
@@ -397,7 +397,8 @@ segments:
       - [0x000A3430, rodata, 12900]
       - [0x000A34A0, rodata, 17A00]
       - [0x000A34F0, rodata, 1A160]
-      - [0x000A3C80, rodata]
+      - [0x000A3C80, rodata, debug]
+      - [0x000A3CA0, rodata]
       - [0x000A3D10, rodata]
       - [0x000A41E0, rodata]
       - [0x000A4310, rodata]
@@ -456,6 +457,7 @@ segments:
       - { start: 0x000A8420, type: bss, vram: 0x800A78A0, name: F960 }
       - { start: 0x000A8420, type: .bss, vram: 0x800DD0D0, name: effect_manager }
       - { start: 0x000A8420, type: bss, vram: 0x800DD0E0 }
+      # - { start: 0x000A8420, type: bss, vram: 0x800D7120, name: debug }
       - { start: 0x000A8420, type: bss, vram: 0x801229B0, name: libultra/io/motor }
       - { start: 0x000A8420, type: bss, vram: 0x80122AB0, name: libultra/io/pfsisplug }
       - { start: 0x000A8420, type: bss, vram: 0x80122AF0, name: libultra/io/pimgr }
