@@ -83,7 +83,7 @@ segments:
       - [0x0000F460, c, object_flow]    # Contains some gamestate-related functions
       - [0x0000F960, asm]               # File load-related. Object 0x0003's code is located here
       - [0x00010100, asm]
-      - [0x000101C0, asm, DMAMgr]
+      - [0x000101C0, asm, dma_manager]
       - [0x000113D0, asm]              # light, Objects 0x006D, 0x006E and 0x006F's code
       - [0x00011F10, c, vec3f]
       - [0x00012700, asm]              # Appears to contain float-rounding functions?
@@ -97,14 +97,14 @@ segments:
       - [0x000172F0, asm]              # Contains setup_framebuffer, setup_background_color and setup_z_buffer
       - [0x00017660, asm, controller]
       - [0x00017A00, asm]              # Contains decompression and file-loading functions
-      - [0x00018310, asm, DMA]
+      - [0x00018310, asm, dma]
       - [0x00018430, asm]
-      - [0x00018590, asm]
-      - [0x0001A160, asm]
+      - [0x00018590, asm, crash_screen]
+      - [0x0001A160, asm, crash_screen_init]
       - [0x0001A7C0, c, debug] # Likely comes from an internal Konami library
       - [0x0001AE50, asm]
-      - [0x0001AF80, asm]
-      - [0x0001B7D0, asm]
+      - [0x0001AF80, asm, controller_pak] # Controller Pak handling functions
+      - [0x0001B7D0, asm, save] # Handles save file loading and errors
       - [0x0001C830, asm]
       - [0x00022350, asm]
       - [0x00025F80, asm]
@@ -363,7 +363,8 @@ segments:
       - [0x00094920, data, 113D0]
       - [0x00094940, data]
       - [0x000976C0, .data, debug]
-      - [0x000976D0, data]
+      - [0x000976D0, data, save]
+      - [0x00097710, data]
       - [0x0009B8D0, data, 56B60]
       - [0x0009B8E0, data, 57050]
       - [0x0009B900, data, 574C0]
@@ -401,6 +402,7 @@ segments:
       - [0x000A34F0, rodata, 1A160]
       - [0x000A3C80, rodata, debug]
       - [0x000A3CA0, rodata]
+      # - [0x000A3CE4, rodata, save] # Having this rodata segment defined causes non-matching ROM
       - [0x000A3D10, rodata]
       - [0x000A41E0, rodata]
       - [0x000A4310, rodata]
