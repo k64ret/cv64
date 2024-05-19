@@ -49,6 +49,7 @@ f32 f32_clamp(f32 value, f32 min, f32 max) {
 }
 
 #ifdef NON_MATCHING
+    // https://decomp.me/scratch/yVAbQ
     #pragma GLOBAL_ASM("../asm/nonmatchings/12700/func_80011C6C_1286C.s")
 #else
 f32 func_80011C6C_1286C(s32 arg0, s32 arg1) {
