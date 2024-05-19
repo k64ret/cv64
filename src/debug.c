@@ -1,8 +1,8 @@
 #include "cv64.h"
 #include "debug.h"
 
-extern s32 processMeter_number_of_divisions;
-extern f32 processBar_sizeDivisor;
+s32 processMeter_number_of_divisions = 3;
+f32 processBar_sizeDivisor           = 45720360.0f;
 
 extern OSTime processMeter_greenBar_beginTime;
 extern OSTime processMeter_greenBar_endTime;
