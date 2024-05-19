@@ -45,6 +45,7 @@ extern void func_8000C6D0();
 extern void func_80012400();
 extern void func_80005658();
 extern u32 getMapEventFlagID(s16 stage_ID);
+s32 func_8001A250_1AE50(s32* arg0, u16* arg1, s16 arg2);
 
 #define NPTR             0
 #define ARRAY_COUNT(arr) (s32)(sizeof(arr) / sizeof(arr[0])) // Get number of elements in the array
