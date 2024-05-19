@@ -35,7 +35,10 @@ typedef struct {
 } sysw_gfx;
 
 typedef struct {
-    u32 game_loop_time;
+    /**
+     * Global Timer (uncapped framerate)
+     */
+    u32 global_timer_uncapped;
     u32 execution_flags;
     sysw_gfx field2_0x8[2];
     s16 current_dlist_buffer;
@@ -78,12 +81,11 @@ typedef struct {
     Matrix44F field19_0x24078;
     unk_union_1 field20_0x240b8;
     u32 NisitenmaIchigo_loadedFiles[64];
-    u32 NisitenmaIchigo_currentlyCompressingFiles[64];
+    u32 NisitenmaIchigo_currentlyDecompressingFiles[64];
     /**
-     * Increments every time the game executes most of its code and a frame advances.
-     * Updates at 30fps.
+     * Global Timer (Capped Framerate)
      */
-    u16 code_execution_timer;
+    u16 global_timer_capped;
     u8 field24_0x242be[6];
     cv64_controller_state_t controllers[4];
     u8 file_load_array_ID;
