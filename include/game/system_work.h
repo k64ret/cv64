@@ -11,6 +11,7 @@
 #include "cutscene_ID.h"
 #include "objects/player/player.h"
 #include "objects/camera/cameraMgr.h"
+#include "objects/cutscene/interactuables.h"
 #include <ultra64.h>
 
 #define MAP_ASSETS_FILE_ID    sys.map_assets_file_IDs[0]
@@ -30,15 +31,12 @@ typedef union {
 
 typedef struct {
     Gfx dlists[5120];
-    Matrix44F matrices[512];
+    Matrix44F matrices[FIG_ARRAY_MAX];
 } sysw_gfx;
 
 typedef struct {
     u32 game_loop_time;
     u32 execution_flags;
-    /**
-     * TODO: Double check
-     */
     sysw_gfx field2_0x8[2];
     s16 current_dlist_buffer;
     s16 previous_dlist_buffer;
@@ -118,14 +116,8 @@ typedef struct {
     s16 field44_0x2621e;
     s16 FREEZE_gameplayMenuMgr;
     s16 contPak_file_no;
-    /**
-     * Player*
-     */
     Player* ptr_PlayerObject;
-    /**
-     * interactuables*
-     */
-    void* actor_player_is_currently_interacting_with;
+    interactuables* actor_player_is_currently_interacting_with;
     u32 pull_lever;
     u8 field50_0x26230[4];
     u16 current_PowerUp_level;
