@@ -15,4 +15,6 @@ void creditsMgr_init(creditsMgr* self);       // 0x0F000070
 void creditsMgr_loop(creditsMgr* self);       // 0x0F00016C
 void creditsMgr_exit(creditsMgr* self);       // 0x0F0001F0
 
+typedef void (*cv64_ovl_creditsmgr_func_t)(creditsMgr*);
+
 #endif

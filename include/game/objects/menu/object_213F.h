@@ -15,4 +15,6 @@ void obj213F_isPlayerDroppingDown(object_213F* self);     // 0x0F0000DC
 void obj213F_playSound(object_213F* self);                // 0x0F000130
 void obj213F_destroy(object_213F* self);                  // 0x0F000174
 
+typedef void (*cv64_ovl_obj213F_func_t)(object_213F*);
+
 #endif

@@ -18,7 +18,7 @@
 #include "system_work.h"
 
 // 0x0F0001A0
-void (*cv64_ovl_obj213F_funcs[])(object_213F* self) = {
+cv64_ovl_obj213F_func_t cv64_ovl_obj213F_funcs[] = {
     obj213F_isDraculaCutsceneWatched,
     obj213F_isPlayerDroppingDown,
     obj213F_playSound,

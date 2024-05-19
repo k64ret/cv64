@@ -12,8 +12,9 @@
 #include "gfx/camera.h"
 #include "objects/menu/textboxAdvanceArrow.h"
 
-void (*cv64_ovl_textboxadvancearrow_funcs[])(textboxAdvanceArrow* self
-) = {textboxAdvanceArrow_init, textboxAdvanceArrow_loop, textboxAdvanceArrow_destroy};
+cv64_ovl_textboxadvancearrow_func_t cv64_ovl_textboxadvancearrow_funcs[] = {
+    textboxAdvanceArrow_init, textboxAdvanceArrow_loop, textboxAdvanceArrow_destroy
+};
 
 void textboxAdvanceArrow_entrypoint(textboxAdvanceArrow* self) {
     ENTER(self, cv64_ovl_textboxadvancearrow_funcs);

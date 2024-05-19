@@ -13,8 +13,9 @@
 #include "gamestate.h"
 #include "cutscene_ID.h"
 
-void (*cv64_ovl_creditsmgr_funcs[])(creditsMgr* self
-) = {creditsMgr_init, creditsMgr_loop, creditsMgr_exit};
+cv64_ovl_creditsmgr_func_t cv64_ovl_creditsmgr_funcs[] = {
+    creditsMgr_init, creditsMgr_loop, creditsMgr_exit
+};
 
 void creditsMgr_entrypoint(creditsMgr* self) {
     ENTER(self, cv64_ovl_creditsmgr_funcs);
