@@ -68,4 +68,25 @@ void processMeter_renderDivisions(Gfx** dlist, f32 division_width) {
     }
 }
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/debug/processMeter_renderBar.s")
+void processMeter_renderBar(Gfx** dlist, u32 color, f32 bar_size, s32 row) {
+    gDPPipeSync(dlist[0]++);
+    if (bar_size < 1.0) {
+        gDPSetFillColor(dlist[0]++, color);
+        gDPFillRectangle(
+            dlist[0]++,
+            40,
+            row + (SCREEN_HEIGHT - 30),
+            (SCREEN_WIDTH - 80) * bar_size + 40,
+            row + (SCREEN_HEIGHT - 24)
+        );
+    } else {
+        gDPSetFillColor(dlist[0]++, RGBA(120, 1, 120, 1));
+        gDPFillRectangle(
+            dlist[0]++,
+            40,
+            row + (SCREEN_HEIGHT - 30),
+            SCREEN_WIDTH - 40,
+            row + (SCREEN_HEIGHT - 24)
+        );
+    }
+}

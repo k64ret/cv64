@@ -23,6 +23,6 @@ void processMeter_setSizeDivisor(f32 size_divisor);
 extern void processMeter_update(s32 state);
 extern void processMeter_render(Gfx** dlist);
 void processMeter_renderDivisions(Gfx** dlist, f32 division_width);
-extern void processMeter_renderBar(Gfx* dlist, u32 color, f32 bar_size, s32 row);
+void processMeter_renderBar(Gfx** dlist, u32 color, f32 bar_size, s32 row);
 
 #endif
