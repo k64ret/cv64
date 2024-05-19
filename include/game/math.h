@@ -55,7 +55,7 @@ void func_80011984_12584(vec3f* arg0, vec3f* arg1, vec3f* arg2);
 void func_800119F0_125F0(vec3f* arg0, vec3f* arg1, vec3f* arg2, vec3f* arg3);
 
 f32 f32_trunc(f32 value);
-extern f32 f32_simple_round_nearest(f32 value);
+f32 f32_simple_round_nearest(f32 value);
 f32 f32_round_nearest_with_sign(f32 value);
 /**
  * Given a start and end value within a range,
