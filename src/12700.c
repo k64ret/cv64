@@ -5,8 +5,9 @@ f32 f32_trunc(f32 value) {
     return (s32) value;
 }
 
-// https://decomp.me/scratch/dG8bd
-#pragma GLOBAL_ASM("../asm/nonmatchings/12700/f32_simple_round_nearest.s")
+f32 f32_simple_round_nearest(f32 value) {
+    return (s32) (value += value < 0.0f ? -0.5 : 0.5);
+}
 
 f32 f32_round_nearest_with_sign(f32 value) {
     s32 temp_f4 = value;
@@ -47,5 +48,5 @@ f32 f32_clamp(f32 value, f32 min, f32 max) {
     return value;
 }
 
-// https://decomp.me/scratch/D2hli
+// https://decomp.me/scratch/yVAbQ
 #pragma GLOBAL_ASM("../asm/nonmatchings/12700/func_80011C6C_1286C.s")
