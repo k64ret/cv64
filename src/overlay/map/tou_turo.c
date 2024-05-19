@@ -3,7 +3,7 @@
  *
  * Contains the code for objects exclusive to TOU TURO
  * (Room of Clocks)
-*/
+ */
 
 #include "cv64.h"
 #include "sound.h"

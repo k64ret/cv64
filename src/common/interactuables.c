@@ -6,7 +6,7 @@
  *
  * The name owes to the fact that both, pickable items and text spots,
  * have in common the ability to be interacted with by using C-Right.
-*/
+ */
 
 #include "actor.h"
 #include "effect.h"

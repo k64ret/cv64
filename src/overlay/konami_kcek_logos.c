@@ -2,7 +2,7 @@
  * @file konami_kcek_logos.c
  *
  * Handles the Konami / KCEK logo screen
-*/
+ */
 
 #include "objects/engine/konami_kcek_logos.h"
 #include "cv64.h"

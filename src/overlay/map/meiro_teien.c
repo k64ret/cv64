@@ -3,7 +3,7 @@
  *
  * Contains the code for objects exclusive to MEIRO TEIEN
  * (Maze Garden)
-*/
+ */
 
 #include "objects/map/meiro_teien/object_01B5.h"
 

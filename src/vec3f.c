@@ -2,7 +2,7 @@
  * @file vec3f.c
  *
  * Contains code for different math-related operations, as well as operations with vectors.
-*/
+ */
 
 #include "math.h"
 

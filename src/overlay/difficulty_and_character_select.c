@@ -4,7 +4,7 @@
  * Handles both the character selection screen when selecting a new game,
  * as well as the difficulty selection menu that shows up when accessing a save file
  * without a controller pak inserted in.
-*/
+ */
 
 #include "objects/menu/mfds.h"
 #include "objects/effect/distortion.h"

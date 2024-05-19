@@ -5,7 +5,7 @@
  * if they fulfill certain conditions.
  *
  * It also contains code that set up and execute game states.
-*/
+ */
 
 #include "cv64.h"
 #include "game/objects/engine/GameStateMgr.h"

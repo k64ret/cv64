@@ -7,7 +7,7 @@
  *
  * Sound `SD_2E9` appears to be silent, so it's unknown how it would have sound
  * like. For some reason, it's grouped under the "Menu" objects.
-*/
+ */
 
 #include "objects/menu/object_213F.h"
 #include "objects/player/player.h"

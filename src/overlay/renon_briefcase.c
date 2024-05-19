@@ -3,7 +3,7 @@
  *
  * Handles the small cutscene that shows the briefcase spinning
  * prior to entering Renon's Shop.
-*/
+ */
 
 #include "objects/menu/renon_briefcase.h"
 #include "gfx/camera.h"

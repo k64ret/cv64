@@ -5,7 +5,7 @@
  *
  * It also has all the functions that tell an object to advance to certain functions in their respective
  * functions arrays.
-*/
+ */
 
 #include "memory.h"
 #include "object.h"

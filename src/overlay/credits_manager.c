@@ -2,7 +2,7 @@
  * @file credits_manager.c
  *
  * Creates the credits cutscene and resets the game once it's over.
-*/
+ */
 
 #include "objects/engine/creditsMgr.h"
 #include "objects/engine/DMAMgr.h"

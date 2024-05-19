@@ -5,7 +5,7 @@
  * the assets file for each of the Iceman variants (via their `objects_file_info` entry)
  * To do that, the objects themselves don't have to run any code,
  * therefore it is empty.
-*/
+ */
 
 #include "objects/enemy/mudAndLavaManAssetsLoader.h"
 #include "objects/enemy/bloodManAssetsLoader.h"

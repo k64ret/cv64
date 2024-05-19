@@ -6,7 +6,7 @@
  *
  * Note that the animation and movement of the bats is handled by
  * said cutscene's overlay.
-*/
+ */
 
 #include "objects/enemy/openingBat.h"
 #include "system_work.h"

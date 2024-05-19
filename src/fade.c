@@ -2,7 +2,7 @@
  * @file fade.c
  *
  * Handles the screen fading in and out.
-*/
+ */
 
 #include "fade.h"
 #include "cv64.h"

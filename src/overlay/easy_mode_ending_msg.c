@@ -2,7 +2,7 @@
  * @file easy_mode_ending_msg.c
  *
  * Displays the ending message when you beat Easy Mode
-*/
+ */
 
 #include "objects/menu/easy_mode_ending_msg.h"
 #include "sound.h"

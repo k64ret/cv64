@@ -3,7 +3,7 @@
  *
  * Initializes the `effectMgr` object, which serves as a parent and manager
  * that is common to most effects currently spawned.
-*/
+ */
 
 #include "cv64.h"
 #include "objects/effect/effect_manager.h"

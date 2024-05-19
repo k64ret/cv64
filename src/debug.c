@@ -9,7 +9,7 @@
  *
  * Other N64 Konami games have a very similar looking unused process meter, such as MNSG, so it's possible
  * that this code comes from a common N64 Konami library.
-*/
+ */
 
 #include "debug.h"
 

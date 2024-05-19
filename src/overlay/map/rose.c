@@ -3,7 +3,7 @@
  *
  * Contains the code for objects exclusive to ROSE
  * (Rosa / Actriese Fan Room)
-*/
+ */
 
 #include "objects/map/rose/rose.h"
 #include "actor.h"

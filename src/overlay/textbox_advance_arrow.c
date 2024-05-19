@@ -5,7 +5,7 @@
  * next string in a textbox.
  *
  * Not to be confused with the red arrow used for selecting options in some textboxes.
-*/
+ */
 
 #include "gfx/camera.h"
 #include "objects/menu/textboxAdvanceArrow.h"

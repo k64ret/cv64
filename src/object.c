@@ -2,7 +2,7 @@
  * @file object.c
  *
  * This file contains code that perform different operations on objects.
-*/
+ */
 
 #include "object.h"
 #include "cv64.h"
