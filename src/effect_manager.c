@@ -1,7 +1,14 @@
 #include "cv64.h"
 #include "objects/effect/effect_manager.h"
 
-cv64_effectMgr_func_t effectMgr_functions[] = {effectMgr_init, effectMgr_loop};
+// clang-format off
+
+cv64_effectMgr_func_t effectMgr_functions[] = {
+    effectMgr_init,
+    effectMgr_loop
+};
+
+// clang-format on
 
 effectMgr* ptr_effectMgr;
 
