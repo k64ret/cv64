@@ -126,7 +126,7 @@ void cv64_ovl_renonbriefcase_loop(cv64_ovl_renonbriefcase_t* self) {
             // Update the sound's volume based on the briefcase's
             // proximity towards the camera
             volume = 1.0f -
-                (*computeNormalizedPosition)(
+                (*f32_normalize)(
                          (*vec3f_distance)(&model->position, &common_camera_8009B44C->position),
                          10.0f,
                          400.0f

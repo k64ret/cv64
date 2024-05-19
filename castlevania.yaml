@@ -86,7 +86,7 @@ segments:
       - [0x000101C0, asm, dma_manager]
       - [0x000113D0, asm]              # light, Objects 0x006D, 0x006E and 0x006F's code
       - [0x00011F10, c, vec3f]
-      - [0x00012700, asm]              # Appears to contain float-rounding functions?
+      - [0x00012700, c]                # Appears to contain float-rounding functions?
       - [0x00012900, asm]
       - [0x00015AE0, asm, main]        # Contains func_80014EE0, main and Idle_ThreadEntry
       - [0x00015C80, asm]

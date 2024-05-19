@@ -127,6 +127,19 @@ func_800119F0_125F0  = 0x800119F0; // type:func
 // End of src/vec3f.c ==========================================================
 
 
+// src/12700.c =================================================================
+
+// .text
+f32_trunc                   = 0x80011B00; // type:func
+f32_simple_round_nearest    = 0x80011B18; // type:func
+f32_round_nearest_with_sign = 0x80011B74; // type:func
+f32_normalize               = 0x80011BCC; // type:func
+f32_clamp                   = 0x80011C2C; // type:func
+func_80011C6C_1286C         = 0x80011C6C; // type:func
+
+// End of src/12700.c ==========================================================
+
+
 // src/debug.c =================================================================
 
 // .text
@@ -1637,7 +1650,6 @@ DMAMgr_loadFile = 0x8000f670;
 DMAMgr_loadNisitenmaIchigoFile = 0x8000f83c;
 DMAChunkMgr_loadChunkFromROM = 0x8000fab8;
 DMAChunkMgr_advanceToNextByte = 0x8000fb40;
-increaseOrDecreaseByZeroPointFive = 0x80011b18;
 isSongIDMusic = 0x800129a8;
 setSongToPlay = 0x80014a28;
 stopMusic = 0x80014a98;
@@ -2925,7 +2937,6 @@ func_8000C740 = 0x8000C740;
 func_80005658 = 0x80005658;
 effect_isMarkForDeletion = 0x8005d244;
 effect_markForDeletion = 0x8005d230;
-computeNormalizedPosition = 0x80011BCC;
 func_800139D4 = 0x800139D4;
 D_80093D20_94920 = 0x80093D20; // size:0x1C
 // devAddr = 0xA0000000;
