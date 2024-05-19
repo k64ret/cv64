@@ -14,18 +14,26 @@ f32 f32_round_nearest_with_sign(f32 value) {
     s32 var_a0;
 
     if (value != temp_f4) {
-        if (value < 0.0f) {
-            var_a0 = -1;
-        } else {
-            var_a0 = 1;
-        }
+        var_a0 = value < 0.0f ? -1 : 1;
         temp_f4 += var_a0;
     }
 
     return temp_f4;
 }
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/12700/f32_normalize.s")
+f32 f32_normalize(f32 value, f32 min, f32 max) {
+    value = (value - min) / (max - min);
+
+    if (value < 0.0f) {
+        return 0.0f;
+    }
+
+    if (value > 1.0f) {
+        return 1.0f;
+    }
+
+    return value;
+}
 
 #pragma GLOBAL_ASM("../asm/nonmatchings/12700/f32_clamp.s")
 
