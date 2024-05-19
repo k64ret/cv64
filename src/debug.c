@@ -10,7 +10,7 @@ extern OSTime processMeter_blueBar_endTime;
 extern f32 processMeter_greenBarSize;
 extern f32 processMeter_blueBarSize;
 
-void func_80019BC0_1A7C0(void) {}
+void func_80019BC0_1A7C0() {}
 
 void func_80019BC8_1A7C8(s32 arg0) {}
 
@@ -20,9 +20,9 @@ void func_80019BD0_1A7D0(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {}
 // Maybe another stubbed debug print function, based on the number of arguments
 void func_80019BE4_1A7E4(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {}
 
-void func_80019BF8_1A7F8(void) {}
+void func_80019BF8_1A7F8() {}
 
-void processMeter_80019C00(OSMesgQueue* mq) {
+void processMeter_updateTiming(OSMesgQueue* mq) {
     u32 start_count;
     u32 end_count;
     u32 total_count;
@@ -58,9 +58,20 @@ void processMeter_setSizeDivisor(f32 size_divisor) {
     processBar_sizeDivisor = size_divisor;
 }
 
+// TODO: This function can't be matched until we can include this file's `bss`
+//       in without having linker errors.
 #ifdef NON_MATCHING
     #pragma GLOBAL_ASM("../asm/nonmatchings/debug/processMeter_update.s")
 #else
+/**
+ * Updates the size of each process bar.
+ *
+ * For each bar, this function must be called at least twice:
+ * Once with the `START` state, and another one with the `END` state,
+ * in order for the size to update correctly.
+ *
+ * See the `dbg_processmeter_state_t` enum for all possible values.
+ */
 void processMeter_update(s32 state) {
     switch (state) {
         case START_GREEN_BAR:
@@ -87,9 +98,14 @@ void processMeter_update(s32 state) {
 }
 #endif
 
+// TODO: This function can't be matched until we can include this file's `bss`
+//       in without having linker errors.
 #ifdef NON_MATCHING
     #pragma GLOBAL_ASM("../asm/nonmatchings/debug/processMeter_render.s")
 #else
+/**
+ * Render both the green and blue process bars.
+ */
 void processMeter_render(Gfx** dlist) {
     f32 number_of_divisions = SCREEN_HEIGHT / processMeter_number_of_divisions;
     f32 green_bar_size;
@@ -108,6 +124,9 @@ void processMeter_render(Gfx** dlist) {
 }
 #endif
 
+/**
+ * Renders each black division bar.
+ */
 void processMeter_renderDivisions(Gfx** dlist, f32 division_width) {
     s32 i;
 
@@ -124,6 +143,9 @@ void processMeter_renderDivisions(Gfx** dlist, f32 division_width) {
     }
 }
 
+/**
+ * Renders an individual process bar.
+ */
 void processMeter_renderBar(Gfx** dlist, u32 color, f32 bar_size, s32 row) {
     gDPPipeSync(dlist[0]++);
     if (bar_size < 1.0) {
@@ -135,6 +157,8 @@ void processMeter_renderBar(Gfx** dlist, u32 color, f32 bar_size, s32 row) {
             (SCREEN_WIDTH - 80) * bar_size + 40,
             row + (SCREEN_HEIGHT - 24)
         );
+        // If the bar is too long, cap its length
+        // and give the bar a red color.
     } else {
         gDPSetFillColor(dlist[0]++, RGBA(120, 1, 120, 1));
         gDPFillRectangle(

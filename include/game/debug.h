@@ -18,7 +18,7 @@ void func_80019BC8_1A7C8(s32);
 void func_80019BD0_1A7D0(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
 void func_80019BE4_1A7E4(s32, s32, s32, s32);
 void func_80019BF8_1A7F8();
-void processMeter_80019C00(OSMesgQueue*);
+void processMeter_updateTiming(OSMesgQueue*);
 void processMeter_setSizeDivisor(f32 size_divisor);
 extern void processMeter_update(s32 state);
 extern void processMeter_render(Gfx** dlist);
