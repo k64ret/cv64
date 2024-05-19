@@ -35,7 +35,17 @@ f32 f32_normalize(f32 value, f32 min, f32 max) {
     return value;
 }
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/12700/f32_clamp.s")
+f32 f32_clamp(f32 value, f32 min, f32 max) {
+    if (value < min) {
+        return min;
+    }
+
+    if (max < value) {
+        return max;
+    }
+
+    return value;
+}
 
 // https://decomp.me/scratch/D2hli
 #pragma GLOBAL_ASM("../asm/nonmatchings/12700/func_80011C6C_1286C.s")

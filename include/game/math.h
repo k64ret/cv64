@@ -62,7 +62,7 @@ f32 f32_round_nearest_with_sign(f32 value);
  * returns the percentage of the relative position of value in that range.
  */
 f32 f32_normalize(f32 value, f32 min, f32 max);
-extern f32 f32_clamp(f32 value, f32 min, f32 max);
+f32 f32_clamp(f32 value, f32 min, f32 max);
 extern f32 func_80011C6C_1286C(s32 arg0, s32 arg1);
 
 #endif
