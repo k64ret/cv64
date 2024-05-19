@@ -20,7 +20,7 @@ options:
     - linker/symbol_addrs_makerom.txt
     - linker/symbol_addrs_overlays.txt
     - linker/symbol_addrs_assets.txt
-  disassemble_all: true
+  disassemble_all: false
   migrate_rodata_to_functions: false
   find_file_boundaries: true
   header_encoding: ASCII
@@ -459,7 +459,7 @@ segments:
       - { start: 0x000A8420, type: bss, vram: 0x800A7850, name: figure }
       - { start: 0x000A8420, type: bss, vram: 0x800A78A0, name: F960 }
       - { start: 0x000A8420, type: bss, vram: 0x800D7120, name: debug }
-      - { start: 0x000A8420, type: bss, vram: 0x800D7150, name: contPak }
+      - { start: 0x000A8420, type: bss, vram: 0x800D7150, name: controller_pak }
       - { start: 0x000A8420, type: .bss, vram: 0x800DD0D0, name: effect_manager }
       - { start: 0x000A8420, type: bss, vram: 0x800DD0E0 }  # Used in `func_80066400`
       - { start: 0x000A8420, type: bss, vram: 0x801229B0, name: libultra/io/motor }

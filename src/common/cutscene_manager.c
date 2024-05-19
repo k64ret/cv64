@@ -1,3 +1,11 @@
+/**
+ * @file cutscene_manager.c
+ *
+ * Handles global aspects of cutscenes, such as initializing a cutscene's object,
+ * setting up common cutscene camera parameters, checking if the player has pressed
+ * START to skip the cutscene, etc.
+*/
+
 #include "cv64.h"
 #include "objects/cutscene/cutsceneMgr.h"
 #include "cutscene_ID.h"

@@ -1,3 +1,13 @@
+/**
+ * @file interactuables.c
+ *
+ * Contains the code used by pickable items and text spots
+ * (invisible spots that bring up a textbox when interacted).
+ *
+ * The name owes to the fact that both, pickable items and text spots,
+ * have in common the ability to be interacted with by using C-Right.
+*/
+
 #include "actor.h"
 #include "effect.h"
 #include "event_flags.h"

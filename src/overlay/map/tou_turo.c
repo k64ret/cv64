@@ -1,11 +1,9 @@
 /**
- * File: tou_turo.c
- * Description: Contains the code for objects exclusive to TOU TURO
- * (Room of Clocks)
- * Associated objects: 0x1224
+ * @file tou_turo.c
  *
- * Mapped by the TLB? = No
- */
+ * Contains the code for objects exclusive to TOU TURO
+ * (Room of Clocks)
+*/
 
 #include "cv64.h"
 #include "sound.h"

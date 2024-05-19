@@ -1,3 +1,12 @@
+/**
+ * @file menu_alloc_struct.c
+ *
+ * Contains code that allows any struct of a desired size to be allocated dynamically,
+ * plus being able to store a pointer to it in any of the `alloc_data` slots from an object.
+ *
+ * Some of these functions have an unused string argument, which reveal a struct's original name.
+*/
+
 #include "memory.h"
 #include "object.h"
 

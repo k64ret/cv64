@@ -1,10 +1,8 @@
 /**
- * File: easy_mode_ending_msg.c
- * Description: Displays the ending message when you beat Easy Mode
- * Associated objects: 0x2140
+ * @file easy_mode_ending_msg.c
  *
- * Mapped by the TLB? = Yes
- */
+ * Displays the ending message when you beat Easy Mode
+*/
 
 #include "objects/menu/easy_mode_ending_msg.h"
 #include "sound.h"

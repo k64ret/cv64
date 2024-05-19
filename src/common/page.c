@@ -1,3 +1,9 @@
+/**
+ * @file page.c
+ *
+ * This file has the code that handles the Necronomicon's individual pages.
+*/
+
 #include "cv64.h"
 #include "objects/menu/page.h"
 
@@ -155,14 +161,14 @@ void page_loop(page* self) {
             }
         }
         work_flags = work->flags;
-        // Finished flipping over animation
+        // Reached the end of the animation's current keyframe
         if (anim_state == 1) {
-            work->flags = work_flags | FINISHED_FLIP_ANIMATION;
+            work->flags = work_flags | PAGE_ANIM_END_KEYFRAME;
             if (self->field_0x6C != 0) {
                 self->field_0x6C = 0;
             }
         } else {
-            work->flags = work_flags & ~FINISHED_FLIP_ANIMATION;
+            work->flags = work_flags & ~PAGE_ANIM_END_KEYFRAME;
         }
     } else if (work->flags & DESTROY_PAGE) {
         (*object_curLevel_goToNextFuncAndClearTimer)(

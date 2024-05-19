@@ -1,3 +1,9 @@
+/**
+ * @file gamestate.c
+ *
+ * This file contains code and data related to creating and handling game states.
+*/
+
 #include "gamestate.h"
 #include "cv64.h"
 #include "fade.h"

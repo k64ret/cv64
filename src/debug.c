@@ -1,3 +1,16 @@
+/**
+ * @file debug.c
+ *
+ * Contains code to render a process meter, used for profiling.
+ *
+ * The code also features a few empty functions, which may have been used for printing text
+ * to the screen, since Legacy of Darkness has text-printing functions on its `debug.c` counterpart,
+ * right before the process meter functions.
+ *
+ * Other N64 Konami games have a very similar looking unused process meter, such as MNSG, so it's possible
+ * that this code comes from a common N64 Konami library.
+*/
+
 #include "debug.h"
 
 s32 processMeter_number_of_divisions = 3;

@@ -1,10 +1,8 @@
 /**
- * File: konami_kcek_logos.c
- * Description: Handles the Konami / KCEK logo screen
- * Associated objects: 0x000E
+ * @file konami_kcek_logos.c
  *
- * Mapped by the TLB? = No
- */
+ * Handles the Konami / KCEK logo screen
+*/
 
 #include "objects/engine/konami_kcek_logos.h"
 #include "cv64.h"

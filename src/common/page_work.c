@@ -1,3 +1,10 @@
+/**
+ * @file page_work.c
+ *
+ * Contains the creation function for the `page_work` struct,
+ * which stores data related to the `page` object.
+*/
+
 #include "objects/menu/page.h"
 
 page_work* pageWork_create(

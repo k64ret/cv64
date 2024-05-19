@@ -1,10 +1,8 @@
-/*
- * File: creditsMgr.c
- * Description: Creates the credits cutscene and resets the game once it's over.
- * Associated objects: 0x201B
+/**
+ * @file credits_manager.c
  *
- * Mapped by the TLB? = Yes
- */
+ * Creates the credits cutscene and resets the game once it's over.
+*/
 
 #include "objects/engine/creditsMgr.h"
 #include "objects/engine/DMAMgr.h"
@@ -13,9 +11,15 @@
 #include "gamestate.h"
 #include "cutscene_ID.h"
 
+// clang-format off
+
 cv64_ovl_creditsmgr_func_t cv64_ovl_creditsmgr_funcs[] = {
-    creditsMgr_init, creditsMgr_loop, creditsMgr_exit
+    creditsMgr_init,
+    creditsMgr_loop,
+    creditsMgr_exit
 };
+
+// clang-format on
 
 void creditsMgr_entrypoint(creditsMgr* self) {
     ENTER(self, cv64_ovl_creditsmgr_funcs);

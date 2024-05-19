@@ -1,14 +1,11 @@
 /**
- * File: icemanAssetsLoader.c
- * Description:
- *   The only purpose of the three objects below is to load
- *   the assets file for each of the Iceman variants (via their `objects_file_info` entry)
- *   To do that, the objects themselves don't have to run any code,
- *   therefore it is empty.
- * Associated objects: 0x20A3, 0x20A4, 0x20A5
+ * @file icemanAssetsLoader.c
  *
- * Mapped by the TLB? = Yes
- */
+ * The only purpose of the three objects below is to load
+ * the assets file for each of the Iceman variants (via their `objects_file_info` entry)
+ * To do that, the objects themselves don't have to run any code,
+ * therefore it is empty.
+*/
 
 #include "objects/enemy/mudAndLavaManAssetsLoader.h"
 #include "objects/enemy/bloodManAssetsLoader.h"

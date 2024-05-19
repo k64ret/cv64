@@ -1,20 +1,24 @@
-/*
- * File: textbox_advance_arrow.c
- * Description:
- *   The blinking red arrow that appears when you can press A to advance t the
- *   next string in a textbox. (Not to be confused with the red arrow used for
- *   selecting options in some textboxes)
- * Associated objects: 0x2138
+/**
+ * @file textbox_advance_arrow.c
  *
- * Mapped by the TLB? = Yes
- */
+ * The blinking red arrow that appears when you can press A to advance to the
+ * next string in a textbox.
+ *
+ * Not to be confused with the red arrow used for selecting options in some textboxes.
+*/
 
 #include "gfx/camera.h"
 #include "objects/menu/textboxAdvanceArrow.h"
 
+// clang-format off
+
 cv64_ovl_textboxadvancearrow_func_t cv64_ovl_textboxadvancearrow_funcs[] = {
-    textboxAdvanceArrow_init, textboxAdvanceArrow_loop, textboxAdvanceArrow_destroy
+    textboxAdvanceArrow_init,
+    textboxAdvanceArrow_loop,
+    textboxAdvanceArrow_destroy
 };
+
+// clang-format on
 
 void textboxAdvanceArrow_entrypoint(textboxAdvanceArrow* self) {
     ENTER(self, cv64_ovl_textboxadvancearrow_funcs);

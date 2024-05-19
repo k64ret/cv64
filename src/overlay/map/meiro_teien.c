@@ -1,11 +1,9 @@
 /**
- * File: meiro_teien.c
- * Description: Contains the code for objects exclusive to MEIRO TEIEN
- * (Maze Garden)
- * Associated objects: 0x01B5
+ * @file meiro_teien.c
  *
- * Mapped by the TLB? = No
- */
+ * Contains the code for objects exclusive to MEIRO TEIEN
+ * (Maze Garden)
+*/
 
 #include "objects/map/meiro_teien/object_01B5.h"
 
