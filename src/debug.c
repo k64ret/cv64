@@ -59,7 +59,34 @@ void processMeter_setSizeDivisor(f32 size_divisor) {
     processBar_sizeDivisor = size_divisor;
 }
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/debug/processMeter_update.s")
+#ifdef NON_MATCHING
+    #pragma GLOBAL_ASM("../asm/nonmatchings/debug/processMeter_update.s")
+#else
+void processMeter_update(s32 state) {
+    switch (state) {
+        case START_GREEN_BAR:
+            processMeter_greenBar_beginTime = osGetTime();
+            break;
+        case END_GREEN_BAR:
+            processMeter_greenBar_endTime = osGetTime();
+            processMeter_greenBarSize =
+                processMeter_greenBar_endTime - processMeter_greenBar_beginTime;
+            processMeter_greenBarSize =
+                (1000.0 * processMeter_greenBarSize) / (u64) processBar_sizeDivisor;
+            break;
+        case START_BLUE_BAR:
+            processMeter_blueBar_beginTime = osGetTime();
+            break;
+        case END_BLUE_BAR:
+            processMeter_blueBar_endTime = osGetTime();
+            processMeter_blueBarSize =
+                processMeter_blueBar_endTime - processMeter_blueBar_beginTime;
+            processMeter_blueBarSize =
+                (1000.0 * processMeter_blueBarSize) / (u64) processBar_sizeDivisor;
+            break;
+    }
+}
+#endif
 
 #ifdef NON_MATCHING
     #pragma GLOBAL_ASM("../asm/nonmatchings/debug/processMeter_render.s")
