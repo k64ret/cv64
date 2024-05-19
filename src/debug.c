@@ -23,7 +23,37 @@ void func_80019BE4_1A7E4(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {}
 
 void func_80019BF8_1A7F8(void) {}
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/debug/processMeter_80019C00.s")
+void processMeter_80019C00(OSMesgQueue* mq) {
+    u32 start_count;
+    u32 end_count;
+    u32 total_count;
+    f64 framerate;
+
+    // Wait until the message queue has at least one message to process
+    if (mq->msgCount <= mq->validCount) {
+        osRecvMesg(mq, NULL, OS_MESG_BLOCK);
+    }
+
+    // Wait for the next message in the queue
+    osRecvMesg(mq, NULL, OS_MESG_BLOCK);
+    start_count = osGetCount();
+
+    // Wait for another message in the queue to measure end time
+    osRecvMesg(mq, NULL, OS_MESG_BLOCK);
+    end_count = osGetCount();
+
+    // Get framerate and the total time elapsed
+    framerate   = osTvType == OS_TV_PAL ? 50.0 : 60.0;
+    total_count = end_count - start_count;
+
+    // @bug This condition is never executed
+    if (FALSE) {
+        framerate = 60.0;
+        total_count -= 1;
+    }
+
+    processMeter_setSizeDivisor(framerate * 1.0 * total_count);
+}
 
 void processMeter_setSizeDivisor(f32 size_divisor) {
     processBar_sizeDivisor = size_divisor;
