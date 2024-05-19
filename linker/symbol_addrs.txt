@@ -1741,6 +1741,7 @@ effect_createModel = 0x8005b388;
 effectMgr_increaseNumerOfEffectsCreated = 0x8005cf9c;
 effectMgr_checkFreeEffectSlots = 0x8005d1f4;
 magicBall_calcNextPos = 0x8006548c;
+func_80066400 = 0x80066400;
 cameraMgr_disableViewMode = 0x800665f0;
 cameraMgr_calcCameraMode = 0x8006662c;
 cameraMgr_loop_gameplay = 0x80066ce0;
