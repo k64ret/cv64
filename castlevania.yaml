@@ -471,6 +471,8 @@ segments:
       - { start: 0x000A8420, type: bss, vram: 0x800A7850, name: figure }
       - { start: 0x000A8420, type: bss, vram: 0x800A78A0, name: F960 }
       # - { start: 0x000A8420, type: bss, vram: 0x800D5E60, name: dma }
+      - { start: 0x000A8420, type: bss, vram: 0x800D5F20, name: 197D0 }
+      - { start: 0x000A8420, type: bss, vram: 0x800D5F40, name: crash_screen_init }
       - { start: 0x000A8420, type: bss, vram: 0x800D7120, name: debug }
       - { start: 0x000A8420, type: bss, vram: 0x800D7150, name: controller_pak }
       - { start: 0x000A8420, type: .bss, vram: 0x800DD0D0, name: effect_manager }
