@@ -1,15 +1,12 @@
-/*
- * File: overlay_BA.c
- * Description:
- *   This actor can be found in the main area of Castle Wall, and its purpose
- *   is to play sound 0x2E9 when falling off the platform where you encounter
- *   Dracula.
+/**
+ * @file overlay_BA.c
  *
- *   Sound 0x2E9 appears to be silent, so it's unknown how it would have sound
- *   like. For some reason, it's grouped under the "Menu" objects.
- * Associated objects: 0x213F
+ * This actor can be found in the main area of Castle Wall, and its purpose
+ * is to play sound `SD_2E9` when falling off the platform where you encounter
+ * Dracula.
  *
- * Mapped by the TLB? = Yes
+ * Sound `SD_2E9` appears to be silent, so it's unknown how it would have sound
+ * like. For some reason, it's grouped under the "Menu" objects.
  */
 
 #include "objects/menu/object_213F.h"
@@ -18,7 +15,7 @@
 #include "system_work.h"
 
 // 0x0F0001A0
-void (*cv64_ovl_obj213F_funcs[])(object_213F* self) = {
+cv64_ovl_obj213F_func_t cv64_ovl_obj213F_funcs[] = {
     obj213F_isDraculaCutsceneWatched,
     obj213F_isPlayerDroppingDown,
     obj213F_playSound,

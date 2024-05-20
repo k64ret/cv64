@@ -80,7 +80,7 @@ typedef struct {
     u8 field_0x64[4];
     u32 number_of_items_in_scroll;
     /**
-     * Can be menu works, like sound_menu_work_keycon_menu_work, etc
+     * Can be menu work structs, like `sound_menu_work`, `keycon_menu_work`, etc
      * Might need a generic "menu work" struct
      */
     void* work;

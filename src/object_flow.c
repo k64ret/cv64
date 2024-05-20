@@ -1,3 +1,12 @@
+/**
+ * @file object_flow.c
+ *
+ * Contains code that tells an object to advance to certain functions in its functions arrays
+ * if they fulfill certain conditions.
+ *
+ * It also contains code that set up and execute game states.
+ */
+
 #include "cv64.h"
 #include "game/objects/engine/GameStateMgr.h"
 #include "game/fade.h"

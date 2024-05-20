@@ -1,9 +1,7 @@
 /**
- * File: easy_mode_ending_msg.c
- * Description: Displays the ending message when you beat Easy Mode
- * Associated objects: 0x2140
+ * @file easy_mode_ending_msg.c
  *
- * Mapped by the TLB? = Yes
+ * Displays the ending message when you beat Easy Mode
  */
 
 #include "objects/menu/easy_mode_ending_msg.h"
@@ -11,6 +9,8 @@
 #include "cv64.h"
 #include "atari.h"
 #include "system_work.h"
+
+// clang-format off
 
 /*
  *   You have completed
@@ -25,8 +25,12 @@ u16 cv64_ovl_easyending_msg[] = {
 };
 
 cv64_ovl_easyending_func_t cv64_ovl_easyending_funcs[] = {
-    cv64_ovl_easyending_init, cv64_ovl_easyending_loop, cv64_ovl_easyending_destroy
+    cv64_ovl_easyending_init,
+    cv64_ovl_easyending_loop,
+    cv64_ovl_easyending_destroy
 };
+
+// clang-format on
 
 void cv64_ovl_easyending_entrypoint(cv64_ovl_easyending_t* self) {
     ENTER(self, cv64_ovl_easyending_funcs);

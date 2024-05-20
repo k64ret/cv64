@@ -24,6 +24,8 @@ void textboxAdvanceArrow_init(textboxAdvanceArrow* self);
 void textboxAdvanceArrow_loop(textboxAdvanceArrow* self);
 void textboxAdvanceArrow_destroy(textboxAdvanceArrow* self);
 
+typedef void (*cv64_ovl_textboxadvancearrow_func_t)(textboxAdvanceArrow*);
+
 extern const u32 TEXTBOX_ADVANCE_ARROW_DL;
 
 #endif

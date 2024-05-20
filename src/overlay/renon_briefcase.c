@@ -1,10 +1,8 @@
 /**
- * File: renon_briefcase.c
- * Description: Handles the small cutscene that shows the briefcase spinning
- *              prior to entering Renon's Shop
- * Associated objects: 0x213C
+ * @file renon_briefcase.c
  *
- * Mapped by the TLB? = Yes
+ * Handles the small cutscene that shows the briefcase spinning
+ * prior to entering Renon's Shop.
  */
 
 #include "objects/menu/renon_briefcase.h"
@@ -30,11 +28,13 @@ u8 cv64_ovl_renonbriefcase_open_anim_rot_data[2][12] = {
     { 0x0E, 0x40, 0x00, 0x00, 0xB1, 0xC0, 0x00, 0x00, 0x40, 0x00, 0x00, 0x00 }
 };
 
-// clang-format on
-
 cv64_ovl_renonbriefcase_func_t cv64_ovl_renonbriefcase_funcs[] = {
-    cv64_ovl_renonbriefcase_init, cv64_ovl_renonbriefcase_loop, cv64_ovl_renonbriefcase_destroy
+    cv64_ovl_renonbriefcase_init,
+    cv64_ovl_renonbriefcase_loop,
+    cv64_ovl_renonbriefcase_destroy
 };
+
+// clang-format on
 
 void cv64_ovl_renonbriefcase_entrypoint(cv64_ovl_renonbriefcase_t* self) {
     ENTER(self, cv64_ovl_renonbriefcase_funcs);
@@ -126,7 +126,7 @@ void cv64_ovl_renonbriefcase_loop(cv64_ovl_renonbriefcase_t* self) {
             // Update the sound's volume based on the briefcase's
             // proximity towards the camera
             volume = 1.0f -
-                (*computeNormalizedPosition)(
+                (*f32_normalize)(
                          (*vec3f_distance)(&model->position, &common_camera_8009B44C->position),
                          10.0f,
                          400.0f

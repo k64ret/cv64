@@ -1,10 +1,8 @@
 /**
- * File: rose.c
- * Description: Contains the code for objects exclusive to ROSE
- * (Rosa / Actriese Fan Room)
- * Associated objects: 0x0220, 0x1221
+ * @file rose.c
  *
- * Mapped by the TLB? = No
+ * Contains the code for objects exclusive to ROSE
+ * (Rosa / Actriese Fan Room)
  */
 
 #include "objects/map/rose/rose.h"
@@ -16,12 +14,16 @@
 #include "sound.h"
 #include "system_work.h"
 
+// clang-format off
+
 cv64_ovl_rose_ventilator_func_t cv64_ovl_rose_ventilator_funcs[] = {
-    cv64_ovl_rose_ventilator_init, cv64_ovl_rose_ventilator_loop
+    cv64_ovl_rose_ventilator_init,
+    cv64_ovl_rose_ventilator_loop
 };
 
 cv64_ovl_rose_door_func_t cv64_ovl_rose_door_funcs[] = {
-    cv64_ovl_rose_door_init, cv64_ovl_rose_door_loop
+    cv64_ovl_rose_door_init,
+    cv64_ovl_rose_door_loop
 };
 
 cv64_ovl_rose_door_func_t cv64_ovl_rose_door_state_funcs[] = {
@@ -29,6 +31,8 @@ cv64_ovl_rose_door_func_t cv64_ovl_rose_door_state_funcs[] = {
     cv64_ovl_rose_door_state_closing,
     cv64_ovl_rose_door_state_idle
 };
+
+// clang-format on
 
 const char cv64_ovl_rose_unused_str[] = "VENTILATOR : Can't allocate F3D.\n";
 

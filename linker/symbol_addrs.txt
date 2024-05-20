@@ -57,6 +57,25 @@ objects_number_of_instances_per_object = 0x8034CE60;
 // End of src/object.c =========================================================
 
 
+// src/fade.c ==================================================================
+
+// .text
+fade_setSettings          = 0x8000e618; // type:func
+fade_isFading             = 0x8000e67c; // type:func
+fade_setColor             = 0x8000e5f4; // type:func
+fade_removeFlag           = 0x8000e5cc; // type:func
+fade_setAllFlags          = 0x8000e590; // type:func
+fade_setFlag              = 0x8000e5a8; // type:func
+fade_calc                 = 0x8000e6c4; // type:func
+
+// .data
+//cv64_dl_fade_normal       = 0x80093370; // rom:0x00093F70 size:0x60
+//cv64_dl_fade_with_outline = 0x800933D0; // rom:0x00093FD0 size:0x60
+// .rodata
+
+// End of src/fade.c ===========================================================
+
+
 // src/object_flow.c ===========================================================
 
 object_doNothing                               = 0x8000E860; // type:func
@@ -75,6 +94,91 @@ GameStateMgr_executeGameStateUncappedFramerate = 0x8000EC24; // type:func
 GameStateMgr_executeGameStateCappedFramerate   = 0x8000ECB0; // type:func
 
 // End of src/object_flow.c ====================================================
+
+
+// src/vec3f.c =================================================================
+
+// .text
+func_80011310_11F10  = 0x80011310; // type:func
+func_80011370_11F70  = 0x80011370; // type:func
+vec3f_distance       = 0x800113CC; // type:func
+vec3f_magnitude      = 0x80011400; // type:func
+vec3f_80011440       = 0x80011440; // type:func
+vec3f_add            = 0x800114C0; // type:func
+vec3f_substract      = 0x800114F4; // type:func
+vec3f_copy           = 0x80011528; // type:func
+vec3f_swap           = 0x80011544; // type:func
+vec3f_multiplyScalar = 0x80011588; // type:func
+vec3f_percentage     = 0x800115B4; // type:func
+vec3f_complement     = 0x800115EC; // type:func
+vec3f_80011614       = 0x80011614; // type:func
+vec3f_dotProduct     = 0x8001166C; // type:func
+vec3f_crossProduct   = 0x8001169C; // type:func
+vec3f_80011710       = 0x80011710; // type:func
+vec3f_set            = 0x80011760; // type:func
+vec3f_multiplyByOne  = 0x80011780; // type:func
+vec3f_800117a4       = 0x800117A4; // type:func
+vec3f_80011808       = 0x80011808; // type:func
+func_80011880        = 0x80011880; // type:func
+func_80011914_12514  = 0x80011914; // type:func
+func_80011984_12584  = 0x80011984; // type:func
+func_800119F0_125F0  = 0x800119F0; // type:func
+
+// End of src/vec3f.c ==========================================================
+
+
+// src/12700.c =================================================================
+
+// .text
+f32_trunc                   = 0x80011B00; // type:func
+f32_simple_round_nearest    = 0x80011B18; // type:func
+f32_round_nearest_with_sign = 0x80011B74; // type:func
+f32_normalize               = 0x80011BCC; // type:func
+f32_clamp                   = 0x80011C2C; // type:func
+func_80011C6C_1286C         = 0x80011C6C; // type:func
+
+// End of src/12700.c ==========================================================
+
+
+// src/debug.c =================================================================
+
+// .text
+func_80019BC0_1A7C0              = 0x80019BC0; // type:func
+func_80019BC8_1A7C8              = 0x80019BC8; // type:func
+func_80019BD0_1A7D0              = 0x80019BD0; // type:func
+func_80019BE4_1A7E4              = 0x80019BE4; // type:func
+func_80019BF8_1A7F8              = 0x80019BF8; // type:func
+processMeter_updateTiming            = 0x80019C00; // type:func
+processMeter_setSizeDivisor      = 0x80019CE0; // type:func
+processMeter_update              = 0x80019CEC; // type:func
+processMeter_render              = 0x80019E68; // type:func
+processMeter_renderDivisions     = 0x8001A004; // type:func
+processMeter_renderBar           = 0x8001A0B8; // type:func
+
+// .data
+processMeter_number_of_divisions = 0x80096AC0; // type:s32
+processBar_sizeDivisor           = 0x80096AC4; // type:f32
+
+// .rodata
+D_800A3080_A3C80                 = 0x800A3080; // type:f64
+D_800A3088_A3C88                 = 0x800A3088; // type:f64
+D_800A3090_A3C90                 = 0x800A3090; // type:f64
+D_800A3098_A3C98                 = 0x800A3098; // type:f64
+D_800A30A0_A3CA0                 = 0x800A30A0; // type:asciz
+D_800A30B4_A3CB4                 = 0x800A30B4; // type:asciz
+D_800A30C0_A3CC0                 = 0x800A30C0; // type:asciz
+D_800A30C8_A3CC8                 = 0x800A30C8; // type:asciz
+D_800A30D4_A3CD4                 = 0x800A30D4; // type:asciz
+
+// .bss
+processMeter_greenBar_beginTime  = 0x800d7120; // type:f64
+processMeter_greenBar_endTime    = 0x800d7128; // type:f64
+processMeter_blueBar_beginTime   = 0x800d7130; // type:f64
+processMeter_blueBar_endTime     = 0x800d7138; // type:f64
+processMeter_greenBarSize        = 0x800d7140; // type:f32
+processMeter_blueBarSize         = 0x800d7144; // type:f32
+
+// End of src/debug.c ==========================================================
 
 
 // src/effect_manager.c ========================================================
@@ -1546,25 +1650,6 @@ DMAMgr_loadFile = 0x8000f670;
 DMAMgr_loadNisitenmaIchigoFile = 0x8000f83c;
 DMAChunkMgr_loadChunkFromROM = 0x8000fab8;
 DMAChunkMgr_advanceToNextByte = 0x8000fb40;
-vec3f_distance = 0x800113cc;
-vec3f_magnitude = 0x80011400;
-vec3f_80011440 = 0x80011440;
-vec3f_add = 0x800114c0;
-vec3f_substract = 0x800114f4;
-vec3f_copy = 0x80011528;
-vec3f_multiplyScalar = 0x80011588;
-vec3f_percentage = 0x800115b4;
-vec3f_complement = 0x800115ec;
-vec3f_80011614 = 0x80011614;
-vec3f_dotProduct = 0x8001166c;
-vec3f_crossProduct = 0x8001169c;
-vec3f_80011710 = 0x80011710;
-vec3f_set = 0x80011760;
-vec3f_multiplyByOne = 0x80011780;
-vec3f_800117a4 = 0x800117a4;
-vec3f_80011808 = 0x80011808;
-func_80011880 = 0x80011880;
-increaseOrDecreaseByZeroPointFive = 0x80011b18;
 isSongIDMusic = 0x800129a8;
 setSongToPlay = 0x80014a28;
 stopMusic = 0x80014a98;
@@ -1599,7 +1684,6 @@ romCopy = 0x800177ec;
 rmonPrintf = 0x800192e8;
 crashScreen_printThreadData = 0x80019560;
 crashScreen_printExceptionInfo = 0x80019968;
-processMeter_setSizeDivisor = 0x80019ce0;
 contPak_getInsertedStatus = 0x8001a380;
 contPak_initPak = 0x8001a538;
 contPak_allocateFile = 0x8001a5cc;
@@ -1657,6 +1741,7 @@ effect_createModel = 0x8005b388;
 effectMgr_increaseNumerOfEffectsCreated = 0x8005cf9c;
 effectMgr_checkFreeEffectSlots = 0x8005d1f4;
 magicBall_calcNextPos = 0x8006548c;
+func_80066400 = 0x80066400;
 cameraMgr_disableViewMode = 0x800665f0;
 cameraMgr_calcCameraMode = 0x8006662c;
 cameraMgr_loop_gameplay = 0x80066ce0;
@@ -1877,7 +1962,6 @@ DMAMgr_anotherDecompressFunction = 0x800100a4;
 DMAMgr_80010344 = 0x80010344;
 DMAMgr_800103e0 = 0x800103e0;
 DMAMgr_decompressChunkBuffer = 0x80010510;
-vec3f_swap = 0x80011544;
 play_sound_in_position = 0x80013a48;
 play_sound = 0x80013eac;
 setNewSongToPlay = 0x80014ad0;
@@ -1915,8 +1999,6 @@ unusedPrintf = 0x800192a8;
 is_proutSyncPrintf = 0x80019398;
 crashScreen_ThreadEntry = 0x80019a44;
 crashScreen_Init = 0x80019b48;
-processMeter_80019c00 = 0x80019c00;
-processMeter_update = 0x80019cec;
 contPak_initAllPaks = 0x8001a46c;
 contPak_deleteFile = 0x8001a664;
 contPak_initFirstPak = 0x8001abd0;
@@ -2246,8 +2328,6 @@ setup_rsp = 0x800158e0;
 setup_framebuffer = 0x800166f0;
 setup_background_color = 0x800167bc;
 setup_z_buffer = 0x80016968;
-processMeter_renderDivisions = 0x8001a004;
-processMeter_renderBar = 0x8001a0b8;
 shadow_create = 0x80061280;
 playerCameraController_updateCameraRotationSpeed = 0x8006bc50;
 playerCameraController_8006bcf4 = 0x8006bcf4;
@@ -2363,7 +2443,6 @@ someROMLoadedFile_bytesLeftToRead = 0x800d5e48;
 someROMLoadedFile_lastIndex = 0x800d5e4c;
 someROMLoadedFile_address = 0x800d5e44;
 someROMLoadedFile_currentReadingAddress = 0x800d5e40;
-processMeter_render = 0x80019e68;
 contPak_notInserted = 0x800d7490;
 contPak_getFileState = 0x8001a770;
 contPak_getNumFiles = 0x8001a7d4;
@@ -2441,11 +2520,8 @@ interactuables_settings_table = 0x8016a904;
 map_breakables_drop_values_list = 0x80189dd0;
 map_door_bitflags_list = 0x80188210;
 controllers = 0x80387d7c;
-processMeter_greenBarSize = 0x800d7140;
-processMeter_blueBarSize = 0x800d7144;
 _KMC_REG_WPORT = 0xbff08000;
 _KMC_REG_STAT = 0xbff08004;
-processMeter_number_of_divisions = 0x80096ac0;
 map__address_of_actor_list_in_map_file = 0x8018a788;
 map__starting_non_proximity_spawnable_actors = 0x8018a800;
 map_actor_model_model_info = 0x8018a710;
@@ -2587,24 +2663,6 @@ ptr_player_animations_rotation_data = 0x8016c75c;
 cutscene_settings = 0x8016B5C0;
 kingSkeleton_objectFiles = 0x80095b78;
 gameState_konamiLogo_overlay_info = 0x800958b0;
-
-// src/fade.c
-
-// .text
-fade_setSettings          = 0x8000e618; // type:func
-fade_isFading             = 0x8000e67c; // type:func
-fade_setColor             = 0x8000e5f4; // type:func
-fade_removeFlag           = 0x8000e5cc; // type:func
-fade_setAllFlags          = 0x8000e590; // type:func
-fade_setFlag              = 0x8000e5a8; // type:func
-fade_calc                 = 0x8000e6c4; // type:func
-
-// .data
-//cv64_dl_fade_normal       = 0x80093370; // rom:0x00093F70 size:0x60
-//cv64_dl_fade_with_outline = 0x800933D0; // rom:0x00093FD0 size:0x60
-// .rodata
-
-// End of src/fade.c
 
 D_8009342C_9402C = 0x8009342C; // ignore:true
 objects_file_info         = 0x80093430; // rom:0x00094030 size:0x8A8
@@ -2825,11 +2883,6 @@ attacker_atari_data_work_pos = 0x800d8228;
 distance_attacker_target_atari_data_vector = 0x800d8234;
 distance_attacker_target_atari_data = 0x800d8244;
 atari_work_update_position_data_functions = 0x80098600;
-processMeter_greenBar_beginTime = 0x800d7120;
-processMeter_greenBar_endTime = 0x800d7128;
-processMeter_blueBar_beginTime = 0x800d7130;
-processMeter_blueBar_endTime = 0x800d7138;
-processBar_sizeDivisor = 0x80096ac4;
 __osThreadSave = 0x80122800;
 collision_triangle_array_type_ID = 0x8018eb00;
 fileSelectController_functions = 0x80181070;
@@ -2885,7 +2938,6 @@ func_8000C740 = 0x8000C740;
 func_80005658 = 0x80005658;
 effect_isMarkForDeletion = 0x8005d244;
 effect_markForDeletion = 0x8005d230;
-computeNormalizedPosition = 0x80011BCC;
 func_800139D4 = 0x800139D4;
 D_80093D20_94920 = 0x80093D20; // size:0x1C
 // devAddr = 0xA0000000;

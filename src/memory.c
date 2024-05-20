@@ -1,3 +1,12 @@
+/**
+ * @file memory.c
+ *
+ * Contains code that handles memory-related operations, including dynamically allocating data.
+ *
+ * It also has all the functions that tell an object to advance to certain functions in their respective
+ * functions arrays.
+ */
+
 #include "memory.h"
 #include "object.h"
 #include "system_work.h"

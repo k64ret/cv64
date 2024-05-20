@@ -1,14 +1,11 @@
 /**
- * File: openingBat.c
- * Description:
- *   Creates and initializes the bats seen in the opening cutscene
- *   (the one with the camera moving around the castle).
+ * @file openingBat.c
  *
- *   Note that the animation and movement of the bats is handled by
- *   said cutscene's overlay.
- * Associated objects: 0x20A6
+ * Creates and initializes the bats seen in the opening cutscene
+ * (the one with the camera moving around the castle).
  *
- * Mapped by the TLB? = Yes
+ * Note that the animation and movement of the bats is handled by
+ * said cutscene's overlay.
  */
 
 #include "objects/enemy/openingBat.h"

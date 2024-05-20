@@ -1,3 +1,9 @@
+/**
+ * @file page.c
+ *
+ * This file has the code that handles the Necronomicon's individual pages.
+ */
+
 #include "cv64.h"
 #include "objects/menu/page.h"
 
@@ -52,9 +58,14 @@ u8 page_flip_anim_rot_data[9][28] = {
     { 0x80, 0x20, 0x04, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x40, 0x00, 0x00, 0x00 }
 };
 
-// clang-format on
+page_func_t page_functions[] = {
+    page_isWorkCreated,
+    page_init,
+    page_loop,
+    page_destroy
+};
 
-page_func_t page_functions[] = {page_isWorkCreated, page_init, page_loop, page_destroy};
+// clang-format on
 
 void page_entrypoint(page* self) {
     ENTER(self, page_functions);
@@ -150,14 +161,14 @@ void page_loop(page* self) {
             }
         }
         work_flags = work->flags;
-        // Finished flipping over animation
+        // Reached the end of the animation's current keyframe
         if (anim_state == 1) {
-            work->flags = work_flags | FINISHED_FLIP_ANIMATION;
+            work->flags = work_flags | PAGE_ANIM_END_KEYFRAME;
             if (self->field_0x6C != 0) {
                 self->field_0x6C = 0;
             }
         } else {
-            work->flags = work_flags & ~FINISHED_FLIP_ANIMATION;
+            work->flags = work_flags & ~PAGE_ANIM_END_KEYFRAME;
         }
     } else if (work->flags & DESTROY_PAGE) {
         (*object_curLevel_goToNextFuncAndClearTimer)(

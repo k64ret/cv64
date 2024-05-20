@@ -14,7 +14,7 @@ typedef enum page_work_flags {
     PAGE_2                           = 0x02,
     PAGE_3                           = 0x03,
     ANIMATE                          = 0x04,
-    FINISHED_FLIP_ANIMATION          = 0x08,
+    PAGE_ANIM_END_KEYFRAME           = 0x08,
     PAGE_HIDE                        = 0x10,
     DESTROY_AFTER_ANIMATION_FINISHES = 0x20,
     DESTROY_PAGE                     = 0x40

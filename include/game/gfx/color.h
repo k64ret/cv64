@@ -3,6 +3,8 @@
 
 #include <ultra64.h>
 
+#define RGBA(r, g, b, a) (((r) << 24) | ((g) << 16) | ((b) << 8) | (a))
+
 /**
  * RGBA color separated into 8-bit components
  */

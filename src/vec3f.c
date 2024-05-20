@@ -1,3 +1,9 @@
+/**
+ * @file vec3f.c
+ *
+ * Contains code for different math-related operations, as well as operations with vectors.
+ */
+
 #include "math.h"
 
 f32 func_80011310_11F10(f32 src) {

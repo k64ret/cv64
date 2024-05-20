@@ -54,4 +54,15 @@ void func_80011914_12514(vec3f* dest, vec3f* src, vec3f* rotation, s32 angle);
 void func_80011984_12584(vec3f* arg0, vec3f* arg1, vec3f* arg2);
 void func_800119F0_125F0(vec3f* arg0, vec3f* arg1, vec3f* arg2, vec3f* arg3);
 
+f32 f32_trunc(f32 value);
+f32 f32_simple_round_nearest(f32 value);
+f32 f32_round_nearest_with_sign(f32 value);
+/**
+ * Given a start and end value within a range,
+ * returns the percentage of the relative position of value in that range.
+ */
+f32 f32_normalize(f32 value, f32 min, f32 max);
+f32 f32_clamp(f32 value, f32 min, f32 max);
+s32 func_80011C6C_1286C(s32 arg0, s32 arg1);
+
 #endif
