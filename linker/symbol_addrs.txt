@@ -54,6 +54,10 @@ Objects_functions                      = 0x80092274; // size:0x2216
 objects_array                          = 0x80342060;
 objects_number_of_instances_per_object = 0x8034CE60;
 
+// .bss
+object_list_free_slot                  = 0x800A7830;
+ptr_gameplayParentObject               = 0x800A7834;
+
 // End of src/object.c =========================================================
 
 
@@ -2675,7 +2679,6 @@ D_8009342C_9402C = 0x8009342C; // ignore:true
 objects_file_info         = 0x80093430; // rom:0x00094030 size:0x8A8
 gameState_konamiLogo_object_files = 0x800958c0;
 gameState_gameOver_object_files = 0x80096348;
-object_list_free_slot = 0x800a7830;
 random_initSeed = 0x80037970;
 player_death_animations = 0x80097060;
 carrie_assets_alt_costume_hierarchy = 0x803dd7b0;
@@ -2879,7 +2882,6 @@ ledge_moving_max_speed = 0x800a3640;
 cameraMgr = 0x80342230;
 enemyGenerator_functions = 0x8018a964;
 enemyGenerator_entries_table = 0x8018aa70;
-ptr_gameplayParentObject = 0x800a7834;
 current_cutscene_ID__Carrie_overlay = 0x803ddb68;
 prt_80040c08_6bd09446 = 0x80040c08;
 atari_center_point_translation_matrix = 0x800d8190;
