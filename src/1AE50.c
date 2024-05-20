@@ -15,11 +15,12 @@ s32 func_8001A250_1AE50(s32* arg0, u16* arg1, s16 arg2) {
     } else {
         var_v0 = 1;
     }
-    if ((sys.controllers[0].buttons_pressed & CONT_UP) ||
-        (sys.controllers[0].buttons_pressed & CONT_DOWN)) {
+
+    if (CONT_BTNS_PRESSED(CONT_0, CONT_UP) || CONT_BTNS_PRESSED(CONT_0, CONT_DOWN)) {
         *arg1 = 0;
     }
-    if (sys.controllers[0].buttons_held & CONT_UP) {
+
+    if (CONT_BTNS_HELD(CONT_0, CONT_UP)) {
         if (*arg1 == 0) {
             *arg1 = 3;
             *arg0 = *arg0 - 1;
@@ -35,7 +36,8 @@ s32 func_8001A250_1AE50(s32* arg0, u16* arg1, s16 arg2) {
             *arg1 = *arg1 - 1;
         }
     }
-    if (sys.controllers[0].buttons_held & CONT_DOWN) {
+
+    if (CONT_BTNS_HELD(CONT_0, CONT_DOWN)) {
         if (*arg1 == 0) {
             *arg1 = 3;
             *arg0 = *arg0 + 1;
@@ -52,5 +54,6 @@ s32 func_8001A250_1AE50(s32* arg0, u16* arg1, s16 arg2) {
             *arg1 = *arg1 - 1;
         }
     }
+
     return var_v1;
 }

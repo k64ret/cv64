@@ -3,6 +3,11 @@
 
 #include <ultra64.h>
 
+#define CONT_0 0
+#define CONT_1 1
+#define CONT_2 2
+#define CONT_3 3
+
 typedef struct cv64_controller_state {
     u16 is_connected;
     u16 buttons_held;

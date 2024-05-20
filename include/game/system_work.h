@@ -184,4 +184,9 @@ typedef struct {
  */
 extern system_work sys;
 
+#define CONT_BTNS_HELD(controller_id, buttons)                                                     \
+    BITS_HAS(sys.controllers[(controller_id)].buttons_held, (buttons))
+#define CONT_BTNS_PRESSED(controller_id, buttons)                                                  \
+    BITS_HAS(sys.controllers[(controller_id)].buttons_pressed, (buttons))
+
 #endif
