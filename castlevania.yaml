@@ -97,7 +97,7 @@ segments:
       - [0x000172F0, asm]              # Contains setup_framebuffer, setup_background_color and setup_z_buffer
       - [0x00017660, asm, controller]
       - [0x00017A00, asm]              # Contains decompression and file-loading functions
-      - [0x00018310, asm, dma]
+      - [0x00018310, c, dma]
       - [0x00018430, asm]
       - [0x00018590, asm, crash_screen]
       - [0x0001A160, asm, crash_screen_init]
@@ -458,6 +458,7 @@ segments:
       - { start: 0x000A8420, type: .bss, vram: 0x800A7840, name: object_0002 }  # Only contains ptr_Object_0002.
       - { start: 0x000A8420, type: bss, vram: 0x800A7850, name: figure }
       - { start: 0x000A8420, type: bss, vram: 0x800A78A0, name: F960 }
+      # - { start: 0x000A8420, type: bss, vram: 0x800D5E60, name: dma }
       - { start: 0x000A8420, type: bss, vram: 0x800D7120, name: debug }
       - { start: 0x000A8420, type: bss, vram: 0x800D7150, name: controller_pak }
       - { start: 0x000A8420, type: .bss, vram: 0x800DD0D0, name: effect_manager }

@@ -140,6 +140,16 @@ func_80011C6C_1286C         = 0x80011C6C; // type:func
 // End of src/12700.c ==========================================================
 
 
+// src/dma.c ===================================================================
+
+// .text
+dma_init_cart  = 0x80017710; // type:func
+dma_read_write = 0x80017734; // type:func
+dma_rom_copy   = 0x800177EC; // type:func
+
+// End of src/dma.c ============================================================
+
+
 // src/debug.c =================================================================
 
 // .text
@@ -1678,9 +1688,6 @@ ROM_0x1800_ChunkLoad__Advance = 0x8001746c;
 loadROM_0x1800_Chunk_ToRAM = 0x800174e4;
 setNextFileToLoad = 0x80017570;
 loadFilesFromFileLoadArray = 0x800175ec;
-initCartHandle = 0x80017710;
-DMA_readOrWrite = 0x80017734;
-romCopy = 0x800177ec;
 rmonPrintf = 0x800192e8;
 crashScreen_printThreadData = 0x80019560;
 crashScreen_printExceptionInfo = 0x80019968;
