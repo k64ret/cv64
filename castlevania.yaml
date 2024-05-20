@@ -107,7 +107,7 @@ segments:
       - [0x00019570, asm] # potential file split
       - [0x00019620, asm] # potential file split
       - [0x00019630, asm] # potential file split
-      - [0x000197D0, asm] # potential file split
+      # - [0x000197D0, asm] # potential file split
       # - [0x00019BA0, asm] # potential file split
       - [0x00019E20, asm] # potential file split
       # - [0x00019E60, asm] # potential file split
@@ -374,6 +374,10 @@ segments:
       - [0x000948F0, data, DMAMgr]
       - [0x00094920, data, 113D0]
       - [0x00094940, data]
+      - [0x00096BD0, data, 19630]
+      # - [0x00097294, data, 19630]
+      # - [0x00096C48, data]
+      - [0x000972E0, data, crash_screen_init]
       - [0x000976C0, .data, debug]
       - [0x000976D0, data, save]
       - [0x00097710, data]
@@ -471,7 +475,7 @@ segments:
       - { start: 0x000A8420, type: bss, vram: 0x800A7850, name: figure }
       - { start: 0x000A8420, type: bss, vram: 0x800A78A0, name: F960 }
       # - { start: 0x000A8420, type: bss, vram: 0x800D5E60, name: dma }
-      - { start: 0x000A8420, type: bss, vram: 0x800D5F20, name: 197D0 }
+      - { start: 0x000A8420, type: bss, vram: 0x800D5F20, name: 19630 }
       - { start: 0x000A8420, type: bss, vram: 0x800D5F40, name: crash_screen_init }
       - { start: 0x000A8420, type: bss, vram: 0x800D7120, name: debug }
       - { start: 0x000A8420, type: bss, vram: 0x800D7150, name: controller_pak }
