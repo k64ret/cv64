@@ -151,6 +151,11 @@ dma_init_cart  = 0x80017710; // type:func
 dma_read_write = 0x80017734; // type:func
 dma_rom_copy   = 0x800177EC; // type:func
 
+// .bss
+dmaIoMesgBuf = 0x800d5e60;
+dmaIoMesgQueue = 0x800abfa0;
+gCartHandle = 0x800d5e78;
+
 // End of src/dma.c ============================================================
 
 
@@ -2405,12 +2410,10 @@ textbox_setHeightAndWidth = 0x8012cd54;
 SaveStruct_cPak = 0x800d74a0;
 SaveStruct_gameplay = 0x80389be4;
 controller_pak_note_table = 0x80096ad0;
-gCartHandle = 0x800d5e78;
 osViModeNtsc = 0x800a10b0;
 osViModePal = 0x800a1970;
 controllerMsgQ = 0x800d5df0;
 controller_status = 0x800d5e10;
-dmaIoMesgBuf = 0x800d5e60;
 sIdleThread = 0x800a8908;
 gPIMesgBuf = 0x800abc80;
 ptr_dmaIoMesgBuf = 0x800abfb8;
@@ -2506,7 +2509,6 @@ object_curLevel_goToPrevFunc = 0x80001488;
 object_prevLevel_goToPrevFunc = 0x800014c4;
 object_nextLevel_goToNextFunc = 0x800013fc;
 object_prevLevel_goToFunc = 0x80001600;
-dmaIoMesgQueue = 0x800abfa0;
 object_nextLevel_goToFunc = 0x80001638;
 seed_RNG_C_rand_srand = 0x80186e3c;
 srand = 0x801588e0;

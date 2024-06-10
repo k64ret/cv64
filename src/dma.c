@@ -1,3 +1,9 @@
+/**
+ * @file dma.c
+ *
+ * This file defines functions involved with direct memory access with the cartridge.
+ */
+
 #include <ultra64.h>
 #include "cv64.h"
 
