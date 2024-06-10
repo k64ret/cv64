@@ -5,6 +5,12 @@
 #include "math.h"
 #include <ultra64.h>
 
+// Unknown types
+typedef u8 UNK8;
+typedef u16 UNK16;
+typedef s32 UNK32;
+typedef void* UNKPTR;
+
 #define CV64_BIT(num) (1 << (num))
 /**
  * Apply `mask` on top of `value`.
