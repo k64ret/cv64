@@ -53,7 +53,8 @@ void cv64_ovl_easyending_init(cv64_ovl_easyending_t* self) {
     );
     (*textbox_enableLens)(
         new_textbox,
-        (WINDOW_FLAG_40000 | WINDOW_FLAG_OPEN_DOWN_RIGHT | WINDOW_FLAG_OPEN_RIGHT_DOWN | WINDOW_FLAG_OPEN_DOWN | WINDOW_FLAG_OPEN_RIGHT),
+        (WINDOW_FLAG_40000 | WINDOW_FLAG_OPEN_DOWN_RIGHT | WINDOW_FLAG_OPEN_RIGHT_DOWN |
+         WINDOW_FLAG_OPEN_DOWN | WINDOW_FLAG_OPEN_RIGHT),
         30
     );
     (*object_curLevel_goToNextFuncAndClearTimer)(
@@ -68,7 +69,7 @@ void cv64_ovl_easyending_loop(cv64_ovl_easyending_t* self) {
     u32* textbox_flags = &self->ending_textbox->flags;
 
     self->active_time++;
-    if ((self->active_time > 120) && BITS_HAS(sys.controllers[0].buttons_pressed, A_BUTTON)) {
+    if ((self->active_time > 120) && CONT_BTNS_PRESSED(CONT_0, A_BUTTON)) {
         BITS_SET(*textbox_flags, CLOSE_TEXTBOX);
         sys.SaveStruct_gameplay.money                                = 0;
         sys.SaveStruct_gameplay.time_saved_counter                   = 0;

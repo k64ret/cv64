@@ -27,9 +27,7 @@ void cv64_ovl_konamilogo_entrypoint(cv64_ovl_konamilogo_t* self) {
 }
 
 void cv64_ovl_konamilogo_check_btn_press(cv64_ovl_konamilogo_t* self) {
-    if ((sys.controllers[0].buttons_pressed | sys.controllers[1].buttons_pressed |
-         sys.controllers[2].buttons_pressed | sys.controllers[3].buttons_pressed) &
-        (START_BUTTON | RECENTER_BUTTON)) {
+    if (CONT_ALL_BTNS_PRESSED(START_BUTTON | RECENTER_BUTTON)) {
         (*object_curLevel_goToFunc)(
             self->header.current_function, &self->header.function_info_ID, KONAMILOGO_KCEK_WAIT
         );

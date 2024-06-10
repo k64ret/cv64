@@ -130,8 +130,8 @@ void stageSelect_initLens(stageSelect* self) {
         self->lens = (*lens_create)(
             self,
             common_camera_HUD,
-            (WINDOW_FLAG_ENABLE_DISTORTION_EFFECT | WINDOW_FLAG_80 | WINDOW_FLAG_OPEN_DOWN_RIGHT | WINDOW_FLAG_OPEN_RIGHT_DOWN | WINDOW_FLAG_OPEN_DOWN |
-             WINDOW_FLAG_OPEN_RIGHT),
+            (WINDOW_FLAG_ENABLE_DISTORTION_EFFECT | WINDOW_FLAG_80 | WINDOW_FLAG_OPEN_DOWN_RIGHT |
+             WINDOW_FLAG_OPEN_RIGHT_DOWN | WINDOW_FLAG_OPEN_DOWN | WINDOW_FLAG_OPEN_RIGHT),
             -120.0f,
             61.0f,
             10.0f,
@@ -170,8 +170,8 @@ void stageSelect_moveLens(stageSelect* self) {
     current_option  = self->current_option;
     previous_option = self->previous_option;
     if (current_option == (u32) previous_option) {
-        if (BITS_HAS(sys.controllers[0].buttons_pressed, A_BUTTON) ||
-            BITS_HAS(sys.controllers[0].buttons_pressed, START_BUTTON | RECENTER_BUTTON)) {
+        if (CONT_BTNS_PRESSED(CONT_0, A_BUTTON) ||
+            CONT_BTNS_PRESSED(CONT_0, START_BUTTON | RECENTER_BUTTON)) {
             BITS_UNSET(lens->flags, WINDOW_OPENING);
             BITS_SET(lens->flags, WINDOW_CLOSING);
             (*object_curLevel_goToNextFuncAndClearTimer)(

@@ -387,25 +387,22 @@ void characterSelect_selectOption(characterSelect* self) {
         if (work->current_character_option == work->previous_character_option) {
             // Moving the lens to the left
             if ((work->current_character_option == work->previous_character_option) &&
-                ((sys.controllers[0].buttons_pressed & L_JPAD) ||
-                 (sys.controllers[0].joystick_x < -25))) {
+                (CONT_BTNS_PRESSED(CONT_0, L_JPAD) || (sys.controllers[0].joystick_x < -25))) {
                 work->current_character_option--;
             }
             // Moving the lens to the right
             if ((work->current_character_option == work->previous_character_option) &&
-                ((sys.controllers[0].buttons_pressed & R_JPAD) ||
-                 (sys.controllers[0].joystick_x >= 26))) {
+                (CONT_BTNS_PRESSED(CONT_0, R_JPAD) || (sys.controllers[0].joystick_x >= 26))) {
                 work->current_character_option++;
             }
             characterSelect_determineCharacterToSelect(
                 work, work->current_character_option - work->previous_character_option
             );
             // Character is selected
-            if ((sys.controllers[0].buttons_pressed & A_BUTTON) ||
-                (sys.controllers[0].buttons_pressed & (START_BUTTON | RECENTER_BUTTON))) {
+            if (CONT_BTNS_PRESSED(CONT_0, A_BUTTON) ||
+                CONT_BTNS_PRESSED(CONT_0, (START_BUTTON | RECENTER_BUTTON))) {
                 // Apply alternate costume if moving up + if the appropiate Special jewels were obtained
-                if ((sys.controllers[0].buttons_pressed & U_JPAD) ||
-                    (sys.controllers[0].joystick_y >= 26)) {
+                if (CONT_BTNS_PRESSED(CONT_0, U_JPAD) || (sys.controllers[0].joystick_y >= 26)) {
                     // Make sure the player has finished the game before trying to assign the alternate costume
                     if ((((sys.SaveStruct_gameplay.flags & SAVE_FLAG_REINDHART_GOOD_ENDING) ||
                           (sys.SaveStruct_gameplay.flags & SAVE_FLAG_CARRIE_GOOD_ENDING)) ||
@@ -461,7 +458,7 @@ void characterSelect_selectOption(characterSelect* self) {
                 return;
             }
             // Back out of the menu
-            if (sys.controllers[0].buttons_pressed & B_BUTTON) {
+            if CONT_BTNS_PRESSED (CONT_0, B_BUTTON) {
                 // Close lens
                 lens->flags &= ~WINDOW_OPENING;
                 lens->flags |= WINDOW_CLOSING;
