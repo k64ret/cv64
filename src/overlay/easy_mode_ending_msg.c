@@ -53,7 +53,7 @@ void cv64_ovl_easyending_init(cv64_ovl_easyending_t* self) {
     );
     (*textbox_enableLens)(
         new_textbox,
-        (WINDOW_FLAG_40000 | WINDOW_FLAG_20 | WINDOW_FLAG_10 | WINDOW_FLAG_4 | WINDOW_FLAG_1),
+        (WINDOW_FLAG_40000 | WINDOW_FLAG_OPEN_DOWN_RIGHT | WINDOW_FLAG_OPEN_RIGHT_DOWN | WINDOW_FLAG_OPEN_DOWN | WINDOW_FLAG_OPEN_RIGHT),
         30
     );
     (*object_curLevel_goToNextFuncAndClearTimer)(

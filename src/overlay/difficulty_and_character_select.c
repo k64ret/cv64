@@ -317,7 +317,7 @@ void characterSelect_createLens(characterSelect* self) {
             self->inner.lens = (*lens_create)(
                 self,
                 work->lens_light,
-                WINDOW_FLAG_80 | WINDOW_FLAG_20 | WINDOW_FLAG_10 | WINDOW_FLAG_4 | WINDOW_FLAG_1,
+                WINDOW_FLAG_80 | WINDOW_FLAG_OPEN_DOWN_RIGHT | WINDOW_FLAG_OPEN_RIGHT_DOWN | WINDOW_FLAG_OPEN_DOWN | WINDOW_FLAG_OPEN_RIGHT,
                 lens_pos[REINHARDT].x,
                 lens_pos[REINHARDT].y,
                 0.0f,
@@ -330,8 +330,8 @@ void characterSelect_createLens(characterSelect* self) {
             self->inner.lens = (*lens_create)(
                 self,
                 work->lens_light,
-                WINDOW_FLAG_800000 | WINDOW_FLAG_80 | WINDOW_FLAG_20 | WINDOW_FLAG_10 |
-                    WINDOW_FLAG_4 | WINDOW_FLAG_1,
+                WINDOW_FLAG_ENABLE_DISTORTION_EFFECT | WINDOW_FLAG_80 | WINDOW_FLAG_OPEN_DOWN_RIGHT | WINDOW_FLAG_OPEN_RIGHT_DOWN |
+                    WINDOW_FLAG_OPEN_DOWN | WINDOW_FLAG_OPEN_RIGHT,
                 lens_pos[REINHARDT].x,
                 lens_pos[REINHARDT].y,
                 0.0f,
@@ -340,7 +340,7 @@ void characterSelect_createLens(characterSelect* self) {
                 30.0f
             );
             lens = self->inner.lens;
-            (*windowWork_setParams)(lens, WINDOW_FLAG_200000, 9, 9, 6.0f, 3.299999952f, NULL);
+            (*windowWork_setParams)(lens, WINDOW_FLAG_OPEN_DOWN_RIGHT0000, 9, 9, 6.0f, 3.299999952f, NULL);
         }
         // Open the lens
         lens->flags &= ~WINDOW_CLOSING;

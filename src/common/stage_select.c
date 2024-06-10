@@ -130,8 +130,8 @@ void stageSelect_initLens(stageSelect* self) {
         self->lens = (*lens_create)(
             self,
             common_camera_HUD,
-            (WINDOW_FLAG_800000 | WINDOW_FLAG_80 | WINDOW_FLAG_20 | WINDOW_FLAG_10 | WINDOW_FLAG_4 |
-             WINDOW_FLAG_1),
+            (WINDOW_FLAG_ENABLE_DISTORTION_EFFECT | WINDOW_FLAG_80 | WINDOW_FLAG_OPEN_DOWN_RIGHT | WINDOW_FLAG_OPEN_RIGHT_DOWN | WINDOW_FLAG_OPEN_DOWN |
+             WINDOW_FLAG_OPEN_RIGHT),
             -120.0f,
             61.0f,
             10.0f,
