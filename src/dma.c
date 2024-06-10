@@ -1,7 +1,7 @@
 /**
  * @file dma.c
  *
- * This file defines functions involved with direct memory access with the cartridge.
+ * This file defines functions involved with direct memory access and retrieving data from the cartridge.
  */
 
 #include <ultra64.h>
