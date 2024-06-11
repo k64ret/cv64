@@ -74,7 +74,7 @@ void cv64_ovl_rose_ventilator_loop(cv64_ovl_rose_ventilator_t* self) {
     model->fog_color.integer       = sys.background_color.integer;
     if ((*actor_playerOutsideActorSpawnRadius)(
             self, model->position.x, model->position.y, model->position.z
-        ) != FALSE) {
+        )) {
         // clang-format off
         /* @bug If the player is far away enough from the ventilator, it will try to go to the next function.
                 However, `cv64_ovl_rose_ventilator_funcs` only has two functions. This will make the game
