@@ -31,6 +31,6 @@ typedef struct {
 } light;
 
 extern light* light_create(u16 type);
-extern light* D_8018CDE0[3];
+extern light* map_lights[3];
 
 #endif

@@ -90,7 +90,7 @@ void interactuables_init(interactuables* self) {
         if (interactuables_settings_table[self->table_index].type == ITEM_KIND_ITEM) {
             // Create and setup the item model
             item_model =
-                modelInfo_createAndSetChild(FIG_TYPE_0400 | FIG_TYPE_HIERARCHY_NODE, D_8018CDE0[2]);
+                modelInfo_createAndSetChild(FIG_TYPE_0400 | FIG_TYPE_HIERARCHY_NODE, map_lights[2]);
             self->model = item_model;
             if (settings != NULL) {
                 actor_model_set_pos(self, item_model);
@@ -401,10 +401,12 @@ void interactuables_initCheck(interactuables* self) {
         }
 
         // clang-format off
-        // Get the message associated to the text spot
-        //
-        // Bug? No matter if flag `TEXT_SPOT_DO_ACTION_AFTER_SELECTING_OPTION` is set or not,
-        // the game will grab the same string
+        /**
+         * Get the message associated to the text spot
+
+         * @bug? No matter if flag `TEXT_SPOT_DO_ACTION_AFTER_SELECTING_OPTION` is set or not,
+         * the game will grab the same string
+         */
         textbox = (BITS_HAS(interactuables_settings_table[self->table_index].flags, TEXT_SPOT_DO_ACTION_AFTER_SELECTING_OPTION))
             ? map_getMessageFromPool(interactuables_settings_table[self->table_index].text_ID, 0)
             : map_getMessageFromPool(interactuables_settings_table[self->table_index].text_ID, 0);
