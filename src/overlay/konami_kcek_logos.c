@@ -44,9 +44,9 @@ void cv64_ovl_konamilogo_init(cv64_ovl_konamilogo_t* self) {
     model->assets_file_ID        = NI_ASSETS_KONAMI_AND_KCEK_LOGOS;
     model->size.x                = 0.9975f;
     model->size.y                = 1.005f;
-    sys.background_color.integer = 0x000000FF; // Black (opaque)
+    sys.background_color.integer = RGBA(0, 0, 0, 255);
     BITS_SET(model->flags, FIG_FLAG_APPLY_PRIMITIVE_COLOR);
-    model->primitive_color.integer = 0xFFFFFF00; // White (transparent)
+    model->primitive_color.integer = RGBA(255, 255, 255, 0);
 
     GO_TO_NEXT_FUNC_NOW(
         self, cv64_ovl_konamilogo_funcs, curFunc, (*object_curLevel_goToNextFuncAndClearTimer)

@@ -76,7 +76,7 @@ void cv64_ovl_renonbriefcase_init(cv64_ovl_renonbriefcase_t* self) {
     );
     model = self->model;
     BITS_SET(model->flags, FIG_FLAG_APPLY_PRIMITIVE_COLOR | FIG_FLAG_0080);
-    model->primitive_color.integer = 0xFFFFFFFF;
+    model->primitive_color.integer = RGBA(255, 255, 255, 255);
     model->angle.pitch             = 0;
     model->angle.yaw               = 0x4000;
     model->angle.roll              = 0;
@@ -171,6 +171,6 @@ void cv64_ovl_renonbriefcase_loop(cv64_ovl_renonbriefcase_t* self) {
 }
 
 void cv64_ovl_renonbriefcase_destroy(cv64_ovl_renonbriefcase_t* self) {
-    sys.background_color.integer = 0x000000FF;
+    sys.background_color.integer = RGBA(0, 0, 0, 255);
     self->header.destroy(self);
 }

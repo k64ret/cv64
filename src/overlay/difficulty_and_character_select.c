@@ -191,7 +191,7 @@ void characterSelect_init(characterSelect* self) {
     character_portrait->assets_file_ID = NI_ASSETS_CHARACTER_SELECTION_SCREEN;
     character_portrait->flags |= FIG_FLAG_APPLY_PRIMITIVE_COLOR;
     character_portrait->flags |= FIG_FLAG_0080;
-    character_portrait->primitive_color.integer = 0xFFFFFFFF;
+    character_portrait->primitive_color.integer = RGBA(255, 255, 255, 255);
     character_portrait->size.x                  = 0.6999999881f;
     character_portrait->size.y                  = 0.6999999881f;
     character_portrait->size.z                  = 0.6999999881f;
@@ -213,7 +213,7 @@ void characterSelect_init(characterSelect* self) {
     character_portrait->assets_file_ID = NI_ASSETS_CHARACTER_SELECTION_SCREEN;
     character_portrait->flags |= FIG_FLAG_APPLY_PRIMITIVE_COLOR;
     character_portrait->flags |= FIG_FLAG_0080;
-    character_portrait->primitive_color.integer = 0xFFFFFFFF;
+    character_portrait->primitive_color.integer = RGBA(255, 255, 255, 255);
     character_portrait->size.x                  = 0.6999999881f;
     character_portrait->size.y                  = 0.6999999881f;
     character_portrait->size.z                  = 0.6999999881f;
@@ -227,7 +227,7 @@ void characterSelect_init(characterSelect* self) {
     }
 
     // Create scroll
-    sys.background_color.integer = 0x000000FF;
+    sys.background_color.integer = RGBA(0, 0, 0, 255);
     scroll_state                 = (*createScrollState)(
         self,
         work->scroll_dowels_light,
@@ -372,12 +372,12 @@ void characterSelect_selectOption(characterSelect* self) {
     lens               = self->inner.lens;
     // Iterate through all the enabled characters and lower their brightness
     // if they're not highlighted by the lens
-    if (character_portrait->primitive_color.integer >= 0x33333400) {
+    if (character_portrait->primitive_color.integer >= RGBA(51, 51, 52, 0)) {
         for (self_temp = self, i = 0; i != NUM_CHARACTERS; i++,
             self_temp          = (u32*) self_temp + 1,
             character_portrait = self_temp->character_portraits[0]) {
             if (work->flags & CV64_BIT(i)) {
-                character_portrait->primitive_color.integer -= 0x11111100;
+                character_portrait->primitive_color.integer -= RGBA(17, 17, 17, 0);
             }
         }
     }
@@ -432,7 +432,7 @@ void characterSelect_selectOption(characterSelect* self) {
                         character_portrait = self->character_portraits[CARRIE];
                         break;
                 }
-                character_portrait->primitive_color.integer = 0xFFFFFFFF;
+                character_portrait->primitive_color.integer = RGBA(255, 255, 255, 255);
                 // Close lens
                 lens->flags &= ~WINDOW_OPENING;
                 lens->flags |= WINDOW_CLOSING;
