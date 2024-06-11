@@ -156,7 +156,7 @@ void stageSelect_moveLens(stageSelect* self) {
     s32 current_option;
     s8 previous_option;
 
-    if (self->lens_are_moving != FALSE) {
+    if (self->lens_are_moving) {
         self->lens_move_offset = self->lens_transition_rate / 4;
         if (self->lens_move_offset >= 1.) {
             self->lens_are_moving  = FALSE;
@@ -196,7 +196,7 @@ void stageSelect_warpToStage(stageSelect* self) {
     s16 i, j;
     window_work* lens = self->lens;
 
-    if (BITS_MASK(lens->flags, WINDOW_FLAG_4000 | WINDOW_FLAG_8000) >> 0xE != FALSE) {
+    if (BITS_MASK(lens->flags, WINDOW_FLAG_4000 | WINDOW_FLAG_8000) >> 0xE) {
         stageSelect_closeTextboxes(self);
 
         sys.SaveStruct_gameplay.map           = NONE;

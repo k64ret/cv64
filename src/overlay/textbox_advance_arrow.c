@@ -64,7 +64,7 @@ void textboxAdvanceArrow_loop(textboxAdvanceArrow* self) {
     u32 new_var;
 
     self->fade_timer++;
-    if ((fade_timer_prev > 9) != (((fade_timer_prev > 9) != FALSE) * 0)) { // Likely a fakematch
+    if ((fade_timer_prev > 9) != (((fade_timer_prev > 9)) * 0)) { // Likely a fakematch
         new_var = model->primitive_color.r;
         red     = new_var;
         if (red < 8.5) {

@@ -68,23 +68,33 @@ the following two things:
 #### Upper 5 bits: Execution flags
 
 ```c
-NONE         = 0x0000
-STAGE_OBJECT = 0x1000
-MAP_OVERLAY  = 0x2000
-DESTROY      = 0x8000
+    OBJ_FLAG_NONE         = 0x0000,
+    /**
+     * If `OBJ_FLAG_ENABLE_COLLISION` is set,
+     * this flag will make it so that the actor can move alongside
+     * the collision. Used in the Tunnel's gondolas,
+     * or the Tower of Execution's moving platforms
+     */
+    OBJ_FLAG_MOVE_ALONGSIDE_COLLISION = 0x0800,
+    /**
+     * If the object has any associated hard collision,
+     * such as map_actor_model's collision, this will enable it.
+     */
+    OBJ_FLAG_ENABLE_COLLISION = 0x1000,
+    OBJ_FLAG_MAP_OVERLAY  = 0x2000,
+    OBJ_FLAG_DESTROY      = 0x8000,
+    /**
+     * Used for the `data` fields in actors
+     */
+    OBJ_TYPE_DATA         = 0x8000
 ```
 
-- `STAGE_OBJECT`: notifies the game that the object is a _map actor_[^2].
-Sometimes `0x1800` is used instead.
+- `OBJ_FLAG_MAP_OVERLAY`: indicates that the code associated to the object
+needs to be [mapped by the TLB](#code-mapped-by-the-tlb) to an address in
+[KUSEG](https://en64.shoutwiki.com/wiki/N64_CPU#CPU_Addressing).
 
-- `MAP_OVERLAY`: indicates that the code associated to the object needs to be
-[mapped by the TLB](#code-mapped-by-the-tlb) to an address in [KUSEG](https://en64.shoutwiki.com/wiki/N64_CPU#CPU_Addressing).
-
-- `DESTROY`: destroys the object[^3]. Once an object is destroyed, its code will
-stop running.
-
-[^2]: A map actor is an actor meant to be used in a certain map. This includes
-most map-specific hazards or decorative elements.
+- `OBJ_FLAG_DESTROY`: destroys the object[^3].
+Once an object is destroyed, its code will stop running.
 
 [^3]: In practice, destroying an object means marking it for deletion. Doing so
 has the effect of removing the object from memory next time the game attempts to
@@ -94,7 +104,7 @@ execute it.
 
 For example, the Gardener's object ID is `0x2090`:
 
-- `0x2000` = Execution flags (`MAP_OVERLAY`)
+- `0x2000` = Execution flags (`OBJ_FLAG_MAP_OVERLAY`)
 - `0x0090` = The actual identifier
 
 There are a total of 554 object IDs assigned by KCEK, starting from 1. These can

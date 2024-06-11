@@ -26,17 +26,20 @@ void commonMoon_main_idleNight(commonMoon* self);
 void commonMoon_main_nightToDay(commonMoon* self);
 
 typedef enum commonMoon_func_id {
-    COMMONMOON_INIT,
-    COMMONMOON_LOOP
+    COMMON_MOON_INIT,
+    COMMON_MOON_LOOP
 } commonMoon_func_id_t;
 
 typedef enum commonMoon_main_func_id {
-    COMMONMOON_MAIN_IDLEDAY,
-    COMMONMOON_MAIN_DAYTONIGHT,
-    COMMONMOON_MAIN_IDLENIGHT,
-    COMMONMOON_MAIN_NIGHTTODAY
+    COMMON_MOON_MAIN_IDLEDAY,
+    COMMON_MOON_MAIN_DAYTONIGHT,
+    COMMON_MOON_MAIN_IDLENIGHT,
+    COMMON_MOON_MAIN_NIGHTTODAY
 } commonMoon_main_func_id_t;
 
 typedef void (*commonMoon_func_t)(commonMoon*);
+
+extern const u32 COMMON_MOON_BEKKAN_1F_DL;
+extern const u32 COMMON_MOON_BEKKAN_2F_DL;
 
 #endif

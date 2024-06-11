@@ -72,8 +72,9 @@ void cv64_ovl_rose_ventilator_loop(cv64_ovl_rose_ventilator_t* self) {
 
     model->primitive_color.integer = sys.primitive_color.integer;
     model->fog_color.integer       = sys.background_color.integer;
-    if ((*actor_checkSpawn)(self, model->position.x, model->position.y, model->position.z) !=
-        FALSE) {
+    if ((*actor_playerOutsideActorSpawnRadius)(
+            self, model->position.x, model->position.y, model->position.z
+        ) != FALSE) {
         // clang-format off
         /* @bug If the player is far away enough from the ventilator, it will try to go to the next function.
                 However, `cv64_ovl_rose_ventilator_funcs` only has two functions. This will make the game
@@ -151,8 +152,9 @@ void cv64_ovl_rose_door_loop(cv64_ovl_rose_door_t* self) {
     model->primitive_color.integer = sys.primitive_color.integer;
     model->fog_color.integer       = sys.background_color.integer;
 
-    if ((*actor_checkSpawn)(self, model->position.x, model->position.y, model->position.z) !=
-        FALSE) {
+    if ((*actor_playerOutsideActorSpawnRadius)(
+            self, model->position.x, model->position.y, model->position.z
+        ) != FALSE) {
         self->header.destroy(self);
     } else {
         ENTER(self, cv64_ovl_rose_door_state_funcs);

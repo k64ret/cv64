@@ -211,8 +211,9 @@ void interactuables_main(interactuables* self) {
         }
 
         // If the player is within the actor spawn radius...
-        if (actor_checkSpawn(self, model->position.x, model->position.y, model->position.z) ==
-            FALSE) {
+        if (actor_playerOutsideActorSpawnRadius(
+                self, model->position.x, model->position.y, model->position.z
+            ) == FALSE) {
             // Periodically create the flash effect
             if (self->time_when_flash_appears_over_item == self->current_flash_inactive_time) {
                 if (BITS_NOT_HAS(

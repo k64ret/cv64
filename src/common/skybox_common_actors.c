@@ -106,7 +106,9 @@ void obj0172_init(object_0172* self) {
 void obj0172_loop(object_0172* self) {
     cv64_actor_settings_t* settings = self->settings;
 
-    if (actor_checkSpawn(self, settings->position.x, settings->position.y, settings->position.z)) {
+    if (actor_playerOutsideActorSpawnRadius(
+            self, settings->position.x, settings->position.y, settings->position.z
+        )) {
         self->header.destroy(self);
     }
 }
@@ -152,7 +154,7 @@ void commonMoon_init(commonMoon* self) {
      *
      * At this point, if function `commonMoon_main_nightToDay` is accessed, then the object will go back to `commonMoon_init` and initialize another moon model,
      * plus the moon is not able to be despawned by getting far away from it,
-     * as `actor_checkSpawn` is only called from `commonMoon_main`, which gets skipped due to the bug.
+     * as `actor_playerOutsideActorSpawnRadius` is only called from `commonMoon_main`, which gets skipped due to the bug.
      *
      * Not only that, but the moon's transparency won't be updated properly during day / night transitions, since the transparency value is
      * set in `commonMoon_main` as well.
@@ -163,7 +165,9 @@ void commonMoon_init(commonMoon* self) {
 void commonMoon_main(commonMoon* self) {
     cv64_model_inf_t* model = self->model;
 
-    if (actor_checkSpawn(self, model->position.x, model->position.y, model->position.z)) {
+    if (actor_playerOutsideActorSpawnRadius(
+            self, model->position.x, model->position.y, model->position.z
+        )) {
         self->header.destroy(self);
     } else {
         ENTER(self, commonMoon_main_functions);
@@ -202,7 +206,7 @@ void commonMoon_main_nightToDay(commonMoon* self) {
     if (self->transparency < 0) {
         self->transparency = 0;
         (*object_curLevel_goToFunc)(
-            self->header.current_function, &self->header.function_info_ID, COMMONMOON_MAIN_IDLEDAY
+            self->header.current_function, &self->header.function_info_ID, COMMON_MOON_MAIN_IDLEDAY
         );
     }
 }
@@ -234,7 +238,9 @@ void obj8015C368_loop(object_8015C368* self) {
     cv64_actor_settings_t* settings;
 
     model->primitive_color.integer = sys.background_color.integer;
-    if (actor_checkSpawn(self, model->position.x, model->position.y, model->position.z)) {
+    if (actor_playerOutsideActorSpawnRadius(
+            self, model->position.x, model->position.y, model->position.z
+        )) {
         self->header.destroy(self);
     }
 

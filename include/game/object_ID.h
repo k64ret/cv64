@@ -45,7 +45,10 @@ typedef enum cv64_object_flag {
     OBJ_FLAG_ENABLE_COLLISION = 0x1000,
     OBJ_FLAG_MAP_OVERLAY  = 0x2000,
     OBJ_FLAG_DESTROY      = 0x8000,
-    OBJ_TYPE_DATA         = 0x8000     // Used for the `data` fields in actors
+    /**
+     * Used for the `data` fields in actors
+     */
+    OBJ_TYPE_DATA         = 0x8000
 } cv64_object_flag_t;
 
 typedef enum cv64_object_id_raw {

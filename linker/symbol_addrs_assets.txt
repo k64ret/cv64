@@ -1,6 +1,9 @@
 KONAMI_LOGO_DL = 0x0600C650; // segment:ni_konami_kcek_logos
 KCEK_LOGO_DL   = 0x06015CA0; // segment:ni_konami_kcek_logos
 
+COMMON_MOON_BEKKAN_1F_DL       = 0x0601C918; // segment:NI_ASSETS_BEKKAN_1F
+COMMON_MOON_BEKKAN_2F_DL       = 0x06024EF0; // segment:NI_ASSETS_BEKKAN_2F
+
 ROSE_VENTILATOR_DL = 0x06005400; // segment:NI_ASSETS_ROSE
 ROSE_DOOR_DL       = 0x06005A30; // segment:NI_ASSETS_ROSE
 
