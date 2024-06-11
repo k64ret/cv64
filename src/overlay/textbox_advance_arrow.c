@@ -32,12 +32,12 @@ void textboxAdvanceArrow_init(textboxAdvanceArrow* self) {
     self->arrow_light = arrow_light;
     (*figure_setChild)(arrow_light, common_camera_HUD);
     arrow_light->primitive_color.r     = arrow_light->primitive_color.g =
-        arrow_light->primitive_color.b = 0xA0;
+        arrow_light->primitive_color.b = 160;
     arrow_light->field5_0x3c           = 1;
-    arrow_light->blend_color.r = arrow_light->blend_color.g = arrow_light->blend_color.b = 0xCF;
-    (s8) arrow_light->fog_color.r = 0xF0; // The s8 typecast is needed for matching here
+    arrow_light->blend_color.r = arrow_light->blend_color.g = arrow_light->blend_color.b = 207;
+    (s8) arrow_light->fog_color.r = 240; // The s8 typecast is needed for matching here
     arrow_light->fog_color.g      = 0;
-    arrow_light->fog_color.b      = 0x10;
+    arrow_light->fog_color.b      = 16;
     model                 = (*modelInfo_createAndSetChild)(FIG_TYPE_HUD_ELEMENT, arrow_light);
     self->model           = model;
     model->dlist          = &TEXTBOX_ADVANCE_ARROW_DL;
@@ -68,8 +68,8 @@ void textboxAdvanceArrow_loop(textboxAdvanceArrow* self) {
         new_var = model->primitive_color.r;
         red     = new_var;
         if (red < 8.5) {
-            model->primitive_color.r = 0xFF;
-            model->primitive_color.a = 0xFF;
+            model->primitive_color.r = 255;
+            model->primitive_color.a = 255;
             self->fade_timer         = 0;
         } else {
             model->primitive_color.r = red - 8.5;

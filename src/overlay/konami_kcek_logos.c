@@ -56,10 +56,10 @@ void cv64_ovl_konamilogo_init(cv64_ovl_konamilogo_t* self) {
 void cv64_ovl_konamilogo_fade_in(cv64_ovl_konamilogo_t* self) {
     cv64_model_inf_t* model = self->model;
 
-    if (model->primitive_color.a < 0xF3) {
-        model->primitive_color.a += 0x0C;
+    if (model->primitive_color.a < 243) {
+        model->primitive_color.a += 12;
     } else {
-        model->primitive_color.a = 0xFF;
+        model->primitive_color.a = 255;
         (*object_curLevel_goToNextFuncAndClearTimer)(
             self->header.current_function, &self->header.function_info_ID
         );
@@ -87,10 +87,10 @@ void cv64_ovl_konamilogo_wait(cv64_ovl_konamilogo_t* self) {
 void cv64_ovl_konamilogo_fade_out(cv64_ovl_konamilogo_t* self) {
     cv64_model_inf_t* model = self->model;
 
-    if (model->primitive_color.a >= 0x0A) {
-        model->primitive_color.a -= 0x09;
+    if (model->primitive_color.a >= 10) {
+        model->primitive_color.a -= 9;
     } else {
-        model->primitive_color.a = 0x00;
+        model->primitive_color.a = 0;
         (*object_curLevel_goToNextFuncAndClearTimer)(
             self->header.current_function, &self->header.function_info_ID
         );
@@ -103,10 +103,10 @@ void cv64_ovl_konamilogo_kcek_fade_in(cv64_ovl_konamilogo_t* self) {
 
     model->size.x = 0.995f;
     model->dlist  = &KCEK_LOGO_DL;
-    if (model->primitive_color.a < 0xFC) {
-        model->primitive_color.a += 0x03;
+    if (model->primitive_color.a < 252) {
+        model->primitive_color.a += 3;
     } else {
-        model->primitive_color.a = 0xFF;
+        model->primitive_color.a = 255;
         (*object_curLevel_goToNextFuncAndClearTimer)(
             self->header.current_function, &self->header.function_info_ID
         );
@@ -118,10 +118,10 @@ void cv64_ovl_konamilogo_kcek_wait(cv64_ovl_konamilogo_t* self) {
     cv64_model_inf_t* model = self->model;
 
     model->size.x = 0.995f;
-    if (model->primitive_color.a < 0xFC) {
-        model->primitive_color.a += 0x03;
+    if (model->primitive_color.a < 252) {
+        model->primitive_color.a += 3;
     } else {
-        model->primitive_color.a = 0xFF;
+        model->primitive_color.a = 255;
     }
     model->dlist = &KCEK_LOGO_DL;
     if ((s32) self->header.current_function[self->header.function_info_ID].timer >= 97) {
@@ -135,10 +135,10 @@ void cv64_ovl_konamilogo_kcek_fade_out(cv64_ovl_konamilogo_t* self) {
     cv64_model_inf_t* model = self->model;
 
     model->dlist = &KCEK_LOGO_DL;
-    if (model->primitive_color.a >= 0x0D) {
-        model->primitive_color.a -= 0x0C;
+    if (model->primitive_color.a >= 13) {
+        model->primitive_color.a -= 12;
     } else {
-        model->primitive_color.a = 0x00;
+        model->primitive_color.a = 0;
         (*gamestate_change)(GAMESTATE_INTRO_CUTSCENE);
     }
     sys.background_color.r = model->primitive_color.a;
