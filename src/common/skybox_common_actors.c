@@ -144,6 +144,11 @@ void commonMoon_init(commonMoon* self) {
     }
 
     // Make the moon invisible if it's a new moon.
+    /**
+     * @bug The game should check for `moonVisibilityVars.moonVisibility`,
+     * but `moonVisibilityVars.integer` is checked instead, which yields the wrong results,
+     * as it's including the value of `moonVisibilityVars.dontUpdateMoonVisibility` as well.
+     */
     if (moonVisibilityVars.integer == MOON_VISIBILITY_NEW_MOON) {
         self->transparency       = 0;
         model->primitive_color.a = 0;
@@ -153,18 +158,23 @@ void commonMoon_init(commonMoon* self) {
     // Make the moon visible during regular nights.
     self->transparency       = 192 << 8;
     model->primitive_color.a = 192;
+
     /**
-     * @bug This will try accessing a third function in `commonMoon_functions`, but said array only has two entries.
-     * This will make the game read out of bounds, and branch into `commonMoon_main_invisible` without going through `commonMoon_main` first.
+     * @bug Since the moon is supposed to become visible, the code likely attempted to branch to function `commonMoon_main_visible` here.
+     * However, `object_curLevel_goToFunc` is used, instead of `object_nextLevel_goToFunc`, so the game will try accessing a third function
+     * in `commonMoon_functions`, rather than in `commonMoon_main_functions`, which is where `commonMoon_main_visible` is.
+     * 
+     * `commonMoon_functions` only has two entries, so this will make the game read out of bounds, and branch into `commonMoon_main_invisible`
+     * without going through `commonMoon_main` first.
      *
-     * At this point, if function `commonMoon_main_disappear` is accessed, then the object will go back to `commonMoon_init` and initialize another moon model,
-     * plus the moon is not able to be despawned by getting far away from it,
-     * as `actor_playerOutsideActorSpawnRadius` is only called from `commonMoon_main`, which gets skipped due to the bug.
+     * At this point, when function `commonMoon_main_disappear` is accessed, the object will go back to `commonMoon_init` and initialize another moon model,
+     * plus the moon is not able to be despawned by getting far away from it most of the time,
+     * as `actor_playerOutsideActorSpawnRadius` is only called from `commonMoon_main`, which normally gets skipped due to the bug.
      *
-     * Not only that, but the moon's transparency won't be updated properly during day / night transitions, since the transparency value is
+     * Not only that, but the moon's transparency won't be updated properly during day / night transitions most of the time, since the transparency value is
      * set in `commonMoon_main` as well.
      */
-    (*object_curLevel_goToFunc)(self->header.current_function, &self->header.function_info_ID, 2);
+    (*object_curLevel_goToFunc)(self->header.current_function, &self->header.function_info_ID, COMMON_MOON_MAIN_VISIBLE);
 }
 
 void commonMoon_main(commonMoon* self) {
@@ -181,6 +191,11 @@ void commonMoon_main(commonMoon* self) {
 }
 
 void commonMoon_main_invisible(commonMoon* self) {
+    /**
+     * @bug The game should check for `moonVisibilityVars.moonVisibility`,
+     * but `moonVisibilityVars.integer` is checked instead, which yields the wrong results,
+     * as it's including the value of `moonVisibilityVars.dontUpdateMoonVisibility` as well.
+     */
     if ((sys.SaveStruct_gameplay.hour >= 18) && (moonVisibilityVars.integer == MOON_VISIBILITY_NIGHT)) {
         (*object_curLevel_goToNextFuncAndClearTimer)(
             self->header.current_function, &self->header.function_info_ID
