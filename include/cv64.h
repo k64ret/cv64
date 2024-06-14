@@ -42,15 +42,23 @@ typedef u8 Addr[];
 extern u32 D_80092F50;
 extern Gfx* gDisplayListHead; // 0x800B49E0
 
+#define MOON_VISIBILITY_DAY      0  // Moon is invisible
+#define MOON_VISIBILITY_NIGHT    1  // Moon is visible
+/**
+ * New moons have been observed to happen during the following situations. During these times,
+ * the moon is not supposed to be visible:
+ *  - From 18:00 to 23:59 on the 7th day of the week, but only if the current week number is even.
+ * 
+ *  - When spawning in Forest of Silence from 00:00 to 06:00 of the 1st day of the week,
+ *    but only if the current week number is even.
+ */
+#define MOON_VISIBILITY_NEW_MOON 2  // Moon is invisible
+
 /**
  * Most of the time, these two variables are accessed as two separate `s16`.
  * However, some code accesses both variables at the same time, as an `s32`,
  * hence why we have this as a union.
  */
-#define MOON_VISIBILITY_DAY      0  // Moon is invisible
-#define MOON_VISIBILITY_NIGHT    1  // Moon is visible
-#define MOON_VISIBILITY_NEW_MOON 2  // Moon is invisible
-
 typedef union {
     struct {
         s16 moonVisibility;

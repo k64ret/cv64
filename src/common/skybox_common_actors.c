@@ -136,16 +136,21 @@ void commonMoon_init(commonMoon* self) {
         self->header.current_function, &self->header.function_info_ID
     );
 
+    // Make the moon invisible if daytime.
     if ((sys.SaveStruct_gameplay.hour >= 6) && (sys.SaveStruct_gameplay.hour < 18)) {
         self->transparency       = 0;
         model->primitive_color.a = 0;
         return;
     }
+
+    // Make the moon invisible if it's a new moon.
     if (moonVisibilityVars.integer == MOON_VISIBILITY_NEW_MOON) {
         self->transparency       = 0;
         model->primitive_color.a = 0;
         return;
     }
+
+    // Make the moon visible during regular nights.
     self->transparency       = 192 << 8;
     model->primitive_color.a = 192;
     /**
