@@ -41,15 +41,29 @@ typedef u8 Addr[];
 
 extern u32 D_80092F50;
 extern Gfx* gDisplayListHead; // 0x800B49E0
+
+/**
+ * Most of the time, these two variables are accessed as two separate `s16`.
+ * However, some code accesses both variables at the same time, as an `s32`,
+ * hence why we have this as a union.
+ */
+#define MOON_VISIBILITY_DAY      0  // Moon is invisible
+#define MOON_VISIBILITY_NIGHT    1  // Moon is visible
+#define MOON_VISIBILITY_NEW_MOON 2  // Moon is invisible
+
 typedef union {
     struct {
-        u16 map_timeOfDay;
-        u16 dont_check_map_timeOfDay;
+        s16 moonVisibility;
+        /**
+         * Don't update `moonVisibility` by calling the `updateMoonVisibility` function,
+         * so that other code can update it on its own, or not update it at all.
+         */
+        s16 dontUpdateMoonVisibility;
     };
-    u32 integer;
-} union_D_8018CDD0_10FF90;
+    s32 integer;
+} union_moonVisibilityVars;
 
-extern union_D_8018CDD0_10FF90 D_8018CDD0_10FF90;
+extern union_moonVisibilityVars moonVisibilityVars;
 
 extern void end_master_display_list();
 extern s32 menuButton_selectNextOption(s32* option, s16* param_2, s16 number_of_options);

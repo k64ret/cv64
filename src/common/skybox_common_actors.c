@@ -141,7 +141,7 @@ void commonMoon_init(commonMoon* self) {
         model->primitive_color.a = 0;
         return;
     }
-    if (D_8018CDD0_10FF90.integer == 2) {
+    if (moonVisibilityVars.integer == MOON_VISIBILITY_NEW_MOON) {
         self->transparency       = 0;
         model->primitive_color.a = 0;
         return;
@@ -176,7 +176,7 @@ void commonMoon_main(commonMoon* self) {
 }
 
 void commonMoon_main_invisible(commonMoon* self) {
-    if ((sys.SaveStruct_gameplay.hour >= 18) && (D_8018CDD0_10FF90.integer == 1)) {
+    if ((sys.SaveStruct_gameplay.hour >= 18) && (moonVisibilityVars.integer == MOON_VISIBILITY_NIGHT)) {
         (*object_curLevel_goToNextFuncAndClearTimer)(
             self->header.current_function, &self->header.function_info_ID
         );
