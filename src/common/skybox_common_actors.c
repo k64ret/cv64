@@ -66,10 +66,10 @@ commonMoon_func_t commonMoon_functions[] = {
 };
 
 commonMoon_func_t commonMoon_main_functions[] = {
-    commonMoon_main_idleDay,
-    commonMoon_main_dayToNight,
-    commonMoon_main_idleNight,
-    commonMoon_main_nightToDay
+    commonMoon_main_invisible,
+    commonMoon_main_appear,
+    commonMoon_main_visible,
+    commonMoon_main_disappear
 };
 
 obj8015C368_func_t obj8015C368_functions[] = {
@@ -150,9 +150,9 @@ void commonMoon_init(commonMoon* self) {
     model->primitive_color.a = 192;
     /**
      * @bug This will try accessing a third function in `commonMoon_functions`, but said array only has two entries.
-     * This will make the game read out of bounds, and branch into `commonMoon_main_idleDay` without going through `commonMoon_main` first.
+     * This will make the game read out of bounds, and branch into `commonMoon_main_invisible` without going through `commonMoon_main` first.
      *
-     * At this point, if function `commonMoon_main_nightToDay` is accessed, then the object will go back to `commonMoon_init` and initialize another moon model,
+     * At this point, if function `commonMoon_main_disappear` is accessed, then the object will go back to `commonMoon_init` and initialize another moon model,
      * plus the moon is not able to be despawned by getting far away from it,
      * as `actor_playerOutsideActorSpawnRadius` is only called from `commonMoon_main`, which gets skipped due to the bug.
      *
@@ -175,7 +175,7 @@ void commonMoon_main(commonMoon* self) {
     }
 }
 
-void commonMoon_main_idleDay(commonMoon* self) {
+void commonMoon_main_invisible(commonMoon* self) {
     if ((sys.SaveStruct_gameplay.hour >= 18) && (D_8018CDD0_10FF90.integer == 1)) {
         (*object_curLevel_goToNextFuncAndClearTimer)(
             self->header.current_function, &self->header.function_info_ID
@@ -183,7 +183,7 @@ void commonMoon_main_idleDay(commonMoon* self) {
     }
 }
 
-void commonMoon_main_dayToNight(commonMoon* self) {
+void commonMoon_main_appear(commonMoon* self) {
     self->transparency += 0x0147; // Actual transparency gets added up +1
     if (self->transparency >= ((192 << 8) | 1)) {
         self->transparency = 192 << 8;
@@ -193,7 +193,7 @@ void commonMoon_main_dayToNight(commonMoon* self) {
     }
 }
 
-void commonMoon_main_idleNight(commonMoon* self) {
+void commonMoon_main_visible(commonMoon* self) {
     if ((sys.SaveStruct_gameplay.hour >= 6) && (sys.SaveStruct_gameplay.hour < 18)) {
         (*object_curLevel_goToNextFuncAndClearTimer)(
             self->header.current_function, &self->header.function_info_ID
@@ -201,12 +201,12 @@ void commonMoon_main_idleNight(commonMoon* self) {
     }
 }
 
-void commonMoon_main_nightToDay(commonMoon* self) {
+void commonMoon_main_disappear(commonMoon* self) {
     self->transparency -= 0x0147; // Actual transparency gets substracted -1
     if (self->transparency < 0) {
         self->transparency = 0;
         (*object_curLevel_goToFunc)(
-            self->header.current_function, &self->header.function_info_ID, COMMON_MOON_MAIN_IDLEDAY
+            self->header.current_function, &self->header.function_info_ID, COMMON_MOON_MAIN_INVISIBLE
         );
     }
 }

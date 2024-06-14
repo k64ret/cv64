@@ -1628,10 +1628,10 @@ obj0172_loop                                 = 0x8015BFD0; // type:func segment:
 commonMoon_entrypoint                             = 0x8015C03C; // type:func segment:common
 commonMoon_init                                   = 0x8015C060; // type:func segment:common
 commonMoon_main                                   = 0x8015C178; // type:func segment:common
-commonMoon_main_idleDay                           = 0x8015C238; // type:func segment:common
-commonMoon_main_dayToNight                        = 0x8015C288; // type:func segment:common
-commonMoon_main_idleNight                         = 0x8015C2D8; // type:func segment:common
-commonMoon_main_nightToDay                        = 0x8015C320; // type:func segment:common
+commonMoon_main_invisible                           = 0x8015C238; // type:func segment:common
+commonMoon_main_appear                        = 0x8015C288; // type:func segment:common
+commonMoon_main_visible                         = 0x8015C2D8; // type:func segment:common
+commonMoon_main_disappear                        = 0x8015C320; // type:func segment:common
 
 obj8015C368_entrypoint                           = 0x8015C368; // type:func segment:common
 obj8015C368_init                                 = 0x8015C38C; // type:func segment:common

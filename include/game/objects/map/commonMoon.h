@@ -20,10 +20,10 @@ typedef struct {
 void commonMoon_entrypoint(commonMoon* self);
 void commonMoon_init(commonMoon* self);
 void commonMoon_main(commonMoon* self);
-void commonMoon_main_idleDay(commonMoon* self);
-void commonMoon_main_dayToNight(commonMoon* self);
-void commonMoon_main_idleNight(commonMoon* self);
-void commonMoon_main_nightToDay(commonMoon* self);
+void commonMoon_main_invisible(commonMoon* self);
+void commonMoon_main_appear(commonMoon* self);
+void commonMoon_main_visible(commonMoon* self);
+void commonMoon_main_disappear(commonMoon* self);
 
 typedef enum commonMoon_func_id {
     COMMON_MOON_INIT,
@@ -31,10 +31,10 @@ typedef enum commonMoon_func_id {
 } commonMoon_func_id_t;
 
 typedef enum commonMoon_main_func_id {
-    COMMON_MOON_MAIN_IDLEDAY,
-    COMMON_MOON_MAIN_DAYTONIGHT,
-    COMMON_MOON_MAIN_IDLENIGHT,
-    COMMON_MOON_MAIN_NIGHTTODAY
+    COMMON_MOON_MAIN_INVISIBLE,
+    COMMON_MOON_MAIN_APPEAR,
+    COMMON_MOON_MAIN_VISIBLE,
+    COMMON_MOON_MAIN_DISAPPEAR
 } commonMoon_main_func_id_t;
 
 typedef void (*commonMoon_func_t)(commonMoon*);
