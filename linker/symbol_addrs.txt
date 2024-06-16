@@ -1590,67 +1590,69 @@ cutsceneMgr_functions                      = 0x8016B580;
 // End of src/common/cutscene_manager.c ========================================
 
 
-// src/common/page.c ===============================================
+// src/common/page.c ===========================================================
 
 // .text
-page_entrypoint                           = 0x8014f4b0; // type:func segment:common
-page_isWorkCreated                        = 0x8014f520; // type:func segment:common
-page_init                                 = 0x8014f558; // type:func segment:common
-page_loop                                 = 0x8014f748; // type:func segment:common
-page_destroy                              = 0x8014f830; // type:func segment:common
+page_entrypoint         = 0x8014f4b0; // type:func segment:common
+page_isWorkCreated      = 0x8014f520; // type:func segment:common
+page_init               = 0x8014f558; // type:func segment:common
+page_loop               = 0x8014f748; // type:func segment:common
+page_destroy            = 0x8014f830; // type:func segment:common
 
 // .data
-page_1_hierarchy                          = 0x801815c0; // segment:common size:0x4C
-page_2_hierarchy                          = 0x8018160c; // segment:common size:0x4C
-page_3_hierarchy                          = 0x80181658; // segment:common size:0x4C
-page_flip_anim_rot_data                   = 0x801816A4; // segment:common size:0xFC
-page_functions                            = 0x801817A0; // segment:common size:0x10
+page_1_hierarchy        = 0x801815c0; // segment:common size:0x4C
+page_2_hierarchy        = 0x8018160c; // segment:common size:0x4C
+page_3_hierarchy        = 0x80181658; // segment:common size:0x4C
+page_flip_anim_rot_data = 0x801816A4; // segment:common size:0xFC
+page_functions          = 0x801817A0; // segment:common size:0x10
 
-// End of src/common/page.c ========================================
+// End of src/common/page.c ====================================================
 
-// src/common/page_work.c ===============================================
+
+// src/common/page_work.c ======================================================
 
 // .text
-pageWork_create                           = 0x8014f860; // type:func segment:common
+pageWork_create = 0x8014f860; // type:func segment:common
 
 // .rodata
-D_8018BDF0                                = 0x8018bdf0; // type:asciz segment:common size:0x0A
+D_8018BDF0      = 0x8018bdf0; // type:asciz segment:common size:0x0A
 
-// End of src/common/page_work.c ========================================
+// End of src/common/page_work.c ===============================================
 
-// src/common/skybox_common_actors.c ===============================================
+
+// src/common/skybox_common_actors.c ===========================================
 
 // .text
-obj0172_entrypoint                           = 0x8015BF00; // type:func segment:common
-obj0172_init                                 = 0x8015BF24; // type:func segment:common
-obj0172_loop                                 = 0x8015BFD0; // type:func segment:common
+obj0172_entrypoint        = 0x8015BF00; // type:func segment:common
+obj0172_init              = 0x8015BF24; // type:func segment:common
+obj0172_loop              = 0x8015BFD0; // type:func segment:common
 
-commonMoon_entrypoint                             = 0x8015C03C; // type:func segment:common
-commonMoon_init                                   = 0x8015C060; // type:func segment:common
-commonMoon_main                                   = 0x8015C178; // type:func segment:common
-commonMoon_main_invisible                           = 0x8015C238; // type:func segment:common
-commonMoon_main_appear                        = 0x8015C288; // type:func segment:common
-commonMoon_main_visible                         = 0x8015C2D8; // type:func segment:common
-commonMoon_main_disappear                        = 0x8015C320; // type:func segment:common
+commonMoon_entrypoint     = 0x8015C03C; // type:func segment:common
+commonMoon_init           = 0x8015C060; // type:func segment:common
+commonMoon_main           = 0x8015C178; // type:func segment:common
+commonMoon_main_invisible = 0x8015C238; // type:func segment:common
+commonMoon_main_appear    = 0x8015C288; // type:func segment:common
+commonMoon_main_visible   = 0x8015C2D8; // type:func segment:common
+commonMoon_main_disappear = 0x8015C320; // type:func segment:common
 
-obj8015C368_entrypoint                           = 0x8015C368; // type:func segment:common
-obj8015C368_init                                 = 0x8015C38C; // type:func segment:common
-obj8015C368_loop                                 = 0x8015C450; // type:func segment:common
+obj8015C368_entrypoint    = 0x8015C368; // type:func segment:common
+obj8015C368_init          = 0x8015C38C; // type:func segment:common
+obj8015C368_loop          = 0x8015C450; // type:func segment:common
 
 // .data
-obj0172_dlists                          = 0x80187400; // segment:common size:0x18
-commonMoon_dlists                       = 0x80187418; // segment:common size:0x18
-obj8015C368_dlists                      = 0x80187430; // segment:common size:0x18
+obj0172_dlists            = 0x80187400; // segment:common size:0x18
+commonMoon_dlists         = 0x80187418; // segment:common size:0x18
+obj8015C368_dlists        = 0x80187430; // segment:common size:0x18
 
-obj0172_functions                       = 0x80187448; // segment:common size:0x08
-commonMoon_functions                    = 0x80187450; // segment:common size:0x08
-commonMoon_main_functions               = 0x80187458; // segment:common size:0x10
-obj8015C368_functions                   = 0x80187468; // segment:common size:0x08
+obj0172_functions         = 0x80187448; // segment:common size:0x08
+commonMoon_functions      = 0x80187450; // segment:common size:0x08
+commonMoon_main_functions = 0x80187458; // segment:common size:0x10
+obj8015C368_functions     = 0x80187468; // segment:common size:0x08
 
 // .rodata
-D_8018C650                              = 0x8018C650; // type:f32 segment:common
+D_8018C650                = 0x8018C650; // type:f32 segment:common
 
-// End of src/common/skybox_common_actors.c ========================================
+// End of src/common/skybox_common_actors.c ====================================
 
 memory_clear = 0x80000770;
 memory_copy = 0x800008d0;

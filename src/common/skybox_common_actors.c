@@ -3,18 +3,21 @@
  *
  * This file contains code for three scrapped skybox-related actors.
  *
- * We know they were scrapped because these objects despawn the moment their code starts running,
- * as their `entrypoint` function just calls the destroy function.
- * All of these objects could have appeared in the first 6 maps, but `commonMoon`, the only object with
- * non-NULL addresses on its assets array, only has assets assigned for the Villa Foyer and Hallway maps,
- * so that object can only work on those maps.
+ * We know they were scrapped because these objects despawn the moment their code starts running, as
+ * their `entrypoint` function just calls the destroy function. All of these objects could have
+ * appeared in the first 6 maps, but `commonMoon`, the only object with non-NULL addresses on its
+ * assets array, only has assets assigned for the Villa Foyer and Hallway maps, so that object can
+ * only work on those maps.
  *
- * - object_0172: Unknown static element. The code assigns the actor with a yellow-ish color, so it may have been the sun?
- *                A sun is only seen in the ending cutscenes, but that one is part of the map objects overlay for the `ENDING` map.
+ * - object_0172:     Unknown static element. The code assigns the actor with a yellow-ish color, so
+ *                    it may have been the sun? A sun is only seen in the ending cutscenes, but that
+ *                    one is part of the map objects overlay for the `ENDING` map.
  *
- * - commonMoon:  A moon that was meant to show up at night in the outside windows of Villa Foyer and Hallway.
- *                This one is actually spawned in those maps, but it's destroyed immediatly. Previously seen in prerelease screenshots from a magazine.
- *                Note that this moon is different from the one that shows up normally during gameplay. That one is part of the `skybox` object.
+ * - commonMoon:      A moon that was meant to show up at night in the outside windows of Villa
+ *                    Foyer and Hallway. This one is actually spawned in those maps, but it's
+ *                    destroyed immediatly. Previously seen in prerelease screenshots from a
+ *                    magazine. Note that this moon is different from the one that shows up normally
+ *                    during gameplay. That one is part of the `skybox` object.
  *
  * - object_8015C368: Unknown element that would have moved sideways, either forwards or backwards.
  *                    This object doesn't have an ID.
@@ -145,9 +148,9 @@ void commonMoon_init(commonMoon* self) {
 
     // Make the moon invisible if it's a new moon.
     /**
-     * @bug The game should check for `moonVisibilityVars.moonVisibility`,
-     * but `moonVisibilityVars.integer` is checked instead, which yields the wrong results,
-     * as it's including the value of `moonVisibilityVars.dontUpdateMoonVisibility` as well.
+     * @bug The game should check for `moonVisibilityVars.moonVisibility`, but
+     * `moonVisibilityVars.integer` is checked instead, which yields the wrong results, as it's
+     * including the value of `moonVisibilityVars.dontUpdateMoonVisibility` as well.
      */
     if (moonVisibilityVars.integer == MOON_VISIBILITY_NEW_MOON) {
         self->transparency       = 0;
@@ -160,21 +163,28 @@ void commonMoon_init(commonMoon* self) {
     model->primitive_color.a = 192;
 
     /**
-     * @bug Since the moon is supposed to become visible, the code likely attempted to branch to function `commonMoon_main_visible` here.
-     * However, `object_curLevel_goToFunc` is used, instead of `object_nextLevel_goToFunc`, so the game will try accessing a third function
-     * in `commonMoon_functions`, rather than in `commonMoon_main_functions`, which is where `commonMoon_main_visible` is.
-     * 
-     * `commonMoon_functions` only has two entries, so this will make the game read out of bounds, and branch into `commonMoon_main_invisible`
-     * without going through `commonMoon_main` first.
+     * @bug Since the moon is supposed to become visible, the code likely attempted to branch to
+     * function `commonMoon_main_visible` here. However, `object_curLevel_goToFunc` is used, instead
+     * of `object_nextLevel_goToFunc`, so the game will try accessing a third function in
+     * `commonMoon_functions`, rather than in `commonMoon_main_functions`, which is where
+     * `commonMoon_main_visible` is.
      *
-     * At this point, when function `commonMoon_main_disappear` is accessed, the object will go back to `commonMoon_init` and initialize another moon model,
-     * plus the moon is not able to be despawned by getting far away from it most of the time,
-     * as `actor_playerOutsideActorSpawnRadius` is only called from `commonMoon_main`, which normally gets skipped due to the bug.
+     * `commonMoon_functions` only has two entries, so this will make the game read out of bounds,
+     * and branch into `commonMoon_main_invisible` without going through `commonMoon_main` first.
      *
-     * Not only that, but the moon's transparency won't be updated properly during day / night transitions most of the time, since the transparency value is
-     * set in `commonMoon_main` as well.
+     * At this point, when function `commonMoon_main_disappear` is accessed, the object will go back
+     * to `commonMoon_init` and initialize another moon model, plus the moon is not able to be
+     * despawned by getting far away from it most of the time, as
+     * `actor_playerOutsideActorSpawnRadius` is only called from `commonMoon_main`, which normally
+     * gets skipped due to the bug.
+     *
+     * Not only that, but the moon's transparency won't be updated properly during day / night
+     * transitions most of the time, since the transparency value is set in `commonMoon_main` as
+     * well.
      */
-    (*object_curLevel_goToFunc)(self->header.current_function, &self->header.function_info_ID, COMMON_MOON_MAIN_VISIBLE);
+    (*object_curLevel_goToFunc)(
+        self->header.current_function, &self->header.function_info_ID, COMMON_MOON_MAIN_VISIBLE
+    );
 }
 
 void commonMoon_main(commonMoon* self) {
@@ -192,11 +202,12 @@ void commonMoon_main(commonMoon* self) {
 
 void commonMoon_main_invisible(commonMoon* self) {
     /**
-     * @bug The game should check for `moonVisibilityVars.moonVisibility`,
-     * but `moonVisibilityVars.integer` is checked instead, which yields the wrong results,
-     * as it's including the value of `moonVisibilityVars.dontUpdateMoonVisibility` as well.
+     * @bug The game should check for `moonVisibilityVars.moonVisibility`, but
+     * `moonVisibilityVars.integer` is checked instead, which yields the wrong results, as it's
+     * including the value of `moonVisibilityVars.dontUpdateMoonVisibility` as well.
      */
-    if ((sys.SaveStruct_gameplay.hour >= 18) && (moonVisibilityVars.integer == MOON_VISIBILITY_NIGHT)) {
+    if ((sys.SaveStruct_gameplay.hour >= 18) &&
+        (moonVisibilityVars.integer == MOON_VISIBILITY_NIGHT)) {
         (*object_curLevel_goToNextFuncAndClearTimer)(
             self->header.current_function, &self->header.function_info_ID
         );
@@ -226,7 +237,9 @@ void commonMoon_main_disappear(commonMoon* self) {
     if (self->transparency < 0) {
         self->transparency = 0;
         (*object_curLevel_goToFunc)(
-            self->header.current_function, &self->header.function_info_ID, COMMON_MOON_MAIN_INVISIBLE
+            self->header.current_function,
+            &self->header.function_info_ID,
+            COMMON_MOON_MAIN_INVISIBLE
         );
     }
 }

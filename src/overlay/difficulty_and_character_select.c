@@ -309,9 +309,9 @@ void characterSelect_createLens(characterSelect* self) {
 
     if ((s8) work->lens_not_moving) {
         /**
-         * Make it so that the character selection menu can be accessed during gameplay.
-         * In the final game, only the Button Config menu can be accessed during gameplay
-         * (through the Pause Menu)
+         * Make it so that the character selection menu can be accessed during gameplay. In the
+         * final game, only the Button Config menu can be accessed during gameplay (through the
+         * Pause Menu)
          */
         if ((*objectList_findFirstObjectByID)(MENU_GAMEPLAY_MENUMGR) != NULL) {
             self->inner.lens = (*lens_create)(
@@ -484,9 +484,7 @@ void characterSelect_selectOption(characterSelect* self) {
                 );
                 return;
             }
-        }
-        // Player has selected a new character
-        else {
+        } else { // Player has selected a new character
             work->lens_not_moving           = FALSE;
             self->inner.lens_pos_multiplier = 0.0f;
             self->inner.lens_pos.x          = lens_pos[work->current_character_option].x -
