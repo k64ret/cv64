@@ -64,7 +64,7 @@ void difficultySelect_loop(characterSelect* self) {
             (*miniScroll_setPosition)(inner->mini_scroll, 0.0f, 53.0f, 80.0f);
             (*miniScroll_setWidth)(inner->mini_scroll, 1.1599999666214f, 0.689999997615814f, 1.0f);
             (*miniScroll_setFlags)(inner->mini_scroll, MINISCROLL_FLAG_00000001);
-            if (sys.SaveStruct_gameplay.flags & SAVE_FLAG_HARD_MODE_UNLOCKED) {
+            if (BITS_HAS(sys.SaveStruct_gameplay.flags, SAVE_FLAG_HARD_MODE_UNLOCKED)) {
                 inner->difficulty_select_state = CREATE_TEXT_HARD_MODE;
             } else {
                 inner->difficulty_select_state = CREATE_TEXT_NON_HARD_MODE;
@@ -126,21 +126,21 @@ void difficultySelect_loop(characterSelect* self) {
                     return;
                 // Easy
                 case 1:
-                    sys.SaveStruct_gameplay.flags |= SAVE_FLAG_EASY,
-                        sys.SaveStruct_gameplay.flags &= ~SAVE_FLAG_NORMAL,
-                        sys.SaveStruct_gameplay.flags &= ~SAVE_FLAG_HARD;
+                    BITS_SET(sys.SaveStruct_gameplay.flags, SAVE_FLAG_EASY),
+                        BITS_UNSET(sys.SaveStruct_gameplay.flags, SAVE_FLAG_NORMAL),
+                        BITS_UNSET(sys.SaveStruct_gameplay.flags, SAVE_FLAG_HARD);
                     break;
                 // Normal
                 case 2:
-                    sys.SaveStruct_gameplay.flags &= ~SAVE_FLAG_EASY,
-                        sys.SaveStruct_gameplay.flags |= SAVE_FLAG_NORMAL,
-                        sys.SaveStruct_gameplay.flags &= ~SAVE_FLAG_HARD;
+                    BITS_UNSET(sys.SaveStruct_gameplay.flags, SAVE_FLAG_EASY),
+                        BITS_SET(sys.SaveStruct_gameplay.flags, SAVE_FLAG_NORMAL),
+                        BITS_UNSET(sys.SaveStruct_gameplay.flags, SAVE_FLAG_HARD);
                     break;
                 // Hard
                 case 3:
-                    sys.SaveStruct_gameplay.flags &= ~SAVE_FLAG_EASY,
-                        sys.SaveStruct_gameplay.flags &= ~SAVE_FLAG_NORMAL,
-                        sys.SaveStruct_gameplay.flags |= SAVE_FLAG_HARD;
+                    BITS_UNSET(sys.SaveStruct_gameplay.flags, SAVE_FLAG_EASY),
+                        BITS_UNSET(sys.SaveStruct_gameplay.flags, SAVE_FLAG_NORMAL),
+                        BITS_SET(sys.SaveStruct_gameplay.flags, SAVE_FLAG_HARD);
                     break;
             }
             inner->difficulty_select_state++;
@@ -150,7 +150,7 @@ void difficultySelect_loop(characterSelect* self) {
             (*miniScroll_setFlags)(
                 inner->mini_scroll, MINISCROLL_FLAG_00000004 | MINISCROLL_FLAG_00000001
             );
-            inner->difficulty_text->flags |= CLOSE_TEXTBOX;
+            BITS_SET(inner->difficulty_text->flags, CLOSE_TEXTBOX);
             inner->difficulty_select_state = CREATE_SCROLL;
             inner->difficulty_text         = NULL;
             inner->mini_scroll             = NULL;
@@ -189,8 +189,8 @@ void characterSelect_init(characterSelect* self) {
     character_portrait->dlist =
         FIG_APPLY_VARIABLE_TEXTURE_AND_PALETTE((u32) &REINHARDT_PORTRAIT_DL);
     character_portrait->assets_file_ID = NI_ASSETS_CHARACTER_SELECTION_SCREEN;
-    character_portrait->flags |= FIG_FLAG_APPLY_PRIMITIVE_COLOR;
-    character_portrait->flags |= FIG_FLAG_0080;
+    BITS_SET(character_portrait->flags, FIG_FLAG_APPLY_PRIMITIVE_COLOR);
+    BITS_SET(character_portrait->flags, FIG_FLAG_0080);
     character_portrait->primitive_color.integer = RGBA(255, 255, 255, 255);
     character_portrait->size.x                  = 0.6999999881f;
     character_portrait->size.y                  = 0.6999999881f;
@@ -198,7 +198,7 @@ void characterSelect_init(characterSelect* self) {
     character_portrait->position.x              = -50.0f;
     character_portrait->position.y              = 10.0f;
     character_portrait->position.z              = 67.0f;
-    if (work->flags & ENABLE_REINHARDT) {
+    if (BITS_HAS(work->flags, ENABLE_REINHARDT)) {
         character_portrait->palette = ENABLED_PALETTE;
     } else {
         character_portrait->palette = DISABLED_PALETTE;
@@ -211,8 +211,8 @@ void characterSelect_init(characterSelect* self) {
     character_portrait->material_dlist = &CARRIE_PORTRAIT_MATERIAL_DL;
     character_portrait->dlist = FIG_APPLY_VARIABLE_TEXTURE_AND_PALETTE((u32) &CARRIE_PORTRAIT_DL);
     character_portrait->assets_file_ID = NI_ASSETS_CHARACTER_SELECTION_SCREEN;
-    character_portrait->flags |= FIG_FLAG_APPLY_PRIMITIVE_COLOR;
-    character_portrait->flags |= FIG_FLAG_0080;
+    BITS_SET(character_portrait->flags, FIG_FLAG_APPLY_PRIMITIVE_COLOR);
+    BITS_SET(character_portrait->flags, FIG_FLAG_0080);
     character_portrait->primitive_color.integer = RGBA(255, 255, 255, 255);
     character_portrait->size.x                  = 0.6999999881f;
     character_portrait->size.y                  = 0.6999999881f;
@@ -220,7 +220,7 @@ void characterSelect_init(characterSelect* self) {
     character_portrait->position.x              = 50.0f;
     character_portrait->position.y              = 10.0f;
     character_portrait->position.z              = 67.0f;
-    if (work->flags & ENABLE_CARRIE) {
+    if (BITS_HAS(work->flags, ENABLE_CARRIE)) {
         character_portrait->palette = ENABLED_PALETTE;
     } else {
         character_portrait->palette = DISABLED_PALETTE;
@@ -295,8 +295,8 @@ void characterSelect_openScroll(characterSelect* self) {
         scroll_state->position.y -= 6.0f;
         return;
     }
-    scroll_state->flags &= ~SCROLL_STATE_FLAG_CLOSING;
-    scroll_state->flags |= SCROLL_STATE_FLAG_OPENING;
+    BITS_UNSET(scroll_state->flags, SCROLL_STATE_FLAG_CLOSING);
+    BITS_SET(scroll_state->flags, SCROLL_STATE_FLAG_OPENING);
     (*object_curLevel_goToNextFuncAndClearTimer)(
         self->header.current_function, &self->header.function_info_ID
     );
@@ -345,14 +345,14 @@ void characterSelect_createLens(characterSelect* self) {
             (*windowWork_setParams)(lens, WINDOW_FLAG_200000, 9, 9, 6.0f, 3.299999952f, NULL);
         }
         // Open the lens
-        lens->flags &= ~WINDOW_CLOSING;
-        lens->flags |= WINDOW_OPENING;
+        BITS_UNSET(lens->flags, WINDOW_CLOSING);
+        BITS_SET(lens->flags, WINDOW_OPENING);
         (*object_curLevel_goToNextFuncAndClearTimer)(
             self->header.current_function, &self->header.function_info_ID
         );
         return;
     }
-    if (scroll_state->flags & SCROLL_STATE_FLAG_OPENED) {
+    if (BITS_HAS(scroll_state->flags, SCROLL_STATE_FLAG_OPENED)) {
         work->lens_not_moving = TRUE;
     }
 }
@@ -376,7 +376,7 @@ void characterSelect_selectOption(characterSelect* self) {
         for (self_temp = self, i = 0; i != NUM_CHARACTERS; i++,
             self_temp          = (u32*) self_temp + 1,
             character_portrait = self_temp->character_portraits[0]) {
-            if (work->flags & CV64_BIT(i)) {
+            if (BITS_HAS(work->flags, CV64_BIT(i))) {
                 character_portrait->primitive_color.integer -= RGBA(17, 17, 17, 0);
             }
         }
@@ -404,22 +404,31 @@ void characterSelect_selectOption(characterSelect* self) {
                 // Apply alternate costume if moving up + if the appropiate Special jewels were obtained
                 if (CONT_BTNS_PRESSED(CONT_0, U_JPAD) || (sys.controllers[0].joystick_y >= 26)) {
                     // Make sure the player has finished the game before trying to assign the alternate costume
-                    if ((((sys.SaveStruct_gameplay.flags & SAVE_FLAG_REINDHART_GOOD_ENDING) ||
-                          (sys.SaveStruct_gameplay.flags & SAVE_FLAG_CARRIE_GOOD_ENDING)) ||
-                         (sys.SaveStruct_gameplay.flags & SAVE_FLAG_REINDHART_BAD_ENDING)) ||
-                        (sys.SaveStruct_gameplay.flags & SAVE_FLAG_CARRIE_BAD_ENDING)) {
+                    if (((BITS_HAS(
+                              sys.SaveStruct_gameplay.flags, SAVE_FLAG_REINDHART_GOOD_ENDING
+                          ) ||
+                          BITS_HAS(sys.SaveStruct_gameplay.flags, SAVE_FLAG_CARRIE_GOOD_ENDING)) ||
+                         BITS_HAS(sys.SaveStruct_gameplay.flags, SAVE_FLAG_REINDHART_BAD_ENDING)) ||
+                        BITS_HAS(sys.SaveStruct_gameplay.flags, SAVE_FLAG_CARRIE_BAD_ENDING)) {
                         // Reinhardt is selected
                         if (((u32) work->previous_character_option == REINHARDT) &&
-                            (sys.SaveStruct_gameplay.flags & SAVE_FLAG_HAVE_REINHARDT_ALT_COSTUME
+                            BITS_HAS(
+                                sys.SaveStruct_gameplay.flags, SAVE_FLAG_HAVE_REINHARDT_ALT_COSTUME
                             )) {
                             sys.alternate_costume = TRUE;
-                            sys.SaveStruct_gameplay.flags |= SAVE_FLAG_COSTUME_IS_BEING_USED;
+                            BITS_SET(
+                                sys.SaveStruct_gameplay.flags, SAVE_FLAG_COSTUME_IS_BEING_USED
+                            );
                         }
                         // Carrie is selected
                         if (((u32) work->previous_character_option == CARRIE) &&
-                            (sys.SaveStruct_gameplay.flags & SAVE_FLAG_HAVE_CARRIE_ALT_COSTUME)) {
+                            BITS_HAS(
+                                sys.SaveStruct_gameplay.flags, SAVE_FLAG_HAVE_CARRIE_ALT_COSTUME
+                            )) {
                             sys.alternate_costume = TRUE;
-                            sys.SaveStruct_gameplay.flags |= SAVE_FLAG_COSTUME_IS_BEING_USED;
+                            BITS_SET(
+                                sys.SaveStruct_gameplay.flags, SAVE_FLAG_COSTUME_IS_BEING_USED
+                            );
                         }
                     }
                 }
@@ -434,8 +443,8 @@ void characterSelect_selectOption(characterSelect* self) {
                 }
                 character_portrait->primitive_color.integer = RGBA(255, 255, 255, 255);
                 // Close lens
-                lens->flags &= ~WINDOW_OPENING;
-                lens->flags |= WINDOW_CLOSING;
+                BITS_UNSET(lens->flags, WINDOW_OPENING);
+                BITS_SET(lens->flags, WINDOW_CLOSING);
                 // Display a red circle on the selected character
                 mark = (*markWork_create)(
                     self,
@@ -450,7 +459,7 @@ void characterSelect_selectOption(characterSelect* self) {
                     20.0f
                 );
                 self->inner.mark = mark;
-                mark->flags |= MARK_FLAG_DISPLAY;
+                BITS_SET(mark->flags, MARK_FLAG_DISPLAY);
                 work->lens_not_moving = work->field_0x20 = FALSE;
                 (*object_curLevel_goToNextFuncAndClearTimer)(
                     self->header.current_function, &self->header.function_info_ID
@@ -458,10 +467,10 @@ void characterSelect_selectOption(characterSelect* self) {
                 return;
             }
             // Back out of the menu
-            if CONT_BTNS_PRESSED (CONT_0, B_BUTTON) {
+            if (CONT_BTNS_PRESSED(CONT_0, B_BUTTON)) {
                 // Close lens
-                lens->flags &= ~WINDOW_OPENING;
-                lens->flags |= WINDOW_CLOSING;
+                BITS_UNSET(lens->flags, WINDOW_OPENING);
+                BITS_SET(lens->flags, WINDOW_CLOSING);
                 // Display a red cross on the center of the screen
                 mark = (*markWork_create)(
                     self,
@@ -476,7 +485,7 @@ void characterSelect_selectOption(characterSelect* self) {
                     20.0f
                 );
                 self->inner.mark = mark;
-                mark->flags |= MARK_FLAG_DISPLAY;
+                BITS_SET(mark->flags, MARK_FLAG_DISPLAY);
                 work->lens_not_moving = work->field_0x20 = FALSE;
                 work->current_character_option           = -1;
                 (*object_curLevel_goToNextFuncAndClearTimer)(
@@ -525,29 +534,29 @@ void characterSelect_optionSelected(characterSelect* self) {
             // TODO: (WINDOW_CLOSING | WINDOW_OPENING) represents flag 0x300.
             // However, we don't know if that specific flag represents something
             // not related to opening / closing the lens
-            if (((lens_temp2->flags & 0x300) >> 8) == FALSE) {
+            if ((BITS_MASK(lens_temp2->flags, 0x300) >> 8) == FALSE) {
                 if (1) {
                 }
-                lens_temp2->flags |= 0x300;
+                BITS_SET(lens_temp2->flags, 0x300);
                 self->inner.lens = NULL;
             }
-        } else if (((mark->flags & MARK_FLAG_DISPLAY) >> 2) == FALSE) {
-            scroll_state->flags &= ~SCROLL_STATE_FLAG_OPENING;
-            scroll_state->flags |= SCROLL_STATE_FLAG_CLOSING;
+        } else if ((BITS_MASK(mark->flags, MARK_FLAG_DISPLAY) >> 2) == FALSE) {
+            BITS_UNSET(scroll_state->flags, SCROLL_STATE_FLAG_OPENING);
+            BITS_SET(scroll_state->flags, SCROLL_STATE_FLAG_CLOSING);
             work->lens_not_moving = TRUE;
         }
-    } else if ((self->inner.scrollState != NULL) && !(scroll_state->flags & SCROLL_STATE_FLAG_HIDE)) {
+    } else if ((self->inner.scrollState != NULL) && BITS_NOT_HAS(scroll_state->flags, SCROLL_STATE_FLAG_HIDE)) {
         if (1) {
         }
         if (scroll_state->position.y > 60.0f) {
             if (lens_temp1 && self->inner.lens) {
             }
-            mark->flags &= ~MARK_FLAG_DISPLAY;
-            mark->flags |= MARK_FLAG_DESTROY;
-            self->inner.character_names[REINHARDT]->flags |= CLOSE_TEXTBOX;
+            BITS_UNSET(mark->flags, MARK_FLAG_DISPLAY);
+            BITS_SET(mark->flags, MARK_FLAG_DESTROY);
+            BITS_SET(self->inner.character_names[REINHARDT]->flags, CLOSE_TEXTBOX);
             if (1) {
             }
-            self->inner.character_names[CARRIE]->flags |= CLOSE_TEXTBOX;
+            BITS_SET(self->inner.character_names[CARRIE]->flags, CLOSE_TEXTBOX);
             scroll_state->flags     = SCROLL_STATE_FLAG_HIDE;
             self->inner.scrollState = NULL;
             work->player_character  = work->current_character_option + 1;
@@ -601,7 +610,7 @@ void characterSelect_determineCharacterToSelect(
                 work->number_of_characters + work->current_character_option;
         }
         // Check if the characters are disabled. If not, don't select them.
-        if (!(work->flags & (CV64_BIT(work->current_character_option)))) {
+        if (BITS_NOT_HAS(work->flags, CV64_BIT(work->current_character_option))) {
             work->current_character_option =
                 work->current_character_option + new_character_option_offset;
             new_character_option_offset = (u8) new_character_option_offset;

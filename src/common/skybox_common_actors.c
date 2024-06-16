@@ -97,7 +97,7 @@ void obj0172_init(object_0172* self) {
     actor_model_set_pos_and_angle(self, model);
     model->assets_file_ID = MAP_ASSETS_FILE_ID;
     model->dlist          = obj0172_dlists[sys.SaveStruct_gameplay.map];
-    model->flags |= FIG_FLAG_APPLY_PRIMITIVE_COLOR;
+    BITS_SET(model->flags, FIG_FLAG_APPLY_PRIMITIVE_COLOR);
     model->primitive_color.integer = RGBA(192, 192, 128, 255);
     model->size.x                  = 0.05f;
     model->size.y                  = 0.05f;
@@ -133,7 +133,7 @@ void commonMoon_init(commonMoon* self) {
     actor_model_set_pos_and_angle(self, model);
     model->assets_file_ID = MAP_ASSETS_FILE_ID;
     model->dlist          = commonMoon_dlists[sys.SaveStruct_gameplay.map];
-    model->flags |= FIG_FLAG_APPLY_PRIMITIVE_COLOR;
+    BITS_SET(model->flags, FIG_FLAG_APPLY_PRIMITIVE_COLOR);
     model->primitive_color.integer = RGBA(128, 128, 128, 255);
     (*object_curLevel_goToNextFuncAndClearTimer)(
         self->header.current_function, &self->header.function_info_ID
@@ -259,7 +259,7 @@ void obj8015C368_init(object_8015C368* self) {
     actor_model_set_pos_and_angle(self, model);
     model->assets_file_ID = MAP_ASSETS_FILE_ID;
     model->dlist = obj8015C368_dlists[sys.SaveStruct_gameplay.map][settings->variable_1 & 0xFF];
-    model->flags |= FIG_FLAG_APPLY_PRIMITIVE_COLOR;
+    BITS_SET(model->flags, FIG_FLAG_APPLY_PRIMITIVE_COLOR);
     model->primitive_color.integer = sys.background_color.integer;
     (*object_curLevel_goToNextFuncAndClearTimer)(
         self->header.current_function, &self->header.function_info_ID
@@ -278,7 +278,7 @@ void obj8015C368_loop(object_8015C368* self) {
     }
 
     settings = self->settings;
-    if (settings->variable_1 & 0xFF) {
+    if (BITS_HAS(settings->variable_1, 0xFF)) {
         model->position.x += 1.0;
         if (((f32) settings->position.x + 32.0) < model->position.x) {
             model->position.x = settings->position.x;
