@@ -50,7 +50,7 @@ func_800027BC_33BC                     = 0x800027BC; // type:func
 func_8000287C_347C                     = 0x8000287C; // type:func
 
 // .data
-Objects_functions                      = 0x80092274; // size:0x2216
+Objects_functions                      = 0x80092274; // size:0x8A8
 objects_array                          = 0x80342060;
 objects_number_of_instances_per_object = 0x8034CE60;
 
@@ -2818,6 +2818,7 @@ decorativeElements_functions = 0x80186e20;
 breakable_rock_info_array = 0x80189348;
 breakableRock_breaking_gravity = 0x8018c830;
 villa_chandelier_breaking_gravity = 0x8018c810;
+D_80092B2C = 0x80092B2C;
 atan2Tbl = 0x80092b50;
 running_turning_angle_speed = 0x803ddd58;
 Player_idle_functions = 0x803ddb74;
