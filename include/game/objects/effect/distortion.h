@@ -7,6 +7,6 @@
 // ID: 0x0069
 typedef struct {
     u8 field_0x00[OBJECT_SIZE];
-} distortion_obj;
+} obj_distortion;
 
 #endif

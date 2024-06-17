@@ -74,7 +74,7 @@ void stageSelect_initGraphics(stageSelect* self) {
         bg_model->assets_file_ID   = NI_ASSETS_MENU;
         bg_model->dlist            = &MENU_RED_BACKGROUND_DL;
         BITS_SET(bg_model->flags, FIG_FLAG_APPLY_PRIMITIVE_COLOR);
-        bg_model->primitive_color.integer = (s8) 0x000000FF; // Slight fakematch?
+        bg_model->primitive_color.integer = RGBA(255, 255, 255, 255);
         bg_model->position.x              = 0.0f;
         bg_model->position.y              = 0.0f;
         bg_model->position.z              = 0.0f;
@@ -130,8 +130,8 @@ void stageSelect_initLens(stageSelect* self) {
         self->lens = (*lens_create)(
             self,
             common_camera_HUD,
-            (WINDOW_FLAG_800000 | WINDOW_FLAG_80 | WINDOW_FLAG_20 | WINDOW_FLAG_10 | WINDOW_FLAG_4 |
-             WINDOW_FLAG_1),
+            (WINDOW_FLAG_ENABLE_DISTORTION_EFFECT | WINDOW_FLAG_80 | WINDOW_FLAG_OPEN_DOWN_RIGHT |
+             WINDOW_FLAG_OPEN_RIGHT_DOWN | WINDOW_FLAG_OPEN_DOWN | WINDOW_FLAG_OPEN_RIGHT),
             -120.0f,
             61.0f,
             10.0f,
@@ -156,7 +156,7 @@ void stageSelect_moveLens(stageSelect* self) {
     s32 current_option;
     s8 previous_option;
 
-    if (self->lens_are_moving != FALSE) {
+    if (self->lens_are_moving) {
         self->lens_move_offset = self->lens_transition_rate / 4;
         if (self->lens_move_offset >= 1.) {
             self->lens_are_moving  = FALSE;
@@ -170,8 +170,8 @@ void stageSelect_moveLens(stageSelect* self) {
     current_option  = self->current_option;
     previous_option = self->previous_option;
     if (current_option == (u32) previous_option) {
-        if (BITS_HAS(sys.controllers[0].buttons_pressed, A_BUTTON) ||
-            BITS_HAS(sys.controllers[0].buttons_pressed, START_BUTTON | RECENTER_BUTTON)) {
+        if (CONT_BTNS_PRESSED(CONT_0, A_BUTTON) ||
+            CONT_BTNS_PRESSED(CONT_0, START_BUTTON | RECENTER_BUTTON)) {
             BITS_UNSET(lens->flags, WINDOW_OPENING);
             BITS_SET(lens->flags, WINDOW_CLOSING);
             (*object_curLevel_goToNextFuncAndClearTimer)(
@@ -196,7 +196,7 @@ void stageSelect_warpToStage(stageSelect* self) {
     s16 i, j;
     window_work* lens = self->lens;
 
-    if (BITS_MASK(lens->flags, WINDOW_FLAG_4000 | WINDOW_FLAG_8000) >> 0xE != FALSE) {
+    if (BITS_MASK(lens->flags, WINDOW_FLAG_4000 | WINDOW_FLAG_8000) >> 0xE) {
         stageSelect_closeTextboxes(self);
 
         sys.SaveStruct_gameplay.map           = NONE;

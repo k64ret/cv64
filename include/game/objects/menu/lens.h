@@ -25,7 +25,7 @@ typedef struct {
     void* field_0x54;
     void* field_0x58;
     void* field_0x5C;
-    distortion_obj* distortion;
+    obj_distortion* distortion;
     struct_78* field_0x64;
     window_work* field_0x68;
     window_work* field_0x6C;

@@ -35,8 +35,11 @@
 #define DISABLED_PALETTE 1 // Unused
 
 typedef enum pc_select_work_flags {
-    ENABLE_REINHARDT = 0x01,
-    ENABLE_CARRIE    = 0x02
+    ENABLE_REINHARDT        = 0x01,
+    ENABLE_CARRIE           = 0x02,
+    ENABLE_CORNELL          = 0x04,   // Unused
+    ENABLE_COLLER           = 0x08,   // Unused
+    PC_SELECT_WORK_FLAG_40  = 0x40    // Used, but never read from in practice
 } pc_select_work_flags;
 
 typedef enum difficulty_select_state_enum {

@@ -27,9 +27,7 @@ void cv64_ovl_konamilogo_entrypoint(cv64_ovl_konamilogo_t* self) {
 }
 
 void cv64_ovl_konamilogo_check_btn_press(cv64_ovl_konamilogo_t* self) {
-    if ((sys.controllers[0].buttons_pressed | sys.controllers[1].buttons_pressed |
-         sys.controllers[2].buttons_pressed | sys.controllers[3].buttons_pressed) &
-        (START_BUTTON | RECENTER_BUTTON)) {
+    if (CONT_ALL_BTNS_PRESSED(START_BUTTON | RECENTER_BUTTON)) {
         (*object_curLevel_goToFunc)(
             self->header.current_function, &self->header.function_info_ID, KONAMILOGO_KCEK_WAIT
         );
@@ -46,9 +44,9 @@ void cv64_ovl_konamilogo_init(cv64_ovl_konamilogo_t* self) {
     model->assets_file_ID        = NI_ASSETS_KONAMI_AND_KCEK_LOGOS;
     model->size.x                = 0.9975f;
     model->size.y                = 1.005f;
-    sys.background_color.integer = 0x000000FF; // Black (opaque)
+    sys.background_color.integer = RGBA(0, 0, 0, 255);
     BITS_SET(model->flags, FIG_FLAG_APPLY_PRIMITIVE_COLOR);
-    model->primitive_color.integer = 0xFFFFFF00; // White (transparent)
+    model->primitive_color.integer = RGBA(255, 255, 255, 0);
 
     GO_TO_NEXT_FUNC_NOW(
         self, cv64_ovl_konamilogo_funcs, curFunc, (*object_curLevel_goToNextFuncAndClearTimer)
@@ -58,10 +56,10 @@ void cv64_ovl_konamilogo_init(cv64_ovl_konamilogo_t* self) {
 void cv64_ovl_konamilogo_fade_in(cv64_ovl_konamilogo_t* self) {
     cv64_model_inf_t* model = self->model;
 
-    if (model->primitive_color.a < 0xF3) {
-        model->primitive_color.a += 0x0C;
+    if (model->primitive_color.a < 243) {
+        model->primitive_color.a += 12;
     } else {
-        model->primitive_color.a = 0xFF;
+        model->primitive_color.a = 255;
         (*object_curLevel_goToNextFuncAndClearTimer)(
             self->header.current_function, &self->header.function_info_ID
         );
@@ -89,10 +87,10 @@ void cv64_ovl_konamilogo_wait(cv64_ovl_konamilogo_t* self) {
 void cv64_ovl_konamilogo_fade_out(cv64_ovl_konamilogo_t* self) {
     cv64_model_inf_t* model = self->model;
 
-    if (model->primitive_color.a >= 0x0A) {
-        model->primitive_color.a -= 0x09;
+    if (model->primitive_color.a >= 10) {
+        model->primitive_color.a -= 9;
     } else {
-        model->primitive_color.a = 0x00;
+        model->primitive_color.a = 0;
         (*object_curLevel_goToNextFuncAndClearTimer)(
             self->header.current_function, &self->header.function_info_ID
         );
@@ -105,10 +103,10 @@ void cv64_ovl_konamilogo_kcek_fade_in(cv64_ovl_konamilogo_t* self) {
 
     model->size.x = 0.995f;
     model->dlist  = &KCEK_LOGO_DL;
-    if (model->primitive_color.a < 0xFC) {
-        model->primitive_color.a += 0x03;
+    if (model->primitive_color.a < 252) {
+        model->primitive_color.a += 3;
     } else {
-        model->primitive_color.a = 0xFF;
+        model->primitive_color.a = 255;
         (*object_curLevel_goToNextFuncAndClearTimer)(
             self->header.current_function, &self->header.function_info_ID
         );
@@ -120,10 +118,10 @@ void cv64_ovl_konamilogo_kcek_wait(cv64_ovl_konamilogo_t* self) {
     cv64_model_inf_t* model = self->model;
 
     model->size.x = 0.995f;
-    if (model->primitive_color.a < 0xFC) {
-        model->primitive_color.a += 0x03;
+    if (model->primitive_color.a < 252) {
+        model->primitive_color.a += 3;
     } else {
-        model->primitive_color.a = 0xFF;
+        model->primitive_color.a = 255;
     }
     model->dlist = &KCEK_LOGO_DL;
     if ((s32) self->header.current_function[self->header.function_info_ID].timer >= 97) {
@@ -137,10 +135,10 @@ void cv64_ovl_konamilogo_kcek_fade_out(cv64_ovl_konamilogo_t* self) {
     cv64_model_inf_t* model = self->model;
 
     model->dlist = &KCEK_LOGO_DL;
-    if (model->primitive_color.a >= 0x0D) {
-        model->primitive_color.a -= 0x0C;
+    if (model->primitive_color.a >= 13) {
+        model->primitive_color.a -= 12;
     } else {
-        model->primitive_color.a = 0x00;
+        model->primitive_color.a = 0;
         (*gamestate_change)(GAMESTATE_INTRO_CUTSCENE);
     }
     sys.background_color.r = model->primitive_color.a;

@@ -47,7 +47,7 @@ void cv64_ovl_touturo_door_init(cv64_ovl_touturo_door_t* self) {
     if (settings) {
     } // Needed for matching
 
-    model = self->model = modelInfo_createAndSetChild(FIG_TYPE_STANDALONE, D_8018CDE0[0]);
+    model = self->model = modelInfo_createAndSetChild(FIG_TYPE_STANDALONE, map_lights[0]);
 
     if (model) {
     } // Needed for matching
@@ -77,9 +77,9 @@ void cv64_ovl_touturo_door_loop(cv64_ovl_touturo_door_t* self) {
     cv64_actor_settings_t* settings = self->settings;
     cv64_model_inf_t* model         = self->model;
 
-    if ((*actor_checkSpawn)(
+    if ((*actor_playerOutsideActorSpawnRadius)(
             self, settings->position.x, settings->position.y, settings->position.z
-        ) != FALSE) {
+        )) {
         self->header.destroy(self);
         return;
     } else {

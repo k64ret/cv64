@@ -50,9 +50,13 @@ func_800027BC_33BC                     = 0x800027BC; // type:func
 func_8000287C_347C                     = 0x8000287C; // type:func
 
 // .data
-Objects_functions                      = 0x80092274; // size:0x2216
+Objects_functions                      = 0x80092274; // size:0x8A8
 objects_array                          = 0x80342060;
 objects_number_of_instances_per_object = 0x8034CE60;
+
+// .bss
+object_list_free_slot                  = 0x800A7830;
+ptr_gameplayParentObject               = 0x800A7834;
 
 // End of src/object.c =========================================================
 
@@ -138,6 +142,21 @@ f32_clamp                   = 0x80011C2C; // type:func
 func_80011C6C_1286C         = 0x80011C6C; // type:func
 
 // End of src/12700.c ==========================================================
+
+
+// src/dma.c ===================================================================
+
+// .text
+dma_init_cart  = 0x80017710; // type:func
+dma_read_write = 0x80017734; // type:func
+dma_rom_copy   = 0x800177EC; // type:func
+
+// .bss
+dmaIoMesgBuf = 0x800d5e60;
+dmaIoMesgQueue = 0x800abfa0;
+gCartHandle = 0x800d5e78;
+
+// End of src/dma.c ============================================================
 
 
 // src/debug.c =================================================================
@@ -1571,33 +1590,69 @@ cutsceneMgr_functions                      = 0x8016B580;
 // End of src/common/cutscene_manager.c ========================================
 
 
-// src/common/page.c ===============================================
+// src/common/page.c ===========================================================
 
 // .text
-page_entrypoint                           = 0x8014f4b0; // type:func segment:common
-page_isWorkCreated                        = 0x8014f520; // type:func segment:common
-page_init                                 = 0x8014f558; // type:func segment:common
-page_loop                                 = 0x8014f748; // type:func segment:common
-page_destroy                              = 0x8014f830; // type:func segment:common
+page_entrypoint         = 0x8014f4b0; // type:func segment:common
+page_isWorkCreated      = 0x8014f520; // type:func segment:common
+page_init               = 0x8014f558; // type:func segment:common
+page_loop               = 0x8014f748; // type:func segment:common
+page_destroy            = 0x8014f830; // type:func segment:common
 
 // .data
-page_1_hierarchy                          = 0x801815c0; // segment:common size:0x4C
-page_2_hierarchy                          = 0x8018160c; // segment:common size:0x4C
-page_3_hierarchy                          = 0x80181658; // segment:common size:0x4C
-page_flip_anim_rot_data                       = 0x801816A4; // segment:common size:0xFC
-page_functions                            = 0x801817A0; // segment:common size:0x10
+page_1_hierarchy        = 0x801815c0; // segment:common size:0x4C
+page_2_hierarchy        = 0x8018160c; // segment:common size:0x4C
+page_3_hierarchy        = 0x80181658; // segment:common size:0x4C
+page_flip_anim_rot_data = 0x801816A4; // segment:common size:0xFC
+page_functions          = 0x801817A0; // segment:common size:0x10
 
-// End of src/common/page.c ========================================
+// End of src/common/page.c ====================================================
 
-// src/common/page_work.c ===============================================
+
+// src/common/page_work.c ======================================================
 
 // .text
-pageWork_create                           = 0x8014f860; // type:func segment:common
+pageWork_create = 0x8014f860; // type:func segment:common
 
 // .rodata
-D_8018BDF0                                = 0x8018bdf0; // type:asciz segment:common size:0x0A
+D_8018BDF0      = 0x8018bdf0; // type:asciz segment:common size:0x0A
 
-// End of src/common/page_work.c ========================================
+// End of src/common/page_work.c ===============================================
+
+
+// src/common/skybox_common_actors.c ===========================================
+
+// .text
+obj0172_entrypoint        = 0x8015BF00; // type:func segment:common
+obj0172_init              = 0x8015BF24; // type:func segment:common
+obj0172_loop              = 0x8015BFD0; // type:func segment:common
+
+commonMoon_entrypoint     = 0x8015C03C; // type:func segment:common
+commonMoon_init           = 0x8015C060; // type:func segment:common
+commonMoon_main           = 0x8015C178; // type:func segment:common
+commonMoon_main_invisible = 0x8015C238; // type:func segment:common
+commonMoon_main_appear    = 0x8015C288; // type:func segment:common
+commonMoon_main_visible   = 0x8015C2D8; // type:func segment:common
+commonMoon_main_disappear = 0x8015C320; // type:func segment:common
+
+obj8015C368_entrypoint    = 0x8015C368; // type:func segment:common
+obj8015C368_init          = 0x8015C38C; // type:func segment:common
+obj8015C368_loop          = 0x8015C450; // type:func segment:common
+
+// .data
+obj0172_dlists            = 0x80187400; // segment:common size:0x18
+commonMoon_dlists         = 0x80187418; // segment:common size:0x18
+obj8015C368_dlists        = 0x80187430; // segment:common size:0x18
+
+obj0172_functions         = 0x80187448; // segment:common size:0x08
+commonMoon_functions      = 0x80187450; // segment:common size:0x08
+commonMoon_main_functions = 0x80187458; // segment:common size:0x10
+obj8015C368_functions     = 0x80187468; // segment:common size:0x08
+
+// .rodata
+D_8018C650                = 0x8018C650; // type:f32 segment:common
+
+// End of src/common/skybox_common_actors.c ====================================
 
 memory_clear = 0x80000770;
 memory_copy = 0x800008d0;
@@ -1678,9 +1733,6 @@ ROM_0x1800_ChunkLoad__Advance = 0x8001746c;
 loadROM_0x1800_Chunk_ToRAM = 0x800174e4;
 setNextFileToLoad = 0x80017570;
 loadFilesFromFileLoadArray = 0x800175ec;
-initCartHandle = 0x80017710;
-DMA_readOrWrite = 0x80017734;
-romCopy = 0x800177ec;
 rmonPrintf = 0x800192e8;
 crashScreen_printThreadData = 0x80019560;
 crashScreen_printExceptionInfo = 0x80019968;
@@ -1883,7 +1935,7 @@ fileSelect_showSlotStrings = 0x80147164;
 fileSelect_setMoneyString = 0x80147300;
 map_initPositionSettings = 0x801529cc;
 map_setCameraParams = 0x80152b60;
-isNight = 0x80152bf4;
+updateMoonVisibility = 0x80152bf4;
 createMapPiece = 0x80152c2c;
 isPlayerInsideMapPiece = 0x80152fcc;
 mapCollisionPtrHolder_getCollisonDataFromMapPieceArray = 0x80153214;
@@ -1912,7 +1964,7 @@ stopMapAmbienceSounds = 0x80156040;
 checkIfOutsideEntityIsInsideMainEntityRadius = 0x8015870c;
 rand = 0x80158874;
 rand_f32 = 0x801588a4;
-actor_checkSpawn = 0x801588ec;
+actor_playerOutsideActorSpawnRadius = 0x801588ec;
 Actor_findFirstActorWithVariable1 = 0x801589c0;
 modelInfo_copyPosToVec3f = 0x80158c7c;
 isDaytime = 0x801591e4;
@@ -2394,12 +2446,10 @@ textbox_setHeightAndWidth = 0x8012cd54;
 SaveStruct_cPak = 0x800d74a0;
 SaveStruct_gameplay = 0x80389be4;
 controller_pak_note_table = 0x80096ad0;
-gCartHandle = 0x800d5e78;
 osViModeNtsc = 0x800a10b0;
 osViModePal = 0x800a1970;
 controllerMsgQ = 0x800d5df0;
 controller_status = 0x800d5e10;
-dmaIoMesgBuf = 0x800d5e60;
 sIdleThread = 0x800a8908;
 gPIMesgBuf = 0x800abc80;
 ptr_dmaIoMesgBuf = 0x800abfb8;
@@ -2495,7 +2545,6 @@ object_curLevel_goToPrevFunc = 0x80001488;
 object_prevLevel_goToPrevFunc = 0x800014c4;
 object_nextLevel_goToNextFunc = 0x800013fc;
 object_prevLevel_goToFunc = 0x80001600;
-dmaIoMesgQueue = 0x800abfa0;
 object_nextLevel_goToFunc = 0x80001638;
 seed_RNG_C_rand_srand = 0x80186e3c;
 srand = 0x801588e0;
@@ -2538,6 +2587,7 @@ ptr_Player_model_info = 0x8018cda4;
 map_model_settings_list = 0x80184e44;
 display_list_2 = 0x80185ef8;
 map_player_initial_position = 0x8018cdb0;
+moonVisibilityVars = 0x8018CDD0;
 map_names = 0x801853d4;
 map_settings_list = 0x8018504c;
 map_color_settings = 0x8018cdf8;
@@ -2668,7 +2718,6 @@ D_8009342C_9402C = 0x8009342C; // ignore:true
 objects_file_info         = 0x80093430; // rom:0x00094030 size:0x8A8
 gameState_konamiLogo_object_files = 0x800958c0;
 gameState_gameOver_object_files = 0x80096348;
-object_list_free_slot = 0x800a7830;
 random_initSeed = 0x80037970;
 player_death_animations = 0x80097060;
 carrie_assets_alt_costume_hierarchy = 0x803dd7b0;
@@ -2769,6 +2818,7 @@ decorativeElements_functions = 0x80186e20;
 breakable_rock_info_array = 0x80189348;
 breakableRock_breaking_gravity = 0x8018c830;
 villa_chandelier_breaking_gravity = 0x8018c810;
+D_80092B2C = 0x80092B2C;
 atan2Tbl = 0x80092b50;
 running_turning_angle_speed = 0x803ddd58;
 Player_idle_functions = 0x803ddb74;
@@ -2872,7 +2922,6 @@ ledge_moving_max_speed = 0x800a3640;
 cameraMgr = 0x80342230;
 enemyGenerator_functions = 0x8018a964;
 enemyGenerator_entries_table = 0x8018aa70;
-ptr_gameplayParentObject = 0x800a7834;
 current_cutscene_ID__Carrie_overlay = 0x803ddb68;
 prt_80040c08_6bd09446 = 0x80040c08;
 atari_center_point_translation_matrix = 0x800d8190;
@@ -2924,7 +2973,7 @@ file_selection_arrow_string = 0x80181360;
 file_selection_money_string = 0x801813d4;
 HEAP_MULTIPURPOSE_START = 0x80271060;
 HEAP_MENU_DATA_START = 0x801CC000;
-D_8018CDE0 = 0x8018CDE0;
+map_lights = 0x8018CDE0;
 play_sound_in_position_and_set_volume = 0x80013C40;
 figures_array = 0x8034EAB8;
 func_8000EE18 = 0x8000EE18;

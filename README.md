@@ -10,6 +10,24 @@
 
 </div>
 
+## About
+
+This repository contains a work-in-progress decompilation project
+for Castlevania (Nintendo 64).
+
+The main objective of this project is to rewrite C code that, when compiled,
+results in matching assembly code found in the game's ROM.
+Besides this, the project also aims to extract and convert all assets
+from binary data to a higher-level format understood by the console.
+
+Note that all data, including the original assembly code and assets,
+requires a legally obtained copy of the original game to extract
+all of this data from.
+
+At the moment, this project cannot be used to create mods on a large scale
+due to issues with shiftability (i.e. hardcoded addresses),
+therefore it's only useful for documentation of the game's code for now.
+
 ## Acknowledgements
 
 ### Tools
@@ -28,6 +46,9 @@ These people make this project possible and successful.
 creation/upkeep of the [Castlevania 64 - Research Spreadsheets][research-spreadsheets]
 - [@LiquidCat64](https://github.com/LiquidCat64) and [@Fluvian](https://github.com/Fluvian)
 for reversing the [LZKN64][lzkn64] compression algorithm used by Konami
+- [@decompals](https://github.com/decompals) for the
+[ultralib](https://github.com/decompals/ultralib) repository,
+which we took the Ultra64 headers from.
 
 ## Getting started
 

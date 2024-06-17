@@ -56,7 +56,7 @@ typedef struct cv64_save_state {
     u32 flags;
     u16 week;
     u16 day;
-    u16 hour;
+    s16 hour;
     u16 minute;
     u16 seconds;
     u16 milliseconds;        // Assumption.
@@ -65,7 +65,11 @@ typedef struct cv64_save_state {
     s16 sound_mode;
     s16 character;
     u16 life;
-    u16 field_0x5C; // Maybe related to the scrapped S / E meter?
+    /**
+     * Only set to 100, like the life, and never used otherwise.
+     * Maybe related to the scrapped S / E meter?
+     */
+    u16 field_0x5C;
     u16 subweapon;
     u32 money;
     union {
@@ -81,7 +85,7 @@ typedef struct cv64_save_state {
     } items;
     u32 player_status;
     u16 health_depletion_rate_while_poisoned;
-    u16 current_hour_VAMP; // If greater than 24, you turn into vampire
+    s16 current_hour_VAMP; // If greater than 24 (midnight), the player turns into vampire
     s16 map;
     s16 spawn;
     u8 save_crystal_number;

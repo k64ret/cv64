@@ -32,19 +32,19 @@ void textboxAdvanceArrow_init(textboxAdvanceArrow* self) {
     self->arrow_light = arrow_light;
     (*figure_setChild)(arrow_light, common_camera_HUD);
     arrow_light->primitive_color.r     = arrow_light->primitive_color.g =
-        arrow_light->primitive_color.b = 0xA0;
+        arrow_light->primitive_color.b = 160;
     arrow_light->field5_0x3c           = 1;
-    arrow_light->blend_color.r = arrow_light->blend_color.g = arrow_light->blend_color.b = 0xCF;
-    (s8) arrow_light->fog_color.r = 0xF0; // The s8 typecast is needed for matching here
+    arrow_light->blend_color.r = arrow_light->blend_color.g = arrow_light->blend_color.b = 207;
+    (s8) arrow_light->fog_color.r = 240; // The s8 typecast is needed for matching here
     arrow_light->fog_color.g      = 0;
-    arrow_light->fog_color.b      = 0x10;
+    arrow_light->fog_color.b      = 16;
     model                 = (*modelInfo_createAndSetChild)(FIG_TYPE_HUD_ELEMENT, arrow_light);
     self->model           = model;
     model->dlist          = &TEXTBOX_ADVANCE_ARROW_DL;
     model->assets_file_ID = NI_ASSETS_FILE_SELECT;
     BITS_SET(model->flags, FIG_FLAG_0080);
     BITS_SET(model->flags, FIG_FLAG_APPLY_PRIMITIVE_COLOR);
-    model->primitive_color.integer = 0xFF0000FF; // Red (opaque)
+    model->primitive_color.integer = RGBA(255, 0, 0, 255);
     model->size.x                  = 1.3f;
     model->size.y                  = 1.3f;
     model->position.x              = 0.0f;
@@ -64,12 +64,12 @@ void textboxAdvanceArrow_loop(textboxAdvanceArrow* self) {
     u32 new_var;
 
     self->fade_timer++;
-    if ((fade_timer_prev > 9) != (((fade_timer_prev > 9) != FALSE) * 0)) { // Likely a fakematch
+    if ((fade_timer_prev > 9) != (((fade_timer_prev > 9)) * 0)) { // Likely a fakematch
         new_var = model->primitive_color.r;
         red     = new_var;
         if (red < 8.5) {
-            model->primitive_color.r = 0xFF;
-            model->primitive_color.a = 0xFF;
+            model->primitive_color.r = 255;
+            model->primitive_color.a = 255;
             self->fade_timer         = 0;
         } else {
             model->primitive_color.r = red - 8.5;

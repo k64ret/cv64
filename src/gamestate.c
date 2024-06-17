@@ -219,11 +219,11 @@ void setup_frame() {
     gDisplayListHead = &sys.field2_0x8[sys.current_dlist_buffer].dlists;
     gSPSegment(gDisplayListHead++, 0x00, 0x00000000);
     setup_rsp(&gDisplayListHead);
-    if (sys.should_setup_Z_buffer != FALSE) {
+    if (sys.should_setup_Z_buffer) {
         setup_z_buffer();
     }
     setup_framebuffer();
-    if (sys.should_setup_background_color != FALSE) {
+    if (sys.should_setup_background_color) {
         setup_background_color();
     }
 }

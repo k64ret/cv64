@@ -45,7 +45,10 @@ typedef enum cv64_object_flag {
     OBJ_FLAG_ENABLE_COLLISION = 0x1000,
     OBJ_FLAG_MAP_OVERLAY  = 0x2000,
     OBJ_FLAG_DESTROY      = 0x8000,
-    OBJ_TYPE_DATA         = 0x8000     // Used for the `data` fields in actors
+    /**
+     * Used for the `data` fields in actors
+     */
+    OBJ_TYPE_DATA         = 0x8000
 } cv64_object_flag_t;
 
 typedef enum cv64_object_id_raw {
@@ -419,7 +422,7 @@ typedef enum cv64_object_id_raw {
     ID_OBJECT_170                    = 0x170,
     ID_OBJECT_171                    = 0x171,
     ID_OBJECT_172                    = 0x172,
-    ID_OBJECT_173                    = 0x173,
+    ID_COMMON_MOON                   = 0x173,
     ID_OBJECT_174                    = 0x174,
     ID_OBJECT_175                    = 0x175,
     ID_OBJECT_176                    = 0x176,
@@ -697,6 +700,8 @@ typedef enum cv64_object_id {
 
     // Stage object
     STAGE_OBJECT_LEVER                 = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_LEVER),
+    STAGE_OBJECT_OBJ_0172              = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_OBJECT_172),
+    STAGE_COMMON_MOON                  = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_COMMON_MOON),
     STAGE_OBJECT_MEIRO_TEIEN_OBJ_01B5  = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_MEIRO_TEIEN_OBJ_01B5),
     STAGE_OBJECT_ROSE_VENTILATOR       = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_ROSE_VENTILATOR),
     STAGE_OBJECT_ROSE_DOOR             = CV64_OBJECT_ID(OBJ_KIND_ENABLE_COLLISION, ID_ROSE_DOOR),

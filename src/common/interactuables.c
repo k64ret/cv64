@@ -90,7 +90,7 @@ void interactuables_init(interactuables* self) {
         if (interactuables_settings_table[self->table_index].type == ITEM_KIND_ITEM) {
             // Create and setup the item model
             item_model =
-                modelInfo_createAndSetChild(FIG_TYPE_0400 | FIG_TYPE_HIERARCHY_NODE, D_8018CDE0[2]);
+                modelInfo_createAndSetChild(FIG_TYPE_0400 | FIG_TYPE_HIERARCHY_NODE, map_lights[2]);
             self->model = item_model;
             if (settings != NULL) {
                 actor_model_set_pos(self, item_model);
@@ -138,11 +138,11 @@ void interactuables_init(interactuables* self) {
                 );
             }
 
-            item_model->primitive_color.integer = 0xFFFFFFFF;
+            item_model->primitive_color.integer = RGBA(255, 255, 255, 255);
             // Make all White Jewels semi-transparent if not playing in a save file
             if ((interactuables_settings_table[self->table_index].item == ITEM_ID_WHITE_JEWEL) &&
                 (sys.contPak_file_no < 0)) {
-                item_model->primitive_color.integer = 0xFFFFFF40;
+                item_model->primitive_color.integer = RGBA(255, 255, 255, 64);
             }
             self->primitive_color.integer = item_model->primitive_color.integer;
             item_model->primitive_color.a = item_appearence_settings->transparency;
@@ -211,8 +211,9 @@ void interactuables_main(interactuables* self) {
         }
 
         // If the player is within the actor spawn radius...
-        if (actor_checkSpawn(self, model->position.x, model->position.y, model->position.z) ==
-            FALSE) {
+        if (actor_playerOutsideActorSpawnRadius(
+                self, model->position.x, model->position.y, model->position.z
+            ) == FALSE) {
             // Periodically create the flash effect
             if (self->time_when_flash_appears_over_item == self->current_flash_inactive_time) {
                 if (BITS_NOT_HAS(
@@ -302,9 +303,9 @@ void interactuables_main(interactuables* self) {
             case ITEM_ID_WHITE_JEWEL:
                 // Make White Jewels semi-transparent if not playing in a save file
                 if (sys.contPak_file_no < 0) {
-                    model->primitive_color.integer = 0xFFFFFF40;
+                    model->primitive_color.integer = RGBA(255, 255, 255, 64);
                 } else {
-                    model->primitive_color.integer = 0xFFFFFFFF;
+                    model->primitive_color.integer = RGBA(255, 255, 255, 255);
                 }
                 break;
         }
@@ -401,10 +402,12 @@ void interactuables_initCheck(interactuables* self) {
         }
 
         // clang-format off
-        // Get the message associated to the text spot
-        //
-        // Bug? No matter if flag `TEXT_SPOT_DO_ACTION_AFTER_SELECTING_OPTION` is set or not,
-        // the game will grab the same string
+        /**
+         * Get the message associated to the text spot
+
+         * @bug? No matter if flag `TEXT_SPOT_DO_ACTION_AFTER_SELECTING_OPTION` is set or not,
+         * the game will grab the same string
+         */
         textbox = (BITS_HAS(interactuables_settings_table[self->table_index].flags, TEXT_SPOT_DO_ACTION_AFTER_SELECTING_OPTION))
             ? map_getMessageFromPool(interactuables_settings_table[self->table_index].text_ID, 0)
             : map_getMessageFromPool(interactuables_settings_table[self->table_index].text_ID, 0);
