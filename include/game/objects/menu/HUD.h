@@ -5,13 +5,13 @@
 #include "gfx/model_info.h
 
 typedef enum HUD_parameters_flags {
-    SHOW_BOSS_BAR = 0x04,
+    SHOW_BOSS_BAR             = 0x04,
     UPDATE_HUD_GOLD_AND_JEWEL = 0x08,
-    CLOSE_CLOCK = 0x20,     // Unused
+    CLOSE_CLOCK               = 0x20, // Unused
     /**
      * Hides HUD during cutscenes or when transitioning between maps.
      */
-    HIDE_HUD = 0x40,
+    HIDE_HUD    = 0x40,
     DESTROY_HUD = 0x80
 } HUD_parameters_flags;
 
@@ -86,6 +86,12 @@ extern void HUD_initParams(HUD* self);
 extern void HUD_initGraphics(HUD* self);
 extern void HUD_update(HUD* self);
 extern void HUD_destroy(HUD* self);
+
+extern void HUDParams_fillPlayerHealth(
+    s16 life,
+    u32 player_flags_to_remove,
+    s32 play_character_health_fulfilled_sound_after_recovering_health
+);
 
 typedef void (*HUD_func_t)(HUD*);
 

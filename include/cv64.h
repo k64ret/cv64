@@ -41,6 +41,8 @@ typedef u8 Addr[];
 
 extern u32 D_80092F50;
 extern Gfx* gDisplayListHead; // 0x800B49E0
+extern u32 map_misc_event_flags;
+extern u8 PLAYER_HAS_MAX_HEALTH;
 
 #define MOON_VISIBILITY_DAY   0 // Moon is invisible
 #define MOON_VISIBILITY_NIGHT 1 // Moon is visible
