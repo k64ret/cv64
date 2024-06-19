@@ -2578,6 +2578,7 @@ DAT_8018d484 = 0x8018d484;
 map_text_segment_address = 0x8016d008;
 squashPoint_entrypoint = 0x80156f60;
 another_viewing_matrix = 0x80389e8c;
+ptr_master_light = 0x800a78d0;
 DAT_800a78f0 = 0x800a78f0;
 Another_Display_List = 0x800932e0;
 character_hanging_distance_from_edge = 0x800972a0;
