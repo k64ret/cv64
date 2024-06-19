@@ -2997,3 +2997,7 @@ figure_setChild = 0x80004ce8;
 modelLighting_create = 0x80010b60;
 modelLighting_createList = 0x80010d78;
 Actor_getPosAndVariable1 = 0x80038730;
+light_setAmbientColor = 0x800107d8;
+light_setColorAndDirection = 0x800107f0;
+light_addColorAndDirection = 0x80010858;
+light_addColorAndDirectionOrSetAmbientColorIfListIsEmpty = 0x800109d0;

@@ -54,4 +54,11 @@ extern light* light_create(u16 type);
 extern light* map_lights[3];
 extern light* ptr_master_light;
 
+extern void light_setAmbientColor(light* self, u32 ambient_color);
+extern void light_setColorAndDirection(light* self, s32 index, u32 color, u32 direction);
+extern s32 light_addColorAndDirection(light* self, u32 color, u32 direction);
+extern s32 light_addColorAndDirectionOrSetAmbientColorIfListIsEmpty(
+    light* self, u32 ambient_color, u32 direction
+);
+
 #endif
