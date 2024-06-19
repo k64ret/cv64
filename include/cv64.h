@@ -75,6 +75,13 @@ typedef union {
 
 extern union_moonVisibilityVars moonVisibilityVars;
 
+typedef enum menu_ID_t {
+    NOT_ON_MENU = 0,
+    PAUSE       = 9,
+    RENON_SHOP  = 10,
+    GAME_OVER   = 14
+} menu_ID_t;
+
 extern void end_master_display_list();
 extern s32 menuButton_selectNextOption(s32* option, s16* param_2, s16 number_of_options);
 extern u32 NisitenmaIchigo_checkAndStoreLoadedFile(u32 file_ID);
