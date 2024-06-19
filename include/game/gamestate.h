@@ -37,8 +37,8 @@ typedef enum cv64_gamestate_id {
 #define FUNC_8000C6D0        0x8000C6D0
 #define SETUP_FRAME          0x80000694
 #define UPDATE_GAMEPLAY_TIME 0x80018E74
-#define FUNC_80012400        0x80012400
-#define FUNC_8000C740        0x8000C740
+#define UPDATE_GAME_SOUND    0x80012400
+#define FIGURE_UPDATE        0x8000C740
 #define ATARI_WORK_UPDATE    0x80040AA0
 #define FUNC_80005658        0x80005658
 #define END_FRAME            0x8000072C
