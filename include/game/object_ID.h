@@ -413,7 +413,7 @@ typedef enum cv64_object_id_raw {
     ID_OBJECT_167                    = 0x167,
     ID_OBJECT_168                    = 0x168,
     ID_OBJECT_169                    = 0x169,
-    ID_OBJECT_16A                    = 0x16A,
+    ID_LOADING_ZONE                  = 0x16A,
     ID_OBJECT_16B                    = 0x16B,
     ID_OBJECT_16C                    = 0x16C,
     ID_OBJECT_16D                    = 0x16D,
@@ -699,6 +699,9 @@ typedef enum cv64_object_id {
     MENU_OBJ_13F                       = CV64_OBJECT_ID(OBJ_KIND_MAP_OVERLAY, ID_OBJECT_13F),
     MENU_EASY_ENDING                   = CV64_OBJECT_ID(OBJ_KIND_MAP_OVERLAY, ID_EASY_ENDING),
     MENU_STAGE_SELECT                  = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_STAGE_SELECT),
+
+    // Map handling
+    MAP_HANDLING_LOADING_ZONE          = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_LOADING_ZONE),
 
     // Stage object
     STAGE_OBJECT_LEVER                 = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_LEVER),
