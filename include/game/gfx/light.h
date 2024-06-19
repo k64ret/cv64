@@ -12,7 +12,9 @@ typedef struct {
 typedef struct {
     cv64_rgba_t color;
     /**
-     * X, Y, Z
+     * X [0]
+     * Y [1]
+     * Z [2]
      */
     s8 direction[3];
     /**

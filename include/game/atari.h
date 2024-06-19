@@ -1,6 +1,8 @@
 #ifndef ATARI_WORK_H
 #define ATARI_WORK_H
 
+// Collider structs
+
 #include "gfx/model_info.h"
 #include <ultra64.h>
 
