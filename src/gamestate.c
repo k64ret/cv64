@@ -216,7 +216,7 @@ void gamestate_init(GameStateMgr* self) {
 }
 
 void setup_frame() {
-    gDisplayListHead = &sys.field2_0x8[sys.current_dlist_buffer].dlists;
+    gDisplayListHead = &sys.graphic_buffers[sys.current_graphic_buffer].dlists;
     gSPSegment(gDisplayListHead++, 0x00, 0x00000000);
     setup_rsp(&gDisplayListHead);
     if (sys.should_setup_Z_buffer) {
