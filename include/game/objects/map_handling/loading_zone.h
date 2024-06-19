@@ -45,22 +45,24 @@ typedef struct {
     loadingZoneInner inner;
 } loadingZone;
 
-void (*loadingZone_functions[])(loadingZone* self);
-void (*loadingZone_fillHealth_functions[])(loadingZone* self);
-void (*loadingZone_createEasyModeEnding_functions[])(loadingZone* self);
+extern void (*loadingZone_functions[])(loadingZone* self);
+extern void (*loadingZone_fillHealth_functions[])(loadingZone* self);
+extern void (*loadingZone_createEasyModeEnding_functions[])(loadingZone* self);
 
-loading_zone_cutscene_settings* loading_zone_cutscene_settings_table[6];
-map_loading_zone_settings* map_loading_zone_settings_array[30];
+extern loading_zone_cutscene_settings* loading_zone_cutscene_settings_table[6];
+extern map_loading_zone_settings* map_loading_zone_settings_array[30];
 
-void loadingZone_entrypoint(loadingZone* self);
-void loadingZone_init(loadingZone* self);
-void loadingZone_destroy(loadingZone* self);
-void loadingZone_checkExceptions(loadingZone* self);
-void loadingZone_playerIsInsideZone(loadingZone* self);
-void loadingZone_setCutsceneSettings(loadingZone* self);
-void loadingZone_freezeEntitiesAndSetCameraParams(loadingZone* self);
-void loadingZone_fillPlayerHealth(loadingZone* self);
-void loadingZone_exitMap(loadingZone* self);
-void loadingZone_warpToMapFromLoadingZone(loadingZone* self);
+extern void loadingZone_entrypoint(loadingZone* self);
+extern void loadingZone_init(loadingZone* self);
+extern void loadingZone_destroy(loadingZone* self);
+extern void loadingZone_checkExceptions(loadingZone* self);
+extern void loadingZone_playerIsInsideZone(loadingZone* self);
+extern void loadingZone_setCutsceneSettings(loadingZone* self);
+extern void loadingZone_freezeEntitiesAndSetCameraParams(loadingZone* self);
+extern void loadingZone_fillPlayerHealth(loadingZone* self);
+extern void loadingZone_exitMap(loadingZone* self);
+extern void loadingZone_warpToMapFromLoadingZone(loadingZone* self);
+
+typedef void (*loadingZone_func_t)(loadingZone*);
 
 #endif
