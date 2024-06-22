@@ -81,10 +81,10 @@ typedef struct cv64_save_state {
             s8 gold[3];
             s8 field_0x41[SIZE_ITEMS_ARRAY - NUM_ITEMS]; // Probably unused
         } category;
-        u8 array[64];
+        u8 array[SIZE_ITEMS_ARRAY];
     } items;
     u32 player_status;
-    u16 health_depletion_rate_while_poisoned;    // TODO: Double check
+    u16 health_depletion_rate_while_poisoned; // TODO: Double check
     /**
     * If greater than 24 (midnight), the player turns into a vampire
     */
