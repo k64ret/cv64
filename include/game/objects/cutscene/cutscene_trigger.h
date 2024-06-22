@@ -34,7 +34,7 @@ typedef struct {
      */
     u32 required_event_flags;
     union {
-        s16 cutscene_ID;
+        u16 cutscene_ID;
         s16 enemy_actor_ID;
     };
     u16 trigger_dimension_type;
