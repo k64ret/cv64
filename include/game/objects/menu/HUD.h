@@ -38,10 +38,10 @@ typedef struct {
     s16 boss_bar_damage;
     u8 field_0x22[2];
     f32 boss_bar_damage_length;
-    mfds_state* money_amount_textbox;
+    mfds_state* gold_amount_textbox;
     mfds_state* item_amount_textbox;
     u8 field_0x30[4];
-    u16* money_amount_text;
+    u16* gold_amount_text;
     u16* item_amount_text;
     u8 field_0x3C[4];
 } HUD_parameters;

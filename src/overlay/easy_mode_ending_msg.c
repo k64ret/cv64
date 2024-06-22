@@ -71,7 +71,7 @@ void cv64_ovl_easyending_loop(cv64_ovl_easyending_t* self) {
     self->active_time++;
     if ((self->active_time > 120) && CONT_BTNS_PRESSED(CONT_0, A_BUTTON)) {
         BITS_SET(*textbox_flags, CLOSE_TEXTBOX);
-        sys.SaveStruct_gameplay.money                                = 0;
+        sys.SaveStruct_gameplay.gold                                 = 0;
         sys.SaveStruct_gameplay.time_saved_counter                   = 0;
         sys.SaveStruct_gameplay.death_counter                        = 0;
         sys.SaveStruct_gameplay.field55_0xbc                         = 0;
@@ -84,7 +84,7 @@ void cv64_ovl_easyending_loop(cv64_ovl_easyending_t* self) {
         sys.SaveStruct_gameplay.field77_0xd2                         = 0;
         sys.SaveStruct_gameplay.field79_0xd4                         = 0;
         sys.SaveStruct_gameplay.field83_0xd8                         = 0;
-        sys.SaveStruct_gameplay.money_spent_on_Renon                 = 0;
+        sys.SaveStruct_gameplay.gold_spent_on_Renon                  = 0;
         sys.SaveStruct_gameplay.player_status                        = 0;
         sys.SaveStruct_gameplay.life                                 = 100;
         sys.SaveStruct_gameplay.field_0x5C                           = 100;
