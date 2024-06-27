@@ -1,10 +1,13 @@
+/**
+ * @file figure.h
+ *
+ * Types and functions common to figure-type structs (model_info, camera, light)
+ */
+
 #ifndef FIGURE_H
 #define FIGURE_H
 
 #include <ultra64.h>
-
-// Types and functions common to figure-type structs (model_info, camera,
-// light)
 
 #define FIG_SIZE      0xA8
 #define FIG_ARRAY_MAX 512
