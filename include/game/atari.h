@@ -6,45 +6,51 @@
 #include "gfx/model_info.h"
 #include <ultra64.h>
 
-typedef enum atari_work_flags_t {
-    DONT_UPDATE_POSITIONAL_DATA            = 0x20,
-    UPDATE_ATTACKER_TARGET_POSITIONAL_DATA = 0x40,
-    INFLICT_DAMAGE                         = 0x100,
-    ENABLE_PUSH_BACK_FORCE                 = 0x800,
-    TYPE_DATA                              = 0x1000,
-    TYPE_BASE                              = 0x2000,
-    ATARI_WORK_DESTROY                     = 0x8000
-} atari_work_flags_t;
+typedef enum cv64_atari_work_flag {
+    ATARI_WORK_DONT_UPDATE_POSITIONAL_DATA            = 0x20,
+    ATARI_WORK_UPDATE_ATTACKER_TARGET_POSITIONAL_DATA = 0x40,
+    ATARI_WORK_INFLICT_DAMAGE                         = 0x100,
+    ATARI_WORK_ENABLE_PUSH_BACK_FORCE                 = 0x800,
+    ATARI_WORK_TYPE_DATA                              = 0x1000,
+    ATARI_WORK_TYPE_BASE                              = 0x2000,
+    ATARI_WORK_DESTROY                                = 0x8000
+} cv64_atari_work_flag_t;
 
-typedef enum atari_work_damage_type_t {
-    DAMAGE_BLOOD   = 0x01, // Red sparkles
-    REGULAR_HIT    = 0x02, // Displays orange sparkles
-    BURNING_DAMAGE = 0x04,
-    POISON_DAMAGE  = 0x10,
-    ELECTRIFIED    = 0x20,
-    GRABBED        = 0x40,
+typedef enum cv64_atari_work_damage_kind {
+    /**
+     * Red sparkles
+     */
+    DAMAGE_KIND_BLOOD = 0x01,
+    /**
+     * Orange sparkles
+     */
+    DAMAGE_KIND_REGULAR_HIT = 0x02,
+    DAMAGE_KIND_BURN        = 0x04,
+    DAMAGE_KIND_POISON      = 0x10,
+    DAMAGE_KIND_ELECTRICITY = 0x20,
+    DAMAGE_KIND_GRAB        = 0x40,
     /**
      * Except for being frozen
      */
-    INVINCIBLE = 0x80,
+    DAMAGE_KIND_INVINCIBLE = 0x80,
     /**
      * Also used in 0x80030350
      */
-    GRABBED_AND_LAUNCHED = 0x400,
-    GEAR_SINK_DEATH      = 0x800,
+    DAMAGE_KIND_GRAB_AND_LAUNCH = 0x400,
+    DAMAGE_KIND_GEAR_SINK_DEATH = 0x800,
     /**
      * Plays weird animation
      */
-    ATARI_WORK_DAMAGE_TYPE_1000 = 0x1000,
-    HIT_LAUNCH                  = 0x2000,
-    FALLS_OVER                  = 0x4000,
+    DAMAGE_KIND_1000       = 0x1000,
+    DAMAGE_KIND_HIT_LAUNCH = 0x2000,
+    DAMAGE_KIND_FALL_OVER  = 0x4000,
     /**
      * Spreads the damage effect throught the whole body
      */
-    CREATE_SPARKLES_ON_EVERY_ATARI_DATA = 0x8000
-} atari_work_damage_type_t;
+    DAMAGE_KIND_CREATE_SPARKLES_ON_EVERY_ATARI_DATA = 0x8000
+} cv64_atari_work_damage_kind_t;
 
-typedef struct {
+typedef struct cv64_atari_data_work {
     /**
      * The lowest 3-bits are a function ID in the array at 0x80098600
      */
@@ -68,7 +74,7 @@ typedef struct {
     /**
      * The "atari_base" struct it's attached to
      */
-    struct atari_data_work* atari_work[2];
+    struct cv64_atari_data_work* atari_work[2];
     f32 field_0x38;
     f32 field_0x3C;
     vec3f position;
@@ -76,7 +82,7 @@ typedef struct {
     vec3f field_0x58;
     f32 field_0x64;
     cv64_model_inf_t* field_0x68;
-    struct atari_data_work* collider_attacker;
+    struct cv64_atari_data_work* collider_attacker;
     vec3f damage_effect_position;
     vec3f damage_effect_scale;
     f32 field_0x88;
@@ -86,9 +92,9 @@ typedef struct {
     s16 field_0x94;
     s16 field_0x96;
     u8 field_0x98[4];
-} atari_data_work;
+} cv64_atari_data_work_t;
 
-typedef struct {
+typedef struct cv64_atari_base_work {
     u16 flags;
     s16 damage_type;
     /**
@@ -103,11 +109,11 @@ typedef struct {
     u8 field_0x0D;
     s16 push_back_divisor;
     vec3f push_back_force;
-    atari_data_work* attacker_atari_data;
+    cv64_atari_data_work_t* attacker_atari_data;
     /**
      * Associated colider that was hit by attacker_atari_data
      */
-    atari_data_work* collider_hit;
+    cv64_atari_data_work_t* collider_hit;
     vec3f damage_effect_pos;
     vec3f damage_effect_scale;
     /**
@@ -126,8 +132,8 @@ typedef struct {
     s32 field_0x50;
     u32 hit_target_flags;
     cv64_model_inf_t* attached_model;
-    atari_data_work* field_0x5C[4];
-    atari_data_work* field_0x6C[4];
+    cv64_atari_data_work_t* field_0x5C[4];
+    cv64_atari_data_work_t* field_0x6C[4];
     s32 field_0x7C;
     u8 field_0x80;
     u8 field_0x81[3];
@@ -138,14 +144,14 @@ typedef struct {
     s16 field_0x94;
     s16 field_0x96;
     u8 field_0x98[4];
-} atari_base_work;
+} cv64_atari_base_work_t;
 
-typedef struct {
+typedef struct cv64_atari_only_work {
     u16 flags;
     s16 damage_type;
     /**
-     * Seems to only be used for deciding whether or not
-     * to draw the damage effect. See createDamageEffect()
+     * Seems to only be used for deciding whether or not to draw the damage effect.
+     * See createDamageEffect()
      */
     s16 ignored_damage_type;
     s16 damage;
@@ -155,7 +161,7 @@ typedef struct {
     u8 on_hit_SFX_set_slot;
     s16 field_0x0E;
     vec3f push_back_on_collider_contact;
-    atari_data_work* collider_hit;
+    cv64_atari_data_work_t* collider_hit;
     vec3f damage_effect_position;
     vec3f damage_effect_scale;
     f32 field_0x38;
@@ -196,14 +202,15 @@ typedef struct {
     u8 field_0x99;
     u8 field_0x9A;
     u8 field_0x9B;
-} atari_only_work;
+} cv64_atari_only_work_t;
 
 extern void atari_work_table_init();
-extern atari_base_work* atariBaseWork_create(cv64_model_inf_t* attached_bone);
-extern atari_data_work* atariDataWork_create(cv64_model_inf_t* attached_bone, u16 param_2);
-extern atari_only_work*
+extern cv64_atari_base_work_t* atariBaseWork_create(cv64_model_inf_t* attached_bone);
+extern cv64_atari_data_work_t* atariDataWork_create(cv64_model_inf_t* attached_bone, u16 param_2);
+extern cv64_atari_only_work_t*
 atariOnlyWork_create(cv64_model_inf_t* attached_bone, u16 function, u16 param_3);
-extern u32
-atariBaseWork_attachCollider(atari_base_work* self, atari_data_work* collider, u32 param_3);
+extern u32 atariBaseWork_attachCollider(
+    cv64_atari_base_work_t* self, cv64_atari_data_work_t* collider, u32 param_3
+);
 
 #endif
