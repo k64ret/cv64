@@ -8,13 +8,7 @@
 typedef struct {
     cv64_object_hdr_t header;
     u8 field_0x20[20];
-    union {
-        u32 text_ID_s32;
-        struct {
-            u16 field_0x34;
-            u16 text_ID_u16;
-        };
-    };
+    u32 text_ID;
     u8 field_0x38[4];
     u32 interacting_with_interactuable;
     u32 textbox_is_active;
@@ -37,6 +31,15 @@ void mandragoraTextbox_selectOption(mandragoraTextbox* self);
 void mandragoraTextbox_closeTextbox(mandragoraTextbox* self);
 void mandragoraTextbox_destroy(mandragoraTextbox* self);
 s32 mandragoraIsPlacedInWall();
+
+typedef enum mandragoraTextbox_func_id {
+    MANDRAGORA_TEXTBOX_INIT,
+    MANDRAGORA_TEXTBOX_IDLE,
+    MANDRAGORA_TEXTBOX_PREPARE_MESSAGE,
+    MANDRAGORA_TEXTBOX_SELECT_OPTION,
+    MANDRAGORA_TEXTBOX_CLOSE_TEXTBOX,
+    MANDRAGORA_TEXTBOX_DESTROY
+} mandragoraTextbox_func_id_t;
 
 typedef void (*mandragoraTextbox_func_t)(mandragoraTextbox*);
 

@@ -105,6 +105,12 @@ extern void func_80066400(s32);
 #define SCREEN_WIDTH  320
 #define SCREEN_HEIGHT 240
 
+// Text IDs for Castle Center (Main)
+#define CASTLE_CENTER_TAKE_MANDRAGORA                           10
+#define CASTLE_CENTER_OBTAINED_MANDRAGORA                       11
+#define CASTLE_CENTER_TRY_HAVING_MANDRAGORA_AND_NITRO_SAME_TIME 12
+#define CASTLE_CENTER_MANDRAGORA_INFO                           13
+
 /**
  * Obtain the un-mapped address of data from a Nisitenma-Ichigo file
  * This is needed if data is trying to be accessed when said data is not mapped by the TLB

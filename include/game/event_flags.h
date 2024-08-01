@@ -15,6 +15,9 @@
 /*
  *  Event flag ID
  */
+// Castle Center (Broken staircase, friendly lizard-man, vampire butler room, and upper cracked wall area)
+// Castle Center (Nitro, invention, and vampire maid room area.)
+#define EVENT_FLAG_ID_CASTLE_CENTER_3F 3
 // Castle Keep (Exterior), Castle Keep (Interior), Clock Tower
 #define EVENT_FLAG_ID_CLOCK_TOWER 5
 // Dracula's desert, Rose / Actriese Fan Room, Villa's vampire crypt, Room of
@@ -22,10 +25,16 @@
 #define EVENT_FLAG_ID_MISC_STAGES 6
 // Castle Wall (Main)
 #define EVENT_FLAG_ID_CASTLE_WALL_MAIN 10
+// Castle Center (Main)
+#define EVENT_FLAG_ID_CASTLE_CENTER_MAIN 13
 
 /*
  *  Event flags
  */
+// EVENT_FLAG_ID_CASTLE_CENTER_3F
+#define EVENT_FLAG_CASTLE_CENTER_3F_DISABLED_UPPER_WALL_INTERACTION 0x00002000
+#define EVENT_FLAG_CASTLE_CENTER_3F_MANDRAGORA_IN_UPPER_WALL        0x00008000
+
 // EVENT_FLAG_ID_CLOCK_TOWER
 #define EVENT_FLAG_CLOCK_TOWER_DEFEATED_DEATH   0x00000040
 #define EVENT_FLAG_CLOCK_TOWER_DEFEATED_ACTRISE 0x00000080
@@ -35,5 +44,9 @@
 
 // EVENT_FLAG_ID_CASTLE_WALL_MAIN
 #define EVENT_FLAG_CASTLE_WALL_MAIN_WATCHED_DRACULA_CUTSCENE 0x00000100
+
+// EVENT_FLAG_ID_CASTLE_CENTER_MAIN
+#define EVENT_FLAG_CASTLE_CENTER_3F_DISABLED_LOWER_WALL_INTERACTION 0x00000008
+#define EVENT_FLAG_CASTLE_CENTER_3F_MANDRAGORA_IN_LOWER_WALL        0x00000100
 
 #endif

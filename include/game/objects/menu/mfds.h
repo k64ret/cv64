@@ -193,6 +193,6 @@ extern u16* text_findCharInString(u16* text, u16 char_to_find);
 extern mfds_color_anim_data text_color_anim_data_table[4][8];
 extern u16* convertUTF16ToCustomTextFormat(u16* text_buffer);
 extern void textbox_setHeightAndWidth(mfds_state* self, u32 index, u8 text_height, u8 text_width);
-extern mfds_state* map_getMessageFromPool(u32 text_ID, u32 textbox_display_time);
+extern mfds_state* map_getMessageFromPool(u16 text_ID, u32 textbox_display_time);
 
 #endif
