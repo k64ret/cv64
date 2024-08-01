@@ -19,11 +19,6 @@
 #define SKYBOX_ASSETS_FILE_ID sys.map_assets_file_IDs[2]
 
 typedef union {
-    s16 field_s16;
-    f32 field_f32;
-} unk_union_1;
-
-typedef union {
     void* field_voidptr;
     cv64_actor_t* enemy;
     s16 damage;
@@ -40,9 +35,9 @@ typedef struct {
      */
     u32 global_timer_uncapped;
     u32 execution_flags;
-    sysw_gfx field2_0x8[2];
-    s16 current_dlist_buffer;
-    s16 previous_dlist_buffer;
+    sysw_gfx graphic_buffers[2];
+    s16 current_graphic_buffer;
+    s16 previous_graphic_buffer;
     s16 frameBuffer_index;
     s16 framebuffer_image_pixel_size;
     cv64_rgba_t background_color;
@@ -73,13 +68,16 @@ typedef struct {
     u16 fog_distance_near;
     u16 fog_distance_far;
     /**
-     * See func_8000C740
+     * See figure_update
      */
     s32 field16_0x2402c;
     Matrix44F* field17_0x24030;
     u8 field18_0x24034[68];
     Matrix44F field19_0x24078;
-    unk_union_1 field20_0x240b8;
+    union {
+        s16 field20_0x240b8_s16;
+        f32 field20_0x240b8_f32;
+    };
     u32 NisitenmaIchigo_loadedFiles[64];
     u32 NisitenmaIchigo_currentlyDecompressingFiles[64];
     /**
@@ -96,7 +94,11 @@ typedef struct {
      * fileLoad*
      */
     void* file_load_array[8];
-    u8 field31_0x24720[6154];
+    /**
+     * Perhaps a decompression chunk buffer? Used in `romCopyAndDecompress`
+     */
+    u8 field31_0x24720[0x1800];
+    u8 field_0x25f20[10];
     s16 field32_0x25f2a;
     u8 field33_0x25f2c[512];
     cv64_save_state_t SaveStruct_gameplay;
@@ -125,11 +127,11 @@ typedef struct {
     u16 current_PowerUp_level;
     u8 alternate_costume;
     u8 in_first_person_mode;
-    s16 field54_0x26238;
+    s16 nitro_explosion_hit_launch_angle;
     s16 field55_0x2623a;
-    f32 field56_0x2623c;
-    f32 field57_0x26240;
-    s32 field58_0x26244;
+    f32 nitro_explosion_hit_launch_speed;
+    f32 nitro_explosion_hit_launch_Y_velocity;
+    s32 player_frozenGrab_timer;
     s16 player_position_log_max;
     s16 player_position_log_current;
     vec3f player_position_log[30];
@@ -145,7 +147,7 @@ typedef struct {
      */
     void* ptr_playerCameraController;
     u8 field70_0x263d0[4];
-    Matrix44F another_viewing_matrix;
+    Matrix44F field_0x263d4;
     cv64_rgba_t primitive_color;
     s16 map_is_setup;
     u8 field74_0x2641a;
@@ -175,6 +177,9 @@ typedef struct {
     u32 cutscene_ID;
     u32 entrance_cutscene_ID;
     u32 cutscene_flags;
+    /**
+     * DESTROY_CUTSCENE_TRIGGERS = 0x00000001
+     */
     u32 field89_0x2644c;
 } system_work; // Size = 0x26450
 

@@ -2,6 +2,7 @@
 #define CUTSCENE_H
 
 #include "actor.h"
+#include "cutscene_ID.h"
 
 #define NUM_CUTSCENES 61
 

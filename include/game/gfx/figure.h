@@ -1,10 +1,13 @@
+/**
+ * @file figure.h
+ *
+ * Types and functions common to figure-type structs (model_info, camera, light)
+ */
+
 #ifndef FIGURE_H
 #define FIGURE_H
 
 #include <ultra64.h>
-
-// Types and functions common to figure-type structs (model_info, camera,
-// light)
 
 #define FIG_SIZE      0xA8
 #define FIG_ARRAY_MAX 512
@@ -64,5 +67,16 @@ extern void figure_hideSelfAndChildren(figHeader*, u16);
 extern void* figure_setChild(figHeader* new_child, figHeader* self);
 
 extern figure figures_array[FIG_ARRAY_MAX];
+
+typedef struct {
+    u32 field_0x00;
+    figure* field_0x04;
+    f32 far;
+    u8 field_0x0C[4];
+    struct struct_106* field_0x10; // Could also be `light*` ?
+    struct struct_106* field_0x14;
+} struct_106;
+
+extern struct_106 D_8034D2B8[256];
 
 #endif

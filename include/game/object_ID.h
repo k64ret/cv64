@@ -92,7 +92,7 @@ typedef enum cv64_object_id_raw {
     ID_OBJECT_026                    = 0x026,
     ID_INTERACTUABLES                = 0x027,
     ID_OBJECT_028                    = 0x028,
-    ID_OBJECT_029                    = 0x029,
+    ID_CUTSCENE_TRIGGER              = 0x029,
     ID_CUTSCENEMGR                   = 0x02A,
     ID_CSFILMREEL                    = 0x02B,
     ID_OBJECT_02C                    = 0x02C,
@@ -160,7 +160,7 @@ typedef enum cv64_object_id_raw {
     ID_CAMERAMGR                     = 0x06A,
     ID_OBJECT_06B                    = 0x06B,
     ID_PLAYER_CAMERA_CONTROLLER      = 0x06C,
-    ID_OBJECT_06D                    = 0x06D,
+    ID_MASTER_LIGHT_MGR              = 0x06D,
     ID_MODEL_LIGHTING                = 0x06E,
     ID_POINT_LIGHT                   = 0x06F,
     ID_REINHARDT                     = 0x070,
@@ -348,7 +348,7 @@ typedef enum cv64_object_id_raw {
     ID_GAMEPLAY_MENUMGR              = 0x126,
     ID_MFDS                          = 0x127,
     ID_LENS                          = 0x128,
-    ID_OBJECT_129                    = 0x129,
+    ID_HUD                           = 0x129,
     ID_OBJECT_12A                    = 0x12A,
     ID_OBJECT_12B                    = 0x12B,
     ID_OBJECT_12C                    = 0x12C,
@@ -413,7 +413,7 @@ typedef enum cv64_object_id_raw {
     ID_OBJECT_167                    = 0x167,
     ID_OBJECT_168                    = 0x168,
     ID_OBJECT_169                    = 0x169,
-    ID_OBJECT_16A                    = 0x16A,
+    ID_LOADING_ZONE                  = 0x16A,
     ID_OBJECT_16B                    = 0x16B,
     ID_OBJECT_16C                    = 0x16C,
     ID_OBJECT_16D                    = 0x16D,
@@ -617,6 +617,7 @@ typedef enum cv64_object_id {
     ENGINE_GAMEPLAYMGR                 = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_GAMEPLAYMGR),
     ENGINE_MAP_OBJECT_PARENT           = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_MAP_OBJECT_PARENT),
     ENGINE_PLAYER_CONTROLLER           = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_PLAYER_CONTROLLER),
+    ENGINE_MASTER_LIGHT_MGR            = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_MASTER_LIGHT_MGR),
     ENGINE_MAP_SETUP                   = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_MAP_SETUP),
     ENGINE_ENEMY_PARENT                = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_ENEMY_PARENT),
     ENGINE_GAMENOTE_DELETE_MGR_CREATOR = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_GAMENOTE_DELETE_MGR_CREATOR),
@@ -643,6 +644,7 @@ typedef enum cv64_object_id {
 
     // Cutscene
     CUTSCENE_INTERACTUABLES            = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_INTERACTUABLES),
+    CUTSCENE_CUTSCENE_TRIGGER          = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_CUTSCENE_TRIGGER),
     CUTSCENE_CUTSCENEMGR               = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_CUTSCENEMGR),
     CUTSCENE_CSFILMREEL                = CV64_OBJECT_ID(OBJ_KIND_MAP_OVERLAY, ID_CSFILMREEL),
     CUTSCENE_CUTSCENE_FOREST_BLESSING  = CV64_OBJECT_ID(OBJ_KIND_MAP_OVERLAY, ID_CUTSCENE_FOREST_BLESSING),
@@ -653,7 +655,7 @@ typedef enum cv64_object_id {
     CAMERA_CAMERAMGR                   = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_CAMERAMGR),
     CAMERA_OBJ_06B                     = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_OBJECT_06B),
     CAMERA_PLAYER_CAMERA_CONTROLLER    = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_PLAYER_CAMERA_CONTROLLER),
-    CAMERA_OBJ_06D                     = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_OBJECT_06D),
+    CAMERA_MASTER_LIGHT_MGR            = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_MASTER_LIGHT_MGR),
     CAMERA_MODEL_LIGHTING              = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_MODEL_LIGHTING),
     CAMERA_POINT_LIGHT                 = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_POINT_LIGHT),
 
@@ -685,6 +687,7 @@ typedef enum cv64_object_id {
     MENU_GAMEPLAY_MENUMGR              = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_GAMEPLAY_MENUMGR),
     MENU_MFDS                          = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_MFDS),
     MENU_LENS                          = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_LENS),
+    MENU_HUD                           = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_HUD),
     MENU_CHARACTER_SELECT              = CV64_OBJECT_ID(OBJ_KIND_MAP_OVERLAY, ID_CHARACTER_SELECT),
     MENU_PAGE                          = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_PAGE),
     MENU_SCROLL                        = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_SCROLL),
@@ -697,6 +700,9 @@ typedef enum cv64_object_id {
     MENU_OBJ_13F                       = CV64_OBJECT_ID(OBJ_KIND_MAP_OVERLAY, ID_OBJECT_13F),
     MENU_EASY_ENDING                   = CV64_OBJECT_ID(OBJ_KIND_MAP_OVERLAY, ID_EASY_ENDING),
     MENU_STAGE_SELECT                  = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_STAGE_SELECT),
+
+    // Map handling
+    MAP_HANDLING_LOADING_ZONE          = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_LOADING_ZONE),
 
     // Stage object
     STAGE_OBJECT_LEVER                 = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_LEVER),

@@ -74,7 +74,7 @@ void* func_80001008_1C08(cv64_heap_kind_t heap_kind, u32 size) {
     data_header->data_ptrs[0] = data;
     BITS_SET(data_header->flags, HEAP_BLOCK_4000);
     data_header->data_ptrs[1] = data + size;
-    data_header->field_0x08   = data_header->data_ptrs[sys.current_dlist_buffer];
+    data_header->field_0x08   = data_header->data_ptrs[sys.current_graphic_buffer];
 
     return &data_header->field_0x08;
 }

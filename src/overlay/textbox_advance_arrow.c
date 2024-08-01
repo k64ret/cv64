@@ -31,13 +31,20 @@ void textboxAdvanceArrow_init(textboxAdvanceArrow* self) {
     arrow_light       = (*light_create)(FIG_TYPE_LIGHT);
     self->arrow_light = arrow_light;
     (*figure_setChild)(arrow_light, common_camera_HUD);
-    arrow_light->primitive_color.r     = arrow_light->primitive_color.g =
-        arrow_light->primitive_color.b = 160;
-    arrow_light->field5_0x3c           = 1;
-    arrow_light->blend_color.r = arrow_light->blend_color.g = arrow_light->blend_color.b = 207;
-    (s8) arrow_light->fog_color.r = 240; // The s8 typecast is needed for matching here
-    arrow_light->fog_color.g      = 0;
-    arrow_light->fog_color.b      = 16;
+
+    // clang-format off
+    arrow_light->ambient_color.r = arrow_light->ambient_color.g = arrow_light->ambient_color.b = 160;
+    // clang-format on
+
+    arrow_light->number_of_lights = 1;
+
+    // clang-format off
+    arrow_light->lights[0].color.r = arrow_light->lights[0].color.g = arrow_light->lights[0].color.b = 207;
+    // clang-format on
+
+    arrow_light->lights[0].direction[0] = 240;
+    arrow_light->lights[0].direction[1] = 0;
+    arrow_light->lights[0].direction[2] = 16;
     model                 = (*modelInfo_createAndSetChild)(FIG_TYPE_HUD_ELEMENT, arrow_light);
     self->model           = model;
     model->dlist          = &TEXTBOX_ADVANCE_ARROW_DL;

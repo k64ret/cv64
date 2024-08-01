@@ -54,24 +54,24 @@ typedef enum cv64_map_ID {
 typedef struct cv64_save_state {
     u32 event_flags[NUM_EVENT_FLAGS];
     u32 flags;
-    u16 week;
-    u16 day;
+    s16 week;
+    s16 day;
     s16 hour;
-    u16 minute;
-    u16 seconds;
+    s16 minute;
+    s16 seconds;
     u16 milliseconds;        // Assumption.
     u32 gameplay_framecount; // Updates at 60fps
     s16 button_config;
     s16 sound_mode;
     s16 character;
-    u16 life;
+    s16 life;
     /**
      * Only set to 100, like the life, and never used otherwise.
      * Maybe related to the scrapped S / E meter?
      */
-    u16 field_0x5C;
+    s16 field_0x5C;
     u16 subweapon;
-    u32 money;
+    u32 gold;
     union {
         struct {
             s8 jewels[5];
@@ -84,8 +84,11 @@ typedef struct cv64_save_state {
         u8 array[SIZE_ITEMS_ARRAY];
     } items;
     u32 player_status;
-    u16 health_depletion_rate_while_poisoned;
-    s16 current_hour_VAMP; // If greater than 24 (midnight), the player turns into vampire
+    u16 health_depletion_rate_while_poisoned; // TODO: Double check
+    /**
+    * If greater than 24 (midnight), the player turns into a vampire
+    */
+    u16 current_hour_VAMP;
     s16 map;
     s16 spawn;
     u8 save_crystal_number;
@@ -104,7 +107,7 @@ typedef struct cv64_save_state {
     s16 field77_0xd2;
     s16 field79_0xd4;
     s32 field83_0xd8;
-    u32 money_spent_on_Renon;
+    u32 gold_spent_on_Renon;
 } cv64_save_state_t; // Size = 0xE0
 
 // clang-format off

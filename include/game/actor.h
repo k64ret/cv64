@@ -17,7 +17,7 @@
 
 typedef struct {
     u32 flags;
-    atari_base_work* atari_base;
+    cv64_atari_base_work_t* atari_base;
     cv64_model_inf_t* model;
     modelLighting* lighting;
     animationMgr animMgr;

@@ -41,18 +41,21 @@ typedef u8 Addr[];
 
 extern u32 D_80092F50;
 extern Gfx* gDisplayListHead; // 0x800B49E0
+extern u32 map_misc_event_flags;
+extern u8 PLAYER_HAS_MAX_HEALTH;
 
-#define MOON_VISIBILITY_DAY      0  // Moon is invisible
-#define MOON_VISIBILITY_NIGHT    1  // Moon is visible
-/**
- * New moons have been observed to happen during the following situations. During these times,
- * the moon is not supposed to be visible:
- *  - From 18:00 to 23:59 on the 7th day of the week, but only if the current week number is even.
- * 
- *  - When spawning in Forest of Silence from 00:00 to 06:00 of the 1st day of the week,
- *    but only if the current week number is even.
- */
-#define MOON_VISIBILITY_NEW_MOON 2  // Moon is invisible
+typedef enum cv64_moon_visibility {
+    MOON_VISIBILITY_DAY   = 0, // Moon is invisible
+    MOON_VISIBILITY_NIGHT = 1, // Moon is visible
+    /**
+     * New moons have been observed to happen during the following situations. During these times,
+     * the moon is not supposed to be visible:
+     * - From 18:00 to 23:59 on the 7th day of the week, but only if the current week number is even.
+     * - When spawning in Forest of Silence from 00:00 to 06:00 of the 1st day of the week,
+     *   but only if the current week number is even.
+     */
+    MOON_VISIBILITY_NEW_MOON = 2 // Moon is invisible
+} cv64_moon_visibility_t;
 
 /**
  * Most of the time, these two variables are accessed as two separate `s16`.
@@ -73,13 +76,22 @@ typedef union {
 
 extern union_moonVisibilityVars moonVisibilityVars;
 
+typedef enum cv64_menu_id {
+    MENU_ID_NOT_ON_MENU = 0,
+    MENU_ID_PAUSE       = 9,
+    MENU_ID_RENON_SHOP  = 10,
+    MENU_ID_GAME_OVER   = 14
+} cv64_menu_id_t;
+
 extern void end_master_display_list();
 extern s32 menuButton_selectNextOption(s32* option, s16* param_2, s16 number_of_options);
 extern u32 NisitenmaIchigo_checkAndStoreLoadedFile(u32 file_ID);
 extern void func_800010A0_1CA0();
 extern void func_8001248C_1308C();
 extern void func_8000C6D0();
-extern void func_80012400();
+extern void updateGameSound();
+extern void figure_update();
+extern void drawFog();
 extern void func_80005658();
 extern u32 getMapEventFlagID(s16 stage_ID);
 s32 func_8001A250_1AE50(s32* arg0, u16* arg1, s16 arg2);
