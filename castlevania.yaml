@@ -2483,12 +2483,15 @@ segments:
     vram: 0x0E000000
     exclusive_ram_id: nisitenma_ichigo_cutscenes
 
-  - name: ni_B5D180
-    type: bin
+  - name: ni_mandragora_textbox
+    type: code
     # start: 0x00B5D180
     start: 0x00E63080
     vram: 0x0E000000
     exclusive_ram_id: nisitenma_ichigo_cutscenes
+    subsegments:
+      - [0x00E63080, c, overlay/mandragora_textbox]
+      - [0x00E63500, data, overlay/mandragora_textbox]
 
   - name: ni_B5D504
     type: bin
