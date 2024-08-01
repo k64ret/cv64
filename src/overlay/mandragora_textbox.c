@@ -6,18 +6,37 @@
 
 #include "objects/cutscene/mandragora_textbox.h"
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/overlay/mandragora_textbox/func_0E000000_E63080.s")
+// clang-format off
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/overlay/mandragora_textbox/func_0E000070_E630F0.s")
+mandragoraTextbox_func_t mandragoraTextbox_functions[] = {
+    mandragoraTextbox_init,
+    mandragoraTextbox_idle,
+    mandragoraTextbox_prepareMessage,
+    mandragoraTextbox_selectOption,
+    mandragoraTextbox_closeTextbox,
+    mandragoraTextbox_destroy
+};
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/overlay/mandragora_textbox/func_0E000134_E631B4.s")
+// clang-format on
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/overlay/mandragora_textbox/func_0E0001CC_E6324C.s")
+#pragma GLOBAL_ASM("../asm/nonmatchings/overlay/mandragora_textbox/mandragoraTextbox_entrypoint.s")
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/overlay/mandragora_textbox/func_0E0002AC_E6332C.s")
+#pragma GLOBAL_ASM("../asm/nonmatchings/overlay/mandragora_textbox/mandragoraTextbox_init.s")
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/overlay/mandragora_textbox/func_0E000338_E633B8.s")
+#pragma GLOBAL_ASM("../asm/nonmatchings/overlay/mandragora_textbox/mandragoraTextbox_idle.s")
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/overlay/mandragora_textbox/func_0E0003E0_E63460.s")
+#pragma GLOBAL_ASM(                                                                                \
+    "../asm/nonmatchings/overlay/mandragora_textbox/mandragoraTextbox_prepareMessage.s"            \
+)
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/overlay/mandragora_textbox/func_0E000404_E63484.s")
+#pragma GLOBAL_ASM(                                                                                \
+    "../asm/nonmatchings/overlay/mandragora_textbox/mandragoraTextbox_selectOption.s"              \
+)
+
+#pragma GLOBAL_ASM(                                                                                \
+    "../asm/nonmatchings/overlay/mandragora_textbox/mandragoraTextbox_closeTextbox.s"              \
+)
+
+#pragma GLOBAL_ASM("../asm/nonmatchings/overlay/mandragora_textbox/mandragoraTextbox_destroy.s")
+
+#pragma GLOBAL_ASM("../asm/nonmatchings/overlay/mandragora_textbox/mandragoraIsPlacedInWall.s")

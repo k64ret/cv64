@@ -178,3 +178,17 @@ openingBat_hierarchy                   = 0x0F000430; // segment:ni_ovl_opening_b
 openingBat_materialDlist               = 0x0F000470; // segment:ni_ovl_opening_bat size:0x30
 openingBat_functions                   = 0x0F0004A0; // segment:ni_ovl_opening_bat size:0x10
 // End of src/overlay/openingBat.c ======================================
+
+// src/overlay/mandragora_textbox.c =============================================
+// .text
+mandragoraTextbox_entrypoint      = 0x0E000000; // type:func segment:ni_mandragora_textbox
+mandragoraTextbox_init = 0x0E000070; // type:func segment:ni_mandragora_textbox
+mandragoraTextbox_idle            = 0x0E000134; // type:func segment:ni_mandragora_textbox
+mandragoraTextbox_prepareMessage         = 0x0E0001CC; // type:func segment:ni_mandragora_textbox
+mandragoraTextbox_selectOption            = 0x0E0002AC; // type:func segment:ni_mandragora_textbox
+mandragoraTextbox_closeTextbox        = 0x0E000338; // type:func segment:ni_mandragora_textbox
+mandragoraTextbox_destroy    = 0x0E0003E0; // type:func segment:ni_mandragora_textbox
+mandragoraIsPlacedInWall       = 0x0E000404; // type:func segment:ni_mandragora_textbox
+// .data
+mandragoraTextbox_functions           = 0x0E000480; // segment:ni_mandragora_textbox size:0x18
+// End of src/overlay/mandragora_textbox.c ======================================

@@ -2491,7 +2491,7 @@ segments:
     exclusive_ram_id: nisitenma_ichigo_cutscenes
     subsegments:
       - [0x00E63080, c, overlay/mandragora_textbox]
-      - [0x00E63500, data, overlay/mandragora_textbox]
+      - [0x00E63500, .data, overlay/mandragora_textbox]
 
   - name: ni_B5D504
     type: bin

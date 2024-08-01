@@ -38,4 +38,6 @@ void mandragoraTextbox_closeTextbox(mandragoraTextbox* self);
 void mandragoraTextbox_destroy(mandragoraTextbox* self);
 s32 mandragoraIsPlacedInWall();
 
+typedef void (*mandragoraTextbox_func_t)(mandragoraTextbox*);
+
 #endif
