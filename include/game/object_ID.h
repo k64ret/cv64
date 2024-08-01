@@ -84,7 +84,7 @@ typedef enum cv64_object_id_raw {
     ID_GAME_OVER                     = 0x01E,
     ID_OBJECT_01F                    = 0x01F,
     ID_OBJECT_020                    = 0x020,
-    ID_OBJECT_021                    = 0x021,
+    ID_MANDRAGORA_TEXTBOX            = 0x021,
     ID_OBJECT_022                    = 0x022,
     ID_OBJECT_023                    = 0x023,
     ID_OBJECT_024                    = 0x024,
@@ -643,6 +643,7 @@ typedef enum cv64_object_id {
     ENGINE_GAME_OVER                   = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_GAME_OVER),
 
     // Cutscene
+    CUTSCENE_MANDRAGORA_TEXTBOX        = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_MANDRAGORA_TEXTBOX),
     CUTSCENE_INTERACTUABLES            = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_INTERACTUABLES),
     CUTSCENE_CUTSCENE_TRIGGER          = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_CUTSCENE_TRIGGER),
     CUTSCENE_CUTSCENEMGR               = CV64_OBJECT_ID(OBJ_KIND_NONE, ID_CUTSCENEMGR),
