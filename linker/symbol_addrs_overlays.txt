@@ -188,7 +188,7 @@ mandragoraTextbox_prepareMessage         = 0x0E0001CC; // type:func segment:ni_m
 mandragoraTextbox_selectOption            = 0x0E0002AC; // type:func segment:ni_mandragora_textbox
 mandragoraTextbox_closeTextbox        = 0x0E000338; // type:func segment:ni_mandragora_textbox
 mandragoraTextbox_destroy    = 0x0E0003E0; // type:func segment:ni_mandragora_textbox
-mandragoraIsPlacedInWall       = 0x0E000404; // type:func segment:ni_mandragora_textbox
+shouldNotGiveMandragora       = 0x0E000404; // type:func segment:ni_mandragora_textbox
 // .data
 mandragoraTextbox_functions           = 0x0E000480; // segment:ni_mandragora_textbox size:0x18
 // End of src/overlay/mandragora_textbox.c ======================================

@@ -60,6 +60,7 @@ void mandragoraTextbox_idle(mandragoraTextbox* self) {
 void mandragoraTextbox_prepareMessage(mandragoraTextbox* self) {
     mfds_state* message;
 
+    // Both walls are blown up
     if (CHECK_EVENT_FLAGS(
             EVENT_FLAG_ID_CASTLE_CENTER_MAIN,
             EVENT_FLAG_CASTLE_CENTER_3F_DISABLED_LOWER_WALL_INTERACTION
@@ -69,16 +70,20 @@ void mandragoraTextbox_prepareMessage(mandragoraTextbox* self) {
             EVENT_FLAG_CASTLE_CENTER_3F_DISABLED_UPPER_WALL_INTERACTION
         )) {
         self->text_ID = CASTLE_CENTER_MANDRAGORA_INFO;
+        // Mandragora is not on the inventory
     } else if (self->mandragora_amount_until_max_capacity != 0) {
+        // Nitro is not on the inventory
         if (self->nitro_amount_until_max_capacity != 0) {
-            if (mandragoraIsPlacedInWall()) {
+            if (shouldNotGiveMandragora()) {
                 self->text_ID = CASTLE_CENTER_MANDRAGORA_INFO;
             } else {
                 self->text_ID = CASTLE_CENTER_TAKE_MANDRAGORA;
             }
+            // Try getting Mandragora when Nitro is already on the inventory
         } else {
             self->text_ID = CASTLE_CENTER_TRY_HAVING_MANDRAGORA_AND_NITRO_SAME_TIME;
         }
+        // Already have Mandragora on the inventory
     } else {
         self->text_ID = CASTLE_CENTER_MANDRAGORA_INFO;
     }
@@ -144,7 +149,8 @@ void mandragoraTextbox_destroy(mandragoraTextbox* self) {
     self->header.destroy(self);
 }
 
-s32 mandragoraIsPlacedInWall() {
+s32 shouldNotGiveMandragora() {
+    // There's Mandragora at both walls
     if ((CHECK_EVENT_FLAGS(
             EVENT_FLAG_ID_CASTLE_CENTER_MAIN, EVENT_FLAG_CASTLE_CENTER_3F_MANDRAGORA_IN_LOWER_WALL
         )) &&
@@ -153,6 +159,8 @@ s32 mandragoraIsPlacedInWall() {
         )) {
         return TRUE;
     }
+
+    // The lower wall has a Mandragora and the upper wall is blown up
     if ((CHECK_EVENT_FLAGS(
             EVENT_FLAG_ID_CASTLE_CENTER_MAIN, EVENT_FLAG_CASTLE_CENTER_3F_MANDRAGORA_IN_LOWER_WALL
         )) &&
@@ -162,6 +170,8 @@ s32 mandragoraIsPlacedInWall() {
         )) {
         return TRUE;
     }
+
+    // The upper wall has a Mandragora and the lower wall is blown up
     if ((CHECK_EVENT_FLAGS(
             EVENT_FLAG_ID_CASTLE_CENTER_3F, EVENT_FLAG_CASTLE_CENTER_3F_MANDRAGORA_IN_UPPER_WALL
         )) &&

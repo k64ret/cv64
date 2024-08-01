@@ -30,7 +30,7 @@ void mandragoraTextbox_prepareMessage(mandragoraTextbox* self);
 void mandragoraTextbox_selectOption(mandragoraTextbox* self);
 void mandragoraTextbox_closeTextbox(mandragoraTextbox* self);
 void mandragoraTextbox_destroy(mandragoraTextbox* self);
-s32 mandragoraIsPlacedInWall();
+s32 shouldNotGiveMandragora();
 
 typedef enum mandragoraTextbox_func_id {
     MANDRAGORA_TEXTBOX_INIT,
