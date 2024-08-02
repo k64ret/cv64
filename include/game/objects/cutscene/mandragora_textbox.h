@@ -5,7 +5,7 @@
 #include "objects/menu/mfds.h"
 
 // ID: 0x2021
-typedef struct {
+typedef struct cv64_ovl_mandragoratextbox {
     cv64_object_hdr_t header;
     u8 field_0x20[20];
     u32 text_ID;
@@ -21,26 +21,25 @@ typedef struct {
     mfds_state* message_textbox;
     vec3f position;
     cv64_actor_settings_t* settings;
-} mandragoraTextbox;
+} cv64_ovl_mandragoratextbox_t;
 
-void mandragoraTextbox_entrypoint(mandragoraTextbox* self);
-void mandragoraTextbox_init(mandragoraTextbox* self);
-void mandragoraTextbox_idle(mandragoraTextbox* self);
-void mandragoraTextbox_prepareMessage(mandragoraTextbox* self);
-void mandragoraTextbox_selectOption(mandragoraTextbox* self);
-void mandragoraTextbox_closeTextbox(mandragoraTextbox* self);
-void mandragoraTextbox_destroy(mandragoraTextbox* self);
-s32 shouldNotGiveMandragora();
+void cv64_ovl_mandragoratextbox_entrypoint(cv64_ovl_mandragoratextbox_t* self);
+void cv64_ovl_mandragoratextbox_init(cv64_ovl_mandragoratextbox_t* self);
+void cv64_ovl_mandragoratextbox_idle(cv64_ovl_mandragoratextbox_t* self);
+void cv64_ovl_mandragoratextbox_prep_msg(cv64_ovl_mandragoratextbox_t* self);
+void cv64_ovl_mandragoratextbox_yes_no(cv64_ovl_mandragoratextbox_t* self);
+void cv64_ovl_mandragoratextbox_close(cv64_ovl_mandragoratextbox_t* self);
+void cv64_ovl_mandragoratextbox_destroy(cv64_ovl_mandragoratextbox_t* self);
 
-typedef enum mandragoraTextbox_func_id {
+typedef enum cv64_ovl_mandragoratextbox_func_id {
     MANDRAGORA_TEXTBOX_INIT,
     MANDRAGORA_TEXTBOX_IDLE,
     MANDRAGORA_TEXTBOX_PREPARE_MESSAGE,
     MANDRAGORA_TEXTBOX_SELECT_OPTION,
     MANDRAGORA_TEXTBOX_CLOSE_TEXTBOX,
     MANDRAGORA_TEXTBOX_DESTROY
-} mandragoraTextbox_func_id_t;
+} cv64_ovl_mandragoratextbox_func_id_t;
 
-typedef void (*mandragoraTextbox_func_t)(mandragoraTextbox*);
+typedef void (*cv64_ovl_mandragoratextbox_func_t)(cv64_ovl_mandragoratextbox_t*);
 
 #endif
