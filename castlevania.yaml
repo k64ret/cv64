@@ -2483,7 +2483,7 @@ segments:
     vram: 0x0E000000
     exclusive_ram_id: nisitenma_ichigo_cutscenes
 
-  - name: ni_mandragora_textbox
+  - name: ni_ovl_mandragora_textbox
     type: code
     # start: 0x00B5D180
     start: 0x00E63080
