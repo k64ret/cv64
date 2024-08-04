@@ -190,5 +190,21 @@ cv64_ovl_mandragoratextbox_close      = 0x0E000338; // type:func segment:ni_ovl_
 cv64_ovl_mandragoratextbox_destroy    = 0x0E0003E0; // type:func segment:ni_ovl_mandragora_textbox
 cannot_collect_mandragora             = 0x0E000404; // type:func segment:ni_ovl_mandragora_textbox
 // .data
-cv64_ovl_mandragoratextbox_funcs      = 0x0E000480; // segment:ni_ovl_mandragora_textbox size:0x18
+cv64_ovl_mandragoratextbox_funcs      = 0x0E000480; // type:asciz segment:ni_ovl_mandragora_textbox size:0x4
 // End of src/overlay/mandragora_textbox.c =====================================
+
+// src/overlay/nitro_textbox.c ============================================
+// .text
+cv64_ovl_nitrotextbox_entrypoint = 0x0E000000; // type:func segment:ni_ovl_nitro_textbox
+cv64_ovl_nitrotextbox_init       = 0x0E000070; // type:func segment:ni_ovl_nitro_textbox
+cv64_ovl_nitrotextbox_idle       = 0x0E000134; // type:func segment:ni_ovl_nitro_textbox
+cv64_ovl_nitrotextbox_prep_msg   = 0x0E000258; // type:func segment:ni_ovl_nitro_textbox
+cv64_ovl_nitrotextbox_yes_no     = 0x0E0002B4; // type:func segment:ni_ovl_nitro_textbox
+cv64_ovl_nitrotextbox_close      = 0x0E000358; // type:func segment:ni_ovl_nitro_textbox
+cv64_ovl_nitrotextbox_destroy    = 0x0E000400; // type:func segment:ni_ovl_nitro_textbox
+cannot_collect_nitro             = 0x0E000424; // type:func segment:ni_ovl_nitro_textbox
+// .data
+cv64_ovl_nitrotextbox_funcs      = 0x0E0004A0; // segment:ni_ovl_nitro_textbox size:0x18
+// .rodata
+cv64_ovl_nitrotextbox_unused_str = 0x0E0004C0; // segment:ni_ovl_nitro_textbox size:0x18
+// End of src/overlay/nitro_textbox.c =====================================
