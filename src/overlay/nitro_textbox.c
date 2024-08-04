@@ -18,9 +18,9 @@ cv64_ovl_nitrotextbox_func_t cv64_ovl_nitrotextbox_funcs[] = {
     cv64_ovl_nitrotextbox_destroy
 };
 
-const char cv64_ovl_nitrotextbox_unused_str[] = "OK\n";
-
 // clang-format on
+
+const char cv64_ovl_nitrotextbox_unused_str[] = "OK\n";
 
 static s32 cannot_collect_nitro();
 
@@ -67,15 +67,15 @@ void cv64_ovl_nitrotextbox_idle(cv64_ovl_nitrotextbox_t* self) {
             EVENT_FLAG_ID_CASTLE_CENTER_3F,
             EVENT_FLAG_CASTLE_CENTER_3F_DISABLED_UPPER_WALL_INTERACTION
         )) {
-        self->text_ID = 5;
+        self->text_ID = CASTLE_CENTER_NITRO_INFO;
         // Nitro is not on the inventory
     } else if (self->nitro_amount_until_max_capacity != 0) {
         // Mandragora is not on the inventory
         if (self->mandragora_amount_until_max_capacity != 0) {
             if (cannot_collect_nitro()) {
-                self->text_ID = 5;
+                self->text_ID = CASTLE_CENTER_NITRO_INFO;
             } else {
-                self->text_ID              = 6;
+                self->text_ID              = CASTLE_CENTER_TAKE_NITRO;
                 self->message_display_time = 0;
             }
             // Try getting Nitro when Mandragora is already on the inventory
@@ -84,7 +84,7 @@ void cv64_ovl_nitrotextbox_idle(cv64_ovl_nitrotextbox_t* self) {
         }
         // Already have Nitro on the inventory
     } else {
-        self->text_ID = 5;
+        self->text_ID = CASTLE_CENTER_NITRO_INFO;
     }
     (*object_curLevel_goToNextFuncAndClearTimer)(
         self->header.current_function, &self->header.function_info_ID
@@ -109,13 +109,13 @@ void cv64_ovl_nitrotextbox_prep_msg(cv64_ovl_nitrotextbox_t* self) {
 void cv64_ovl_nitrotextbox_yes_no(cv64_ovl_nitrotextbox_t* self) {
     mfds_state* textbox = self->message_textbox;
 
-    if (self->text_ID == 6) {
+    if (self->text_ID == CASTLE_CENTER_TAKE_NITRO) {
         switch (textbox->textbox_option) {
             case 0:
                 return;
             // Yes
             case 1:
-                self->text_ID = 7;
+                self->text_ID = CASTLE_CENTER_NITRO_WARNING;
                 (*item_addAmountToInventory)(ITEM_ID_MAGICAL_NITRO, 1);
                 sys.SaveStruct_gameplay.flags |= SAVE_FLAG_CAN_EXPLODE_ON_JUMPING;
                 // Fallthrough
@@ -134,7 +134,7 @@ void cv64_ovl_nitrotextbox_yes_no(cv64_ovl_nitrotextbox_t* self) {
 void cv64_ovl_nitrotextbox_close(cv64_ovl_nitrotextbox_t* self) {
     mfds_state* message_textbox;
 
-    if (self->text_ID == 7) {
+    if (self->text_ID == CASTLE_CENTER_NITRO_WARNING) {
         message_textbox = (*map_getMessageFromPool)(self->text_ID, 0);
         if (message_textbox != NULL) {
             self->message_textbox = message_textbox;
@@ -164,20 +164,34 @@ void cv64_ovl_nitrotextbox_destroy(cv64_ovl_nitrotextbox_t* self) {
 
 s32 cannot_collect_nitro() {
     // There's Nitro at both walls
-    if ((CHECK_EVENT_FLAGS(EVENT_FLAG_ID_CASTLE_CENTER_MAIN, 0x02000000)) &&
-        CHECK_EVENT_FLAGS(EVENT_FLAG_ID_CASTLE_CENTER_3F, 0x4000)) {
+    if ((CHECK_EVENT_FLAGS(
+            EVENT_FLAG_ID_CASTLE_CENTER_MAIN, EVENT_FLAG_CASTLE_CENTER_3F_NITRO_IN_LOWER_WALL
+        )) &&
+        CHECK_EVENT_FLAGS(
+            EVENT_FLAG_ID_CASTLE_CENTER_3F, EVENT_FLAG_CASTLE_CENTER_3F_NITRO_IN_UPPER_WALL
+        )) {
         return TRUE;
     }
 
     // The lower wall has a Nitro and the upper wall is blown up
-    if ((CHECK_EVENT_FLAGS(EVENT_FLAG_ID_CASTLE_CENTER_MAIN, 0x02000000)) &&
-        CHECK_EVENT_FLAGS(EVENT_FLAG_ID_CASTLE_CENTER_3F, 0x2000)) {
+    if ((CHECK_EVENT_FLAGS(
+            EVENT_FLAG_ID_CASTLE_CENTER_MAIN, EVENT_FLAG_CASTLE_CENTER_3F_NITRO_IN_LOWER_WALL
+        )) &&
+        CHECK_EVENT_FLAGS(
+            EVENT_FLAG_ID_CASTLE_CENTER_3F,
+            EVENT_FLAG_CASTLE_CENTER_3F_DISABLED_UPPER_WALL_INTERACTION
+        )) {
         return TRUE;
     }
 
     // The upper wall has a Nitro and the lower wall is blown up
-    if ((CHECK_EVENT_FLAGS(EVENT_FLAG_ID_CASTLE_CENTER_3F, 0x4000)) &&
-        CHECK_EVENT_FLAGS(EVENT_FLAG_ID_CASTLE_CENTER_MAIN, 8)) {
+    if ((CHECK_EVENT_FLAGS(
+            EVENT_FLAG_ID_CASTLE_CENTER_3F, EVENT_FLAG_CASTLE_CENTER_3F_NITRO_IN_UPPER_WALL
+        )) &&
+        CHECK_EVENT_FLAGS(
+            EVENT_FLAG_ID_CASTLE_CENTER_MAIN,
+            EVENT_FLAG_CASTLE_CENTER_3F_DISABLED_LOWER_WALL_INTERACTION
+        )) {
         return TRUE;
     }
 

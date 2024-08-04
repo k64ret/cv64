@@ -106,6 +106,9 @@ extern void func_80066400(s32);
 #define SCREEN_HEIGHT 240
 
 // Text IDs for Castle Center (Main)
+#define CASTLE_CENTER_NITRO_INFO                                5
+#define CASTLE_CENTER_TAKE_NITRO                                6
+#define CASTLE_CENTER_NITRO_WARNING                             7
 #define CASTLE_CENTER_TAKE_MANDRAGORA                           10
 #define CASTLE_CENTER_OBTAINED_MANDRAGORA                       11
 #define CASTLE_CENTER_TRY_HAVING_MANDRAGORA_AND_NITRO_SAME_TIME 12
