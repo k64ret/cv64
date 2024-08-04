@@ -122,7 +122,7 @@ void difficultySelect_loop(characterSelect* self) {
         case SELECT_OPTION:
             option = inner->difficulty_text->textbox_option;
             switch (option) {
-                case 0:
+                case TEXTBOX_OPTION_IDLE:
                     return;
                 // Easy
                 case 1:

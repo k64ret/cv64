@@ -109,15 +109,13 @@ void cv64_ovl_mandragoratextbox_yes_no(cv64_ovl_mandragoratextbox_t* self) {
 
     if (self->text_ID == CASTLE_CENTER_TAKE_MANDRAGORA) {
         switch (textbox->textbox_option) {
-            case 0:
+            case TEXTBOX_OPTION_IDLE:
                 return;
-            // Yes
-            case 1:
+            case TEXTBOX_OPTION_YES:
                 self->text_ID = CASTLE_CENTER_OBTAINED_MANDRAGORA;
                 (*item_addAmountToInventory)(ITEM_ID_MANDRAGORA, 1);
                 // Fallthrough
-            // No
-            case 2:
+            case TEXTBOX_OPTION_NO:
             default:
                 break;
         }

@@ -111,16 +111,14 @@ void cv64_ovl_nitrotextbox_yes_no(cv64_ovl_nitrotextbox_t* self) {
 
     if (self->text_ID == CASTLE_CENTER_TAKE_NITRO) {
         switch (textbox->textbox_option) {
-            case 0:
+            case TEXTBOX_OPTION_IDLE:
                 return;
-            // Yes
-            case 1:
+            case TEXTBOX_OPTION_YES:
                 self->text_ID = CASTLE_CENTER_NITRO_WARNING;
                 (*item_addAmountToInventory)(ITEM_ID_MAGICAL_NITRO, 1);
                 sys.SaveStruct_gameplay.flags |= SAVE_FLAG_CAN_EXPLODE_ON_JUMPING;
                 // Fallthrough
-            // No
-            case 2:
+            case TEXTBOX_OPTION_NO:
             default:
                 break;
         }

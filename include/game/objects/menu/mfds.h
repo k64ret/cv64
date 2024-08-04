@@ -24,6 +24,10 @@
 #define MENU_TEXT_CORNELL   12  // Unused
 #define MENU_TEXT_COLLER    13  // Unused
 
+#define TEXTBOX_OPTION_IDLE 0
+#define TEXTBOX_OPTION_YES  1
+#define TEXTBOX_OPTION_NO   2
+
 typedef enum cv64_textbox_flag {
     MENU_TEXT_ID_PRINTS_ITEM        = CV64_BIT(0),
     MENU_TEXT_ID_PRINTS_MENU_STRING = CV64_BIT(1),
