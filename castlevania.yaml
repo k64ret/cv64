@@ -2501,8 +2501,8 @@ segments:
     exclusive_ram_id: nisitenma_ichigo_cutscenes
     subsegments:
       - [0x00E63520, c, overlay/nitro_textbox]
-      - [0x00E639C0, data, overlay/nitro_textbox]
-      - [0x00E639E0, rodata, overlay/nitro_textbox]
+      - [0x00E639C0, .data, overlay/nitro_textbox]
+      - [0x00E639E0, .rodata, overlay/nitro_textbox]
 
   - name: ni_B5D8B2
     type: bin

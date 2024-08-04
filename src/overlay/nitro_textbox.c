@@ -1,17 +1,185 @@
-#include "cv64.h"
+/**
+ * @file nitro_textbox.c
+ *
+ * Handles the textbox that grants the Magical Nitro item to the player.
+ */
 
-#pragma GLOBAL_ASM("asm/nonmatchings/overlay/nitro_textbox/cv64_ovl_nitrotextbox_entrypoint.s")
+#include "objects/cutscene/nitro_textbox.h"
+#include "system_work.h"
 
-#pragma GLOBAL_ASM("asm/nonmatchings/overlay/nitro_textbox/cv64_ovl_nitrotextbox_init.s")
+// clang-format off
 
-#pragma GLOBAL_ASM("asm/nonmatchings/overlay/nitro_textbox/cv64_ovl_nitrotextbox_idle.s")
+cv64_ovl_nitrotextbox_func_t cv64_ovl_nitrotextbox_funcs[] = {
+    cv64_ovl_nitrotextbox_init,
+    cv64_ovl_nitrotextbox_idle,
+    cv64_ovl_nitrotextbox_prep_msg,
+    cv64_ovl_nitrotextbox_yes_no,
+    cv64_ovl_nitrotextbox_close,
+    cv64_ovl_nitrotextbox_destroy
+};
 
-#pragma GLOBAL_ASM("asm/nonmatchings/overlay/nitro_textbox/cv64_ovl_nitrotextbox_prep_msg.s")
+const char cv64_ovl_nitrotextbox_unused_str[] = "OK\n";
 
-#pragma GLOBAL_ASM("asm/nonmatchings/overlay/nitro_textbox/cv64_ovl_nitrotextbox_yes_no.s")
+// clang-format on
 
-#pragma GLOBAL_ASM("asm/nonmatchings/overlay/nitro_textbox/cv64_ovl_nitrotextbox_close.s")
+static s32 cannot_collect_nitro();
 
-#pragma GLOBAL_ASM("asm/nonmatchings/overlay/nitro_textbox/cv64_ovl_nitrotextbox_destroy.s")
+void cv64_ovl_nitrotextbox_entrypoint(cv64_ovl_nitrotextbox_t* self) {
+    ENTER(self, cv64_ovl_nitrotextbox_funcs);
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/overlay/nitro_textbox/cannot_collect_nitro.s")
+void cv64_ovl_nitrotextbox_init(cv64_ovl_nitrotextbox_t* self) {
+    cv64_actor_settings_t* settings = self->settings;
+
+    if (ptr_PlayerData == NULL)
+        return;
+
+    self->position.x     = settings->position.x;
+    self->position.y     = settings->position.y;
+    self->position.z     = settings->position.z;
+    self->trigger_size_X = settings->variable_2;
+    self->trigger_size_Z = settings->variable_3;
+    self->header.timer   = 0;
+    (*object_curLevel_goToNextFuncAndClearTimer)(
+        self->header.current_function, &self->header.function_info_ID
+    );
+}
+
+void cv64_ovl_nitrotextbox_idle(cv64_ovl_nitrotextbox_t* self) {
+    int temp[2];
+
+    if (self->interacting_with_interactuable != TRUE)
+        return;
+
+    sys.FREEZE_GAMEPLAY = TRUE;
+    (*cameraMgr_setReadingTextState)(sys.ptr_cameraMgr, TRUE);
+    self->mandragora_amount_until_max_capacity =
+        (*item_getAmountUntilMaxCapacity)(ITEM_ID_MANDRAGORA);
+    self->nitro_amount_until_max_capacity =
+        (*item_getAmountUntilMaxCapacity)(ITEM_ID_MAGICAL_NITRO);
+    self->message_display_time = 0;
+    // Both walls are blown up
+    if (CHECK_EVENT_FLAGS(
+            EVENT_FLAG_ID_CASTLE_CENTER_MAIN,
+            EVENT_FLAG_CASTLE_CENTER_3F_DISABLED_LOWER_WALL_INTERACTION
+        ) &&
+        CHECK_EVENT_FLAGS(
+            EVENT_FLAG_ID_CASTLE_CENTER_3F,
+            EVENT_FLAG_CASTLE_CENTER_3F_DISABLED_UPPER_WALL_INTERACTION
+        )) {
+        self->text_ID = 5;
+        // Nitro is not on the inventory
+    } else if (self->nitro_amount_until_max_capacity != 0) {
+        // Mandragora is not on the inventory
+        if (self->mandragora_amount_until_max_capacity != 0) {
+            if (cannot_collect_nitro()) {
+                self->text_ID = 5;
+            } else {
+                self->text_ID              = 6;
+                self->message_display_time = 0;
+            }
+            // Try getting Nitro when Mandragora is already on the inventory
+        } else {
+            self->text_ID = CASTLE_CENTER_TRY_HAVING_MANDRAGORA_AND_NITRO_SAME_TIME;
+        }
+        // Already have Nitro on the inventory
+    } else {
+        self->text_ID = 5;
+    }
+    (*object_curLevel_goToNextFuncAndClearTimer)(
+        self->header.current_function, &self->header.function_info_ID
+    );
+}
+
+void cv64_ovl_nitrotextbox_prep_msg(cv64_ovl_nitrotextbox_t* self) {
+    mfds_state* message;
+
+    message = (*map_getMessageFromPool)(self->text_ID, self->message_display_time);
+    if (message == NULL)
+        return;
+
+    self->message_textbox   = message;
+    self->header.timer      = 0;
+    self->textbox_is_active = FALSE;
+    (*object_curLevel_goToNextFuncAndClearTimer)(
+        self->header.current_function, &self->header.function_info_ID
+    );
+}
+
+void cv64_ovl_nitrotextbox_yes_no(cv64_ovl_nitrotextbox_t* self) {
+    mfds_state* textbox = self->message_textbox;
+
+    if (self->text_ID == 6) {
+        switch (textbox->textbox_option) {
+            case 0:
+                return;
+            // Yes
+            case 1:
+                self->text_ID = 7;
+                (*item_addAmountToInventory)(ITEM_ID_MAGICAL_NITRO, 1);
+                sys.SaveStruct_gameplay.flags |= SAVE_FLAG_CAN_EXPLODE_ON_JUMPING;
+                // Fallthrough
+            // No
+            case 2:
+            default:
+                break;
+        }
+    }
+
+    (*object_curLevel_goToNextFuncAndClearTimer)(
+        self->header.current_function, &self->header.function_info_ID
+    );
+}
+
+void cv64_ovl_nitrotextbox_close(cv64_ovl_nitrotextbox_t* self) {
+    mfds_state* message_textbox;
+
+    if (self->text_ID == 7) {
+        message_textbox = (*map_getMessageFromPool)(self->text_ID, 0);
+        if (message_textbox != NULL) {
+            self->message_textbox = message_textbox;
+        } else {
+            return;
+        }
+    }
+
+    self->text_ID = 0;
+
+    if (!(*lensAreClosed)())
+        return;
+
+    self->header.timer                   = 0;
+    self->textbox_is_active              = FALSE;
+    self->interacting_with_interactuable = FALSE;
+    sys.FREEZE_GAMEPLAY                  = FALSE;
+    (*cameraMgr_setReadingTextState)(sys.ptr_cameraMgr, FALSE);
+    (*object_curLevel_goToFunc)(
+        self->header.current_function, &self->header.function_info_ID, NITRO_TEXTBOX_IDLE
+    );
+}
+
+void cv64_ovl_nitrotextbox_destroy(cv64_ovl_nitrotextbox_t* self) {
+    self->header.destroy(self);
+}
+
+s32 cannot_collect_nitro() {
+    // There's Nitro at both walls
+    if ((CHECK_EVENT_FLAGS(EVENT_FLAG_ID_CASTLE_CENTER_MAIN, 0x02000000)) &&
+        CHECK_EVENT_FLAGS(EVENT_FLAG_ID_CASTLE_CENTER_3F, 0x4000)) {
+        return TRUE;
+    }
+
+    // The lower wall has a Nitro and the upper wall is blown up
+    if ((CHECK_EVENT_FLAGS(EVENT_FLAG_ID_CASTLE_CENTER_MAIN, 0x02000000)) &&
+        CHECK_EVENT_FLAGS(EVENT_FLAG_ID_CASTLE_CENTER_3F, 0x2000)) {
+        return TRUE;
+    }
+
+    // The upper wall has a Nitro and the lower wall is blown up
+    if ((CHECK_EVENT_FLAGS(EVENT_FLAG_ID_CASTLE_CENTER_3F, 0x4000)) &&
+        CHECK_EVENT_FLAGS(EVENT_FLAG_ID_CASTLE_CENTER_MAIN, 8)) {
+        return TRUE;
+    }
+
+    return FALSE;
+}
