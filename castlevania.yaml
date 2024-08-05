@@ -2469,12 +2469,15 @@ segments:
       - [0x00E61AE0, c, overlay/easy_mode_ending_msg]
       - [0x00E61E30, .data, overlay/easy_mode_ending_msg]
 
-  - name: ni_B5C426
-    type: bin
+  - name: ni_ovl_library_puzzle_textbox
+    type: code
     # start: 0x00B5C426
     start: 0x00E61F30
     vram: 0x0E000000
     exclusive_ram_id: nisitenma_ichigo_cutscenes
+    subsegments:
+      - [0x00E61F30, asm, overlay/textbox/library_puzzle]
+      - [0x00E62B90, data, overlay/textbox/library_puzzle]
 
   - name: ni_ovl_nitro_mandragora_display
     type: bin
