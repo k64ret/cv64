@@ -138,6 +138,7 @@ cv64_ovl_easyending_msg        = 0x0F000350; // type:u16 segment:ni_ovl_easy_mod
 cv64_ovl_easyending_funcs      = 0x0F000440; // segment:ni_ovl_easy_mode_ending_msg size:0x0C
 // End of src/overlay/easy_mode_ending_msg.c ===================================
 
+
 // src/overlay/difficulty_and_character_select.c ===============================
 // .text
 characterSelect_entrypoint                   = 0x0F000000; // type:func segment:ni_ovl_difficulty_and_character_select
@@ -166,6 +167,7 @@ carrie_portrait_size                         = 0x0F00134C; // type:f32 segment:n
 D_0F001350                                   = 0x0F001350; // type:f32 segment:ni_ovl_difficulty_and_character_select
 // End of src/overlay/difficulty_and_character_select.c ========================
 
+
 // src/overlay/openingBat.c ====================================================
 // .text
 openingBat_entrypoint    = 0x0F000000; // type:func segment:ni_ovl_opening_bat
@@ -179,7 +181,19 @@ openingBat_materialDlist = 0x0F000470; // segment:ni_ovl_opening_bat size:0x30
 openingBat_functions     = 0x0F0004A0; // segment:ni_ovl_opening_bat size:0x10
 // End of src/overlay/openingBat.c =============================================
 
-// src/overlay/mandragora_textbox.c ============================================
+
+// src/overlay/textbox/library_puzzle.c ========================================
+// .text
+cv64_ovl_librarypuzzletextbox_entrypoint = 0x0E000000; // type:func segment:ni_ovl_library_puzzle_textbox
+cv64_ovl_librarypuzzletextbox_init       = 0x0E000070; // type:func segment:ni_ovl_library_puzzle_textbox
+cv64_ovl_librarypuzzletextbox_close      = 0x0E000824; // type:func segment:ni_ovl_library_puzzle_textbox
+cv64_ovl_librarypuzzletextbox_destroy    = 0x0E0009EC; // type:func segment:ni_ovl_library_puzzle_textbox
+// .data
+cv64_ovl_librarypuzzletextbox_funcs      = 0x0E000C60; // segment:ni_ovl_library_puzzle_textbox size:0x20
+// End of src/overlay/textbox/library_puzzle.c =================================
+
+
+// src/overlay/textbox/mandragora.c ============================================
 // .text
 cv64_ovl_mandragoratextbox_entrypoint = 0x0E000000; // type:func segment:ni_ovl_mandragora_textbox
 cv64_ovl_mandragoratextbox_init       = 0x0E000070; // type:func segment:ni_ovl_mandragora_textbox
@@ -191,9 +205,10 @@ cv64_ovl_mandragoratextbox_destroy    = 0x0E0003E0; // type:func segment:ni_ovl_
 cannot_collect_mandragora             = 0x0E000404; // type:func segment:ni_ovl_mandragora_textbox
 // .data
 cv64_ovl_mandragoratextbox_funcs      = 0x0E000480; // type:asciz segment:ni_ovl_mandragora_textbox size:0x4
-// End of src/overlay/mandragora_textbox.c =====================================
+// End of src/overlay/textbox/mandragora.c =====================================
 
-// src/overlay/nitro_textbox.c ============================================
+
+// src/overlay/textbox/nitro.c =================================================
 // .text
 cv64_ovl_nitrotextbox_entrypoint = 0x0E000000; // type:func segment:ni_ovl_nitro_textbox
 cv64_ovl_nitrotextbox_init       = 0x0E000070; // type:func segment:ni_ovl_nitro_textbox
@@ -207,4 +222,4 @@ cannot_collect_nitro             = 0x0E000424; // type:func segment:ni_ovl_nitro
 cv64_ovl_nitrotextbox_funcs      = 0x0E0004A0; // segment:ni_ovl_nitro_textbox size:0x18
 // .rodata
 cv64_ovl_nitrotextbox_unused_str = 0x0E0004C0; // segment:ni_ovl_nitro_textbox size:0x18
-// End of src/overlay/nitro_textbox.c =====================================
+// End of src/overlay/textbox/nitro.c =========================================
