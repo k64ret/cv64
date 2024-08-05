@@ -131,11 +131,10 @@ void cv64_ovl_mandragoratextbox_close(cv64_ovl_mandragoratextbox_t* self) {
 
     if (self->text_ID == CASTLE_CENTER_OBTAINED_MANDRAGORA) {
         message_textbox = (*map_getMessageFromPool)(self->text_ID, 0);
-        if (message_textbox != NULL) {
-            self->message_textbox = message_textbox;
-        } else {
+        if (message_textbox == NULL)
             return;
-        }
+
+        self->message_textbox = message_textbox;
     }
 
     self->text_ID = 0;

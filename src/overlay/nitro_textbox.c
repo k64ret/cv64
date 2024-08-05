@@ -58,6 +58,7 @@ void cv64_ovl_nitrotextbox_idle(cv64_ovl_nitrotextbox_t* self) {
     self->nitro_amount_until_max_capacity =
         (*item_getAmountUntilMaxCapacity)(ITEM_ID_MAGICAL_NITRO);
     self->message_display_time = 0;
+
     // Both walls are blown up
     if (CHECK_EVENT_FLAGS(
             EVENT_FLAG_ID_CASTLE_CENTER_MAIN,
@@ -86,6 +87,7 @@ void cv64_ovl_nitrotextbox_idle(cv64_ovl_nitrotextbox_t* self) {
     } else {
         self->text_ID = CASTLE_CENTER_NITRO_INFO;
     }
+
     (*object_curLevel_goToNextFuncAndClearTimer)(
         self->header.current_function, &self->header.function_info_ID
     );
@@ -116,7 +118,7 @@ void cv64_ovl_nitrotextbox_yes_no(cv64_ovl_nitrotextbox_t* self) {
             case TEXTBOX_OPTION_YES:
                 self->text_ID = CASTLE_CENTER_NITRO_WARNING;
                 (*item_addAmountToInventory)(ITEM_ID_MAGICAL_NITRO, 1);
-                sys.SaveStruct_gameplay.flags |= SAVE_FLAG_CAN_EXPLODE_ON_JUMPING;
+                BITS_SET(sys.SaveStruct_gameplay.flags, SAVE_FLAG_CAN_EXPLODE_ON_JUMPING);
                 // Fallthrough
             case TEXTBOX_OPTION_NO:
             default:
@@ -134,11 +136,10 @@ void cv64_ovl_nitrotextbox_close(cv64_ovl_nitrotextbox_t* self) {
 
     if (self->text_ID == CASTLE_CENTER_NITRO_WARNING) {
         message_textbox = (*map_getMessageFromPool)(self->text_ID, 0);
-        if (message_textbox != NULL) {
-            self->message_textbox = message_textbox;
-        } else {
+        if (message_textbox == NULL)
             return;
-        }
+
+        self->message_textbox = message_textbox;
     }
 
     self->text_ID = 0;
