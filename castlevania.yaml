@@ -2490,8 +2490,8 @@ segments:
     vram: 0x0E000000
     exclusive_ram_id: nisitenma_ichigo_cutscenes
     subsegments:
-      - [0x00E63080, c, overlay/mandragora_textbox]
-      - [0x00E63500, .data, overlay/mandragora_textbox]
+      - [0x00E63080, c, overlay/textbox/mandragora]
+      - [0x00E63500, .data, overlay/textbox/mandragora]
 
   - name: ni_ovl_nitro_textbox
     type: code
@@ -2500,9 +2500,9 @@ segments:
     vram: 0x0E000000
     exclusive_ram_id: nisitenma_ichigo_cutscenes
     subsegments:
-      - [0x00E63520, c, overlay/nitro_textbox]
-      - [0x00E639C0, .data, overlay/nitro_textbox]
-      - [0x00E639E0, .rodata, overlay/nitro_textbox]
+      - [0x00E63520, c, overlay/textbox/nitro]
+      - [0x00E639C0, .data, overlay/textbox/nitro]
+      - [0x00E639E0, .rodata, overlay/textbox/nitro]
 
   - name: ni_B5D8B2
     type: bin
