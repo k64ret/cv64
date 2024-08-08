@@ -1,5 +1,5 @@
 /**
- * @file nitro_textbox.c
+ * @file nitro.c
  *
  * Handles the textbox that grants the Magical Nitro item to the player.
  */

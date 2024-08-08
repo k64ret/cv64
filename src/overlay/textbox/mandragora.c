@@ -1,5 +1,5 @@
 /**
- * @file mandragora_textbox.c
+ * @file mandragora.c
  *
  * Handles the textbox that grants the Mandragora item to the player.
  */
