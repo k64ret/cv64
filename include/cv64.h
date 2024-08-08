@@ -106,13 +106,23 @@ extern void func_80066400(s32);
 #define SCREEN_HEIGHT 240
 
 // Text IDs for Castle Center (Main)
-#define CASTLE_CENTER_NITRO_INFO                                5
-#define CASTLE_CENTER_TAKE_NITRO                                6
-#define CASTLE_CENTER_NITRO_WARNING                             7
-#define CASTLE_CENTER_TAKE_MANDRAGORA                           10
-#define CASTLE_CENTER_OBTAINED_MANDRAGORA                       11
+#define CASTLE_CENTER_MAIN_TAKE_MANDRAGORA     10
+#define CASTLE_CENTER_MAIN_OBTAINED_MANDRAGORA 11
+#define CASTLE_CENTER_MAIN_MANDRAGORA_INFO     13
+// Text IDs for Castle Center (Bottom Elevator)
+#define CASTLE_CENTER_1F_DISPOSAL_WITH_NITRO    7
+#define CASTLE_CENTER_1F_DISPOSAL_WITHOUT_NITRO 8
+// Text IDs for Castle Center (Gears)
+#define CASTLE_CENTER_2F_DISPOSAL_WITH_NITRO    2
+#define CASTLE_CENTER_2F_DISPOSAL_WITHOUT_NITRO 3
+// Text IDs for Castle Center (Friendly lizard-man)
+#define CASTLE_CENTER_3F_DISPOSAL_WITH_NITRO    3
+#define CASTLE_CENTER_3F_DISPOSAL_WITHOUT_NITRO 4
+#define CASTLE_CENTER_3F_NITRO_INFO             5
+#define CASTLE_CENTER_3F_TAKE_NITRO             6
+#define CASTLE_CENTER_3F_NITRO_WARNING          7
+// Text IDs for Castle Center
 #define CASTLE_CENTER_TRY_HAVING_MANDRAGORA_AND_NITRO_SAME_TIME 12
-#define CASTLE_CENTER_MANDRAGORA_INFO                           13
 
 /**
  * Obtain the un-mapped address of data from a Nisitenma-Ichigo file

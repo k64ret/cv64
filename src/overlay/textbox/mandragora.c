@@ -73,15 +73,15 @@ void cv64_ovl_mandragoratextbox_prep_msg(cv64_ovl_mandragoratextbox_t* self) {
             EVENT_FLAG_ID_CASTLE_CENTER_3F,
             EVENT_FLAG_CASTLE_CENTER_3F_DISABLED_UPPER_WALL_INTERACTION
         )) {
-        self->text_ID = CASTLE_CENTER_MANDRAGORA_INFO;
+        self->text_ID = CASTLE_CENTER_MAIN_MANDRAGORA_INFO;
         // Mandragora is not on the inventory
     } else if (self->mandragora_amount_until_max_capacity != 0) {
         // Nitro is not on the inventory
         if (self->nitro_amount_until_max_capacity != 0) {
             // clang-format off
             self->text_ID = cannot_collect_mandragora()
-                ? CASTLE_CENTER_MANDRAGORA_INFO
-                : CASTLE_CENTER_TAKE_MANDRAGORA;
+                ? CASTLE_CENTER_MAIN_MANDRAGORA_INFO
+                : CASTLE_CENTER_MAIN_TAKE_MANDRAGORA;
             // clang-format on
             // Try getting Mandragora when Nitro is already on the inventory
         } else {
@@ -89,7 +89,7 @@ void cv64_ovl_mandragoratextbox_prep_msg(cv64_ovl_mandragoratextbox_t* self) {
         }
         // Already have Mandragora on the inventory
     } else {
-        self->text_ID = CASTLE_CENTER_MANDRAGORA_INFO;
+        self->text_ID = CASTLE_CENTER_MAIN_MANDRAGORA_INFO;
     }
 
     message = (*map_getMessageFromPool)(self->text_ID, 0);
@@ -107,12 +107,12 @@ void cv64_ovl_mandragoratextbox_prep_msg(cv64_ovl_mandragoratextbox_t* self) {
 void cv64_ovl_mandragoratextbox_yes_no(cv64_ovl_mandragoratextbox_t* self) {
     mfds_state* textbox = self->message_textbox;
 
-    if (self->text_ID == CASTLE_CENTER_TAKE_MANDRAGORA) {
+    if (self->text_ID == CASTLE_CENTER_MAIN_TAKE_MANDRAGORA) {
         switch (textbox->textbox_option) {
             case TEXTBOX_OPTION_IDLE:
                 return;
             case TEXTBOX_OPTION_YES:
-                self->text_ID = CASTLE_CENTER_OBTAINED_MANDRAGORA;
+                self->text_ID = CASTLE_CENTER_MAIN_OBTAINED_MANDRAGORA;
                 (*item_addAmountToInventory)(ITEM_ID_MANDRAGORA, 1);
                 // Fallthrough
             case TEXTBOX_OPTION_NO:
@@ -129,7 +129,7 @@ void cv64_ovl_mandragoratextbox_yes_no(cv64_ovl_mandragoratextbox_t* self) {
 void cv64_ovl_mandragoratextbox_close(cv64_ovl_mandragoratextbox_t* self) {
     mfds_state* message_textbox;
 
-    if (self->text_ID == CASTLE_CENTER_OBTAINED_MANDRAGORA) {
+    if (self->text_ID == CASTLE_CENTER_MAIN_OBTAINED_MANDRAGORA) {
         message_textbox = (*map_getMessageFromPool)(self->text_ID, 0);
         if (message_textbox == NULL)
             return;

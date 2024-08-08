@@ -4,6 +4,10 @@
 #include "actor.h"
 #include "objects/menu/mfds.h"
 
+#define NITRO_DISPOSAL_TEXTBOX_BOTTOM_ELEVATOR     0
+#define NITRO_DISPOSAL_TEXTBOX_GEARS               1
+#define NITRO_DISPOSAL_TEXTBOX_FRIENDLY_LIZARD_MAN 2
+
 // ID: 0x2023
 typedef struct cv64_ovl_nitrodisposaltextbox {
     cv64_object_hdr_t header;

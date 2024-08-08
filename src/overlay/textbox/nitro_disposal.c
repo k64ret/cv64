@@ -1,7 +1,7 @@
 /**
  * @file nitro_disposal.c
  *
- * Handles the textbox that for the Magical Nitro disposal spot.
+ * Handles the textbox that for the Magical Nitro disposal spots.
  */
 
 #include "objects/cutscene/nitro_disposal_textbox.h"
@@ -36,17 +36,17 @@ void cv64_ovl_nitrodisposaltextbox_init(cv64_ovl_nitrodisposaltextbox_t* self) {
     self->trigger_size_X = settings->variable_2;
     self->trigger_size_Z = settings->variable_3;
     switch (settings->variable_1) {
-        case 0:
-            self->has_nitro_text_ID = 7;
-            self->no_nitro_text_ID  = 8;
+        case NITRO_DISPOSAL_TEXTBOX_BOTTOM_ELEVATOR:
+            self->has_nitro_text_ID = CASTLE_CENTER_1F_DISPOSAL_WITH_NITRO;
+            self->no_nitro_text_ID  = CASTLE_CENTER_1F_DISPOSAL_WITHOUT_NITRO;
             break;
-        case 1:
-            self->has_nitro_text_ID = 2;
-            self->no_nitro_text_ID  = 3;
+        case NITRO_DISPOSAL_TEXTBOX_GEARS:
+            self->has_nitro_text_ID = CASTLE_CENTER_2F_DISPOSAL_WITH_NITRO;
+            self->no_nitro_text_ID  = CASTLE_CENTER_2F_DISPOSAL_WITHOUT_NITRO;
             break;
-        case 2:
-            self->has_nitro_text_ID = 3;
-            self->no_nitro_text_ID  = 4;
+        case NITRO_DISPOSAL_TEXTBOX_FRIENDLY_LIZARD_MAN:
+            self->has_nitro_text_ID = CASTLE_CENTER_3F_DISPOSAL_WITH_NITRO;
+            self->no_nitro_text_ID  = CASTLE_CENTER_3F_DISPOSAL_WITHOUT_NITRO;
             break;
     }
     self->header.timer = 0;
@@ -72,6 +72,7 @@ void cv64_ovl_nitrodisposaltextbox_idle(cv64_ovl_nitrodisposaltextbox_t* self) {
 void cv64_ovl_nitrodisposaltextbox_prep_msg(cv64_ovl_nitrodisposaltextbox_t* self) {
     mfds_state* message;
 
+    // Both walls have been blown up already
     if (CHECK_EVENT_FLAGS(
             EVENT_FLAG_ID_CASTLE_CENTER_MAIN,
             EVENT_FLAG_CASTLE_CENTER_3F_DISABLED_LOWER_WALL_INTERACTION
@@ -81,8 +82,10 @@ void cv64_ovl_nitrodisposaltextbox_prep_msg(cv64_ovl_nitrodisposaltextbox_t* sel
             EVENT_FLAG_CASTLE_CENTER_3F_DISABLED_UPPER_WALL_INTERACTION
         )) {
         self->text_ID = self->no_nitro_text_ID;
+        // Nitro is not on the inventory
     } else if (self->nitro_amount_until_max_capacity != 0) {
         self->text_ID = self->no_nitro_text_ID;
+        // // Nitro is on the inventory
     } else {
         self->text_ID = self->has_nitro_text_ID;
     }

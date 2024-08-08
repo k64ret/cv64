@@ -68,15 +68,15 @@ void cv64_ovl_nitrotextbox_idle(cv64_ovl_nitrotextbox_t* self) {
             EVENT_FLAG_ID_CASTLE_CENTER_3F,
             EVENT_FLAG_CASTLE_CENTER_3F_DISABLED_UPPER_WALL_INTERACTION
         )) {
-        self->text_ID = CASTLE_CENTER_NITRO_INFO;
+        self->text_ID = CASTLE_CENTER_3F_NITRO_INFO;
         // Nitro is not on the inventory
     } else if (self->nitro_amount_until_max_capacity != 0) {
         // Mandragora is not on the inventory
         if (self->mandragora_amount_until_max_capacity != 0) {
             if (cannot_collect_nitro()) {
-                self->text_ID = CASTLE_CENTER_NITRO_INFO;
+                self->text_ID = CASTLE_CENTER_3F_NITRO_INFO;
             } else {
-                self->text_ID              = CASTLE_CENTER_TAKE_NITRO;
+                self->text_ID              = CASTLE_CENTER_3F_TAKE_NITRO;
                 self->message_display_time = 0;
             }
             // Try getting Nitro when Mandragora is already on the inventory
@@ -85,7 +85,7 @@ void cv64_ovl_nitrotextbox_idle(cv64_ovl_nitrotextbox_t* self) {
         }
         // Already have Nitro on the inventory
     } else {
-        self->text_ID = CASTLE_CENTER_NITRO_INFO;
+        self->text_ID = CASTLE_CENTER_3F_NITRO_INFO;
     }
 
     (*object_curLevel_goToNextFuncAndClearTimer)(
@@ -111,12 +111,12 @@ void cv64_ovl_nitrotextbox_prep_msg(cv64_ovl_nitrotextbox_t* self) {
 void cv64_ovl_nitrotextbox_yes_no(cv64_ovl_nitrotextbox_t* self) {
     mfds_state* textbox = self->message_textbox;
 
-    if (self->text_ID == CASTLE_CENTER_TAKE_NITRO) {
+    if (self->text_ID == CASTLE_CENTER_3F_TAKE_NITRO) {
         switch (textbox->textbox_option) {
             case TEXTBOX_OPTION_IDLE:
                 return;
             case TEXTBOX_OPTION_YES:
-                self->text_ID = CASTLE_CENTER_NITRO_WARNING;
+                self->text_ID = CASTLE_CENTER_3F_NITRO_WARNING;
                 (*item_addAmountToInventory)(ITEM_ID_MAGICAL_NITRO, 1);
                 BITS_SET(sys.SaveStruct_gameplay.flags, SAVE_FLAG_CAN_EXPLODE_ON_JUMPING);
                 // Fallthrough
@@ -134,7 +134,7 @@ void cv64_ovl_nitrotextbox_yes_no(cv64_ovl_nitrotextbox_t* self) {
 void cv64_ovl_nitrotextbox_close(cv64_ovl_nitrotextbox_t* self) {
     mfds_state* message_textbox;
 
-    if (self->text_ID == CASTLE_CENTER_NITRO_WARNING) {
+    if (self->text_ID == CASTLE_CENTER_3F_NITRO_WARNING) {
         message_textbox = (*map_getMessageFromPool)(self->text_ID, 0);
         if (message_textbox == NULL)
             return;
