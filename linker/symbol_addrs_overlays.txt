@@ -236,3 +236,16 @@ cv64_ovl_nitrodisposaltextbox_destroy    = 0x0E0003DC; // type:func segment:ni_o
 // .data
 cv64_ovl_nitrodisposaltextbox_funcs      = 0x0E000400; // type:asciz segment:ni_ovl_nitro_disposal_textbox size:0x4
 // End of src/overlay/textbox/nitro_disposal.c =====================================
+
+// src/overlay/textbox/bottom_elevator_activator.c ============================================
+// .text
+cv64_ovl_bottomelevatoractivatortextbox_entrypoint = 0x0E000000; // type:func segment:ni_ovl_bottom_elevator_activator_textbox
+cv64_ovl_bottomelevatoractivatortextbox_init       = 0x0E000070; // type:func segment:ni_ovl_bottom_elevator_activator_textbox
+cv64_ovl_bottomelevatoractivatortextbox_idle       = 0x0E000134; // type:func segment:ni_ovl_bottom_elevator_activator_textbox
+cv64_ovl_bottomelevatoractivatortextbox_prep_msg   = 0x0E0001A0; // type:func segment:ni_ovl_bottom_elevator_activator_textbox
+cv64_ovl_bottomelevatoractivatortextbox_yes_no     = 0x0E000278; // type:func segment:ni_ovl_bottom_elevator_activator_textbox
+cv64_ovl_bottomelevatoractivatortextbox_close      = 0x0E000314; // type:func segment:ni_ovl_bottom_elevator_activator_textbox
+cv64_ovl_bottomelevatoractivatortextbox_destroy    = 0x0E0003D4; // type:func segment:ni_ovl_bottom_elevator_activator_textbox
+// .data
+cv64_ovl_bottomelevatoractivatortextbox_funcs      = 0x0E000400; // type:asciz segment:ni_ovl_bottom_elevator_activator_textbox size:0x4
+// End of src/overlay/textbox/bottom_elevator_activator.c =====================================

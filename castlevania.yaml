@@ -2524,12 +2524,15 @@ segments:
     vram: 0x0E000000
     exclusive_ram_id: nisitenma_ichigo_cutscenes
 
-  - name: ni_B5E214
-    type: bin
+  - name: ni_ovl_bottom_elevator_activator_textbox
+    type: code
     # start: 0x00B5E214
     start: 0x00E649E0
     vram: 0x0E000000
     exclusive_ram_id: nisitenma_ichigo_cutscenes
+    subsegments:
+      - [0x00E649E0, c, overlay/textbox/bottom_elevator_activator]
+      - [0x00E64DE0, .data, overlay/textbox/bottom_elevator_activator]
 
   - name: ni_ovl_film_reel_effect
     type: bin
