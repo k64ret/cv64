@@ -23,7 +23,7 @@ typedef struct cv64_ovl_bottomelevatoractivatortextbox {
      * a text ID, it would be `CASTLE_CENTER_1F_ELEVATOR_NOT_MOVING`, which doesn't make sense, since the
      * elevator is already activated.
      */
-    u32 text_ID;
+    u32 state;
     u8 field_0x38[4];
     u32 interacting_with_interactuable;
     u32 textbox_is_active;

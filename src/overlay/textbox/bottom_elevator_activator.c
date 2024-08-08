@@ -5,6 +5,7 @@
  */
 
 #include "objects/cutscene/bottom_elevator_activator.h"
+#include "sound.h"
 #include "system_work.h"
 
 // clang-format off
@@ -60,8 +61,13 @@ void cv64_ovl_bottomelevatoractivatortextbox_prep_msg(
 ) {
     mfds_state* message;
 
-    if (CHECK_EVENT_FLAGS(13, 1)) {
-        if (CHECK_EVENT_FLAGS(8, 2)) {
+    if (CHECK_EVENT_FLAGS(
+            EVENT_FLAG_ID_CASTLE_CENTER_MAIN,
+            EVENT_FLAG_CASTLE_CENTER_3F_RELEASED_BULL_ROOM_CRYSTAL_MAGIC
+        )) {
+        if (CHECK_EVENT_FLAGS(
+                EVENT_FLAG_ID_CASTLE_CENTER_1F_2F, EVENT_FLAG_CASTLE_CENTER_1F_2F_ELEVATOR_ACTIVATED
+            )) {
             message     = (*map_getMessageFromPool)(CASTLE_CENTER_1F_ELEVATOR_ALREADY_USED, 0);
             self->state = BOTTOM_ELEVATOR_ACTIVATOR_STATE_ALREADY_USED;
         } else {
@@ -92,8 +98,11 @@ void cv64_ovl_bottomelevatoractivatortextbox_yes_no(cv64_ovl_bottomelevatoractiv
             case TEXTBOX_OPTION_IDLE:
                 return;
             case TEXTBOX_OPTION_YES:
-                SET_EVENT_FLAGS(8, 2);
-                (*play_sound)(0x119);
+                SET_EVENT_FLAGS(
+                    EVENT_FLAG_ID_CASTLE_CENTER_1F_2F,
+                    EVENT_FLAG_CASTLE_CENTER_1F_2F_ELEVATOR_ACTIVATED
+                );
+                (*play_sound)(SD_TRIGGER_BOTTOM_ELEVATOR_ACTIVATOR);
                 break;
             case TEXTBOX_OPTION_NO:
                 self->state = BOTTOM_ELEVATOR_ACTIVATOR_STATE_DONT_ACTIVATE_YET;
@@ -128,7 +137,7 @@ void cv64_ovl_bottomelevatoractivatortextbox_close(cv64_ovl_bottomelevatoractiva
         (*object_curLevel_goToFunc)(
             self->header.current_function,
             &self->header.function_info_ID,
-            NITRO_DISPOSAL_TEXTBOX_IDLE
+            BOTTOM_ELEVATOR_ACTIVATOR_IDLE
         );
     }
 }
