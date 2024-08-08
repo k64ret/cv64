@@ -20,7 +20,7 @@ options:
     - linker/symbol_addrs_makerom.txt
     - linker/symbol_addrs_overlays.txt
     - linker/symbol_addrs_assets.txt
-  disassemble_all: true
+  disassemble_all: false
   migrate_rodata_to_functions: false
   find_file_boundaries: true
   header_encoding: ASCII
