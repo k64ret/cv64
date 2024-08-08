@@ -1,7 +1,7 @@
 /**
  * @file nitro_disposal.c
  *
- * Handles the textbox that for the Magical Nitro disposal spots.
+ * Handles the textbox associated to the Magical Nitro disposal spots.
  */
 
 #include "objects/cutscene/nitro_disposal_textbox.h"
