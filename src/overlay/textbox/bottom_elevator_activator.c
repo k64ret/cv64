@@ -49,7 +49,7 @@ void cv64_ovl_bottomelevatoractivatortextbox_idle(cv64_ovl_bottomelevatoractivat
 
     sys.FREEZE_GAMEPLAY = TRUE;
     (*cameraMgr_setReadingTextState)(sys.ptr_cameraMgr, TRUE);
-    self->text_ID = 0;
+    self->state = 0;
     (*object_curLevel_goToNextFuncAndClearTimer)(
         self->header.current_function, &self->header.function_info_ID
     );
@@ -62,14 +62,14 @@ void cv64_ovl_bottomelevatoractivatortextbox_prep_msg(
 
     if (CHECK_EVENT_FLAGS(13, 1)) {
         if (CHECK_EVENT_FLAGS(8, 2)) {
-            message       = (*map_getMessageFromPool)(4, 0);
-            self->text_ID = 2;
+            message     = (*map_getMessageFromPool)(CASTLE_CENTER_1F_ELEVATOR_ALREADY_USED, 0);
+            self->state = BOTTOM_ELEVATOR_ACTIVATOR_STATE_ALREADY_USED;
         } else {
-            message       = (*map_getMessageFromPool)(1, 0);
-            self->text_ID = 1;
+            message     = (*map_getMessageFromPool)(CASTLE_CENTER_1F_ACTIVATE_ELEVATOR, 0);
+            self->state = BOTTOM_ELEVATOR_ACTIVATOR_STATE_ACTIVATE_ELEVATOR;
         }
     } else {
-        message = (*map_getMessageFromPool)(3, 0);
+        message = (*map_getMessageFromPool)(CASTLE_CENTER_1F_CANT_ACTIVATE_ELEVATOR_YET, 0);
     }
 
     if (message == NULL)
@@ -87,7 +87,7 @@ void cv64_ovl_bottomelevatoractivatortextbox_yes_no(cv64_ovl_bottomelevatoractiv
 ) {
     mfds_state* textbox = self->message_textbox;
 
-    if (self->text_ID == 1) {
+    if (self->state == BOTTOM_ELEVATOR_ACTIVATOR_STATE_ACTIVATE_ELEVATOR) {
         switch (textbox->textbox_option) {
             case TEXTBOX_OPTION_IDLE:
                 return;
@@ -96,7 +96,7 @@ void cv64_ovl_bottomelevatoractivatortextbox_yes_no(cv64_ovl_bottomelevatoractiv
                 (*play_sound)(0x119);
                 break;
             case TEXTBOX_OPTION_NO:
-                self->text_ID = 4;
+                self->state = BOTTOM_ELEVATOR_ACTIVATOR_STATE_DONT_ACTIVATE_YET;
                 break;
         }
     }
@@ -110,15 +110,16 @@ void cv64_ovl_bottomelevatoractivatortextbox_close(cv64_ovl_bottomelevatoractiva
 ) {
     mfds_state* message;
 
-    if (self->text_ID == 1) {
-        message = (*map_getMessageFromPool)(2, 0);
+    if (self->state == BOTTOM_ELEVATOR_ACTIVATOR_STATE_ACTIVATE_ELEVATOR) {
+        message = (*map_getMessageFromPool)(CASTLE_CENTER_1F_ELEVATOR_ACTIVATED, 0);
         if (message == NULL)
             return;
 
         self->message_textbox = message;
-        self->text_ID         = 5;
+        self->state           = BOTTOM_ELEVATOR_ACTIVATOR_STATE_ELEVATOR_ACTIVATED;
     }
-    if ((self->text_ID == 4) || ((*lensAreClosed)())) {
+    if ((self->state == BOTTOM_ELEVATOR_ACTIVATOR_STATE_DONT_ACTIVATE_YET) ||
+        ((*lensAreClosed)())) {
         self->header.timer                   = 0;
         self->textbox_is_active              = FALSE;
         self->interacting_with_interactuable = FALSE;

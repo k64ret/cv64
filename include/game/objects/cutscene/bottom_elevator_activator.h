@@ -4,10 +4,25 @@
 #include "actor.h"
 #include "objects/menu/mfds.h"
 
+#define BOTTOM_ELEVATOR_ACTIVATOR_STATE_ACTIVATE_ELEVATOR  1
+#define BOTTOM_ELEVATOR_ACTIVATOR_STATE_ALREADY_USED       2
+#define BOTTOM_ELEVATOR_ACTIVATOR_STATE_DONT_ACTIVATE_YET  4
+#define BOTTOM_ELEVATOR_ACTIVATOR_STATE_ELEVATOR_ACTIVATED 5
+
 // ID: 0x2025
 typedef struct cv64_ovl_bottomelevatoractivatortextbox {
     cv64_object_hdr_t header;
     u8 field_0x20[20];
+    /**
+     * This field should be the text ID, just like with most of the
+     * other special textboxes. However, it isn't used to retrieve messages this time,
+     * and the text IDs assigned to this variables sometimes aren't coherent with the current
+     * state.
+     *
+     * For example, after activating the elevator, this variable is set to 5, which if interpreted as
+     * a text ID, it would be `CASTLE_CENTER_1F_ELEVATOR_NOT_MOVING`, which doesn't make sense, since the
+     * elevator is already activated.
+     */
     u32 text_ID;
     u8 field_0x38[4];
     u32 interacting_with_interactuable;
