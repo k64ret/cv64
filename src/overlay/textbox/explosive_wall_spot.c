@@ -98,9 +98,21 @@ void explosiveWallSpot_idle(explosiveWallTextbox* self) {
     "asm/nonmatchings/overlay/textbox/explosive_wall_spot/explosiveWallSpot_determineMessage.s"    \
 )
 
-#pragma GLOBAL_ASM(                                                                                       \
-    "asm/nonmatchings/overlay/textbox/explosive_wall_spot/explosiveWallSpot_setItemText_prepareMessage.s" \
-)
+void explosiveWallSpot_setItemText_prepareMessage(explosiveWallTextbox* self) {
+    mfds_state* message;
+
+    if (self->nitro_amount_until_max_capacity <= 0) {
+        message = (*map_getMessageFromPool)(self->set_nitro_text_ID, 0);
+    } else {
+        message = (*map_getMessageFromPool)(self->set_mandragora_text_ID, 0);
+    }
+    if (message != NULL) {
+        self->message_textbox = message;
+        (*object_curLevel_goToNextFuncAndClearTimer)(
+            self->header.current_function, &self->header.function_info_ID
+        );
+    }
+}
 
 #pragma GLOBAL_ASM(                                                                                \
     "asm/nonmatchings/overlay/textbox/explosive_wall_spot/explosiveWallSpot_setItemText_idle.s"    \
@@ -134,6 +146,6 @@ void explosiveWallSpot_idle(explosiveWallTextbox* self) {
     "asm/nonmatchings/overlay/textbox/explosive_wall_spot/explosiveWallSpot_itemAlreadySet.s"      \
 )
 
-#pragma GLOBAL_ASM(                                                                                \
-    "asm/nonmatchings/overlay/textbox/explosive_wall_spot/explosiveWallSpot_destroy.s"             \
-)
+void explosiveWallSpot_destroy(explosiveWallTextbox* self) {
+    self->header.destroy(self);
+}

@@ -37,16 +37,16 @@ typedef struct explosiveWallTextbox {
 void explosiveWallSpot_entrypoint(explosiveWallTextbox* self);
 void explosiveWallSpot_init(explosiveWallTextbox* self);
 void explosiveWallSpot_idle(explosiveWallTextbox* self);
-void explosiveWallSpot_determineMessage(explosiveWallTextbox* self);
+extern void explosiveWallSpot_determineMessage(explosiveWallTextbox* self);
 void explosiveWallSpot_setItemText_prepareMessage(explosiveWallTextbox* self);
-void explosiveWallSpot_setItemText_idle(explosiveWallTextbox* self);
-void explosiveWallSpot_setItemText_determineNextTextbox(explosiveWallTextbox* self);
-void explosiveWallSpot_setItemText_close(explosiveWallTextbox* self);
-void explosiveWallSpot_readyForBlasting(explosiveWallTextbox* self);
-void explosiveWallSpot_nitroIsSet(explosiveWallTextbox* self);
-void explosiveWallSpot_mandragoraIsSet(explosiveWallTextbox* self);
-void explosiveWallSpot_defaultDescription(explosiveWallTextbox* self);
-void explosiveWallSpot_itemAlreadySet(explosiveWallTextbox* self);
+extern void explosiveWallSpot_setItemText_idle(explosiveWallTextbox* self);
+extern void explosiveWallSpot_setItemText_determineNextTextbox(explosiveWallTextbox* self);
+extern void explosiveWallSpot_setItemText_close(explosiveWallTextbox* self);
+extern void explosiveWallSpot_readyForBlasting(explosiveWallTextbox* self);
+extern void explosiveWallSpot_nitroIsSet(explosiveWallTextbox* self);
+extern void explosiveWallSpot_mandragoraIsSet(explosiveWallTextbox* self);
+extern void explosiveWallSpot_defaultDescription(explosiveWallTextbox* self);
+extern void explosiveWallSpot_itemAlreadySet(explosiveWallTextbox* self);
 void explosiveWallSpot_destroy(explosiveWallTextbox* self);
 
 typedef enum explosiveWallTextbox_func_id {
