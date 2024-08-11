@@ -41,7 +41,7 @@ void explosiveWallSpot_determineMessage(explosiveWallTextbox* self);
 void explosiveWallSpot_setItemText_prepareMessage(explosiveWallTextbox* self);
 void explosiveWallSpot_setItemText_idle(explosiveWallTextbox* self);
 void explosiveWallSpot_setItemText_determineNextTextbox(explosiveWallTextbox* self);
-void explosiveWallSpot_setItemText_close(explosiveWallTextbox* self);
+void explosiveWallSpot_setItemText_no(explosiveWallTextbox* self);
 void explosiveWallSpot_readyForBlasting(explosiveWallTextbox* self);
 void explosiveWallSpot_nitroIsSet(explosiveWallTextbox* self);
 void explosiveWallSpot_mandragoraIsSet(explosiveWallTextbox* self);

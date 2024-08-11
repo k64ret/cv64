@@ -17,7 +17,7 @@ explosiveWallTextbox_func_t explosiveWallSpot_functions[] = {
     explosiveWallSpot_setItemText_prepareMessage,
     explosiveWallSpot_setItemText_idle,
     explosiveWallSpot_setItemText_determineNextTextbox,
-    explosiveWallSpot_setItemText_close,
+    explosiveWallSpot_setItemText_no,
     explosiveWallSpot_readyForBlasting,
     explosiveWallSpot_nitroIsSet,
     explosiveWallSpot_mandragoraIsSet,
@@ -43,22 +43,22 @@ void explosiveWallSpot_init(explosiveWallTextbox* self) {
         self->trigger_size_Z = settings->variable_3;
         self->wall_type      = settings->variable_1;
         if (self->wall_type == WALL_TYPE_MAIN_MAP) {
-            self->set_nitro_text_ID           = 0xE;
-            self->set_mandragora_text_ID      = 0xF;
-            self->default_description_text_ID = 2;
-            self->item_already_set_text_ID    = 0x10;
-            self->nitro_set_text_ID           = 0x11;
-            self->mandragora_set_text_ID      = 0x12;
-            self->ready_for_blasting_text_ID  = 0x13;
+            self->set_nitro_text_ID           = CASTLE_CENTER_MAIN_SET_NITRO;
+            self->set_mandragora_text_ID      = CASTLE_CENTER_MAIN_SET_MANDRAGORA;
+            self->default_description_text_ID = CASTLE_CENTER_MAIN_WALL_INFO;
+            self->item_already_set_text_ID    = CASTLE_CENTER_MAIN_ITEM_ALREADY_SET;
+            self->nitro_set_text_ID           = CASTLE_CENTER_MAIN_NITRO_SET;
+            self->mandragora_set_text_ID      = CASTLE_CENTER_MAIN_MANDRAGORA_SET;
+            self->ready_for_blasting_text_ID  = CASTLE_CENTER_MAIN_READY_FOR_BLASTING;
         }
         if (self->wall_type == WALL_TYPE_FRIENDLY_LIZARD_MAN_MAP) {
-            self->set_nitro_text_ID           = 0xC;
-            self->set_mandragora_text_ID      = 0xD;
-            self->default_description_text_ID = 0;
-            self->item_already_set_text_ID    = 0xE;
-            self->nitro_set_text_ID           = 0xF;
-            self->mandragora_set_text_ID      = 0x10;
-            self->ready_for_blasting_text_ID  = 0x11;
+            self->set_nitro_text_ID           = CASTLE_CENTER_3F_SET_NITRO;
+            self->set_mandragora_text_ID      = CASTLE_CENTER_3F_SET_MANDRAGORA;
+            self->default_description_text_ID = CASTLE_CENTER_3F_WALL_INFO;
+            self->item_already_set_text_ID    = CASTLE_CENTER_3F_ITEM_ALREADY_SET;
+            self->nitro_set_text_ID           = CASTLE_CENTER_3F_NITRO_SET;
+            self->mandragora_set_text_ID      = CASTLE_CENTER_3F_MANDRAGORA_SET;
+            self->ready_for_blasting_text_ID  = CASTLE_CENTER_3F_READY_FOR_BLASTING;
         }
         self->header.timer = 0;
         (*object_curLevel_goToNextFuncAndClearTimer)(
@@ -68,6 +68,7 @@ void explosiveWallSpot_init(explosiveWallTextbox* self) {
 }
 
 void explosiveWallSpot_idle(explosiveWallTextbox* self) {
+    // If we're interacting with the wall and it hasn't been blown up yet
     if ((self->interacting_with_interactuable == TRUE) &&
         ((self->wall_type == WALL_TYPE_MAIN_MAP) &&
              !(CHECK_EVENT_FLAGS(
@@ -95,6 +96,7 @@ void explosiveWallSpot_idle(explosiveWallTextbox* self) {
 }
 
 void explosiveWallSpot_determineMessage(explosiveWallTextbox* self) {
+    // If we don't have the Nitro or the Mandragora
     if ((self->nitro_amount_until_max_capacity > 0) &&
         (self->mandragora_amount_until_max_capacity > 0)) {
         (*object_curLevel_goToFunc)(
@@ -104,8 +106,10 @@ void explosiveWallSpot_determineMessage(explosiveWallTextbox* self) {
         );
         return;
     }
+    // If we have Nitro on the inventory
     if (self->nitro_amount_until_max_capacity <= 0) {
         switch (self->wall_type) {
+            // Check if Nitro is already placed in the wall
             case WALL_TYPE_MAIN_MAP:
                 if (CHECK_EVENT_FLAGS(
                         EVENT_FLAG_ID_CASTLE_CENTER_MAIN,
@@ -134,8 +138,10 @@ void explosiveWallSpot_determineMessage(explosiveWallTextbox* self) {
                 break;
         }
     }
+    // If we have Mandragora on the inventory
     if (self->mandragora_amount_until_max_capacity <= 0) {
         switch (self->wall_type) {
+            // Check if Mandragora is already placed in the wall
             case WALL_TYPE_MAIN_MAP:
                 if (CHECK_EVENT_FLAGS(
                         EVENT_FLAG_ID_CASTLE_CENTER_MAIN,
@@ -244,6 +250,7 @@ void explosiveWallSpot_setItemText_idle(explosiveWallTextbox* self) {
 void explosiveWallSpot_setItemText_determineNextTextbox(explosiveWallTextbox* self) {
     switch (self->wall_type) {
         case WALL_TYPE_MAIN_MAP:
+            // Both the Nitro and Mandragora have been set. The wall is ready for blasting
             if ((CHECK_EVENT_FLAGS(
                     EVENT_FLAG_ID_CASTLE_CENTER_MAIN,
                     EVENT_FLAG_CASTLE_CENTER_3F_NITRO_IN_LOWER_WALL
@@ -259,6 +266,7 @@ void explosiveWallSpot_setItemText_determineNextTextbox(explosiveWallTextbox* se
                 );
                 return;
             }
+            // Nitro was put into the floor successfully
             if (CHECK_EVENT_FLAGS(
                     EVENT_FLAG_ID_CASTLE_CENTER_MAIN,
                     EVENT_FLAG_CASTLE_CENTER_3F_NITRO_IN_LOWER_WALL
@@ -270,6 +278,7 @@ void explosiveWallSpot_setItemText_determineNextTextbox(explosiveWallTextbox* se
                 );
                 return;
             }
+            // Mandragora was put into the floor successfully
             if (CHECK_EVENT_FLAGS(
                     EVENT_FLAG_ID_CASTLE_CENTER_MAIN,
                     EVENT_FLAG_CASTLE_CENTER_3F_MANDRAGORA_IN_LOWER_WALL
@@ -283,6 +292,7 @@ void explosiveWallSpot_setItemText_determineNextTextbox(explosiveWallTextbox* se
             }
             break;
         case WALL_TYPE_FRIENDLY_LIZARD_MAN_MAP:
+            // Both the Nitro and Mandragora have been set. The wall is ready for blasting
             if ((CHECK_EVENT_FLAGS(
                     EVENT_FLAG_ID_CASTLE_CENTER_3F, EVENT_FLAG_CASTLE_CENTER_3F_NITRO_IN_UPPER_WALL
                 )) &&
@@ -297,6 +307,7 @@ void explosiveWallSpot_setItemText_determineNextTextbox(explosiveWallTextbox* se
                 );
                 return;
             }
+            // Nitro was put into the floor successfully
             if (CHECK_EVENT_FLAGS(
                     EVENT_FLAG_ID_CASTLE_CENTER_3F, EVENT_FLAG_CASTLE_CENTER_3F_NITRO_IN_UPPER_WALL
                 )) {
@@ -307,6 +318,7 @@ void explosiveWallSpot_setItemText_determineNextTextbox(explosiveWallTextbox* se
                 );
                 return;
             }
+            // Mandragora was put into the floor successfully
             if (CHECK_EVENT_FLAGS(
                     EVENT_FLAG_ID_CASTLE_CENTER_3F,
                     EVENT_FLAG_CASTLE_CENTER_3F_MANDRAGORA_IN_UPPER_WALL
@@ -324,7 +336,11 @@ void explosiveWallSpot_setItemText_determineNextTextbox(explosiveWallTextbox* se
     );
 }
 
-void explosiveWallSpot_setItemText_close(explosiveWallTextbox* self) {
+/**
+ * Player selected the "NO" option in the
+ * "Set X item?" textbox
+ */
+void explosiveWallSpot_setItemText_no(explosiveWallTextbox* self) {
     if ((*lensAreClosed)()) {
         self->header.timer                   = 0;
         self->textbox_is_active              = FALSE;
