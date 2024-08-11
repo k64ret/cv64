@@ -20,7 +20,7 @@ options:
     - linker/symbol_addrs_makerom.txt
     - linker/symbol_addrs_overlays.txt
     - linker/symbol_addrs_assets.txt
-  disassemble_all: false
+  disassemble_all: true
   migrate_rodata_to_functions: false
   find_file_boundaries: true
   header_encoding: ASCII
@@ -2524,8 +2524,8 @@ segments:
     vram: 0x0E000000
     exclusive_ram_id: nisitenma_ichigo_cutscenes
     subsegments:
-      - [0x00E63E10, asm, overlay/textbox/explosive_wall_spot]
-      - [0x00E649A0, data, overlay/textbox/explosive_wall_spot]
+      - [0x00E63E10, c, overlay/textbox/explosive_wall_spot]
+      - [0x00E649A0, .data, overlay/textbox/explosive_wall_spot]
 
   - name: ni_ovl_bottom_elevator_activator_textbox
     type: code
