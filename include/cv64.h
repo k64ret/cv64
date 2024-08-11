@@ -43,6 +43,7 @@ extern u32 D_80092F50;
 extern Gfx* gDisplayListHead; // 0x800B49E0
 extern u32 map_misc_event_flags;
 extern u8 PLAYER_HAS_MAX_HEALTH;
+extern u32 map_text_segment_address[28]; // 0x8016D008
 
 typedef enum cv64_moon_visibility {
     MOON_VISIBILITY_DAY   = 0, // Moon is invisible
@@ -96,6 +97,7 @@ extern void func_80005658();
 extern u32 getMapEventFlagID(s16 stage_ID);
 s32 func_8001A250_1AE50(s32* arg0, u16* arg1, s16 arg2);
 extern void func_80066400(s32);
+extern void* NisitenmaIchigoFiles_segmentToVirtual(u32 segment_address, s32 file_ID);
 
 #define NPTR             0
 #define ARRAY_COUNT(arr) (s32)(sizeof(arr) / sizeof(arr[0])) // Get number of elements in the array
@@ -150,6 +152,15 @@ extern void func_80066400(s32);
  */
 #define GET_UNMAPPED_ADDRESS(file_ID, data_ptr)                                                    \
     (u32) sys.Nisitenma_Ichigo_loaded_files_ptr[file_ID] + BITS_MASK((u32) data_ptr, 0xFFFFFF)
+
+/**
+ * Obtain the VRAM address of the message pool inside a map assets file, given its segment address
+ * in the `map_text_segment_address` array
+ */
+#define GET_MAP_MESSAGE_POOL_PTR()                                                                 \
+    (*NisitenmaIchigoFiles_segmentToVirtual)(                                                      \
+        map_text_segment_address[sys.SaveStruct_gameplay.map], MAP_ASSETS_FILE_ID                  \
+    )
 
 extern const u32 MENU_RED_BACKGROUND_DL;
 #define NI_ASSETS_MENU_BUFFER_SIZE 0x30000

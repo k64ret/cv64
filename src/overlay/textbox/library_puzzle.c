@@ -122,15 +122,44 @@ void libraryPuzzle_showFirstTextbox(libraryPuzzle* self) {
     }
 }
 
-// clang-format off
+void libraryPuzzle_puzzle_prepare(libraryPuzzle* self) {
+    mfds_state* textbox;
+    u16* message_ptr;
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/overlay/textbox/library_puzzle/libraryPuzzle_puzzle_prepare.s")
+    textbox = (*textbox_create)(self, common_camera_HUD, (0x08000000 | 0x00400000 | 0x00200000));
+    self->message_textbox = textbox;
+    if (textbox != NULL) {
+        message_ptr = (*text_getMessageFromPool)(GET_MAP_MESSAGE_POOL_PTR(), 8);
+        (*textbox_setPos)(textbox, 30, 140, 1);
+        (*textbox_setDimensions)(textbox, 4, 255, 0, 0);
+        (*textbox_setMessagePtr)(textbox, message_ptr, NULL, 0);
+        (*textbox_enableLens)(
+            textbox, (0x00040000 | 0x00000020 | 0x00000010 | 0x00000004 | 0x00000001), 40.0f
+        );
+    }
+    (*object_curLevel_goToNextFuncAndClearTimer)(
+        self->header.current_function, &self->header.function_info_ID
+    );
+}
+
+// clang-format off
 
 #pragma GLOBAL_ASM("../asm/nonmatchings/overlay/textbox/library_puzzle/libraryPuzzle_puzzle_selectOption.s")
 
 #pragma GLOBAL_ASM("../asm/nonmatchings/overlay/textbox/library_puzzle/libraryPuzzle_puzzle_fail.s")
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/overlay/textbox/library_puzzle/libraryPuzzle_puzzle_success.s")
+void libraryPuzzle_puzzle_success(libraryPuzzle* self) {
+    libraryPuzzleData* data = self->data;
+
+    sys.cutscene_ID = 0x13;
+    SET_EVENT_FLAGS(11, 0x01000000);
+    data->lens_window_work->flags |= 0x300;
+    data->message_textbox->flags |= 0x04000000;
+    sys.FREEZE_ENEMIES = 0;
+    sys.FREEZE_PLAYER = 0;
+    (*cameraMgr_setLockCameraAtPointState)(sys.ptr_cameraMgr, FALSE);
+    (*object_curLevel_goToNextFuncAndClearTimer)(self->header.current_function, &self->header.function_info_ID);
+}
 
 void libraryPuzzle_destroy(libraryPuzzle* self) {
     self->header.destroy(self);
