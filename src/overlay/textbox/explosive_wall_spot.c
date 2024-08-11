@@ -189,13 +189,101 @@ void explosiveWallSpot_setItemText_prepareMessage(explosiveWallTextbox* self) {
     "asm/nonmatchings/overlay/textbox/explosive_wall_spot/explosiveWallSpot_setItemText_idle.s"    \
 )
 
-#pragma GLOBAL_ASM(                                                                                             \
-    "asm/nonmatchings/overlay/textbox/explosive_wall_spot/explosiveWallSpot_setItemText_determineNextTextbox.s" \
-)
+void explosiveWallSpot_setItemText_determineNextTextbox(explosiveWallTextbox* self) {
+    switch (self->wall_type) {
+        case WALL_TYPE_MAIN_MAP:
+            if ((CHECK_EVENT_FLAGS(
+                    EVENT_FLAG_ID_CASTLE_CENTER_MAIN,
+                    EVENT_FLAG_CASTLE_CENTER_3F_NITRO_IN_LOWER_WALL
+                )) &&
+                (CHECK_EVENT_FLAGS(
+                    EVENT_FLAG_ID_CASTLE_CENTER_MAIN,
+                    EVENT_FLAG_CASTLE_CENTER_3F_MANDRAGORA_IN_LOWER_WALL
+                ))) {
+                (*object_curLevel_goToFunc)(
+                    self->header.current_function,
+                    &self->header.function_info_ID,
+                    EXPLOSIVE_WALL_SPOT_READY_FOR_BLASTING
+                );
+                return;
+            }
+            if (CHECK_EVENT_FLAGS(
+                    EVENT_FLAG_ID_CASTLE_CENTER_MAIN,
+                    EVENT_FLAG_CASTLE_CENTER_3F_NITRO_IN_LOWER_WALL
+                )) {
+                (*object_curLevel_goToFunc)(
+                    self->header.current_function,
+                    &self->header.function_info_ID,
+                    EXPLOSIVE_WALL_SPOT_NITRO_IS_SET
+                );
+                return;
+            }
+            if (CHECK_EVENT_FLAGS(
+                    EVENT_FLAG_ID_CASTLE_CENTER_MAIN,
+                    EVENT_FLAG_CASTLE_CENTER_3F_MANDRAGORA_IN_LOWER_WALL
+                )) {
+                (*object_curLevel_goToFunc)(
+                    self->header.current_function,
+                    &self->header.function_info_ID,
+                    EXPLOSIVE_WALL_SPOT_MANDRAGORA_IS_SET
+                );
+                return;
+            }
+            break;
+        case WALL_TYPE_FRIENDLY_LIZARD_MAN_MAP:
+            if ((CHECK_EVENT_FLAGS(
+                    EVENT_FLAG_ID_CASTLE_CENTER_3F, EVENT_FLAG_CASTLE_CENTER_3F_NITRO_IN_UPPER_WALL
+                )) &&
+                (CHECK_EVENT_FLAGS(
+                    EVENT_FLAG_ID_CASTLE_CENTER_3F,
+                    EVENT_FLAG_CASTLE_CENTER_3F_MANDRAGORA_IN_UPPER_WALL
+                ))) {
+                (*object_curLevel_goToFunc)(
+                    self->header.current_function,
+                    &self->header.function_info_ID,
+                    EXPLOSIVE_WALL_SPOT_READY_FOR_BLASTING
+                );
+                return;
+            }
+            if (CHECK_EVENT_FLAGS(
+                    EVENT_FLAG_ID_CASTLE_CENTER_3F, EVENT_FLAG_CASTLE_CENTER_3F_NITRO_IN_UPPER_WALL
+                )) {
+                (*object_curLevel_goToFunc)(
+                    self->header.current_function,
+                    &self->header.function_info_ID,
+                    EXPLOSIVE_WALL_SPOT_NITRO_IS_SET
+                );
+                return;
+            }
+            if (CHECK_EVENT_FLAGS(
+                    EVENT_FLAG_ID_CASTLE_CENTER_3F,
+                    EVENT_FLAG_CASTLE_CENTER_3F_MANDRAGORA_IN_UPPER_WALL
+                )) {
+                (*object_curLevel_goToFunc)(
+                    self->header.current_function,
+                    &self->header.function_info_ID,
+                    EXPLOSIVE_WALL_SPOT_MANDRAGORA_IS_SET
+                );
+                return;
+            }
+    }
+    (*object_curLevel_goToNextFuncAndClearTimer)(
+        self->header.current_function, &self->header.function_info_ID
+    );
+}
 
-#pragma GLOBAL_ASM(                                                                                \
-    "asm/nonmatchings/overlay/textbox/explosive_wall_spot/explosiveWallSpot_setItemText_close.s"   \
-)
+void explosiveWallSpot_setItemText_close(explosiveWallTextbox* self) {
+    if ((*lensAreClosed)()) {
+        self->header.timer                   = 0;
+        self->textbox_is_active              = FALSE;
+        self->interacting_with_interactuable = FALSE;
+        sys.FREEZE_GAMEPLAY                  = FALSE;
+        (*cameraMgr_setReadingTextState)(sys.ptr_cameraMgr, FALSE);
+        (*object_curLevel_goToFunc)(
+            self->header.current_function, &self->header.function_info_ID, EXPLOSIVE_WALL_SPOT_IDLE
+        );
+    }
+}
 
 #pragma GLOBAL_ASM(                                                                                \
     "asm/nonmatchings/overlay/textbox/explosive_wall_spot/explosiveWallSpot_readyForBlasting.s"    \
