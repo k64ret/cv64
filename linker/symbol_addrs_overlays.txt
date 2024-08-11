@@ -184,12 +184,19 @@ openingBat_functions     = 0x0F0004A0; // segment:ni_ovl_opening_bat size:0x10
 
 // src/overlay/textbox/library_puzzle.c ========================================
 // .text
-cv64_ovl_librarypuzzletextbox_entrypoint = 0x0E000000; // type:func segment:ni_ovl_library_puzzle_textbox
-cv64_ovl_librarypuzzletextbox_init       = 0x0E000070; // type:func segment:ni_ovl_library_puzzle_textbox
-cv64_ovl_librarypuzzletextbox_close      = 0x0E000824; // type:func segment:ni_ovl_library_puzzle_textbox
-cv64_ovl_librarypuzzletextbox_destroy    = 0x0E0009EC; // type:func segment:ni_ovl_library_puzzle_textbox
+libraryPuzzle_entrypoint = 0x0E000000; // type:func segment:ni_ovl_library_puzzle_textbox
+libraryPuzzle_init       = 0x0E000070; // type:func segment:ni_ovl_library_puzzle_textbox
+libraryPuzzle_idle      = 0x0E000140; // type:func segment:ni_ovl_library_puzzle_textbox
+libraryPuzzle_showFirstTextbox    = 0x0E0001D8; // type:func segment:ni_ovl_library_puzzle_textbox
+libraryPuzzle_puzzle_prepare    = 0x0E0003C0; // type:func segment:ni_ovl_library_puzzle_textbox
+libraryPuzzle_puzzle_selectOption    = 0x0E0004DC; // type:func segment:ni_ovl_library_puzzle_textbox
+libraryPuzzle_puzzle_fail    = 0x0E000824; // type:func segment:ni_ovl_library_puzzle_textbox
+libraryPuzzle_puzzle_success    = 0x0E000954; // type:func segment:ni_ovl_library_puzzle_textbox
+libraryPuzzle_destroy    = 0x0E0009EC; // type:func segment:ni_ovl_library_puzzle_textbox
+libraryPuzzle_printSelectedOptions    = 0x0E000A10; // type:func segment:ni_ovl_library_puzzle_textbox
+libraryPuzzle_selectNextOption    = 0x0E000A80; // type:func segment:ni_ovl_library_puzzle_textbox
 // .data
-cv64_ovl_librarypuzzletextbox_funcs      = 0x0E000C60; // segment:ni_ovl_library_puzzle_textbox size:0x20
+libraryPuzzle_functions      = 0x0E000C60; // segment:ni_ovl_library_puzzle_textbox size:0x20
 // End of src/overlay/textbox/library_puzzle.c =================================
 
 
