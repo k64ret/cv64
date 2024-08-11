@@ -17,6 +17,12 @@ depends = ['clean']
 run = """cmake -S . -B build -G "Ninja""""
 alias = 'c'
 
+[tasks.configure_decompressed]
+# description = 'Create the build system, and generate assembly and binaries, without compressing'
+depends = ['clean']
+run = """cmake -S . -B build -G "Ninja" -Dcompress=FALSE"""
+alias = 'cdec'
+
 [tasks.build]
 # description = 'Build Castlevania ROM'
 run = "cmake --build build"

@@ -121,6 +121,12 @@ following...
 cmake -S . -B build -G "Unix Makefiles"
 ```
 
+> [!TIP]
+> You can also use `mise run cdec` if you are already using [mise][mise],
+or `cmake -S . -B build -Dcompress=FALSE` to skip compressing files
+and checking the ROM's sha1sum.
+This is only useful for debugging non-matching compressed files at the moment.
+
 Afterwards, to build the project, run the following...
 
 ```sh
