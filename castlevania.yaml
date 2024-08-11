@@ -2476,8 +2476,8 @@ segments:
     vram: 0x0E000000
     exclusive_ram_id: nisitenma_ichigo_cutscenes
     subsegments:
-      - [0x00E61F30, asm, overlay/textbox/library_puzzle]
-      - [0x00E62B90, data, overlay/textbox/library_puzzle]
+      - [0x00E61F30, c, overlay/textbox/library_puzzle]
+      - [0x00E62B90, .data, overlay/textbox/library_puzzle]
 
   - name: ni_ovl_nitro_mandragora_display
     type: bin
