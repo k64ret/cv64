@@ -2517,12 +2517,15 @@ segments:
       - [0x00E639F0, c, overlay/textbox/nitro_disposal]
       - [0x00E63DF0, .data, overlay/textbox/nitro_disposal]
 
-  - name: ni_B5DBAE
-    type: bin
+  - name: ni_explosive_wall_spot
+    type: code
     # start: 0x00B5DBAE
     start: 0x00E63E10
     vram: 0x0E000000
     exclusive_ram_id: nisitenma_ichigo_cutscenes
+    subsegments:
+      - [0x00E63E10, asm, overlay/textbox/explosive_wall_spot]
+      - [0x00E649A0, data, overlay/textbox/explosive_wall_spot]
 
   - name: ni_ovl_bottom_elevator_activator_textbox
     type: code

@@ -204,7 +204,7 @@ cv64_ovl_mandragoratextbox_close      = 0x0E000338; // type:func segment:ni_ovl_
 cv64_ovl_mandragoratextbox_destroy    = 0x0E0003E0; // type:func segment:ni_ovl_mandragora_textbox
 cannot_collect_mandragora             = 0x0E000404; // type:func segment:ni_ovl_mandragora_textbox
 // .data
-cv64_ovl_mandragoratextbox_funcs      = 0x0E000480; // type:asciz segment:ni_ovl_mandragora_textbox size:0x18
+cv64_ovl_mandragoratextbox_funcs      = 0x0E000480; // segment:ni_ovl_mandragora_textbox size:0x18
 // End of src/overlay/textbox/mandragora.c =====================================
 
 
@@ -221,7 +221,7 @@ cannot_collect_nitro             = 0x0E000424; // type:func segment:ni_ovl_nitro
 // .data
 cv64_ovl_nitrotextbox_funcs      = 0x0E0004A0; // segment:ni_ovl_nitro_textbox size:0x18
 // .rodata
-cv64_ovl_nitrotextbox_unused_str = 0x0E0004C0; // segment:ni_ovl_nitro_textbox size:0x04
+cv64_ovl_nitrotextbox_unused_str = 0x0E0004C0; // type:asciz segment:ni_ovl_nitro_textbox size:0x04
 // End of src/overlay/textbox/nitro.c =========================================
 
 // src/overlay/textbox/nitro_disposal.c ============================================
@@ -234,8 +234,28 @@ cv64_ovl_nitrodisposaltextbox_yes_no     = 0x0E0002B8; // type:func segment:ni_o
 cv64_ovl_nitrodisposaltextbox_close      = 0x0E00035C; // type:func segment:ni_ovl_nitro_disposal_textbox
 cv64_ovl_nitrodisposaltextbox_destroy    = 0x0E0003DC; // type:func segment:ni_ovl_nitro_disposal_textbox
 // .data
-cv64_ovl_nitrodisposaltextbox_funcs      = 0x0E000400; // type:asciz segment:ni_ovl_nitro_disposal_textbox size:0x18
+cv64_ovl_nitrodisposaltextbox_funcs      = 0x0E000400; // segment:ni_ovl_nitro_disposal_textbox size:0x18
 // End of src/overlay/textbox/nitro_disposal.c =====================================
+
+// src/overlay/textbox/explosive_wall_spot.c ============================================
+// .text
+explosiveWallSpot_entrypoint = 0x0E000000; // type:func segment:ni_explosive_wall_spot
+explosiveWallSpot_init       = 0x0E000070; // type:func segment:ni_explosive_wall_spot
+explosiveWallSpot_idle       = 0x0E0001B4; // type:func segment:ni_explosive_wall_spot
+explosiveWallSpot_determineMessage   = 0x0E00028C; // type:func segment:ni_explosive_wall_spot
+explosiveWallSpot_setItemText_prepareMessage     = 0x0E000400; // type:func segment:ni_explosive_wall_spot
+explosiveWallSpot_setItemText_idle      = 0x0E00048C; // type:func segment:ni_explosive_wall_spot
+explosiveWallSpot_setItemText_determineNextTextbox    = 0x0E0005F0; // type:func segment:ni_explosive_wall_spot
+explosiveWallSpot_setItemText_close    = 0x0E000748; // type:func segment:ni_explosive_wall_spot
+explosiveWallSpot_readyForBlasting    = 0x0E0007C4; // type:func segment:ni_explosive_wall_spot
+explosiveWallSpot_nitroIsSet    = 0x0E0008AC; // type:func segment:ni_explosive_wall_spot
+explosiveWallSpot_mandragoraIsSet    = 0x0E00095C; // type:func segment:ni_explosive_wall_spot
+explosiveWallSpot_defaultDescription    = 0x0E000A0C; // type:func segment:ni_explosive_wall_spot
+explosiveWallSpot_itemAlreadySet    = 0x0E000ABC; // type:func segment:ni_explosive_wall_spot
+explosiveWallSpot_destroy    = 0x0E000B6C; // type:func segment:ni_explosive_wall_spot
+// .data
+explosiveWallSpot_functions      = 0x0E000B90; // segment:ni_explosive_wall_spot size:0x18
+// End of src/overlay/textbox/explosive_wall_spot.c =====================================
 
 // src/overlay/textbox/bottom_elevator_activator.c ============================================
 // .text
@@ -247,5 +267,5 @@ cv64_ovl_bottomelevatoractivatortextbox_yes_no     = 0x0E000278; // type:func se
 cv64_ovl_bottomelevatoractivatortextbox_close      = 0x0E000314; // type:func segment:ni_ovl_bottom_elevator_activator_textbox
 cv64_ovl_bottomelevatoractivatortextbox_destroy    = 0x0E0003D4; // type:func segment:ni_ovl_bottom_elevator_activator_textbox
 // .data
-cv64_ovl_bottomelevatoractivatortextbox_funcs      = 0x0E000400; // type:asciz segment:ni_ovl_bottom_elevator_activator_textbox size:0x18
+cv64_ovl_bottomelevatoractivatortextbox_funcs      = 0x0E000400; // segment:ni_ovl_bottom_elevator_activator_textbox size:0x18
 // End of src/overlay/textbox/bottom_elevator_activator.c =====================================
