@@ -8,13 +8,13 @@
 typedef struct cv64_ovl_nitrotextbox {
     cv64_object_hdr_t header;
     u8 field_0x20[20];
-    u32 text_ID;
+    s32 text_ID;
     u8 field_0x38[4];
     u32 interacting_with_interactuable;
     u32 textbox_is_active;
     u8 field_0x44[8];
-    u32 mandragora_amount_until_max_capacity;
-    u32 nitro_amount_until_max_capacity;
+    s32 mandragora_amount_until_max_capacity;
+    s32 nitro_amount_until_max_capacity;
     u32 message_display_time;
     f32 trigger_size_X;
     f32 trigger_size_Z;
