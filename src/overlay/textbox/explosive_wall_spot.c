@@ -94,9 +94,80 @@ void explosiveWallSpot_idle(explosiveWallTextbox* self) {
     }
 }
 
-#pragma GLOBAL_ASM(                                                                                \
-    "asm/nonmatchings/overlay/textbox/explosive_wall_spot/explosiveWallSpot_determineMessage.s"    \
-)
+void explosiveWallSpot_determineMessage(explosiveWallTextbox* self) {
+    if ((self->nitro_amount_until_max_capacity > 0) &&
+        (self->mandragora_amount_until_max_capacity > 0)) {
+        (*object_curLevel_goToFunc)(
+            self->header.current_function,
+            &self->header.function_info_ID,
+            EXPLOSIVE_WALL_SPOT_ITEM_ALREADY_SET
+        );
+        return;
+    }
+    if (self->nitro_amount_until_max_capacity <= 0) {
+        switch (self->wall_type) {
+            case WALL_TYPE_MAIN_MAP:
+                if (CHECK_EVENT_FLAGS(
+                        EVENT_FLAG_ID_CASTLE_CENTER_MAIN,
+                        EVENT_FLAG_CASTLE_CENTER_3F_NITRO_IN_LOWER_WALL
+                    )) {
+                    (*object_curLevel_goToFunc)(
+                        self->header.current_function,
+                        &self->header.function_info_ID,
+                        EXPLOSIVE_WALL_SPOT_DEFAULT_DESCRIPTION
+                    );
+                    return;
+                }
+                break;
+            case WALL_TYPE_FRIENDLY_LIZARD_MAN_MAP:
+                if (CHECK_EVENT_FLAGS(
+                        EVENT_FLAG_ID_CASTLE_CENTER_3F,
+                        EVENT_FLAG_CASTLE_CENTER_3F_NITRO_IN_UPPER_WALL
+                    )) {
+                    (*object_curLevel_goToFunc)(
+                        self->header.current_function,
+                        &self->header.function_info_ID,
+                        EXPLOSIVE_WALL_SPOT_DEFAULT_DESCRIPTION
+                    );
+                    return;
+                }
+                break;
+        }
+    }
+    if (self->mandragora_amount_until_max_capacity <= 0) {
+        switch (self->wall_type) {
+            case WALL_TYPE_MAIN_MAP:
+                if (CHECK_EVENT_FLAGS(
+                        EVENT_FLAG_ID_CASTLE_CENTER_MAIN,
+                        EVENT_FLAG_CASTLE_CENTER_3F_MANDRAGORA_IN_LOWER_WALL
+                    )) {
+                    (*object_curLevel_goToFunc)(
+                        self->header.current_function,
+                        &self->header.function_info_ID,
+                        EXPLOSIVE_WALL_SPOT_DEFAULT_DESCRIPTION
+                    );
+                    return;
+                }
+                break;
+            case WALL_TYPE_FRIENDLY_LIZARD_MAN_MAP:
+                if (CHECK_EVENT_FLAGS(
+                        EVENT_FLAG_ID_CASTLE_CENTER_3F,
+                        EVENT_FLAG_CASTLE_CENTER_3F_MANDRAGORA_IN_UPPER_WALL
+                    )) {
+                    (*object_curLevel_goToFunc)(
+                        self->header.current_function,
+                        &self->header.function_info_ID,
+                        EXPLOSIVE_WALL_SPOT_DEFAULT_DESCRIPTION
+                    );
+                    return;
+                }
+                break;
+        }
+    }
+    (*object_curLevel_goToNextFuncAndClearTimer)(
+        self->header.current_function, &self->header.function_info_ID
+    );
+}
 
 void explosiveWallSpot_setItemText_prepareMessage(explosiveWallTextbox* self) {
     mfds_state* message;

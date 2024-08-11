@@ -37,7 +37,7 @@ typedef struct explosiveWallTextbox {
 void explosiveWallSpot_entrypoint(explosiveWallTextbox* self);
 void explosiveWallSpot_init(explosiveWallTextbox* self);
 void explosiveWallSpot_idle(explosiveWallTextbox* self);
-extern void explosiveWallSpot_determineMessage(explosiveWallTextbox* self);
+void explosiveWallSpot_determineMessage(explosiveWallTextbox* self);
 void explosiveWallSpot_setItemText_prepareMessage(explosiveWallTextbox* self);
 extern void explosiveWallSpot_setItemText_idle(explosiveWallTextbox* self);
 extern void explosiveWallSpot_setItemText_determineNextTextbox(explosiveWallTextbox* self);
