@@ -43,8 +43,8 @@ typedef struct libraryPuzzle {
     u32 number_of_options_selected;
     s32 option_selected;
     u8 field_0x58[4];
-    f32 trigger_size_X;
-    f32 trigger_size_Z;
+    s16 trigger_size_X;
+    s16 trigger_size_Z;
     mfds_state* message_textbox;
     vec3f position;
     cv64_actor_settings_t* settings;
