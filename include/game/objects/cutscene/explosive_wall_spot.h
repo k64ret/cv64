@@ -45,8 +45,8 @@ void explosiveWallSpot_setItemText_no(explosiveWallTextbox* self);
 void explosiveWallSpot_readyForBlasting(explosiveWallTextbox* self);
 void explosiveWallSpot_nitroIsSet(explosiveWallTextbox* self);
 void explosiveWallSpot_mandragoraIsSet(explosiveWallTextbox* self);
-void explosiveWallSpot_itemAlreadySet(explosiveWallTextbox* self);
 void explosiveWallSpot_defaultDescription(explosiveWallTextbox* self);
+void explosiveWallSpot_itemAlreadySet(explosiveWallTextbox* self);
 void explosiveWallSpot_destroy(explosiveWallTextbox* self);
 
 typedef enum explosiveWallTextbox_func_id {
