@@ -185,9 +185,61 @@ void explosiveWallSpot_setItemText_prepareMessage(explosiveWallTextbox* self) {
     }
 }
 
-#pragma GLOBAL_ASM(                                                                                \
-    "asm/nonmatchings/overlay/textbox/explosive_wall_spot/explosiveWallSpot_setItemText_idle.s"    \
-)
+void explosiveWallSpot_setItemText_idle(explosiveWallTextbox* self) {
+    mfds_state* textbox = self->message_textbox;
+    u8 textbox_option   = textbox->textbox_option;
+
+    switch (textbox_option) {
+        case TEXTBOX_OPTION_IDLE:
+            return;
+        case TEXTBOX_OPTION_YES:
+            if (self->nitro_amount_until_max_capacity <= 0) {
+                (*item_removeAmountFromInventory)(ITEM_ID_MAGICAL_NITRO, 1);
+                BITS_UNSET(sys.SaveStruct_gameplay.flags, SAVE_FLAG_CAN_EXPLODE_ON_JUMPING);
+                switch (self->wall_type) {
+                    case WALL_TYPE_MAIN_MAP:
+                        SET_EVENT_FLAGS(
+                            EVENT_FLAG_ID_CASTLE_CENTER_MAIN,
+                            EVENT_FLAG_CASTLE_CENTER_3F_NITRO_IN_LOWER_WALL
+                        );
+                        break;
+                    case WALL_TYPE_FRIENDLY_LIZARD_MAN_MAP:
+                        SET_EVENT_FLAGS(
+                            EVENT_FLAG_ID_CASTLE_CENTER_3F,
+                            EVENT_FLAG_CASTLE_CENTER_3F_NITRO_IN_UPPER_WALL
+                        );
+                        break;
+                }
+            } else {
+                (*item_removeAmountFromInventory)(ITEM_ID_MANDRAGORA, 1);
+                switch (self->wall_type) {
+                    case WALL_TYPE_MAIN_MAP:
+                        SET_EVENT_FLAGS(
+                            EVENT_FLAG_ID_CASTLE_CENTER_MAIN,
+                            EVENT_FLAG_CASTLE_CENTER_3F_MANDRAGORA_IN_LOWER_WALL
+                        );
+                        break;
+                    case WALL_TYPE_FRIENDLY_LIZARD_MAN_MAP:
+                        SET_EVENT_FLAGS(
+                            EVENT_FLAG_ID_CASTLE_CENTER_3F,
+                            EVENT_FLAG_CASTLE_CENTER_3F_MANDRAGORA_IN_UPPER_WALL
+                        );
+                        break;
+                }
+            }
+            break;
+        case TEXTBOX_OPTION_NO:
+            (*object_curLevel_goToFunc)(
+                self->header.current_function,
+                &self->header.function_info_ID,
+                EXPLOSIVE_WALL_SPOT_SETITEMTEXT_CLOSE
+            );
+            return;
+    }
+    (*object_curLevel_goToNextFuncAndClearTimer)(
+        self->header.current_function, &self->header.function_info_ID
+    );
+}
 
 void explosiveWallSpot_setItemText_determineNextTextbox(explosiveWallTextbox* self) {
     switch (self->wall_type) {

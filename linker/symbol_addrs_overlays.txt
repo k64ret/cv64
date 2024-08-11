@@ -254,7 +254,7 @@ explosiveWallSpot_defaultDescription    = 0x0E000A0C; // type:func segment:ni_ex
 explosiveWallSpot_itemAlreadySet    = 0x0E000ABC; // type:func segment:ni_explosive_wall_spot
 explosiveWallSpot_destroy    = 0x0E000B6C; // type:func segment:ni_explosive_wall_spot
 // .data
-explosiveWallSpot_functions      = 0x0E000B90; // segment:ni_explosive_wall_spot size:0x18
+explosiveWallSpot_functions      = 0x0E000B90; // segment:ni_explosive_wall_spot size:0x34
 // End of src/overlay/textbox/explosive_wall_spot.c =====================================
 
 // src/overlay/textbox/bottom_elevator_activator.c ============================================
