@@ -1818,6 +1818,7 @@ cameraMgr_enterDoor = 0x80068c98;
 unsetInFirstPersonMode = 0x80068d40;
 cameraMgr_calcNewLockAngleOffset = 0x80069010;
 cameraMgr_setReadingTextState = 0x800698a0;
+cameraMgr_setLockCameraAtPointState = 0x800698c0;
 cameraMgr_checkFirstPersonOrEnteringDoor = 0x800698e0;
 cameraMgr_checkIfEnterOrLeaveFirstPerson = 0x80069908;
 cameraMgr_copyCameraPos = 0x80069960;
