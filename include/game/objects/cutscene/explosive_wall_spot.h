@@ -4,6 +4,9 @@
 #include "actor.h"
 #include "objects/menu/mfds.h"
 
+#define WALL_TYPE_MAIN_MAP                0
+#define WALL_TYPE_FRIENDLY_LIZARD_MAN_MAP 1
+
 // ID: 0x2024
 typedef struct explosiveWallTextbox {
     cv64_object_hdr_t header;

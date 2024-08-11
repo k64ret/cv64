@@ -1,4 +1,32 @@
-#include "cv64.h"
+/**
+ * @file explosive_wall_spot.c
+ *
+ * Handles the textbox associated to the spots in front of the breakable walls in Castle Center
+ * where the player has to drop the Magical Nitro and Mandragora.
+ */
+
+#include "objects/cutscene/explosive_wall_spot.h"
+#include "system_work.h"
+
+// clang-format off
+
+explosiveWallTextbox_func_t explosiveWallSpot_functions[] = {
+    explosiveWallSpot_init,
+    explosiveWallSpot_idle,
+    explosiveWallSpot_determineMessage,
+    explosiveWallSpot_setItemText_prepareMessage,
+    explosiveWallSpot_setItemText_idle,
+    explosiveWallSpot_setItemText_determineNextTextbox,
+    explosiveWallSpot_setItemText_close,
+    explosiveWallSpot_readyForBlasting,
+    explosiveWallSpot_nitroIsSet,
+    explosiveWallSpot_mandragoraIsSet,
+    explosiveWallSpot_defaultDescription,
+    explosiveWallSpot_itemAlreadySet,
+    explosiveWallSpot_destroy
+};
+
+// clang-format on
 
 #pragma GLOBAL_ASM(                                                                                \
     "asm/nonmatchings/overlay/textbox/explosive_wall_spot/explosiveWallSpot_entrypoint.s"          \
