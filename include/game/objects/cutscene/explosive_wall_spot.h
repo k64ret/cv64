@@ -42,11 +42,11 @@ void explosiveWallSpot_setItemText_prepareMessage(explosiveWallTextbox* self);
 void explosiveWallSpot_setItemText_idle(explosiveWallTextbox* self);
 void explosiveWallSpot_setItemText_determineNextTextbox(explosiveWallTextbox* self);
 void explosiveWallSpot_setItemText_close(explosiveWallTextbox* self);
-extern void explosiveWallSpot_readyForBlasting(explosiveWallTextbox* self);
-extern void explosiveWallSpot_nitroIsSet(explosiveWallTextbox* self);
-extern void explosiveWallSpot_mandragoraIsSet(explosiveWallTextbox* self);
-extern void explosiveWallSpot_defaultDescription(explosiveWallTextbox* self);
-extern void explosiveWallSpot_itemAlreadySet(explosiveWallTextbox* self);
+void explosiveWallSpot_readyForBlasting(explosiveWallTextbox* self);
+void explosiveWallSpot_nitroIsSet(explosiveWallTextbox* self);
+void explosiveWallSpot_mandragoraIsSet(explosiveWallTextbox* self);
+void explosiveWallSpot_itemAlreadySet(explosiveWallTextbox* self);
+void explosiveWallSpot_defaultDescription(explosiveWallTextbox* self);
 void explosiveWallSpot_destroy(explosiveWallTextbox* self);
 
 typedef enum explosiveWallTextbox_func_id {
@@ -60,8 +60,8 @@ typedef enum explosiveWallTextbox_func_id {
     EXPLOSIVE_WALL_SPOT_READY_FOR_BLASTING,
     EXPLOSIVE_WALL_SPOT_NITRO_IS_SET,
     EXPLOSIVE_WALL_SPOT_MANDRAGORA_IS_SET,
-    EXPLOSIVE_WALL_SPOT_DEFAULT_DESCRIPTION,
     EXPLOSIVE_WALL_SPOT_ITEM_ALREADY_SET,
+    EXPLOSIVE_WALL_SPOT_DEFAULT_DESCRIPTION,
     EXPLOSIVE_WALL_SPOT_DESTROY
 } explosiveWallTextbox_func_id_t;
 

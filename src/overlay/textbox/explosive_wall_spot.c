@@ -21,8 +21,8 @@ explosiveWallTextbox_func_t explosiveWallSpot_functions[] = {
     explosiveWallSpot_readyForBlasting,
     explosiveWallSpot_nitroIsSet,
     explosiveWallSpot_mandragoraIsSet,
-    explosiveWallSpot_defaultDescription,
     explosiveWallSpot_itemAlreadySet,
+    explosiveWallSpot_defaultDescription,
     explosiveWallSpot_destroy
 };
 
@@ -100,7 +100,7 @@ void explosiveWallSpot_determineMessage(explosiveWallTextbox* self) {
         (*object_curLevel_goToFunc)(
             self->header.current_function,
             &self->header.function_info_ID,
-            EXPLOSIVE_WALL_SPOT_ITEM_ALREADY_SET
+            EXPLOSIVE_WALL_SPOT_DEFAULT_DESCRIPTION
         );
         return;
     }
@@ -114,7 +114,7 @@ void explosiveWallSpot_determineMessage(explosiveWallTextbox* self) {
                     (*object_curLevel_goToFunc)(
                         self->header.current_function,
                         &self->header.function_info_ID,
-                        EXPLOSIVE_WALL_SPOT_DEFAULT_DESCRIPTION
+                        EXPLOSIVE_WALL_SPOT_ITEM_ALREADY_SET
                     );
                     return;
                 }
@@ -127,7 +127,7 @@ void explosiveWallSpot_determineMessage(explosiveWallTextbox* self) {
                     (*object_curLevel_goToFunc)(
                         self->header.current_function,
                         &self->header.function_info_ID,
-                        EXPLOSIVE_WALL_SPOT_DEFAULT_DESCRIPTION
+                        EXPLOSIVE_WALL_SPOT_ITEM_ALREADY_SET
                     );
                     return;
                 }
@@ -144,7 +144,7 @@ void explosiveWallSpot_determineMessage(explosiveWallTextbox* self) {
                     (*object_curLevel_goToFunc)(
                         self->header.current_function,
                         &self->header.function_info_ID,
-                        EXPLOSIVE_WALL_SPOT_DEFAULT_DESCRIPTION
+                        EXPLOSIVE_WALL_SPOT_ITEM_ALREADY_SET
                     );
                     return;
                 }
@@ -157,7 +157,7 @@ void explosiveWallSpot_determineMessage(explosiveWallTextbox* self) {
                     (*object_curLevel_goToFunc)(
                         self->header.current_function,
                         &self->header.function_info_ID,
-                        EXPLOSIVE_WALL_SPOT_DEFAULT_DESCRIPTION
+                        EXPLOSIVE_WALL_SPOT_ITEM_ALREADY_SET
                     );
                     return;
                 }
@@ -337,25 +337,133 @@ void explosiveWallSpot_setItemText_close(explosiveWallTextbox* self) {
     }
 }
 
-#pragma GLOBAL_ASM(                                                                                \
-    "asm/nonmatchings/overlay/textbox/explosive_wall_spot/explosiveWallSpot_readyForBlasting.s"    \
-)
+void explosiveWallSpot_readyForBlasting(explosiveWallTextbox* self) {
+    mfds_state* message;
 
-#pragma GLOBAL_ASM(                                                                                \
-    "asm/nonmatchings/overlay/textbox/explosive_wall_spot/explosiveWallSpot_nitroIsSet.s"          \
-)
+    if (self->state == 0) {
+        message = (*map_getMessageFromPool)(self->ready_for_blasting_text_ID, 0);
+    }
+    if (message != NULL) {
+        self->state           = 1;
+        self->message_textbox = message;
+        if ((*lensAreClosed)()) {
+            switch (self->wall_type) {
+                case WALL_TYPE_MAIN_MAP:
+                    sys.cutscene_ID = CUTSCENE_ID_BLOW_UP_WALL_IN_BULL_ARENA;
+                    break;
+                case WALL_TYPE_FRIENDLY_LIZARD_MAN_MAP:
+                    sys.cutscene_ID = CUTSCENE_ID_BLOW_UP_WALL_TO_LIBRARY;
+                    break;
+            }
+            self->header.timer                   = 0;
+            self->textbox_is_active              = FALSE;
+            self->interacting_with_interactuable = FALSE;
+            sys.FREEZE_GAMEPLAY                  = FALSE;
+            (*cameraMgr_setReadingTextState)(sys.ptr_cameraMgr, FALSE);
+            (*object_curLevel_goToFunc)(
+                self->header.current_function,
+                &self->header.function_info_ID,
+                EXPLOSIVE_WALL_SPOT_IDLE
+            );
+        }
+    }
+}
 
-#pragma GLOBAL_ASM(                                                                                \
-    "asm/nonmatchings/overlay/textbox/explosive_wall_spot/explosiveWallSpot_mandragoraIsSet.s"     \
-)
+void explosiveWallSpot_nitroIsSet(explosiveWallTextbox* self) {
+    mfds_state* message;
 
-#pragma GLOBAL_ASM(                                                                                \
-    "asm/nonmatchings/overlay/textbox/explosive_wall_spot/explosiveWallSpot_defaultDescription.s"  \
-)
+    if (self->state == 0) {
+        message = (*map_getMessageFromPool)(self->nitro_set_text_ID, 0);
+    }
+    if (message != NULL) {
+        self->state           = 1;
+        self->message_textbox = message;
+        if ((*lensAreClosed)()) {
+            self->header.timer                   = 0;
+            self->textbox_is_active              = FALSE;
+            self->interacting_with_interactuable = FALSE;
+            sys.FREEZE_GAMEPLAY                  = FALSE;
+            (*cameraMgr_setReadingTextState)(sys.ptr_cameraMgr, FALSE);
+            (*object_curLevel_goToFunc)(
+                self->header.current_function,
+                &self->header.function_info_ID,
+                EXPLOSIVE_WALL_SPOT_IDLE
+            );
+        }
+    }
+}
 
-#pragma GLOBAL_ASM(                                                                                \
-    "asm/nonmatchings/overlay/textbox/explosive_wall_spot/explosiveWallSpot_itemAlreadySet.s"      \
-)
+void explosiveWallSpot_mandragoraIsSet(explosiveWallTextbox* self) {
+    mfds_state* message;
+
+    if (self->state == 0) {
+        message = (*map_getMessageFromPool)(self->mandragora_set_text_ID, 0);
+    }
+    if (message != NULL) {
+        self->state           = 1;
+        self->message_textbox = message;
+        if ((*lensAreClosed)()) {
+            self->header.timer                   = 0;
+            self->textbox_is_active              = FALSE;
+            self->interacting_with_interactuable = FALSE;
+            sys.FREEZE_GAMEPLAY                  = FALSE;
+            (*cameraMgr_setReadingTextState)(sys.ptr_cameraMgr, FALSE);
+            (*object_curLevel_goToFunc)(
+                self->header.current_function,
+                &self->header.function_info_ID,
+                EXPLOSIVE_WALL_SPOT_IDLE
+            );
+        }
+    }
+}
+
+void explosiveWallSpot_defaultDescription(explosiveWallTextbox* self) {
+    mfds_state* message;
+
+    if (self->state == 0) {
+        message = (*map_getMessageFromPool)(self->default_description_text_ID, 0);
+    }
+    if (message != NULL) {
+        self->state           = 1;
+        self->message_textbox = message;
+        if ((*lensAreClosed)()) {
+            self->header.timer                   = 0;
+            self->textbox_is_active              = FALSE;
+            self->interacting_with_interactuable = FALSE;
+            sys.FREEZE_GAMEPLAY                  = FALSE;
+            (*cameraMgr_setReadingTextState)(sys.ptr_cameraMgr, FALSE);
+            (*object_curLevel_goToFunc)(
+                self->header.current_function,
+                &self->header.function_info_ID,
+                EXPLOSIVE_WALL_SPOT_IDLE
+            );
+        }
+    }
+}
+
+void explosiveWallSpot_itemAlreadySet(explosiveWallTextbox* self) {
+    mfds_state* message;
+
+    if (self->state == 0) {
+        message = (*map_getMessageFromPool)(self->item_already_set_text_ID, 0);
+    }
+    if (message != NULL) {
+        self->state           = 1;
+        self->message_textbox = message;
+        if ((*lensAreClosed)()) {
+            self->header.timer                   = 0;
+            self->textbox_is_active              = FALSE;
+            self->interacting_with_interactuable = FALSE;
+            sys.FREEZE_GAMEPLAY                  = FALSE;
+            (*cameraMgr_setReadingTextState)(sys.ptr_cameraMgr, FALSE);
+            (*object_curLevel_goToFunc)(
+                self->header.current_function,
+                &self->header.function_info_ID,
+                EXPLOSIVE_WALL_SPOT_IDLE
+            );
+        }
+    }
+}
 
 void explosiveWallSpot_destroy(explosiveWallTextbox* self) {
     self->header.destroy(self);
