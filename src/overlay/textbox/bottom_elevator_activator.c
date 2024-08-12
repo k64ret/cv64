@@ -79,7 +79,7 @@ void cv64_ovl_elevatortextbox_prep_msg(cv64_ovl_elevatortextbox_t* self) {
 
     self->message_textbox   = message;
     self->header.timer      = 0;
-    self->textbox_is_active = 0;
+    self->textbox_is_active = FALSE;
     (*object_curLevel_goToNextFuncAndClearTimer)(
         self->header.current_function, &self->header.function_info_ID
     );
@@ -121,19 +121,20 @@ void cv64_ovl_elevatortextbox_close(cv64_ovl_elevatortextbox_t* self) {
         self->message_textbox = message;
         self->state           = BOTTOM_ELEVATOR_ACTIVATOR_STATE_ELEVATOR_ACTIVATED;
     }
-    if ((self->state == BOTTOM_ELEVATOR_ACTIVATOR_STATE_DONT_ACTIVATE_YET) ||
-        ((*lensAreClosed)())) {
-        self->header.timer                   = 0;
-        self->textbox_is_active              = FALSE;
-        self->interacting_with_interactuable = FALSE;
-        sys.FREEZE_GAMEPLAY                  = FALSE;
-        (*cameraMgr_setReadingTextState)(sys.ptr_cameraMgr, FALSE);
-        (*object_curLevel_goToFunc)(
-            self->header.current_function,
-            &self->header.function_info_ID,
-            BOTTOM_ELEVATOR_ACTIVATOR_IDLE
-        );
-    }
+
+    if ((self->state != BOTTOM_ELEVATOR_ACTIVATOR_STATE_DONT_ACTIVATE_YET) && !(*lensAreClosed)())
+        return;
+
+    self->header.timer                   = 0;
+    self->textbox_is_active              = FALSE;
+    self->interacting_with_interactuable = FALSE;
+    sys.FREEZE_GAMEPLAY                  = FALSE;
+    (*cameraMgr_setReadingTextState)(sys.ptr_cameraMgr, FALSE);
+    (*object_curLevel_goToFunc)(
+        self->header.current_function,
+        &self->header.function_info_ID,
+        BOTTOM_ELEVATOR_ACTIVATOR_IDLE
+    );
 }
 
 void cv64_ovl_elevatortextbox_destroy(cv64_ovl_elevatortextbox_t* self) {
