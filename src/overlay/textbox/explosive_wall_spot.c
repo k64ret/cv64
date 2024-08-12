@@ -35,36 +35,40 @@ void explosiveWallSpot_entrypoint(explosiveWallTextbox* self) {
 void explosiveWallSpot_init(explosiveWallTextbox* self) {
     cv64_actor_settings_t* settings = self->settings;
 
-    if (ptr_PlayerData != NULL) {
-        self->position.x     = settings->position.x;
-        self->position.y     = settings->position.y;
-        self->position.z     = settings->position.z;
-        self->trigger_size_X = settings->variable_2;
-        self->trigger_size_Z = settings->variable_3;
-        self->wall_type      = settings->variable_1;
-        if (self->wall_type == WALL_TYPE_MAIN_MAP) {
-            self->set_nitro_text_ID           = CASTLE_CENTER_MAIN_SET_NITRO;
-            self->set_mandragora_text_ID      = CASTLE_CENTER_MAIN_SET_MANDRAGORA;
-            self->default_description_text_ID = CASTLE_CENTER_MAIN_WALL_INFO;
-            self->item_already_set_text_ID    = CASTLE_CENTER_MAIN_ITEM_ALREADY_SET;
-            self->nitro_set_text_ID           = CASTLE_CENTER_MAIN_NITRO_SET;
-            self->mandragora_set_text_ID      = CASTLE_CENTER_MAIN_MANDRAGORA_SET;
-            self->ready_for_blasting_text_ID  = CASTLE_CENTER_MAIN_READY_FOR_BLASTING;
-        }
-        if (self->wall_type == WALL_TYPE_FRIENDLY_LIZARD_MAN_MAP) {
-            self->set_nitro_text_ID           = CASTLE_CENTER_3F_SET_NITRO;
-            self->set_mandragora_text_ID      = CASTLE_CENTER_3F_SET_MANDRAGORA;
-            self->default_description_text_ID = CASTLE_CENTER_3F_WALL_INFO;
-            self->item_already_set_text_ID    = CASTLE_CENTER_3F_ITEM_ALREADY_SET;
-            self->nitro_set_text_ID           = CASTLE_CENTER_3F_NITRO_SET;
-            self->mandragora_set_text_ID      = CASTLE_CENTER_3F_MANDRAGORA_SET;
-            self->ready_for_blasting_text_ID  = CASTLE_CENTER_3F_READY_FOR_BLASTING;
-        }
-        self->header.timer = 0;
-        (*object_curLevel_goToNextFuncAndClearTimer)(
-            self->header.current_function, &self->header.function_info_ID
-        );
+    if (ptr_PlayerData == NULL)
+        return;
+
+    self->position.x     = settings->position.x;
+    self->position.y     = settings->position.y;
+    self->position.z     = settings->position.z;
+    self->trigger_size_X = settings->variable_2;
+    self->trigger_size_Z = settings->variable_3;
+    self->wall_type      = settings->variable_1;
+
+    if (self->wall_type == WALL_TYPE_MAIN_MAP) {
+        self->set_nitro_text_ID           = CASTLE_CENTER_MAIN_SET_NITRO;
+        self->set_mandragora_text_ID      = CASTLE_CENTER_MAIN_SET_MANDRAGORA;
+        self->default_description_text_ID = CASTLE_CENTER_MAIN_WALL_INFO;
+        self->item_already_set_text_ID    = CASTLE_CENTER_MAIN_ITEM_ALREADY_SET;
+        self->nitro_set_text_ID           = CASTLE_CENTER_MAIN_NITRO_SET;
+        self->mandragora_set_text_ID      = CASTLE_CENTER_MAIN_MANDRAGORA_SET;
+        self->ready_for_blasting_text_ID  = CASTLE_CENTER_MAIN_READY_FOR_BLASTING;
     }
+
+    if (self->wall_type == WALL_TYPE_FRIENDLY_LIZARD_MAN_MAP) {
+        self->set_nitro_text_ID           = CASTLE_CENTER_3F_SET_NITRO;
+        self->set_mandragora_text_ID      = CASTLE_CENTER_3F_SET_MANDRAGORA;
+        self->default_description_text_ID = CASTLE_CENTER_3F_WALL_INFO;
+        self->item_already_set_text_ID    = CASTLE_CENTER_3F_ITEM_ALREADY_SET;
+        self->nitro_set_text_ID           = CASTLE_CENTER_3F_NITRO_SET;
+        self->mandragora_set_text_ID      = CASTLE_CENTER_3F_MANDRAGORA_SET;
+        self->ready_for_blasting_text_ID  = CASTLE_CENTER_3F_READY_FOR_BLASTING;
+    }
+
+    self->header.timer = 0;
+    (*object_curLevel_goToNextFuncAndClearTimer)(
+        self->header.current_function, &self->header.function_info_ID
+    );
 }
 
 void explosiveWallSpot_idle(explosiveWallTextbox* self) {
@@ -106,6 +110,7 @@ void explosiveWallSpot_determineMessage(explosiveWallTextbox* self) {
         );
         return;
     }
+
     // If we have Nitro on the inventory
     if (self->nitro_amount_until_max_capacity <= 0) {
         switch (self->wall_type) {
@@ -138,6 +143,7 @@ void explosiveWallSpot_determineMessage(explosiveWallTextbox* self) {
                 break;
         }
     }
+
     // If we have Mandragora on the inventory
     if (self->mandragora_amount_until_max_capacity <= 0) {
         switch (self->wall_type) {
@@ -170,25 +176,26 @@ void explosiveWallSpot_determineMessage(explosiveWallTextbox* self) {
                 break;
         }
     }
+
     (*object_curLevel_goToNextFuncAndClearTimer)(
         self->header.current_function, &self->header.function_info_ID
     );
 }
 
 void explosiveWallSpot_setItemText_prepareMessage(explosiveWallTextbox* self) {
-    mfds_state* message;
+    // clang-format off
+    mfds_state* message = (self->nitro_amount_until_max_capacity <= 0)
+        ? (*map_getMessageFromPool)(self->set_nitro_text_ID, 0)
+        : (*map_getMessageFromPool)(self->set_mandragora_text_ID, 0);
+    // clang-format on
 
-    if (self->nitro_amount_until_max_capacity <= 0) {
-        message = (*map_getMessageFromPool)(self->set_nitro_text_ID, 0);
-    } else {
-        message = (*map_getMessageFromPool)(self->set_mandragora_text_ID, 0);
-    }
-    if (message != NULL) {
-        self->message_textbox = message;
-        (*object_curLevel_goToNextFuncAndClearTimer)(
-            self->header.current_function, &self->header.function_info_ID
-        );
-    }
+    if (message == NULL)
+        return;
+
+    self->message_textbox = message;
+    (*object_curLevel_goToNextFuncAndClearTimer)(
+        self->header.current_function, &self->header.function_info_ID
+    );
 }
 
 void explosiveWallSpot_setItemText_idle(explosiveWallTextbox* self) {
@@ -242,6 +249,7 @@ void explosiveWallSpot_setItemText_idle(explosiveWallTextbox* self) {
             );
             return;
     }
+
     (*object_curLevel_goToNextFuncAndClearTimer)(
         self->header.current_function, &self->header.function_info_ID
     );
@@ -331,6 +339,7 @@ void explosiveWallSpot_setItemText_determineNextTextbox(explosiveWallTextbox* se
                 return;
             }
     }
+
     (*object_curLevel_goToNextFuncAndClearTimer)(
         self->header.current_function, &self->header.function_info_ID
     );
@@ -341,16 +350,17 @@ void explosiveWallSpot_setItemText_determineNextTextbox(explosiveWallTextbox* se
  * "Set X item?" textbox
  */
 void explosiveWallSpot_setItemText_no(explosiveWallTextbox* self) {
-    if ((*lensAreClosed)()) {
-        self->header.timer                   = 0;
-        self->textbox_is_active              = FALSE;
-        self->interacting_with_interactuable = FALSE;
-        sys.FREEZE_GAMEPLAY                  = FALSE;
-        (*cameraMgr_setReadingTextState)(sys.ptr_cameraMgr, FALSE);
-        (*object_curLevel_goToFunc)(
-            self->header.current_function, &self->header.function_info_ID, EXPLOSIVE_WALL_SPOT_IDLE
-        );
-    }
+    if (!(*lensAreClosed)())
+        return;
+
+    self->header.timer                   = 0;
+    self->textbox_is_active              = FALSE;
+    self->interacting_with_interactuable = FALSE;
+    sys.FREEZE_GAMEPLAY                  = FALSE;
+    (*cameraMgr_setReadingTextState)(sys.ptr_cameraMgr, FALSE);
+    (*object_curLevel_goToFunc)(
+        self->header.current_function, &self->header.function_info_ID, EXPLOSIVE_WALL_SPOT_IDLE
+    );
 }
 
 void explosiveWallSpot_readyForBlasting(explosiveWallTextbox* self) {
@@ -359,30 +369,32 @@ void explosiveWallSpot_readyForBlasting(explosiveWallTextbox* self) {
     if (self->state == 0) {
         message = (*map_getMessageFromPool)(self->ready_for_blasting_text_ID, 0);
     }
-    if (message != NULL) {
-        self->state           = 1;
-        self->message_textbox = message;
-        if ((*lensAreClosed)()) {
-            switch (self->wall_type) {
-                case WALL_TYPE_MAIN_MAP:
-                    sys.cutscene_ID = CUTSCENE_ID_BLOW_UP_WALL_IN_BULL_ARENA;
-                    break;
-                case WALL_TYPE_FRIENDLY_LIZARD_MAN_MAP:
-                    sys.cutscene_ID = CUTSCENE_ID_BLOW_UP_WALL_TO_LIBRARY;
-                    break;
-            }
-            self->header.timer                   = 0;
-            self->textbox_is_active              = FALSE;
-            self->interacting_with_interactuable = FALSE;
-            sys.FREEZE_GAMEPLAY                  = FALSE;
-            (*cameraMgr_setReadingTextState)(sys.ptr_cameraMgr, FALSE);
-            (*object_curLevel_goToFunc)(
-                self->header.current_function,
-                &self->header.function_info_ID,
-                EXPLOSIVE_WALL_SPOT_IDLE
-            );
-        }
+
+    if (message == NULL)
+        return;
+
+    self->state           = 1;
+    self->message_textbox = message;
+
+    if (!(*lensAreClosed)())
+        return;
+
+    switch (self->wall_type) {
+        case WALL_TYPE_MAIN_MAP:
+            sys.cutscene_ID = CUTSCENE_ID_BLOW_UP_WALL_IN_BULL_ARENA;
+            break;
+        case WALL_TYPE_FRIENDLY_LIZARD_MAN_MAP:
+            sys.cutscene_ID = CUTSCENE_ID_BLOW_UP_WALL_TO_LIBRARY;
+            break;
     }
+    self->header.timer                   = 0;
+    self->textbox_is_active              = FALSE;
+    self->interacting_with_interactuable = FALSE;
+    sys.FREEZE_GAMEPLAY                  = FALSE;
+    (*cameraMgr_setReadingTextState)(sys.ptr_cameraMgr, FALSE);
+    (*object_curLevel_goToFunc)(
+        self->header.current_function, &self->header.function_info_ID, EXPLOSIVE_WALL_SPOT_IDLE
+    );
 }
 
 void explosiveWallSpot_nitroIsSet(explosiveWallTextbox* self) {
@@ -391,22 +403,24 @@ void explosiveWallSpot_nitroIsSet(explosiveWallTextbox* self) {
     if (self->state == 0) {
         message = (*map_getMessageFromPool)(self->nitro_set_text_ID, 0);
     }
-    if (message != NULL) {
-        self->state           = 1;
-        self->message_textbox = message;
-        if ((*lensAreClosed)()) {
-            self->header.timer                   = 0;
-            self->textbox_is_active              = FALSE;
-            self->interacting_with_interactuable = FALSE;
-            sys.FREEZE_GAMEPLAY                  = FALSE;
-            (*cameraMgr_setReadingTextState)(sys.ptr_cameraMgr, FALSE);
-            (*object_curLevel_goToFunc)(
-                self->header.current_function,
-                &self->header.function_info_ID,
-                EXPLOSIVE_WALL_SPOT_IDLE
-            );
-        }
-    }
+
+    if (message == NULL)
+        return;
+
+    self->state           = 1;
+    self->message_textbox = message;
+
+    if (!(*lensAreClosed)())
+        return;
+
+    self->header.timer                   = 0;
+    self->textbox_is_active              = FALSE;
+    self->interacting_with_interactuable = FALSE;
+    sys.FREEZE_GAMEPLAY                  = FALSE;
+    (*cameraMgr_setReadingTextState)(sys.ptr_cameraMgr, FALSE);
+    (*object_curLevel_goToFunc)(
+        self->header.current_function, &self->header.function_info_ID, EXPLOSIVE_WALL_SPOT_IDLE
+    );
 }
 
 void explosiveWallSpot_mandragoraIsSet(explosiveWallTextbox* self) {
@@ -415,22 +429,24 @@ void explosiveWallSpot_mandragoraIsSet(explosiveWallTextbox* self) {
     if (self->state == 0) {
         message = (*map_getMessageFromPool)(self->mandragora_set_text_ID, 0);
     }
-    if (message != NULL) {
-        self->state           = 1;
-        self->message_textbox = message;
-        if ((*lensAreClosed)()) {
-            self->header.timer                   = 0;
-            self->textbox_is_active              = FALSE;
-            self->interacting_with_interactuable = FALSE;
-            sys.FREEZE_GAMEPLAY                  = FALSE;
-            (*cameraMgr_setReadingTextState)(sys.ptr_cameraMgr, FALSE);
-            (*object_curLevel_goToFunc)(
-                self->header.current_function,
-                &self->header.function_info_ID,
-                EXPLOSIVE_WALL_SPOT_IDLE
-            );
-        }
-    }
+
+    if (message == NULL)
+        return;
+
+    self->state           = 1;
+    self->message_textbox = message;
+
+    if (!(*lensAreClosed)())
+        return;
+
+    self->header.timer                   = 0;
+    self->textbox_is_active              = FALSE;
+    self->interacting_with_interactuable = FALSE;
+    sys.FREEZE_GAMEPLAY                  = FALSE;
+    (*cameraMgr_setReadingTextState)(sys.ptr_cameraMgr, FALSE);
+    (*object_curLevel_goToFunc)(
+        self->header.current_function, &self->header.function_info_ID, EXPLOSIVE_WALL_SPOT_IDLE
+    );
 }
 
 void explosiveWallSpot_defaultDescription(explosiveWallTextbox* self) {
@@ -439,22 +455,24 @@ void explosiveWallSpot_defaultDescription(explosiveWallTextbox* self) {
     if (self->state == 0) {
         message = (*map_getMessageFromPool)(self->default_description_text_ID, 0);
     }
-    if (message != NULL) {
-        self->state           = 1;
-        self->message_textbox = message;
-        if ((*lensAreClosed)()) {
-            self->header.timer                   = 0;
-            self->textbox_is_active              = FALSE;
-            self->interacting_with_interactuable = FALSE;
-            sys.FREEZE_GAMEPLAY                  = FALSE;
-            (*cameraMgr_setReadingTextState)(sys.ptr_cameraMgr, FALSE);
-            (*object_curLevel_goToFunc)(
-                self->header.current_function,
-                &self->header.function_info_ID,
-                EXPLOSIVE_WALL_SPOT_IDLE
-            );
-        }
-    }
+
+    if (message == NULL)
+        return;
+
+    self->state           = 1;
+    self->message_textbox = message;
+
+    if (!(*lensAreClosed)())
+        return;
+
+    self->header.timer                   = 0;
+    self->textbox_is_active              = FALSE;
+    self->interacting_with_interactuable = FALSE;
+    sys.FREEZE_GAMEPLAY                  = FALSE;
+    (*cameraMgr_setReadingTextState)(sys.ptr_cameraMgr, FALSE);
+    (*object_curLevel_goToFunc)(
+        self->header.current_function, &self->header.function_info_ID, EXPLOSIVE_WALL_SPOT_IDLE
+    );
 }
 
 void explosiveWallSpot_itemAlreadySet(explosiveWallTextbox* self) {
@@ -463,22 +481,24 @@ void explosiveWallSpot_itemAlreadySet(explosiveWallTextbox* self) {
     if (self->state == 0) {
         message = (*map_getMessageFromPool)(self->item_already_set_text_ID, 0);
     }
-    if (message != NULL) {
-        self->state           = 1;
-        self->message_textbox = message;
-        if ((*lensAreClosed)()) {
-            self->header.timer                   = 0;
-            self->textbox_is_active              = FALSE;
-            self->interacting_with_interactuable = FALSE;
-            sys.FREEZE_GAMEPLAY                  = FALSE;
-            (*cameraMgr_setReadingTextState)(sys.ptr_cameraMgr, FALSE);
-            (*object_curLevel_goToFunc)(
-                self->header.current_function,
-                &self->header.function_info_ID,
-                EXPLOSIVE_WALL_SPOT_IDLE
-            );
-        }
-    }
+
+    if (message == NULL)
+        return;
+
+    self->state           = 1;
+    self->message_textbox = message;
+
+    if (!(*lensAreClosed)())
+        return;
+
+    self->header.timer                   = 0;
+    self->textbox_is_active              = FALSE;
+    self->interacting_with_interactuable = FALSE;
+    sys.FREEZE_GAMEPLAY                  = FALSE;
+    (*cameraMgr_setReadingTextState)(sys.ptr_cameraMgr, FALSE);
+    (*object_curLevel_goToFunc)(
+        self->header.current_function, &self->header.function_info_ID, EXPLOSIVE_WALL_SPOT_IDLE
+    );
 }
 
 void explosiveWallSpot_destroy(explosiveWallTextbox* self) {
