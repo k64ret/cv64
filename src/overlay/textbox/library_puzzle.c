@@ -146,7 +146,37 @@ void libraryPuzzle_puzzle_prepare(libraryPuzzle* self) {
 
 #pragma GLOBAL_ASM("../asm/nonmatchings/overlay/textbox/library_puzzle/libraryPuzzle_puzzle_selectOption.s")
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/overlay/textbox/library_puzzle/libraryPuzzle_puzzle_fail.s")
+void libraryPuzzle_puzzle_fail(libraryPuzzle* self) {
+    libraryPuzzleData* data = self->data;
+    mfds_state* textbox = self->message_textbox;
+    s32 temp[2];
+
+    if (textbox == NULL) {
+        textbox = (*map_getMessageFromPool)(11, 0);
+        self->message_textbox = textbox;
+        return;
+    }
+    if ((*lensAreClosed)()) {
+        (*cutscene_setActorStateIfMatchingVariable1)(0x01D6, 0, 0);
+        (*cutscene_setActorStateIfMatchingVariable1)(0x01D6, 1, 0);
+        (*cutscene_setActorStateIfMatchingVariable1)(0x01D6, 2, 0);
+        self->header.timer = 0;
+        self->first_option = 0;
+        self->second_option = 0;
+        self->third_option = 0;
+        self->number_of_options_selected = 0;
+        self->option_selected = 0;
+        self->textbox_is_active = 0;
+        self->interacting_with_interactuable = 0;
+        data->lens_window_work->flags |= 0x300;
+        textbox = data->message_textbox;
+        textbox->flags |= 0x04000000;
+        sys.FREEZE_ENEMIES = 0;
+        sys.FREEZE_PLAYER = 0;
+        (*cameraMgr_setLockCameraAtPointState)(sys.ptr_cameraMgr, FALSE);
+        (*object_curLevel_goToFunc)(self->header.current_function, &self->header.function_info_ID, LIBRARY_PUZZLE_IDLE);
+    }
+}
 
 void libraryPuzzle_puzzle_success(libraryPuzzle* self) {
     libraryPuzzleData* data = self->data;
