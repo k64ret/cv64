@@ -22,7 +22,7 @@ cv64_ovl_nitrotextbox_func_t cv64_ovl_nitrotextbox_funcs[] = {
 
 const char cv64_ovl_nitrotextbox_unused_str[] = "OK\n";
 
-static s32 cannot_collect_nitro();
+static s32 cannot_collect_nitro(void);
 
 void cv64_ovl_nitrotextbox_entrypoint(cv64_ovl_nitrotextbox_t* self) {
     ENTER(self, cv64_ovl_nitrotextbox_funcs);
@@ -161,7 +161,7 @@ void cv64_ovl_nitrotextbox_destroy(cv64_ovl_nitrotextbox_t* self) {
     self->header.destroy(self);
 }
 
-s32 cannot_collect_nitro() {
+s32 cannot_collect_nitro(void) {
     // There's Nitro at both walls
     if ((CHECK_EVENT_FLAGS(
             EVENT_FLAG_ID_CASTLE_CENTER_MAIN, EVENT_FLAG_CASTLE_CENTER_3F_NITRO_IN_LOWER_WALL

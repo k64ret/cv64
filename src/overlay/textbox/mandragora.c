@@ -20,7 +20,7 @@ cv64_ovl_mandragoratextbox_func_t cv64_ovl_mandragoratextbox_funcs[] = {
 
 // clang-format on
 
-static s32 cannot_collect_mandragora();
+static s32 cannot_collect_mandragora(void);
 
 void cv64_ovl_mandragoratextbox_entrypoint(cv64_ovl_mandragoratextbox_t* self) {
     ENTER(self, cv64_ovl_mandragoratextbox_funcs);
@@ -156,7 +156,7 @@ void cv64_ovl_mandragoratextbox_destroy(cv64_ovl_mandragoratextbox_t* self) {
     self->header.destroy(self);
 }
 
-s32 cannot_collect_mandragora() {
+s32 cannot_collect_mandragora(void) {
     // There's Mandragora at both walls
     if ((CHECK_EVENT_FLAGS(
             EVENT_FLAG_ID_CASTLE_CENTER_MAIN, EVENT_FLAG_CASTLE_CENTER_3F_MANDRAGORA_IN_LOWER_WALL
