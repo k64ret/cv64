@@ -9,22 +9,22 @@
 
 // clang-format off
 
-cv64_ovl_nitrodisposaltextbox_func_t cv64_ovl_nitrodisposaltextbox_funcs[] = {
-    cv64_ovl_nitrodisposaltextbox_init,
-    cv64_ovl_nitrodisposaltextbox_idle,
-    cv64_ovl_nitrodisposaltextbox_prep_msg,
-    cv64_ovl_nitrodisposaltextbox_yes_no,
-    cv64_ovl_nitrodisposaltextbox_close,
-    cv64_ovl_nitrodisposaltextbox_destroy
+cv64_ovl_nitrodisposaltxt_func_t cv64_ovl_nitrodisposaltxt_funcs[] = {
+    cv64_ovl_nitrodisposaltxt_init,
+    cv64_ovl_nitrodisposaltxt_idle,
+    cv64_ovl_nitrodisposaltxt_prep_msg,
+    cv64_ovl_nitrodisposaltxt_yes_no,
+    cv64_ovl_nitrodisposaltxt_close,
+    cv64_ovl_nitrodisposaltxt_destroy
 };
 
 // clang-format on
 
-void cv64_ovl_nitrodisposaltextbox_entrypoint(cv64_ovl_nitrodisposaltextbox_t* self) {
-    ENTER(self, cv64_ovl_nitrodisposaltextbox_funcs);
+void cv64_ovl_nitrodisposaltxt_entrypoint(cv64_ovl_nitrodisposaltxt_t* self) {
+    ENTER(self, cv64_ovl_nitrodisposaltxt_funcs);
 }
 
-void cv64_ovl_nitrodisposaltextbox_init(cv64_ovl_nitrodisposaltextbox_t* self) {
+void cv64_ovl_nitrodisposaltxt_init(cv64_ovl_nitrodisposaltxt_t* self) {
     cv64_actor_settings_t* settings = self->settings;
 
     if (ptr_PlayerData == NULL)
@@ -55,7 +55,7 @@ void cv64_ovl_nitrodisposaltextbox_init(cv64_ovl_nitrodisposaltextbox_t* self) {
     );
 }
 
-void cv64_ovl_nitrodisposaltextbox_idle(cv64_ovl_nitrodisposaltextbox_t* self) {
+void cv64_ovl_nitrodisposaltxt_idle(cv64_ovl_nitrodisposaltxt_t* self) {
     if (self->interacting_with_interactuable != TRUE)
         return;
 
@@ -69,7 +69,7 @@ void cv64_ovl_nitrodisposaltextbox_idle(cv64_ovl_nitrodisposaltextbox_t* self) {
     );
 }
 
-void cv64_ovl_nitrodisposaltextbox_prep_msg(cv64_ovl_nitrodisposaltextbox_t* self) {
+void cv64_ovl_nitrodisposaltxt_prep_msg(cv64_ovl_nitrodisposaltxt_t* self) {
     mfds_state* message;
 
     // Both walls have been blown up already
@@ -102,7 +102,7 @@ void cv64_ovl_nitrodisposaltextbox_prep_msg(cv64_ovl_nitrodisposaltextbox_t* sel
     );
 }
 
-void cv64_ovl_nitrodisposaltextbox_yes_no(cv64_ovl_nitrodisposaltextbox_t* self) {
+void cv64_ovl_nitrodisposaltxt_yes_no(cv64_ovl_nitrodisposaltxt_t* self) {
     mfds_state* textbox = self->message_textbox;
 
     if (self->has_nitro_text_ID == self->text_ID) {
@@ -124,7 +124,7 @@ void cv64_ovl_nitrodisposaltextbox_yes_no(cv64_ovl_nitrodisposaltextbox_t* self)
     );
 }
 
-void cv64_ovl_nitrodisposaltextbox_close(cv64_ovl_nitrodisposaltextbox_t* self) {
+void cv64_ovl_nitrodisposaltxt_close(cv64_ovl_nitrodisposaltxt_t* self) {
     self->text_ID = 0;
 
     if (!(*lensAreClosed)())
@@ -140,6 +140,6 @@ void cv64_ovl_nitrodisposaltextbox_close(cv64_ovl_nitrodisposaltextbox_t* self) 
     );
 }
 
-void cv64_ovl_nitrodisposaltextbox_destroy(cv64_ovl_nitrodisposaltextbox_t* self) {
+void cv64_ovl_nitrodisposaltxt_destroy(cv64_ovl_nitrodisposaltxt_t* self) {
     self->header.destroy(self);
 }
