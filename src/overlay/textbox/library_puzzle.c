@@ -176,7 +176,7 @@ void libraryPuzzle_puzzle_selectOption(libraryPuzzle* self) {
             data->message_textbox->flags |= UPDATE_STRING;
             self->option_selected = TRUE;
             self->number_of_options_selected++;
-            (*play_sound)(SD_1A0);
+            (*play_sound)(SD_LIBRARY_PIECE_SET);
             return;
         }
         if (self->option_selected) {

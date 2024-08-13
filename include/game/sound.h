@@ -69,7 +69,7 @@ extern s32 audioControlFadeOutType_setType(u32 type);
 
 #define SD_TRIGGER_BOTTOM_ELEVATOR_ACTIVATOR 0x119
 #define SD_TOU_TURO_DOOR_CLOSE               0x11B
-#define SD_1A0                               0x1A0
+#define SD_LIBRARY_PIECE_SET                 0x1A0
 #define SD_RENON_BRIEFCASE_SPIN_1            0x21A
 #define SD_RENON_BRIEFCASE_SPIN_2            0x21B
 #define SD_ROSE_DOOR_CLOSE                   0x27B
