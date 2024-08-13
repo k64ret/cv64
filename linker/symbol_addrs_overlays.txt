@@ -202,16 +202,16 @@ cv64_ovl_librarypuzzletxt_funcs          = 0x0E000C60; // segment:ni_ovl_library
 
 // src/overlay/textbox/mandragora.c ============================================
 // .text
-cv64_ovl_mandragoratextbox_entrypoint = 0x0E000000; // type:func segment:ni_ovl_mandragora_textbox
-cv64_ovl_mandragoratextbox_init       = 0x0E000070; // type:func segment:ni_ovl_mandragora_textbox
-cv64_ovl_mandragoratextbox_idle       = 0x0E000134; // type:func segment:ni_ovl_mandragora_textbox
-cv64_ovl_mandragoratextbox_prep_msg   = 0x0E0001CC; // type:func segment:ni_ovl_mandragora_textbox
-cv64_ovl_mandragoratextbox_yes_no     = 0x0E0002AC; // type:func segment:ni_ovl_mandragora_textbox
-cv64_ovl_mandragoratextbox_close      = 0x0E000338; // type:func segment:ni_ovl_mandragora_textbox
-cv64_ovl_mandragoratextbox_destroy    = 0x0E0003E0; // type:func segment:ni_ovl_mandragora_textbox
+cv64_ovl_mandragoratxt_entrypoint = 0x0E000000; // type:func segment:ni_ovl_mandragora_textbox
+cv64_ovl_mandragoratxt_init       = 0x0E000070; // type:func segment:ni_ovl_mandragora_textbox
+cv64_ovl_mandragoratxt_idle       = 0x0E000134; // type:func segment:ni_ovl_mandragora_textbox
+cv64_ovl_mandragoratxt_prep_msg   = 0x0E0001CC; // type:func segment:ni_ovl_mandragora_textbox
+cv64_ovl_mandragoratxt_yes_no     = 0x0E0002AC; // type:func segment:ni_ovl_mandragora_textbox
+cv64_ovl_mandragoratxt_close      = 0x0E000338; // type:func segment:ni_ovl_mandragora_textbox
+cv64_ovl_mandragoratxt_destroy    = 0x0E0003E0; // type:func segment:ni_ovl_mandragora_textbox
 cannot_collect_mandragora             = 0x0E000404; // type:func segment:ni_ovl_mandragora_textbox
 // .data
-cv64_ovl_mandragoratextbox_funcs      = 0x0E000480; // segment:ni_ovl_mandragora_textbox size:0x18
+cv64_ovl_mandragoratxt_funcs      = 0x0E000480; // segment:ni_ovl_mandragora_textbox size:0x18
 // End of src/overlay/textbox/mandragora.c =====================================
 
 

@@ -9,24 +9,24 @@
 
 // clang-format off
 
-cv64_ovl_mandragoratextbox_func_t cv64_ovl_mandragoratextbox_funcs[] = {
-    cv64_ovl_mandragoratextbox_init,
-    cv64_ovl_mandragoratextbox_idle,
-    cv64_ovl_mandragoratextbox_prep_msg,
-    cv64_ovl_mandragoratextbox_yes_no,
-    cv64_ovl_mandragoratextbox_close,
-    cv64_ovl_mandragoratextbox_destroy
+cv64_ovl_mandragoratxt_func_t cv64_ovl_mandragoratxt_funcs[] = {
+    cv64_ovl_mandragoratxt_init,
+    cv64_ovl_mandragoratxt_idle,
+    cv64_ovl_mandragoratxt_prep_msg,
+    cv64_ovl_mandragoratxt_yes_no,
+    cv64_ovl_mandragoratxt_close,
+    cv64_ovl_mandragoratxt_destroy
 };
 
 // clang-format on
 
 static s32 cannot_collect_mandragora(void);
 
-void cv64_ovl_mandragoratextbox_entrypoint(cv64_ovl_mandragoratextbox_t* self) {
-    ENTER(self, cv64_ovl_mandragoratextbox_funcs);
+void cv64_ovl_mandragoratxt_entrypoint(cv64_ovl_mandragoratxt_t* self) {
+    ENTER(self, cv64_ovl_mandragoratxt_funcs);
 }
 
-void cv64_ovl_mandragoratextbox_init(cv64_ovl_mandragoratextbox_t* self) {
+void cv64_ovl_mandragoratxt_init(cv64_ovl_mandragoratxt_t* self) {
     cv64_actor_settings_t* settings = self->settings;
 
     if (ptr_PlayerData == NULL)
@@ -43,7 +43,7 @@ void cv64_ovl_mandragoratextbox_init(cv64_ovl_mandragoratextbox_t* self) {
     );
 }
 
-void cv64_ovl_mandragoratextbox_idle(cv64_ovl_mandragoratextbox_t* self) {
+void cv64_ovl_mandragoratxt_idle(cv64_ovl_mandragoratxt_t* self) {
     int temp[2];
 
     if (self->interacting_with_interactuable != TRUE)
@@ -61,7 +61,7 @@ void cv64_ovl_mandragoratextbox_idle(cv64_ovl_mandragoratextbox_t* self) {
     );
 }
 
-void cv64_ovl_mandragoratextbox_prep_msg(cv64_ovl_mandragoratextbox_t* self) {
+void cv64_ovl_mandragoratxt_prep_msg(cv64_ovl_mandragoratxt_t* self) {
     mfds_state* message;
 
     // Both walls are blown up
@@ -104,7 +104,7 @@ void cv64_ovl_mandragoratextbox_prep_msg(cv64_ovl_mandragoratextbox_t* self) {
     );
 }
 
-void cv64_ovl_mandragoratextbox_yes_no(cv64_ovl_mandragoratextbox_t* self) {
+void cv64_ovl_mandragoratxt_yes_no(cv64_ovl_mandragoratxt_t* self) {
     mfds_state* textbox = self->message_textbox;
 
     if (self->text_ID == CASTLE_CENTER_MAIN_TAKE_MANDRAGORA) {
@@ -126,7 +126,7 @@ void cv64_ovl_mandragoratextbox_yes_no(cv64_ovl_mandragoratextbox_t* self) {
     );
 }
 
-void cv64_ovl_mandragoratextbox_close(cv64_ovl_mandragoratextbox_t* self) {
+void cv64_ovl_mandragoratxt_close(cv64_ovl_mandragoratxt_t* self) {
     mfds_state* message_textbox;
 
     if (self->text_ID == CASTLE_CENTER_MAIN_OBTAINED_MANDRAGORA) {
@@ -152,7 +152,7 @@ void cv64_ovl_mandragoratextbox_close(cv64_ovl_mandragoratextbox_t* self) {
     );
 }
 
-void cv64_ovl_mandragoratextbox_destroy(cv64_ovl_mandragoratextbox_t* self) {
+void cv64_ovl_mandragoratxt_destroy(cv64_ovl_mandragoratxt_t* self) {
     self->header.destroy(self);
 }
 
