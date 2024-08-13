@@ -9,7 +9,7 @@
 #include "actor_settings.h"
 #include <ultra64.h>
 
-// For "axis" argument from checkIfOutsideEntityIsInsideMainEntityRadius()
+// For "axis" argument from `checkIfOutsideEntityIsInsideMainEntityRadius`
 #define AXIS_X   1
 #define AXIS_Y   2
 #define AXIS_Z   4

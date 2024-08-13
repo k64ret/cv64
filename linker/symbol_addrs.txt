@@ -1684,6 +1684,7 @@ modelInfo_createHierarchyNode = 0x80004fac;
 modelInfo_buildHierarchy = 0x800051c8;
 animation_animateRotationFrame = 0x800088ec;
 modelInfo_setPosVec3s = 0x80009330;
+modelInfo_copyPositionalData = 0x80158c98;
 animation_animateTranslationFrame = 0x800095e0;
 animationInfo_create = 0x8000b454;
 animationInfo_setParams = 0x8000b5b8;

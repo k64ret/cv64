@@ -4,6 +4,12 @@
 #include "actor.h"
 #include "objects/menu/mfds.h"
 
+#define PUZZLE_OPTION(number)               (number - 1)
+#define SELECTION_DELAY_TIMER(self)         (self->header.timer)
+#define LIBRARY_PUZZLE_NUM_OPTIONS          10
+#define LIBRARY_PUZZLE_MAX_SELECTED_OPTIONS 3
+#define LIBRARY_PUZZLE_SELECTION_DELAY      4
+
 typedef enum cv64_ovl_librarypuzzledata_opt_id {
     OPTION_1 = CV64_BIT(0),
     OPTION_2 = CV64_BIT(1),
@@ -17,14 +23,22 @@ typedef enum cv64_ovl_librarypuzzledata_opt_id {
 } cv64_ovl_librarypuzzledata_opt_id_t;
 
 typedef struct cv64_ovl_librarypuzzledata {
-    mfds_state* message_textbox;
-    window_work* lens_window_work;
+    mfds_state* options_textbox;
+    window_work* lens;
+    /**
+     * Buffer that holds the 1, 2, 3, etc. text
+     */
     u16 options_text[16];
     u8 field_0x28[8];
+    /**
+     * Bitflags that represent the options selected.
+     * See `libraryPuzzleData_optionIDs` for all possible options
+     */
     u16 selected_options_IDs;
     u8 field_0x32[2];
     /**
-     * Starts from 0, so option 1 is represented as 0
+     * Starts from 0, so option 1 is represented as 0.
+     * For better readability, it is used alongside the `PUZZLE_OPTION` macro
      */
     u32 highlighted_option;
 } cv64_ovl_librarypuzzledata_t;
@@ -59,10 +73,6 @@ void cv64_ovl_librarypuzzletxt_select(cv64_ovl_librarypuzzletxt_t* self);
 void cv64_ovl_librarypuzzletxt_fail(cv64_ovl_librarypuzzletxt_t* self);
 void cv64_ovl_librarypuzzletxt_success(cv64_ovl_librarypuzzletxt_t* self);
 void cv64_ovl_librarypuzzletxt_destroy(cv64_ovl_librarypuzzletxt_t* self);
-void cv64_ovl_librarypuzzletxt_print_selected(u16* text, u16 selected_options_IDs);
-s32 cv64_ovl_librarypuzzletxt_select_next(
-    s32* highlighted_option, u16* selection_delay_timer, u16* selected_options_IDs
-);
 
 typedef enum cv64_ovl_librarypuzzletxt_func_id {
     LIBRARY_PUZZLE_INIT,
