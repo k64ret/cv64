@@ -106,7 +106,7 @@ void libraryPuzzle_showFirstTextbox(libraryPuzzle* self) {
                 1.0f,
                 20.0f
             );
-            data->lens_window_work = lens;
+            data->lens = lens;
             lens->flags &= ~WINDOW_CLOSING;
             lens->flags |= WINDOW_OPENING;
             self->message_textbox =
@@ -167,7 +167,7 @@ void libraryPuzzle_puzzle_selectOption(libraryPuzzle* self) {
             var_a1 = libraryPuzzle_selectNextOption(
                 &data->highlighted_option, &SELECTION_DELAY_TIMER(self), &data->selected_options_IDs
             );
-            lens             = data->lens_window_work;
+            lens             = data->lens;
             lens->position.x = (s32) (data->highlighted_option * 25) - 101;
         }
         if (var_a1 > 0) {
@@ -252,7 +252,7 @@ void libraryPuzzle_puzzle_fail(libraryPuzzle* self) {
         self->option_selected                = 0;
         self->textbox_is_active              = 0;
         self->interacting_with_interactuable = 0;
-        data->lens_window_work->flags |= 0x300;
+        data->lens->flags |= 0x300;
         textbox = data->message_textbox;
         textbox->flags |= 0x04000000;
         sys.FREEZE_ENEMIES = 0;
@@ -272,7 +272,7 @@ void libraryPuzzle_puzzle_success(libraryPuzzle* self) {
         EVENT_FLAG_ID_CASTLE_WALL_LIBRARY_AND_MAZE_GARDEN,
         EVENT_FLAG_CASTLE_WALL_LIBRARY_AND_MAZE_GARDEN_LIBRARY_PUZZLE_SOLVED
     );
-    data->lens_window_work->flags |= 0x300;
+    data->lens->flags |= 0x300;
     data->message_textbox->flags |= 0x04000000;
     sys.FREEZE_ENEMIES = 0;
     sys.FREEZE_PLAYER  = 0;

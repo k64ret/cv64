@@ -21,7 +21,7 @@ typedef enum libraryPuzzleData_optionIDs {
 
 typedef struct libraryPuzzleData {
     mfds_state* message_textbox;
-    window_work* lens_window_work;
+    window_work* lens;
     u16 options_text[16];
     u8 field_0x28[8];
     u16 selected_options_IDs;
