@@ -297,6 +297,68 @@ void libraryPuzzle_printSelectedOptions(u16* text, u16 selected_options_IDs) {
     *string = 0;
 }
 
-#pragma GLOBAL_ASM(                                                                                \
-    "../asm/nonmatchings/overlay/textbox/library_puzzle/libraryPuzzle_selectNextOption.s"          \
-)
+s32 libraryPuzzle_selectNextOption(
+    s32* highlighted_option, u16* selection_delay_timer, u16* selected_options_IDs
+) {
+    s32 ret = 0;
+
+    if (*selected_options_IDs ==
+        (OPTION_1 | OPTION_2 | OPTION_3 | OPTION_4 | OPTION_5 | OPTION_6 | OPTION_7 | OPTION_8 |
+         OPTION_9)) {
+        return 0;
+    }
+
+    if ((CONT_BTNS_PRESSED(CONT_0, U_JPAD)) || (CONT_BTNS_PRESSED(CONT_0, U_JPAD)) ||
+        (CONT_BTNS_PRESSED(CONT_0, L_JPAD)) || (CONT_BTNS_PRESSED(CONT_0, R_JPAD))) {
+        *selection_delay_timer = 0;
+    }
+
+    if ((CONT_BTNS_PRESSED(CONT_0, L_JPAD)) || (sys.controllers[0].joystick_x < -25)) {
+        if (*selection_delay_timer == 0) {
+            *selection_delay_timer = 4;
+            do {
+                (*highlighted_option)--;
+                if ((*highlighted_option) < 0) {
+                    *highlighted_option = 8;
+                }
+            } while (*selected_options_IDs & (1 << (*highlighted_option)));
+        } else {
+            (*selection_delay_timer)--;
+        }
+    } else if ((CONT_BTNS_PRESSED(CONT_0, R_JPAD)) || (sys.controllers[0].joystick_x >= 26)) {
+        if (*selection_delay_timer == 0) {
+            *selection_delay_timer = 4;
+            do {
+                (*highlighted_option)++;
+                if ((*highlighted_option) >= 9) {
+                    *highlighted_option = 0;
+                }
+            } while (*selected_options_IDs & (1 << (*highlighted_option)));
+        } else {
+            (*selection_delay_timer)--;
+        }
+    }
+
+    if (*selected_options_IDs & (1 << (*highlighted_option))) {
+        ret = 1;
+        do {
+            (*highlighted_option)++;
+            if ((*highlighted_option) >= 9) {
+                *highlighted_option = 0;
+            }
+        } while (*selected_options_IDs & (1 << (*highlighted_option)));
+    }
+
+    if (ret != 0) {
+        return 0;
+    }
+
+    if ((CONT_BTNS_PRESSED(CONT_0, A_BUTTON))) {
+        *selected_options_IDs |= (1 << (*highlighted_option));
+        ret = 1;
+    } else if ((CONT_BTNS_PRESSED(CONT_0, B_BUTTON))) {
+        ret = -1;
+    }
+
+    return ret;
+}
