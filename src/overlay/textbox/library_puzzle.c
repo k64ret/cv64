@@ -145,7 +145,7 @@ void libraryPuzzle_puzzle_prepare(libraryPuzzle* self) {
         (*textbox_setMessagePtr)(textbox, message_ptr, NULL, 0);
         (*textbox_enableLens)(
             textbox,
-            (WINDOW_FLAG_400000 | WINDOW_FLAG_OPEN_DOWN_RIGHT | WINDOW_FLAG_OPEN_RIGHT_DOWN |
+            (WINDOW_FLAG_40000 | WINDOW_FLAG_OPEN_DOWN_RIGHT | WINDOW_FLAG_OPEN_RIGHT_DOWN |
              WINDOW_FLAG_OPEN_DOWN | WINDOW_FLAG_OPEN_RIGHT),
             40.0f
         );
@@ -194,7 +194,7 @@ void libraryPuzzle_puzzle_selectOption(libraryPuzzle* self) {
                     textbox->flags |= UPDATE_STRING;
                     self->first_option = data->highlighted_option;
                     (*cutscene_setActorStateIfMatchingVariable1)(
-                        STAGE_OBJECT_OBJ_01D6, 1, self->first_option + 1
+                        STAGE_OBJECT_HONMARU_4F_MINAMI_LIBRARY_PIECE, 1, self->first_option + 1
                     );
                     self->message_textbox = textbox;
                     self->option_selected = FALSE;
@@ -212,7 +212,7 @@ void libraryPuzzle_puzzle_selectOption(libraryPuzzle* self) {
                     textbox->flags |= UPDATE_STRING;
                     self->second_option = data->highlighted_option;
                     (*cutscene_setActorStateIfMatchingVariable1)(
-                        STAGE_OBJECT_OBJ_01D6, 2, self->second_option + 1
+                        STAGE_OBJECT_HONMARU_4F_MINAMI_LIBRARY_PIECE, 2, self->second_option + 1
                     );
                     self->message_textbox = textbox;
                     self->option_selected = FALSE;
@@ -221,7 +221,7 @@ void libraryPuzzle_puzzle_selectOption(libraryPuzzle* self) {
                     self->third_option = data->highlighted_option;
                     textbox->flags |= CLOSE_TEXTBOX;
                     (*cutscene_setActorStateIfMatchingVariable1)(
-                        STAGE_OBJECT_OBJ_01D6, 0, self->third_option + 1
+                        STAGE_OBJECT_HONMARU_4F_MINAMI_LIBRARY_PIECE, 0, self->third_option + 1
                     );
                     break;
             }
@@ -256,9 +256,15 @@ void libraryPuzzle_puzzle_fail(libraryPuzzle* self) {
         return;
     }
     if ((*lensAreClosed)()) {
-        (*cutscene_setActorStateIfMatchingVariable1)(STAGE_OBJECT_OBJ_01D6, 0, 0);
-        (*cutscene_setActorStateIfMatchingVariable1)(STAGE_OBJECT_OBJ_01D6, 1, 0);
-        (*cutscene_setActorStateIfMatchingVariable1)(STAGE_OBJECT_OBJ_01D6, 2, 0);
+        (*cutscene_setActorStateIfMatchingVariable1)(
+            STAGE_OBJECT_HONMARU_4F_MINAMI_LIBRARY_PIECE, 0, 0
+        );
+        (*cutscene_setActorStateIfMatchingVariable1)(
+            STAGE_OBJECT_HONMARU_4F_MINAMI_LIBRARY_PIECE, 1, 0
+        );
+        (*cutscene_setActorStateIfMatchingVariable1)(
+            STAGE_OBJECT_HONMARU_4F_MINAMI_LIBRARY_PIECE, 2, 0
+        );
         SELECTION_DELAY_TIMER(self)          = 0;
         self->first_option                   = 0;
         self->second_option                  = 0;
