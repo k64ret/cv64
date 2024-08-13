@@ -32,7 +32,10 @@ void libraryPuzzle_init(libraryPuzzle* self) {
     cv64_actor_settings_t* settings = self->settings;
 
     if (ptr_PlayerData != NULL) {
-        if (CHECK_EVENT_FLAGS(11, 0x01000000)) {
+        if (CHECK_EVENT_FLAGS(
+                EVENT_FLAG_ID_CASTLE_WALL_LIBRARY_AND_MAZE_GARDEN,
+                EVENT_FLAG_CASTLE_WALL_LIBRARY_AND_MAZE_GARDEN_LIBRARY_PUZZLE_SOLVED
+            )) {
             self->header.destroy(self);
             return;
         }
@@ -254,8 +257,11 @@ void libraryPuzzle_puzzle_fail(libraryPuzzle* self) {
 void libraryPuzzle_puzzle_success(libraryPuzzle* self) {
     libraryPuzzleData* data = self->data;
 
-    sys.cutscene_ID = 0x13;
-    SET_EVENT_FLAGS(11, 0x01000000);
+    sys.cutscene_ID = CUTSCENE_ID_LIBRARY_PUZZLE_SOLVED;
+    SET_EVENT_FLAGS(
+        EVENT_FLAG_ID_CASTLE_WALL_LIBRARY_AND_MAZE_GARDEN,
+        EVENT_FLAG_CASTLE_WALL_LIBRARY_AND_MAZE_GARDEN_LIBRARY_PUZZLE_SOLVED
+    );
     data->lens_window_work->flags |= 0x300;
     data->message_textbox->flags |= 0x04000000;
     sys.FREEZE_ENEMIES = 0;
