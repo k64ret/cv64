@@ -57,7 +57,7 @@ void libraryPuzzle_idle(libraryPuzzle* self) {
     mfds_state* message;
 
     if (self->interacting_with_interactuable == TRUE) {
-        message = (*map_getMessageFromPool)(7, 0);
+        message = (*map_getMessageFromPool)(CASTLE_CENTER_4F_LIBRARY_PUZZLE_DESCRIPTION, 0);
         if (message != NULL) {
             sys.FREEZE_PLAYER  = TRUE;
             sys.FREEZE_ENEMIES = TRUE;
@@ -82,9 +82,10 @@ void libraryPuzzle_showFirstTextbox(libraryPuzzle* self) {
         case TEXTBOX_OPTION_YES:
             data                       = self->data;
             data->selected_options_IDs = 0;
-            data->highlighted_option   = 0;
-            data->message_textbox =
-                (*textbox_create)(self, common_camera_HUD, (0x08000000 | 0x00200000 | 0x00000008));
+            data->highlighted_option   = PUZZLE_OPTION(1);
+            data->message_textbox      = (*textbox_create)(
+                self, common_camera_HUD, (OPEN_TEXTBOX | FAST_TEXT_TRANSITION | MFDS_FLAG_00000008)
+            );
             options_textbox = data->message_textbox;
             if (options_textbox != NULL) {
                 (*textbox_setPos)(options_textbox, 50, 50, 1);
@@ -96,7 +97,8 @@ void libraryPuzzle_showFirstTextbox(libraryPuzzle* self) {
             lens = (*lens_create)(
                 self,
                 common_camera_HUD,
-                (0x00000080 | 0x00000020 | 0x00000010 | 0x00000004 | 0x00000001),
+                (WINDOW_FLAG_80 | WINDOW_FLAG_OPEN_DOWN_RIGHT | WINDOW_FLAG_OPEN_RIGHT_DOWN |
+                 WINDOW_FLAG_OPEN_DOWN | WINDOW_FLAG_OPEN_RIGHT),
                 -125.0f,
                 58.0f,
                 10.0f,
@@ -105,9 +107,10 @@ void libraryPuzzle_showFirstTextbox(libraryPuzzle* self) {
                 20.0f
             );
             data->lens_window_work = lens;
-            lens->flags &= ~0x100;
-            lens->flags |= 0x200;
-            self->message_textbox = (*map_getMessageFromPool)(8, 0);
+            lens->flags &= ~WINDOW_CLOSING;
+            lens->flags |= WINDOW_OPENING;
+            self->message_textbox =
+                (*map_getMessageFromPool)(CASTLE_CENTER_4F_LIBRARY_PUZZLE_GOLD_PIECE, 0);
             (*object_curLevel_goToNextFuncAndClearTimer)(
                 self->header.current_function, &self->header.function_info_ID
             );
@@ -116,7 +119,7 @@ void libraryPuzzle_showFirstTextbox(libraryPuzzle* self) {
             sys.FREEZE_PLAYER  = FALSE;
             sys.FREEZE_ENEMIES = FALSE;
             (*cameraMgr_setLockCameraAtPointState)(sys.ptr_cameraMgr, FALSE);
-            self->header.timer                   = 0;
+            SELECTION_DELAY_TIMER(self)          = 0;
             self->textbox_is_active              = FALSE;
             self->interacting_with_interactuable = FALSE;
             (*object_curLevel_goToFunc)(
@@ -129,15 +132,22 @@ void libraryPuzzle_puzzle_prepare(libraryPuzzle* self) {
     mfds_state* textbox;
     u16* message_ptr;
 
-    textbox = (*textbox_create)(self, common_camera_HUD, (0x08000000 | 0x00400000 | 0x00200000));
+    textbox = (*textbox_create)(
+        self, common_camera_HUD, (OPEN_TEXTBOX | FAST_TEXT_TRANSITION | MFDS_FLAG_400000)
+    );
     self->message_textbox = textbox;
     if (textbox != NULL) {
-        message_ptr = (*text_getMessageFromPool)(GET_MAP_MESSAGE_POOL_PTR(), 8);
+        message_ptr = (*text_getMessageFromPool)(
+            GET_MAP_MESSAGE_POOL_PTR(), CASTLE_CENTER_4F_LIBRARY_PUZZLE_GOLD_PIECE
+        );
         (*textbox_setPos)(textbox, 30, 140, 1);
         (*textbox_setDimensions)(textbox, 4, 255, 0, 0);
         (*textbox_setMessagePtr)(textbox, message_ptr, NULL, 0);
         (*textbox_enableLens)(
-            textbox, (0x00040000 | 0x00000020 | 0x00000010 | 0x00000004 | 0x00000001), 40.0f
+            textbox,
+            (WINDOW_FLAG_400000 | WINDOW_FLAG_OPEN_DOWN_RIGHT | WINDOW_FLAG_OPEN_RIGHT_DOWN |
+             WINDOW_FLAG_OPEN_DOWN | WINDOW_FLAG_OPEN_RIGHT),
+            40.0f
         );
     }
     (*object_curLevel_goToNextFuncAndClearTimer)(
@@ -151,11 +161,11 @@ void libraryPuzzle_puzzle_selectOption(libraryPuzzle* self) {
     mfds_state* textbox = self->message_textbox;
     s32 var_a1          = 0;
 
-    if (textbox->flags & 0x40000000) {
+    if (textbox->flags & TEXT_IS_PARSED) {
         data = self->data;
         if (self->option_selected == 0) {
             var_a1 = libraryPuzzle_selectNextOption(
-                &data->highlighted_option, &self->header.timer, &data->selected_options_IDs
+                &data->highlighted_option, &SELECTION_DELAY_TIMER(self), &data->selected_options_IDs
             );
             lens             = data->lens_window_work;
             lens->position.x = (s32) (data->highlighted_option * 25) - 101;
@@ -212,8 +222,8 @@ void libraryPuzzle_puzzle_selectOption(libraryPuzzle* self) {
             );
             return;
         }
-        self->message_textbox = (*map_getMessageFromPool)(11, 0);
-        self->header.timer    = 0;
+        self->message_textbox       = (*map_getMessageFromPool)(11, 0);
+        SELECTION_DELAY_TIMER(self) = 0;
         (*object_curLevel_goToNextFuncAndClearTimer)(
             self->header.current_function, &self->header.function_info_ID
         );
@@ -234,7 +244,7 @@ void libraryPuzzle_puzzle_fail(libraryPuzzle* self) {
         (*cutscene_setActorStateIfMatchingVariable1)(0x01D6, 0, 0);
         (*cutscene_setActorStateIfMatchingVariable1)(0x01D6, 1, 0);
         (*cutscene_setActorStateIfMatchingVariable1)(0x01D6, 2, 0);
-        self->header.timer                   = 0;
+        SELECTION_DELAY_TIMER(self)          = 0;
         self->first_option                   = 0;
         self->second_option                  = 0;
         self->third_option                   = 0;

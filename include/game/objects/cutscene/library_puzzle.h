@@ -4,6 +4,9 @@
 #include "actor.h"
 #include "objects/menu/mfds.h"
 
+#define PUZZLE_OPTION(number)       (number - 1)
+#define SELECTION_DELAY_TIMER(self) (self->header.timer)
+
 typedef enum libraryPuzzleData_optionIDs {
     OPTION_1 = CV64_BIT(0),
     OPTION_2 = CV64_BIT(1),
