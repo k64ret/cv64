@@ -194,7 +194,9 @@ void libraryPuzzle_puzzle_selectOption(libraryPuzzle* self) {
                     textbox->flags |= UPDATE_STRING;
                     self->first_option = data->highlighted_option;
                     (*cutscene_setActorStateIfMatchingVariable1)(
-                        STAGE_OBJECT_HONMARU_4F_MINAMI_LIBRARY_PIECE, 1, self->first_option + 1
+                        STAGE_OBJECT_HONMARU_4F_MINAMI_LIBRARY_PIECE,
+                        YELLOW_PIECE,
+                        self->first_option + 1
                     );
                     self->message_textbox = textbox;
                     self->option_selected = FALSE;
@@ -212,7 +214,9 @@ void libraryPuzzle_puzzle_selectOption(libraryPuzzle* self) {
                     textbox->flags |= UPDATE_STRING;
                     self->second_option = data->highlighted_option;
                     (*cutscene_setActorStateIfMatchingVariable1)(
-                        STAGE_OBJECT_HONMARU_4F_MINAMI_LIBRARY_PIECE, 2, self->second_option + 1
+                        STAGE_OBJECT_HONMARU_4F_MINAMI_LIBRARY_PIECE,
+                        RED_PIECE,
+                        self->second_option + 1
                     );
                     self->message_textbox = textbox;
                     self->option_selected = FALSE;
@@ -221,7 +225,9 @@ void libraryPuzzle_puzzle_selectOption(libraryPuzzle* self) {
                     self->third_option = data->highlighted_option;
                     textbox->flags |= CLOSE_TEXTBOX;
                     (*cutscene_setActorStateIfMatchingVariable1)(
-                        STAGE_OBJECT_HONMARU_4F_MINAMI_LIBRARY_PIECE, 0, self->third_option + 1
+                        STAGE_OBJECT_HONMARU_4F_MINAMI_LIBRARY_PIECE,
+                        BLUE_PIECE,
+                        self->third_option + 1
                     );
                     break;
             }
@@ -257,13 +263,13 @@ void libraryPuzzle_puzzle_fail(libraryPuzzle* self) {
     }
     if ((*lensAreClosed)()) {
         (*cutscene_setActorStateIfMatchingVariable1)(
-            STAGE_OBJECT_HONMARU_4F_MINAMI_LIBRARY_PIECE, 0, 0
+            STAGE_OBJECT_HONMARU_4F_MINAMI_LIBRARY_PIECE, BLUE_PIECE, 0
         );
         (*cutscene_setActorStateIfMatchingVariable1)(
-            STAGE_OBJECT_HONMARU_4F_MINAMI_LIBRARY_PIECE, 1, 0
+            STAGE_OBJECT_HONMARU_4F_MINAMI_LIBRARY_PIECE, YELLOW_PIECE, 0
         );
         (*cutscene_setActorStateIfMatchingVariable1)(
-            STAGE_OBJECT_HONMARU_4F_MINAMI_LIBRARY_PIECE, 2, 0
+            STAGE_OBJECT_HONMARU_4F_MINAMI_LIBRARY_PIECE, RED_PIECE, 0
         );
         SELECTION_DELAY_TIMER(self)          = 0;
         self->first_option                   = 0;
