@@ -11,24 +11,24 @@
 
 // clang-format off
 
-libraryPuzzle_func_t libraryPuzzle_functions[] = {
-    libraryPuzzle_init,
-    libraryPuzzle_idle,
-    libraryPuzzle_showFirstTextbox,
-    libraryPuzzle_puzzle_prepare,
-    libraryPuzzle_puzzle_selectOption,
-    libraryPuzzle_puzzle_fail,
-    libraryPuzzle_puzzle_success,
-    libraryPuzzle_destroy
+cv64_ovl_librarypuzzletxt_func_t cv64_ovl_librarypuzzletxt_funcs[] = {
+    cv64_ovl_librarypuzzletxt_init,
+    cv64_ovl_librarypuzzletxt_idle,
+    cv64_ovl_librarypuzzletxt_show,
+    cv64_ovl_librarypuzzletxt_prep_msg,
+    cv64_ovl_librarypuzzletxt_select,
+    cv64_ovl_librarypuzzletxt_fail,
+    cv64_ovl_librarypuzzletxt_success,
+    cv64_ovl_librarypuzzletxt_destroy
 };
 
 // clang-format on
 
-void libraryPuzzle_entrypoint(libraryPuzzle* self) {
-    ENTER(self, libraryPuzzle_functions);
+void cv64_ovl_librarypuzzletxt_entrypoint(cv64_ovl_librarypuzzletxt_t* self) {
+    ENTER(self, cv64_ovl_librarypuzzletxt_funcs);
 }
 
-void libraryPuzzle_init(libraryPuzzle* self) {
+void cv64_ovl_librarypuzzletxt_init(cv64_ovl_librarypuzzletxt_t* self) {
     cv64_actor_settings_t* settings = self->settings;
 
     if (ptr_PlayerData != NULL) {
@@ -42,7 +42,7 @@ void libraryPuzzle_init(libraryPuzzle* self) {
         self->trigger_size_X = 10;
         self->trigger_size_Z = 10;
         (*object_allocEntryInListAndClear)(
-            self, HEAP_KIND_MULTIPURPOSE, sizeof(libraryPuzzleData), 0
+            self, HEAP_KIND_MULTIPURPOSE, sizeof(cv64_ovl_librarypuzzledata_t), 0
         );
         (*object_curLevel_goToNextFuncAndClearTimer)(
             self->header.current_function, &self->header.function_info_ID
@@ -50,7 +50,7 @@ void libraryPuzzle_init(libraryPuzzle* self) {
     }
 }
 
-void libraryPuzzle_idle(libraryPuzzle* self) {
+void cv64_ovl_librarypuzzletxt_idle(cv64_ovl_librarypuzzletxt_t* self) {
     mfds_state* message;
 
     if (self->interacting_with_interactuable == TRUE) {
@@ -67,9 +67,12 @@ void libraryPuzzle_idle(libraryPuzzle* self) {
     }
 }
 
-void libraryPuzzle_showFirstTextbox(libraryPuzzle* self) {
+/**
+ * Shows the initial textbox in the Library Puzzle interaction
+ */
+void cv64_ovl_librarypuzzletxt_show(cv64_ovl_librarypuzzletxt_t* self) {
     mfds_state* options_textbox;
-    libraryPuzzleData* data;
+    cv64_ovl_librarypuzzledata_t* data;
     window_work* lens;
     mfds_state* textbox = self->message_textbox;
 
@@ -87,7 +90,7 @@ void libraryPuzzle_showFirstTextbox(libraryPuzzle* self) {
                 (*textbox_setPos)(options_textbox, 50, 50, 1);
                 (*textbox_setDimensions)(options_textbox, 1, 255, 0, 8);
                 options_textbox->display_time = 0;
-                libraryPuzzle_printSelectedOptions(data->options_text, 0);
+                cv64_ovl_librarypuzzletxt_print_selected(data->options_text, 0);
                 (*textbox_setMessagePtr)(options_textbox, data->options_text, NULL, 0);
             }
             lens = (*lens_create)(
@@ -122,7 +125,7 @@ void libraryPuzzle_showFirstTextbox(libraryPuzzle* self) {
     }
 }
 
-void libraryPuzzle_puzzle_prepare(libraryPuzzle* self) {
+void cv64_ovl_librarypuzzletxt_prep_msg(cv64_ovl_librarypuzzletxt_t* self) {
     mfds_state* textbox;
     u16* message_ptr;
 
@@ -142,8 +145,11 @@ void libraryPuzzle_puzzle_prepare(libraryPuzzle* self) {
     );
 }
 
-void libraryPuzzle_puzzle_selectOption(libraryPuzzle* self) {
-    libraryPuzzleData* data;
+/**
+ * Allows the player to select the goddesses for the Library Puzzle
+ */
+void cv64_ovl_librarypuzzletxt_select(cv64_ovl_librarypuzzletxt_t* self) {
+    cv64_ovl_librarypuzzledata_t* data;
     window_work* lens;
     mfds_state* textbox = self->message_textbox;
     s32 var_a1          = 0;
@@ -151,14 +157,16 @@ void libraryPuzzle_puzzle_selectOption(libraryPuzzle* self) {
     if (textbox->flags & 0x40000000) {
         data = self->data;
         if (self->option_selected == 0) {
-            var_a1 = libraryPuzzle_selectNextOption(
+            var_a1 = cv64_ovl_librarypuzzletxt_select_next(
                 &data->highlighted_option, &self->header.timer, &data->selected_options_IDs
             );
             lens             = data->lens_window_work;
             lens->position.x = (s32) (data->highlighted_option * 25) - 101;
         }
         if (var_a1 > 0) {
-            libraryPuzzle_printSelectedOptions(data->options_text, data->selected_options_IDs);
+            cv64_ovl_librarypuzzletxt_print_selected(
+                data->options_text, data->selected_options_IDs
+            );
             (*textbox_setMessagePtr)(data->message_textbox, data->options_text, NULL, 0);
             data->message_textbox->flags |= 0x01000000;
             self->option_selected = 1;
@@ -217,9 +225,9 @@ void libraryPuzzle_puzzle_selectOption(libraryPuzzle* self) {
     }
 }
 
-void libraryPuzzle_puzzle_fail(libraryPuzzle* self) {
-    libraryPuzzleData* data = self->data;
-    mfds_state* textbox     = self->message_textbox;
+void cv64_ovl_librarypuzzletxt_fail(cv64_ovl_librarypuzzletxt_t* self) {
+    cv64_ovl_librarypuzzledata_t* data = self->data;
+    mfds_state* textbox                = self->message_textbox;
     s32 temp[2];
 
     if (textbox == NULL) {
@@ -251,8 +259,8 @@ void libraryPuzzle_puzzle_fail(libraryPuzzle* self) {
     }
 }
 
-void libraryPuzzle_puzzle_success(libraryPuzzle* self) {
-    libraryPuzzleData* data = self->data;
+void cv64_ovl_librarypuzzletxt_success(cv64_ovl_librarypuzzletxt_t* self) {
+    cv64_ovl_librarypuzzledata_t* data = self->data;
 
     sys.cutscene_ID = 0x13;
     SET_EVENT_FLAGS(11, 0x01000000);
@@ -266,7 +274,7 @@ void libraryPuzzle_puzzle_success(libraryPuzzle* self) {
     );
 }
 
-void libraryPuzzle_destroy(libraryPuzzle* self) {
+void cv64_ovl_librarypuzzletxt_destroy(cv64_ovl_librarypuzzletxt_t* self) {
     self->header.destroy(self);
 }
 
@@ -274,7 +282,7 @@ void libraryPuzzle_destroy(libraryPuzzle* self) {
 * `number + ASCII_TO_CV64('0')` takes a variable number and converts it to
 * the game's custom text format.
 */
-void libraryPuzzle_printSelectedOptions(u16* text, u16 selected_options_IDs) {
+void cv64_ovl_librarypuzzletxt_print_selected(u16* text, u16 selected_options_IDs) {
     u16* string = text;
     u16 i;
     u16 number;
@@ -297,7 +305,7 @@ void libraryPuzzle_printSelectedOptions(u16* text, u16 selected_options_IDs) {
     *string = 0;
 }
 
-s32 libraryPuzzle_selectNextOption(
+s32 cv64_ovl_librarypuzzletxt_select_next(
     s32* highlighted_option, u16* selection_delay_timer, u16* selected_options_IDs
 ) {
     s32 ret = 0;
