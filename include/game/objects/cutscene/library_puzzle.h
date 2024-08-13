@@ -4,8 +4,11 @@
 #include "actor.h"
 #include "objects/menu/mfds.h"
 
-#define PUZZLE_OPTION(number)       (number - 1)
-#define SELECTION_DELAY_TIMER(self) (self->header.timer)
+#define PUZZLE_OPTION(number)               (number - 1)
+#define SELECTION_DELAY_TIMER(self)         (self->header.timer)
+#define LIBRARY_PUZZLE_NUM_OPTIONS          10
+#define LIBRARY_PUZZLE_MAX_SELECTED_OPTIONS 3
+#define LIBRARY_PUZZLE_SELECTION_DELAY      4
 
 typedef enum libraryPuzzleData_optionIDs {
     OPTION_1 = CV64_BIT(0),
@@ -20,10 +23,17 @@ typedef enum libraryPuzzleData_optionIDs {
 } libraryPuzzleData_optionIDs;
 
 typedef struct libraryPuzzleData {
-    mfds_state* message_textbox;
+    mfds_state* options_textbox;
     window_work* lens;
+    /**
+     * Buffer that holds the 1, 2, 3, etc. text
+     */
     u16 options_text[16];
     u8 field_0x28[8];
+    /**
+     * Bitflags that represent the options selected.
+     * See `libraryPuzzleData_optionIDs` for all possible options
+     */
     u16 selected_options_IDs;
     u8 field_0x32[2];
     /**
@@ -63,10 +73,6 @@ void libraryPuzzle_puzzle_selectOption(libraryPuzzle* self);
 void libraryPuzzle_puzzle_fail(libraryPuzzle* self);
 void libraryPuzzle_puzzle_success(libraryPuzzle* self);
 void libraryPuzzle_destroy(libraryPuzzle* self);
-void libraryPuzzle_printSelectedOptions(u16* text, u16 selected_options_IDs);
-s32 libraryPuzzle_selectNextOption(
-    s32* highlighted_option, u16* selection_delay_timer, u16* selected_options_IDs
-);
 
 typedef enum libraryPuzzle_func_id {
     LIBRARY_PUZZLE_INIT,

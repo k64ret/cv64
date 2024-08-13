@@ -5,6 +5,7 @@
  */
 
 #include "objects/cutscene/library_puzzle.h"
+#include "objects/map/honmaru_4f_minami/library_piece.h"
 #include "memory.h"
 #include "sound.h"
 #include "system_work.h"
@@ -24,6 +25,11 @@ libraryPuzzle_func_t libraryPuzzle_functions[] = {
 
 // clang-format on
 
+static void libraryPuzzle_printOptions(u16* text, u16 selected_options_IDs);
+static s32 libraryPuzzle_selectNextOption(
+    s32* highlighted_option, u16* selection_delay_timer, u16* selected_options_IDs
+);
+
 void libraryPuzzle_entrypoint(libraryPuzzle* self) {
     ENTER(self, libraryPuzzle_functions);
 }
@@ -32,6 +38,7 @@ void libraryPuzzle_init(libraryPuzzle* self) {
     cv64_actor_settings_t* settings = self->settings;
 
     if (ptr_PlayerData != NULL) {
+        // Destroy if the puzzle was already solved
         if (CHECK_EVENT_FLAGS(
                 EVENT_FLAG_ID_CASTLE_WALL_LIBRARY_AND_MAZE_GARDEN,
                 EVENT_FLAG_CASTLE_WALL_LIBRARY_AND_MAZE_GARDEN_LIBRARY_PUZZLE_SOLVED
@@ -57,6 +64,7 @@ void libraryPuzzle_idle(libraryPuzzle* self) {
     mfds_state* message;
 
     if (self->interacting_with_interactuable == TRUE) {
+        // Freeze player and ask the user if they want to do the puzzle
         message = (*map_getMessageFromPool)(CASTLE_CENTER_4F_LIBRARY_PUZZLE_DESCRIPTION, 0);
         if (message != NULL) {
             sys.FREEZE_PLAYER  = TRUE;
@@ -82,18 +90,24 @@ void libraryPuzzle_showFirstTextbox(libraryPuzzle* self) {
         case TEXTBOX_OPTION_YES:
             data                       = self->data;
             data->selected_options_IDs = 0;
-            data->highlighted_option   = PUZZLE_OPTION(1);
-            data->message_textbox      = (*textbox_create)(
+
+            // Highlight the number 1 by default
+            data->highlighted_option = PUZZLE_OPTION(1);
+
+            // Create and setup the textbox that holds the 1, 2, 3, etc. options
+            data->options_textbox = (*textbox_create)(
                 self, common_camera_HUD, (OPEN_TEXTBOX | FAST_TEXT_TRANSITION | MFDS_FLAG_00000008)
             );
-            options_textbox = data->message_textbox;
+            options_textbox = data->options_textbox;
             if (options_textbox != NULL) {
                 (*textbox_setPos)(options_textbox, 50, 50, 1);
                 (*textbox_setDimensions)(options_textbox, 1, 255, 0, 8);
                 options_textbox->display_time = 0;
-                libraryPuzzle_printSelectedOptions(data->options_text, 0);
+                libraryPuzzle_printOptions(data->options_text, 0);
                 (*textbox_setMessagePtr)(options_textbox, data->options_text, NULL, 0);
             }
+
+            // Create and setup the selection lens
             lens = (*lens_create)(
                 self,
                 common_camera_HUD,
@@ -109,13 +123,21 @@ void libraryPuzzle_showFirstTextbox(libraryPuzzle* self) {
             data->lens = lens;
             lens->flags &= ~WINDOW_CLOSING;
             lens->flags |= WINDOW_OPENING;
+
+            /**
+             * This isn't used in practice, since the piece text is written into a new
+             * textbox, and not to gameplayMenuMgr's common textbox, which closes after
+             * said message displays
+             */
             self->message_textbox =
                 (*map_getMessageFromPool)(CASTLE_CENTER_4F_LIBRARY_PUZZLE_GOLD_PIECE, 0);
+
             (*object_curLevel_goToNextFuncAndClearTimer)(
                 self->header.current_function, &self->header.function_info_ID
             );
             return;
         case TEXTBOX_OPTION_NO:
+            // Go back to normal gameplay
             sys.FREEZE_PLAYER  = FALSE;
             sys.FREEZE_ENEMIES = FALSE;
             (*cameraMgr_setLockCameraAtPointState)(sys.ptr_cameraMgr, FALSE);
@@ -132,6 +154,10 @@ void libraryPuzzle_puzzle_prepare(libraryPuzzle* self) {
     mfds_state* textbox;
     u16* message_ptr;
 
+    /**
+     * Create and setup the "Is the X piece in place?" textbox,
+     * and display it for the gold piece first
+     */
     textbox = (*textbox_create)(
         self, common_camera_HUD, (OPEN_TEXTBOX | FAST_TEXT_TRANSITION | MFDS_FLAG_400000)
     );
@@ -158,29 +184,41 @@ void libraryPuzzle_puzzle_prepare(libraryPuzzle* self) {
 void libraryPuzzle_puzzle_selectOption(libraryPuzzle* self) {
     libraryPuzzleData* data;
     window_work* lens;
-    mfds_state* textbox       = self->message_textbox;
-    s32 update_option_strings = 0;
+    mfds_state* textbox = self->message_textbox;
+    s32 set_piece       = 0;
 
     if (textbox->flags & TEXT_IS_PARSED) {
         data = self->data;
         if (self->option_selected == FALSE) {
-            update_option_strings = libraryPuzzle_selectNextOption(
+            set_piece = libraryPuzzle_selectNextOption(
                 &data->highlighted_option, &SELECTION_DELAY_TIMER(self), &data->selected_options_IDs
             );
+            // Update the selection lens's horizontal position
             lens             = data->lens;
             lens->position.x = (s32) (data->highlighted_option * 25) - 101;
         }
-        if (update_option_strings > 0) {
-            libraryPuzzle_printSelectedOptions(data->options_text, data->selected_options_IDs);
-            (*textbox_setMessagePtr)(data->message_textbox, data->options_text, NULL, 0);
-            data->message_textbox->flags |= UPDATE_STRING;
+
+        // An option was selected
+        if (set_piece > 0) {
+            libraryPuzzle_printOptions(data->options_text, data->selected_options_IDs);
+            (*textbox_setMessagePtr)(data->options_textbox, data->options_text, NULL, 0);
+            data->options_textbox->flags |= UPDATE_STRING;
             self->option_selected = TRUE;
             self->number_of_options_selected++;
             (*play_sound)(SD_LIBRARY_PIECE_SET);
             return;
         }
+
+        /**
+         * Set each piece to the position indicated by the selecgted option
+         * and update the message displayed to reflect
+         * the next piece
+         */
         if (self->option_selected) {
             switch (self->number_of_options_selected) {
+                /**
+                 * Red piece
+                 */
                 case 1:
                     (*textbox_setMessagePtr)(
                         textbox,
@@ -201,6 +239,10 @@ void libraryPuzzle_puzzle_selectOption(libraryPuzzle* self) {
                     self->message_textbox = textbox;
                     self->option_selected = FALSE;
                     break;
+
+                /**
+                 * Blue piece
+                 */
                 case 2:
                     (*textbox_setMessagePtr)(
                         textbox,
@@ -221,6 +263,10 @@ void libraryPuzzle_puzzle_selectOption(libraryPuzzle* self) {
                     self->message_textbox = textbox;
                     self->option_selected = FALSE;
                     break;
+
+                /**
+                 * All pieces have been put
+                 */
                 case 3:
                     self->third_option = data->highlighted_option;
                     textbox->flags |= CLOSE_TEXTBOX;
@@ -233,9 +279,12 @@ void libraryPuzzle_puzzle_selectOption(libraryPuzzle* self) {
             }
         }
     }
-    if (self->number_of_options_selected == 3) {
+
+    // Check the puzzle code
+    if (self->number_of_options_selected == LIBRARY_PUZZLE_MAX_SELECTED_OPTIONS) {
         if ((self->first_option == PUZZLE_OPTION(2)) && (self->second_option == PUZZLE_OPTION(4)) &&
             (self->third_option == PUZZLE_OPTION(8))) {
+            // Success
             (*object_curLevel_goToFunc)(
                 self->header.current_function,
                 &self->header.function_info_ID,
@@ -243,6 +292,7 @@ void libraryPuzzle_puzzle_selectOption(libraryPuzzle* self) {
             );
             return;
         }
+        // Fail
         self->message_textbox = (*map_getMessageFromPool)(CASTLE_CENTER_4F_LIBRARY_PUZZLE_FAIL, 0);
         SELECTION_DELAY_TIMER(self) = 0;
         (*object_curLevel_goToNextFuncAndClearTimer)(
@@ -256,12 +306,16 @@ void libraryPuzzle_puzzle_fail(libraryPuzzle* self) {
     mfds_state* textbox     = self->message_textbox;
     s32 temp[2];
 
+    // Open up the common textbox again, and display the failed message
     if (textbox == NULL) {
         textbox               = (*map_getMessageFromPool)(CASTLE_CENTER_4F_LIBRARY_PUZZLE_FAIL, 0);
         self->message_textbox = textbox;
         return;
     }
+
+    // Close the message and go back to normal
     if ((*lensAreClosed)()) {
+        // Put all the pieces back in the pedestal
         (*cutscene_setActorStateIfMatchingVariable1)(
             STAGE_OBJECT_HONMARU_4F_MINAMI_LIBRARY_PIECE, BLUE_PIECE, 0
         );
@@ -280,7 +334,7 @@ void libraryPuzzle_puzzle_fail(libraryPuzzle* self) {
         self->textbox_is_active              = FALSE;
         self->interacting_with_interactuable = FALSE;
         data->lens->flags |= (WINDOW_CLOSING | WINDOW_OPENING);
-        textbox = data->message_textbox;
+        textbox = data->options_textbox;
         textbox->flags |= CLOSE_TEXTBOX;
         sys.FREEZE_ENEMIES = FALSE;
         sys.FREEZE_PLAYER  = FALSE;
@@ -294,13 +348,17 @@ void libraryPuzzle_puzzle_fail(libraryPuzzle* self) {
 void libraryPuzzle_puzzle_success(libraryPuzzle* self) {
     libraryPuzzleData* data = self->data;
 
+    /**
+     * Start the puzzle solved cutscene,
+     * set the appropiate event flags and go back to normal
+     */
     sys.cutscene_ID = CUTSCENE_ID_LIBRARY_PUZZLE_SOLVED;
     SET_EVENT_FLAGS(
         EVENT_FLAG_ID_CASTLE_WALL_LIBRARY_AND_MAZE_GARDEN,
         EVENT_FLAG_CASTLE_WALL_LIBRARY_AND_MAZE_GARDEN_LIBRARY_PUZZLE_SOLVED
     );
     data->lens->flags |= (WINDOW_CLOSING | WINDOW_OPENING);
-    data->message_textbox->flags |= CLOSE_TEXTBOX;
+    data->options_textbox->flags |= CLOSE_TEXTBOX;
     sys.FREEZE_ENEMIES = FALSE;
     sys.FREEZE_PLAYER  = FALSE;
     (*cameraMgr_setLockCameraAtPointState)(sys.ptr_cameraMgr, FALSE);
@@ -317,13 +375,16 @@ void libraryPuzzle_destroy(libraryPuzzle* self) {
 * `number + ASCII_TO_CV64('0')` takes a variable number and converts it to
 * the game's custom text format.
 */
-void libraryPuzzle_printSelectedOptions(u16* text, u16 selected_options_IDs) {
+void libraryPuzzle_printOptions(u16* text, u16 selected_options_IDs) {
     u16* string = text;
     u16 i;
     u16 number;
 
-    for (i = 1, number = 1; i < 10; i++) {
+    // Iterate through all the options
+    for (i = 1, number = 1; i < LIBRARY_PUZZLE_NUM_OPTIONS; i++) {
         number = i;
+
+        // Check that an option was selected
         if (selected_options_IDs & (1 << (number + 0x1F))) {
             // Print selected options in red
             string[0] = CTRL_SET_COLOR(TEXT_COLOR_RED);
@@ -340,29 +401,49 @@ void libraryPuzzle_printSelectedOptions(u16* text, u16 selected_options_IDs) {
     *string = 0;
 }
 
+/**
+ * Check controller inputs to move the selection lens.
+ * There is normally a small delay of 4 frames between selections.
+ *
+ * @return
+ *  0: Default, nothing happened
+ *  1: A new option was selected
+ * -1: The B button was pressed. No code checks for this output in practice
+ */
 s32 libraryPuzzle_selectNextOption(
     s32* highlighted_option, u16* selection_delay_timer, u16* selected_options_IDs
 ) {
     s32 ret = 0;
 
+    // All options are selected (impossible to perform in practice)
     if (*selected_options_IDs ==
         (OPTION_1 | OPTION_2 | OPTION_3 | OPTION_4 | OPTION_5 | OPTION_6 | OPTION_7 | OPTION_8 |
          OPTION_9)) {
         return 0;
     }
 
+    /**
+     * Remove selection delay if pressing any of the D-Pad buttons
+     * except for the D-Pad Down (probably a mistake since Up is checked twice)
+     */
     if ((CONT_BTNS_PRESSED(CONT_0, U_JPAD)) || (CONT_BTNS_PRESSED(CONT_0, U_JPAD)) ||
         (CONT_BTNS_PRESSED(CONT_0, L_JPAD)) || (CONT_BTNS_PRESSED(CONT_0, R_JPAD))) {
         *selection_delay_timer = 0;
     }
 
+    /**
+     * Move cursor to the left or to the right
+     *
+     * `*selected_options_IDs & (1 << (*highlighted_option))` makes sure
+     * to skip selecting the already-selected options
+     */
     if ((CONT_BTNS_PRESSED(CONT_0, L_JPAD)) || (sys.controllers[0].joystick_x < -25)) {
         if (*selection_delay_timer == 0) {
-            *selection_delay_timer = 4;
+            *selection_delay_timer = LIBRARY_PUZZLE_SELECTION_DELAY;
             do {
                 (*highlighted_option)--;
-                if ((*highlighted_option) < 0) {
-                    *highlighted_option = 8;
+                if ((*highlighted_option) < PUZZLE_OPTION(1)) {
+                    *highlighted_option = PUZZLE_OPTION(9);
                 }
             } while (*selected_options_IDs & (1 << (*highlighted_option)));
         } else {
@@ -370,11 +451,11 @@ s32 libraryPuzzle_selectNextOption(
         }
     } else if ((CONT_BTNS_PRESSED(CONT_0, R_JPAD)) || (sys.controllers[0].joystick_x >= 26)) {
         if (*selection_delay_timer == 0) {
-            *selection_delay_timer = 4;
+            *selection_delay_timer = LIBRARY_PUZZLE_SELECTION_DELAY;
             do {
                 (*highlighted_option)++;
-                if ((*highlighted_option) >= 9) {
-                    *highlighted_option = 0;
+                if ((*highlighted_option) > PUZZLE_OPTION(9)) {
+                    *highlighted_option = PUZZLE_OPTION(1);
                 }
             } while (*selected_options_IDs & (1 << (*highlighted_option)));
         } else {
@@ -382,23 +463,34 @@ s32 libraryPuzzle_selectNextOption(
         }
     }
 
+    /**
+     * Move the lens forwards one place after selecting an option to avoid
+     * being able to select the previous option again
+     */
     if (*selected_options_IDs & (1 << (*highlighted_option))) {
         ret = 1;
         do {
             (*highlighted_option)++;
-            if ((*highlighted_option) >= 9) {
-                *highlighted_option = 0;
+            if ((*highlighted_option) > PUZZLE_OPTION(9)) {
+                *highlighted_option = PUZZLE_OPTION(1);
             }
         } while (*selected_options_IDs & (1 << (*highlighted_option)));
     }
-
     if (ret != 0) {
         return 0;
     }
 
+    /**
+     * Option selected
+     */
     if ((CONT_BTNS_PRESSED(CONT_0, A_BUTTON))) {
         *selected_options_IDs |= (1 << (*highlighted_option));
         ret = 1;
+        /**
+     * Pressed the B button. This does nothing in practice.
+     * It could've been used to exit the puzzle earlier in development,
+     * but in the final game, the puzzle doesn't finish until all options are selected
+     */
     } else if ((CONT_BTNS_PRESSED(CONT_0, B_BUTTON))) {
         ret = -1;
     }

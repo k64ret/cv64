@@ -193,7 +193,7 @@ libraryPuzzle_puzzle_selectOption    = 0x0E0004DC; // type:func segment:ni_ovl_l
 libraryPuzzle_puzzle_fail    = 0x0E000824; // type:func segment:ni_ovl_library_puzzle_textbox
 libraryPuzzle_puzzle_success    = 0x0E000954; // type:func segment:ni_ovl_library_puzzle_textbox
 libraryPuzzle_destroy    = 0x0E0009EC; // type:func segment:ni_ovl_library_puzzle_textbox
-libraryPuzzle_printSelectedOptions    = 0x0E000A10; // type:func segment:ni_ovl_library_puzzle_textbox
+libraryPuzzle_printOptions    = 0x0E000A10; // type:func segment:ni_ovl_library_puzzle_textbox
 libraryPuzzle_selectNextOption    = 0x0E000A80; // type:func segment:ni_ovl_library_puzzle_textbox
 // .data
 libraryPuzzle_functions      = 0x0E000C60; // segment:ni_ovl_library_puzzle_textbox size:0x20
