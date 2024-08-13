@@ -9,26 +9,26 @@
 
 // clang-format off
 
-cv64_ovl_nitrotextbox_func_t cv64_ovl_nitrotextbox_funcs[] = {
-    cv64_ovl_nitrotextbox_init,
-    cv64_ovl_nitrotextbox_idle,
-    cv64_ovl_nitrotextbox_prep_msg,
-    cv64_ovl_nitrotextbox_yes_no,
-    cv64_ovl_nitrotextbox_close,
-    cv64_ovl_nitrotextbox_destroy
+cv64_ovl_nitrotxt_func_t cv64_ovl_nitrotxt_funcs[] = {
+    cv64_ovl_nitrotxt_init,
+    cv64_ovl_nitrotxt_idle,
+    cv64_ovl_nitrotxt_prep_msg,
+    cv64_ovl_nitrotxt_yes_no,
+    cv64_ovl_nitrotxt_close,
+    cv64_ovl_nitrotxt_destroy
 };
 
 // clang-format on
 
-const char cv64_ovl_nitrotextbox_unused_str[] = "OK\n";
+const char cv64_ovl_nitrotxt_unused_str[] = "OK\n";
 
 static s32 cannot_collect_nitro(void);
 
-void cv64_ovl_nitrotextbox_entrypoint(cv64_ovl_nitrotextbox_t* self) {
-    ENTER(self, cv64_ovl_nitrotextbox_funcs);
+void cv64_ovl_nitrotxt_entrypoint(cv64_ovl_nitrotxt_t* self) {
+    ENTER(self, cv64_ovl_nitrotxt_funcs);
 }
 
-void cv64_ovl_nitrotextbox_init(cv64_ovl_nitrotextbox_t* self) {
+void cv64_ovl_nitrotxt_init(cv64_ovl_nitrotxt_t* self) {
     cv64_actor_settings_t* settings = self->settings;
 
     if (ptr_PlayerData == NULL)
@@ -45,7 +45,7 @@ void cv64_ovl_nitrotextbox_init(cv64_ovl_nitrotextbox_t* self) {
     );
 }
 
-void cv64_ovl_nitrotextbox_idle(cv64_ovl_nitrotextbox_t* self) {
+void cv64_ovl_nitrotxt_idle(cv64_ovl_nitrotxt_t* self) {
     int temp[2];
 
     if (self->interacting_with_interactuable != TRUE)
@@ -93,7 +93,7 @@ void cv64_ovl_nitrotextbox_idle(cv64_ovl_nitrotextbox_t* self) {
     );
 }
 
-void cv64_ovl_nitrotextbox_prep_msg(cv64_ovl_nitrotextbox_t* self) {
+void cv64_ovl_nitrotxt_prep_msg(cv64_ovl_nitrotxt_t* self) {
     mfds_state* message;
 
     message = (*map_getMessageFromPool)(self->text_ID, self->message_display_time);
@@ -108,7 +108,7 @@ void cv64_ovl_nitrotextbox_prep_msg(cv64_ovl_nitrotextbox_t* self) {
     );
 }
 
-void cv64_ovl_nitrotextbox_yes_no(cv64_ovl_nitrotextbox_t* self) {
+void cv64_ovl_nitrotxt_yes_no(cv64_ovl_nitrotxt_t* self) {
     mfds_state* textbox = self->message_textbox;
 
     if (self->text_ID == CASTLE_CENTER_3F_TAKE_NITRO) {
@@ -131,7 +131,7 @@ void cv64_ovl_nitrotextbox_yes_no(cv64_ovl_nitrotextbox_t* self) {
     );
 }
 
-void cv64_ovl_nitrotextbox_close(cv64_ovl_nitrotextbox_t* self) {
+void cv64_ovl_nitrotxt_close(cv64_ovl_nitrotxt_t* self) {
     mfds_state* message_textbox;
 
     if (self->text_ID == CASTLE_CENTER_3F_NITRO_WARNING) {
@@ -157,7 +157,7 @@ void cv64_ovl_nitrotextbox_close(cv64_ovl_nitrotextbox_t* self) {
     );
 }
 
-void cv64_ovl_nitrotextbox_destroy(cv64_ovl_nitrotextbox_t* self) {
+void cv64_ovl_nitrotxt_destroy(cv64_ovl_nitrotxt_t* self) {
     self->header.destroy(self);
 }
 

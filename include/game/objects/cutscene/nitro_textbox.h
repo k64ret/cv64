@@ -5,7 +5,7 @@
 #include "objects/menu/mfds.h"
 
 // ID: 0x2022
-typedef struct cv64_ovl_nitrotextbox {
+typedef struct cv64_ovl_nitrotxt {
     cv64_object_hdr_t header;
     u8 field_0x20[20];
     s32 text_ID;
@@ -21,25 +21,25 @@ typedef struct cv64_ovl_nitrotextbox {
     mfds_state* message_textbox;
     vec3f position;
     cv64_actor_settings_t* settings;
-} cv64_ovl_nitrotextbox_t;
+} cv64_ovl_nitrotxt_t;
 
-void cv64_ovl_nitrotextbox_entrypoint(cv64_ovl_nitrotextbox_t* self);
-void cv64_ovl_nitrotextbox_init(cv64_ovl_nitrotextbox_t* self);
-void cv64_ovl_nitrotextbox_idle(cv64_ovl_nitrotextbox_t* self);
-void cv64_ovl_nitrotextbox_prep_msg(cv64_ovl_nitrotextbox_t* self);
-void cv64_ovl_nitrotextbox_yes_no(cv64_ovl_nitrotextbox_t* self);
-void cv64_ovl_nitrotextbox_close(cv64_ovl_nitrotextbox_t* self);
-void cv64_ovl_nitrotextbox_destroy(cv64_ovl_nitrotextbox_t* self);
+void cv64_ovl_nitrotxt_entrypoint(cv64_ovl_nitrotxt_t* self);
+void cv64_ovl_nitrotxt_init(cv64_ovl_nitrotxt_t* self);
+void cv64_ovl_nitrotxt_idle(cv64_ovl_nitrotxt_t* self);
+void cv64_ovl_nitrotxt_prep_msg(cv64_ovl_nitrotxt_t* self);
+void cv64_ovl_nitrotxt_yes_no(cv64_ovl_nitrotxt_t* self);
+void cv64_ovl_nitrotxt_close(cv64_ovl_nitrotxt_t* self);
+void cv64_ovl_nitrotxt_destroy(cv64_ovl_nitrotxt_t* self);
 
-typedef enum cv64_ovl_nitrotextbox_func_id {
+typedef enum cv64_ovl_nitrotxt_func_id {
     NITRO_TEXTBOX_INIT,
     NITRO_TEXTBOX_IDLE,
     NITRO_TEXTBOX_PREPARE_MESSAGE,
     NITRO_TEXTBOX_SELECT_OPTION,
     NITRO_TEXTBOX_CLOSE_TEXTBOX,
     NITRO_TEXTBOX_DESTROY
-} cv64_ovl_nitrotextbox_func_id_t;
+} cv64_ovl_nitrotxt_func_id_t;
 
-typedef void (*cv64_ovl_nitrotextbox_func_t)(cv64_ovl_nitrotextbox_t*);
+typedef void (*cv64_ovl_nitrotxt_func_t)(cv64_ovl_nitrotxt_t*);
 
 #endif
