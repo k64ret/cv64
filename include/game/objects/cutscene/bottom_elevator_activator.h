@@ -10,7 +10,7 @@
 #define BOTTOM_ELEVATOR_ACTIVATOR_STATE_ELEVATOR_ACTIVATED 5
 
 // ID: 0x2025
-typedef struct cv64_ovl_elevatortextbox {
+typedef struct cv64_ovl_elevatortxt {
     cv64_object_hdr_t header;
     u8 field_0x20[20];
     /**
@@ -33,25 +33,25 @@ typedef struct cv64_ovl_elevatortextbox {
     mfds_state* message_textbox;
     vec3f position;
     cv64_actor_settings_t* settings;
-} cv64_ovl_elevatortextbox_t;
+} cv64_ovl_elevatortxt_t;
 
-void cv64_ovl_elevatortextbox_entrypoint(cv64_ovl_elevatortextbox_t* self);
-void cv64_ovl_elevatortextbox_init(cv64_ovl_elevatortextbox_t* self);
-void cv64_ovl_elevatortextbox_idle(cv64_ovl_elevatortextbox_t* self);
-void cv64_ovl_elevatortextbox_prep_msg(cv64_ovl_elevatortextbox_t* self);
-void cv64_ovl_elevatortextbox_yes_no(cv64_ovl_elevatortextbox_t* self);
-void cv64_ovl_elevatortextbox_close(cv64_ovl_elevatortextbox_t* self);
-void cv64_ovl_elevatortextbox_destroy(cv64_ovl_elevatortextbox_t* self);
+void cv64_ovl_elevatortxt_entrypoint(cv64_ovl_elevatortxt_t* self);
+void cv64_ovl_elevatortxt_init(cv64_ovl_elevatortxt_t* self);
+void cv64_ovl_elevatortxt_idle(cv64_ovl_elevatortxt_t* self);
+void cv64_ovl_elevatortxt_prep_msg(cv64_ovl_elevatortxt_t* self);
+void cv64_ovl_elevatortxt_yes_no(cv64_ovl_elevatortxt_t* self);
+void cv64_ovl_elevatortxt_close(cv64_ovl_elevatortxt_t* self);
+void cv64_ovl_elevatortxt_destroy(cv64_ovl_elevatortxt_t* self);
 
-typedef enum cv64_ovl_elevatortextbox_func_id {
+typedef enum cv64_ovl_elevatortxt_func_id {
     BOTTOM_ELEVATOR_ACTIVATOR_INIT,
     BOTTOM_ELEVATOR_ACTIVATOR_IDLE,
     BOTTOM_ELEVATOR_ACTIVATOR_PREPARE_MESSAGE,
     BOTTOM_ELEVATOR_ACTIVATOR_SELECT_OPTION,
     BOTTOM_ELEVATOR_ACTIVATOR_CLOSE_TEXTBOX,
     BOTTOM_ELEVATOR_ACTIVATOR_DESTROY
-} cv64_ovl_elevatortextbox_func_id_t;
+} cv64_ovl_elevatortxt_func_id_t;
 
-typedef void (*cv64_ovl_elevatortextbox_func_t)(cv64_ovl_elevatortextbox_t*);
+typedef void (*cv64_ovl_elevatortxt_func_t)(cv64_ovl_elevatortxt_t*);
 
 #endif

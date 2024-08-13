@@ -264,15 +264,15 @@ explosiveWallSpot_destroy    = 0x0E000B6C; // type:func segment:ni_explosive_wal
 explosiveWallSpot_functions      = 0x0E000B90; // segment:ni_explosive_wall_spot size:0x34
 // End of src/overlay/textbox/explosive_wall_spot.c =====================================
 
-// src/overlay/textbox/bottom_elevator_activator.c ============================================
+// src/overlay/textbox/bottom_elevator_activator.c =============================
 // .text
-cv64_ovl_elevatortextbox_entrypoint = 0x0E000000; // type:func segment:ni_ovl_bottom_elevator_activator_textbox
-cv64_ovl_elevatortextbox_init       = 0x0E000070; // type:func segment:ni_ovl_bottom_elevator_activator_textbox
-cv64_ovl_elevatortextbox_idle       = 0x0E000134; // type:func segment:ni_ovl_bottom_elevator_activator_textbox
-cv64_ovl_elevatortextbox_prep_msg   = 0x0E0001A0; // type:func segment:ni_ovl_bottom_elevator_activator_textbox
-cv64_ovl_elevatortextbox_yes_no     = 0x0E000278; // type:func segment:ni_ovl_bottom_elevator_activator_textbox
-cv64_ovl_elevatortextbox_close      = 0x0E000314; // type:func segment:ni_ovl_bottom_elevator_activator_textbox
-cv64_ovl_elevatortextbox_destroy    = 0x0E0003D4; // type:func segment:ni_ovl_bottom_elevator_activator_textbox
+cv64_ovl_elevatortxt_entrypoint = 0x0E000000; // type:func segment:ni_ovl_bottom_elevator_activator_textbox
+cv64_ovl_elevatortxt_init       = 0x0E000070; // type:func segment:ni_ovl_bottom_elevator_activator_textbox
+cv64_ovl_elevatortxt_idle       = 0x0E000134; // type:func segment:ni_ovl_bottom_elevator_activator_textbox
+cv64_ovl_elevatortxt_prep_msg   = 0x0E0001A0; // type:func segment:ni_ovl_bottom_elevator_activator_textbox
+cv64_ovl_elevatortxt_yes_no     = 0x0E000278; // type:func segment:ni_ovl_bottom_elevator_activator_textbox
+cv64_ovl_elevatortxt_close      = 0x0E000314; // type:func segment:ni_ovl_bottom_elevator_activator_textbox
+cv64_ovl_elevatortxt_destroy    = 0x0E0003D4; // type:func segment:ni_ovl_bottom_elevator_activator_textbox
 // .data
-cv64_ovl_elevatortextbox_funcs      = 0x0E000400; // segment:ni_ovl_bottom_elevator_activator_textbox size:0x18
-// End of src/overlay/textbox/bottom_elevator_activator.c =====================================
+cv64_ovl_elevatortxt_funcs      = 0x0E000400; // segment:ni_ovl_bottom_elevator_activator_textbox size:0x18
+// End of src/overlay/textbox/bottom_elevator_activator.c ======================

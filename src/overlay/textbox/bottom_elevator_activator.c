@@ -10,22 +10,22 @@
 
 // clang-format off
 
-cv64_ovl_elevatortextbox_func_t cv64_ovl_elevatortextbox_funcs[] = {
-    cv64_ovl_elevatortextbox_init,
-    cv64_ovl_elevatortextbox_idle,
-    cv64_ovl_elevatortextbox_prep_msg,
-    cv64_ovl_elevatortextbox_yes_no,
-    cv64_ovl_elevatortextbox_close,
-    cv64_ovl_elevatortextbox_destroy
+cv64_ovl_elevatortxt_func_t cv64_ovl_elevatortxt_funcs[] = {
+    cv64_ovl_elevatortxt_init,
+    cv64_ovl_elevatortxt_idle,
+    cv64_ovl_elevatortxt_prep_msg,
+    cv64_ovl_elevatortxt_yes_no,
+    cv64_ovl_elevatortxt_close,
+    cv64_ovl_elevatortxt_destroy
 };
 
 // clang-format on
 
-void cv64_ovl_elevatortextbox_entrypoint(cv64_ovl_elevatortextbox_t* self) {
-    ENTER(self, cv64_ovl_elevatortextbox_funcs);
+void cv64_ovl_elevatortxt_entrypoint(cv64_ovl_elevatortxt_t* self) {
+    ENTER(self, cv64_ovl_elevatortxt_funcs);
 }
 
-void cv64_ovl_elevatortextbox_init(cv64_ovl_elevatortextbox_t* self) {
+void cv64_ovl_elevatortxt_init(cv64_ovl_elevatortxt_t* self) {
     cv64_actor_settings_t* settings = self->settings;
 
     if (ptr_PlayerData == NULL)
@@ -42,7 +42,7 @@ void cv64_ovl_elevatortextbox_init(cv64_ovl_elevatortextbox_t* self) {
     );
 }
 
-void cv64_ovl_elevatortextbox_idle(cv64_ovl_elevatortextbox_t* self) {
+void cv64_ovl_elevatortxt_idle(cv64_ovl_elevatortxt_t* self) {
     if (self->interacting_with_interactuable != TRUE)
         return;
 
@@ -54,7 +54,7 @@ void cv64_ovl_elevatortextbox_idle(cv64_ovl_elevatortextbox_t* self) {
     );
 }
 
-void cv64_ovl_elevatortextbox_prep_msg(cv64_ovl_elevatortextbox_t* self) {
+void cv64_ovl_elevatortxt_prep_msg(cv64_ovl_elevatortxt_t* self) {
     mfds_state* message;
 
     if (CHECK_EVENT_FLAGS(
@@ -85,7 +85,7 @@ void cv64_ovl_elevatortextbox_prep_msg(cv64_ovl_elevatortextbox_t* self) {
     );
 }
 
-void cv64_ovl_elevatortextbox_yes_no(cv64_ovl_elevatortextbox_t* self) {
+void cv64_ovl_elevatortxt_yes_no(cv64_ovl_elevatortxt_t* self) {
     mfds_state* textbox = self->message_textbox;
 
     if (self->state == BOTTOM_ELEVATOR_ACTIVATOR_STATE_ACTIVATE_ELEVATOR) {
@@ -110,7 +110,7 @@ void cv64_ovl_elevatortextbox_yes_no(cv64_ovl_elevatortextbox_t* self) {
     );
 }
 
-void cv64_ovl_elevatortextbox_close(cv64_ovl_elevatortextbox_t* self) {
+void cv64_ovl_elevatortxt_close(cv64_ovl_elevatortxt_t* self) {
     mfds_state* message;
 
     if (self->state == BOTTOM_ELEVATOR_ACTIVATOR_STATE_ACTIVATE_ELEVATOR) {
@@ -137,6 +137,6 @@ void cv64_ovl_elevatortextbox_close(cv64_ovl_elevatortextbox_t* self) {
     );
 }
 
-void cv64_ovl_elevatortextbox_destroy(cv64_ovl_elevatortextbox_t* self) {
+void cv64_ovl_elevatortxt_destroy(cv64_ovl_elevatortxt_t* self) {
     self->header.destroy(self);
 }
