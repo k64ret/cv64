@@ -145,6 +145,9 @@ extern void* NisitenmaIchigoFiles_segmentToVirtual(u32 segment_address, s32 file
 // Text IDs for Castle Center (Library)
 #define CASTLE_CENTER_4F_LIBRARY_PUZZLE_DESCRIPTION 7
 #define CASTLE_CENTER_4F_LIBRARY_PUZZLE_GOLD_PIECE  8
+#define CASTLE_CENTER_4F_LIBRARY_PUZZLE_RED_PIECE   9
+#define CASTLE_CENTER_4F_LIBRARY_PUZZLE_BLUE_PIECE  10
+#define CASTLE_CENTER_4F_LIBRARY_PUZZLE_FAIL        11
 // Text IDs for Castle Center
 #define CASTLE_CENTER_TRY_HAVING_MANDRAGORA_AND_NITRO_SAME_TIME 12
 

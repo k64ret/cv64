@@ -27,7 +27,8 @@ typedef struct libraryPuzzleData {
     u16 selected_options_IDs;
     u8 field_0x32[2];
     /**
-     * Starts from 0, so option 1 is represented as 0
+     * Starts from 0, so option 1 is represented as 0.
+     * For better readability, it is used alongside the `PUZZLE_OPTION` macro
      */
     u32 highlighted_option;
 } libraryPuzzleData;

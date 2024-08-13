@@ -158,63 +158,78 @@ void libraryPuzzle_puzzle_prepare(libraryPuzzle* self) {
 void libraryPuzzle_puzzle_selectOption(libraryPuzzle* self) {
     libraryPuzzleData* data;
     window_work* lens;
-    mfds_state* textbox = self->message_textbox;
-    s32 var_a1          = 0;
+    mfds_state* textbox       = self->message_textbox;
+    s32 update_option_strings = 0;
 
     if (textbox->flags & TEXT_IS_PARSED) {
         data = self->data;
-        if (self->option_selected == 0) {
-            var_a1 = libraryPuzzle_selectNextOption(
+        if (self->option_selected == FALSE) {
+            update_option_strings = libraryPuzzle_selectNextOption(
                 &data->highlighted_option, &SELECTION_DELAY_TIMER(self), &data->selected_options_IDs
             );
             lens             = data->lens;
             lens->position.x = (s32) (data->highlighted_option * 25) - 101;
         }
-        if (var_a1 > 0) {
+        if (update_option_strings > 0) {
             libraryPuzzle_printSelectedOptions(data->options_text, data->selected_options_IDs);
             (*textbox_setMessagePtr)(data->message_textbox, data->options_text, NULL, 0);
-            data->message_textbox->flags |= 0x01000000;
-            self->option_selected = 1;
+            data->message_textbox->flags |= UPDATE_STRING;
+            self->option_selected = TRUE;
             self->number_of_options_selected++;
-            (*play_sound)(0x1A0);
+            (*play_sound)(SD_1A0);
             return;
         }
-        if (self->option_selected != 0) {
+        if (self->option_selected) {
             switch (self->number_of_options_selected) {
                 case 1:
                     (*textbox_setMessagePtr)(
-                        textbox, (*text_getMessageFromPool)(GET_MAP_MESSAGE_POOL_PTR(), 9), NULL, 0
+                        textbox,
+                        (*text_getMessageFromPool)(
+                            GET_MAP_MESSAGE_POOL_PTR(), CASTLE_CENTER_4F_LIBRARY_PUZZLE_RED_PIECE
+                        ),
+                        NULL,
+                        0
                     );
-                    textbox->flags &= ~0x80000000;
-                    textbox->flags |= 0x01000000;
+                    textbox->flags &= ~HIDE_TEXTBOX;
+                    textbox->flags |= UPDATE_STRING;
                     self->first_option = data->highlighted_option;
-                    (*cutscene_setActorStateIfMatchingVariable1)(0x01D6, 1, self->first_option + 1);
+                    (*cutscene_setActorStateIfMatchingVariable1)(
+                        STAGE_OBJECT_OBJ_01D6, 1, self->first_option + 1
+                    );
                     self->message_textbox = textbox;
-                    self->option_selected = 0;
+                    self->option_selected = FALSE;
                     break;
                 case 2:
                     (*textbox_setMessagePtr)(
-                        textbox, (*text_getMessageFromPool)(GET_MAP_MESSAGE_POOL_PTR(), 10), NULL, 0
+                        textbox,
+                        (*text_getMessageFromPool)(
+                            GET_MAP_MESSAGE_POOL_PTR(), CASTLE_CENTER_4F_LIBRARY_PUZZLE_BLUE_PIECE
+                        ),
+                        NULL,
+                        0
                     );
-                    textbox->flags &= ~0x80000000;
-                    textbox->flags |= 0x01000000;
+                    textbox->flags &= ~HIDE_TEXTBOX;
+                    textbox->flags |= UPDATE_STRING;
                     self->second_option = data->highlighted_option;
                     (*cutscene_setActorStateIfMatchingVariable1)(
-                        0x01D6, 2, self->second_option + 1
+                        STAGE_OBJECT_OBJ_01D6, 2, self->second_option + 1
                     );
                     self->message_textbox = textbox;
-                    self->option_selected = 0;
+                    self->option_selected = FALSE;
                     break;
                 case 3:
                     self->third_option = data->highlighted_option;
-                    textbox->flags |= 0x04000000;
-                    (*cutscene_setActorStateIfMatchingVariable1)(0x01D6, 0, self->third_option + 1);
+                    textbox->flags |= CLOSE_TEXTBOX;
+                    (*cutscene_setActorStateIfMatchingVariable1)(
+                        STAGE_OBJECT_OBJ_01D6, 0, self->third_option + 1
+                    );
                     break;
             }
         }
     }
     if (self->number_of_options_selected == 3) {
-        if ((self->first_option == 1) && (self->second_option == 3) && (self->third_option == 7)) {
+        if ((self->first_option == PUZZLE_OPTION(2)) && (self->second_option == PUZZLE_OPTION(4)) &&
+            (self->third_option == PUZZLE_OPTION(8))) {
             (*object_curLevel_goToFunc)(
                 self->header.current_function,
                 &self->header.function_info_ID,
@@ -222,7 +237,7 @@ void libraryPuzzle_puzzle_selectOption(libraryPuzzle* self) {
             );
             return;
         }
-        self->message_textbox       = (*map_getMessageFromPool)(11, 0);
+        self->message_textbox = (*map_getMessageFromPool)(CASTLE_CENTER_4F_LIBRARY_PUZZLE_FAIL, 0);
         SELECTION_DELAY_TIMER(self) = 0;
         (*object_curLevel_goToNextFuncAndClearTimer)(
             self->header.current_function, &self->header.function_info_ID
@@ -236,27 +251,27 @@ void libraryPuzzle_puzzle_fail(libraryPuzzle* self) {
     s32 temp[2];
 
     if (textbox == NULL) {
-        textbox               = (*map_getMessageFromPool)(11, 0);
+        textbox               = (*map_getMessageFromPool)(CASTLE_CENTER_4F_LIBRARY_PUZZLE_FAIL, 0);
         self->message_textbox = textbox;
         return;
     }
     if ((*lensAreClosed)()) {
-        (*cutscene_setActorStateIfMatchingVariable1)(0x01D6, 0, 0);
-        (*cutscene_setActorStateIfMatchingVariable1)(0x01D6, 1, 0);
-        (*cutscene_setActorStateIfMatchingVariable1)(0x01D6, 2, 0);
+        (*cutscene_setActorStateIfMatchingVariable1)(STAGE_OBJECT_OBJ_01D6, 0, 0);
+        (*cutscene_setActorStateIfMatchingVariable1)(STAGE_OBJECT_OBJ_01D6, 1, 0);
+        (*cutscene_setActorStateIfMatchingVariable1)(STAGE_OBJECT_OBJ_01D6, 2, 0);
         SELECTION_DELAY_TIMER(self)          = 0;
         self->first_option                   = 0;
         self->second_option                  = 0;
         self->third_option                   = 0;
         self->number_of_options_selected     = 0;
-        self->option_selected                = 0;
-        self->textbox_is_active              = 0;
-        self->interacting_with_interactuable = 0;
-        data->lens->flags |= 0x300;
+        self->option_selected                = FALSE;
+        self->textbox_is_active              = FALSE;
+        self->interacting_with_interactuable = FALSE;
+        data->lens->flags |= (WINDOW_CLOSING | WINDOW_OPENING);
         textbox = data->message_textbox;
-        textbox->flags |= 0x04000000;
-        sys.FREEZE_ENEMIES = 0;
-        sys.FREEZE_PLAYER  = 0;
+        textbox->flags |= CLOSE_TEXTBOX;
+        sys.FREEZE_ENEMIES = FALSE;
+        sys.FREEZE_PLAYER  = FALSE;
         (*cameraMgr_setLockCameraAtPointState)(sys.ptr_cameraMgr, FALSE);
         (*object_curLevel_goToFunc)(
             self->header.current_function, &self->header.function_info_ID, LIBRARY_PUZZLE_IDLE
@@ -272,10 +287,10 @@ void libraryPuzzle_puzzle_success(libraryPuzzle* self) {
         EVENT_FLAG_ID_CASTLE_WALL_LIBRARY_AND_MAZE_GARDEN,
         EVENT_FLAG_CASTLE_WALL_LIBRARY_AND_MAZE_GARDEN_LIBRARY_PUZZLE_SOLVED
     );
-    data->lens->flags |= 0x300;
-    data->message_textbox->flags |= 0x04000000;
-    sys.FREEZE_ENEMIES = 0;
-    sys.FREEZE_PLAYER  = 0;
+    data->lens->flags |= (WINDOW_CLOSING | WINDOW_OPENING);
+    data->message_textbox->flags |= CLOSE_TEXTBOX;
+    sys.FREEZE_ENEMIES = FALSE;
+    sys.FREEZE_PLAYER  = FALSE;
     (*cameraMgr_setLockCameraAtPointState)(sys.ptr_cameraMgr, FALSE);
     (*object_curLevel_goToNextFuncAndClearTimer)(
         self->header.current_function, &self->header.function_info_ID
