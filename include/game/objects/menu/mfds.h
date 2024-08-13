@@ -10,6 +10,15 @@
 #include "objects/menu/textboxAdvanceArrow.h"
 #include "window.h"
 
+/**
+ * Converts an ASCII char to a character in the game's custom
+ * text format
+*/
+#define ASCII_TO_CV64(ascii) (ascii - 0x1E)
+
+// Special control characters
+#define CTRL_SET_COLOR(arg) (0xA200 | (arg & 0xFF))
+
 // clang-format off
 
 #define TEXT_COLOR_WHITE 0

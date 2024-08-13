@@ -59,7 +59,7 @@ void libraryPuzzle_puzzle_selectOption(libraryPuzzle* self);
 void libraryPuzzle_puzzle_fail(libraryPuzzle* self);
 void libraryPuzzle_puzzle_success(libraryPuzzle* self);
 void libraryPuzzle_destroy(libraryPuzzle* self);
-void libraryPuzzle_printSelectedOptions(libraryPuzzle* self, u32 selected_options_IDs);
+void libraryPuzzle_printSelectedOptions(u16* text, u16 selected_options_IDs);
 s32 libraryPuzzle_selectNextOption(
     u32* highlighted_option, s16* selection_delay_timer, u32* selected_options_IDs
 );

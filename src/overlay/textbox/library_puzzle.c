@@ -142,19 +142,19 @@ void libraryPuzzle_puzzle_prepare(libraryPuzzle* self) {
     );
 }
 
-// clang-format off
-
 void libraryPuzzle_puzzle_selectOption(libraryPuzzle* self) {
     libraryPuzzleData* data;
     window_work* lens;
     mfds_state* textbox = self->message_textbox;
-    s32 var_a1 = 0;
+    s32 var_a1          = 0;
 
     if (textbox->flags & 0x40000000) {
         data = self->data;
         if (self->option_selected == 0) {
-            var_a1 = libraryPuzzle_selectNextOption(&data->highlighted_option,  &self->header.timer, &data->selected_options_IDs);
-            lens = data->lens_window_work;
+            var_a1 = libraryPuzzle_selectNextOption(
+                &data->highlighted_option, &self->header.timer, &data->selected_options_IDs
+            );
+            lens             = data->lens_window_work;
             lens->position.x = (s32) (data->highlighted_option * 25) - 101;
         }
         if (var_a1 > 0) {
@@ -169,7 +169,9 @@ void libraryPuzzle_puzzle_selectOption(libraryPuzzle* self) {
         if (self->option_selected != 0) {
             switch (self->number_of_options_selected) {
                 case 1:
-                    (*textbox_setMessagePtr)(textbox, (*text_getMessageFromPool)(GET_MAP_MESSAGE_POOL_PTR(), 9), NULL, 0);
+                    (*textbox_setMessagePtr)(
+                        textbox, (*text_getMessageFromPool)(GET_MAP_MESSAGE_POOL_PTR(), 9), NULL, 0
+                    );
                     textbox->flags &= ~0x80000000;
                     textbox->flags |= 0x01000000;
                     self->first_option = data->highlighted_option;
@@ -178,11 +180,15 @@ void libraryPuzzle_puzzle_selectOption(libraryPuzzle* self) {
                     self->option_selected = 0;
                     break;
                 case 2:
-                    (*textbox_setMessagePtr)(textbox, (*text_getMessageFromPool)(GET_MAP_MESSAGE_POOL_PTR(), 10), NULL, 0);
+                    (*textbox_setMessagePtr)(
+                        textbox, (*text_getMessageFromPool)(GET_MAP_MESSAGE_POOL_PTR(), 10), NULL, 0
+                    );
                     textbox->flags &= ~0x80000000;
                     textbox->flags |= 0x01000000;
                     self->second_option = data->highlighted_option;
-                    (*cutscene_setActorStateIfMatchingVariable1)(0x01D6, 2, self->second_option + 1);
+                    (*cutscene_setActorStateIfMatchingVariable1)(
+                        0x01D6, 2, self->second_option + 1
+                    );
                     self->message_textbox = textbox;
                     self->option_selected = 0;
                     break;
@@ -196,22 +202,28 @@ void libraryPuzzle_puzzle_selectOption(libraryPuzzle* self) {
     }
     if (self->number_of_options_selected == 3) {
         if ((self->first_option == 1) && (self->second_option == 3) && (self->third_option == 7)) {
-            (*object_curLevel_goToFunc)(self->header.current_function, &self->header.function_info_ID, LIBRARY_PUZZLE_PUZZLE_SUCCESS);
+            (*object_curLevel_goToFunc)(
+                self->header.current_function,
+                &self->header.function_info_ID,
+                LIBRARY_PUZZLE_PUZZLE_SUCCESS
+            );
             return;
         }
         self->message_textbox = (*map_getMessageFromPool)(11, 0);
-        self->header.timer = 0;
-        (*object_curLevel_goToNextFuncAndClearTimer)(self->header.current_function, &self->header.function_info_ID);
+        self->header.timer    = 0;
+        (*object_curLevel_goToNextFuncAndClearTimer)(
+            self->header.current_function, &self->header.function_info_ID
+        );
     }
 }
 
 void libraryPuzzle_puzzle_fail(libraryPuzzle* self) {
     libraryPuzzleData* data = self->data;
-    mfds_state* textbox = self->message_textbox;
+    mfds_state* textbox     = self->message_textbox;
     s32 temp[2];
 
     if (textbox == NULL) {
-        textbox = (*map_getMessageFromPool)(11, 0);
+        textbox               = (*map_getMessageFromPool)(11, 0);
         self->message_textbox = textbox;
         return;
     }
@@ -219,21 +231,23 @@ void libraryPuzzle_puzzle_fail(libraryPuzzle* self) {
         (*cutscene_setActorStateIfMatchingVariable1)(0x01D6, 0, 0);
         (*cutscene_setActorStateIfMatchingVariable1)(0x01D6, 1, 0);
         (*cutscene_setActorStateIfMatchingVariable1)(0x01D6, 2, 0);
-        self->header.timer = 0;
-        self->first_option = 0;
-        self->second_option = 0;
-        self->third_option = 0;
-        self->number_of_options_selected = 0;
-        self->option_selected = 0;
-        self->textbox_is_active = 0;
+        self->header.timer                   = 0;
+        self->first_option                   = 0;
+        self->second_option                  = 0;
+        self->third_option                   = 0;
+        self->number_of_options_selected     = 0;
+        self->option_selected                = 0;
+        self->textbox_is_active              = 0;
         self->interacting_with_interactuable = 0;
         data->lens_window_work->flags |= 0x300;
         textbox = data->message_textbox;
         textbox->flags |= 0x04000000;
         sys.FREEZE_ENEMIES = 0;
-        sys.FREEZE_PLAYER = 0;
+        sys.FREEZE_PLAYER  = 0;
         (*cameraMgr_setLockCameraAtPointState)(sys.ptr_cameraMgr, FALSE);
-        (*object_curLevel_goToFunc)(self->header.current_function, &self->header.function_info_ID, LIBRARY_PUZZLE_IDLE);
+        (*object_curLevel_goToFunc)(
+            self->header.current_function, &self->header.function_info_ID, LIBRARY_PUZZLE_IDLE
+        );
     }
 }
 
@@ -245,17 +259,44 @@ void libraryPuzzle_puzzle_success(libraryPuzzle* self) {
     data->lens_window_work->flags |= 0x300;
     data->message_textbox->flags |= 0x04000000;
     sys.FREEZE_ENEMIES = 0;
-    sys.FREEZE_PLAYER = 0;
+    sys.FREEZE_PLAYER  = 0;
     (*cameraMgr_setLockCameraAtPointState)(sys.ptr_cameraMgr, FALSE);
-    (*object_curLevel_goToNextFuncAndClearTimer)(self->header.current_function, &self->header.function_info_ID);
+    (*object_curLevel_goToNextFuncAndClearTimer)(
+        self->header.current_function, &self->header.function_info_ID
+    );
 }
 
 void libraryPuzzle_destroy(libraryPuzzle* self) {
     self->header.destroy(self);
 }
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/overlay/textbox/library_puzzle/libraryPuzzle_printSelectedOptions.s")
+/**
+* `number + ASCII_TO_CV64('0')` takes a variable number and converts it to
+* the game's custom text format.
+*/
+void libraryPuzzle_printSelectedOptions(u16* text, u16 selected_options_IDs) {
+    u16* string = text;
+    u16 i;
+    u16 number;
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/overlay/textbox/library_puzzle/libraryPuzzle_selectNextOption.s")
+    for (i = 1, number = 1; i < 10; i++) {
+        number = i;
+        if (selected_options_IDs & (1 << (number + 0x1F))) {
+            // Print selected options in red
+            string[0] = CTRL_SET_COLOR(TEXT_COLOR_RED);
+            string[1] = number + ASCII_TO_CV64('0');
+            // Print the following chars in white by default
+            string[2] = CTRL_SET_COLOR(TEXT_COLOR_WHITE);
+            string += 3;
+        } else {
+            // Just print the number, don't change its color
+            string[0] = number + ASCII_TO_CV64('0');
+            string += 1;
+        }
+    }
+    *string = 0;
+}
 
-// clang-format on
+#pragma GLOBAL_ASM(                                                                                \
+    "../asm/nonmatchings/overlay/textbox/library_puzzle/libraryPuzzle_selectNextOption.s"          \
+)
