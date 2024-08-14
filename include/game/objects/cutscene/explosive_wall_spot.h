@@ -8,7 +8,7 @@
 #define WALL_TYPE_FRIENDLY_LIZARD_MAN_MAP 1
 
 // ID: 0x2024
-typedef struct explosiveWallTextbox {
+typedef struct cv64_ovl_explwalltxt {
     cv64_object_hdr_t header;
     u8 field_0x20[20];
     u32 state;
@@ -32,24 +32,24 @@ typedef struct explosiveWallTextbox {
     mfds_state* message_textbox;
     vec3f position;
     cv64_actor_settings_t* settings;
-} explosiveWallTextbox;
+} cv64_ovl_explwalltxt_t;
 
-void explosiveWallSpot_entrypoint(explosiveWallTextbox* self);
-void explosiveWallSpot_init(explosiveWallTextbox* self);
-void explosiveWallSpot_idle(explosiveWallTextbox* self);
-void explosiveWallSpot_determineMessage(explosiveWallTextbox* self);
-void explosiveWallSpot_setItemText_prepareMessage(explosiveWallTextbox* self);
-void explosiveWallSpot_setItemText_idle(explosiveWallTextbox* self);
-void explosiveWallSpot_setItemText_determineNextTextbox(explosiveWallTextbox* self);
-void explosiveWallSpot_setItemText_no(explosiveWallTextbox* self);
-void explosiveWallSpot_readyForBlasting(explosiveWallTextbox* self);
-void explosiveWallSpot_nitroIsSet(explosiveWallTextbox* self);
-void explosiveWallSpot_mandragoraIsSet(explosiveWallTextbox* self);
-void explosiveWallSpot_defaultDescription(explosiveWallTextbox* self);
-void explosiveWallSpot_itemAlreadySet(explosiveWallTextbox* self);
-void explosiveWallSpot_destroy(explosiveWallTextbox* self);
+void cv64_ovl_explwalltxt_entrypoint(cv64_ovl_explwalltxt_t* self);
+void cv64_ovl_explwalltxt_init(cv64_ovl_explwalltxt_t* self);
+void cv64_ovl_explwalltxt_idle(cv64_ovl_explwalltxt_t* self);
+void cv64_ovl_explwalltxt_det_msg(cv64_ovl_explwalltxt_t* self);
+void cv64_ovl_explwalltxt_item_prep_msg(cv64_ovl_explwalltxt_t* self);
+void cv64_ovl_explwalltxt_item_idle(cv64_ovl_explwalltxt_t* self);
+void cv64_ovl_explwalltxt_item_det_next_txt(cv64_ovl_explwalltxt_t* self);
+void cv64_ovl_explwalltxt_item_no(cv64_ovl_explwalltxt_t* self);
+void cv64_ovl_explwalltxt_ready_for_blast(cv64_ovl_explwalltxt_t* self);
+void cv64_ovl_explwalltxt_nitro_is_set(cv64_ovl_explwalltxt_t* self);
+void cv64_ovl_explwalltxt_mandragora_is_set(cv64_ovl_explwalltxt_t* self);
+void cv64_ovl_explwalltxt_default_desc(cv64_ovl_explwalltxt_t* self);
+void cv64_ovl_explwalltxt_item_alr_set(cv64_ovl_explwalltxt_t* self);
+void cv64_ovl_explwalltxt_destroy(cv64_ovl_explwalltxt_t* self);
 
-typedef enum explosiveWallTextbox_func_id {
+typedef enum cv64_ovl_explwalltxt_func_id {
     EXPLOSIVE_WALL_SPOT_INIT,
     EXPLOSIVE_WALL_SPOT_IDLE,
     EXPLOSIVE_WALL_SPOT_DETERMINE_MESSAGE,
@@ -63,8 +63,8 @@ typedef enum explosiveWallTextbox_func_id {
     EXPLOSIVE_WALL_SPOT_ITEM_ALREADY_SET,
     EXPLOSIVE_WALL_SPOT_DEFAULT_DESCRIPTION,
     EXPLOSIVE_WALL_SPOT_DESTROY
-} explosiveWallTextbox_func_id_t;
+} cv64_ovl_explwalltxt_func_id_t;
 
-typedef void (*explosiveWallTextbox_func_t)(explosiveWallTextbox*);
+typedef void (*cv64_ovl_explwalltxt_func_t)(cv64_ovl_explwalltxt_t*);
 
 #endif

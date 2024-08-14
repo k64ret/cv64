@@ -10,29 +10,29 @@
 
 // clang-format off
 
-explosiveWallTextbox_func_t explosiveWallSpot_functions[] = {
-    explosiveWallSpot_init,
-    explosiveWallSpot_idle,
-    explosiveWallSpot_determineMessage,
-    explosiveWallSpot_setItemText_prepareMessage,
-    explosiveWallSpot_setItemText_idle,
-    explosiveWallSpot_setItemText_determineNextTextbox,
-    explosiveWallSpot_setItemText_no,
-    explosiveWallSpot_readyForBlasting,
-    explosiveWallSpot_nitroIsSet,
-    explosiveWallSpot_mandragoraIsSet,
-    explosiveWallSpot_itemAlreadySet,
-    explosiveWallSpot_defaultDescription,
-    explosiveWallSpot_destroy
+cv64_ovl_explwalltxt_func_t cv64_ovl_explwalltxt_funcs[] = {
+    cv64_ovl_explwalltxt_init,
+    cv64_ovl_explwalltxt_idle,
+    cv64_ovl_explwalltxt_det_msg,
+    cv64_ovl_explwalltxt_item_prep_msg,
+    cv64_ovl_explwalltxt_item_idle,
+    cv64_ovl_explwalltxt_item_det_next_txt,
+    cv64_ovl_explwalltxt_item_no,
+    cv64_ovl_explwalltxt_ready_for_blast,
+    cv64_ovl_explwalltxt_nitro_is_set,
+    cv64_ovl_explwalltxt_mandragora_is_set,
+    cv64_ovl_explwalltxt_item_alr_set,
+    cv64_ovl_explwalltxt_default_desc,
+    cv64_ovl_explwalltxt_destroy
 };
 
 // clang-format on
 
-void explosiveWallSpot_entrypoint(explosiveWallTextbox* self) {
-    ENTER(self, explosiveWallSpot_functions);
+void cv64_ovl_explwalltxt_entrypoint(cv64_ovl_explwalltxt_t* self) {
+    ENTER(self, cv64_ovl_explwalltxt_funcs);
 }
 
-void explosiveWallSpot_init(explosiveWallTextbox* self) {
+void cv64_ovl_explwalltxt_init(cv64_ovl_explwalltxt_t* self) {
     cv64_actor_settings_t* settings = self->settings;
 
     if (ptr_PlayerData == NULL)
@@ -71,7 +71,7 @@ void explosiveWallSpot_init(explosiveWallTextbox* self) {
     );
 }
 
-void explosiveWallSpot_idle(explosiveWallTextbox* self) {
+void cv64_ovl_explwalltxt_idle(cv64_ovl_explwalltxt_t* self) {
     // If we're interacting with the wall and it hasn't been blown up yet
     if ((self->interacting_with_interactuable == TRUE) &&
         ((self->wall_type == WALL_TYPE_MAIN_MAP) &&
@@ -99,7 +99,7 @@ void explosiveWallSpot_idle(explosiveWallTextbox* self) {
     }
 }
 
-void explosiveWallSpot_determineMessage(explosiveWallTextbox* self) {
+void cv64_ovl_explwalltxt_det_msg(cv64_ovl_explwalltxt_t* self) {
     // If we don't have the Nitro or the Mandragora
     if ((self->nitro_amount_until_max_capacity > 0) &&
         (self->mandragora_amount_until_max_capacity > 0)) {
@@ -182,7 +182,7 @@ void explosiveWallSpot_determineMessage(explosiveWallTextbox* self) {
     );
 }
 
-void explosiveWallSpot_setItemText_prepareMessage(explosiveWallTextbox* self) {
+void cv64_ovl_explwalltxt_item_prep_msg(cv64_ovl_explwalltxt_t* self) {
     // clang-format off
     mfds_state* message = (self->nitro_amount_until_max_capacity <= 0)
         ? (*map_getMessageFromPool)(self->set_nitro_text_ID, 0)
@@ -198,7 +198,7 @@ void explosiveWallSpot_setItemText_prepareMessage(explosiveWallTextbox* self) {
     );
 }
 
-void explosiveWallSpot_setItemText_idle(explosiveWallTextbox* self) {
+void cv64_ovl_explwalltxt_item_idle(cv64_ovl_explwalltxt_t* self) {
     mfds_state* textbox = self->message_textbox;
     u8 textbox_option   = textbox->textbox_option;
 
@@ -255,7 +255,7 @@ void explosiveWallSpot_setItemText_idle(explosiveWallTextbox* self) {
     );
 }
 
-void explosiveWallSpot_setItemText_determineNextTextbox(explosiveWallTextbox* self) {
+void cv64_ovl_explwalltxt_item_det_next_txt(cv64_ovl_explwalltxt_t* self) {
     switch (self->wall_type) {
         case WALL_TYPE_MAIN_MAP:
             // Both the Nitro and Mandragora have been set. The wall is ready for blasting
@@ -349,7 +349,7 @@ void explosiveWallSpot_setItemText_determineNextTextbox(explosiveWallTextbox* se
  * Player selected the "NO" option in the
  * "Set X item?" textbox
  */
-void explosiveWallSpot_setItemText_no(explosiveWallTextbox* self) {
+void cv64_ovl_explwalltxt_item_no(cv64_ovl_explwalltxt_t* self) {
     if (!(*lensAreClosed)())
         return;
 
@@ -363,7 +363,7 @@ void explosiveWallSpot_setItemText_no(explosiveWallTextbox* self) {
     );
 }
 
-void explosiveWallSpot_readyForBlasting(explosiveWallTextbox* self) {
+void cv64_ovl_explwalltxt_ready_for_blast(cv64_ovl_explwalltxt_t* self) {
     mfds_state* message;
 
     if (self->state == 0) {
@@ -397,7 +397,7 @@ void explosiveWallSpot_readyForBlasting(explosiveWallTextbox* self) {
     );
 }
 
-void explosiveWallSpot_nitroIsSet(explosiveWallTextbox* self) {
+void cv64_ovl_explwalltxt_nitro_is_set(cv64_ovl_explwalltxt_t* self) {
     mfds_state* message;
 
     if (self->state == 0) {
@@ -423,7 +423,7 @@ void explosiveWallSpot_nitroIsSet(explosiveWallTextbox* self) {
     );
 }
 
-void explosiveWallSpot_mandragoraIsSet(explosiveWallTextbox* self) {
+void cv64_ovl_explwalltxt_mandragora_is_set(cv64_ovl_explwalltxt_t* self) {
     mfds_state* message;
 
     if (self->state == 0) {
@@ -449,7 +449,7 @@ void explosiveWallSpot_mandragoraIsSet(explosiveWallTextbox* self) {
     );
 }
 
-void explosiveWallSpot_defaultDescription(explosiveWallTextbox* self) {
+void cv64_ovl_explwalltxt_default_desc(cv64_ovl_explwalltxt_t* self) {
     mfds_state* message;
 
     if (self->state == 0) {
@@ -475,7 +475,7 @@ void explosiveWallSpot_defaultDescription(explosiveWallTextbox* self) {
     );
 }
 
-void explosiveWallSpot_itemAlreadySet(explosiveWallTextbox* self) {
+void cv64_ovl_explwalltxt_item_alr_set(cv64_ovl_explwalltxt_t* self) {
     mfds_state* message;
 
     if (self->state == 0) {
@@ -501,6 +501,6 @@ void explosiveWallSpot_itemAlreadySet(explosiveWallTextbox* self) {
     );
 }
 
-void explosiveWallSpot_destroy(explosiveWallTextbox* self) {
+void cv64_ovl_explwalltxt_destroy(cv64_ovl_explwalltxt_t* self) {
     self->header.destroy(self);
 }
