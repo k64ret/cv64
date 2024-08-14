@@ -10,6 +10,15 @@
 #include "objects/menu/textboxAdvanceArrow.h"
 #include "window.h"
 
+/**
+ * Converts an ASCII char to a character in the game's custom
+ * text format
+*/
+#define ASCII_TO_CV64(ascii) (ascii - 0x1E)
+
+// Special control characters
+#define CTRL_SET_COLOR(arg) (0xA200 | (arg & 0xFF))
+
 // clang-format off
 
 #define TEXT_COLOR_WHITE 0
@@ -23,6 +32,10 @@
 #define MENU_TEXT_CARRIE    11
 #define MENU_TEXT_CORNELL   12  // Unused
 #define MENU_TEXT_COLLER    13  // Unused
+
+#define TEXTBOX_OPTION_IDLE 0
+#define TEXTBOX_OPTION_YES  1
+#define TEXTBOX_OPTION_NO   2
 
 typedef enum cv64_textbox_flag {
     MENU_TEXT_ID_PRINTS_ITEM        = CV64_BIT(0),
@@ -193,6 +206,6 @@ extern u16* text_findCharInString(u16* text, u16 char_to_find);
 extern mfds_color_anim_data text_color_anim_data_table[4][8];
 extern u16* convertUTF16ToCustomTextFormat(u16* text_buffer);
 extern void textbox_setHeightAndWidth(mfds_state* self, u32 index, u8 text_height, u8 text_width);
-extern mfds_state* map_getMessageFromPool(u32 text_ID, u32 textbox_display_time);
+extern mfds_state* map_getMessageFromPool(u16 text_ID, u8 textbox_display_time);
 
 #endif

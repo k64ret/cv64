@@ -441,17 +441,15 @@ void interactuables_selectTextboxOption(interactuables* self) {
             switch (textbox->textbox_option) {
                 default:
                     break;
-                case 0:
+                case TEXTBOX_OPTION_IDLE:
                     return;
-                // Yes
-                case 1:
+                case TEXTBOX_OPTION_YES:
                     // Save the game
                     saveGameObj =
                         (saveGame*) object_createAndSetChild(&self->header, MENU_SAVEGAME),
                     saveGameObj->save_crystal_number = (s16) self->event_flag;
                     break;
-                // No
-                case 2:
+                case TEXTBOX_OPTION_NO:
                     // Stop interaction
                     sys.FREEZE_PLAYER = FALSE, sys.FREEZE_ENEMIES = FALSE;
                     cameraMgr_setReadingTextState(sys.ptr_cameraMgr, FALSE);
@@ -475,10 +473,9 @@ void interactuables_selectTextboxOption(interactuables* self) {
             switch (textbox->textbox_option) {
                 default:
                     break;
-                case 0:
+                case TEXTBOX_OPTION_IDLE:
                     return;
-                // Yes
-                case 1:
+                case TEXTBOX_OPTION_YES:
                     if (BITS_HAS(
                             interactuables_settings_table[self->table_index].flags,
                             TEXT_SPOT_IF_YES_START_CUTSCENE
@@ -529,8 +526,7 @@ void interactuables_selectTextboxOption(interactuables* self) {
                         BITS_SET(sys.pull_lever, TRUE);
                     }
                     break;
-                // No
-                case 2:
+                case TEXTBOX_OPTION_NO:
                     break;
             }
         }

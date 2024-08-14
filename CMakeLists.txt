@@ -10,6 +10,10 @@ set(SPLAT_CONFIG ${CMAKE_SOURCE_DIR}/${TARGET}.yaml)
 set(DECOMPRESS ${CMAKE_SOURCE_DIR}/tools/decompress.py)
 set(COMPRESS ${CMAKE_SOURCE_DIR}/tools/compress.py)
 
+# Enable compression and check the ROM's sha1sum. At the moment this is only useful for debugging non-matching issues
+# regarding compressed files. Enabled by default to build a matching ROM.
+option(compress "Compress the ROM and check sha1sum" TRUE)
+
 include(cmake/Prerequisites.cmake)
 
 project(
@@ -45,22 +49,24 @@ add_custom_command(
   VERBATIM)
 
 # Compress build/castlevania.z64
-add_custom_command(
-  TARGET ${TARGET}
-  POST_BUILD
-  COMMAND ${Python_EXECUTABLE} ARGS ${COMPRESS} ${ROM} ${ROM}
-  WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-  COMMENT "Compressing Nisitema-Ichigo assets in ${ROM} ROM file"
-  VERBATIM)
+if(compress)
+  add_custom_command(
+    TARGET ${TARGET}
+    POST_BUILD
+    COMMAND ${Python_EXECUTABLE} ARGS ${COMPRESS} ${ROM} ${ROM}
+    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+    COMMENT "Compressing Nisitema-Ichigo assets in ${ROM} ROM file"
+    VERBATIM)
 
-add_custom_command(
-  TARGET ${TARGET}
-  POST_BUILD
-  COMMAND sha1sum ARGS ${ROM}
-  COMMAND sha1sum ARGS -c ${CMAKE_SOURCE_DIR}/${TARGET}.sha1
-  WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-  COMMENT "Comparing ${ROM} ROM file to ${BASEROM}"
-  VERBATIM)
+  add_custom_command(
+    TARGET ${TARGET}
+    POST_BUILD
+    COMMAND sha1sum ARGS ${ROM}
+    COMMAND sha1sum ARGS -c ${CMAKE_SOURCE_DIR}/${TARGET}.sha1
+    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+    COMMENT "Comparing ${ROM} ROM file to ${BASEROM}"
+    VERBATIM)
+endif()
 
 target_compile_definitions(${TARGET} PRIVATE $<$<COMPILE_LANGUAGE:C>:_LANGUAGE_C F3DEX_GBI_2 NON_MATCHING>)
 

@@ -51,5 +51,6 @@ extern void cameraMgr_entrypoint(cameraMgr* self);
 extern void cameraMgr_init(cameraMgr* self);
 extern void cameraMgr_loop(cameraMgr* self);
 extern void cameraMgr_setReadingTextState(cameraMgr* self, s32 isReadingText);
+extern void cameraMgr_setLockCameraAtPointState(cameraMgr* self, s32 shouldLockCameraAtPoint);
 
 #endif

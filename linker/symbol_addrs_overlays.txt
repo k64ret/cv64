@@ -104,14 +104,14 @@ cv64_ovl_textboxadvancearrow_funcs = 0x0F0003A0; // segment:ni_ovl_textbox_advan
 
 // src/overlay/renon_briefcase.c ===============================================
 // .text
-cv64_ovl_renonbriefcase_entrypoint    = 0x0F000000; // type:func segment:ni_ovl_renon_briefcase
-cv64_ovl_renonbriefcase_init          = 0x0F000070; // type:func segment:ni_ovl_renon_briefcase
-cv64_ovl_renonbriefcase_loop          = 0x0F00028C; // type:func segment:ni_ovl_renon_briefcase
-cv64_ovl_renonbriefcase_destroy       = 0x0F0005DC; // type:func segment:ni_ovl_renon_briefcase
+cv64_ovl_renonbriefcase_entrypoint         = 0x0F000000; // type:func segment:ni_ovl_renon_briefcase
+cv64_ovl_renonbriefcase_init               = 0x0F000070; // type:func segment:ni_ovl_renon_briefcase
+cv64_ovl_renonbriefcase_loop               = 0x0F00028C; // type:func segment:ni_ovl_renon_briefcase
+cv64_ovl_renonbriefcase_destroy            = 0x0F0005DC; // type:func segment:ni_ovl_renon_briefcase
 // .data
-cv64_ovl_renonbriefcase_hierarchy     = 0x0F000610; // segment:ni_ovl_renon_briefcase size:0x1C
+cv64_ovl_renonbriefcase_hierarchy          = 0x0F000610; // segment:ni_ovl_renon_briefcase size:0x1C
 cv64_ovl_renonbriefcase_open_anim_rot_data = 0x0F00062C; // type:u8 segment:ni_ovl_renon_briefcase size:0x18
-cv64_ovl_renonbriefcase_funcs         = 0x0F000644; // segment:ni_ovl_renon_briefcase size:0x0C
+cv64_ovl_renonbriefcase_funcs              = 0x0F000644; // segment:ni_ovl_renon_briefcase size:0x0C
 // End of src/overlay/renon_briefcase.c ========================================
 
 
@@ -138,43 +138,144 @@ cv64_ovl_easyending_msg        = 0x0F000350; // type:u16 segment:ni_ovl_easy_mod
 cv64_ovl_easyending_funcs      = 0x0F000440; // segment:ni_ovl_easy_mode_ending_msg size:0x0C
 // End of src/overlay/easy_mode_ending_msg.c ===================================
 
-// src/overlay/difficulty_and_character_select.c =============================================
+
+// src/overlay/difficulty_and_character_select.c ===============================
 // .text
-characterSelect_entrypoint      = 0x0F000000; // type:func segment:ni_ovl_difficulty_and_character_select
-difficultySelect_loop      = 0x0F000070; // type:func segment:ni_ovl_difficulty_and_character_select
-characterSelect_areStructsCreated      = 0x0F0004B0; // type:func segment:ni_ovl_difficulty_and_character_select
-characterSelect_init      = 0x0F000504; // type:func segment:ni_ovl_difficulty_and_character_select
-characterSelect_openScroll      = 0x0F0008EC; // type:func segment:ni_ovl_difficulty_and_character_select
-characterSelect_createLens      = 0x0F000968; // type:func segment:ni_ovl_difficulty_and_character_select
-characterSelect_selectOption      = 0x0F000B08; // type:func segment:ni_ovl_difficulty_and_character_select
-characterSelect_optionSelected      = 0x0F000FE8; // type:func segment:ni_ovl_difficulty_and_character_select
-characterSelect_destroy      = 0x0F001134; // type:func segment:ni_ovl_difficulty_and_character_select
-characterSelect_determineCharacterToSelect      = 0x0F001174; // type:func segment:ni_ovl_difficulty_and_character_select
+characterSelect_entrypoint                   = 0x0F000000; // type:func segment:ni_ovl_difficulty_and_character_select
+difficultySelect_loop                        = 0x0F000070; // type:func segment:ni_ovl_difficulty_and_character_select
+characterSelect_areStructsCreated            = 0x0F0004B0; // type:func segment:ni_ovl_difficulty_and_character_select
+characterSelect_init                         = 0x0F000504; // type:func segment:ni_ovl_difficulty_and_character_select
+characterSelect_openScroll                   = 0x0F0008EC; // type:func segment:ni_ovl_difficulty_and_character_select
+characterSelect_createLens                   = 0x0F000968; // type:func segment:ni_ovl_difficulty_and_character_select
+characterSelect_selectOption                 = 0x0F000B08; // type:func segment:ni_ovl_difficulty_and_character_select
+characterSelect_optionSelected               = 0x0F000FE8; // type:func segment:ni_ovl_difficulty_and_character_select
+characterSelect_destroy                      = 0x0F001134; // type:func segment:ni_ovl_difficulty_and_character_select
+characterSelect_determineCharacterToSelect   = 0x0F001174; // type:func segment:ni_ovl_difficulty_and_character_select
 // .data
-level_select_text                   = 0x0F001240; // type:u16 segment:ni_ovl_difficulty_and_character_select size:0x90
-reinhardt_lens_pos_X                   = 0x0F0012D0; // type:f32 segment:ni_ovl_difficulty_and_character_select
-reinhardt_lens_pos_Y                   = 0x0F0012D4; // type:f32 segment:ni_ovl_difficulty_and_character_select
-carrie_lens_pos_X                   = 0x0F0012D8; // type:f32 segment:ni_ovl_difficulty_and_character_select
-carrie_lens_pos_Y                   = 0x0F0012DC; // type:f32 segment:ni_ovl_difficulty_and_character_select
-characterSelect_functions                   = 0x0F0012E0; // segment:ni_ovl_difficulty_and_character_select size:0x20
+level_select_text                            = 0x0F001240; // type:u16 segment:ni_ovl_difficulty_and_character_select size:0x90
+reinhardt_lens_pos_X                         = 0x0F0012D0; // type:f32 segment:ni_ovl_difficulty_and_character_select
+reinhardt_lens_pos_Y                         = 0x0F0012D4; // type:f32 segment:ni_ovl_difficulty_and_character_select
+carrie_lens_pos_X                            = 0x0F0012D8; // type:f32 segment:ni_ovl_difficulty_and_character_select
+carrie_lens_pos_Y                            = 0x0F0012DC; // type:f32 segment:ni_ovl_difficulty_and_character_select
+characterSelect_functions                    = 0x0F0012E0; // segment:ni_ovl_difficulty_and_character_select size:0x20
 // .rodata
 difficulty_and_character_select_unused_str_1 = 0x0F001310; // type:asciz segment:ni_ovl_difficulty_and_character_select size:0x0C
 difficulty_and_character_select_unused_str_2 = 0x0F00131C; // type:asciz segment:ni_ovl_difficulty_and_character_select size:0x14
-jump_table_0F001330 = 0x0F001330; // type:jtbl_label segment:ni_ovl_difficulty_and_character_select size:0x18
-reinhardt_portrait_size                   = 0x0F001348; // type:f32 segment:ni_ovl_difficulty_and_character_select
-carrie_portrait_size                   = 0x0F00134C; // type:f32 segment:ni_ovl_difficulty_and_character_select
-D_0F001350                   = 0x0F001350; // type:f32 segment:ni_ovl_difficulty_and_character_select
-// End of src/overlay/difficulty_and_character_select.c ======================================
+jump_table_0F001330                          = 0x0F001330; // type:jtbl_label segment:ni_ovl_difficulty_and_character_select size:0x18
+reinhardt_portrait_size                      = 0x0F001348; // type:f32 segment:ni_ovl_difficulty_and_character_select
+carrie_portrait_size                         = 0x0F00134C; // type:f32 segment:ni_ovl_difficulty_and_character_select
+D_0F001350                                   = 0x0F001350; // type:f32 segment:ni_ovl_difficulty_and_character_select
+// End of src/overlay/difficulty_and_character_select.c ========================
 
-// src/overlay/openingBat.c =============================================
+
+// src/overlay/openingBat.c ====================================================
 // .text
-openingBat_entrypoint      = 0x0F000000; // type:func segment:ni_ovl_opening_bat
-openingBat_createData      = 0x0F000070; // type:func segment:ni_ovl_opening_bat
-openingBat_init            = 0x0F00012C; // type:func segment:ni_ovl_opening_bat
-openingBat_loop            = 0x0F0003B0; // type:func segment:ni_ovl_opening_bat
-openingBat_destroy         = 0x0F000400; // type:func segment:ni_ovl_opening_bat
+openingBat_entrypoint    = 0x0F000000; // type:func segment:ni_ovl_opening_bat
+openingBat_createData    = 0x0F000070; // type:func segment:ni_ovl_opening_bat
+openingBat_init          = 0x0F00012C; // type:func segment:ni_ovl_opening_bat
+openingBat_loop          = 0x0F0003B0; // type:func segment:ni_ovl_opening_bat
+openingBat_destroy       = 0x0F000400; // type:func segment:ni_ovl_opening_bat
 // .data
-openingBat_hierarchy                   = 0x0F000430; // segment:ni_ovl_opening_bat size:0x40
-openingBat_materialDlist               = 0x0F000470; // segment:ni_ovl_opening_bat size:0x30
-openingBat_functions                   = 0x0F0004A0; // segment:ni_ovl_opening_bat size:0x10
-// End of src/overlay/openingBat.c ======================================
+openingBat_hierarchy     = 0x0F000430; // segment:ni_ovl_opening_bat size:0x40
+openingBat_materialDlist = 0x0F000470; // segment:ni_ovl_opening_bat size:0x30
+openingBat_functions     = 0x0F0004A0; // segment:ni_ovl_opening_bat size:0x10
+// End of src/overlay/openingBat.c =============================================
+
+
+// src/overlay/textbox/library_puzzle.c ========================================
+// .text
+cv64_ovl_librarypuzzletxt_entrypoint     = 0x0E000000; // type:func segment:ni_ovl_library_puzzle_textbox
+cv64_ovl_librarypuzzletxt_init           = 0x0E000070; // type:func segment:ni_ovl_library_puzzle_textbox
+cv64_ovl_librarypuzzletxt_idle           = 0x0E000140; // type:func segment:ni_ovl_library_puzzle_textbox
+cv64_ovl_librarypuzzletxt_show           = 0x0E0001D8; // type:func segment:ni_ovl_library_puzzle_textbox
+cv64_ovl_librarypuzzletxt_prepare_msg       = 0x0E0003C0; // type:func segment:ni_ovl_library_puzzle_textbox
+cv64_ovl_librarypuzzletxt_select         = 0x0E0004DC; // type:func segment:ni_ovl_library_puzzle_textbox
+cv64_ovl_librarypuzzletxt_fail           = 0x0E000824; // type:func segment:ni_ovl_library_puzzle_textbox
+cv64_ovl_librarypuzzletxt_success        = 0x0E000954; // type:func segment:ni_ovl_library_puzzle_textbox
+cv64_ovl_librarypuzzletxt_destroy        = 0x0E0009EC; // type:func segment:ni_ovl_library_puzzle_textbox
+cv64_ovl_librarypuzzletxt_print_selected = 0x0E000A10; // type:func segment:ni_ovl_library_puzzle_textbox
+cv64_ovl_librarypuzzletxt_select_next    = 0x0E000A80; // type:func segment:ni_ovl_library_puzzle_textbox
+// .data
+cv64_ovl_librarypuzzletxt_funcs          = 0x0E000C60; // segment:ni_ovl_library_puzzle_textbox size:0x20
+// End of src/overlay/textbox/library_puzzle.c =================================
+
+
+// src/overlay/textbox/mandragora.c ============================================
+// .text
+cv64_ovl_mandragoratxt_entrypoint = 0x0E000000; // type:func segment:ni_ovl_mandragora_textbox
+cv64_ovl_mandragoratxt_init       = 0x0E000070; // type:func segment:ni_ovl_mandragora_textbox
+cv64_ovl_mandragoratxt_idle       = 0x0E000134; // type:func segment:ni_ovl_mandragora_textbox
+cv64_ovl_mandragoratxt_prepare_msg   = 0x0E0001CC; // type:func segment:ni_ovl_mandragora_textbox
+cv64_ovl_mandragoratxt_yes_no     = 0x0E0002AC; // type:func segment:ni_ovl_mandragora_textbox
+cv64_ovl_mandragoratxt_close      = 0x0E000338; // type:func segment:ni_ovl_mandragora_textbox
+cv64_ovl_mandragoratxt_destroy    = 0x0E0003E0; // type:func segment:ni_ovl_mandragora_textbox
+cannot_collect_mandragora             = 0x0E000404; // type:func segment:ni_ovl_mandragora_textbox
+// .data
+cv64_ovl_mandragoratxt_funcs      = 0x0E000480; // segment:ni_ovl_mandragora_textbox size:0x18
+// End of src/overlay/textbox/mandragora.c =====================================
+
+
+// src/overlay/textbox/nitro.c =================================================
+// .text
+cv64_ovl_nitrotxt_entrypoint = 0x0E000000; // type:func segment:ni_ovl_nitro_textbox
+cv64_ovl_nitrotxt_init       = 0x0E000070; // type:func segment:ni_ovl_nitro_textbox
+cv64_ovl_nitrotxt_idle       = 0x0E000134; // type:func segment:ni_ovl_nitro_textbox
+cv64_ovl_nitrotxt_prepare_msg   = 0x0E000258; // type:func segment:ni_ovl_nitro_textbox
+cv64_ovl_nitrotxt_yes_no     = 0x0E0002B4; // type:func segment:ni_ovl_nitro_textbox
+cv64_ovl_nitrotxt_close      = 0x0E000358; // type:func segment:ni_ovl_nitro_textbox
+cv64_ovl_nitrotxt_destroy    = 0x0E000400; // type:func segment:ni_ovl_nitro_textbox
+cannot_collect_nitro         = 0x0E000424; // type:func segment:ni_ovl_nitro_textbox
+// .data
+cv64_ovl_nitrotxt_funcs      = 0x0E0004A0; // segment:ni_ovl_nitro_textbox size:0x18
+// .rodata
+cv64_ovl_nitrotxt_unused_str = 0x0E0004C0; // type:asciz segment:ni_ovl_nitro_textbox size:0x04
+// End of src/overlay/textbox/nitro.c ==========================================
+
+
+// src/overlay/textbox/nitro_disposal.c ========================================
+// .text
+cv64_ovl_nitrodisposaltxt_entrypoint = 0x0E000000; // type:func segment:ni_ovl_nitro_disposal_textbox
+cv64_ovl_nitrodisposaltxt_init       = 0x0E000070; // type:func segment:ni_ovl_nitro_disposal_textbox
+cv64_ovl_nitrodisposaltxt_idle       = 0x0E00018C; // type:func segment:ni_ovl_nitro_disposal_textbox
+cv64_ovl_nitrodisposaltxt_prepare_msg   = 0x0E00020C; // type:func segment:ni_ovl_nitro_disposal_textbox
+cv64_ovl_nitrodisposaltxt_yes_no     = 0x0E0002B8; // type:func segment:ni_ovl_nitro_disposal_textbox
+cv64_ovl_nitrodisposaltxt_close      = 0x0E00035C; // type:func segment:ni_ovl_nitro_disposal_textbox
+cv64_ovl_nitrodisposaltxt_destroy    = 0x0E0003DC; // type:func segment:ni_ovl_nitro_disposal_textbox
+// .data
+cv64_ovl_nitrodisposaltxt_funcs      = 0x0E000400; // segment:ni_ovl_nitro_disposal_textbox size:0x18
+// End of src/overlay/textbox/nitro_disposal.c =================================
+
+
+// src/overlay/textbox/explosive_wall_spot.c ===================================
+// .text
+cv64_ovl_explwalltxt_entrypoint        = 0x0E000000; // type:func segment:ni_explosive_wall_spot
+cv64_ovl_explwalltxt_init              = 0x0E000070; // type:func segment:ni_explosive_wall_spot
+cv64_ovl_explwalltxt_idle              = 0x0E0001B4; // type:func segment:ni_explosive_wall_spot
+cv64_ovl_explwalltxt_determine_msg           = 0x0E00028C; // type:func segment:ni_explosive_wall_spot
+cv64_ovl_explwalltxt_item_prepare_msg     = 0x0E000400; // type:func segment:ni_explosive_wall_spot
+cv64_ovl_explwalltxt_item_idle         = 0x0E00048C; // type:func segment:ni_explosive_wall_spot
+cv64_ovl_explwalltxt_item_determine_next_txt = 0x0E0005F0; // type:func segment:ni_explosive_wall_spot
+cv64_ovl_explwalltxt_item_no           = 0x0E000748; // type:func segment:ni_explosive_wall_spot
+cv64_ovl_explwalltxt_ready_for_blast   = 0x0E0007C4; // type:func segment:ni_explosive_wall_spot
+cv64_ovl_explwalltxt_nitro_is_set      = 0x0E0008AC; // type:func segment:ni_explosive_wall_spot
+cv64_ovl_explwalltxt_mandragora_is_set = 0x0E00095C; // type:func segment:ni_explosive_wall_spot
+cv64_ovl_explwalltxt_default_desc      = 0x0E000A0C; // type:func segment:ni_explosive_wall_spot
+cv64_ovl_explwalltxt_item_already_set      = 0x0E000ABC; // type:func segment:ni_explosive_wall_spot
+cv64_ovl_explwalltxt_destroy           = 0x0E000B6C; // type:func segment:ni_explosive_wall_spot
+// .data
+cv64_ovl_explwalltxt_funcs             = 0x0E000B90; // segment:ni_explosive_wall_spot size:0x34
+// End of src/overlay/textbox/explosive_wall_spot.c ============================
+
+
+// src/overlay/textbox/bottom_elevator_activator.c =============================
+// .text
+cv64_ovl_elevatortxt_entrypoint = 0x0E000000; // type:func segment:ni_ovl_bottom_elevator_activator_textbox
+cv64_ovl_elevatortxt_init       = 0x0E000070; // type:func segment:ni_ovl_bottom_elevator_activator_textbox
+cv64_ovl_elevatortxt_idle       = 0x0E000134; // type:func segment:ni_ovl_bottom_elevator_activator_textbox
+cv64_ovl_elevatortxt_prepare_msg   = 0x0E0001A0; // type:func segment:ni_ovl_bottom_elevator_activator_textbox
+cv64_ovl_elevatortxt_yes_no     = 0x0E000278; // type:func segment:ni_ovl_bottom_elevator_activator_textbox
+cv64_ovl_elevatortxt_close      = 0x0E000314; // type:func segment:ni_ovl_bottom_elevator_activator_textbox
+cv64_ovl_elevatortxt_destroy    = 0x0E0003D4; // type:func segment:ni_ovl_bottom_elevator_activator_textbox
+// .data
+cv64_ovl_elevatortxt_funcs      = 0x0E000400; // segment:ni_ovl_bottom_elevator_activator_textbox size:0x18
+// End of src/overlay/textbox/bottom_elevator_activator.c ======================

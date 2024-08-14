@@ -40,7 +40,13 @@ typedef struct cv64_model_inf {
     Matrix44F matrix;
 } cv64_model_inf_t;
 
+typedef struct actorPositionalData {
+    vec3f position;
+    angle_t angle;
+} actorPositionalData;
+
 extern void modelInfo_setPosVec3s(cv64_model_inf_t* self, vec3s* position);
+extern void modelInfo_copyPositionalData(cv64_model_inf_t*, actorPositionalData*);
 extern void modelInfo_setMapActorModel(cv64_model_inf_t*, u32*);
 extern cv64_model_inf_t* modelInfo_createAndSetChild(u32 type, void* parent);
 extern cv64_model_inf_t* modelInfo_createNextNode(u32 parent_type, void* parent);
