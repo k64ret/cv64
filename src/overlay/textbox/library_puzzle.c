@@ -219,7 +219,7 @@ void cv64_ovl_librarypuzzletxt_select(cv64_ovl_librarypuzzletxt_t* self) {
         }
 
         /**
-         * Set each piece to the position indicated by the selecgted option
+         * Set each piece to the position indicated by the selected option
          * and update the message displayed to reflect
          * the next piece
          */
