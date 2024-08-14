@@ -35,45 +35,49 @@ static s32 select_next_option(s32*, u16*, u16*);
 void cv64_ovl_librarypuzzletxt_init(cv64_ovl_librarypuzzletxt_t* self) {
     cv64_actor_settings_t* settings = self->settings;
 
-    if (ptr_PlayerData != NULL) {
-        // Destroy if the puzzle was already solved
-        if (CHECK_EVENT_FLAGS(
-                EVENT_FLAG_ID_CASTLE_WALL_LIBRARY_AND_MAZE_GARDEN,
-                EVENT_FLAG_CASTLE_WALL_LIBRARY_AND_MAZE_GARDEN_LIBRARY_PUZZLE_SOLVED
-            )) {
-            self->header.destroy(self);
-            return;
-        }
-        self->position.x     = settings->position.x;
-        self->position.y     = settings->position.y;
-        self->position.z     = settings->position.z;
-        self->trigger_size_X = 10;
-        self->trigger_size_Z = 10;
-        (*object_allocEntryInListAndClear)(
-            self, HEAP_KIND_MULTIPURPOSE, sizeof(cv64_ovl_librarypuzzledata_t), 0
-        );
-        (*object_curLevel_goToNextFuncAndClearTimer)(
-            self->header.current_function, &self->header.function_info_ID
-        );
+    if (ptr_PlayerData == NULL)
+        return;
+
+    // Destroy if the puzzle was already solved
+    if (CHECK_EVENT_FLAGS(
+            EVENT_FLAG_ID_CASTLE_WALL_LIBRARY_AND_MAZE_GARDEN,
+            EVENT_FLAG_CASTLE_WALL_LIBRARY_AND_MAZE_GARDEN_LIBRARY_PUZZLE_SOLVED
+        )) {
+        self->header.destroy(self);
+        return;
     }
+
+    self->position.x     = settings->position.x;
+    self->position.y     = settings->position.y;
+    self->position.z     = settings->position.z;
+    self->trigger_size_X = 10;
+    self->trigger_size_Z = 10;
+    (*object_allocEntryInListAndClear)(
+        self, HEAP_KIND_MULTIPURPOSE, sizeof(cv64_ovl_librarypuzzledata_t), 0
+    );
+    (*object_curLevel_goToNextFuncAndClearTimer)(
+        self->header.current_function, &self->header.function_info_ID
+    );
 }
 
 void cv64_ovl_librarypuzzletxt_idle(cv64_ovl_librarypuzzletxt_t* self) {
     mfds_state* message;
 
-    if (self->interacting_with_interactuable == TRUE) {
-        // Freeze player and ask the user if they want to do the puzzle
-        message = (*map_getMessageFromPool)(CASTLE_CENTER_4F_LIBRARY_PUZZLE_DESCRIPTION, 0);
-        if (message != NULL) {
-            sys.FREEZE_PLAYER  = TRUE;
-            sys.FREEZE_ENEMIES = TRUE;
-            (*cameraMgr_setLockCameraAtPointState)(sys.ptr_cameraMgr, TRUE);
-            self->message_textbox = message;
-            (*object_curLevel_goToNextFuncAndClearTimer)(
-                self->header.current_function, &self->header.function_info_ID
-            );
-        }
-    }
+    if (self->interacting_with_interactuable != TRUE)
+        return;
+
+    // Freeze player and ask the user if they want to do the puzzle
+    message = (*map_getMessageFromPool)(CASTLE_CENTER_4F_LIBRARY_PUZZLE_DESCRIPTION, 0);
+    if (message == NULL)
+        return;
+
+    sys.FREEZE_PLAYER  = TRUE;
+    sys.FREEZE_ENEMIES = TRUE;
+    (*cameraMgr_setLockCameraAtPointState)(sys.ptr_cameraMgr, TRUE);
+    self->message_textbox = message;
+    (*object_curLevel_goToNextFuncAndClearTimer)(
+        self->header.current_function, &self->header.function_info_ID
+    );
 }
 
 /**
@@ -122,8 +126,8 @@ void cv64_ovl_librarypuzzletxt_show(cv64_ovl_librarypuzzletxt_t* self) {
                 20.0f
             );
             data->lens = lens;
-            lens->flags &= ~WINDOW_CLOSING;
-            lens->flags |= WINDOW_OPENING;
+            BITS_UNSET(lens->flags, WINDOW_CLOSING);
+            BITS_SET(lens->flags, WINDOW_OPENING);
 
             /**
              * This isn't used in practice, since the piece text is written into a new
@@ -177,6 +181,7 @@ void cv64_ovl_librarypuzzletxt_prep_msg(cv64_ovl_librarypuzzletxt_t* self) {
             40.0f
         );
     }
+
     (*object_curLevel_goToNextFuncAndClearTimer)(
         self->header.current_function, &self->header.function_info_ID
     );
@@ -191,7 +196,7 @@ void cv64_ovl_librarypuzzletxt_select(cv64_ovl_librarypuzzletxt_t* self) {
     mfds_state* textbox = self->message_textbox;
     s32 set_piece       = 0;
 
-    if (textbox->flags & TEXT_IS_PARSED) {
+    if (BITS_HAS(textbox->flags, TEXT_IS_PARSED)) {
         data = self->data;
         if (self->option_selected == FALSE) {
             set_piece = select_next_option(
@@ -206,7 +211,7 @@ void cv64_ovl_librarypuzzletxt_select(cv64_ovl_librarypuzzletxt_t* self) {
         if (set_piece > 0) {
             print_selected_options(data->options_text, data->selected_options_IDs);
             (*textbox_setMessagePtr)(data->options_textbox, data->options_text, NULL, 0);
-            data->options_textbox->flags |= UPDATE_STRING;
+            BITS_SET(data->options_textbox->flags, UPDATE_STRING);
             self->option_selected = TRUE;
             self->number_of_options_selected++;
             (*play_sound)(SD_LIBRARY_PIECE_SET);
@@ -232,8 +237,8 @@ void cv64_ovl_librarypuzzletxt_select(cv64_ovl_librarypuzzletxt_t* self) {
                         NULL,
                         0
                     );
-                    textbox->flags &= ~HIDE_TEXTBOX;
-                    textbox->flags |= UPDATE_STRING;
+                    BITS_UNSET(textbox->flags, HIDE_TEXTBOX);
+                    BITS_SET(textbox->flags, UPDATE_STRING);
                     self->first_option = data->highlighted_option;
                     (*cutscene_setActorStateIfMatchingVariable1)(
                         STAGE_OBJECT_HONMARU_4F_MINAMI_LIBRARY_PIECE,
@@ -256,8 +261,8 @@ void cv64_ovl_librarypuzzletxt_select(cv64_ovl_librarypuzzletxt_t* self) {
                         NULL,
                         0
                     );
-                    textbox->flags &= ~HIDE_TEXTBOX;
-                    textbox->flags |= UPDATE_STRING;
+                    BITS_UNSET(textbox->flags, HIDE_TEXTBOX);
+                    BITS_SET(textbox->flags, UPDATE_STRING);
                     self->second_option = data->highlighted_option;
                     (*cutscene_setActorStateIfMatchingVariable1)(
                         STAGE_OBJECT_HONMARU_4F_MINAMI_LIBRARY_PIECE,
@@ -273,7 +278,7 @@ void cv64_ovl_librarypuzzletxt_select(cv64_ovl_librarypuzzletxt_t* self) {
                  */
                 case 3:
                     self->third_option = data->highlighted_option;
-                    textbox->flags |= CLOSE_TEXTBOX;
+                    BITS_SET(textbox->flags, CLOSE_TEXTBOX);
                     (*cutscene_setActorStateIfMatchingVariable1)(
                         STAGE_OBJECT_HONMARU_4F_MINAMI_LIBRARY_PIECE,
                         BLUE_PIECE,
@@ -285,24 +290,26 @@ void cv64_ovl_librarypuzzletxt_select(cv64_ovl_librarypuzzletxt_t* self) {
     }
 
     // Check the puzzle code
-    if (self->number_of_options_selected == LIBRARY_PUZZLE_MAX_SELECTED_OPTIONS) {
-        if ((self->first_option == PUZZLE_OPTION(2)) && (self->second_option == PUZZLE_OPTION(4)) &&
-            (self->third_option == PUZZLE_OPTION(8))) {
-            // Success
-            (*object_curLevel_goToFunc)(
-                self->header.current_function,
-                &self->header.function_info_ID,
-                LIBRARY_PUZZLE_PUZZLE_SUCCESS
-            );
-            return;
-        }
-        // Fail
-        self->message_textbox = (*map_getMessageFromPool)(CASTLE_CENTER_4F_LIBRARY_PUZZLE_FAIL, 0);
-        SELECTION_DELAY_TIMER(self) = 0;
-        (*object_curLevel_goToNextFuncAndClearTimer)(
-            self->header.current_function, &self->header.function_info_ID
+    if (self->number_of_options_selected != LIBRARY_PUZZLE_MAX_SELECTED_OPTIONS)
+        return;
+
+    if ((self->first_option == PUZZLE_OPTION(2)) && (self->second_option == PUZZLE_OPTION(4)) &&
+        (self->third_option == PUZZLE_OPTION(8))) {
+        // Success
+        (*object_curLevel_goToFunc)(
+            self->header.current_function,
+            &self->header.function_info_ID,
+            LIBRARY_PUZZLE_PUZZLE_SUCCESS
         );
+        return;
     }
+
+    // Fail
+    self->message_textbox = (*map_getMessageFromPool)(CASTLE_CENTER_4F_LIBRARY_PUZZLE_FAIL, 0);
+    SELECTION_DELAY_TIMER(self) = 0;
+    (*object_curLevel_goToNextFuncAndClearTimer)(
+        self->header.current_function, &self->header.function_info_ID
+    );
 }
 
 void cv64_ovl_librarypuzzletxt_fail(cv64_ovl_librarypuzzletxt_t* self) {
@@ -317,36 +324,38 @@ void cv64_ovl_librarypuzzletxt_fail(cv64_ovl_librarypuzzletxt_t* self) {
         return;
     }
 
+    if (!(*lensAreClosed)())
+        return;
+
     // Close the message and go back to normal
-    if ((*lensAreClosed)()) {
-        // Put all the pieces back in the pedestal
-        (*cutscene_setActorStateIfMatchingVariable1)(
-            STAGE_OBJECT_HONMARU_4F_MINAMI_LIBRARY_PIECE, BLUE_PIECE, 0
-        );
-        (*cutscene_setActorStateIfMatchingVariable1)(
-            STAGE_OBJECT_HONMARU_4F_MINAMI_LIBRARY_PIECE, YELLOW_PIECE, 0
-        );
-        (*cutscene_setActorStateIfMatchingVariable1)(
-            STAGE_OBJECT_HONMARU_4F_MINAMI_LIBRARY_PIECE, RED_PIECE, 0
-        );
-        SELECTION_DELAY_TIMER(self)          = 0;
-        self->first_option                   = 0;
-        self->second_option                  = 0;
-        self->third_option                   = 0;
-        self->number_of_options_selected     = 0;
-        self->option_selected                = FALSE;
-        self->textbox_is_active              = FALSE;
-        self->interacting_with_interactuable = FALSE;
-        data->lens->flags |= (WINDOW_CLOSING | WINDOW_OPENING);
-        textbox = data->options_textbox;
-        textbox->flags |= CLOSE_TEXTBOX;
-        sys.FREEZE_ENEMIES = FALSE;
-        sys.FREEZE_PLAYER  = FALSE;
-        (*cameraMgr_setLockCameraAtPointState)(sys.ptr_cameraMgr, FALSE);
-        (*object_curLevel_goToFunc)(
-            self->header.current_function, &self->header.function_info_ID, LIBRARY_PUZZLE_IDLE
-        );
-    }
+
+    // Put all the pieces back in the pedestal
+    (*cutscene_setActorStateIfMatchingVariable1)(
+        STAGE_OBJECT_HONMARU_4F_MINAMI_LIBRARY_PIECE, BLUE_PIECE, 0
+    );
+    (*cutscene_setActorStateIfMatchingVariable1)(
+        STAGE_OBJECT_HONMARU_4F_MINAMI_LIBRARY_PIECE, YELLOW_PIECE, 0
+    );
+    (*cutscene_setActorStateIfMatchingVariable1)(
+        STAGE_OBJECT_HONMARU_4F_MINAMI_LIBRARY_PIECE, RED_PIECE, 0
+    );
+    SELECTION_DELAY_TIMER(self)          = 0;
+    self->first_option                   = 0;
+    self->second_option                  = 0;
+    self->third_option                   = 0;
+    self->number_of_options_selected     = 0;
+    self->option_selected                = FALSE;
+    self->textbox_is_active              = FALSE;
+    self->interacting_with_interactuable = FALSE;
+    BITS_SET(data->lens->flags, WINDOW_CLOSING | WINDOW_OPENING);
+    textbox = data->options_textbox;
+    BITS_SET(textbox->flags, CLOSE_TEXTBOX);
+    sys.FREEZE_ENEMIES = FALSE;
+    sys.FREEZE_PLAYER  = FALSE;
+    (*cameraMgr_setLockCameraAtPointState)(sys.ptr_cameraMgr, FALSE);
+    (*object_curLevel_goToFunc)(
+        self->header.current_function, &self->header.function_info_ID, LIBRARY_PUZZLE_IDLE
+    );
 }
 
 void cv64_ovl_librarypuzzletxt_success(cv64_ovl_librarypuzzletxt_t* self) {
@@ -361,8 +370,8 @@ void cv64_ovl_librarypuzzletxt_success(cv64_ovl_librarypuzzletxt_t* self) {
         EVENT_FLAG_ID_CASTLE_WALL_LIBRARY_AND_MAZE_GARDEN,
         EVENT_FLAG_CASTLE_WALL_LIBRARY_AND_MAZE_GARDEN_LIBRARY_PUZZLE_SOLVED
     );
-    data->lens->flags |= (WINDOW_CLOSING | WINDOW_OPENING);
-    data->options_textbox->flags |= CLOSE_TEXTBOX;
+    BITS_SET(data->lens->flags, WINDOW_CLOSING | WINDOW_OPENING);
+    BITS_SET(data->options_textbox->flags, CLOSE_TEXTBOX);
     sys.FREEZE_ENEMIES = FALSE;
     sys.FREEZE_PLAYER  = FALSE;
     (*cameraMgr_setLockCameraAtPointState)(sys.ptr_cameraMgr, FALSE);
@@ -389,7 +398,7 @@ void print_selected_options(u16* text, u16 selected_options_IDs) {
         number = i;
 
         // Check that an option was selected
-        if (selected_options_IDs & (1 << (number + 0x1F))) {
+        if (BITS_HAS(selected_options_IDs, CV64_BIT(number + 0x1F))) {
             // Print selected options in red
             string[0] = CTRL_SET_COLOR(TEXT_COLOR_RED);
             string[1] = number + ASCII_TO_CV64('0');
@@ -449,7 +458,7 @@ s32 select_next_option(
                 if ((*highlighted_option) < PUZZLE_OPTION(1)) {
                     *highlighted_option = PUZZLE_OPTION(9);
                 }
-            } while (*selected_options_IDs & (1 << (*highlighted_option)));
+            } while (BITS_HAS(*selected_options_IDs, CV64_BIT(*highlighted_option)));
         } else {
             (*selection_delay_timer)--;
         }
@@ -461,7 +470,7 @@ s32 select_next_option(
                 if ((*highlighted_option) > PUZZLE_OPTION(9)) {
                     *highlighted_option = PUZZLE_OPTION(1);
                 }
-            } while (*selected_options_IDs & (1 << (*highlighted_option)));
+            } while (BITS_HAS(*selected_options_IDs, CV64_BIT(*highlighted_option)));
         } else {
             (*selection_delay_timer)--;
         }
@@ -471,15 +480,16 @@ s32 select_next_option(
      * Move the lens forwards one place after selecting an option to avoid
      * being able to select the previous option again
      */
-    if (*selected_options_IDs & (1 << (*highlighted_option))) {
+    if (BITS_HAS(*selected_options_IDs, CV64_BIT(*highlighted_option))) {
         ret = 1;
         do {
             (*highlighted_option)++;
             if ((*highlighted_option) > PUZZLE_OPTION(9)) {
                 *highlighted_option = PUZZLE_OPTION(1);
             }
-        } while (*selected_options_IDs & (1 << (*highlighted_option)));
+        } while (BITS_HAS(*selected_options_IDs, CV64_BIT(*highlighted_option)));
     }
+
     if (ret != 0) {
         return 0;
     }
@@ -488,7 +498,7 @@ s32 select_next_option(
      * Option selected
      */
     if ((CONT_BTNS_PRESSED(CONT_0, A_BUTTON))) {
-        *selected_options_IDs |= (1 << (*highlighted_option));
+        BITS_SET(*selected_options_IDs, CV64_BIT(*highlighted_option));
         ret = 1;
         /**
      * Pressed the B button. This does nothing in practice.
