@@ -12,7 +12,7 @@
 cv64_ovl_nitrotxt_func_t cv64_ovl_nitrotxt_funcs[] = {
     cv64_ovl_nitrotxt_init,
     cv64_ovl_nitrotxt_idle,
-    cv64_ovl_nitrotxt_prep_msg,
+    cv64_ovl_nitrotxt_prepare_msg,
     cv64_ovl_nitrotxt_yes_no,
     cv64_ovl_nitrotxt_close,
     cv64_ovl_nitrotxt_destroy
@@ -93,7 +93,7 @@ void cv64_ovl_nitrotxt_idle(cv64_ovl_nitrotxt_t* self) {
     );
 }
 
-void cv64_ovl_nitrotxt_prep_msg(cv64_ovl_nitrotxt_t* self) {
+void cv64_ovl_nitrotxt_prepare_msg(cv64_ovl_nitrotxt_t* self) {
     mfds_state* message;
 
     message = (*map_getMessageFromPool)(self->text_ID, self->message_display_time);

@@ -38,7 +38,7 @@ typedef struct cv64_ovl_elevatortxt {
 void cv64_ovl_elevatortxt_entrypoint(cv64_ovl_elevatortxt_t* self);
 void cv64_ovl_elevatortxt_init(cv64_ovl_elevatortxt_t* self);
 void cv64_ovl_elevatortxt_idle(cv64_ovl_elevatortxt_t* self);
-void cv64_ovl_elevatortxt_prep_msg(cv64_ovl_elevatortxt_t* self);
+void cv64_ovl_elevatortxt_prepare_msg(cv64_ovl_elevatortxt_t* self);
 void cv64_ovl_elevatortxt_yes_no(cv64_ovl_elevatortxt_t* self);
 void cv64_ovl_elevatortxt_close(cv64_ovl_elevatortxt_t* self);
 void cv64_ovl_elevatortxt_destroy(cv64_ovl_elevatortxt_t* self);

@@ -13,7 +13,7 @@
 cv64_ovl_elevatortxt_func_t cv64_ovl_elevatortxt_funcs[] = {
     cv64_ovl_elevatortxt_init,
     cv64_ovl_elevatortxt_idle,
-    cv64_ovl_elevatortxt_prep_msg,
+    cv64_ovl_elevatortxt_prepare_msg,
     cv64_ovl_elevatortxt_yes_no,
     cv64_ovl_elevatortxt_close,
     cv64_ovl_elevatortxt_destroy
@@ -54,7 +54,7 @@ void cv64_ovl_elevatortxt_idle(cv64_ovl_elevatortxt_t* self) {
     );
 }
 
-void cv64_ovl_elevatortxt_prep_msg(cv64_ovl_elevatortxt_t* self) {
+void cv64_ovl_elevatortxt_prepare_msg(cv64_ovl_elevatortxt_t* self) {
     mfds_state* message;
 
     if (CHECK_EVENT_FLAGS(

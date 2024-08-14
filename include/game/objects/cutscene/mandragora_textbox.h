@@ -26,7 +26,7 @@ typedef struct cv64_ovl_mandragoratxt {
 void cv64_ovl_mandragoratxt_entrypoint(cv64_ovl_mandragoratxt_t* self);
 void cv64_ovl_mandragoratxt_init(cv64_ovl_mandragoratxt_t* self);
 void cv64_ovl_mandragoratxt_idle(cv64_ovl_mandragoratxt_t* self);
-void cv64_ovl_mandragoratxt_prep_msg(cv64_ovl_mandragoratxt_t* self);
+void cv64_ovl_mandragoratxt_prepare_msg(cv64_ovl_mandragoratxt_t* self);
 void cv64_ovl_mandragoratxt_yes_no(cv64_ovl_mandragoratxt_t* self);
 void cv64_ovl_mandragoratxt_close(cv64_ovl_mandragoratxt_t* self);
 void cv64_ovl_mandragoratxt_destroy(cv64_ovl_mandragoratxt_t* self);

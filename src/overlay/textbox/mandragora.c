@@ -12,7 +12,7 @@
 cv64_ovl_mandragoratxt_func_t cv64_ovl_mandragoratxt_funcs[] = {
     cv64_ovl_mandragoratxt_init,
     cv64_ovl_mandragoratxt_idle,
-    cv64_ovl_mandragoratxt_prep_msg,
+    cv64_ovl_mandragoratxt_prepare_msg,
     cv64_ovl_mandragoratxt_yes_no,
     cv64_ovl_mandragoratxt_close,
     cv64_ovl_mandragoratxt_destroy
@@ -61,7 +61,7 @@ void cv64_ovl_mandragoratxt_idle(cv64_ovl_mandragoratxt_t* self) {
     );
 }
 
-void cv64_ovl_mandragoratxt_prep_msg(cv64_ovl_mandragoratxt_t* self) {
+void cv64_ovl_mandragoratxt_prepare_msg(cv64_ovl_mandragoratxt_t* self) {
     mfds_state* message;
 
     // Both walls are blown up

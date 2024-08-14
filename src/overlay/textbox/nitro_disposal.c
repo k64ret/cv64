@@ -12,7 +12,7 @@
 cv64_ovl_nitrodisposaltxt_func_t cv64_ovl_nitrodisposaltxt_funcs[] = {
     cv64_ovl_nitrodisposaltxt_init,
     cv64_ovl_nitrodisposaltxt_idle,
-    cv64_ovl_nitrodisposaltxt_prep_msg,
+    cv64_ovl_nitrodisposaltxt_prepare_msg,
     cv64_ovl_nitrodisposaltxt_yes_no,
     cv64_ovl_nitrodisposaltxt_close,
     cv64_ovl_nitrodisposaltxt_destroy
@@ -69,7 +69,7 @@ void cv64_ovl_nitrodisposaltxt_idle(cv64_ovl_nitrodisposaltxt_t* self) {
     );
 }
 
-void cv64_ovl_nitrodisposaltxt_prep_msg(cv64_ovl_nitrodisposaltxt_t* self) {
+void cv64_ovl_nitrodisposaltxt_prepare_msg(cv64_ovl_nitrodisposaltxt_t* self) {
     mfds_state* message;
 
     // Both walls have been blown up already
@@ -85,7 +85,7 @@ void cv64_ovl_nitrodisposaltxt_prep_msg(cv64_ovl_nitrodisposaltxt_t* self) {
         // Nitro is not on the inventory
     } else if (self->nitro_amount_until_max_capacity != 0) {
         self->text_ID = self->no_nitro_text_ID;
-        // // Nitro is on the inventory
+        // Nitro is on the inventory
     } else {
         self->text_ID = self->has_nitro_text_ID;
     }

@@ -13,15 +13,15 @@
 cv64_ovl_explwalltxt_func_t cv64_ovl_explwalltxt_funcs[] = {
     cv64_ovl_explwalltxt_init,
     cv64_ovl_explwalltxt_idle,
-    cv64_ovl_explwalltxt_det_msg,
-    cv64_ovl_explwalltxt_item_prep_msg,
+    cv64_ovl_explwalltxt_determine_msg,
+    cv64_ovl_explwalltxt_item_prepare_msg,
     cv64_ovl_explwalltxt_item_idle,
-    cv64_ovl_explwalltxt_item_det_next_txt,
+    cv64_ovl_explwalltxt_item_determine_next_txt,
     cv64_ovl_explwalltxt_item_no,
     cv64_ovl_explwalltxt_ready_for_blast,
     cv64_ovl_explwalltxt_nitro_is_set,
     cv64_ovl_explwalltxt_mandragora_is_set,
-    cv64_ovl_explwalltxt_item_alr_set,
+    cv64_ovl_explwalltxt_item_already_set,
     cv64_ovl_explwalltxt_default_desc,
     cv64_ovl_explwalltxt_destroy
 };
@@ -99,7 +99,7 @@ void cv64_ovl_explwalltxt_idle(cv64_ovl_explwalltxt_t* self) {
     }
 }
 
-void cv64_ovl_explwalltxt_det_msg(cv64_ovl_explwalltxt_t* self) {
+void cv64_ovl_explwalltxt_determine_msg(cv64_ovl_explwalltxt_t* self) {
     // If we don't have the Nitro or the Mandragora
     if ((self->nitro_amount_until_max_capacity > 0) &&
         (self->mandragora_amount_until_max_capacity > 0)) {
@@ -182,7 +182,7 @@ void cv64_ovl_explwalltxt_det_msg(cv64_ovl_explwalltxt_t* self) {
     );
 }
 
-void cv64_ovl_explwalltxt_item_prep_msg(cv64_ovl_explwalltxt_t* self) {
+void cv64_ovl_explwalltxt_item_prepare_msg(cv64_ovl_explwalltxt_t* self) {
     // clang-format off
     mfds_state* message = (self->nitro_amount_until_max_capacity <= 0)
         ? (*map_getMessageFromPool)(self->set_nitro_text_ID, 0)
@@ -255,7 +255,7 @@ void cv64_ovl_explwalltxt_item_idle(cv64_ovl_explwalltxt_t* self) {
     );
 }
 
-void cv64_ovl_explwalltxt_item_det_next_txt(cv64_ovl_explwalltxt_t* self) {
+void cv64_ovl_explwalltxt_item_determine_next_txt(cv64_ovl_explwalltxt_t* self) {
     switch (self->wall_type) {
         case WALL_TYPE_MAIN_MAP:
             // Both the Nitro and Mandragora have been set. The wall is ready for blasting
@@ -475,7 +475,7 @@ void cv64_ovl_explwalltxt_default_desc(cv64_ovl_explwalltxt_t* self) {
     );
 }
 
-void cv64_ovl_explwalltxt_item_alr_set(cv64_ovl_explwalltxt_t* self) {
+void cv64_ovl_explwalltxt_item_already_set(cv64_ovl_explwalltxt_t* self) {
     mfds_state* message;
 
     if (self->state == 0) {

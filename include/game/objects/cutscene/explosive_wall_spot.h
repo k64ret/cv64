@@ -37,16 +37,16 @@ typedef struct cv64_ovl_explwalltxt {
 void cv64_ovl_explwalltxt_entrypoint(cv64_ovl_explwalltxt_t* self);
 void cv64_ovl_explwalltxt_init(cv64_ovl_explwalltxt_t* self);
 void cv64_ovl_explwalltxt_idle(cv64_ovl_explwalltxt_t* self);
-void cv64_ovl_explwalltxt_det_msg(cv64_ovl_explwalltxt_t* self);
-void cv64_ovl_explwalltxt_item_prep_msg(cv64_ovl_explwalltxt_t* self);
+void cv64_ovl_explwalltxt_determine_msg(cv64_ovl_explwalltxt_t* self);
+void cv64_ovl_explwalltxt_item_prepare_msg(cv64_ovl_explwalltxt_t* self);
 void cv64_ovl_explwalltxt_item_idle(cv64_ovl_explwalltxt_t* self);
-void cv64_ovl_explwalltxt_item_det_next_txt(cv64_ovl_explwalltxt_t* self);
+void cv64_ovl_explwalltxt_item_determine_next_txt(cv64_ovl_explwalltxt_t* self);
 void cv64_ovl_explwalltxt_item_no(cv64_ovl_explwalltxt_t* self);
 void cv64_ovl_explwalltxt_ready_for_blast(cv64_ovl_explwalltxt_t* self);
 void cv64_ovl_explwalltxt_nitro_is_set(cv64_ovl_explwalltxt_t* self);
 void cv64_ovl_explwalltxt_mandragora_is_set(cv64_ovl_explwalltxt_t* self);
 void cv64_ovl_explwalltxt_default_desc(cv64_ovl_explwalltxt_t* self);
-void cv64_ovl_explwalltxt_item_alr_set(cv64_ovl_explwalltxt_t* self);
+void cv64_ovl_explwalltxt_item_already_set(cv64_ovl_explwalltxt_t* self);
 void cv64_ovl_explwalltxt_destroy(cv64_ovl_explwalltxt_t* self);
 
 typedef enum cv64_ovl_explwalltxt_func_id {

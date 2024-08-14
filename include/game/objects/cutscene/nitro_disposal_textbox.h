@@ -31,7 +31,7 @@ typedef struct cv64_ovl_nitrodisposaltxt {
 void cv64_ovl_nitrodisposaltxt_entrypoint(cv64_ovl_nitrodisposaltxt_t* self);
 void cv64_ovl_nitrodisposaltxt_init(cv64_ovl_nitrodisposaltxt_t* self);
 void cv64_ovl_nitrodisposaltxt_idle(cv64_ovl_nitrodisposaltxt_t* self);
-void cv64_ovl_nitrodisposaltxt_prep_msg(cv64_ovl_nitrodisposaltxt_t* self);
+void cv64_ovl_nitrodisposaltxt_prepare_msg(cv64_ovl_nitrodisposaltxt_t* self);
 void cv64_ovl_nitrodisposaltxt_yes_no(cv64_ovl_nitrodisposaltxt_t* self);
 void cv64_ovl_nitrodisposaltxt_close(cv64_ovl_nitrodisposaltxt_t* self);
 void cv64_ovl_nitrodisposaltxt_destroy(cv64_ovl_nitrodisposaltxt_t* self);

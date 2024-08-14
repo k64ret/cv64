@@ -26,7 +26,7 @@ typedef struct cv64_ovl_nitrotxt {
 void cv64_ovl_nitrotxt_entrypoint(cv64_ovl_nitrotxt_t* self);
 void cv64_ovl_nitrotxt_init(cv64_ovl_nitrotxt_t* self);
 void cv64_ovl_nitrotxt_idle(cv64_ovl_nitrotxt_t* self);
-void cv64_ovl_nitrotxt_prep_msg(cv64_ovl_nitrotxt_t* self);
+void cv64_ovl_nitrotxt_prepare_msg(cv64_ovl_nitrotxt_t* self);
 void cv64_ovl_nitrotxt_yes_no(cv64_ovl_nitrotxt_t* self);
 void cv64_ovl_nitrotxt_close(cv64_ovl_nitrotxt_t* self);
 void cv64_ovl_nitrotxt_destroy(cv64_ovl_nitrotxt_t* self);

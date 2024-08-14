@@ -68,7 +68,7 @@ void cv64_ovl_librarypuzzletxt_entrypoint(cv64_ovl_librarypuzzletxt_t* self);
 void cv64_ovl_librarypuzzletxt_init(cv64_ovl_librarypuzzletxt_t* self);
 void cv64_ovl_librarypuzzletxt_idle(cv64_ovl_librarypuzzletxt_t* self);
 void cv64_ovl_librarypuzzletxt_show(cv64_ovl_librarypuzzletxt_t* self);
-void cv64_ovl_librarypuzzletxt_prep_msg(cv64_ovl_librarypuzzletxt_t* self);
+void cv64_ovl_librarypuzzletxt_prepare_msg(cv64_ovl_librarypuzzletxt_t* self);
 void cv64_ovl_librarypuzzletxt_select(cv64_ovl_librarypuzzletxt_t* self);
 void cv64_ovl_librarypuzzletxt_fail(cv64_ovl_librarypuzzletxt_t* self);
 void cv64_ovl_librarypuzzletxt_success(cv64_ovl_librarypuzzletxt_t* self);
