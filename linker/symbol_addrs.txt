@@ -1893,8 +1893,6 @@ _allocatePVoice = 0x80081a50;
 alSynAllocVoice = 0x80081b38;
 osVirtualToPhysical = 0x80081c80;
 osWritebackDCache = 0x80081d00;
-playerCanInteractWithInteractuable = 0x801268e4;
-getMapEventFlagID = 0x80126cec;
 checkCutsceneTimeRangeTrigger = 0x80127e84;
 cutscene_setCameraClippingAndScissoring = 0x801287f0;
 textbox_create = 0x8012cb88;
@@ -2173,7 +2171,25 @@ prepareMuteSoundToPlayAndSetStereoLocation = 0x80079dd4;
 prepareSoundToPlayAndSetVolume = 0x80079e04;
 guPerspective = 0x8007f800;
 osDestroyThread = 0x80080cb0;
-PlayerMgr_getActorCurrentlyInteractingWith = 0x80126370;
+
+// src/common/A9560.c ==================================================================
+
+// .text
+Player_getActorCurrentlyInteractingWith = 0x80126370; // type:func
+Player_getSpecialTextboxCurrentlyInteractingWith = 0x801267c4; // type:func
+playerCanInteractWithInteractuable = 0x801268e4; // type:func
+interactuables_getInteractingType = 0x80126be0;  // type:func
+interactuableObject_enableTextbox = 0x80126cd4;  // type:func
+interactuableObject_setInteractingFlag = 0x80126ce0;  // type:func
+getMapEventFlagID = 0x80126cec; // type:func
+spawnCastleWallGratingMechanismTextboxes = 0x80126e04; // type:func
+checkDoorCanBeOpenedWithKey              = 0x80126ea0; // type:func
+
+// .rodata
+D_8018ab80 = 8018ab80;  // type:jtbl_label size:0x74
+
+// End of src/common/A9560.c ===========================================================
+
 cutsceneTrigger_entrypoint = 0x801274f0;
 cutsceneTrigger_checkCollision = 0x801276b4;
 cutsceneTrigger_destroy = 0x80127e60;
@@ -2641,9 +2657,6 @@ DAT_80342148 = 0x80342148;
 initial_magic_ball_size = 0x800a4aa0;
 PlayerData = 0x80350798;
 animationMgr_setSwitchTime = 0x8000b930;
-interactuables_getInteractingType = 0x80126be0;
-interactuableObject_enableTextbox = 0x80126cd4;
-interactuableObject_setInteractingFlag = 0x80126ce0;
 CarrieAttackMgr_subweapon_selectSubweapon = 0x803dab3c;
 atariBaseWork_create = 0x800405c4;
 Carrie = 0x803427a0;
