@@ -32,6 +32,7 @@ typedef struct specialTextbox {
     cv64_actor_settings_t* settings;
 } specialTextbox;
 
+specialTextbox* Player_getActorCurrentlyInteractingWith();
 specialTextbox*
 Player_getSpecialTextboxCurrentlyInteractingWith(s16 actor_ID, cv64_model_inf_t* player_model);
 s32 playerCanInteractWithInteractuable(f32 pos_X, f32 pos_Y, f32 pos_Z, interactuables* actor);
