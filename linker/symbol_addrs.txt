@@ -2186,9 +2186,21 @@ spawnCastleWallGratingMechanismTextboxes = 0x80126e04; // type:func
 checkDoorCanBeOpenedWithKey              = 0x80126ea0; // type:func
 
 // .rodata
-D_8018ab80 = 8018ab80;  // type:jtbl_label size:0x74
+D_8018ab80 = 0x8018ab80;  // type:jtbl_label size:0x74
 
 // End of src/common/A9560.c ===========================================================
+
+// src/common/EDA60.c ==================================================================
+
+// .data
+castleWallGratingMechanism_textSpotsActorSettings_openMechanism = 0x8016a870;  // size:0x10
+castleWallGratingMechanism_textSpotsActorSettings_mechanismOpened = 0x8016a880;  // size:0x10
+door_item_open_verify_list = 0x8016a890;  // size:0x68
+castleWallGratingMechanism_textSpotsActorSettings = 0x8016a8f8;  // size:0x0C
+interactuables_settings_table = 0x8016a904;  // size:0x9C4
+item_model_settings_list = 0x8016b2c8;  // size:0x290
+
+// End of src/common/EDA60.c ===========================================================
 
 cutsceneTrigger_entrypoint = 0x801274f0;
 cutsceneTrigger_checkCollision = 0x801276b4;
@@ -2550,7 +2562,6 @@ contPak_notInserted_1 = 0x800d7491;
 contPak_notInserted_2 = 0x800d7492;
 contPak_notInserted_3 = 0x800d7493;
 tmp_task = 0x801226d0;
-item_model_settings_list = 0x8016b2c8;
 cameraMgr_init = 0x8006686c;
 distortion_dlist = 0x80180eb0;
 __osException = 0x80080380;
@@ -2589,7 +2600,6 @@ song_ID_to_play_next = 0x80093d94;
 map_song_ID_table = 0x80096600;
 map_song_ID_unused = 0x800d5f20;
 mapSetup_functions = 0x800966a4;
-interactuables_settings_table = 0x8016a904;
 map_breakables_drop_values_list = 0x80189dd0;
 map_door_bitflags_list = 0x80188210;
 controllers = 0x80387d7c;

@@ -16,7 +16,7 @@
 #define INTERACTUABLES_SETTINGS_TYPE_TEXT_SPOT 2
 
 // Variable 1: ID + 1 in `interactuables_settings_table` to get the settings from
-#define INTERACTUABLE_SETTINGS_TABLE_ENTRY_ID settings->variable_1
+#define INTERACTUABLES_SETTINGS_TABLE_ENTRY_ID settings->variable_1
 
 // Variable 2:
 // Items: Upper 2-bytes of the event flag
@@ -32,7 +32,7 @@
 // Text spots: Size of the trigger (Z)
 #define TEXT_SPOT_Z_SIZE settings->variable_3
 
-typedef enum cv64_interactuable_settings_table_id {
+typedef enum cv64_interactuables_settings_table_id {
     //// Items ////
     // Visible + Doesn't vanish
     INTERACT_ID_NO_VANISH_WHITE_JEWEL       = 0x00,
@@ -166,7 +166,7 @@ typedef enum cv64_interactuable_settings_table_id {
     INTERACT_ID_TEXT_7A = 0x7A,
     INTERACT_ID_TEXT_7B = 0x7B,
     INTERACT_ID_TEXT_7C = 0x7C
-} cv64_interactuable_settings_table_id_t;
+} cv64_interactuables_settings_table_id_t;
 
 typedef enum cv64_interactuables_settings_flag {
     ITEM_VANISH_OR_UPDATE_POSITION             = 0x0001,
@@ -215,7 +215,7 @@ typedef struct {
     u8 field_0x28[12];
     f32 item_falling_target_height;
     /**
-     * ID in `interactuable_settings_table`
+     * ID in `interactuables_settings_table`
      */
     u16 table_index;
     u8 field_0x3A[2];

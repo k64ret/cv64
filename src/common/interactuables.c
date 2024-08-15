@@ -49,7 +49,7 @@ void interactuables_init(interactuables* self) {
     if (settings != NULL) {
         // In the actor settings, the table ID is stored + 1.
         // Substract -1 to get the actual ID
-        self->table_index = INTERACTUABLE_SETTINGS_TABLE_ENTRY_ID - 1;
+        self->table_index = INTERACTUABLES_SETTINGS_TABLE_ENTRY_ID - 1;
     } else {
         // Set the table ID to -1 (invalid entry)
         self->table_index--;

@@ -124,7 +124,7 @@ typedef struct {
     interactuables* actor_player_is_currently_interacting_with;
     u32 pull_lever;
     u8 field50_0x26230[4];
-    u16 current_PowerUp_level;
+    s16 current_PowerUp_level;
     u8 alternate_costume;
     u8 in_first_person_mode;
     s16 nitro_explosion_hit_launch_angle;
