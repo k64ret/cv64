@@ -6,6 +6,7 @@
 
 #include "A9560.h"
 #include "objects/cutscene/cutsceneMgr.h"
+#include "objects/player/player.h"
 
 // clang-format off
 
@@ -14,13 +15,13 @@
 
 // clang-format on
 
-cv64_ovl_nitrodisposaltxt_t*
+specialTextbox*
 Player_getSpecialTextboxCurrentlyInteractingWith(s16 actor_ID, cv64_model_inf_t* player_model) {
-    cv64_ovl_nitrodisposaltxt_t* actor;
+    specialTextbox* actor;
     u16 temp1;
     u16 temp2;
 
-    actor = objectList_findFirstObjectByID(actor_ID);
+    actor = (specialTextbox*) objectList_findFirstObjectByID(actor_ID);
     if (actor != NULL) {
         if (((actor->position.x - actor->trigger_size_X) <= player_model->position.x) &&
             (player_model->position.x <= (actor->trigger_size_X + actor->position.x))) {
@@ -104,12 +105,12 @@ s32 playerCanInteractWithInteractuable(f32 pos_X, f32 pos_Y, f32 pos_Z, interact
     return FALSE;
 }
 
-s32 interactuables_getInteractingType(interactuables* self) {
+s32 interactuables_getInteractingType(specialTextbox* actor) {
     interactuables_settings* settings;
-    s16 actor_ID = self->header.ID;
+    s16 actor_ID = actor->header.ID;
 
     if (actor_ID == CUTSCENE_INTERACTUABLES) {
-        settings = &interactuables_settings_table[self->table_index];
+        settings = &interactuables_settings_table[((interactuables*) actor)->table_index];
         if (settings->type == ITEM_KIND_ITEM) {
             return INTERACT_TYPE_ITEM;
         }
@@ -144,12 +145,12 @@ s32 interactuables_getInteractingType(interactuables* self) {
     return INTERACT_TYPE_NONE;
 }
 
-void interactuables_enableTextbox(interactuables* self) {
-    self->textbox_is_active = TRUE;
+void interactuables_enableTextbox(specialTextbox* actor) {
+    actor->textbox_is_active = TRUE;
 }
 
-void interactuables_setInteractingFlag(interactuables* self) {
-    self->interacting_with_interactuable = TRUE;
+void interactuables_setInteractingFlag(specialTextbox* actor) {
+    actor->interacting_with_interactuable = TRUE;
 }
 
 u32 getMapEventFlagID(s16 stage_ID) {
