@@ -500,7 +500,7 @@ segments:
     bss_size: 0x20C0
     subsegments:
       - [0x000A8420, c, common/interactuables]
-      - [0x000A9560, asm, common/A9560]
+      - [0x000A9560, c, common/A9560]
       - [0x000AA130, c, common/cutscene_manager]
       - [0x000AA6E0, asm, common/cutscene_trigger]
       - [0x000AB0F0, asm, common/cutscene]   # Also contains initNewGame() and player_status_init()
@@ -590,7 +590,8 @@ segments:
       - [0x0010D900, data]
       - [0x0010DC60, data]
       - [0x0010DD50, .rodata, common/interactuables]
-      - [0x0010DD70, rodata, common/A9560]
+      - [0x0010DD70, .rodata, common/A9560]
+      - [0x0010DDF0, rodata, common/cutscene_trigger]
       - [0x0010E070, .rodata, common/stage_select]
       - [0x0010E0F0, rodata]
       - [0x0010E1E0, rodata]

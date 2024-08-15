@@ -2179,14 +2179,14 @@ Player_getActorCurrentlyInteractingWith = 0x80126370; // type:func
 Player_getSpecialTextboxCurrentlyInteractingWith = 0x801267c4; // type:func
 playerCanInteractWithInteractuable = 0x801268e4; // type:func
 interactuables_getInteractingType = 0x80126be0;  // type:func
-interactuableObject_enableTextbox = 0x80126cd4;  // type:func
-interactuableObject_setInteractingFlag = 0x80126ce0;  // type:func
+interactuables_enableTextbox = 0x80126cd4;  // type:func
+interactuables_setInteractingFlag = 0x80126ce0;  // type:func
 getMapEventFlagID = 0x80126cec; // type:func
 spawnCastleWallGratingMechanismTextboxes = 0x80126e04; // type:func
 checkDoorCanBeOpenedWithKey              = 0x80126ea0; // type:func
 
 // .rodata
-D_8018ab80 = 0x8018ab80;  // type:jtbl_label size:0x74
+D_8018ab80 = 0x8018ab80;  // type:jtbl size:0x74
 
 // End of src/common/A9560.c ===========================================================
 
