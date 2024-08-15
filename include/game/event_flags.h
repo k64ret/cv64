@@ -15,23 +15,52 @@
 /*
  *  Event flag ID
  */
+// Forest of Silence
+// Any map not included below
+#define EVENT_FLAG_ID_FOREST_AND_DEFAULT 0
+// Villa (Foyer, rose garden, and servant entrance area)
+// Villa (Hallway, bedroom, living room, storeroom, and archives area)
+#define EVENT_FLAG_ID_VILLA_INSIDE 1
+// Tunnel
+// Castle Center (Top elevator room)
+#define EVENT_FLAG_ID_WATERWAY_AND_CASTLE_CENTER_5F 2
 // Castle Center (Broken staircase, friendly lizard-man, vampire butler room, and upper cracked wall area)
 // Castle Center (Nitro, invention, and vampire maid room area.)
 #define EVENT_FLAG_ID_CASTLE_CENTER_3F 3
-// Castle Keep (Exterior), Castle Keep (Interior), Clock Tower
+// Tower of Execution
+// Tower of Sorcery
+// Duel Tower
+// Ending map
+#define EVENT_FLAG_ID_TOWER_EXECUTION_SORCERY_DUEL_ENDING 4
+// Castle Keep (Exterior)
+// Castle Keep (Interior)
+// Clock Tower
 #define EVENT_FLAG_ID_CLOCK_TOWER 5
-// Dracula's desert, Rose / Actriese Fan Room, Villa's vampire crypt, Room of
-// Clocks
+// Dracula's desert
+// Rose / Actriese Fan Room
+// Villa's vampire crypt
+// Room of Clocks
 #define EVENT_FLAG_ID_MISC_STAGES 6
+// Not assigned to any map. Instead, it's used for the Tower of Science turrets
+#define EVENT_FLAG_ID_TOWER_SCIENCE_TURRETS 7
 // Castle Center (Bottom elevator room)
 // Castle Center (Gears)
 #define EVENT_FLAG_ID_CASTLE_CENTER_1F_2F 8
+// Villa (Front yard)
+#define EVENT_FLAG_ID_VILLA_OUTSIDE 9
 // Castle Wall (Main)
 #define EVENT_FLAG_ID_CASTLE_WALL_MAIN 10
-// Castle Wall (Library) and Maze Garden
-#define EVENT_FLAG_ID_CASTLE_WALL_LIBRARY_AND_MAZE_GARDEN 11
+// Castle Center (Library)
+// Maze Garden
+#define EVENT_FLAG_ID_CASTLE_CENTER_4F_AND_MAZE_GARDEN 11
+// Tunnel
+#define EVENT_FLAG_ID_TUNNEL 12
 // Castle Center (Main)
 #define EVENT_FLAG_ID_CASTLE_CENTER_MAIN 13
+// Castle Wall (Towers)
+#define EVENT_FLAG_ID_CASTLE_WALL_TOWERS 14
+// Tower of Science
+#define EVENT_FLAG_ID_TOWER_SCIENCE 15
 
 /*
  *  Event flags
@@ -54,7 +83,7 @@
 // EVENT_FLAG_ID_CASTLE_WALL_MAIN
 #define EVENT_FLAG_CASTLE_WALL_MAIN_WATCHED_DRACULA_CUTSCENE 0x00000100
 
-// EVENT_FLAG_ID_CASTLE_WALL_LIBRARY_AND_MAZE_GARDEN
+// EVENT_FLAG_ID_CASTLE_CENTER_4F_AND_MAZE_GARDEN
 #define EVENT_FLAG_CASTLE_WALL_LIBRARY_AND_MAZE_GARDEN_LIBRARY_PUZZLE_SOLVED 0x01000000
 
 // EVENT_FLAG_ID_CASTLE_CENTER_MAIN
