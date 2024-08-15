@@ -9,13 +9,100 @@
 
 // clang-format off
 
+// https://decomp.me/scratch/hTIg0
 #pragma GLOBAL_ASM("../asm/nonmatchings/common/A9560/Player_getActorCurrentlyInteractingWith.s")
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/common/A9560/Player_getSpecialTextboxCurrentlyInteractingWith.s")
-
-#pragma GLOBAL_ASM("../asm/nonmatchings/common/A9560/playerCanInteractWithInteractuable.s")
-
 // clang-format on
+
+cv64_ovl_nitrodisposaltxt_t*
+Player_getSpecialTextboxCurrentlyInteractingWith(s16 actor_ID, cv64_model_inf_t* player_model) {
+    cv64_ovl_nitrodisposaltxt_t* actor;
+    u16 temp1;
+    u16 temp2;
+
+    actor = objectList_findFirstObjectByID(actor_ID);
+    if (actor != NULL) {
+        if (((actor->position.x - actor->trigger_size_X) <= player_model->position.x) &&
+            (player_model->position.x <= (actor->trigger_size_X + actor->position.x))) {
+            if (((actor->position.y - 6.0f) <= player_model->position.y) &&
+                (player_model->position.y <= (actor->position.y + 6.0f))) {
+                if (((actor->position.z - actor->trigger_size_Z) <= player_model->position.z) &&
+                    (player_model->position.z <= (actor->trigger_size_Z + actor->position.z))) {
+                    if (1) {
+                    }
+                    temp2 = (u16) player_model->angle.yaw + 0x2000;
+                    if (1) {
+                    }
+                    temp1 = getAngleBetweenPlayerAndInteractuable(
+                                player_model->position.x,
+                                player_model->position.z,
+                                actor->position.x,
+                                actor->position.z
+                            ) -
+                        temp2;
+                    if ((((temp1) + 0x4000) & 0xFFFF) <= 0x9000) {
+                        return actor;
+                    }
+                }
+            }
+        }
+    }
+    return NULL;
+}
+
+s32 playerCanInteractWithInteractuable(f32 pos_X, f32 pos_Y, f32 pos_Z, interactuables* actor) {
+    cv64_model_inf_t* player_model    = ptr_PlayerData->visualData.model;
+    interactuables_settings* settings = &interactuables_settings_table[0, (s16) actor->table_index];
+    f32 sp34;
+    f32 sp38;
+    u16 temp1;
+    u16 temp_s0;
+
+    if (settings->type == ITEM_KIND_ITEM) {
+        if (((pos_X - settings->trigger_size) <= player_model->position.x) &&
+            (player_model->position.x <= (settings->trigger_size + pos_X))) {
+            if (((pos_Y - settings->trigger_size) <= player_model->position.y) &&
+                (player_model->position.y <= (settings->trigger_size + pos_Y))) {
+                if (((pos_Z - settings->trigger_size) <= player_model->position.z) &&
+                    (player_model->position.z <= (settings->trigger_size + pos_Z))) {
+                    temp_s0 = (u16) player_model->angle.yaw + 0x2000;
+                    sp34    = ((*sins)(temp_s0) / 32768.0f) * -2.0 * 1.0f;
+                    sp38    = ((*coss)(temp_s0) / 32768.0f) * -2.0 * 1.0f;
+                    temp1   = getAngleBetweenPlayerAndInteractuable(
+                                player_model->position.x + sp34,
+                                player_model->position.z + sp38,
+                                pos_X,
+                                pos_Z
+                            ) -
+                        temp_s0;
+                    if ((((temp1) + 0x4000) & 0xFFFF) <= 0x8000) {
+                        return TRUE;
+                    }
+                }
+            }
+        }
+    } else {
+        if (((pos_X - actor->trigger_X_size) <= player_model->position.x) &&
+            (player_model->position.x <= (actor->trigger_X_size + pos_X))) {
+            if (((pos_Y - 5.0f) <= player_model->position.y) &&
+                (player_model->position.y <= (pos_Y + 8.0f))) {
+                if (((pos_Z - actor->trigger_Z_size) <= player_model->position.z) &&
+                    (player_model->position.z <= (actor->trigger_Z_size + pos_Z))) {
+                    temp_s0 = (u16) player_model->angle.yaw + 0x2000;
+                    temp1   = getAngleBetweenPlayerAndInteractuable(
+                                player_model->position.x, player_model->position.z, pos_X, pos_Z
+                            ) -
+                        temp_s0;
+                    if ((((temp1) + 0x4000) & 0xFFFF) <= 0x9000) {
+                        return TRUE;
+                    }
+                }
+            }
+        }
+    }
+
+    return FALSE;
+}
 
 s32 interactuables_getInteractingType(interactuables* self) {
     interactuables_settings* settings;
