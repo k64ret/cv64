@@ -6,14 +6,147 @@
 
 #include "A9560.h"
 #include "objects/cutscene/cutsceneMgr.h"
-#include "objects/player/player.h"
+#include "system_work.h"
 
-// clang-format off
+specialTextbox* Player_getActorCurrentlyInteractingWith() {
+    s32 temp;
+    cv64_model_inf_t* player_model;
+    specialTextbox* library_puzzle;
+    interactuables* actor;
+    interactuables* text_spot = NULL;
+    interactuables_settings* settings;
+    s32 can_interact = FALSE;
+    vec3f pos;
 
-// https://decomp.me/scratch/hTIg0
-#pragma GLOBAL_ASM("../asm/nonmatchings/common/A9560/Player_getActorCurrentlyInteractingWith.s")
+    actor = (interactuables*) objectList_findFirstObjectByID(CUTSCENE_INTERACTUABLES);
+    if (actor != NULL) {
+        pos.x        = actor->position.x;
+        pos.y        = actor->position.y;
+        pos.z        = actor->position.z;
+        can_interact = playerCanInteractWithInteractuable(pos.x, pos.y, pos.z, actor);
+        if (can_interact) {
+            settings = &interactuables_settings_table[actor->table_index];
+            if (settings->type == ITEM_KIND_TEXT_SPOT) {
+                text_spot = actor;
+            } else if ((settings->item == ITEM_ID_WHITE_JEWEL) && (sys.contPak_file_no < 0)) {
+                can_interact = FALSE;
+            } else if ((settings->item == ITEM_ID_POWERUP) && (sys.current_PowerUp_level >= 2)) {
+                can_interact = FALSE;
+            } else {
+                return (interactuables*) actor;
+            }
+        }
+        for (actor = (interactuables*) object_findFirstObjectByID(CUTSCENE_INTERACTUABLES, actor);
+             actor != NULL;
+             actor = (interactuables*) object_findFirstObjectByID(CUTSCENE_INTERACTUABLES, actor)) {
+            pos.x        = actor->position.x;
+            pos.y        = actor->position.y;
+            pos.z        = actor->position.z;
+            can_interact = playerCanInteractWithInteractuable(pos.x, pos.y, pos.z, actor);
+            if (can_interact) {
+                settings = &interactuables_settings_table[actor->table_index];
+                if (settings->type == ITEM_KIND_TEXT_SPOT) {
+                    if (text_spot != NULL) {
+                        if (settings->event_flag ==
+                            interactuables_settings_table[text_spot->table_index].event_flag) {
+                            if (settings->flags & TEXT_SPOT_DESTROY_IF_EVENT_FLAG_IS_SET) {
+                                text_spot = actor;
+                                continue;
+                            } else {
+                                continue;
+                            }
+                        } else {
+                            text_spot = actor;
+                            continue;
+                        }
+                    } else {
+                        text_spot = actor;
+                        continue;
+                    }
+                }
+                if ((settings->item == ITEM_ID_WHITE_JEWEL) && (sys.contPak_file_no < 0)) {
+                    can_interact = FALSE;
+                } else if ((settings->item == ITEM_ID_POWERUP) && (sys.current_PowerUp_level >= 2)) {
+                    can_interact = FALSE;
+                } else {
+                    return actor;
+                }
+            }
+        }
+        if (text_spot != NULL) {
+            return text_spot;
+        }
+    }
 
-// clang-format on
+    if (sys.SaveStruct_gameplay.map == HONMARU_4F_MINAMI) {
+        library_puzzle = (specialTextbox*) objectList_findFirstObjectByID(CUTSCENE_LIBRARY_PUZZLE);
+        if (library_puzzle != NULL) {
+            player_model = ptr_PlayerData->visualData.model;
+            pos.x        = library_puzzle->position.x;
+            pos.y        = library_puzzle->position.y;
+            pos.z        = library_puzzle->position.z;
+            if (((pos.x - 15.0f) <= player_model->position.x) &&
+                (player_model->position.x <= (pos.x + 15.0f))) {
+                if (((pos.y - 4.0f) <= player_model->position.y) &&
+                    (player_model->position.y <= (pos.y + 4.0f))) {
+                    if (((pos.z - 16.0f) <= player_model->position.z) &&
+                        (player_model->position.z <= (pos.z + 16.0f))) {
+                        return library_puzzle;
+                    }
+                }
+            }
+        }
+    }
+    if (sys.SaveStruct_gameplay.map == HONMARU_B1F) {
+        player_model = ptr_PlayerData->visualData.model;
+        actor        = Player_getSpecialTextboxCurrentlyInteractingWith(
+            CUTSCENE_MANDRAGORA_TEXTBOX, player_model
+        );
+        if (actor != NULL) {
+            return actor;
+        }
+    }
+    if (sys.SaveStruct_gameplay.map == HONMARU_3F_KITA) {
+        player_model = ptr_PlayerData->visualData.model;
+        actor        = Player_getSpecialTextboxCurrentlyInteractingWith(
+            CUTSCENE_NITRO_TEXTBOX, ptr_PlayerData->visualData.model
+        );
+        if (actor != NULL) {
+            return actor;
+        }
+    }
+    if ((sys.SaveStruct_gameplay.map == HONMARU_1F) ||
+        (sys.SaveStruct_gameplay.map == HONMARU_2F) ||
+        (sys.SaveStruct_gameplay.map == HONMARU_3F_MINAMI)) {
+        player_model = ptr_PlayerData->visualData.model;
+        actor        = Player_getSpecialTextboxCurrentlyInteractingWith(
+            CUTSCENE_NITRO_DISPOSAL_TEXTBOX, player_model
+        );
+        if (actor != NULL) {
+            return actor;
+        }
+        if (sys.SaveStruct_gameplay.map == HONMARU_1F) {
+            actor = Player_getSpecialTextboxCurrentlyInteractingWith(
+                CUTSCENE_BOTTOM_ELEVATOR_ACTIVATOR_TEXTBOX, player_model
+            );
+            if (actor != NULL) {
+                return actor;
+            }
+        }
+    }
+    if ((sys.SaveStruct_gameplay.map == HONMARU_B1F) ||
+        (sys.SaveStruct_gameplay.map == HONMARU_3F_MINAMI)) {
+        actor = Player_getSpecialTextboxCurrentlyInteractingWith(
+            CUTSCENE_EXPLOSIVE_WALL_SPOT, ptr_PlayerData->visualData.model
+        );
+        if (actor != NULL) {
+            return actor;
+        }
+    }
+    if (can_interact == FALSE) {
+        return NULL;
+    }
+}
 
 specialTextbox*
 Player_getSpecialTextboxCurrentlyInteractingWith(s16 actor_ID, cv64_model_inf_t* player_model) {
