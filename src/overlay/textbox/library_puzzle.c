@@ -41,7 +41,7 @@ void cv64_ovl_librarypuzzletxt_init(cv64_ovl_librarypuzzletxt_t* self) {
     // Destroy if the puzzle was already solved
     if (CHECK_EVENT_FLAGS(
             EVENT_FLAG_ID_CASTLE_CENTER_4F_AND_MAZE_GARDEN,
-            EVENT_FLAG_CASTLE_WALL_LIBRARY_AND_MAZE_GARDEN_LIBRARY_PUZZLE_SOLVED
+            EVENT_FLAG_CASTLE_CENTER_4F_AND_MAZE_GARDEN_LIBRARY_PUZZLE_SOLVED
         )) {
         self->header.destroy(self);
         return;
@@ -372,7 +372,7 @@ void cv64_ovl_librarypuzzletxt_success(cv64_ovl_librarypuzzletxt_t* self) {
     sys.cutscene_ID = CUTSCENE_ID_LIBRARY_PUZZLE_SOLVED;
     SET_EVENT_FLAGS(
         EVENT_FLAG_ID_CASTLE_CENTER_4F_AND_MAZE_GARDEN,
-        EVENT_FLAG_CASTLE_WALL_LIBRARY_AND_MAZE_GARDEN_LIBRARY_PUZZLE_SOLVED
+        EVENT_FLAG_CASTLE_CENTER_4F_AND_MAZE_GARDEN_LIBRARY_PUZZLE_SOLVED
     );
     BITS_SET(data->lens->flags, WINDOW_CLOSING | WINDOW_OPENING);
     BITS_SET(data->options_textbox->flags, CLOSE_TEXTBOX);

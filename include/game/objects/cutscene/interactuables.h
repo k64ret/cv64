@@ -16,7 +16,7 @@
 #define INTERACTUABLES_SETTINGS_TYPE_TEXT_SPOT 2
 
 // Variable 1: ID + 1 in `interactuables_settings_table` to get the settings from
-#define INTERACTUABLES_SETTINGS_TABLE_ENTRY_ID settings->variable_1
+#define INTERACTUABLES_SETTINGS_TABLE_ENTRY_ID(id) (id - 1)
 
 // Variable 2:
 // Items: Upper 2-bytes of the event flag
