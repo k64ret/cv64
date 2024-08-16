@@ -99,7 +99,7 @@ specialTextbox* Player_getActorCurrentlyInteractingWith() {
     }
     if (sys.SaveStruct_gameplay.map == HONMARU_B1F) {
         player_model = ptr_PlayerData->visualData.model;
-        actor        = Player_getSpecialTextboxCurrentlyInteractingWith(
+        actor        = (specialTextbox*) Player_getSpecialTextboxCurrentlyInteractingWith(
             CUTSCENE_MANDRAGORA_TEXTBOX, player_model
         );
         if (actor != NULL) {
@@ -108,7 +108,7 @@ specialTextbox* Player_getActorCurrentlyInteractingWith() {
     }
     if (sys.SaveStruct_gameplay.map == HONMARU_3F_KITA) {
         player_model = ptr_PlayerData->visualData.model;
-        actor        = Player_getSpecialTextboxCurrentlyInteractingWith(
+        actor        = (specialTextbox*) Player_getSpecialTextboxCurrentlyInteractingWith(
             CUTSCENE_NITRO_TEXTBOX, ptr_PlayerData->visualData.model
         );
         if (actor != NULL) {
@@ -119,14 +119,14 @@ specialTextbox* Player_getActorCurrentlyInteractingWith() {
         (sys.SaveStruct_gameplay.map == HONMARU_2F) ||
         (sys.SaveStruct_gameplay.map == HONMARU_3F_MINAMI)) {
         player_model = ptr_PlayerData->visualData.model;
-        actor        = Player_getSpecialTextboxCurrentlyInteractingWith(
+        actor        = (specialTextbox*) Player_getSpecialTextboxCurrentlyInteractingWith(
             CUTSCENE_NITRO_DISPOSAL_TEXTBOX, player_model
         );
         if (actor != NULL) {
             return actor;
         }
         if (sys.SaveStruct_gameplay.map == HONMARU_1F) {
-            actor = Player_getSpecialTextboxCurrentlyInteractingWith(
+            actor = (specialTextbox*) Player_getSpecialTextboxCurrentlyInteractingWith(
                 CUTSCENE_BOTTOM_ELEVATOR_ACTIVATOR_TEXTBOX, player_model
             );
             if (actor != NULL) {
@@ -136,7 +136,7 @@ specialTextbox* Player_getActorCurrentlyInteractingWith() {
     }
     if ((sys.SaveStruct_gameplay.map == HONMARU_B1F) ||
         (sys.SaveStruct_gameplay.map == HONMARU_3F_MINAMI)) {
-        actor = Player_getSpecialTextboxCurrentlyInteractingWith(
+        actor = (specialTextbox*) Player_getSpecialTextboxCurrentlyInteractingWith(
             CUTSCENE_EXPLOSIVE_WALL_SPOT, ptr_PlayerData->visualData.model
         );
         if (actor != NULL) {
@@ -151,8 +151,8 @@ specialTextbox* Player_getActorCurrentlyInteractingWith() {
 specialTextbox*
 Player_getSpecialTextboxCurrentlyInteractingWith(s16 actor_ID, cv64_model_inf_t* player_model) {
     specialTextbox* actor;
-    u16 temp1;
-    u16 temp2;
+    u16 angle_player_textspot;
+    u16 player_facing_angle;
 
     actor = (specialTextbox*) objectList_findFirstObjectByID(actor_ID);
     if (actor != NULL) {
@@ -164,17 +164,17 @@ Player_getSpecialTextboxCurrentlyInteractingWith(s16 actor_ID, cv64_model_inf_t*
                     (player_model->position.z <= (actor->trigger_size_Z + actor->position.z))) {
                     if (1) {
                     }
-                    temp2 = (u16) player_model->angle.yaw + 0x2000;
+                    player_facing_angle = (u16) player_model->angle.yaw + 0x2000;
                     if (1) {
                     }
-                    temp1 = getAngleBetweenPlayerAndInteractuable(
-                                player_model->position.x,
-                                player_model->position.z,
-                                actor->position.x,
-                                actor->position.z
-                            ) -
-                        temp2;
-                    if ((((temp1) + 0x4000) & 0xFFFF) <= 0x9000) {
+                    angle_player_textspot = getAngleBetweenPlayerAndInteractuable(
+                                                player_model->position.x,
+                                                player_model->position.z,
+                                                actor->position.x,
+                                                actor->position.z
+                                            ) -
+                        player_facing_angle;
+                    if ((((angle_player_textspot) + 0x4000) & 0xFFFF) <= 0x9000) {
                         return actor;
                     }
                 }
@@ -187,10 +187,10 @@ Player_getSpecialTextboxCurrentlyInteractingWith(s16 actor_ID, cv64_model_inf_t*
 s32 playerCanInteractWithInteractuable(f32 pos_X, f32 pos_Y, f32 pos_Z, interactuables* actor) {
     cv64_model_inf_t* player_model    = ptr_PlayerData->visualData.model;
     interactuables_settings* settings = &interactuables_settings_table[0, (s16) actor->table_index];
-    f32 sp34;
-    f32 sp38;
-    u16 temp1;
-    u16 temp_s0;
+    f32 sine;
+    f32 cosine;
+    u16 angle_player_item;
+    u16 player_facing_angle;
 
     if (settings->type == ITEM_KIND_ITEM) {
         if (((pos_X - settings->trigger_size) <= player_model->position.x) &&
@@ -199,17 +199,17 @@ s32 playerCanInteractWithInteractuable(f32 pos_X, f32 pos_Y, f32 pos_Z, interact
                 (player_model->position.y <= (settings->trigger_size + pos_Y))) {
                 if (((pos_Z - settings->trigger_size) <= player_model->position.z) &&
                     (player_model->position.z <= (settings->trigger_size + pos_Z))) {
-                    temp_s0 = (u16) player_model->angle.yaw + 0x2000;
-                    sp34    = ((*sins)(temp_s0) / 32768.0f) * -2.0 * 1.0f;
-                    sp38    = ((*coss)(temp_s0) / 32768.0f) * -2.0 * 1.0f;
-                    temp1   = getAngleBetweenPlayerAndInteractuable(
-                                player_model->position.x + sp34,
-                                player_model->position.z + sp38,
-                                pos_X,
-                                pos_Z
-                            ) -
-                        temp_s0;
-                    if ((((temp1) + 0x4000) & 0xFFFF) <= 0x8000) {
+                    player_facing_angle = (u16) player_model->angle.yaw + 0x2000;
+                    sine                = ((*sins)(player_facing_angle) / 32768.0f) * -2.0 * 1.0f;
+                    cosine              = ((*coss)(player_facing_angle) / 32768.0f) * -2.0 * 1.0f;
+                    angle_player_item   = getAngleBetweenPlayerAndInteractuable(
+                                            player_model->position.x + sine,
+                                            player_model->position.z + cosine,
+                                            pos_X,
+                                            pos_Z
+                                        ) -
+                        player_facing_angle;
+                    if ((((angle_player_item) + 0x4000) & 0xFFFF) <= 0x8000) {
                         return TRUE;
                     }
                 }
@@ -222,12 +222,13 @@ s32 playerCanInteractWithInteractuable(f32 pos_X, f32 pos_Y, f32 pos_Z, interact
                 (player_model->position.y <= (pos_Y + 8.0f))) {
                 if (((pos_Z - actor->trigger_Z_size) <= player_model->position.z) &&
                     (player_model->position.z <= (actor->trigger_Z_size + pos_Z))) {
-                    temp_s0 = (u16) player_model->angle.yaw + 0x2000;
-                    temp1   = getAngleBetweenPlayerAndInteractuable(
-                                player_model->position.x, player_model->position.z, pos_X, pos_Z
-                            ) -
-                        temp_s0;
-                    if ((((temp1) + 0x4000) & 0xFFFF) <= 0x9000) {
+                    player_facing_angle = (u16) player_model->angle.yaw + 0x2000;
+                    angle_player_item =
+                        getAngleBetweenPlayerAndInteractuable(
+                            player_model->position.x, player_model->position.z, pos_X, pos_Z
+                        ) -
+                        player_facing_angle;
+                    if ((((angle_player_item) + 0x4000) & 0xFFFF) <= 0x9000) {
                         return TRUE;
                     }
                 }
