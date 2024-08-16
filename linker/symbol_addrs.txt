@@ -2190,7 +2190,7 @@ D_8018ab80 = 0x8018ab80;  // type:jtbl size:0x74
 
 // End of src/common/A9560.c ===========================================================
 
-// src/common/EDA60.c ==================================================================
+// src/common/interactuables_tables.c ==================================================================
 
 // .data
 castleWallGratingMechanism_textSpotsActorSettings_openMechanism = 0x8016a870;  // size:0x10
@@ -2200,7 +2200,7 @@ castleWallGratingMechanism_textSpotsActorSettings = 0x8016a8f8;  // size:0x0C
 interactuables_settings_table = 0x8016a904;  // size:0x9C4
 item_model_settings_list = 0x8016b2c8;  // size:0x290
 
-// End of src/common/EDA60.c ===========================================================
+// End of src/common/interactuables_tables.c ===========================================================
 
 cutsceneTrigger_entrypoint = 0x801274f0;
 cutsceneTrigger_checkCollision = 0x801276b4;

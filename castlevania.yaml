@@ -557,7 +557,7 @@ segments:
       - [0x000E9800, asm]   # Also contains code for the `rain` object
       - [0x000EA9B0, asm, common/actor_creator]
       - [0x000EB700, asm]   # Contains object 0x00BA's code
-      - [0x000EDA60, data, common/EDA60]
+      - [0x000EDA60, .data, common/interactuables_tables]
       - [0x000EE750, .data, common/interactuables]
       - [0x000EE770, .data, common/cutscene_manager]
       - [0x000EE790, data, common/cutscene_trigger]
