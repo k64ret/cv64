@@ -6,6 +6,15 @@
 #define LEVER_STATE_RAISED_UP 0
 #define LEVER_STATE_PULL      1
 
+// The first lever, which opens the first grate, which summons a Weretiger
+#define LEVER_TYPE_WERETIGER 0
+// The second lever, which lowers two platforms
+#define LEVER_TYPE_LOWER_PLATFORMS 1
+// The third lever, which opens the door leading to the fourth lever
+#define LEVER_TYPE_OPEN_LEVER_4_DOOR 2
+// The fourth lever, which opens the grating towards the final King Skeleton
+#define LEVER_TYPE_OPEN_BOSS_DOOR 3
+
 typedef struct {
     u8 field_0x00[6];
     s16 field_0x06;
