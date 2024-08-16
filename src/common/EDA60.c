@@ -6,6 +6,7 @@
 
 #include "A9560.h"
 #include "event_flags.h"
+#include "cutscene_ID.h"
 
 /*
 cv64_actor_settings_t castleWallGratingMechanism_textSpotsActorSettings_openMechanism = {
