@@ -5,14 +5,14 @@
 #include "save.h"
 #include "actor_settings.h"
 
-#define INTERACT_TYPE_NONE      0
-#define INTERACT_TYPE_ITEM      1
-#define INTERACT_TYPE_TEXT_SPOT 2
-#define INTERACT_TYPE_OTHERS    3 /* Special textboxes, doors, etc */
+#define INTERACT_TYPE_NONE       0
+#define INTERACT_TYPE_ITEM       1
+#define INTERACT_TYPE_PULL_LEVER 2 // See `interactuables_getInteractingType`
+#define INTERACT_TYPE_TEXT_SPOT  3
 
 typedef struct door_item_open_verify_struct {
-    s16 item_ID;
-    s16 event_flag_IDs;
+    s16 item;
+    s16 event_flag_ID;
     u32 event_flag;
 } door_item_open_verify_struct;
 
@@ -35,13 +35,15 @@ typedef struct specialTextbox {
 specialTextbox* Player_getActorCurrentlyInteractingWith();
 specialTextbox*
 Player_getSpecialTextboxCurrentlyInteractingWith(s16 actor_ID, cv64_model_inf_t* player_model);
-s32 playerCanInteractWithInteractuable(f32 pos_X, f32 pos_Y, f32 pos_Z, interactuables* actor);
+s32 playerCanInteractWithInteractuable(
+    f32 actor_pos_X, f32 actor_pos_Y, f32 actor_pos_Z, interactuables* actor
+);
 s32 interactuables_getInteractingType(specialTextbox* actor);
 void interactuables_enableTextbox(specialTextbox* actor);
 void interactuables_setInteractingFlag(specialTextbox* actor);
 u32 getMapEventFlagID(s16 stage_ID);
 void spawnCastleWallGratingMechanismTextboxes(s16 index);
-void checkDoorCanBeOpenedWithKey(s16 event_flag_IDs, u32 event_flag);
+void removeKeyWhenOpeningDoor(s16 event_flag_ID, u32 event_flag);
 
 extern door_item_open_verify_struct door_item_open_verify_list[13];
 extern cv64_actor_settings_t* castleWallGratingMechanism_textSpotsActorSettings[1][3];

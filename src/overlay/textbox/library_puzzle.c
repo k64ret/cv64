@@ -47,9 +47,13 @@ void cv64_ovl_librarypuzzletxt_init(cv64_ovl_librarypuzzletxt_t* self) {
         return;
     }
 
-    self->position.x     = settings->position.x;
-    self->position.y     = settings->position.y;
-    self->position.z     = settings->position.z;
+    self->position.x = settings->position.x;
+    self->position.y = settings->position.y;
+    self->position.z = settings->position.z;
+    /**
+     * The trigger sizes below are unused, since `Player_getActorCurrentlyInteractingWith`
+     * uses other hardcoded trigger sizes when the player checks out the puzzle's trigger
+     */
     self->trigger_size_X = 10;
     self->trigger_size_Z = 10;
     (*object_allocEntryInListAndClear)(

@@ -2183,7 +2183,7 @@ interactuables_enableTextbox = 0x80126cd4;  // type:func
 interactuables_setInteractingFlag = 0x80126ce0;  // type:func
 getMapEventFlagID = 0x80126cec; // type:func
 spawnCastleWallGratingMechanismTextboxes = 0x80126e04; // type:func
-checkDoorCanBeOpenedWithKey              = 0x80126ea0; // type:func
+removeKeyWhenOpeningDoor              = 0x80126ea0; // type:func
 
 // .rodata
 D_8018ab80 = 0x8018ab80;  // type:jtbl size:0x74
