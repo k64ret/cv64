@@ -32,6 +32,10 @@
 // Text spots: Size of the trigger (Z)
 #define TEXT_SPOT_Z_SIZE settings->variable_3
 
+/**
+ * This enum contains the indexes corresponding to
+ * each entry from `interactuables_settings_table`
+ */
 typedef enum cv64_interactuables_settings_table_id {
     //// Items ////
     // Visible + Doesn't vanish

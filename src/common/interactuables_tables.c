@@ -9,6 +9,10 @@
 #include "cutscene_ID.h"
 #include "objects/map/lever.h"
 
+/**
+ * Actor settings for the text spot that activates the opening mechanism
+ * to open the grating from Castle Wall (`INTERACT_ID_TEXT_72`)
+ */
 cv64_actor_settings_t castleWallGratingMechanism_textSpotsActorSettings_openMechanism = {
     {257, 306, 71},
     CUTSCENE_INTERACTUABLES,
@@ -19,6 +23,10 @@ cv64_actor_settings_t castleWallGratingMechanism_textSpotsActorSettings_openMech
     0
 };
 
+/**
+ * Actor settings for the text spot that tells the player that the grating
+ * from Castle Wall is already open (`INTERACT_ID_TEXT_71`)
+ */
 cv64_actor_settings_t castleWallGratingMechanism_textSpotsActorSettings_mechanismOpened = {
     {257, 306, 71},
     CUTSCENE_INTERACTUABLES,
@@ -29,22 +37,22 @@ cv64_actor_settings_t castleWallGratingMechanism_textSpotsActorSettings_mechanis
     0
 };
 
+// clang-format off
+
+/**
+ * This table contains a list of all key items alongside the event flags that get set
+ * when the players picks those keys up.
+ *
+ * Used by `removeKeyWhenOpeningDoor`
+ */
 door_item_open_verify_struct door_item_open_verify_list[] = {
     {ITEM_ID_ARCHIVES_KEY, EVENT_FLAG_ID_VILLA_INSIDE, EVENT_FLAG_VILLA_INSIDE_GET_ARCHIVES_KEY},
-    {ITEM_ID_LEFT_TOWER_KEY,
-     EVENT_FLAG_ID_CASTLE_WALL_MAIN,
-     EVENT_FLAG_CASTLE_WALL_GET_LEFT_TOWER_KEY},
+    {ITEM_ID_LEFT_TOWER_KEY, EVENT_FLAG_ID_CASTLE_WALL_MAIN, EVENT_FLAG_CASTLE_WALL_GET_LEFT_TOWER_KEY},
     {ITEM_ID_STOREROOM_KEY, EVENT_FLAG_ID_VILLA_INSIDE, EVENT_FLAG_VILLA_INSIDE_GET_STOREROOM_KEY},
     {ITEM_ID_GARDEN_KEY, EVENT_FLAG_ID_VILLA_INSIDE, EVENT_FLAG_VILLA_INSIDE_GET_GARDEN_KEY},
-    {ITEM_ID_COPPER_KEY,
-     EVENT_FLAG_ID_CASTLE_CENTER_4F_AND_MAZE_GARDEN,
-     EVENT_FLAG_CASTLE_CENTER_4F_AND_MAZE_GARDEN_GET_COPPER_KEY},
-    {ITEM_ID_CHAMBER_KEY,
-     EVENT_FLAG_ID_CASTLE_CENTER_3F,
-     EVENT_FLAG_CASTLE_CENTER_3F_GET_CHAMBER_KEY},
-    {ITEM_ID_EXECUTION_KEY,
-     EVENT_FLAG_ID_TOWER_EXECUTION_SORCERY_DUEL_ENDING,
-     EVENT_FLAG_TOWER_EXECUTION_SORCERY_DUEL_ENDING_GET_EXECUTION_KEY},
+    {ITEM_ID_COPPER_KEY, EVENT_FLAG_ID_CASTLE_CENTER_4F_AND_MAZE_GARDEN, EVENT_FLAG_CASTLE_CENTER_4F_AND_MAZE_GARDEN_GET_COPPER_KEY},
+    {ITEM_ID_CHAMBER_KEY, EVENT_FLAG_ID_CASTLE_CENTER_3F, EVENT_FLAG_CASTLE_CENTER_3F_GET_CHAMBER_KEY},
+    {ITEM_ID_EXECUTION_KEY, EVENT_FLAG_ID_TOWER_EXECUTION_SORCERY_DUEL_ENDING, EVENT_FLAG_TOWER_EXECUTION_SORCERY_DUEL_ENDING_GET_EXECUTION_KEY},
     {ITEM_ID_SCIENCE_KEY1, EVENT_FLAG_ID_TOWER_SCIENCE, EVENT_FLAG_TOWER_SCIENCE_GET_KEY1},
     {ITEM_ID_SCIENCE_KEY2, EVENT_FLAG_ID_TOWER_SCIENCE, EVENT_FLAG_TOWER_SCIENCE_GET_KEY2},
     {ITEM_ID_SCIENCE_KEY3, EVENT_FLAG_ID_TOWER_SCIENCE, EVENT_FLAG_TOWER_SCIENCE_GET_KEY3},
@@ -53,14 +61,19 @@ door_item_open_verify_struct door_item_open_verify_list[] = {
     {ITEM_ID_CLOCKTOWER_KEY3, EVENT_FLAG_ID_CLOCK_TOWER, EVENT_FLAG_CLOCK_TOWER_GET_KEY3}
 };
 
+/**
+ * Used by `spawnCastleWallGratingMechanismTextboxes`
+ */
 cv64_actor_settings_t* castleWallGratingMechanism_textSpotsActorSettings[1][3] = {
     {NULL,
      &castleWallGratingMechanism_textSpotsActorSettings_openMechanism,
      &castleWallGratingMechanism_textSpotsActorSettings_mechanismOpened}
 };
 
-// clang-format off
-
+/**
+ * This table contains parameters used by the `interactuables` object, such as what
+ * "type" of interactuable it is, the size of its trigger, etc.
+ */
 interactuables_settings interactuables_settings_table[] = {
     // INTERACT_ID_NO_VANISH_WHITE_JEWEL
     {ITEM_KIND_ITEM, ITEM_ID_WHITE_JEWEL, 0x0000, {0x00, 0x00}, 0x00000000, 5, 0x0000, 12, {0x00, 0x00}},
@@ -314,6 +327,10 @@ interactuables_settings interactuables_settings_table[] = {
     {ITEM_KIND_TEXT_SPOT, 0x000A, (TEXT_SPOT_DESTROY_IF_EVENT_FLAG_IS_SET), {0x00, 0x00}, 0x00000010, 0x0000, 0x0000, 5, {0x00, 0x00}}
 };
 
+/**
+ * This table contains information on how the pickable items should look like,
+ * including parameters like what model and palette it should load, etc.
+ */
 // TODO: `extern const u32` for the dlists
 item_model_settings item_model_settings_list[] = {
     {0x060034C0, 1.00f, 0, 0, 255, 0x00, ITEM_ID_WHITE_JEWEL, (ITEM_MODEL_SETTINGS_FLAG_SPINS), 0x00, 0x00},
