@@ -11,12 +11,12 @@
 
 /**
  * Actor settings for the text spot that activates the opening mechanism
- * to open the grating from Castle Wall (`INTERACT_ID_TEXT_72`)
+ * to open the grating from Castle Wall (`INTERACT_ID_TEXT_71`)
  */
 cv64_actor_settings_t castleWallGratingMechanism_textSpotsActorSettings_openMechanism = {
     {257, 306, 71},
     CUTSCENE_INTERACTUABLES,
-    INTERACT_ID_TEXT_72,
+    INTERACTUABLES_VARIABLE_1(INTERACT_ID_TEXT_71),
     7,
     6,
     DIFFICULTY_AND_SPAWN_SETTINGS_1(SPAWN_ON_ALL_DIFFICULTIES, SPAWN_SETTINGS_1),
@@ -25,12 +25,12 @@ cv64_actor_settings_t castleWallGratingMechanism_textSpotsActorSettings_openMech
 
 /**
  * Actor settings for the text spot that tells the player that the grating
- * from Castle Wall is already open (`INTERACT_ID_TEXT_71`)
+ * from Castle Wall is already open (`INTERACT_ID_TEXT_70`)
  */
 cv64_actor_settings_t castleWallGratingMechanism_textSpotsActorSettings_mechanismOpened = {
     {257, 306, 71},
     CUTSCENE_INTERACTUABLES,
-    INTERACT_ID_TEXT_71,
+    INTERACTUABLES_VARIABLE_1(INTERACT_ID_TEXT_70),
     7,
     6,
     DIFFICULTY_AND_SPAWN_SETTINGS_1(SPAWN_ON_ALL_DIFFICULTIES, SPAWN_SETTINGS_1),

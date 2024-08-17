@@ -17,6 +17,7 @@
 
 // Variable 1: ID + 1 in `interactuables_settings_table` to get the settings from
 #define INTERACTUABLES_SETTINGS_TABLE_ENTRY_ID(id) (id - 1)
+#define INTERACTUABLES_VARIABLE_1(id)              (id + 1) // Used in the `interactuables`'s actor settings
 
 // Variable 2:
 // Items: Upper 2-bytes of the event flag
