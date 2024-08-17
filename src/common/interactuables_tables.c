@@ -4,7 +4,7 @@
  * Contains tables used by interactuables and the different text spots.
  */
 
-#include "A9560.h"
+#include "objects/cutscene/interactuables_helpers.h"
 #include "event_flags.h"
 #include "cutscene_ID.h"
 #include "objects/map/lever.h"

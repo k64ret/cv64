@@ -1,7 +1,7 @@
-#ifndef A9560_H
-#define A9560_H
+#ifndef INTERACTUABLES_HELPERS_H
+#define INTERACTUABLES_HELPERS_H
 
-#include "objects/cutscene/interactuables.h"
+#include "interactuables.h"
 #include "save.h"
 #include "actor_settings.h"
 

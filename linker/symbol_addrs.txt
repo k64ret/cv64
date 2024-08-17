@@ -2172,7 +2172,7 @@ prepareSoundToPlayAndSetVolume = 0x80079e04;
 guPerspective = 0x8007f800;
 osDestroyThread = 0x80080cb0;
 
-// src/common/A9560.c ==================================================================
+// src/common/interactuables_helpers.c ==================================================================
 
 // .text
 Player_getActorCurrentlyInteractingWith = 0x80126370; // type:func
@@ -2188,7 +2188,7 @@ removeKeyWhenOpeningDoor              = 0x80126ea0; // type:func
 // .rodata
 D_8018ab80 = 0x8018ab80;  // type:jtbl size:0x74
 
-// End of src/common/A9560.c ===========================================================
+// End of src/common/interactuables_helpers.c ===========================================================
 
 // src/common/interactuables_tables.c ==================================================================
 

@@ -1,10 +1,10 @@
 /**
- * @file A9560.c
+ * @file interactuables_helpers.c
  *
  * Contains helper functions used for interactions between the player and interactuables.
  */
 
-#include "A9560.h"
+#include "objects/cutscene/interactuables_helpers.h"
 #include "objects/cutscene/cutsceneMgr.h"
 #include "system_work.h"
 
