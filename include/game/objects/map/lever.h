@@ -6,10 +6,14 @@
 #define LEVER_STATE_RAISED_UP 0
 #define LEVER_STATE_PULL      1
 
-// The first lever, which opens the first grate, which summons a Weretiger
+// (Forest of Silence) The first lever, which opens the first grate, which summons a Weretiger
 #define LEVER_TYPE_WERETIGER 0
-// The second lever, which lowers two platforms
+// (Castle Wall Main) White Dragon lever
+#define LEVER_TYPE_WHITE_DRAGON 0
+// (Forest of Silence) The second lever, which lowers two platforms
 #define LEVER_TYPE_LOWER_PLATFORMS 1
+// (Castle Wall Main) The lever in the room the player watches Dracula for the first time
+#define LEVER_TYPE_DRACULA 1
 // The third lever, which opens the door leading to the fourth lever
 #define LEVER_TYPE_OPEN_LEVER_4_DOOR 2
 // The fourth lever, which opens the grating towards the final King Skeleton

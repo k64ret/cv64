@@ -21,7 +21,7 @@
 // Villa (Foyer, rose garden, and servant entrance area)
 // Villa (Hallway, bedroom, living room, storeroom, and archives area)
 #define EVENT_FLAG_ID_VILLA_INSIDE 1
-// Tunnel
+// Underground Waterway
 // Castle Center (Top elevator room)
 #define EVENT_FLAG_ID_WATERWAY_AND_CASTLE_CENTER_5F 2
 // Castle Center (Broken staircase, friendly lizard-man, vampire butler room, and upper cracked wall area)
@@ -66,6 +66,7 @@
  *  Event flags
  */
 // EVENT_FLAG_ID_FOREST_AND_DEFAULT
+#define EVENT_FLAG_FOREST_AND_DEFAULT_SKELETONS_AWAKEN           0x00000001
 #define EVENT_FLAG_FOREST_AND_DEFAULT_WERETIGER_DOOR_UNLOCKED    0x00000100
 #define EVENT_FLAG_FOREST_AND_DEFAULT_LEVER_LOWER_PLATFORMS      0x00000200
 #define EVENT_FLAG_FOREST_AND_DEFAULT_LEVER_OPEN_LEVER_4_DOOR    0x00000400
@@ -77,6 +78,9 @@
 #define EVENT_FLAG_VILLA_INSIDE_GET_STOREROOM_KEY 0x02000000
 #define EVENT_FLAG_VILLA_INSIDE_GET_GARDEN_KEY    0x08000000
 #define EVENT_FLAG_VILLA_INSIDE_GET_ARCHIVES_KEY  0x10000000
+
+// EVENT_FLAG_ID_WATERWAY_AND_CASTLE_CENTER_5F
+#define EVENT_FLAG_WATERWAY_BUTTON_PAST_BRICKS_PRESSED 0x00000010
 
 // EVENT_FLAG_ID_CASTLE_CENTER_3F
 #define EVENT_FLAG_CASTLE_CENTER_3F_GET_CHAMBER_KEY                 0x00400000

@@ -108,7 +108,7 @@ extern void* NisitenmaIchigoFiles_segmentToVirtual(u32 segment_address, s32 file
 #define SCREEN_HEIGHT 240
 
 // Text IDs for Forest of Silence
-#define FOREST_WERETIGER_DOOR_LOCKED 1
+#define FOREST_LOCKED_DOOR 1
 /**
  * "The lady who blesses and restores" statue,
  * right before the final King Skeleton boss door
@@ -116,9 +116,15 @@ extern void* NisitenmaIchigoFiles_segmentToVirtual(u32 segment_address, s32 file
 #define FOREST_LADY_WHO_BLESSES_INSCRIPTION 4
 #define FOREST_LADY_WHO_BLESSES_STATUE      5
 #define FOREST_ACTIVATE_LEVER               6
+#define FOREST_DEAD_SKELETON                8
+#define FOREST_DEAD_BODY                    10
+// Text IDs for Villa (Front Yard)
+#define VILLA_OUTSIDE_CHIMERA_STATUE 6
 // Text IDs for Castle Wall (Main)
 #define CASTLE_WALL_MAIN_OPEN_GRATING           8
 #define CASTLE_WALL_MAIN_GRATING_ALREADY_OPENED 9
+// Text IDs for Undeground Waterway
+#define WATERWAY_DOOR_CLOSED 10
 // Text IDs for Castle Center (Main)
 #define CASTLE_CENTER_MAIN_WALL_INFO           2
 #define CASTLE_CENTER_MAIN_TAKE_MANDRAGORA     10

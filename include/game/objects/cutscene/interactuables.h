@@ -119,7 +119,7 @@ typedef enum cv64_interactuables_settings_table_id {
     INTERACT_ID_TEXT_46                             = 0x46,
     INTERACT_ID_FOREST_LADY_WHO_BLESSES_INSCRIPTION = 0x47,
     INTERACT_ID_FOREST_LADY_WHO_BLESSES_STATUE      = 0x48,
-    INTERACT_ID_TEXT_49                             = 0x49,
+    INTERACT_ID_VILLA_OUTSIDE_CHIMERA               = 0x49,
     INTERACT_ID_TEXT_4A                             = 0x4A,
     INTERACT_ID_TEXT_4B                             = 0x4B,
     INTERACT_ID_TEXT_4C                             = 0x4C,
@@ -160,17 +160,17 @@ typedef enum cv64_interactuables_settings_table_id {
     INTERACT_ID_TEXT_6F                             = 0x6F,
     INTERACT_ID_CASTLE_WALL_MAIN_GRATING_OPENED     = 0x70,
     INTERACT_ID_CASTLE_WALL_MAIN_OPEN_GRATING       = 0x71,
-    INTERACT_ID_FOREST_WERETIGER_DOOR_LOCKED        = 0x72,
-    INTERACT_ID_TEXT_73                             = 0x73,
-    INTERACT_ID_TEXT_74                             = 0x74,
-    INTERACT_ID_TEXT_75                             = 0x75,
-    INTERACT_ID_TEXT_76                             = 0x76,
-    INTERACT_ID_TEXT_77                             = 0x77,
-    INTERACT_ID_TEXT_78                             = 0x78,
+    INTERACT_ID_FOREST_LOCKED_DOOR                  = 0x72,
+    INTERACT_ID_FOREST_LEVER_WERETIGER              = 0x73,
+    INTERACT_ID_FOREST_LEVER_LOWER_PLATFORMS        = 0x74,
+    INTERACT_ID_FOREST_LEVER_OPEN_LEVER_4_DOOR      = 0x75,
+    INTERACT_ID_FOREST_LOCKED_FENCE                 = 0x76,
+    INTERACT_ID_FOREST_LOCKED_LEVER_4_DOOR          = 0x77,
+    INTERACT_ID_FOREST_DEAD_SKELETON                = 0x78,
     INTERACT_ID_TEXT_79                             = 0x79,
-    INTERACT_ID_TEXT_7A                             = 0x7A,
-    INTERACT_ID_TEXT_7B                             = 0x7B,
-    INTERACT_ID_TEXT_7C                             = 0x7C
+    INTERACT_ID_FOREST_LEVER_OPEN_BOSS_DOOR         = 0x7A,
+    INTERACT_ID_FORET_LOCKED_FINAL_BOSS_DOOR        = 0x7B,
+    INTERACT_ID_WATERWAY_DOOR_CLOSED                = 0x7C
 } cv64_interactuables_settings_table_id_t;
 
 typedef enum cv64_interactuables_settings_flag {
