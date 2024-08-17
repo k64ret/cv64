@@ -115,6 +115,7 @@ extern void* NisitenmaIchigoFiles_segmentToVirtual(u32 segment_address, s32 file
  */
 #define FOREST_LADY_WHO_BLESSES_INSCRIPTION 4
 #define FOREST_LADY_WHO_BLESSES_STATUE      5
+#define FOREST_ACTIVATE_LEVER               6
 // Text IDs for Castle Wall (Main)
 #define CASTLE_WALL_MAIN_OPEN_GRATING           8
 #define CASTLE_WALL_MAIN_GRATING_ALREADY_OPENED 9
