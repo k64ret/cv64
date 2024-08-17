@@ -109,6 +109,12 @@ extern void* NisitenmaIchigoFiles_segmentToVirtual(u32 segment_address, s32 file
 
 // Text IDs for Forest of Silence
 #define FOREST_WERETIGER_DOOR_LOCKED 1
+/**
+ * "The lady who blesses and restores" statue,
+ * right before the final King Skeleton boss door
+ */
+#define FOREST_LADY_WHO_BLESSES_INSCRIPTION 4
+#define FOREST_LADY_WHO_BLESSES_STATUE      5
 // Text IDs for Castle Wall (Main)
 #define CASTLE_WALL_MAIN_OPEN_GRATING           8
 #define CASTLE_WALL_MAIN_GRATING_ALREADY_OPENED 9
