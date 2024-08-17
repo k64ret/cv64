@@ -160,7 +160,7 @@ typedef enum cv64_interactuables_settings_table_id {
     INTERACT_ID_TEXT_6F                         = 0x6F,
     INTERACT_ID_CASTLE_WALL_MAIN_GRATING_OPENED = 0x70,
     INTERACT_ID_CASTLE_WALL_MAIN_OPEN_GRATING   = 0x71,
-    INTERACT_ID_TEXT_72                         = 0x72,
+    INTERACT_ID_FOREST_WERETIGER_DOOR_LOCKED    = 0x72,
     INTERACT_ID_TEXT_73                         = 0x73,
     INTERACT_ID_TEXT_74                         = 0x74,
     INTERACT_ID_TEXT_75                         = 0x75,
