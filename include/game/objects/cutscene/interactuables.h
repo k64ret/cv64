@@ -115,11 +115,11 @@ typedef enum cv64_interactuables_settings_table_id {
     //// Text spots ////
     /**
      * Text spots labelled with "GENERIC"
-     * are used accross many maps, and not specific
+     * are used accross various maps, and are not specific
      * to certain situations.
      *
-     * The number following this corresponds to the text ID
-     * associated to them.
+     * The number following the "GENERIC" labels
+     * correspond to the text ID associated to them.
      */
     INTERACT_ID_TEXT_GENERIC_0                  = 0x43,
     INTERACT_ID_TEXT_GENERIC_1                  = 0x44,
