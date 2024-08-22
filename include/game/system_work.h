@@ -125,8 +125,8 @@ typedef struct {
     u32 pull_lever;
     u8 field50_0x26230[4];
     s16 current_PowerUp_level;
-    u8 alternate_costume;
-    u8 in_first_person_mode;
+    s8 alternate_costume;
+    s8 in_first_person_mode;
     s16 nitro_explosion_hit_launch_angle;
     s16 field55_0x2623a;
     f32 nitro_explosion_hit_launch_speed;
