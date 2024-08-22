@@ -28,6 +28,7 @@ typedef struct {
 typedef f32 Matrix44F[4][4];
 
 extern f32 atan2f(f32 arg1, f32 arg2);
+extern s16 atan2s(s16 y, s16 x);
 
 f32 func_80011310_11F10(f32 src);
 f32 func_80011370_11F70(f32 src);

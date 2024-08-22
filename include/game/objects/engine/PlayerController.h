@@ -9,8 +9,8 @@ typedef struct {
     u8 field_0x20[OBJECT_SIZE - 0x20];
 } PlayerController;
 
-void PlayerController_entrypoint(PlayerController* self);
-void PlayerController_createPlayerObject(PlayerController* self);
+extern void PlayerController_entrypoint(PlayerController* self);
+extern void PlayerController_createPlayerObject(PlayerController* self);
 
 typedef void (*PlayerController_func_t)(PlayerController*);
 
