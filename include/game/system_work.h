@@ -125,8 +125,8 @@ typedef struct {
     u32 pull_lever;
     u8 field50_0x26230[4];
     s16 current_PowerUp_level;
-    s8 alternate_costume;
-    s8 in_first_person_mode;
+    u8 alternate_costume;
+    u8 in_first_person_mode;
     s16 nitro_explosion_hit_launch_angle;
     s16 field55_0x2623a;
     f32 nitro_explosion_hit_launch_speed;
@@ -190,20 +190,21 @@ typedef struct {
 extern system_work sys;
 
 // Controller macros
+#define GET_CONTROLLER(controller_id) sys.controllers[(controller_id)]
 #define CONT_BTNS_HELD(controller_id, buttons)                                                     \
-    BITS_HAS(sys.controllers[(controller_id)].buttons_held, (buttons))
+    BITS_HAS(GET_CONTROLLER(controller_id).buttons_held, (buttons))
 #define CONT_BTNS_PRESSED(controller_id, buttons)                                                  \
-    BITS_HAS(sys.controllers[(controller_id)].buttons_pressed, (buttons))
+    BITS_HAS(GET_CONTROLLER(controller_id).buttons_pressed, (buttons))
 #define CONT_ALL_BTNS_HELD(buttons)                                                                \
     BITS_HAS(                                                                                      \
-        ((sys.controllers[0].buttons_held) | (sys.controllers[1].buttons_held) |                   \
-         (sys.controllers[2].buttons_held) | (sys.controllers[3].buttons_held)),                   \
+        ((GET_CONTROLLER(0).buttons_held) | (GET_CONTROLLER(1).buttons_held) |                     \
+         (GET_CONTROLLER(2).buttons_held) | (GET_CONTROLLER(3).buttons_held)),                     \
         (buttons)                                                                                  \
     )
 #define CONT_ALL_BTNS_PRESSED(buttons)                                                             \
     BITS_HAS(                                                                                      \
-        ((sys.controllers[0].buttons_pressed) | (sys.controllers[1].buttons_pressed) |             \
-         (sys.controllers[2].buttons_pressed) | (sys.controllers[3].buttons_pressed)),             \
+        ((GET_CONTROLLER(0).buttons_pressed) | (GET_CONTROLLER(1).buttons_pressed) |               \
+         (GET_CONTROLLER(2).buttons_pressed) | (GET_CONTROLLER(3).buttons_pressed)),               \
         (buttons)                                                                                  \
     )
 
