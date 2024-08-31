@@ -44,6 +44,7 @@ extern Gfx* gDisplayListHead; // 0x800B49E0
 extern u32 map_misc_event_flags;
 extern u8 PLAYER_HAS_MAX_HEALTH;
 extern u32 map_text_segment_address[28]; // 0x8016D008
+extern u32 D_80185F7C_10916C;
 
 typedef enum cv64_moon_visibility {
     MOON_VISIBILITY_DAY   = 0, // Moon is invisible

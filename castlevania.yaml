@@ -2345,11 +2345,15 @@ segments:
     exclusive_ram_id: nisitenma_ichigo_overlays
 
   - name: ni_ovl_title_demo
-    type: bin
+    type: code
     # start: 0x00B52F02
     start: 0x00E53110
     vram: 0x0F000000
     exclusive_ram_id: nisitenma_ichigo_overlays
+    subsegments:
+      - [0x00E53110, c, overlay/title_demo]
+      - [0x00E53780, .data, overlay/title_demo]
+      - [0x00E55560, .rodata, overlay/title_demo]
 
   - name: ni_ovl_credits_manager
     type: code
