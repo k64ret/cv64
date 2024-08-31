@@ -40,154 +40,155 @@ void interactuables_entrypoint(interactuables* self) {
 }
 
 void interactuables_init(interactuables* self) {
-    cv64_actor_settings_t* settings;
+    cv64_actor_settings_t* settings = self->settings;
     u32 sp18;
     item_model_settings* item_appearence_settings;
     cv64_model_inf_t* item_model;
 
-    settings = self->settings;
+    // clang-format off
+
+    self->table_index = (settings != NULL)
+        ? INTERACTUABLES_SETTINGS_TABLE_ENTRY_ID(settings->variable_1)
+        : self->table_index - 1;
+
+    // clang-format on
+
+    if (ptr_PlayerData == NULL)
+        return;
+
+    self->map_event_flag_ID = getMapEventFlagID(sys.SaveStruct_gameplay.map);
+
     if (settings != NULL) {
-        self->table_index = INTERACTUABLES_SETTINGS_TABLE_ENTRY_ID(settings->variable_1);
-    } else {
-        // Set the table ID to -1 (invalid entry)
-        self->table_index--;
-    }
-    if (ptr_PlayerData != NULL) {
-        self->map_event_flag_ID = getMapEventFlagID(sys.SaveStruct_gameplay.map);
-        if (settings != NULL) {
-            if (interactuables_settings_table[self->table_index].type == ITEM_KIND_ITEM) {
-                if (interactuables_settings_table[self->table_index].item == ITEM_ID_WHITE_JEWEL) {
-                    // Set White Jewel spawn number
-                    self->event_flag = WHITE_JEWEL_SPAWN_NUMBER;
-                } else {
-                    // Set item event flag (variable_2 = upper 2-bytes, variable_3 -> lower 2-bytes)
-                    self->event_flag =
-                        ITEM_EVENT_FLAG_LOWER_2BYTES + (ITEM_EVENT_FLAG_UPPER_2BYTES << 0x10);
-                }
-            } else {
-                // Text spots don't set event flags, so doing this is useless
-                self->event_flag =
-                    ITEM_EVENT_FLAG_LOWER_2BYTES + (ITEM_EVENT_FLAG_UPPER_2BYTES << 0x10);
-            }
-        } else {
-            // Extra empty "else" needed for matching
-        }
-        if ((interactuables_settings_table[self->table_index].type == ITEM_KIND_ITEM) &&
-            // White Jewels always have to spawn
-            (interactuables_settings_table[self->table_index].item != ITEM_ID_WHITE_JEWEL)) {
-            // Don't spawn the item if it has been picked up already
-            // i.e. if the item's associated event flag is set
-            if ((self->event_flag != 0) &&
-                // (0, self->event_flag) needed to avoid v0 / t8 regswap
-                CHECK_EVENT_FLAGS(self->map_event_flag_ID, (0, self->event_flag))) {
-                self->header.destroy(self);
-                return;
-            }
-        }
-
         if (interactuables_settings_table[self->table_index].type == ITEM_KIND_ITEM) {
-            // Create and setup the item model
-            item_model =
-                modelInfo_createAndSetChild(FIG_TYPE_0400 | FIG_TYPE_HIERARCHY_NODE, map_lights[2]);
-            self->model = item_model;
-            if (settings != NULL) {
-                actor_model_set_pos(self, item_model);
-                self->position.x = item_model->position.x;
-                self->position.y = item_model->position.y;
-                self->position.z = item_model->position.z;
-            } else {
-                item_model->position.x = self->position.x;
-                item_model->position.y = self->position.y;
-                item_model->position.z = self->position.z;
-            }
-            item_model->assets_file_ID = ITEM_ASSETS_FILE_ID;
-
-            // Configure some of the model variables by loading them from
-            // the item model settings table
-            item_appearence_settings = itemModelSettings_getEntryFromList(
-                interactuables_settings_table[self->table_index].item
-            );
-            self->item_model_settings_flags = item_appearence_settings->flags;
-
-            // Make the item be able to have variable texture and / or palette.
-            // This is used for the Sun / Moon card, and for the keys.
-            if (item_appearence_settings->texture != 0xFF) {
-                item_model->dlist =
-                    item_appearence_settings->dlist | FIG_VARIABLE_TEXTURE_AND_PALETTE;
-                item_model->texture = item_appearence_settings->texture;
-                item_model->palette = item_appearence_settings->palette;
-            } else {
-                item_model->dlist = item_appearence_settings->dlist;
-            }
-
-            item_model->material_dlist = &ITEM_MATERIAL_DL;
-            if (BITS_HAS(interactuables_settings_table[self->table_index].flags, ITEM_INVISIBLE)) {
-                // Hide the item model
-                BITS_SET(item_model->type, ~FIG_TYPE_SHOW);
-            }
-
-            if (BITS_HAS(self->item_model_settings_flags, ITEM_MODEL_SETTINGS_FLAG_SPINS)) {
-                BITS_SET(item_model->flags, FIG_FLAG_APPLY_PRIMITIVE_COLOR);
-            } else {
-                // Make it so that the item model always looks at the camera if not spinning.
-                // This is necessary for item models that only consists of one texture.
-                BITS_SET(
-                    item_model->flags, FIG_FLAG_APPLY_PRIMITIVE_COLOR | FIG_FLAG_LOOK_AT_CAMERA_YAW
-                );
-            }
-
-            item_model->primitive_color.integer = RGBA(255, 255, 255, 255);
-            // Make all White Jewels semi-transparent if not playing in a save file
-            if ((interactuables_settings_table[self->table_index].item == ITEM_ID_WHITE_JEWEL) &&
-                (sys.contPak_file_no < 0)) {
-                item_model->primitive_color.integer = RGBA(255, 255, 255, 64);
-            }
-            self->primitive_color.integer = item_model->primitive_color.integer;
-            item_model->primitive_color.a = item_appearence_settings->transparency;
-
-            item_model->size.x *= item_appearence_settings->size;
-            item_model->size.y *= item_appearence_settings->size;
-            item_model->size.z *= item_appearence_settings->size;
-
-            // Spawn the Axe and Cross subweapons at a slightly higher position
-            if ((interactuables_settings_table[self->table_index].item == ITEM_ID_AXE) ||
-                (interactuables_settings_table[self->table_index].item == ITEM_ID_CROSS)) {
-                item_model->position.y += 3.2;
-                self->position.y += 3.2;
-                self->item_falling_target_height += 3.2;
-                item_model->angle.roll += 0x1000;
-            }
-            item_model->position.y += 0.1;
-
-            // Set the item trigger size
-            //
-            // This is not necessary, as the trigger size for items is directly checked from
-            // `interactuables_settings_table[self->table_index].trigger_size`
-            // In practice, `trigger_X_size` is only used for text spots
-            self->trigger_X_size = interactuables_settings_table[self->table_index].trigger_size;
+            self->event_flag =
+                (interactuables_settings_table[self->table_index].item == ITEM_ID_WHITE_JEWEL)
+                // Set White Jewel spawn number
+                ? WHITE_JEWEL_SPAWN_NUMBER
+                // Set item event flag (variable_2 = upper 2-bytes, variable_3 -> lower 2-bytes)
+                : ITEM_EVENT_FLAG_LOWER_2BYTES + (ITEM_EVENT_FLAG_UPPER_2BYTES << 0x10);
+        } else {
+            // Text spots don't set event flags, so doing this is useless
+            self->event_flag =
+                ITEM_EVENT_FLAG_LOWER_2BYTES + (ITEM_EVENT_FLAG_UPPER_2BYTES << 0x10);
         }
-
-        // Set the text spot parameters
-        if ((interactuables_settings_table[self->table_index].type == ITEM_KIND_TEXT_SPOT) &&
-            (settings != NULL)) {
-            self->position.x     = settings->position.x;
-            self->position.y     = settings->position.y;
-            self->position.z     = settings->position.z;
-            self->trigger_X_size = TEXT_SPOT_X_SIZE;
-            self->trigger_Z_size = TEXT_SPOT_Z_SIZE;
-        }
-
-        // The time it takes for the flash that appears over an item is selected
-        // by randomly selecting a number between 120 and 150 frames
-        // (4 and 5 seconds)
-        self->time_when_flash_appears_over_item = (u16) ((*random_range)(30) + 120);
-        ITEM_FADE_TIMER                         = 0;
-        self->item_falling_height_multiplier    = 0;
-        self->flash                             = NULL;
-        (*object_curLevel_goToNextFuncAndClearTimer)(
-            self->header.current_function, &self->header.function_info_ID
-        );
+    } else {
+        // Extra empty "else" needed for matching
     }
+
+    if ((interactuables_settings_table[self->table_index].type == ITEM_KIND_ITEM) &&
+        // White Jewels always have to spawn
+        (interactuables_settings_table[self->table_index].item != ITEM_ID_WHITE_JEWEL)) {
+        // Don't spawn the item if it has been picked up already
+        // i.e. if the item's associated event flag is set
+        if ((self->event_flag != 0) &&
+            // (0, self->event_flag) needed to avoid v0 / t8 regswap
+            CHECK_EVENT_FLAGS(self->map_event_flag_ID, (0, self->event_flag))) {
+            self->header.destroy(self);
+            return;
+        }
+    }
+
+    if (interactuables_settings_table[self->table_index].type == ITEM_KIND_ITEM) {
+        // Create and setup the item model
+        item_model =
+            modelInfo_createAndSetChild(FIG_TYPE_0400 | FIG_TYPE_HIERARCHY_NODE, map_lights[2]);
+        self->model = item_model;
+        if (settings != NULL) {
+            actor_model_set_pos(self, item_model);
+            self->position.x = item_model->position.x;
+            self->position.y = item_model->position.y;
+            self->position.z = item_model->position.z;
+        } else {
+            item_model->position.x = self->position.x;
+            item_model->position.y = self->position.y;
+            item_model->position.z = self->position.z;
+        }
+        item_model->assets_file_ID = ITEM_ASSETS_FILE_ID;
+
+        // Configure some of the model variables by loading them from
+        // the item model settings table
+        item_appearence_settings =
+            itemModelSettings_getEntryFromList(interactuables_settings_table[self->table_index].item
+            );
+        self->item_model_settings_flags = item_appearence_settings->flags;
+
+        // Make the item be able to have variable texture and / or palette.
+        // This is used for the Sun / Moon card, and for the keys.
+        if (item_appearence_settings->texture != 0xFF) {
+            item_model->dlist = item_appearence_settings->dlist | FIG_VARIABLE_TEXTURE_AND_PALETTE;
+            item_model->texture = item_appearence_settings->texture;
+            item_model->palette = item_appearence_settings->palette;
+        } else {
+            item_model->dlist = item_appearence_settings->dlist;
+        }
+
+        item_model->material_dlist = &ITEM_MATERIAL_DL;
+        if (BITS_HAS(interactuables_settings_table[self->table_index].flags, ITEM_INVISIBLE)) {
+            // Hide the item model
+            BITS_SET(item_model->type, ~FIG_TYPE_SHOW);
+        }
+
+        if (BITS_HAS(self->item_model_settings_flags, ITEM_MODEL_SETTINGS_FLAG_SPINS)) {
+            BITS_SET(item_model->flags, FIG_FLAG_APPLY_PRIMITIVE_COLOR);
+        } else {
+            // Make it so that the item model always looks at the camera if not spinning.
+            // This is necessary for item models that only consists of one texture.
+            BITS_SET(
+                item_model->flags, FIG_FLAG_APPLY_PRIMITIVE_COLOR | FIG_FLAG_LOOK_AT_CAMERA_YAW
+            );
+        }
+
+        item_model->primitive_color.integer = RGBA(255, 255, 255, 255);
+        // Make all White Jewels semi-transparent if not playing in a save file
+        if ((interactuables_settings_table[self->table_index].item == ITEM_ID_WHITE_JEWEL) &&
+            (sys.contPak_file_no < 0)) {
+            item_model->primitive_color.integer = RGBA(255, 255, 255, 64);
+        }
+        self->primitive_color.integer = item_model->primitive_color.integer;
+        item_model->primitive_color.a = item_appearence_settings->transparency;
+
+        item_model->size.x *= item_appearence_settings->size;
+        item_model->size.y *= item_appearence_settings->size;
+        item_model->size.z *= item_appearence_settings->size;
+
+        // Spawn the Axe and Cross subweapons at a slightly higher position
+        if ((interactuables_settings_table[self->table_index].item == ITEM_ID_AXE) ||
+            (interactuables_settings_table[self->table_index].item == ITEM_ID_CROSS)) {
+            item_model->position.y += 3.2;
+            self->position.y += 3.2;
+            self->item_falling_target_height += 3.2;
+            item_model->angle.roll += 0x1000;
+        }
+        item_model->position.y += 0.1;
+
+        // Set the item trigger size
+        //
+        // This is not necessary, as the trigger size for items is directly checked from
+        // `interactuables_settings_table[self->table_index].trigger_size`
+        // In practice, `trigger_X_size` is only used for text spots
+        self->trigger_X_size = interactuables_settings_table[self->table_index].trigger_size;
+    }
+
+    // Set the text spot parameters
+    if ((interactuables_settings_table[self->table_index].type == ITEM_KIND_TEXT_SPOT) &&
+        (settings != NULL)) {
+        self->position.x     = settings->position.x;
+        self->position.y     = settings->position.y;
+        self->position.z     = settings->position.z;
+        self->trigger_X_size = TEXT_SPOT_X_SIZE;
+        self->trigger_Z_size = TEXT_SPOT_Z_SIZE;
+    }
+
+    // The time it takes for the flash that appears over an item is selected
+    // by randomly selecting a number between 120 and 150 frames
+    // (4 and 5 seconds)
+    self->time_when_flash_appears_over_item = (u16) ((*random_range)(30) + 120);
+    ITEM_FADE_TIMER                         = 0;
+    self->item_falling_height_multiplier    = 0;
+    self->flash                             = NULL;
+    (*object_curLevel_goToNextFuncAndClearTimer)(
+        self->header.current_function, &self->header.function_info_ID
+    );
 }
 
 void interactuables_main(interactuables* self) {
@@ -271,8 +272,9 @@ void interactuables_main(interactuables* self) {
                             model->primitive_color.a = 0;
                             self->header.destroy(self);
                             return;
-                        } else
-                            model->primitive_color.a = model_alpha;
+                        }
+
+                        model->primitive_color.a = model_alpha;
                     }
                 }
 
@@ -309,25 +311,27 @@ void interactuables_main(interactuables* self) {
         }
     }
 
+    // Leave if we're not interacting
+    if (self->interacting_with_interactuable != TRUE)
+        return;
+
     // Start the interaction
-    if (self->interacting_with_interactuable == TRUE) {
-        switch (interactuables_settings_table[self->table_index].type) {
-            default:
-                break;
+    switch (interactuables_settings_table[self->table_index].type) {
+        default:
+            break;
 
-            case ITEM_KIND_ITEM:
-                // Remove the item flash effect when checking the item
-                if (self->flash != NULL) {
-                    (*effect_markForDeletion)(self->flash);
-                }
-                break;
-        }
-
-        self->flash = NULL;
-        (*object_curLevel_goToNextFuncAndClearTimer)(
-            self->header.current_function, &self->header.function_info_ID
-        );
+        case ITEM_KIND_ITEM:
+            // Remove the item flash effect when checking the item
+            if (self->flash != NULL) {
+                (*effect_markForDeletion)(self->flash);
+            }
+            break;
     }
+
+    self->flash = NULL;
+    (*object_curLevel_goToNextFuncAndClearTimer)(
+        self->header.current_function, &self->header.function_info_ID
+    );
 }
 
 void interactuables_initCheck(interactuables* self) {
