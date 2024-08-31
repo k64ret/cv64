@@ -36,17 +36,30 @@ void heap_writebackDCache(void) {
     cv64_heap_inf_t* first;
     cv64_heap_inf_t* current_heap;
 
-    first = &heaps[0], current_heap = &heaps[HEAP_NUM - 1];
+    first = ARRAY_START(heaps), current_heap = &heaps[ARRAY_COUNT(heaps) - 1];
 
     do {
         if (BITS_HAS(current_heap->flags, HEAP_WRITE_BACK_CACHE_TO_RAM)) {
             osWritebackDCache(current_heap->heap_start, current_heap->size);
         }
         current_heap--;
-    } while ((u32) first <= (u32) current_heap);
+    } while (first <= current_heap);
 }
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/memory/initHeaps.s")
+void initHeaps(void) {
+    s32 i;
+
+    // clang-format off
+    for (i = ARRAY_COUNT(heaps) - 1; i > 0; i--) heaps[i].flags = HEAP_INACTIVE;
+    // clang-format on
+
+    heap_init(
+        HEAP_KIND_MULTIPURPOSE,
+        (cv64_heapblock_hdr_t*) &HEAP_MULTIPURPOSE_START,
+        HEAP_MULTIPURPOSE_SIZE,
+        HEAP_WRITE_BACK_CACHE_TO_RAM
+    );
+}
 
 void func_80000D68_1968(s32 arg0, u32 arg1) {}
 
