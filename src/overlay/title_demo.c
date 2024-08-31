@@ -803,11 +803,11 @@ void titleDemo_entrypoint(titleDemo* self) {
 void titleDemo_init(titleDemo* self) {
     u8 i;
 
-    // Make sure not to proceed if the game is fading or if it's loading a file
-    if ((*fade_isFading)() || (sys.file_load_array_ID != 0) || ptr_DMAMgr->DMAChunkMgr == NULL)
+    // Make sure not to proceed if the screen is fading or if the game's loading a file
+    if ((*fade_isFading)() || (sys.file_load_array_ID != 0) || (ptr_DMAMgr->DMAChunkMgr == NULL))
         return;
 
-    // Reset much of the save variables before entering the game
+    // Reset much of the save variables before entering gameplay
     sys.current_opened_menu            = MENU_ID_NOT_ON_MENU;
     sys.SaveStruct_gameplay.life       = 100;
     sys.SaveStruct_gameplay.field_0x5C = 100;
@@ -847,8 +847,8 @@ void titleDemo_init(titleDemo* self) {
     if (sys.title_demo_character == REINHARDT) {
         // clang-format off
         sys.map = CHIKA_KODO,
+        sys.spawn                          = 2;
         // clang-format on
-            sys.spawn                      = 2;
         sys.map_fade_out_time              = 30;
         sys.map_fade_in_time               = 30;
         sys.map_fade_in_color.r            = 0;
@@ -859,8 +859,8 @@ void titleDemo_init(titleDemo* self) {
     } else {
         // clang-format off
         sys.map = CHIKA_SUIRO,
+        sys.spawn                          = 2;
         // clang-format on
-            sys.spawn                      = 2;
         sys.map_fade_in_color.r            = 0;
         sys.map_fade_in_color.g            = 0;
         sys.map_fade_in_color.b            = 0;
@@ -877,7 +877,6 @@ void titleDemo_init(titleDemo* self) {
     );
 }
 
-// Note: u8 field24_0x242be[6]; ----> is actually a s16
 void titleDemo_loop(titleDemo* self) {
     actorVisualData* playerVisualdata;
 
@@ -914,7 +913,7 @@ void titleDemo_loop(titleDemo* self) {
         self->state = TITLE_DEMO_STATE_RUNNING;
     }
 
-    // Skip the demo when pressing the Start of A buttons
+    // Skip the demo when pressing the Start or A buttons
     if (CONT_BTNS_PRESSED(CONT_0, (START_BUTTON | RECENTER_BUTTON)) ||
         CONT_BTNS_PRESSED(CONT_0, A_BUTTON)) {
         self->state = TITLE_DEMO_STATE_SKIP;
@@ -925,7 +924,7 @@ void titleDemo_loop(titleDemo* self) {
 
     // Copy the input data into player 1's controller to move the character
     if (sys.title_demo_character == REINHARDT) {
-        // Copy inputs
+        // Copy the inputs
         sys.controllers[CONT_0].joystick_x =
             controller_data_REINHARDT[self->controller_data_current_keyframe].stick_X;
         sys.controllers[CONT_0].joystick_y =
@@ -943,7 +942,7 @@ void titleDemo_loop(titleDemo* self) {
             self->controller_data_current_keyframe_duration--;
         }
     } else {
-        // Copy inputs
+        // Copy the inputs
         sys.controllers[CONT_0].joystick_x =
             controller_data_CARRIE[self->controller_data_current_keyframe].stick_X;
         sys.controllers[CONT_0].joystick_y =
@@ -970,14 +969,15 @@ void titleDemo_loop(titleDemo* self) {
     // End the demo if the character dies
     if (ptr_PlayerData != NULL) {
         playerVisualdata = &ptr_PlayerData->visualData;
-        if ((ptr_PlayerData->visualData.model != NULL) && (playerVisualdata->flags & DEAD)) {
+        if ((ptr_PlayerData->visualData.model != NULL) &&
+            (playerVisualdata->flags & PLAYER_FLAG_DEAD)) {
             self->state = TITLE_DEMO_STATE_END;
         }
     }
 
     // Exit the demo
     if (self->state == TITLE_DEMO_STATE_END) {
-        D_80185F7C_10916C            = TRUE;
+        dont_update_map_lighting     = TRUE;
         sys.background_color.integer = RGBA(0, 0, 0, 255);
         if (1) {
         }

@@ -39,8 +39,8 @@ void cutsceneMgr_main(cutsceneMgr* self) {
     } else if (ptr_PlayerData != NULL) {
         visual_data = &ptr_PlayerData->visualData;
 
-        if (BITS_HAS(visual_data->flags, DEAD) ||
-            BITS_HAS(sys.SaveStruct_gameplay.player_status, DEAD)) {
+        if (BITS_HAS(visual_data->flags, PLAYER_FLAG_DEAD) ||
+            BITS_HAS(sys.SaveStruct_gameplay.player_status, PLAYER_FLAG_DEAD)) {
             sys.entrance_cutscene_ID = CUTSCENE_ID_NONE;
             sys.cutscene_ID          = CUTSCENE_ID_NONE;
         } else {

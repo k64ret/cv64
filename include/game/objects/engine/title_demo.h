@@ -21,15 +21,13 @@ typedef struct {
 // ID: 0x0019
 typedef struct {
     cv64_object_hdr_t header;
-    u8 field_0x20[20];
-    u32 field_0x34;
-    u32 field_0x38;
+    u8 field_0x20[28];
     u32 controller_data_current_keyframe;
     u32 state;
     u32 controller_data_current_keyframe_duration; // In frames
     u32 controller_data_max_keyframe;
     u8 field_0x4C[24];
-    u32 wait_cont; // Delay time until start reading controller data
+    u32 wait_cont; // Delay time until the game starts reading controller data
     u8 field_0x68[OBJECT_SIZE - 0x68];
 } titleDemo;
 

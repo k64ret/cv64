@@ -179,7 +179,7 @@ typedef struct {
     u32 entrance_cutscene_ID;
     u32 cutscene_flags;
     /**
-     * DESTROY_CUTSCENE_TRIGGERS = 0x00000001
+     * DESTROY_CUTSCENE_TRIGGERS --> |= 0x00000001
      */
     u32 field89_0x2644c;
 } system_work; // Size = 0x26450
