@@ -61,7 +61,7 @@ void initHeaps(void) {
     );
 }
 
-void func_80000D68_1968(s32 arg0, u32 arg1) {}
+void func_80000D68_1968(cv64_heap_kind_t arg0, u32 arg1) {}
 
 s32 func_80000D74_1974(s32 arg0) {
     return 0;
