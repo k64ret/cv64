@@ -111,7 +111,7 @@ void initHeaps(void);
 extern void* heap_alloc(s32 kind, u32 data_size); // CV64's malloc()
 extern void* heap_allocWithAlignment(s32 kind, u32 data_size, u32 alignment);
 extern s32 heapBlock_updateBlockMaxSize(void* data, u32 data_size);
-extern void heapBlock_free(u16* ptr); // CV64's free()
+void heapBlock_free(void* ptr); // CV64's free()
 void* func_80001008_1C08(cv64_heap_kind_t heap_kind, u32 size);
 extern void func_80001080_1C80(void*);
 void* allocStruct(const char* name, u32 size);

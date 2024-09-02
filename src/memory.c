@@ -92,7 +92,11 @@ void* func_80001008_1C08(cv64_heap_kind_t heap_kind, u32 size) {
     return &data_header->field_0x08;
 }
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/memory/heapBlock_free.s")
+void heapBlock_free(void* ptr) {
+    cv64_heapblock_hdr_t* temp =
+        (cv64_heapblock_hdr_t*) (((s32) ptr) - sizeof(cv64_heapblock_hdr_t));
+    temp->flags = HEAP_BLOCK_FREE;
+}
 
 // https://decomp.me/scratch/eT3oh
 #pragma GLOBAL_ASM("../asm/nonmatchings/memory/func_80001080_1C80.s")
