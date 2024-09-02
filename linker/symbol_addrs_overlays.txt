@@ -279,3 +279,17 @@ cv64_ovl_elevatortxt_destroy    = 0x0E0003D4; // type:func segment:ni_ovl_bottom
 // .data
 cv64_ovl_elevatortxt_funcs      = 0x0E000400; // segment:ni_ovl_bottom_elevator_activator_textbox size:0x18
 // End of src/overlay/textbox/bottom_elevator_activator.c ======================
+
+// src/overlay/title_demo.c =============================================
+// .text
+titleDemo_entrypoint      = 0x0F000000; // type:func segment:ni_ovl_title_demo
+titleDemo_init            = 0x0F000070; // type:func segment:ni_ovl_title_demo
+titleDemo_loop            = 0x0F000238; // type:func segment:ni_ovl_title_demo
+titleDemo_exit            = 0x0F000574; // type:func segment:ni_ovl_title_demo
+// .data
+controller_data_REINHARDT           = 0x0F000670; // segment:ni_ovl_title_demo size:0x1072
+controller_data_CARRIE              = 0x0F0016E4; // segment:ni_ovl_title_demo size:0xD52
+titleDemo_functions                 = 0x0F002438; // segment:ni_ovl_title_demo size:0x0C
+// .rodata
+D_0F002450                          = 0x0F002450; // type:asciz segment:ni_ovl_title_demo size:0x0F
+// End of src/overlay/title_demo.c ======================================

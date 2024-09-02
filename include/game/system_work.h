@@ -84,7 +84,8 @@ typedef struct {
      * Global Timer (Capped Framerate)
      */
     u16 global_timer_capped;
-    u8 field24_0x242be[6];
+    s16 field24_0x242be;
+    u8 field_0x242c0[4];
     cv64_controller_state_t controllers[4];
     u8 file_load_array_ID;
     u8 field27_0x242fd[3];
@@ -173,12 +174,12 @@ typedef struct {
     /**
      * 0 = REINHARDT, 1 = CARRIE
      */
-    u32 titleDemoCharacter;
+    u32 title_demo_character;
     u32 cutscene_ID;
     u32 entrance_cutscene_ID;
     u32 cutscene_flags;
     /**
-     * DESTROY_CUTSCENE_TRIGGERS = 0x00000001
+     * DESTROY_CUTSCENE_TRIGGERS --> |= 0x00000001
      */
     u32 field89_0x2644c;
 } system_work; // Size = 0x26450
