@@ -67,7 +67,7 @@ void cv64_ovl_librarypuzzletxt_init(cv64_ovl_librarypuzzletxt_t* self) {
 void cv64_ovl_librarypuzzletxt_idle(cv64_ovl_librarypuzzletxt_t* self) {
     mfds_state* message;
 
-    if (self->interacting_with_interactuable != TRUE)
+    if (self->interacting_with_interactable != TRUE)
         return;
 
     // Freeze player and ask the user if they want to do the puzzle
@@ -150,9 +150,9 @@ void cv64_ovl_librarypuzzletxt_show(cv64_ovl_librarypuzzletxt_t* self) {
             sys.FREEZE_PLAYER  = FALSE;
             sys.FREEZE_ENEMIES = FALSE;
             (*cameraMgr_setLockCameraAtPointState)(sys.ptr_cameraMgr, FALSE);
-            SELECTION_DELAY_TIMER(self)          = 0;
-            self->textbox_is_active              = FALSE;
-            self->interacting_with_interactuable = FALSE;
+            SELECTION_DELAY_TIMER(self)         = 0;
+            self->textbox_is_active             = FALSE;
+            self->interacting_with_interactable = FALSE;
             (*object_curLevel_goToFunc)(
                 self->header.current_function, &self->header.function_info_ID, LIBRARY_PUZZLE_IDLE
             );
@@ -343,14 +343,14 @@ void cv64_ovl_librarypuzzletxt_fail(cv64_ovl_librarypuzzletxt_t* self) {
     (*cutscene_setActorStateIfMatchingVariable1)(
         STAGE_OBJECT_HONMARU_4F_MINAMI_LIBRARY_PIECE, RED_PIECE, 0
     );
-    SELECTION_DELAY_TIMER(self)          = 0;
-    self->first_option                   = 0;
-    self->second_option                  = 0;
-    self->third_option                   = 0;
-    self->number_of_options_selected     = 0;
-    self->option_selected                = FALSE;
-    self->textbox_is_active              = FALSE;
-    self->interacting_with_interactuable = FALSE;
+    SELECTION_DELAY_TIMER(self)         = 0;
+    self->first_option                  = 0;
+    self->second_option                 = 0;
+    self->third_option                  = 0;
+    self->number_of_options_selected    = 0;
+    self->option_selected               = FALSE;
+    self->textbox_is_active             = FALSE;
+    self->interacting_with_interactable = FALSE;
     BITS_SET(data->lens->flags, WINDOW_CLOSING | WINDOW_OPENING);
     textbox = data->options_textbox;
     BITS_SET(textbox->flags, CLOSE_TEXTBOX);

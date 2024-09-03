@@ -1,10 +1,10 @@
 /**
- * @file interactuables_tables.c
+ * @file interactables_tables.c
  *
- * Contains tables used by interactuables and the different text spots.
+ * Contains tables used by interactables and the different text spots.
  */
 
-#include "objects/cutscene/interactuables_helpers.h"
+#include "objects/cutscene/interactables_helpers.h"
 #include "event_flags.h"
 #include "cutscene_ID.h"
 #include "objects/map/lever.h"
@@ -15,8 +15,8 @@
  */
 cv64_actor_settings_t castleWallGratingMechanism_textSpotsActorSettings_openMechanism = {
     {257, 306, 71},
-    CUTSCENE_INTERACTUABLES,
-    INTERACTUABLES_VARIABLE_1(INTERACT_ID_CASTLE_WALL_MAIN_OPEN_GRATING),
+    CUTSCENE_INTERACTABLES,
+    INTERACTABLES_VARIABLE_1(INTERACT_ID_CASTLE_WALL_MAIN_OPEN_GRATING),
     7,
     6,
     DIFFICULTY_AND_SPAWN_SETTINGS_1(SPAWN_ON_ALL_DIFFICULTIES, SPAWN_SETTINGS_1),
@@ -29,8 +29,8 @@ cv64_actor_settings_t castleWallGratingMechanism_textSpotsActorSettings_openMech
  */
 cv64_actor_settings_t castleWallGratingMechanism_textSpotsActorSettings_mechanismOpened = {
     {257, 306, 71},
-    CUTSCENE_INTERACTUABLES,
-    INTERACTUABLES_VARIABLE_1(INTERACT_ID_CASTLE_WALL_MAIN_GRATING_OPENED),
+    CUTSCENE_INTERACTABLES,
+    INTERACTABLES_VARIABLE_1(INTERACT_ID_CASTLE_WALL_MAIN_GRATING_OPENED),
     7,
     6,
     DIFFICULTY_AND_SPAWN_SETTINGS_1(SPAWN_ON_ALL_DIFFICULTIES, SPAWN_SETTINGS_1),
@@ -71,10 +71,10 @@ cv64_actor_settings_t* castleWallGratingMechanism_textSpotsActorSettings[1][3] =
 };
 
 /**
- * This table contains parameters used by the `interactuables` object, such as what
- * "type" of interactuable it is, the size of its trigger, etc.
+ * This table contains parameters used by the `interactables` object, such as what
+ * "type" of interactable it is, the size of its trigger, etc.
  */
-interactuables_settings interactuables_settings_table[] = {
+interactables_settings interactables_settings_table[] = {
     // INTERACT_ID_NO_VANISH_WHITE_JEWEL
     {ITEM_KIND_ITEM, ITEM_ID_WHITE_JEWEL, 0x0000, {0x00, 0x00}, 0x00000000, 5, 0x0000, 12, {0x00, 0x00}},
     // INTERACT_ID_NO_VANISH_RED_JEWEL_S

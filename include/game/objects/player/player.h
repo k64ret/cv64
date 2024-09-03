@@ -207,7 +207,7 @@ typedef enum cv64_player_state_funcs_id {
 
 extern playerData* ptr_PlayerData;
 
-extern s32 getAngleBetweenPlayerAndInteractuable(
+extern s32 getAngleBetweenPlayerAndInteractable(
     f32 player_pos_X, f32 player_pos_Z, f32 actor_pos_X, f32 actor_pos_Z
 );
 

@@ -49,7 +49,7 @@ typedef struct cv64_ovl_librarypuzzletxt {
     u8 field_0x20[20];
     cv64_ovl_librarypuzzledata_t* data;
     u8 field_0x38[4];
-    u32 interacting_with_interactuable;
+    u32 interacting_with_interactable;
     u32 textbox_is_active;
     s32 first_option;
     s32 second_option;

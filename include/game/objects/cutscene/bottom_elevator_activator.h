@@ -25,7 +25,7 @@ typedef struct cv64_ovl_elevatortxt {
      */
     u32 state;
     u8 field_0x38[4];
-    u32 interacting_with_interactuable;
+    u32 interacting_with_interactable;
     u32 textbox_is_active;
     u8 field_0x44[20];
     f32 trigger_size_X;

@@ -1554,22 +1554,22 @@ __osSpSetPc = 0x8008FC90; // type:func
 // End of asm/libultra/io/spsetpc.s ============================================
 
 
-// src/common/interactuable.c ==================================================
+// src/common/interactables.c ==================================================
 
 // .text
-interactuables_entrypoint          = 0x80125230; // type:func
-interactuables_init                = 0x801252A0; // type:func
-interactuables_main                = 0x80125764; // type:func
-interactuables_initCheck           = 0x80125B60; // type:func
-interactuables_selectTextboxOption = 0x80125D84; // type:func
-interactuables_stopCheck           = 0x80126004; // type:func
-interactuables_destroy             = 0x801261DC; // type:func
-interactuables_stopInteraction     = 0x80126354; // type:func
+interactables_entrypoint          = 0x80125230; // type:func
+interactables_init                = 0x801252A0; // type:func
+interactables_main                = 0x80125764; // type:func
+interactables_initCheck           = 0x80125B60; // type:func
+interactables_selectTextboxOption = 0x80125D84; // type:func
+interactables_stopCheck           = 0x80126004; // type:func
+interactables_destroy             = 0x801261DC; // type:func
+interactables_stopInteraction     = 0x80126354; // type:func
 
 // .data
-interactuables_functions           = 0x8016B560; // size:0x18
+interactables_functions           = 0x8016B560; // size:0x18
 
-// End of src/common/interactuable.c ===========================================
+// End of src/common/interactables.c ===========================================
 
 
 // src/common/cutscene_manager.c ===============================================
@@ -1781,7 +1781,7 @@ play_footstep_sfx = 0x800251bc;
 Player_8002639c = 0x8002639c;
 Player_setFallReaction = 0x80026e14;
 PlayerMgr_updateJumpSpeedAndAngle = 0x8002b3d4;
-getAngleBetweenPlayerAndInteractuable = 0x80037690;
+getAngleBetweenPlayerAndInteractable = 0x80037690;
 random_range = 0x80037980;
 getCurrentCharacter = 0x8003ca24;
 vec3f_magnitude_2 = 0x8003d37c;
@@ -2174,35 +2174,38 @@ prepareSoundToPlayAndSetVolume = 0x80079e04;
 guPerspective = 0x8007f800;
 osDestroyThread = 0x80080cb0;
 
-// src/common/interactuables_helpers.c ==================================================================
+
+// src/common/interactables_helpers.c ==========================================
 
 // .text
-Player_getActorCurrentlyInteractingWith = 0x80126370; // type:func
-Player_getSpecialTextboxCurrentlyInteractingWith = 0x801267c4; // type:func
-playerCanInteractWithInteractuable = 0x801268e4; // type:func
-interactuables_getInteractingType = 0x80126be0;  // type:func
-interactuables_enableTextbox = 0x80126cd4;  // type:func
-interactuables_setInteractingFlag = 0x80126ce0;  // type:func
-getMapEventFlagID = 0x80126cec; // type:func
-spawnCastleWallGratingMechanismTextboxes = 0x80126e04; // type:func
-removeKeyWhenOpeningDoor              = 0x80126ea0; // type:func
+Player_getActorCurrentlyInteractingWith          = 0x80126370; // type:func
+Player_getSpecialTextboxCurrentlyInteractingWith = 0x801267C4; // type:func
+playerCanInteractWithInteractable                = 0x801268E4; // type:func
+interactables_getInteractingType                 = 0x80126BE0; // type:func
+interactables_enableTextbox                      = 0x80126CD4; // type:func
+interactables_setInteractingFlag                 = 0x80126CE0; // type:func
+getMapEventFlagID                                = 0x80126CEC; // type:func
+spawnCastleWallGratingMechanismTextboxes         = 0x80126E04; // type:func
+removeKeyWhenOpeningDoor                         = 0x80126EA0; // type:func
 
 // .rodata
-D_8018ab80 = 0x8018ab80;  // type:jtbl size:0x74
+D_8018ab80                                       = 0x8018AB80; // type:jtbl size:0x74
 
-// End of src/common/interactuables_helpers.c ===========================================================
+// End of src/common/interactables_helpers.c ===================================
 
-// src/common/interactuables_tables.c ==================================================================
+
+// src/common/interactables_tables.c ===========================================
 
 // .data
-castleWallGratingMechanism_textSpotsActorSettings_openMechanism = 0x8016a870;  // size:0x10
-castleWallGratingMechanism_textSpotsActorSettings_mechanismOpened = 0x8016a880;  // size:0x10
-door_item_open_verify_list = 0x8016a890;  // size:0x68
-castleWallGratingMechanism_textSpotsActorSettings = 0x8016a8f8;  // size:0x0C
-interactuables_settings_table = 0x8016a904;  // size:0x9C4
-item_model_settings_list = 0x8016b2c8;  // size:0x290
+castleWallGratingMechanism_textSpotsActorSettings_openMechanism   = 0x8016A870; // size:0x10
+castleWallGratingMechanism_textSpotsActorSettings_mechanismOpened = 0x8016A880; // size:0x10
+door_item_open_verify_list                                        = 0x8016A890; // size:0x68
+castleWallGratingMechanism_textSpotsActorSettings                 = 0x8016A8F8; // size:0x0C
+interactables_settings_table                                      = 0x8016A904; // size:0x9C4
+item_model_settings_list                                          = 0x8016B2C8; // size:0x290
 
-// End of src/common/interactuables_tables.c ===========================================================
+// End of src/common/interactables_tables.c ====================================
+
 
 cutsceneTrigger_entrypoint = 0x801274f0;
 cutsceneTrigger_checkCollision = 0x801276b4;
