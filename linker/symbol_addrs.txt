@@ -9,6 +9,28 @@ gamestate_change = 0x80000510; // type:func
 // src/memory.c ================================================================
 
 // .text
+memory_clear                              = 0x80000770; // type:func
+memory_copy                               = 0x800008D0; // type:func
+heap_init                                 = 0x80000C28; // type:func
+heap_free                                 = 0x80000C78; // type:func
+heap_writebackDCache                      = 0x80000C94; // type:func
+initHeaps                                 = 0x80000CF4; // type:func
+heap_alloc                                = 0x80000D80; // type:func
+heap_allocWithAlignment                   = 0x80000E58; // type:func
+heapBlock_updateBlockMaxSize              = 0x80000FB4; // type:func
+heapBlock_free                            = 0x80001078; // type:func
+object_curLevel_goToNextFunc              = 0x80001380; // type:func
+object_prevLevel_goToNextFunc             = 0x800013BC; // type:func
+object_nextLevel_goToNextFunc             = 0x800013FC; // type:func
+object_curLevel_goToNextFuncAndClearTimer = 0x80001448; // type:func
+object_curLevel_goToPrevFunc              = 0x80001488; // type:func
+object_prevLevel_goToPrevFunc             = 0x800014C4; // type:func
+object_nextLevel_goToPrevFunc             = 0x80001504; // type:func
+object_curLevel_goToPrevFuncAndClearTimer = 0x80001550; // type:func
+object_curLevel_goToFunc                  = 0x80001590; // type:func
+object_curLevel_goToFuncInLevel           = 0x800015C4; // type:func
+object_prevLevel_goToFunc                 = 0x80001600; // type:func
+object_nextLevel_goToFunc                 = 0x80001638; // type:func
 
 // End of src/memory.c =========================================================
 
@@ -1654,14 +1676,6 @@ D_8018C650                = 0x8018C650; // type:f32 segment:common
 
 // End of src/common/skybox_common_actors.c ====================================
 
-memory_clear = 0x80000770;
-memory_copy = 0x800008d0;
-heap_init = 0x80000c28;
-heap_free = 0x80000c78;
-initHeaps = 0x80000cf4;
-heap_alloc = 0x80000d80;
-heapBlock_updateBlockMaxSize = 0x80000fb4;
-heapBlock_free = 0x80001078;
 multPointMatrix = 0x800029e8;
 vec3f_getDistanceBetweenTwoVectors = 0x8000400c;
 NisitenmaIchigo_isFileLoaded = 0x80004180;
@@ -2006,7 +2020,6 @@ GameStateMgr_entrypoint = 0x8000053c;
 gamestate_init = 0x800005dc; // type:func
 code_execution_max_delay = 0x80387AD0;
 end_frame = 0x8000072c;
-heap_writebackDCache = 0x80000c94;
 objectList_findObjectByIDAndType = 0x80001bc0;
 getRandomFromGuRandom = 0x80004118;
 animationMgr_updateAnimParams = 0x8000be88;
@@ -2469,7 +2482,6 @@ fileSelectController_goToGameplay = 0x80143218;
 cutscene_ID = 0x80389ef8;
 mapObjectParent_entrypoint = 0x80018a28;
 enemyParent_entrypoint = 0x80018e6c;
-object_curLevel_goToNextFuncAndClearTimer = 0x80001448;
 fade_settings = 0x80387ad6;
 current_fade_time = 0x80387adc;
 current_opened_menu = 0x80389eee;
@@ -2571,21 +2583,11 @@ cameraMgr_init = 0x8006686c;
 distortion_dlist = 0x80180eb0;
 __osException = 0x80080380;
 __osExceptionPreamble = 0x80080370;
-heap_allocWithAlignment = 0x80000e58;
 ROM_compressed_files_table = 0x8009503c;
 compressed_file__ID_from_ROMFileTable = 0x800a78c8;
 getTimeOfDay = 0x8003ec20;
 isPlayerDamagedOrDead = 0x8003c99c;
-object_curLevel_goToFuncInLevel = 0x800015c4;
 rotateTowardsTargetAngle = 0x8003d060;
-object_curLevel_goToFunc = 0x80001590;
-object_nextLevel_goToPrevFunc = 0x80001504;
-object_curLevel_goToPrevFuncAndClearTimer = 0x80001550;
-object_curLevel_goToPrevFunc = 0x80001488;
-object_prevLevel_goToPrevFunc = 0x800014c4;
-object_nextLevel_goToNextFunc = 0x800013fc;
-object_prevLevel_goToFunc = 0x80001600;
-object_nextLevel_goToFunc = 0x80001638;
 seed_RNG_C_rand_srand = 0x80186e3c;
 srand = 0x801588e0;
 seed_RNG = 0x800973c0;
@@ -2594,8 +2596,6 @@ dl_dither_set_settings = 0x80181950;
 isBetweenMidnightAnd2AM = 0x8015fa6c;
 door_properties = 0x80187610;
 loadingZone_exitMap = 0x80156a00;
-object_prevLevel_goToNextFunc = 0x800013bc;
-object_curLevel_goToNextFunc = 0x80001380;
 loadingZone_checkExceptions = 0x801563a8;
 loadingZone_checkFillPlayerHealth = 0x80156794;
 loadingZone_freezeEntitiesAndSetCameraParams = 0x8015670c;
