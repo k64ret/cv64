@@ -67,7 +67,58 @@ s32 func_80000D74_1974(s32 arg0) {
     return 0;
 }
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/memory/heap_alloc.s")
+void* heap_alloc(cv64_heap_kind_t kind, u32 size) {
+    cv64_heap_inf_t* heap = &heaps[kind];
+    cv64_heapblock_hdr_t* curr_blk;
+    cv64_heapblock_hdr_t* second_blk;
+    cv64_heapblock_hdr_t* next_blk;
+    cv64_heapblock_hdr_t* new_blk;
+    u32 curr_blk_sz;
+
+    size = (((u32) size + 7) >> 3) * 8;
+
+    for (curr_blk  = heap->heap_start,
+        second_blk = (cv64_heapblock_hdr_t*) (heap->size + (u8*) heap->heap_start);
+         curr_blk != second_blk;
+         curr_blk = (cv64_heapblock_hdr_t*) ((u8*) curr_blk + curr_blk->size +
+                                             sizeof(cv64_heapblock_hdr_t))) {
+        if (curr_blk->flags == HEAP_BLOCK_FREE) {
+            while (TRUE) {
+                next_blk = curr_blk;
+                if (next_blk->size) {
+                }
+                curr_blk_sz = next_blk->size;
+                if (curr_blk_sz < size) {
+                    next_blk = (cv64_heapblock_hdr_t*) ((u8*) next_blk + curr_blk_sz +
+                                                        sizeof(cv64_heapblock_hdr_t));
+                    if ((next_blk < second_blk) && (next_blk->flags == HEAP_BLOCK_FREE)) {
+                        curr_blk->size += next_blk->size + sizeof(cv64_heapblock_hdr_t);
+                        continue;
+                    }
+                } else {
+                    next_blk = NULL;
+                }
+
+                if (next_blk == NULL) {
+                    next_blk =
+                        (cv64_heapblock_hdr_t*) (curr_blk_sz - size - sizeof(cv64_heapblock_hdr_t));
+                    if ((s32) next_blk > 0) {
+                        new_blk          = (cv64_heapblock_hdr_t*) ((u8*) curr_blk + size);
+                        new_blk[1].flags = HEAP_BLOCK_FREE;
+                        new_blk[1].size  = (u32) next_blk;
+                        curr_blk->size   = size;
+                    }
+                    curr_blk->flags = HEAP_BLOCK_ACTIVE;
+                    return curr_blk + 1;
+                }
+
+                break;
+            }
+        }
+    }
+
+    return NULL;
+}
 
 #pragma GLOBAL_ASM("../asm/nonmatchings/memory/heap_allocWithAlignment.s")
 
