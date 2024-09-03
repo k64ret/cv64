@@ -108,7 +108,7 @@ void heap_init(
 void heap_free(cv64_heap_kind_t kind);
 void heap_writebackDCache(void);
 void initHeaps(void);
-extern void* heap_alloc(cv64_heap_kind_t kind, u32 data_size); // CV64's malloc()
+void* heap_alloc(cv64_heap_kind_t kind, u32 data_size); // CV64's malloc()
 extern void* heap_allocWithAlignment(cv64_heap_kind_t kind, u32 data_size, u32 alignment);
 extern s32 heapBlock_updateBlockMaxSize(void* data, u32 data_size);
 void heapBlock_free(void* ptr); // CV64's free()
