@@ -12,8 +12,8 @@ typedef enum cv64_ovl_titledemo_state {
 
 typedef struct cv64_ovl_titledemo_cont {
     u16 keyframe_duration;
-    u16 stick_X;
-    u16 stick_Y;
+    u16 joy_x;
+    u16 joy_y;
     s16 btns_held;
     s16 btns_pressed;
 } cv64_ovl_titledemo_cont_t;

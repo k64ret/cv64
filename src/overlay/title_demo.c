@@ -926,9 +926,9 @@ void cv64_ovl_titledemo_loop(cv64_ovl_titledemo_t* self) {
     if (sys.title_demo_character == REINHARDT) {
         // Copy the inputs
         sys.controllers[CONT_0].joy_x =
-            controller_data_REINHARDT[self->cont_data_curr_keyframe].stick_X;
+            controller_data_REINHARDT[self->cont_data_curr_keyframe].joy_x;
         sys.controllers[CONT_0].joy_y =
-            controller_data_REINHARDT[self->cont_data_curr_keyframe].stick_Y;
+            controller_data_REINHARDT[self->cont_data_curr_keyframe].joy_y;
         sys.controllers[CONT_0].btns_held =
             controller_data_REINHARDT[self->cont_data_curr_keyframe].btns_held;
         sys.controllers[CONT_0].btns_pressed =
@@ -943,10 +943,8 @@ void cv64_ovl_titledemo_loop(cv64_ovl_titledemo_t* self) {
         }
     } else {
         // Copy the inputs
-        sys.controllers[CONT_0].joy_x =
-            controller_data_CARRIE[self->cont_data_curr_keyframe].stick_X;
-        sys.controllers[CONT_0].joy_y =
-            controller_data_CARRIE[self->cont_data_curr_keyframe].stick_Y;
+        sys.controllers[CONT_0].joy_x = controller_data_CARRIE[self->cont_data_curr_keyframe].joy_x;
+        sys.controllers[CONT_0].joy_y = controller_data_CARRIE[self->cont_data_curr_keyframe].joy_y;
         sys.controllers[CONT_0].btns_held =
             controller_data_CARRIE[self->cont_data_curr_keyframe].btns_held;
         sys.controllers[CONT_0].btns_pressed =
