@@ -38,24 +38,24 @@
 #define TEXTBOX_OPTION_NO   2
 
 typedef enum cv64_textbox_flag {
-    MENU_TEXT_ID_PRINTS_ITEM        = CV64_BIT(0),
-    MENU_TEXT_ID_PRINTS_MENU_STRING = CV64_BIT(1),
-    MFDS_FLAG_00000004              = CV64_BIT(2),
-    MFDS_FLAG_00000008              = CV64_BIT(3),
-    PRINT_NUMBER                    = CV64_BIT(4),
-    DISPLAY_LENS                    = CV64_BIT(6),      // Aka enable window_work
-    ALLOC_TEXTBOX_IN_MENU_DATA_HEAP = CV64_BIT(14),
-    SLOW_TEXT_TRANSITION            = CV64_BIT(20),
-    FAST_TEXT_TRANSITION            = CV64_BIT(21),
-    MFDS_FLAG_400000                = CV64_BIT(22),
-    UPDATE_STRING                   = CV64_BIT(24),
-    MFDS_FLAG_2000000               = CV64_BIT(25),
-    CLOSE_TEXTBOX                   = CV64_BIT(26),
-    OPEN_TEXTBOX                    = CV64_BIT(27),
-    CLOSE_LENS                      = CV64_BIT(28),
-    MFDS_FLAG_20000000              = CV64_BIT(29),
-    TEXT_IS_PARSED                  = CV64_BIT(30),     // The text is completely processed
-    HIDE_TEXTBOX                    = CV64_BIT(31)
+    MENU_TEXT_ID_PRINTS_ITEM        = BIT(0),
+    MENU_TEXT_ID_PRINTS_MENU_STRING = BIT(1),
+    MFDS_FLAG_00000004              = BIT(2),
+    MFDS_FLAG_00000008              = BIT(3),
+    PRINT_NUMBER                    = BIT(4),
+    DISPLAY_LENS                    = BIT(6),      // Aka enable window_work
+    ALLOC_TEXTBOX_IN_MENU_DATA_HEAP = BIT(14),
+    SLOW_TEXT_TRANSITION            = BIT(20),
+    FAST_TEXT_TRANSITION            = BIT(21),
+    MFDS_FLAG_400000                = BIT(22),
+    UPDATE_STRING                   = BIT(24),
+    MFDS_FLAG_2000000               = BIT(25),
+    CLOSE_TEXTBOX                   = BIT(26),
+    OPEN_TEXTBOX                    = BIT(27),
+    CLOSE_LENS                      = BIT(28),
+    MFDS_FLAG_20000000              = BIT(29),
+    TEXT_IS_PARSED                  = BIT(30),     // The text is completely processed
+    HIDE_TEXTBOX                    = BIT(31)
 } cv64_textbox_flag_t;
 
 // clang-format on

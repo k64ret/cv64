@@ -3,34 +3,58 @@
 
 #include "controller.h"
 
-typedef struct playerControllerData_t {
-    cv64_controller_state_t controller;
-    cv64_controller_state_t controller_previous_frame;
-    s16 joystick_angle;
-    s16 player_angle; // Player's facing angle (yaw)
-    f32 joystick_x;
-    f32 joystick_y;
-    f32 player_angle_x;
-    f32 player_angle_z;
-    f32 joystick_magnitude; // Current "held" value. Ranges from 0 (center) to 1 (holding max towards a direction)
-    f32 joystick_normalized_x; // Joystick X: 0 (center), -1 (full left), +1 (full right)
-    f32 joystick_normalized_y; // Joystick Y: 0 (center), -1 (full up), +1 (full down)
-    f32 player_angle_normalized_x;
-    f32 player_angle_normalized_z;
-    f32 joystick_normalized_x_delta; // Difference between the "joystic_normalized_x" value between the current and previous frame
-    f32 joystick_normalized_y_delta; // Difference between the "joystic_normalized_y" value between the current and previous frame
-    f32 player_angle_normalized_x_accumulative; // Sum of "player_angle_normalized_x" overtime
-    f32 player_angle_normalized_z_accumulative; // Sum of "player_angle_normalized_z" overtime
-} playerControllerData_t;
+typedef struct cv64_player_cont_data {
+    cv64_cont_state_t cont;
+    cv64_cont_state_t cont_prev_frame;
+    s16 joy_ang;
+    /**
+     * Player's facing angle (yaw)
+     */
+    s16 player_ang;
+    f32 joy_x;
+    f32 joy_y;
+    f32 player_ang_x;
+    f32 player_ang_z;
+    /**
+     * Current joystick's "held" value. Ranges from `0` (center) to `1` (holding max towards a direction)
+     */
+    f32 joy_magn;
+    /**
+     * Normalized value of the joystick's X-axis: `0` (center), `-1` (full left), `+1` (full right)
+     */
+    f32 joy_norm_x;
+    /**
+     * Normalized value of the joystick's Y-axis: `0` (center), `-1` (full up), `+1` (full down)
+     */
+    f32 joy_norm_y;
+    f32 player_ang_norm_x;
+    f32 player_ang_norm_z;
+    /**
+     * Difference between the current and previous frame of `joy_norm_x`
+     */
+    f32 joy_norm_x_delta;
+    /**
+     * Difference between the current and previous frame of `joy_norm_y`
+     */
+    f32 joy_norm_y_delta;
+    /**
+     * Sum of `player_ang_norm_x` over time
+     */
+    f32 player_ang_norm_x_sum;
+    /**
+     * Sum of `player_ang_norm_y` over time
+     */
+    f32 player_ang_norm_z_sum;
+} cv64_player_cont_data_t;
 
-extern playerControllerData_t playerControllerData;
-extern playerControllerData_t D_800D7B00_A8DD0; // Used by `func_800217AC_223AC`
+extern cv64_player_cont_data_t playerControllerData;
+extern cv64_player_cont_data_t D_800D7B00_A8DD0; // Used by `func_800217AC_223AC`
 
 typedef struct JoystickAndPlayerAngleListEntry_t {
-    f32 joystick_normalized_x;
-    f32 joystick_normalized_y;
-    f32 player_angle_normalized_x;
-    f32 player_angle_normalized_z;
+    f32 joy_norm_x;
+    f32 joy_norm_y;
+    f32 player_ang_norm_x;
+    f32 player_ang_norm_z;
 } JoystickAndPlayerAngleListEntry_t;
 
 typedef struct JoystickAndPlayerAngleList_t {

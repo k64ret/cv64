@@ -11,7 +11,7 @@ typedef u16 UNK16;
 typedef s32 UNK32;
 typedef void* UNKPTR;
 
-#define CV64_BIT(num) (1 << (num))
+#define BIT(num) (1 << (num))
 /**
  * Apply `mask` on top of `value`.
  */

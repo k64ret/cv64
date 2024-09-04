@@ -402,7 +402,7 @@ void print_selected_options(u16* text, u16 selected_options_IDs) {
         number = i;
 
         // Check that an option was selected
-        if (BITS_HAS(selected_options_IDs, CV64_BIT(number + 0x1F))) {
+        if (BITS_HAS(selected_options_IDs, BIT(number + 0x1F))) {
             // Print selected options in red
             string[0] = CTRL_SET_COLOR(TEXT_COLOR_RED);
             string[1] = number + ASCII_TO_CV64('0');
@@ -462,7 +462,7 @@ s32 select_next_option(
                 if ((*highlighted_option) < PUZZLE_OPTION(1)) {
                     *highlighted_option = PUZZLE_OPTION(9);
                 }
-            } while (BITS_HAS(*selected_options_IDs, CV64_BIT(*highlighted_option)));
+            } while (BITS_HAS(*selected_options_IDs, BIT(*highlighted_option)));
         } else {
             (*selection_delay_timer)--;
         }
@@ -474,7 +474,7 @@ s32 select_next_option(
                 if ((*highlighted_option) > PUZZLE_OPTION(9)) {
                     *highlighted_option = PUZZLE_OPTION(1);
                 }
-            } while (BITS_HAS(*selected_options_IDs, CV64_BIT(*highlighted_option)));
+            } while (BITS_HAS(*selected_options_IDs, BIT(*highlighted_option)));
         } else {
             (*selection_delay_timer)--;
         }
@@ -484,14 +484,14 @@ s32 select_next_option(
      * Move the lens forwards one place after selecting an option to avoid
      * being able to select the previous option again
      */
-    if (BITS_HAS(*selected_options_IDs, CV64_BIT(*highlighted_option))) {
+    if (BITS_HAS(*selected_options_IDs, BIT(*highlighted_option))) {
         ret = 1;
         do {
             (*highlighted_option)++;
             if ((*highlighted_option) > PUZZLE_OPTION(9)) {
                 *highlighted_option = PUZZLE_OPTION(1);
             }
-        } while (BITS_HAS(*selected_options_IDs, CV64_BIT(*highlighted_option)));
+        } while (BITS_HAS(*selected_options_IDs, BIT(*highlighted_option)));
     }
 
     if (ret != 0) {
@@ -502,7 +502,7 @@ s32 select_next_option(
      * Option selected
      */
     if ((CONT_BTNS_PRESSED(CONT_0, A_BUTTON))) {
-        BITS_SET(*selected_options_IDs, CV64_BIT(*highlighted_option));
+        BITS_SET(*selected_options_IDs, BIT(*highlighted_option));
         ret = 1;
         /**
      * Pressed the B button. This does nothing in practice.

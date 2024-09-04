@@ -11,15 +11,15 @@
 #define LIBRARY_PUZZLE_SELECTION_DELAY      4
 
 typedef enum cv64_ovl_librarypuzzledata_opt_id {
-    OPTION_1 = CV64_BIT(0),
-    OPTION_2 = CV64_BIT(1),
-    OPTION_3 = CV64_BIT(2),
-    OPTION_4 = CV64_BIT(3),
-    OPTION_5 = CV64_BIT(4),
-    OPTION_6 = CV64_BIT(5),
-    OPTION_7 = CV64_BIT(6),
-    OPTION_8 = CV64_BIT(7),
-    OPTION_9 = CV64_BIT(8)
+    OPTION_1 = BIT(0),
+    OPTION_2 = BIT(1),
+    OPTION_3 = BIT(2),
+    OPTION_4 = BIT(3),
+    OPTION_5 = BIT(4),
+    OPTION_6 = BIT(5),
+    OPTION_7 = BIT(6),
+    OPTION_8 = BIT(7),
+    OPTION_9 = BIT(8)
 } cv64_ovl_librarypuzzledata_opt_id_t;
 
 typedef struct cv64_ovl_librarypuzzledata {

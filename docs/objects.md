@@ -116,8 +116,8 @@ These are other sets of flags different from the ones specified above. At the
 moment, only two are known:
 
 ```c
-PAUSE = CV64_BIT(14),
-TOP   = CV64_BIT(15)
+PAUSE = BIT(14),
+TOP   = BIT(15)
 ```
 
 - `PAUSE`: temporarily freezes the execution of the object's associated code.

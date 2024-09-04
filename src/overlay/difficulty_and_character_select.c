@@ -376,7 +376,7 @@ void characterSelect_selectOption(characterSelect* self) {
         for (self_temp = self, i = 0; i != NUM_CHARACTERS; i++,
             self_temp          = (u32*) self_temp + 1,
             character_portrait = self_temp->character_portraits[0]) {
-            if (BITS_HAS(work->flags, CV64_BIT(i))) {
+            if (BITS_HAS(work->flags, BIT(i))) {
                 character_portrait->primitive_color.integer -= RGBA(17, 17, 17, 0);
             }
         }
@@ -610,7 +610,7 @@ void characterSelect_determineCharacterToSelect(
                 work->number_of_characters + work->current_character_option;
         }
         // Check if the characters are disabled. If not, don't select them.
-        if (BITS_NOT_HAS(work->flags, CV64_BIT(work->current_character_option))) {
+        if (BITS_NOT_HAS(work->flags, BIT(work->current_character_option))) {
             work->current_character_option =
                 work->current_character_option + new_character_option_offset;
             new_character_option_offset = (u8) new_character_option_offset;
