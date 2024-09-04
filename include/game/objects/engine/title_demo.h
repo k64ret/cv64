@@ -3,39 +3,45 @@
 
 #include "object.h"
 
-typedef enum titleDemo_state {
+typedef enum cv64_ovl_titledemo_state {
     TITLE_DEMO_STATE_INIT,
     TITLE_DEMO_STATE_RUNNING,
     TITLE_DEMO_STATE_END,
     TITLE_DEMO_STATE_SKIP
-} titleDemo_state_t;
+} cv64_ovl_titledemo_state_t;
 
-typedef struct {
+typedef struct cv64_ovl_titledemo_cont {
     u16 keyframe_duration;
     u16 stick_X;
     u16 stick_Y;
-    s16 buttons_held;
-    s16 buttons_pressed;
-} titleDemo_controller;
+    s16 btns_held;
+    s16 btns_pressed;
+} cv64_ovl_titledemo_cont_t;
 
 // ID: 0x0019
-typedef struct {
+typedef struct cv64_ovl_titledemo {
     cv64_object_hdr_t header;
     u8 field_0x20[28];
-    u32 controller_data_current_keyframe;
+    u32 cont_data_curr_keyframe;
     u32 state;
-    u32 controller_data_current_keyframe_duration; // In frames
-    u32 controller_data_max_keyframe;
+    /**
+     * In frames
+     */
+    u32 cont_data_curr_keyframe_duration;
+    u32 cont_data_max_keyframe;
     u8 field_0x4C[24];
-    u32 wait_cont; // Delay time until the game starts reading controller data
+    /**
+     * Delay time until the game starts reading controller data
+     */
+    u32 wait_cont;
     u8 field_0x68[OBJECT_SIZE - 0x68];
-} titleDemo;
+} cv64_ovl_titledemo_t;
 
-void titleDemo_entrypoint(titleDemo* self);
-void titleDemo_init(titleDemo* self);
-void titleDemo_loop(titleDemo* self);
-void titleDemo_exit(titleDemo* self);
+void cv64_ovl_titledemo_entrypoint(cv64_ovl_titledemo_t* self);
+void cv64_ovl_titledemo_init(cv64_ovl_titledemo_t* self);
+void cv64_ovl_titledemo_loop(cv64_ovl_titledemo_t* self);
+void cv64_ovl_titledemo_exit(cv64_ovl_titledemo_t* self);
 
-typedef void (*titleDemo_func_t)(titleDemo*);
+typedef void (*cv64_ovl_titledemo_func_t)(cv64_ovl_titledemo_t*);
 
 #endif

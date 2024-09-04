@@ -86,7 +86,7 @@ typedef struct {
     u16 global_timer_capped;
     s16 field24_0x242be;
     u8 field_0x242c0[4];
-    cv64_controller_state_t controllers[4];
+    cv64_cont_state_t controllers[4];
     u8 file_load_array_ID;
     u8 field27_0x242fd[3];
     void* Nisitenma_Ichigo_loaded_files_ptr[255];
@@ -193,19 +193,19 @@ extern system_work sys;
 // Controller macros
 #define GET_CONTROLLER(controller_id) sys.controllers[(controller_id)]
 #define CONT_BTNS_HELD(controller_id, buttons)                                                     \
-    BITS_HAS(GET_CONTROLLER(controller_id).buttons_held, (buttons))
+    BITS_HAS(GET_CONTROLLER(controller_id).btns_held, (buttons))
 #define CONT_BTNS_PRESSED(controller_id, buttons)                                                  \
-    BITS_HAS(GET_CONTROLLER(controller_id).buttons_pressed, (buttons))
+    BITS_HAS(GET_CONTROLLER(controller_id).btns_pressed, (buttons))
 #define CONT_ALL_BTNS_HELD(buttons)                                                                \
     BITS_HAS(                                                                                      \
-        ((GET_CONTROLLER(0).buttons_held) | (GET_CONTROLLER(1).buttons_held) |                     \
-         (GET_CONTROLLER(2).buttons_held) | (GET_CONTROLLER(3).buttons_held)),                     \
+        ((GET_CONTROLLER(0).btns_held) | (GET_CONTROLLER(1).btns_held) |                           \
+         (GET_CONTROLLER(2).btns_held) | (GET_CONTROLLER(3).btns_held)),                           \
         (buttons)                                                                                  \
     )
 #define CONT_ALL_BTNS_PRESSED(buttons)                                                             \
     BITS_HAS(                                                                                      \
-        ((GET_CONTROLLER(0).buttons_pressed) | (GET_CONTROLLER(1).buttons_pressed) |               \
-         (GET_CONTROLLER(2).buttons_pressed) | (GET_CONTROLLER(3).buttons_pressed)),               \
+        ((GET_CONTROLLER(0).btns_pressed) | (GET_CONTROLLER(1).btns_pressed) |                     \
+         (GET_CONTROLLER(2).btns_pressed) | (GET_CONTROLLER(3).btns_pressed)),                     \
         (buttons)                                                                                  \
     )
 
