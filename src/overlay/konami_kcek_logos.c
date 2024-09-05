@@ -35,7 +35,6 @@ void cv64_ovl_konamilogo_check_btn_press(cv64_ovl_konamilogo_t* self) {
 }
 
 void cv64_ovl_konamilogo_init(cv64_ovl_konamilogo_t* self) {
-    cv64_object_func_inf_t* curFunc;
     cv64_model_inf_t* model =
         (*modelInfo_createAndSetChild)(FIG_TYPE_HUD_ELEMENT, common_camera_HUD);
 
@@ -48,9 +47,7 @@ void cv64_ovl_konamilogo_init(cv64_ovl_konamilogo_t* self) {
     BITS_SET(model->flags, FIG_FLAG_APPLY_PRIMITIVE_COLOR);
     model->primitive_color.integer = RGBA(255, 255, 255, 0);
 
-    GO_TO_NEXT_FUNC_NOW(
-        self, cv64_ovl_konamilogo_funcs, curFunc, (*object_curLevel_goToNextFuncAndClearTimer)
-    );
+    GO_TO_NEXT_FUNC_NOW(self, cv64_ovl_konamilogo_funcs);
 }
 
 void cv64_ovl_konamilogo_fade_in(cv64_ovl_konamilogo_t* self) {

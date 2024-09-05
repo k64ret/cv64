@@ -180,34 +180,36 @@ extern cv64_object_t* object_list_free_slot;
 // Mostly used inside entrypoint functions
 // Commas at the end of statements needed for matching
 #define ENTER(self, functions_array)                                                               \
-    s16 funcID;                                                                                    \
-    funcID                        = self->header.function_info_ID + 1;                             \
-    self->header.function_info_ID = funcID, self->header.current_function[funcID].timer++;         \
-    functions_array[self->header.current_function[funcID].function](self);                         \
-    self->header.function_info_ID--;
-
-// Goes to a given function in the array the moment after the function ID is changed
-// (so it doesn't wait for the next frame to execute the function)
-// cv64_object_func_inf_t* curFunc;
-#define GO_TO_FUNC_NOW(                                                                            \
-    self, functions_array, curFunc, object_curLevel_goToFunc, function_array_ID                    \
-)                                                                                                  \
-    (*object_curLevel_goToFunc)(                                                                   \
-        self->header.current_function, &self->header.function_info_ID, function_array_ID           \
-    );                                                                                             \
-    curFunc = &self->header.current_function[self->header.function_info_ID];                       \
-    curFunc->timer++, functions_array[curFunc->function](self);
+    {                                                                                              \
+        s16 funcID;                                                                                \
+        funcID                        = self->header.function_info_ID + 1;                         \
+        self->header.function_info_ID = funcID, self->header.current_function[funcID].timer++;     \
+        functions_array[self->header.current_function[funcID].function](self);                     \
+        self->header.function_info_ID--;                                                           \
+    }
 
 // Goes to the next function in the array the moment after the function ID is changed
 // (so it doesn't wait for the next frame to execute the function)
-// cv64_object_func_inf_t* curFunc;
-#define GO_TO_NEXT_FUNC_NOW(                                                                       \
-    self, functions_array, curFunc, object_curLevel_goToNextFuncAndClearTimer                      \
-)                                                                                                  \
-    (*object_curLevel_goToNextFuncAndClearTimer)(                                                  \
-        self->header.current_function, &self->header.function_info_ID                              \
-    );                                                                                             \
-    curFunc = &self->header.current_function[self->header.function_info_ID];                       \
-    curFunc->timer++, functions_array[curFunc->function](self);
+#define GO_TO_NEXT_FUNC_NOW(self, functions_array)                                                 \
+    {                                                                                              \
+        cv64_object_func_inf_t* curFunc;                                                           \
+        (*object_curLevel_goToNextFuncAndClearTimer)(                                              \
+            self->header.current_function, &self->header.function_info_ID                          \
+        );                                                                                         \
+        curFunc = &self->header.current_function[self->header.function_info_ID];                   \
+        curFunc->timer++, functions_array[curFunc->function](self);                                \
+    }
+
+// Goes to a given function in the array the moment after the function ID is changed
+// (so it doesn't wait for the next frame to execute the function)
+#define GO_TO_FUNC_NOW(self, functions_array, function_array_ID)                                   \
+    {                                                                                              \
+        cv64_object_func_inf_t* curFunc;                                                           \
+        (*object_curLevel_goToFunc)(                                                               \
+            self->header.current_function, &self->header.function_info_ID, function_array_ID       \
+        );                                                                                         \
+        curFunc = &self->header.current_function[self->header.function_info_ID];                   \
+        curFunc->timer++, functions_array[curFunc->function](self);                                \
+    }
 
 #endif // OBJECT_H

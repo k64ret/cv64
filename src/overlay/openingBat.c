@@ -48,15 +48,12 @@ void openingBat_entrypoint(openingBat* self) {
 }
 
 void openingBat_createData(openingBat* self) {
-    cv64_object_func_inf_t* curFunc;
     openingBatData* data;
 
     data       = (openingBatData*) (*fig_allocate)(FIG_TYPE_DATA);
     self->data = data;
     if (D_80092F50 < 68) {
-        GO_TO_FUNC_NOW(
-            self, openingBat_functions, curFunc, (*object_curLevel_goToFunc), OPENINGBAT_DESTROY
-        );
+        GO_TO_FUNC_NOW(self, openingBat_functions, OPENINGBAT_DESTROY);
     } else {
         (*object_curLevel_goToNextFuncAndClearTimer)(
             self->header.current_function, &self->header.function_info_ID
@@ -71,23 +68,16 @@ void openingBat_init(openingBat* self) {
     cv64_model_inf_t* model;
     vec3f position;
     u16 variable_1;
-    s32 temp2;
     openingBatDataInner* inner = &data->inner;
-    s32 temp3;
-    cv64_object_func_inf_t* curFunc;
 
     if ((*Actor_getPosAndVariable1)(self, &position, &variable_1) == FALSE) {
-        GO_TO_FUNC_NOW(
-            self, openingBat_functions, curFunc, (*object_curLevel_goToFunc), OPENINGBAT_DESTROY
-        );
+        GO_TO_FUNC_NOW(self, openingBat_functions, OPENINGBAT_DESTROY);
         return;
     }
     lighting        = (*modelLighting_create)(self);
     inner->lighting = lighting;
     if (lighting == NULL) {
-        GO_TO_FUNC_NOW(
-            self, openingBat_functions, curFunc, (*object_curLevel_goToFunc), OPENINGBAT_DESTROY
-        );
+        GO_TO_FUNC_NOW(self, openingBat_functions, OPENINGBAT_DESTROY);
         return;
     }
     model = (*modelInfo_buildHierarchy)(
@@ -96,9 +86,7 @@ void openingBat_init(openingBat* self) {
     self->model  = model;
     inner->model = model;
     if (model == NULL) {
-        GO_TO_FUNC_NOW(
-            self, openingBat_functions, curFunc, (*object_curLevel_goToFunc), OPENINGBAT_DESTROY
-        );
+        GO_TO_FUNC_NOW(self, openingBat_functions, OPENINGBAT_DESTROY);
         return;
     }
     model->dlist = FIG_APPLY_VARIABLE_TEXTURE_AND_PALETTE((u32) &OPENINGBAT_DLIST);
