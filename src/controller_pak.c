@@ -5,38 +5,171 @@
  * used for saving the game in the western versions of the game.
  */
 
-#include "cv64.h"
+#include "controller_pak.h"
 
-#pragma GLOBAL_ASM("asm/nonmatchings/controller_pak/contPak_getInsertedStatus.s")
+OSPfs pfs[MAXCONTROLLERS];
+OSPfs D_800D72F0_A85C0[MAXCONTROLLERS];
+u8 contPak_notInserted[MAXCONTROLLERS];
 
-#pragma GLOBAL_ASM("asm/nonmatchings/controller_pak/contPak_initAllPaks.s")
+s32 contPak_getInsertedStatus(OSContStatus cont_status[]) {
+    s32 i;
 
-#pragma GLOBAL_ASM("asm/nonmatchings/controller_pak/contPak_initPak.s")
+    osContStartQuery(&controllerMsgQ);
+    osRecvMesg(&controllerMsgQ, NULL, OS_MESG_BLOCK);
+    osContGetQuery(cont_status);
 
-#pragma GLOBAL_ASM("asm/nonmatchings/controller_pak/contPak_allocateFile.s")
+    for (i = 0; i < MAXCONTROLLERS; i++) {
+        contPak_notInserted[i] = (cont_status[i].status & CONT_CARD_ON) ? FALSE : TRUE;
+    }
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/controller_pak/contPak_deleteFile.s")
+void contPak_initAllPaks() {
+    s32 i;
 
-#pragma GLOBAL_ASM("asm/nonmatchings/controller_pak/contPak_findFile.s")
+    for (i = 0; i != MAXCONTROLLERS; i++) {
+        if (controller_status[i].status & CONT_CARD_ON) {
+            osPfsInitPak(&controllerMsgQ, &pfs[i], i);
+            contPak_notInserted[i] = FALSE;
+        } else {
+            contPak_notInserted[i] = TRUE;
+        }
+    }
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/controller_pak/contPak_getFileState.s")
+s32 contPak_initPak(u8 cont_number) {
+    if (controller_status[cont_number].status & CONT_CARD_ON) {
+        contPak_notInserted[cont_number] = FALSE;
+        return osPfsInitPak(&controllerMsgQ, &pfs[cont_number], cont_number);
+    } else {
+        contPak_notInserted[cont_number] = TRUE;
+        return contPak_checkInsertedStatus(cont_number);
+    }
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/controller_pak/contPak_getNumFiles.s")
+s32 contPak_allocateFile(u8 cont_number, OSPfsState* pfs_state, int file_size, s32* file_no) {
+    if (contPak_notInserted[cont_number] == FALSE) {
+        return osPfsAllocateFile(
+            &pfs[cont_number],
+            pfs_state->company_code,
+            pfs_state->game_code,
+            &pfs_state->game_name,
+            &pfs_state->ext_name,
+            file_size,
+            file_no
+        );
+    } else {
+        return contPak_checkInsertedStatus(cont_number);
+    }
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/controller_pak/contPak_getFreeBlocks.s")
+s32 contPak_deleteFile(u8 cont_number, OSPfsState* pfs_state) {
+    if (contPak_notInserted[cont_number] == FALSE) {
+        return osPfsDeleteFile(
+            &pfs[cont_number],
+            pfs_state->company_code,
+            pfs_state->game_code,
+            &pfs_state->game_name,
+            &pfs_state->ext_name
+        );
+    } else {
+        return contPak_checkInsertedStatus(cont_number);
+    }
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/controller_pak/contPak_IsPlug.s")
+s32 contPak_findFile(u8 cont_number, OSPfsState* pfs_state, s32* file_no) {
+    if (contPak_notInserted[cont_number] == FALSE) {
+        return osPfsFindFile(
+            &pfs[cont_number],
+            pfs_state->company_code,
+            pfs_state->game_code,
+            &pfs_state->game_name,
+            &pfs_state->ext_name,
+            file_no
+        );
+    } else {
+        return contPak_checkInsertedStatus(cont_number);
+    }
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/controller_pak/contPak_readFile.s")
+s32 contPak_getFileState(u8 cont_number, s32 file_no, OSPfsState* pfs_state) {
+    if (contPak_notInserted[cont_number] == FALSE) {
+        osPfsFileState(&pfs[cont_number], file_no, pfs_state);
+    } else {
+        return contPak_checkInsertedStatus(cont_number);
+    }
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/controller_pak/contPak_writeFile.s")
+s32 contPak_getNumFiles(u8 cont_number, s32* max_files, s32* files_used) {
+    if (contPak_notInserted[cont_number] == FALSE) {
+        osPfsNumFiles(&pfs[cont_number], max_files, files_used);
+    } else {
+        return contPak_checkInsertedStatus(cont_number);
+    }
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/controller_pak/contPak_checkRumblePak.s")
+s32 contPak_getFreeBlocks(u8 cont_number, s32* remaining) {
+    if (contPak_notInserted[cont_number] == FALSE) {
+        return osPfsFreeBlocks(&pfs[cont_number], remaining);
+    } else {
+        return contPak_checkInsertedStatus(cont_number);
+    }
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/controller_pak/contPak_checkInsertedStatus.s")
+s32 contPak_IsPlug(u8* bitpattern) {
+    return osPfsIsPlug(&controllerMsgQ, bitpattern);
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/controller_pak/contPak_8001aaa8.s")
+s32 contPak_readFile(u8 cont_number, s32 file_no, int offset, int nbytes, u8* data_buffer) {
+    if (contPak_notInserted[cont_number] == FALSE) {
+        return osPfsReadWriteFile(
+            &pfs[cont_number], file_no, PFS_READ, offset, nbytes, data_buffer
+        );
+    } else {
+        return contPak_checkInsertedStatus(cont_number);
+    }
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/controller_pak/contPak_8001ab18.s")
+s32 contPak_writeFile(u8 cont_number, s32 file_no, int offset, int nbytes, u8* data_buffer) {
+    if (contPak_notInserted[cont_number] == FALSE) {
+        osPfsReadWriteFile(&pfs[cont_number], file_no, PFS_WRITE, offset, nbytes, data_buffer);
+    } else {
+        return contPak_checkInsertedStatus(cont_number);
+    }
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/controller_pak/contPak_repairID.s")
+s32 contPak_checkRumblePak(u8 cont_number) {
+    s32 ret;
+
+    if (contPak_notInserted[cont_number] == FALSE) {
+        if (osMotorInit(&controllerMsgQ, &pfs[cont_number], cont_number) == 0) {
+            ret = 0xB;
+        } else {
+            contPak_initPak(CONT_0);
+            ret = 0xA;
+        }
+        return ret;
+    }
+
+    return contPak_checkInsertedStatus(cont_number);
+}
+
+s32 contPak_checkInsertedStatus(u8 cont_number) {
+    contPak_getInsertedStatus(controller_status);
+    if (controller_status[cont_number].status & CONT_CARD_ON) {
+        return 0x2;
+    } else {
+        return 0x1;
+    }
+}
+
+void contPak_8001aaa8(u8 cont_number) {
+    D_800D72F0_A85C0[cont_number] = pfs[cont_number];
+}
+
+void contPak_8001ab18(u8 cont_number) {
+    pfs[cont_number] = D_800D72F0_A85C0[cont_number];
+}
+
+s32 contPak_repairID(u8 cont_number) {
+    return osPfsRepairId(&pfs[cont_number]);
+}

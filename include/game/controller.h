@@ -18,4 +18,6 @@ typedef struct cv64_cont_state {
     s16 joy_held; // TODO: Maybe search another name for this variable.
 } cv64_cont_state_t;
 
+extern OSMesgQueue controllerMsgQ;
+
 #endif
