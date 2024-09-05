@@ -115,7 +115,7 @@ segments:
       - [0x0001A160, asm, crash_screen_init]
       - [0x0001A7C0, c, debug] # Likely comes from an internal Konami library
       - [0x0001AE50, c]
-      - [0x0001AF80, asm, controller_pak] # Controller Pak handling functions
+      - [0x0001AF80, c, controller_pak] # Controller Pak handling functions
       - [0x0001B7D0, asm, save] # Handles save file loading and errors
       - [0x0001C830, asm]
       - [0x00022350, asm]

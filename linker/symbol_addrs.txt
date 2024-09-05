@@ -1759,15 +1759,35 @@ loadFilesFromFileLoadArray = 0x800175ec;
 osSyncPrintf = 0x800192E8;
 crashScreen_printThreadData = 0x80019560;
 crashScreen_printExceptionInfo = 0x80019968;
-contPak_getInsertedStatus = 0x8001a380;
-contPak_initPak = 0x8001a538;
-contPak_allocateFile = 0x8001a5cc;
-contPak_findFile = 0x8001a6e4;
-contPak_IsPlug = 0x8001a89c;
-contPak_readFile = 0x8001a8c4;
-contPak_writeFile = 0x8001a948;
-contPak_checkRumblePak = 0x8001a9cc;
-contPak_checkInsertedStatus = 0x8001aa58;
+
+// src/controller_pak.c ================================================================
+
+// .text
+contPak_getInsertedStatus = 0x8001a380; // type:func
+contPak_initAllPaks = 0x8001a46c; // type:func
+contPak_initPak = 0x8001a538; // type:func
+contPak_allocateFile = 0x8001a5cc; // type:func
+contPak_deleteFile = 0x8001a664; // type:func
+contPak_findFile = 0x8001a6e4; // type:func
+contPak_getFileState = 0x8001a770; // type:func
+contPak_getNumFiles = 0x8001a7d4; // type:func
+contPak_getFreeBlocks = 0x8001a838; // type:func
+contPak_IsPlug = 0x8001a89c; // type:func
+contPak_readFile = 0x8001a8c4; // type:func
+contPak_writeFile = 0x8001a948; // type:func
+contPak_checkRumblePak = 0x8001a9cc; // type:func
+contPak_checkInsertedStatus = 0x8001aa58; // type:func
+contPak_8001aaa8 = 0x8001aaa8; // type:func
+contPak_8001ab18 = 0x8001ab18; // type:func
+contPak_repairID = 0x8001ab88; // type:func
+
+// .bss
+pfs = 0x800d7150;   // size:0x19E
+D_800D72F0 = 0x800D72F0;   // size:0x19E
+contPak_notInserted = 0x800d7490;   // size:0x4
+
+// End of src/controller_pak.c ================================================================
+
 contPak_writeSaveFile = 0x8001acf8;
 saveData_BackupAndWriteNewSave = 0x8001ad80;
 saveFile_readSaveFile = 0x8001ae7c;
@@ -2071,8 +2091,6 @@ unusedPrintf = 0x800192a8;
 is_proutSyncPrintf = 0x80019398;
 crashScreen_ThreadEntry = 0x80019a44;
 crashScreen_Init = 0x80019b48;
-contPak_initAllPaks = 0x8001a46c;
-contPak_deleteFile = 0x8001a664;
 contPak_initFirstPak = 0x8001abd0;
 contPak_initFirstPak_2 = 0x8001abf8;
 createNewPakSaveNote = 0x8001ac20;
@@ -2535,7 +2553,6 @@ PlayerMgr_calcBreaking = 0x803d73a4;
 gOsSiMessageQueue = 0x801227c8;
 osSiMesgBuff = 0x801227c0;
 gOsSiAccessQueueCreated = 0x800a0fe0;
-pfs = 0x800d7150;
 updateGameplayTime = 0x80018e74;
 setup_frame = 0x80000694;
 fog_distance_start = 0x80387ae0;
@@ -2547,10 +2564,6 @@ someROMLoadedFile_bytesLeftToRead = 0x800d5e48;
 someROMLoadedFile_lastIndex = 0x800d5e4c;
 someROMLoadedFile_address = 0x800d5e44;
 someROMLoadedFile_currentReadingAddress = 0x800d5e40;
-contPak_notInserted = 0x800d7490;
-contPak_getFileState = 0x8001a770;
-contPak_getNumFiles = 0x8001a7d4;
-contPak_getFreeBlocks = 0x8001a838;
 setMapMusic = 0x80018fa0;
 gISVDbgPrnAdrs = 0xb1ff0000;
 gKMCDbgPrnAdrs = 0xbff00000;
@@ -2559,9 +2572,6 @@ osRomType = 0x80000304;
 osCicId = 0x80000310;
 osVersion = 0x80000314;
 osMemSize = 0x80000318;
-contPak_8001aaa8 = 0x8001aaa8;
-contPak_8001ab18 = 0x8001ab18;
-contPak_repairID = 0x8001ab88;
 SaveStruct_backup = 0x800d76a0;
 convertUTF16ToCustomTextFormat = 0x8001b3c0;
 HUD_update = 0x80137eb4;
