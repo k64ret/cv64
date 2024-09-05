@@ -11,7 +11,10 @@ extern OSPfs pfs[MAXCONTROLLERS];
 extern OSPfs D_800D72F0_A85C0[MAXCONTROLLERS];
 extern u8 contPak_notInserted[MAXCONTROLLERS];
 
-s32 contPak_getInsertedStatus(OSContStatus cont_status[]) {
+/**
+ * Iterates through each controller checking if they have a controller pak inserted
+ */
+void contPak_getInsertedStatus(OSContStatus cont_status[]) {
     s32 i;
 
     osContStartQuery(&controllerMsgQ);
@@ -42,7 +45,7 @@ s32 contPak_initPak(u8 cont_number) {
         return osPfsInitPak(&controllerMsgQ, &pfs[cont_number], cont_number);
     } else {
         contPak_notInserted[cont_number] = TRUE;
-        return contPak_checkInsertedStatus(cont_number);
+        return contPak_checkInsertedError(cont_number);
     }
 }
 
@@ -58,7 +61,7 @@ s32 contPak_allocateFile(u8 cont_number, OSPfsState* pfs_state, int file_size, s
             file_no
         );
     } else {
-        return contPak_checkInsertedStatus(cont_number);
+        return contPak_checkInsertedError(cont_number);
     }
 }
 
@@ -72,7 +75,7 @@ s32 contPak_deleteFile(u8 cont_number, OSPfsState* pfs_state) {
             &pfs_state->ext_name
         );
     } else {
-        return contPak_checkInsertedStatus(cont_number);
+        return contPak_checkInsertedError(cont_number);
     }
 }
 
@@ -87,23 +90,23 @@ s32 contPak_findFile(u8 cont_number, OSPfsState* pfs_state, s32* file_no) {
             file_no
         );
     } else {
-        return contPak_checkInsertedStatus(cont_number);
+        return contPak_checkInsertedError(cont_number);
     }
 }
 
 s32 contPak_getFileState(u8 cont_number, s32 file_no, OSPfsState* pfs_state) {
     if (contPak_notInserted[cont_number] == FALSE) {
-        osPfsFileState(&pfs[cont_number], file_no, pfs_state);
+        return osPfsFileState(&pfs[cont_number], file_no, pfs_state);
     } else {
-        return contPak_checkInsertedStatus(cont_number);
+        return contPak_checkInsertedError(cont_number);
     }
 }
 
 s32 contPak_getNumFiles(u8 cont_number, s32* max_files, s32* files_used) {
     if (contPak_notInserted[cont_number] == FALSE) {
-        osPfsNumFiles(&pfs[cont_number], max_files, files_used);
+        return osPfsNumFiles(&pfs[cont_number], max_files, files_used);
     } else {
-        return contPak_checkInsertedStatus(cont_number);
+        return contPak_checkInsertedError(cont_number);
     }
 }
 
@@ -111,7 +114,7 @@ s32 contPak_getFreeBlocks(u8 cont_number, s32* remaining) {
     if (contPak_notInserted[cont_number] == FALSE) {
         return osPfsFreeBlocks(&pfs[cont_number], remaining);
     } else {
-        return contPak_checkInsertedStatus(cont_number);
+        return contPak_checkInsertedError(cont_number);
     }
 }
 
@@ -125,18 +128,31 @@ s32 contPak_readFile(u8 cont_number, s32 file_no, int offset, int nbytes, u8* da
             &pfs[cont_number], file_no, PFS_READ, offset, nbytes, data_buffer
         );
     } else {
-        return contPak_checkInsertedStatus(cont_number);
+        return contPak_checkInsertedError(cont_number);
     }
 }
 
 s32 contPak_writeFile(u8 cont_number, s32 file_no, int offset, int nbytes, u8* data_buffer) {
     if (contPak_notInserted[cont_number] == FALSE) {
-        osPfsReadWriteFile(&pfs[cont_number], file_no, PFS_WRITE, offset, nbytes, data_buffer);
+        return osPfsReadWriteFile(
+            &pfs[cont_number], file_no, PFS_WRITE, offset, nbytes, data_buffer
+        );
     } else {
-        return contPak_checkInsertedStatus(cont_number);
+        return contPak_checkInsertedError(cont_number);
     }
 }
 
+/**
+ * Checks for the following cases:
+ *
+ * - If a device other than the controller pak is inserted, it checks if it's a rumble pak.
+ *   If it is, `PFS_ERR_DEVICE` is returned.
+ *
+ * - If a controller pak is indeed inserted, then it must be damaged or not connected properly,
+ *   so `PFS_ERR_ID_FATAL` is returned.
+ *
+ * - Anything else means that a device isn't connected into the controller.
+ */
 s32 contPak_checkRumblePak(u8 cont_number) {
     s32 ret;
 
@@ -150,10 +166,18 @@ s32 contPak_checkRumblePak(u8 cont_number) {
         return ret;
     }
 
-    return contPak_checkInsertedStatus(cont_number);
+    return contPak_checkInsertedError(cont_number);
 }
 
-s32 contPak_checkInsertedStatus(u8 cont_number) {
+/**
+ * If a controller pak is connected, but there was an error during its operation,
+ * this function will return either:
+ *
+ * - `PFS_ERR_NEW_PACK`, if a different controller pak was inserted.
+ *
+ * - `PFS_ERR_NOPACK`, if the controller pak was disconnected.
+ */
+s32 contPak_checkInsertedError(u8 cont_number) {
     contPak_getInsertedStatus(controller_status);
     if (controller_status[cont_number].status & CONT_CARD_ON) {
         return PFS_ERR_NEW_PACK;
@@ -162,11 +186,11 @@ s32 contPak_checkInsertedStatus(u8 cont_number) {
     }
 }
 
-void contPak_8001aaa8(u8 cont_number) {
+void contPak_8001AAA8(u8 cont_number) {
     D_800D72F0_A85C0[cont_number] = pfs[cont_number];
 }
 
-void contPak_8001ab18(u8 cont_number) {
+void contPak_8001AB18(u8 cont_number) {
     pfs[cont_number] = D_800D72F0_A85C0[cont_number];
 }
 

@@ -1776,9 +1776,9 @@ contPak_IsPlug = 0x8001a89c; // type:func
 contPak_readFile = 0x8001a8c4; // type:func
 contPak_writeFile = 0x8001a948; // type:func
 contPak_checkRumblePak = 0x8001a9cc; // type:func
-contPak_checkInsertedStatus = 0x8001aa58; // type:func
-contPak_8001aaa8 = 0x8001aaa8; // type:func
-contPak_8001ab18 = 0x8001ab18; // type:func
+contPak_checkInsertedError = 0x8001aa58; // type:func
+contPak_8001AAA8 = 0x8001AAA8; // type:func
+contPak_8001AB18 = 0x8001AB18; // type:func
 contPak_repairID = 0x8001ab88; // type:func
 
 // .bss

@@ -3,7 +3,7 @@
 
 #include "controller.h"
 
-s32 contPak_getInsertedStatus(OSContStatus cont_status[]);
+void contPak_getInsertedStatus(OSContStatus cont_status[]);
 void contPak_initAllPaks();
 s32 contPak_initPak(u8 cont_number);
 s32 contPak_allocateFile(u8 cont_number, OSPfsState* pfs_state, int file_size, s32* file_no);
@@ -16,9 +16,9 @@ s32 contPak_IsPlug(u8* bitpattern);
 s32 contPak_readFile(u8 cont_number, s32 file_no, int offset, int nbytes, u8* data_buffer);
 s32 contPak_writeFile(u8 cont_number, s32 file_no, int offset, int nbytes, u8* data_buffer);
 s32 contPak_checkRumblePak(u8 cont_number);
-s32 contPak_checkInsertedStatus(u8 cont_number);
-void contPak_8001aaa8(u8 cont_number);
-void contPak_8001ab18(u8 cont_number);
+s32 contPak_checkInsertedError(u8 cont_number);
+void contPak_8001AAA8(u8 cont_number);
+void contPak_8001AB18(u8 cont_number);
 s32 contPak_repairID(u8 cont_number);
 
 #endif
