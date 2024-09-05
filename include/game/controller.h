@@ -19,5 +19,6 @@ typedef struct cv64_cont_state {
 } cv64_cont_state_t;
 
 extern OSMesgQueue controllerMsgQ;
+extern OSContStatus controller_status[MAXCONTROLLERS];
 
 #endif

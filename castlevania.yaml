@@ -478,7 +478,7 @@ segments:
       - { start: 0x000A8420, type: bss, vram: 0x800D5F20, name: 19630 }
       - { start: 0x000A8420, type: bss, vram: 0x800D5F40, name: crash_screen_init }
       - { start: 0x000A8420, type: bss, vram: 0x800D7120, name: debug }
-      - { start: 0x000A8420, type: .bss, vram: 0x800D7150, name: controller_pak }
+      - { start: 0x000A8420, type: bss, vram: 0x800D7150, name: controller_pak }
       - { start: 0x000A8420, type: .bss, vram: 0x800DD0D0, name: effect_manager }
       - { start: 0x000A8420, type: bss, vram: 0x800DD0E0 }  # Used in `func_80066400`
       - { start: 0x000A8420, type: bss, vram: 0x801229B0, name: libultra/io/motor }

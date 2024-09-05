@@ -7,9 +7,9 @@
 
 #include "controller_pak.h"
 
-OSPfs pfs[MAXCONTROLLERS];
-OSPfs D_800D72F0_A85C0[MAXCONTROLLERS];
-u8 contPak_notInserted[MAXCONTROLLERS];
+extern OSPfs pfs[MAXCONTROLLERS];
+extern OSPfs D_800D72F0_A85C0[MAXCONTROLLERS];
+extern u8 contPak_notInserted[MAXCONTROLLERS];
 
 s32 contPak_getInsertedStatus(OSContStatus cont_status[]) {
     s32 i;
