@@ -1784,7 +1784,7 @@ contPak_repairID = 0x8001ab88; // type:func
 // .bss
 pfs = 0x800d7150;   // size:0x19E
 D_800D72F0 = 0x800D72F0;   // size:0x19E
-contPak_notInserted = 0x800d7490;   // size:0x4
+contPak_notInserted = 0x800d7490;
 
 // End of src/controller_pak.c ================================================================
 
