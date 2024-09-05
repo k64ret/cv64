@@ -142,10 +142,10 @@ s32 contPak_checkRumblePak(u8 cont_number) {
 
     if (contPak_notInserted[cont_number] == FALSE) {
         if (osMotorInit(&controllerMsgQ, &pfs[cont_number], cont_number) == 0) {
-            ret = 0xB;
+            ret = PFS_ERR_DEVICE;
         } else {
             contPak_initPak(CONT_0);
-            ret = 0xA;
+            ret = PFS_ERR_ID_FATAL;
         }
         return ret;
     }
@@ -156,9 +156,9 @@ s32 contPak_checkRumblePak(u8 cont_number) {
 s32 contPak_checkInsertedStatus(u8 cont_number) {
     contPak_getInsertedStatus(controller_status);
     if (controller_status[cont_number].status & CONT_CARD_ON) {
-        return 0x2;
+        return PFS_ERR_NEW_PACK;
     } else {
-        return 0x1;
+        return PFS_ERR_NOPACK;
     }
 }
 
