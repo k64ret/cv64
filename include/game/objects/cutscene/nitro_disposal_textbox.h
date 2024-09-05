@@ -14,7 +14,7 @@ typedef struct cv64_ovl_nitrodisposaltxt {
     u8 field_0x20[20];
     s32 text_ID;
     u8 field_0x38[4];
-    u32 interacting_with_interactuable;
+    u32 interacting_with_interactable;
     u32 textbox_is_active;
     u8 field_0x44[4];
     s32 has_nitro_text_ID;

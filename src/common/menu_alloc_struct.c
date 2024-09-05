@@ -80,17 +80,18 @@ void* func_8013B454_BE644(const char* name, cv64_object_t* object, u32 size, s32
 }
 
 void func_8013B4F0_BE6E0() {
-    if (isMenuDataHeapActive()) {
-        func_80000D68_1968(HEAP_KIND_MENU_DATA, 0xC0000000);
-    }
+    if (!isMenuDataHeapActive())
+        return;
+
+    func_80000D68_1968(HEAP_KIND_MENU_DATA, 0xC0000000);
 }
 
-u32 isMenuDataHeapActive() {
-    u32 is_active;
+u32 isMenuDataHeapActive(void) {
+    u32 is_active = BITS_HAS(heaps[HEAP_KIND_MENU_DATA].flags, HEAP_ACTIVE);
 
-    is_active = BITS_HAS(heaps[HEAP_KIND_MENU_DATA].flags, HEAP_ACTIVE);
     if (is_active == FALSE) {
         return FALSE;
     }
+
     return TRUE;
 }

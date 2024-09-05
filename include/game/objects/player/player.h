@@ -6,6 +6,7 @@
 #include "math.h"
 #include "objects/player/attackMgr.h"
 #include "objects/player/player_flags.h"
+#include "objects/player/enemyTargetGfx.h"
 #include <ultra64.h>
 
 typedef struct {
@@ -84,28 +85,6 @@ typedef union {
 } unk_union_playerData;
 
 typedef struct {
-    u16 field0_0x0;
-    vec3s field1_0x2;
-    vec3f field2_0x8;
-    f32 field3_0x14;
-    f32 field4_0x18;
-    animation_info field5_0x1c;
-    cv64_actor_t* enemy_targeted_actor_ptr;
-    s16 field7_0x34;
-    s16 field8_0x36;
-    cv64_actor_t* field9_0x38;
-    vec3f field10_0x3c;
-    vec3f field11_0x48;
-    cv64_actor_t* field12_0x54;
-    vec3f field13_0x58;
-    u8 field14_0x64;
-    u8 field15_0x65;
-    u8 field16_0x66;
-    u8 field17_0x67;
-    vec3f field18_0x68;
-} struct_7;
-
-typedef struct {
     u8 field_0x00[4];
     actorVisualData visualData;
     playerParams* params;
@@ -123,7 +102,7 @@ typedef struct {
     f32 field_0x80;
     f32 gravity_accel;
     attackManager* attackMgr;
-    struct_7* field_0x8C;
+    enemyTargetData_t* enemyTargetData;
     u8 unable_to_jump_timer;
     u8 unable_to_throw_subweapon_timer;
     u8 field_0x92;
@@ -227,5 +206,9 @@ typedef enum cv64_player_state_funcs_id {
 } cv64_player_state_funcs_id_t;
 
 extern playerData* ptr_PlayerData;
+
+extern s32 getAngleBetweenPlayerAndInteractable(
+    f32 player_pos_X, f32 player_pos_Z, f32 actor_pos_X, f32 actor_pos_Z
+);
 
 #endif

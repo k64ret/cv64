@@ -73,7 +73,7 @@ void cv64_ovl_explwalltxt_init(cv64_ovl_explwalltxt_t* self) {
 
 void cv64_ovl_explwalltxt_idle(cv64_ovl_explwalltxt_t* self) {
     // If we're interacting with the wall and it hasn't been blown up yet
-    if ((self->interacting_with_interactuable == TRUE) &&
+    if ((self->interacting_with_interactable == TRUE) &&
         ((self->wall_type == WALL_TYPE_MAIN_MAP) &&
              !(CHECK_EVENT_FLAGS(
                  EVENT_FLAG_ID_CASTLE_CENTER_MAIN,
@@ -353,10 +353,10 @@ void cv64_ovl_explwalltxt_item_no(cv64_ovl_explwalltxt_t* self) {
     if (!(*lensAreClosed)())
         return;
 
-    self->header.timer                   = 0;
-    self->textbox_is_active              = FALSE;
-    self->interacting_with_interactuable = FALSE;
-    sys.FREEZE_GAMEPLAY                  = FALSE;
+    self->header.timer                  = 0;
+    self->textbox_is_active             = FALSE;
+    self->interacting_with_interactable = FALSE;
+    sys.FREEZE_GAMEPLAY                 = FALSE;
     (*cameraMgr_setReadingTextState)(sys.ptr_cameraMgr, FALSE);
     (*object_curLevel_goToFunc)(
         self->header.current_function, &self->header.function_info_ID, EXPLOSIVE_WALL_SPOT_IDLE
@@ -387,10 +387,10 @@ void cv64_ovl_explwalltxt_ready_for_blast(cv64_ovl_explwalltxt_t* self) {
             sys.cutscene_ID = CUTSCENE_ID_BLOW_UP_WALL_TO_LIBRARY;
             break;
     }
-    self->header.timer                   = 0;
-    self->textbox_is_active              = FALSE;
-    self->interacting_with_interactuable = FALSE;
-    sys.FREEZE_GAMEPLAY                  = FALSE;
+    self->header.timer                  = 0;
+    self->textbox_is_active             = FALSE;
+    self->interacting_with_interactable = FALSE;
+    sys.FREEZE_GAMEPLAY                 = FALSE;
     (*cameraMgr_setReadingTextState)(sys.ptr_cameraMgr, FALSE);
     (*object_curLevel_goToFunc)(
         self->header.current_function, &self->header.function_info_ID, EXPLOSIVE_WALL_SPOT_IDLE
@@ -413,10 +413,10 @@ void cv64_ovl_explwalltxt_nitro_is_set(cv64_ovl_explwalltxt_t* self) {
     if (!(*lensAreClosed)())
         return;
 
-    self->header.timer                   = 0;
-    self->textbox_is_active              = FALSE;
-    self->interacting_with_interactuable = FALSE;
-    sys.FREEZE_GAMEPLAY                  = FALSE;
+    self->header.timer                  = 0;
+    self->textbox_is_active             = FALSE;
+    self->interacting_with_interactable = FALSE;
+    sys.FREEZE_GAMEPLAY                 = FALSE;
     (*cameraMgr_setReadingTextState)(sys.ptr_cameraMgr, FALSE);
     (*object_curLevel_goToFunc)(
         self->header.current_function, &self->header.function_info_ID, EXPLOSIVE_WALL_SPOT_IDLE
@@ -439,10 +439,10 @@ void cv64_ovl_explwalltxt_mandragora_is_set(cv64_ovl_explwalltxt_t* self) {
     if (!(*lensAreClosed)())
         return;
 
-    self->header.timer                   = 0;
-    self->textbox_is_active              = FALSE;
-    self->interacting_with_interactuable = FALSE;
-    sys.FREEZE_GAMEPLAY                  = FALSE;
+    self->header.timer                  = 0;
+    self->textbox_is_active             = FALSE;
+    self->interacting_with_interactable = FALSE;
+    sys.FREEZE_GAMEPLAY                 = FALSE;
     (*cameraMgr_setReadingTextState)(sys.ptr_cameraMgr, FALSE);
     (*object_curLevel_goToFunc)(
         self->header.current_function, &self->header.function_info_ID, EXPLOSIVE_WALL_SPOT_IDLE
@@ -465,10 +465,10 @@ void cv64_ovl_explwalltxt_default_desc(cv64_ovl_explwalltxt_t* self) {
     if (!(*lensAreClosed)())
         return;
 
-    self->header.timer                   = 0;
-    self->textbox_is_active              = FALSE;
-    self->interacting_with_interactuable = FALSE;
-    sys.FREEZE_GAMEPLAY                  = FALSE;
+    self->header.timer                  = 0;
+    self->textbox_is_active             = FALSE;
+    self->interacting_with_interactable = FALSE;
+    sys.FREEZE_GAMEPLAY                 = FALSE;
     (*cameraMgr_setReadingTextState)(sys.ptr_cameraMgr, FALSE);
     (*object_curLevel_goToFunc)(
         self->header.current_function, &self->header.function_info_ID, EXPLOSIVE_WALL_SPOT_IDLE
@@ -491,10 +491,10 @@ void cv64_ovl_explwalltxt_item_already_set(cv64_ovl_explwalltxt_t* self) {
     if (!(*lensAreClosed)())
         return;
 
-    self->header.timer                   = 0;
-    self->textbox_is_active              = FALSE;
-    self->interacting_with_interactuable = FALSE;
-    sys.FREEZE_GAMEPLAY                  = FALSE;
+    self->header.timer                  = 0;
+    self->textbox_is_active             = FALSE;
+    self->interacting_with_interactable = FALSE;
+    sys.FREEZE_GAMEPLAY                 = FALSE;
     (*cameraMgr_setReadingTextState)(sys.ptr_cameraMgr, FALSE);
     (*object_curLevel_goToFunc)(
         self->header.current_function, &self->header.function_info_ID, EXPLOSIVE_WALL_SPOT_IDLE

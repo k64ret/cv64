@@ -36,4 +36,6 @@ typedef enum cv64_cutsceneMgr_func_id {
 
 typedef void (*cv64_cutscenemgr_func_t)(cutsceneMgr*);
 
+extern cutsceneMgr* ptr_cutsceneMgr;
+
 #endif

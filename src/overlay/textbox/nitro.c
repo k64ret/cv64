@@ -48,7 +48,7 @@ void cv64_ovl_nitrotxt_init(cv64_ovl_nitrotxt_t* self) {
 void cv64_ovl_nitrotxt_idle(cv64_ovl_nitrotxt_t* self) {
     int temp[2];
 
-    if (self->interacting_with_interactuable != TRUE)
+    if (self->interacting_with_interactable != TRUE)
         return;
 
     sys.FREEZE_GAMEPLAY = TRUE;
@@ -147,10 +147,10 @@ void cv64_ovl_nitrotxt_close(cv64_ovl_nitrotxt_t* self) {
     if (!(*lensAreClosed)())
         return;
 
-    self->header.timer                   = 0;
-    self->textbox_is_active              = FALSE;
-    self->interacting_with_interactuable = FALSE;
-    sys.FREEZE_GAMEPLAY                  = FALSE;
+    self->header.timer                  = 0;
+    self->textbox_is_active             = FALSE;
+    self->interacting_with_interactable = FALSE;
+    sys.FREEZE_GAMEPLAY                 = FALSE;
     (*cameraMgr_setReadingTextState)(sys.ptr_cameraMgr, FALSE);
     (*object_curLevel_goToFunc)(
         self->header.current_function, &self->header.function_info_ID, NITRO_TEXTBOX_IDLE

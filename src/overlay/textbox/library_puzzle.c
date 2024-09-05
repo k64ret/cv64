@@ -40,16 +40,20 @@ void cv64_ovl_librarypuzzletxt_init(cv64_ovl_librarypuzzletxt_t* self) {
 
     // Destroy if the puzzle was already solved
     if (CHECK_EVENT_FLAGS(
-            EVENT_FLAG_ID_CASTLE_WALL_LIBRARY_AND_MAZE_GARDEN,
-            EVENT_FLAG_CASTLE_WALL_LIBRARY_AND_MAZE_GARDEN_LIBRARY_PUZZLE_SOLVED
+            EVENT_FLAG_ID_CASTLE_CENTER_4F_AND_MAZE_GARDEN,
+            EVENT_FLAG_CASTLE_CENTER_4F_AND_MAZE_GARDEN_LIBRARY_PUZZLE_SOLVED
         )) {
         self->header.destroy(self);
         return;
     }
 
-    self->position.x     = settings->position.x;
-    self->position.y     = settings->position.y;
-    self->position.z     = settings->position.z;
+    self->position.x = settings->position.x;
+    self->position.y = settings->position.y;
+    self->position.z = settings->position.z;
+    /**
+     * The trigger sizes below are unused, since `Player_getActorCurrentlyInteractingWith`
+     * uses other hardcoded trigger sizes when the player checks out the puzzle's trigger
+     */
     self->trigger_size_X = 10;
     self->trigger_size_Z = 10;
     (*object_allocEntryInListAndClear)(
@@ -63,7 +67,7 @@ void cv64_ovl_librarypuzzletxt_init(cv64_ovl_librarypuzzletxt_t* self) {
 void cv64_ovl_librarypuzzletxt_idle(cv64_ovl_librarypuzzletxt_t* self) {
     mfds_state* message;
 
-    if (self->interacting_with_interactuable != TRUE)
+    if (self->interacting_with_interactable != TRUE)
         return;
 
     // Freeze player and ask the user if they want to do the puzzle
@@ -146,9 +150,9 @@ void cv64_ovl_librarypuzzletxt_show(cv64_ovl_librarypuzzletxt_t* self) {
             sys.FREEZE_PLAYER  = FALSE;
             sys.FREEZE_ENEMIES = FALSE;
             (*cameraMgr_setLockCameraAtPointState)(sys.ptr_cameraMgr, FALSE);
-            SELECTION_DELAY_TIMER(self)          = 0;
-            self->textbox_is_active              = FALSE;
-            self->interacting_with_interactuable = FALSE;
+            SELECTION_DELAY_TIMER(self)         = 0;
+            self->textbox_is_active             = FALSE;
+            self->interacting_with_interactable = FALSE;
             (*object_curLevel_goToFunc)(
                 self->header.current_function, &self->header.function_info_ID, LIBRARY_PUZZLE_IDLE
             );
@@ -339,14 +343,14 @@ void cv64_ovl_librarypuzzletxt_fail(cv64_ovl_librarypuzzletxt_t* self) {
     (*cutscene_setActorStateIfMatchingVariable1)(
         STAGE_OBJECT_HONMARU_4F_MINAMI_LIBRARY_PIECE, RED_PIECE, 0
     );
-    SELECTION_DELAY_TIMER(self)          = 0;
-    self->first_option                   = 0;
-    self->second_option                  = 0;
-    self->third_option                   = 0;
-    self->number_of_options_selected     = 0;
-    self->option_selected                = FALSE;
-    self->textbox_is_active              = FALSE;
-    self->interacting_with_interactuable = FALSE;
+    SELECTION_DELAY_TIMER(self)         = 0;
+    self->first_option                  = 0;
+    self->second_option                 = 0;
+    self->third_option                  = 0;
+    self->number_of_options_selected    = 0;
+    self->option_selected               = FALSE;
+    self->textbox_is_active             = FALSE;
+    self->interacting_with_interactable = FALSE;
     BITS_SET(data->lens->flags, WINDOW_CLOSING | WINDOW_OPENING);
     textbox = data->options_textbox;
     BITS_SET(textbox->flags, CLOSE_TEXTBOX);
@@ -367,8 +371,8 @@ void cv64_ovl_librarypuzzletxt_success(cv64_ovl_librarypuzzletxt_t* self) {
      */
     sys.cutscene_ID = CUTSCENE_ID_LIBRARY_PUZZLE_SOLVED;
     SET_EVENT_FLAGS(
-        EVENT_FLAG_ID_CASTLE_WALL_LIBRARY_AND_MAZE_GARDEN,
-        EVENT_FLAG_CASTLE_WALL_LIBRARY_AND_MAZE_GARDEN_LIBRARY_PUZZLE_SOLVED
+        EVENT_FLAG_ID_CASTLE_CENTER_4F_AND_MAZE_GARDEN,
+        EVENT_FLAG_CASTLE_CENTER_4F_AND_MAZE_GARDEN_LIBRARY_PUZZLE_SOLVED
     );
     BITS_SET(data->lens->flags, WINDOW_CLOSING | WINDOW_OPENING);
     BITS_SET(data->options_textbox->flags, CLOSE_TEXTBOX);
@@ -398,7 +402,7 @@ void print_selected_options(u16* text, u16 selected_options_IDs) {
         number = i;
 
         // Check that an option was selected
-        if (BITS_HAS(selected_options_IDs, CV64_BIT(number + 0x1F))) {
+        if (BITS_HAS(selected_options_IDs, BIT(number + 0x1F))) {
             // Print selected options in red
             string[0] = CTRL_SET_COLOR(TEXT_COLOR_RED);
             string[1] = number + ASCII_TO_CV64('0');
@@ -450,7 +454,7 @@ s32 select_next_option(
      * `*selected_options_IDs & (1 << (*highlighted_option))` makes sure
      * to skip selecting the already-selected options
      */
-    if ((CONT_BTNS_PRESSED(CONT_0, L_JPAD)) || (sys.controllers[0].joystick_x < -25)) {
+    if ((CONT_BTNS_PRESSED(CONT_0, L_JPAD)) || (sys.controllers[0].joy_x < -25)) {
         if (*selection_delay_timer == 0) {
             *selection_delay_timer = LIBRARY_PUZZLE_SELECTION_DELAY;
             do {
@@ -458,11 +462,11 @@ s32 select_next_option(
                 if ((*highlighted_option) < PUZZLE_OPTION(1)) {
                     *highlighted_option = PUZZLE_OPTION(9);
                 }
-            } while (BITS_HAS(*selected_options_IDs, CV64_BIT(*highlighted_option)));
+            } while (BITS_HAS(*selected_options_IDs, BIT(*highlighted_option)));
         } else {
             (*selection_delay_timer)--;
         }
-    } else if ((CONT_BTNS_PRESSED(CONT_0, R_JPAD)) || (sys.controllers[0].joystick_x >= 26)) {
+    } else if ((CONT_BTNS_PRESSED(CONT_0, R_JPAD)) || (sys.controllers[0].joy_x >= 26)) {
         if (*selection_delay_timer == 0) {
             *selection_delay_timer = LIBRARY_PUZZLE_SELECTION_DELAY;
             do {
@@ -470,7 +474,7 @@ s32 select_next_option(
                 if ((*highlighted_option) > PUZZLE_OPTION(9)) {
                     *highlighted_option = PUZZLE_OPTION(1);
                 }
-            } while (BITS_HAS(*selected_options_IDs, CV64_BIT(*highlighted_option)));
+            } while (BITS_HAS(*selected_options_IDs, BIT(*highlighted_option)));
         } else {
             (*selection_delay_timer)--;
         }
@@ -480,14 +484,14 @@ s32 select_next_option(
      * Move the lens forwards one place after selecting an option to avoid
      * being able to select the previous option again
      */
-    if (BITS_HAS(*selected_options_IDs, CV64_BIT(*highlighted_option))) {
+    if (BITS_HAS(*selected_options_IDs, BIT(*highlighted_option))) {
         ret = 1;
         do {
             (*highlighted_option)++;
             if ((*highlighted_option) > PUZZLE_OPTION(9)) {
                 *highlighted_option = PUZZLE_OPTION(1);
             }
-        } while (BITS_HAS(*selected_options_IDs, CV64_BIT(*highlighted_option)));
+        } while (BITS_HAS(*selected_options_IDs, BIT(*highlighted_option)));
     }
 
     if (ret != 0) {
@@ -498,7 +502,7 @@ s32 select_next_option(
      * Option selected
      */
     if ((CONT_BTNS_PRESSED(CONT_0, A_BUTTON))) {
-        BITS_SET(*selected_options_IDs, CV64_BIT(*highlighted_option));
+        BITS_SET(*selected_options_IDs, BIT(*highlighted_option));
         ret = 1;
         /**
      * Pressed the B button. This does nothing in practice.

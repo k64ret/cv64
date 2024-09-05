@@ -43,7 +43,7 @@ void cv64_ovl_elevatortxt_init(cv64_ovl_elevatortxt_t* self) {
 }
 
 void cv64_ovl_elevatortxt_idle(cv64_ovl_elevatortxt_t* self) {
-    if (self->interacting_with_interactuable != TRUE)
+    if (self->interacting_with_interactable != TRUE)
         return;
 
     sys.FREEZE_GAMEPLAY = TRUE;
@@ -125,10 +125,10 @@ void cv64_ovl_elevatortxt_close(cv64_ovl_elevatortxt_t* self) {
     if ((self->state != BOTTOM_ELEVATOR_ACTIVATOR_STATE_DONT_ACTIVATE_YET) && !(*lensAreClosed)())
         return;
 
-    self->header.timer                   = 0;
-    self->textbox_is_active              = FALSE;
-    self->interacting_with_interactuable = FALSE;
-    sys.FREEZE_GAMEPLAY                  = FALSE;
+    self->header.timer                  = 0;
+    self->textbox_is_active             = FALSE;
+    self->interacting_with_interactable = FALSE;
+    sys.FREEZE_GAMEPLAY                 = FALSE;
     (*cameraMgr_setReadingTextState)(sys.ptr_cameraMgr, FALSE);
     (*object_curLevel_goToFunc)(
         self->header.current_function,

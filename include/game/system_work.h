@@ -11,7 +11,7 @@
 #include "cutscene_ID.h"
 #include "objects/player/player.h"
 #include "objects/camera/cameraMgr.h"
-#include "objects/cutscene/interactuables.h"
+#include "objects/cutscene/interactables.h"
 #include <ultra64.h>
 
 #define MAP_ASSETS_FILE_ID    sys.map_assets_file_IDs[0]
@@ -84,8 +84,9 @@ typedef struct {
      * Global Timer (Capped Framerate)
      */
     u16 global_timer_capped;
-    u8 field24_0x242be[6];
-    cv64_controller_state_t controllers[4];
+    s16 field24_0x242be;
+    u8 field_0x242c0[4];
+    cv64_cont_state_t controllers[4];
     u8 file_load_array_ID;
     u8 field27_0x242fd[3];
     void* Nisitenma_Ichigo_loaded_files_ptr[255];
@@ -121,10 +122,10 @@ typedef struct {
     s16 FREEZE_gameplayMenuMgr;
     s16 contPak_file_no;
     Player* ptr_PlayerObject;
-    interactuables* actor_player_is_currently_interacting_with;
+    interactables* actor_player_is_currently_interacting_with;
     u32 pull_lever;
     u8 field50_0x26230[4];
-    u16 current_PowerUp_level;
+    s16 current_PowerUp_level;
     u8 alternate_costume;
     u8 in_first_person_mode;
     s16 nitro_explosion_hit_launch_angle;
@@ -173,12 +174,12 @@ typedef struct {
     /**
      * 0 = REINHARDT, 1 = CARRIE
      */
-    u32 titleDemoCharacter;
+    u32 title_demo_character;
     u32 cutscene_ID;
     u32 entrance_cutscene_ID;
     u32 cutscene_flags;
     /**
-     * DESTROY_CUTSCENE_TRIGGERS = 0x00000001
+     * DESTROY_CUTSCENE_TRIGGERS --> |= 0x00000001
      */
     u32 field89_0x2644c;
 } system_work; // Size = 0x26450
@@ -190,20 +191,21 @@ typedef struct {
 extern system_work sys;
 
 // Controller macros
+#define GET_CONTROLLER(controller_id) sys.controllers[(controller_id)]
 #define CONT_BTNS_HELD(controller_id, buttons)                                                     \
-    BITS_HAS(sys.controllers[(controller_id)].buttons_held, (buttons))
+    BITS_HAS(GET_CONTROLLER(controller_id).btns_held, (buttons))
 #define CONT_BTNS_PRESSED(controller_id, buttons)                                                  \
-    BITS_HAS(sys.controllers[(controller_id)].buttons_pressed, (buttons))
+    BITS_HAS(GET_CONTROLLER(controller_id).btns_pressed, (buttons))
 #define CONT_ALL_BTNS_HELD(buttons)                                                                \
     BITS_HAS(                                                                                      \
-        ((sys.controllers[0].buttons_held) | (sys.controllers[1].buttons_held) |                   \
-         (sys.controllers[2].buttons_held) | (sys.controllers[3].buttons_held)),                   \
+        ((GET_CONTROLLER(0).btns_held) | (GET_CONTROLLER(1).btns_held) |                           \
+         (GET_CONTROLLER(2).btns_held) | (GET_CONTROLLER(3).btns_held)),                           \
         (buttons)                                                                                  \
     )
 #define CONT_ALL_BTNS_PRESSED(buttons)                                                             \
     BITS_HAS(                                                                                      \
-        ((sys.controllers[0].buttons_pressed) | (sys.controllers[1].buttons_pressed) |             \
-         (sys.controllers[2].buttons_pressed) | (sys.controllers[3].buttons_pressed)),             \
+        ((GET_CONTROLLER(0).btns_pressed) | (GET_CONTROLLER(1).btns_pressed) |                     \
+         (GET_CONTROLLER(2).btns_pressed) | (GET_CONTROLLER(3).btns_pressed)),                     \
         (buttons)                                                                                  \
     )
 

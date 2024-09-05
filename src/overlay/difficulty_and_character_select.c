@@ -376,7 +376,7 @@ void characterSelect_selectOption(characterSelect* self) {
         for (self_temp = self, i = 0; i != NUM_CHARACTERS; i++,
             self_temp          = (u32*) self_temp + 1,
             character_portrait = self_temp->character_portraits[0]) {
-            if (BITS_HAS(work->flags, CV64_BIT(i))) {
+            if (BITS_HAS(work->flags, BIT(i))) {
                 character_portrait->primitive_color.integer -= RGBA(17, 17, 17, 0);
             }
         }
@@ -387,12 +387,12 @@ void characterSelect_selectOption(characterSelect* self) {
         if (work->current_character_option == work->previous_character_option) {
             // Moving the lens to the left
             if ((work->current_character_option == work->previous_character_option) &&
-                (CONT_BTNS_PRESSED(CONT_0, L_JPAD) || (sys.controllers[0].joystick_x < -25))) {
+                (CONT_BTNS_PRESSED(CONT_0, L_JPAD) || (sys.controllers[0].joy_x < -25))) {
                 work->current_character_option--;
             }
             // Moving the lens to the right
             if ((work->current_character_option == work->previous_character_option) &&
-                (CONT_BTNS_PRESSED(CONT_0, R_JPAD) || (sys.controllers[0].joystick_x >= 26))) {
+                (CONT_BTNS_PRESSED(CONT_0, R_JPAD) || (sys.controllers[0].joy_x >= 26))) {
                 work->current_character_option++;
             }
             characterSelect_determineCharacterToSelect(
@@ -402,7 +402,7 @@ void characterSelect_selectOption(characterSelect* self) {
             if (CONT_BTNS_PRESSED(CONT_0, A_BUTTON) ||
                 CONT_BTNS_PRESSED(CONT_0, (START_BUTTON | RECENTER_BUTTON))) {
                 // Apply alternate costume if moving up + if the appropiate Special jewels were obtained
-                if (CONT_BTNS_PRESSED(CONT_0, U_JPAD) || (sys.controllers[0].joystick_y >= 26)) {
+                if (CONT_BTNS_PRESSED(CONT_0, U_JPAD) || (sys.controllers[0].joy_y >= 26)) {
                     // Make sure the player has finished the game before trying to assign the alternate costume
                     if (((BITS_HAS(
                               sys.SaveStruct_gameplay.flags, SAVE_FLAG_REINDHART_GOOD_ENDING
@@ -610,7 +610,7 @@ void characterSelect_determineCharacterToSelect(
                 work->number_of_characters + work->current_character_option;
         }
         // Check if the characters are disabled. If not, don't select them.
-        if (BITS_NOT_HAS(work->flags, CV64_BIT(work->current_character_option))) {
+        if (BITS_NOT_HAS(work->flags, BIT(work->current_character_option))) {
             work->current_character_option =
                 work->current_character_option + new_character_option_offset;
             new_character_option_offset = (u8) new_character_option_offset;

@@ -499,8 +499,8 @@ segments:
     follows_vram: main
     bss_size: 0x20C0
     subsegments:
-      - [0x000A8420, c, common/interactuables]
-      - [0x000A9560, asm]
+      - [0x000A8420, c, common/interactables]
+      - [0x000A9560, c, common/interactables_helpers]
       - [0x000AA130, c, common/cutscene_manager]
       - [0x000AA6E0, asm, common/cutscene_trigger]
       - [0x000AB0F0, asm, common/cutscene]   # Also contains initNewGame() and player_status_init()
@@ -557,10 +557,10 @@ segments:
       - [0x000E9800, asm]   # Also contains code for the `rain` object
       - [0x000EA9B0, asm, common/actor_creator]
       - [0x000EB700, asm]   # Contains object 0x00BA's code
-      - [0x000EDA60, data]
-      - [0x000EE750, .data, common/interactuables]
+      - [0x000EDA60, .data, common/interactables_tables]
+      - [0x000EE750, .data, common/interactables]
       - [0x000EE770, .data, common/cutscene_manager]
-      - [0x000EE790, data]
+      - [0x000EE790, data, common/cutscene_trigger]
       - [0x000EE7B0, data]
       - [0x000EFA80, data]
       - [0x000EFAD0, .data, common/stage_select]
@@ -589,8 +589,9 @@ segments:
       - [0x0010D8E0, data]
       - [0x0010D900, data]
       - [0x0010DC60, data]
-      - [0x0010DD50, .rodata, common/interactuables]
-      - [0x0010DD70, rodata]
+      - [0x0010DD50, .rodata, common/interactables]
+      - [0x0010DD70, .rodata, common/interactables_helpers]
+      - [0x0010DDF0, rodata, common/cutscene_trigger]
       - [0x0010E070, .rodata, common/stage_select]
       - [0x0010E0F0, rodata]
       - [0x0010E1E0, rodata]
@@ -2344,11 +2345,15 @@ segments:
     exclusive_ram_id: nisitenma_ichigo_overlays
 
   - name: ni_ovl_title_demo
-    type: bin
+    type: code
     # start: 0x00B52F02
     start: 0x00E53110
     vram: 0x0F000000
     exclusive_ram_id: nisitenma_ichigo_overlays
+    subsegments:
+      - [0x00E53110, c, overlay/title_demo]
+      - [0x00E53780, .data, overlay/title_demo]
+      - [0x00E55560, .rodata, overlay/title_demo]
 
   - name: ni_ovl_credits_manager
     type: code

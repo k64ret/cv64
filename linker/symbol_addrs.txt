@@ -9,6 +9,28 @@ gamestate_change = 0x80000510; // type:func
 // src/memory.c ================================================================
 
 // .text
+memory_clear                              = 0x80000770; // type:func
+memory_copy                               = 0x800008D0; // type:func
+heap_init                                 = 0x80000C28; // type:func
+heap_free                                 = 0x80000C78; // type:func
+heap_writebackDCache                      = 0x80000C94; // type:func
+initHeaps                                 = 0x80000CF4; // type:func
+heap_alloc                                = 0x80000D80; // type:func
+heap_allocWithAlignment                   = 0x80000E58; // type:func
+heapBlock_updateBlockMaxSize              = 0x80000FB4; // type:func
+heapBlock_free                            = 0x80001078; // type:func
+object_curLevel_goToNextFunc              = 0x80001380; // type:func
+object_prevLevel_goToNextFunc             = 0x800013BC; // type:func
+object_nextLevel_goToNextFunc             = 0x800013FC; // type:func
+object_curLevel_goToNextFuncAndClearTimer = 0x80001448; // type:func
+object_curLevel_goToPrevFunc              = 0x80001488; // type:func
+object_prevLevel_goToPrevFunc             = 0x800014C4; // type:func
+object_nextLevel_goToPrevFunc             = 0x80001504; // type:func
+object_curLevel_goToPrevFuncAndClearTimer = 0x80001550; // type:func
+object_curLevel_goToFunc                  = 0x80001590; // type:func
+object_curLevel_goToFuncInLevel           = 0x800015C4; // type:func
+object_prevLevel_goToFunc                 = 0x80001600; // type:func
+object_nextLevel_goToFunc                 = 0x80001638; // type:func
 
 // End of src/memory.c =========================================================
 
@@ -1554,22 +1576,22 @@ __osSpSetPc = 0x8008FC90; // type:func
 // End of asm/libultra/io/spsetpc.s ============================================
 
 
-// src/common/interactuable.c ==================================================
+// src/common/interactables.c ==================================================
 
 // .text
-interactuables_entrypoint          = 0x80125230; // type:func
-interactuables_init                = 0x801252A0; // type:func
-interactuables_main                = 0x80125764; // type:func
-interactuables_initCheck           = 0x80125B60; // type:func
-interactuables_selectTextboxOption = 0x80125D84; // type:func
-interactuables_stopCheck           = 0x80126004; // type:func
-interactuables_destroy             = 0x801261DC; // type:func
-interactuables_stopInteraction     = 0x80126354; // type:func
+interactables_entrypoint          = 0x80125230; // type:func
+interactables_init                = 0x801252A0; // type:func
+interactables_main                = 0x80125764; // type:func
+interactables_initCheck           = 0x80125B60; // type:func
+interactables_selectTextboxOption = 0x80125D84; // type:func
+interactables_stopCheck           = 0x80126004; // type:func
+interactables_destroy             = 0x801261DC; // type:func
+interactables_stopInteraction     = 0x80126354; // type:func
 
 // .data
-interactuables_functions           = 0x8016B560; // size:0x18
+interactables_functions           = 0x8016B560; // size:0x18
 
-// End of src/common/interactuable.c ===========================================
+// End of src/common/interactables.c ===========================================
 
 
 // src/common/cutscene_manager.c ===============================================
@@ -1654,14 +1676,6 @@ D_8018C650                = 0x8018C650; // type:f32 segment:common
 
 // End of src/common/skybox_common_actors.c ====================================
 
-memory_clear = 0x80000770;
-memory_copy = 0x800008d0;
-heap_init = 0x80000c28;
-heap_free = 0x80000c78;
-initHeaps = 0x80000cf4;
-heap_alloc = 0x80000d80;
-heapBlock_updateBlockMaxSize = 0x80000fb4;
-heapBlock_free = 0x80001078;
 multPointMatrix = 0x800029e8;
 vec3f_getDistanceBetweenTwoVectors = 0x8000400c;
 NisitenmaIchigo_isFileLoaded = 0x80004180;
@@ -1742,7 +1756,7 @@ ROM_0x1800_ChunkLoad__Advance = 0x8001746c;
 loadROM_0x1800_Chunk_ToRAM = 0x800174e4;
 setNextFileToLoad = 0x80017570;
 loadFilesFromFileLoadArray = 0x800175ec;
-rmonPrintf = 0x800192e8;
+osSyncPrintf = 0x800192E8;
 crashScreen_printThreadData = 0x80019560;
 crashScreen_printExceptionInfo = 0x80019968;
 contPak_getInsertedStatus = 0x8001a380;
@@ -1781,7 +1795,7 @@ play_footstep_sfx = 0x800251bc;
 Player_8002639c = 0x8002639c;
 Player_setFallReaction = 0x80026e14;
 PlayerMgr_updateJumpSpeedAndAngle = 0x8002b3d4;
-getAngleBetweenPlayerAndInteractuable = 0x80037690;
+getAngleBetweenPlayerAndInteractable = 0x80037690;
 random_range = 0x80037980;
 getCurrentCharacter = 0x8003ca24;
 vec3f_magnitude_2 = 0x8003d37c;
@@ -1893,8 +1907,6 @@ _allocatePVoice = 0x80081a50;
 alSynAllocVoice = 0x80081b38;
 osVirtualToPhysical = 0x80081c80;
 osWritebackDCache = 0x80081d00;
-playerCanInteractWithInteractuable = 0x801268e4;
-getMapEventFlagID = 0x80126cec;
 checkCutsceneTimeRangeTrigger = 0x80127e84;
 cutscene_setCameraClippingAndScissoring = 0x801287f0;
 textbox_create = 0x8012cb88;
@@ -2008,7 +2020,6 @@ GameStateMgr_entrypoint = 0x8000053c;
 gamestate_init = 0x800005dc; // type:func
 code_execution_max_delay = 0x80387AD0;
 end_frame = 0x8000072c;
-heap_writebackDCache = 0x80000c94;
 objectList_findObjectByIDAndType = 0x80001bc0;
 getRandomFromGuRandom = 0x80004118;
 animationMgr_updateAnimParams = 0x8000be88;
@@ -2075,6 +2086,8 @@ Player_destroy = 0x800233dc;
 enemyTargetGfx_entrypoint = 0x80025380;
 enemyTargetGfx_init = 0x800253f0;
 enemyTargetGfx_onTarget = 0x8002559c;
+func_800260F8_26CF8 = 0x800260F8;
+enemyTargetGfx_hidden = 0x80026100;
 Carrie_damage_entrypoint = 0x800261a0;
 Carrie_damage_init = 0x80026ffc;
 PlayerMgr_calcDamage = 0x800278bc;
@@ -2173,7 +2186,40 @@ prepareMuteSoundToPlayAndSetStereoLocation = 0x80079dd4;
 prepareSoundToPlayAndSetVolume = 0x80079e04;
 guPerspective = 0x8007f800;
 osDestroyThread = 0x80080cb0;
-PlayerMgr_getActorCurrentlyInteractingWith = 0x80126370;
+
+
+// src/common/interactables_helpers.c ==========================================
+
+// .text
+Player_getActorCurrentlyInteractingWith          = 0x80126370; // type:func
+Player_getSpecialTextboxCurrentlyInteractingWith = 0x801267C4; // type:func
+playerCanInteractWithInteractable                = 0x801268E4; // type:func
+interactables_getInteractingType                 = 0x80126BE0; // type:func
+interactables_enableTextbox                      = 0x80126CD4; // type:func
+interactables_setInteractingFlag                 = 0x80126CE0; // type:func
+getMapEventFlagID                                = 0x80126CEC; // type:func
+spawnCastleWallGratingMechanismTextboxes         = 0x80126E04; // type:func
+removeKeyWhenOpeningDoor                         = 0x80126EA0; // type:func
+
+// .rodata
+D_8018ab80                                       = 0x8018AB80; // type:jtbl size:0x74
+
+// End of src/common/interactables_helpers.c ===================================
+
+
+// src/common/interactables_tables.c ===========================================
+
+// .data
+castleWallGratingMechanism_textSpotsActorSettings_openMechanism   = 0x8016A870; // size:0x10
+castleWallGratingMechanism_textSpotsActorSettings_mechanismOpened = 0x8016A880; // size:0x10
+door_item_open_verify_list                                        = 0x8016A890; // size:0x68
+castleWallGratingMechanism_textSpotsActorSettings                 = 0x8016A8F8; // size:0x0C
+interactables_settings_table                                      = 0x8016A904; // size:0x9C4
+item_model_settings_list                                          = 0x8016B2C8; // size:0x290
+
+// End of src/common/interactables_tables.c ====================================
+
+
 cutsceneTrigger_entrypoint = 0x801274f0;
 cutsceneTrigger_checkCollision = 0x801276b4;
 cutsceneTrigger_destroy = 0x80127e60;
@@ -2436,7 +2482,6 @@ fileSelectController_goToGameplay = 0x80143218;
 cutscene_ID = 0x80389ef8;
 mapObjectParent_entrypoint = 0x80018a28;
 enemyParent_entrypoint = 0x80018e6c;
-object_curLevel_goToNextFuncAndClearTimer = 0x80001448;
 fade_settings = 0x80387ad6;
 current_fade_time = 0x80387adc;
 current_opened_menu = 0x80389eee;
@@ -2534,26 +2579,15 @@ contPak_notInserted_1 = 0x800d7491;
 contPak_notInserted_2 = 0x800d7492;
 contPak_notInserted_3 = 0x800d7493;
 tmp_task = 0x801226d0;
-item_model_settings_list = 0x8016b2c8;
 cameraMgr_init = 0x8006686c;
 distortion_dlist = 0x80180eb0;
 __osException = 0x80080380;
 __osExceptionPreamble = 0x80080370;
-heap_allocWithAlignment = 0x80000e58;
 ROM_compressed_files_table = 0x8009503c;
 compressed_file__ID_from_ROMFileTable = 0x800a78c8;
 getTimeOfDay = 0x8003ec20;
 isPlayerDamagedOrDead = 0x8003c99c;
-object_curLevel_goToFuncInLevel = 0x800015c4;
 rotateTowardsTargetAngle = 0x8003d060;
-object_curLevel_goToFunc = 0x80001590;
-object_nextLevel_goToPrevFunc = 0x80001504;
-object_curLevel_goToPrevFuncAndClearTimer = 0x80001550;
-object_curLevel_goToPrevFunc = 0x80001488;
-object_prevLevel_goToPrevFunc = 0x800014c4;
-object_nextLevel_goToNextFunc = 0x800013fc;
-object_prevLevel_goToFunc = 0x80001600;
-object_nextLevel_goToFunc = 0x80001638;
 seed_RNG_C_rand_srand = 0x80186e3c;
 srand = 0x801588e0;
 seed_RNG = 0x800973c0;
@@ -2562,8 +2596,6 @@ dl_dither_set_settings = 0x80181950;
 isBetweenMidnightAnd2AM = 0x8015fa6c;
 door_properties = 0x80187610;
 loadingZone_exitMap = 0x80156a00;
-object_prevLevel_goToNextFunc = 0x800013bc;
-object_curLevel_goToNextFunc = 0x80001380;
 loadingZone_checkExceptions = 0x801563a8;
 loadingZone_checkFillPlayerHealth = 0x80156794;
 loadingZone_freezeEntitiesAndSetCameraParams = 0x8015670c;
@@ -2573,7 +2605,6 @@ song_ID_to_play_next = 0x80093d94;
 map_song_ID_table = 0x80096600;
 map_song_ID_unused = 0x800d5f20;
 mapSetup_functions = 0x800966a4;
-interactuables_settings_table = 0x8016a904;
 map_breakables_drop_values_list = 0x80189dd0;
 map_door_bitflags_list = 0x80188210;
 controllers = 0x80387d7c;
@@ -2585,7 +2616,6 @@ map_actor_model_model_info = 0x8018a710;
 DAT_8018d484 = 0x8018d484;
 map_text_segment_address = 0x8016d008;
 squashPoint_entrypoint = 0x80156f60;
-another_viewing_matrix = 0x80389e8c;
 ptr_master_light = 0x800a78d0;
 DAT_800a78f0 = 0x800a78f0;
 Another_Display_List = 0x800932e0;
@@ -2594,7 +2624,7 @@ current_song_ID = 0x80093d90;
 test_grid_map_display_lists = 0x80184d54;
 ptr_Player_model_info = 0x8018cda4;
 map_model_settings_list = 0x80184e44;
-display_list_2 = 0x80185ef8;
+dont_update_map_lighting = 0x80185F7C;
 map_player_initial_position = 0x8018cdb0;
 moonVisibilityVars = 0x8018CDD0;
 map_names = 0x801853d4;
@@ -2602,8 +2632,6 @@ map_settings_list = 0x8018504c;
 map_color_settings = 0x8018cdf8;
 map_fog_color = 0x80387ac8;
 map_diffuse_color = 0x80389ecc;
-a_display_list_3 = 0x8018a4d8;
-DMAMgr = 0x80342318;
 ptr_DMAMgr = 0x800a78c0;
 fileSelectController_setupManagerAndLoadAssets = 0x801424c0;
 isSoftReset = 0x800947f8;
@@ -2641,9 +2669,6 @@ DAT_80342148 = 0x80342148;
 initial_magic_ball_size = 0x800a4aa0;
 PlayerData = 0x80350798;
 animationMgr_setSwitchTime = 0x8000b930;
-interactuables_getInteractingType = 0x80126be0;
-interactuableObject_enableTextbox = 0x80126cd4;
-interactuableObject_setInteractingFlag = 0x80126ce0;
 CarrieAttackMgr_subweapon_selectSubweapon = 0x803dab3c;
 atariBaseWork_create = 0x800405c4;
 Carrie = 0x803427a0;
@@ -3011,3 +3036,8 @@ light_addColorAndDirection = 0x80010858;
 light_addColorAndDirectionOrSetAmbientColorIfListIsEmpty = 0x800109d0;
 map_misc_event_flags = 0x8018cdbc;
 audioControlFadeOutType_setType = 0x80014d40;
+JoystickAndPlayerAngleList_index = 0x800d7a04;
+JoystickAndPlayerAngleList = 0x800d7a08;
+func_800217AC_223AC = 0x800217AC;
+JoystickAndPlayerAngleList_pushCurrentDataAtIndex = 0x80021e28;
+D_800D7B00_A8DD0 = 0x800D7B00;
