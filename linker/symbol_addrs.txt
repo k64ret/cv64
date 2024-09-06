@@ -1760,33 +1760,34 @@ osSyncPrintf = 0x800192E8;
 crashScreen_printThreadData = 0x80019560;
 crashScreen_printExceptionInfo = 0x80019968;
 
-// src/controller_pak.c ================================================================
+
+// src/controller_pak.c ========================================================
 
 // .text
-contPak_getInsertedStatus = 0x8001a380; // type:func
-contPak_initAllPaks = 0x8001a46c; // type:func
-contPak_initPak = 0x8001a538; // type:func
-contPak_allocateFile = 0x8001a5cc; // type:func
-contPak_deleteFile = 0x8001a664; // type:func
-contPak_findFile = 0x8001a6e4; // type:func
-contPak_getFileState = 0x8001a770; // type:func
-contPak_getNumFiles = 0x8001a7d4; // type:func
-contPak_getFreeBlocks = 0x8001a838; // type:func
-contPak_IsPlug = 0x8001a89c; // type:func
-contPak_readFile = 0x8001a8c4; // type:func
-contPak_writeFile = 0x8001a948; // type:func
-contPak_checkRumblePak = 0x8001a9cc; // type:func
-contPak_checkInsertedError = 0x8001aa58; // type:func
-contPak_8001AAA8 = 0x8001AAA8; // type:func
-contPak_8001AB18 = 0x8001AB18; // type:func
-contPak_repairID = 0x8001ab88; // type:func
+contpak_get_ins_status   = 0x8001A380; // type:func
+contpak_init_all         = 0x8001A46C; // type:func
+contpak_init             = 0x8001A538; // type:func
+contpak_alloc_file       = 0x8001A5CC; // type:func
+contpak_del_file         = 0x8001A664; // type:func
+contpak_find_file        = 0x8001A6E4; // type:func
+contpak_get_file_state   = 0x8001A770; // type:func
+contpak_get_num_files    = 0x8001A7D4; // type:func
+contpak_get_free_blks    = 0x8001A838; // type:func
+contpak_is_plug          = 0x8001A89C; // type:func
+contpak_read_file        = 0x8001A8C4; // type:func
+contpak_write_file       = 0x8001A948; // type:func
+contpak_check_rumble_pak = 0x8001A9CC; // type:func
+contpak_check_ins_err    = 0x8001AA58; // type:func
+contpak_8001AAA8         = 0x8001AAA8; // type:func
+contpak_8001AB18         = 0x8001AB18; // type:func
+contpak_repair_id        = 0x8001AB88; // type:func
 
 // .bss
-pfs = 0x800d7150;   // size:0x19E
-D_800D72F0_A85C0 = 0x800D72F0;   // size:0x19E
-contPak_notInserted = 0x800d7490;
+pfs                      = 0x800D7150; // size:0x19E
+D_800D72F0_A85C0         = 0x800D72F0; // size:0x19E
+contpak_uninserted       = 0x800D7490;
 
-// End of src/controller_pak.c ================================================================
+// End of src/controller_pak.c =================================================
 
 contPak_writeSaveFile = 0x8001acf8;
 saveData_BackupAndWriteNewSave = 0x8001ad80;
