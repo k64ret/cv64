@@ -27,3 +27,8 @@ alias = 'cdec'
 # description = 'Build Castlevania ROM'
 run = "cmake --build build"
 alias = 'b'
+
+[tasks.permuter]
+# description = 'Build Castlevania ROM'
+run = "./scripts/perm"
+alias = 'p'
