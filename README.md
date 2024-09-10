@@ -17,7 +17,7 @@ This repository contains a work-in-progress decompilation project
 for Castlevania (Nintendo 64).
 
 > [!IMPORTANT]
-> This repository DOES NOT contain any of the assets required to build the ROM.
+> This repository __DOES NOT__ contain any of the assets required to build the ROM.
 > All data, including the original assembly code and assets, requires a legally
 > obtained copy of the original game to extract all of this data from.
 
