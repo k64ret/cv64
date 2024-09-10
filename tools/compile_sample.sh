@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-../tools/ido/linux/7.1/cc       \
+  tools/ido/linux/7.1/cc        \
   -c                            \
   -Wab,-r4300_mul               \
   -non_shared                   \
