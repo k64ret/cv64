@@ -29,6 +29,6 @@ run = "cmake --build build"
 alias = 'b'
 
 [tasks.permuter]
-# description = 'Build Castlevania ROM'
+# description = 'Prepare a directory for running decomp-permuter'
 run = "./scripts/perm"
 alias = 'p'

@@ -10,7 +10,7 @@ cp tools/settings_sample.toml $PERM_DIR/settings.toml && \
 
 cp tools/compile_sample.sh $PERM_DIR/compile.sh
 
-unzip ~/Downloads/$1.zip -d $PERM_DIR && \
+unzip ~/Downloads/$FUNC_NAME.zip -d $PERM_DIR && \
   mv $PERM_DIR/{code,base}.c && \
   mv $PERM_DIR/ctx.{c,h} && \
   echo -e "#include \"./ctx.h\"\n\n$(cat $PERM_DIR/base.c)" > $PERM_DIR/base.c
