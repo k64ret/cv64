@@ -184,10 +184,10 @@ or when instructions are placed in a different order than the target assembly.
 
    This will create a directory called `perm` in the root of the project.
    
-   > [!TIP]
-   > Or run `mise r pp putFunctionNameHere` if you are already using [mise][mise].
+> [!TIP]
+> Or run `mise r pp putFunctionNameHere` if you are already using [mise][mise].
 
-4. From the root of the repo, run:
+3. From the root of the repo, run:
 
    ```sh
    python tools/decomp-permuter/permuter.py perm
@@ -195,5 +195,5 @@ or when instructions are placed in a different order than the target assembly.
 
    Add the `-j` option to utilize multiple cores, followed by the number of cores.
    
-   > [!TIP]
-   > Or run `mise r p perm` if you are already using [mise][mise].
+> [!TIP]
+> Or run `mise r p perm` if you are already using [mise][mise].
