@@ -1,4 +1,5 @@
 <!-- markdownlint-disable-next-line MD043 -->
+
 # Castlevania Decompilation
 
 <!-- markdownlint-disable-next-line MD033 -->
@@ -16,7 +17,7 @@ This repository contains a work-in-progress decompilation project
 for Castlevania (Nintendo 64).
 
 > [!IMPORTANT]
-> This repository __DOES NOT__ contain any of the assets required to build the ROM.
+> This repository **DOES NOT** contain any of the assets required to build the ROM.
 > All data, including the original assembly code and assets, requires a legally
 > obtained copy of the original game to extract all of this data from.
 
@@ -159,7 +160,7 @@ python3 ./tools/m2ctx.py <your_C_file>
 ```
 
 > [!TIP]
-> Or run `mise run ctx -- <your_C_file>` if you are already using [mise][mise]
+> Or run `mise run ctx -- <your_C_file>` if you are already using [mise][mise].
 
 [mise]: https://github.com/jdx/mise
 [research-spreadsheets]: https://docs.google.com/spreadsheets/d/1nzh_nFf26oVZy6uWeNYiYGXAto6Yz3xypZwWqwJBBJQ/edit#gid=74717405
@@ -172,25 +173,21 @@ but are problematic to work with, such as when there registers are allocated dif
 or when instructions are placed in a different order than the target assembly.
 
 1. Go to a scratch from [decomp.me](decomp.me) and click `Export`,
-which saves a .zip file named the same as the function you’re reversing in decomp.me.
-Then, place the .zip file in `~/Downloads`
+   which saves a ZIP file named the same as the function in that scratch.
+   Ensure the ZIP file is placed in `~/Downloads`.
 
-2. From the root of the repo, run:</br>
-`mise r pp putFunctionNameHere`.</br>
-This will create a directory called `perm` in the root of the project.
+2. From the root of the repo, run:
+   ```
+   ./scripts/perm putFunctionNameHere
+   ```
+   This will create a directory called `perm` in the root of the project.
+   > [!TIP]
+   > Or run `mise r pp putFunctionNameHere` if you are already using [mise][mise].
 
-3. You can now `cd` into that directory and run permuter on it like this:</br>
-`python tools/decomp-permuter/permuter.py .`</br>
-You can add the `-j` option to run it on multiple cores,
-followed by the number of cores.
-</br></br>
-It's also possible to run permuter from the root of the repo by running the following:</br>
-`mise r p perm`</br>
-where `perm` is the directory to run permuter on.
-
-> [!NOTE]
-> You can also run it like this:</br>
-> `mise r pp putFunctionNameHere dirName` to provide the name of the directory.</br>
-> Not providing that second argument defaults it to `perm`,
-which is convenient because `perm` is already added to the `.gitignore` file,
-but other directories you create with it won't be by default.
+3. From the root of the repo, run:
+   ```
+   python tools/decomp-permuter/permuter.py perm
+   ```
+   Add the `-j` option to utilize multiple cores, followed by the number of cores.
+   > [!TIP]
+   > Or run `mise r p perm` if you are already using [mise][mise].
