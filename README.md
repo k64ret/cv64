@@ -1,4 +1,5 @@
 <!-- markdownlint-disable-next-line MD043 -->
+
 # Castlevania Decompilation
 
 <!-- markdownlint-disable-next-line MD033 -->
@@ -6,7 +7,7 @@
 
 [![Discord](https://img.shields.io/discord/106120859520905216?logo=discord&logoColor=white&label=CV64%26CVLoDSpeedruns)](https://discord.gg/eKht382)
 [![Castlevania 64 - Research Spreadsheets](https://img.shields.io/badge/Castlevania%2064%20-%20Research%20Spreadsheets-blue?logo=googlesheets)][research-spreadsheets]
-[![TCRF - Castlevania (Nintendo 64)](https://img.shields.io/badge/TCRF-Castlevania%20%28Nintendo%2064%29-blue)](https://tcrf.net/Notes:Castlevania_(Nintendo_64))
+[![TCRF - Castlevania (Nintendo 64)](https://img.shields.io/badge/TCRF-Castlevania%20%28Nintendo%2064%29-blue)](<https://tcrf.net/Notes:Castlevania_(Nintendo_64)>)
 
 </div>
 
@@ -15,14 +16,15 @@
 This repository contains a work-in-progress decompilation project
 for Castlevania (Nintendo 64).
 
+> [!IMPORTANT]
+> This repository **DOES NOT** contain any of the assets required to build the ROM.
+> All data, including the original assembly code and assets, requires a legally
+> obtained copy of the original game to extract all of this data from.
+
 The main objective of this project is to rewrite C code that, when compiled,
 results in matching assembly code found in the game's ROM.
 Besides this, the project also aims to extract and convert all assets
 from binary data to a higher-level format understood by the console.
-
-Note that all data, including the original assembly code and assets,
-requires a legally obtained copy of the original game to extract
-all of this data from.
 
 At the moment, this project cannot be used to create mods on a large scale
 due to issues with shiftability (i.e. hardcoded addresses),
@@ -43,19 +45,19 @@ These tools are instrumental in the decompilation process of Castlevania 64.
 These people make this project possible and successful.
 
 - [@moisesPC](https://github.com/moisesPC) for his research efforts and the
-creation/upkeep of the [Castlevania 64 - Research Spreadsheets][research-spreadsheets]
+  creation/upkeep of the [Castlevania 64 - Research Spreadsheets][research-spreadsheets]
 - [@LiquidCat64](https://github.com/LiquidCat64) and [@Fluvian](https://github.com/Fluvian)
-for reversing the [LZKN64][lzkn64] compression algorithm used by Konami
+  for reversing the [LZKN64][lzkn64] compression algorithm used by Konami
 - [@decompals](https://github.com/decompals) for the
-[ultralib](https://github.com/decompals/ultralib) repository,
-which we took the Ultra64 headers from.
+  [ultralib](https://github.com/decompals/ultralib) repository,
+  which we took the Ultra64 headers from.
 
 ## Getting started
 
 ### Requirements
 
 - Your own (legally obtained) copy of Castlevania for the Nintendo 64 (USA v1.0)
-(`sha1: 989A28782ED6B0BC489A1BBBD7BEC355D8F2707E`)
+  (`sha1: 989A28782ED6B0BC489A1BBBD7BEC355D8F2707E`)
 - CMake
 - Git
 - Make/Ninja
@@ -96,10 +98,10 @@ docker run --rm -ti -v $(pwd):/c64 c64
 
 > [!WARNING]
 > If the compilation process fails, go to the `castlevania.yaml` file
-and set the option `dissasemble_all` to `True`, then clean and build again.
+> and set the option `dissasemble_all` to `True`, then clean and build again.
 > It should then end up with an error.
-At this point, change said option back to `False`,
-clean and build again and the project should build successfully.
+> At this point, change said option back to `False`,
+> clean and build again and the project should build successfully.
 
 Place a Castlevania 64 (USA v1.0) ROM in the root of the project, and rename it
 to `baserom.z64`.
@@ -123,9 +125,9 @@ cmake -S . -B build -G "Unix Makefiles"
 
 > [!TIP]
 > You can also use `mise run cdec` if you are already using [mise][mise],
-or `cmake -S . -B build -Dcompress=FALSE` to skip compressing files
-and checking the ROM's sha1sum.
-This is only useful for debugging non-matching compressed files at the moment.
+> or `cmake -S . -B build -Dcompress=FALSE` to skip compressing files
+> and checking the ROM's sha1sum.
+> This is only useful for debugging non-matching compressed files at the moment.
 
 Afterwards, to build the project, run the following...
 
@@ -158,8 +160,40 @@ python3 ./tools/m2ctx.py <your_C_file>
 ```
 
 > [!TIP]
-> Or run `mise run ctx -- <your_C_file>` if you are already using [mise][mise]
+> Or run `mise run ctx -- <your_C_file>` if you are already using [mise][mise].
 
 [mise]: https://github.com/jdx/mise
 [research-spreadsheets]: https://docs.google.com/spreadsheets/d/1nzh_nFf26oVZy6uWeNYiYGXAto6Yz3xypZwWqwJBBJQ/edit#gid=74717405
 [lzkn64]: https://github.com/fluvian/lzkn64
+
+### Using permuter
+
+You can use permuter to assist on matching functions that are close to completion,
+but are problematic to work with, such as when there registers are allocated differently
+or when instructions are placed in a different order than the target assembly.
+
+1. Go to a scratch from [decomp.me](decomp.me) and click `Export`,
+   which saves a ZIP file named the same as the function in that scratch.
+   Ensure the ZIP file is placed in `~/Downloads`.
+
+2. From the root of the repo, run:
+
+   ```
+   ./scripts/perm putFunctionNameHere
+   ```
+
+   This will create a directory called `perm` in the root of the project.
+   
+> [!TIP]
+> Or run `mise r pp putFunctionNameHere` if you are already using [mise][mise].
+
+3. From the root of the repo, run:
+
+   ```sh
+   python tools/decomp-permuter/permuter.py perm
+   ```
+
+   Add the `-j` option to utilize multiple cores, followed by the number of cores.
+   
+> [!TIP]
+> Or run `mise r p perm` if you are already using [mise][mise].

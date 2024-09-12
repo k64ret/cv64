@@ -27,3 +27,13 @@ alias = 'cdec'
 # description = 'Build Castlevania ROM'
 run = "cmake --build build"
 alias = 'b'
+
+[tasks.prep_permuter]
+# description = 'Prepare a directory for running decomp-permuter'
+run = "./scripts/perm"
+alias = 'pp'
+
+[tasks.permuter]
+# description = 'Run decomp-permuter on the given directory'
+run = "python tools/decomp-permuter/permuter.py"
+alias = 'p'
