@@ -6,7 +6,7 @@
 
 typedef enum HUD_parameters_flags {
     HUD_PARAMS_ENTERED_PAUSE_MENU        = 0x01,
-    HUD_PARAMS_IN_PAUSE_MENU             = 0x01,
+    HUD_PARAMS_IN_PAUSE_MENU             = 0x02,
     HUD_PARAMS_SHOW_BOSS_BAR             = 0x04,
     HUD_PARAMS_UPDATE_HUD_GOLD_AND_JEWEL = 0x08,
     HUD_PARAMS_CLOSE_CLOCK               = 0x20, // Unused
