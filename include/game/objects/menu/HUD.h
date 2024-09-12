@@ -5,14 +5,16 @@
 #include "gfx/model_info.h"
 
 typedef enum HUD_parameters_flags {
-    SHOW_BOSS_BAR             = 0x04,
-    UPDATE_HUD_GOLD_AND_JEWEL = 0x08,
-    CLOSE_CLOCK               = 0x20, // Unused
+    HUD_PARAMS_ENTERED_PAUSE_MENU        = 0x01,
+    HUD_PARAMS_IN_PAUSE_MENU             = 0x01,
+    HUD_PARAMS_SHOW_BOSS_BAR             = 0x04,
+    HUD_PARAMS_UPDATE_HUD_GOLD_AND_JEWEL = 0x08,
+    HUD_PARAMS_CLOSE_CLOCK               = 0x20, // Unused
     /**
      * Hides HUD during cutscenes or when transitioning between maps.
      */
-    HIDE_HUD    = 0x40,
-    DESTROY_HUD = 0x80
+    HUD_PARAMS_HIDE_HUD    = 0x40,
+    HUD_PARAMS_DESTROY_HUD = 0x80
 } HUD_parameters_flags;
 
 typedef struct {
@@ -30,7 +32,7 @@ typedef struct {
      * DAY   = 0x10
      */
     u8 clockDayNightGraphic_timeOfDay;
-    s8 boss_actor_ID;
+    u8 boss_actor_ID;
     u8 field_0x16[2];
     s16* boss_current_life;
     s16 boss_bar_health_max;
@@ -66,13 +68,25 @@ typedef struct {
     cv64_model_inf_t* subweapon;
     cv64_model_inf_t* subweapon_icon;
     f32 day_and_night_switching_alpha;
-    f32 field_0x64;
-    f32 field_0x68;
     /**
-     * A timer related to the HUD position.
-     * Changes to 10 when pausing the game.
+     * This value changes when switching from night to day, or viceversa,
+     * which is then added to the alpha value
      */
-    u8 field_0x6C;
+    f32 day_and_night_switching_transition_progress;
+    /**
+     * -1.0f: Night to Day
+     *  1.0f: Day to Night
+     *
+     * This value is added up to `day_and_night_switching_transition_progress`
+     * when transitioning through the time of day
+     */
+    f32 day_and_night_switching_factor;
+    /**
+     * This timer is set to 10 when in the pause menu.
+     * When exiting, the timer runs down, and when it reaches -1,
+     * the game will disable changing the position, scale, etc, of the HUD elements
+     */
+    u8 time_before_making_elements_static;
     /**
      * Boss bar is filling up when the bar first appears.
      */
@@ -88,10 +102,10 @@ extern void HUD_update(HUD* self);
 extern void HUD_destroy(HUD* self);
 
 extern void HUDParams_fillPlayerHealth(
-    s16 life,
-    u32 player_flags_to_remove,
-    s32 play_character_health_fulfilled_sound_after_recovering_health
+    s16 life, u32 player_flags_to_remove, s32 play_character_health_fulfilled_sound
 );
+
+extern s8 play_character_health_fulfilled_sound_after_recovering_health;
 
 typedef void (*HUD_func_t)(HUD*);
 
