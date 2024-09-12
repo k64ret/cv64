@@ -12,10 +12,12 @@ extern OSPfs pfs[MAXCONTROLLERS];
 extern OSPfs D_800D72F0_A85C0[MAXCONTROLLERS];
 extern u8 contpak_uninserted[MAXCONTROLLERS];
 
+static s32 check_inserted_err(u8 cont_no);
+
 /**
  * Iterates through each controller checking if they have a controller pak inserted
  */
-void contpak_get_ins_status(OSContStatus cont_status[]) {
+void contpak_get_inserted_status(OSContStatus cont_status[]) {
     s32 i;
 
     osContStartQuery(&controllerMsgQ);
@@ -47,7 +49,7 @@ s32 contpak_init(u8 cont_no) {
     }
 
     contpak_uninserted[cont_no] = TRUE;
-    return contpak_check_ins_err(cont_no);
+    return check_inserted_err(cont_no);
 }
 
 s32 contpak_alloc_file(u8 cont_no, OSPfsState* pfs_state, int file_size, s32* file_no) {
@@ -63,10 +65,10 @@ s32 contpak_alloc_file(u8 cont_no, OSPfsState* pfs_state, int file_size, s32* fi
         );
     }
 
-    return contpak_check_ins_err(cont_no);
+    return check_inserted_err(cont_no);
 }
 
-s32 contpak_del_file(u8 cont_no, OSPfsState* pfs_state) {
+s32 contpak_delete_file(u8 cont_no, OSPfsState* pfs_state) {
     if (contpak_uninserted[cont_no] == FALSE) {
         return osPfsDeleteFile(
             &pfs[cont_no],
@@ -77,7 +79,7 @@ s32 contpak_del_file(u8 cont_no, OSPfsState* pfs_state) {
         );
     }
 
-    return contpak_check_ins_err(cont_no);
+    return check_inserted_err(cont_no);
 }
 
 s32 contpak_find_file(u8 cont_no, OSPfsState* pfs_state, s32* file_no) {
@@ -92,7 +94,7 @@ s32 contpak_find_file(u8 cont_no, OSPfsState* pfs_state, s32* file_no) {
         );
     }
 
-    return contpak_check_ins_err(cont_no);
+    return check_inserted_err(cont_no);
 }
 
 s32 contpak_get_file_state(u8 cont_no, s32 file_no, OSPfsState* pfs_state) {
@@ -100,15 +102,16 @@ s32 contpak_get_file_state(u8 cont_no, s32 file_no, OSPfsState* pfs_state) {
         return osPfsFileState(&pfs[cont_no], file_no, pfs_state);
     }
 
-    return contpak_check_ins_err(cont_no);
+    return check_inserted_err(cont_no);
 }
 
+// maybe static since it's not referenced in any other translation unit
 s32 contpak_get_num_files(u8 cont_no, s32* max_files, s32* files_used) {
     if (contpak_uninserted[cont_no] == FALSE) {
         return osPfsNumFiles(&pfs[cont_no], max_files, files_used);
     }
 
-    return contpak_check_ins_err(cont_no);
+    return check_inserted_err(cont_no);
 }
 
 s32 contpak_get_free_blks(u8 cont_no, s32* remaining) {
@@ -116,7 +119,7 @@ s32 contpak_get_free_blks(u8 cont_no, s32* remaining) {
         return osPfsFreeBlocks(&pfs[cont_no], remaining);
     }
 
-    return contpak_check_ins_err(cont_no);
+    return check_inserted_err(cont_no);
 }
 
 s32 contpak_is_plug(u8* bitpattern) {
@@ -128,7 +131,7 @@ s32 contpak_read_file(u8 cont_no, s32 file_no, int offset, int nbytes, u8* buf) 
         return osPfsReadWriteFile(&pfs[cont_no], file_no, PFS_READ, offset, nbytes, buf);
     }
 
-    return contpak_check_ins_err(cont_no);
+    return check_inserted_err(cont_no);
 }
 
 s32 contpak_write_file(u8 cont_no, s32 file_no, int offset, int nbytes, u8* buf) {
@@ -136,7 +139,7 @@ s32 contpak_write_file(u8 cont_no, s32 file_no, int offset, int nbytes, u8* buf)
         return osPfsReadWriteFile(&pfs[cont_no], file_no, PFS_WRITE, offset, nbytes, buf);
     }
 
-    return contpak_check_ins_err(cont_no);
+    return check_inserted_err(cont_no);
 }
 
 /**
@@ -164,7 +167,7 @@ s32 contpak_check_rumble_pak(u8 cont_no) {
         return ret;
     }
 
-    return contpak_check_ins_err(cont_no);
+    return check_inserted_err(cont_no);
 }
 
 /**
@@ -175,8 +178,8 @@ s32 contpak_check_rumble_pak(u8 cont_no) {
  *
  * - `PFS_ERR_NOPACK`, if the controller pak was disconnected.
  */
-s32 contpak_check_ins_err(u8 cont_no) {
-    contpak_get_ins_status(controller_status);
+s32 check_inserted_err(u8 cont_no) {
+    contpak_get_inserted_status(controller_status);
 
     if (BITS_HAS(controller_status[cont_no].status, CONT_CARD_ON)) {
         return PFS_ERR_NEW_PACK;

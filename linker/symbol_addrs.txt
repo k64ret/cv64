@@ -1764,28 +1764,28 @@ crashScreen_printExceptionInfo = 0x80019968;
 // src/controller_pak.c ========================================================
 
 // .text
-contpak_get_ins_status   = 0x8001A380; // type:func
-contpak_init_all         = 0x8001A46C; // type:func
-contpak_init             = 0x8001A538; // type:func
-contpak_alloc_file       = 0x8001A5CC; // type:func
-contpak_del_file         = 0x8001A664; // type:func
-contpak_find_file        = 0x8001A6E4; // type:func
-contpak_get_file_state   = 0x8001A770; // type:func
-contpak_get_num_files    = 0x8001A7D4; // type:func
-contpak_get_free_blks    = 0x8001A838; // type:func
-contpak_is_plug          = 0x8001A89C; // type:func
-contpak_read_file        = 0x8001A8C4; // type:func
-contpak_write_file       = 0x8001A948; // type:func
-contpak_check_rumble_pak = 0x8001A9CC; // type:func
-contpak_check_ins_err    = 0x8001AA58; // type:func
-contpak_8001AAA8         = 0x8001AAA8; // type:func
-contpak_8001AB18         = 0x8001AB18; // type:func
-contpak_repair_id        = 0x8001AB88; // type:func
+contpak_get_inserted_status = 0x8001A380; // type:func
+contpak_init_all            = 0x8001A46C; // type:func
+contpak_init                = 0x8001A538; // type:func
+contpak_alloc_file          = 0x8001A5CC; // type:func
+contpak_delete_file         = 0x8001A664; // type:func
+contpak_find_file           = 0x8001A6E4; // type:func
+contpak_get_file_state      = 0x8001A770; // type:func
+contpak_get_num_files       = 0x8001A7D4; // type:func
+contpak_get_free_blks       = 0x8001A838; // type:func
+contpak_is_plug             = 0x8001A89C; // type:func
+contpak_read_file           = 0x8001A8C4; // type:func
+contpak_write_file          = 0x8001A948; // type:func
+contpak_check_rumble_pak    = 0x8001A9CC; // type:func
+check_inserted_err          = 0x8001AA58; // type:func
+contpak_8001AAA8            = 0x8001AAA8; // type:func
+contpak_8001AB18            = 0x8001AB18; // type:func
+contpak_repair_id           = 0x8001AB88; // type:func
 
 // .bss
-pfs                      = 0x800D7150; // size:0x19E
-D_800D72F0_A85C0         = 0x800D72F0; // size:0x19E
-contpak_uninserted       = 0x800D7490;
+pfs                         = 0x800D7150; // size:0x19E
+D_800D72F0_A85C0            = 0x800D72F0; // size:0x19E
+contpak_uninserted          = 0x800D7490;
 
 // End of src/controller_pak.c =================================================
 
