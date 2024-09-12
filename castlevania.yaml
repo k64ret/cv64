@@ -509,7 +509,7 @@ segments:
       - [0x000AFD00, asm, common/textbox]
       - [0x000B5720, asm, common/lens]
       - [0x000B9900, asm]   # Contains gameplayMenuMgr and the HUD object code
-      - [0x000BC530, asm, common/hud_params]  # HUD_params is an struct associated to the HUD object
+      - [0x000BC530, c, common/hud_params]  # HUD_params is an struct associated to the HUD object
       - [0x000BC6D0, asm, common/renon_shop]
       - [0x000BDFE0, asm]
       - [0x000BE4B0, c, common/menu_alloc_struct]  # Contains functions for allocating menu-related structs
