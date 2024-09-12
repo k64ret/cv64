@@ -2,7 +2,7 @@
 #define HUD_H
 
 #include "objects/menu/mfds.h"
-#include "gfx/model_info.h
+#include "gfx/model_info.h"
 
 typedef enum HUD_parameters_flags {
     SHOW_BOSS_BAR             = 0x04,
