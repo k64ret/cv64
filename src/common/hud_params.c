@@ -6,6 +6,7 @@
  */
 
 #include "objects/menu/HUD.h"
+#include "system_work.h"
 
 #pragma GLOBAL_ASM("../asm/nonmatchings/common/hud_params/HUDParams_initBossBar.s")
 
