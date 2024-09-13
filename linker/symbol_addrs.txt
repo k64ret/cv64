@@ -2272,7 +2272,7 @@ HUD_updateClockDisplay = 0x80138b68;
 HUDParams_initBossBar = 0x80139340; // type:func
 HUDParams_removeBossCurrentLife = 0x801393ac; // type:func
 HUDParams_increaseDamage = 0x801393d4; // type:func
-HUDParams_resetPlayerLifeAndFlags = 0x80139424; // type:func
+HUDParams_resetPlayerLifeAndStatus = 0x80139424; // type:func
 HUDParams_fillPlayerHealth = 0x80139468; // type:func
 
 // End of src/common/hud_params.c =========================================================
