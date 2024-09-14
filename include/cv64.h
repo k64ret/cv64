@@ -42,7 +42,6 @@ typedef u8 Addr[];
 extern u32 D_80092F50;
 extern Gfx* gDisplayListHead; // 0x800B49E0
 extern u32 map_misc_event_flags;
-extern u8 PLAYER_HAS_MAX_HEALTH;
 extern u32 map_text_segment_address[28]; // 0x8016D008
 /**
  * If set to `TRUE`, the dynamic map lighting won't be updated

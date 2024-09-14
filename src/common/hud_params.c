@@ -76,7 +76,7 @@ void HUDParams_fillPlayerHealth(
     }
 
     if (play_character_health_fulfilled) {
-        play_character_health_fulfilled_sound_after_recovering_health = TRUE;
+        play_health_recovery_sound = TRUE;
     }
 
     params = obj_HUD->params;

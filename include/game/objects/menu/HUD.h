@@ -108,7 +108,14 @@ void HUDParams_fillPlayerHealth(
     s16 life, u32 player_flags_to_remove, s32 play_character_health_fulfilled_sound
 );
 
-extern s8 play_character_health_fulfilled_sound_after_recovering_health;
+extern u8 player_has_max_health;
+/**
+ * Plays the current playeer's "character health fulfilled" sound
+ * after recovering all health.
+ *
+ * This is used in the Pause Menu, after using a health item, like chicken.
+ */
+extern u8 play_health_recovery_sound;
 
 typedef void (*HUD_func_t)(HUD*);
 
