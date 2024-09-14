@@ -1,29 +1,29 @@
 #ifndef GAMEPLAY_MENU_MGR_H
 #define GAMEPLAY_MENU_MGR_H
 
+#include "cv64.h"
 #include "objects/menu/mfds.h"
 #include "objects/menu/HUD.h"
-#include "cv64.h"
 
 typedef enum gameplayMenuMgr_flags_t {
-    IN_PAUSE_MENU   = 1,
-    IN_FILE_SELECT  = 2,
-    IN_OPTIONS_MENU = 4,
-    IN_GAMEPLAY     = 8,
-    QUIT_GAME       = 0x10,
-    IN_GAME_OVER    = 0x20,
-    IN_RENON_SHOP   = 0x40
+    IN_PAUSE_MENU   = BIT(0),
+    IN_FILE_SELECT  = BIT(1),
+    IN_OPTIONS_MENU = BIT(2),
+    IN_GAMEPLAY     = BIT(3),
+    QUIT_GAME       = BIT(4),
+    IN_GAME_OVER    = BIT(5),
+    IN_RENON_SHOP   = BIT(6)
 } gameplayMenuMgr_flags_t;
 
 typedef enum pause_menu_state_t {
-    ENTERING_PAUSE_MENU  = 1,
-    ENTERING_FILE_SELECT = 2, // Unused
-    ENTERING_OPTION      = 4,
-    EXIT_MENU            = 8,
-    QUIT_GAME            = 0x10,
-    ENTERING_GAME_OVER   = 0x20,
-    ENTERING_RENON_SHOP  = 0x40,
-    INIT_NEW_GAME        = 0x200
+    ENTERING_PAUSE_MENU  = BIT(0),
+    ENTERING_FILE_SELECT = BIT(1), // Unused
+    ENTERING_OPTION      = BIT(2),
+    EXIT_MENU            = BIT(3),
+    QUIT_GAME            = BIT(4),
+    ENTERING_GAME_OVER   = BIT(5),
+    ENTERING_RENON_SHOP  = BIT(6),
+    INIT_NEW_GAME        = BIT(9)
 } pause_menu_state_t;
 
 // ID: 0x0126
@@ -37,7 +37,7 @@ typedef struct {
     void* assets_file_buffer_start_ptr;
     cv64_rgba_t background_color;
     mfds_state* common_textbox;
-    HUD_parameters* HUD_params;
+    HUDParams* HUD_params;
     u32 current_opened_menu;
     void* assets_file_buffer_end_ptr;
     u32 flags;

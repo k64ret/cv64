@@ -1,23 +1,22 @@
 #ifndef HUD_H
 #define HUD_H
 
+#include "cv64.h"
 #include "objects/menu/mfds.h"
 #include "gfx/model_info.h"
 
-typedef enum HUD_parameters_flags {
-    HUD_PARAMS_ENTERED_PAUSE_MENU        = 0x01,
-    HUD_PARAMS_IN_PAUSE_MENU             = 0x02,
-    HUD_PARAMS_SHOW_BOSS_BAR             = 0x04,
-    HUD_PARAMS_UPDATE_HUD_GOLD_AND_JEWEL = 0x08,
-    HUD_PARAMS_CLOSE_CLOCK               = 0x20, // Unused
-    /**
-     * Hides HUD during cutscenes or when transitioning between maps.
-     */
-    HUD_PARAMS_HIDE_HUD    = 0x40,
-    HUD_PARAMS_DESTROY_HUD = 0x80
-} HUD_parameters_flags;
+#define HUD_PARAMS_ENTERED_PAUSE_MENU        BIT(0)
+#define HUD_PARAMS_IN_PAUSE_MENU             BIT(1)
+#define HUD_PARAMS_SHOW_BOSS_BAR             BIT(2)
+#define HUD_PARAMS_UPDATE_HUD_GOLD_AND_JEWEL BIT(3)
+#define HUD_PARAMS_CLOSE_CLOCK               BIT(5) // Unused
+/**
+ * Hides HUD during cutscenes or when transitioning between maps.
+ */
+#define HUD_PARAMS_HIDE_HUD    BIT(6)
+#define HUD_PARAMS_DESTROY_HUD BIT(7)
 
-typedef struct {
+typedef struct HUDParams {
     u8 flags;
     u8 field_0x01;
     s16 damage_received;
@@ -46,7 +45,7 @@ typedef struct {
     u16* gold_amount_text;
     u16* item_amount_text;
     u8 field_0x3C[4];
-} HUD_parameters;
+} HUDParams;
 
 // ID: 0x0129
 typedef struct {
@@ -92,7 +91,7 @@ typedef struct {
      */
     u8 boss_bar_is_filling_up;
     s16 health_depletion_rate_while_poisoned;
-    HUD_parameters* params;
+    HUDParams* params;
 } HUD;
 
 extern void HUD_entrypoint(HUD* self);
@@ -101,7 +100,11 @@ extern void HUD_initGraphics(HUD* self);
 extern void HUD_update(HUD* self);
 extern void HUD_destroy(HUD* self);
 
-extern void HUDParams_fillPlayerHealth(
+void HUDParams_initBossBar(u8 boss_actor_ID, s16* boss_current_life, s16 boss_bar_health);
+void HUDParams_removeBossCurrentLife(void);
+void HUDParams_increaseDamage(s16 damage, u32 player_status);
+void HUDParams_resetPlayerLifeAndStatus(void);
+void HUDParams_fillPlayerHealth(
     s16 life, u32 player_flags_to_remove, s32 play_character_health_fulfilled_sound
 );
 
