@@ -508,12 +508,13 @@ segments:
       - [0x000AE120, asm, common/textbox_object]
       - [0x000AFD00, asm, common/textbox]
       - [0x000B5720, asm, common/lens]
-      - [0x000B9900, asm]   # Contains gameplayMenuMgr and the HUD object code
+      - [0x000B9900, asm, common/gameplay_menu_mgr]
+      - [0x000BA6F0, asm, common/hud]
       - [0x000BC530, c, common/hud_params]  # HUD_params is an struct associated to the HUD object
       - [0x000BC6D0, asm, common/renon_shop]
       - [0x000BDFE0, asm]
       - [0x000BE4B0, c, common/menu_alloc_struct]  # Contains functions for allocating menu-related structs
-      - [0x000BE740, asm]   # Contains code for handling gameplayMenuMgr's textbox
+      - [0x000BE740, asm, common/gameplay_menu_mgr_textbox]
       - [0x000BEF40, asm, common/item]   # Contains item / inventory handling code, as well as code for handling displaying these
       - [0x000BFFB0, asm, common/mini_scroll]
       - [0x000C0120, asm]   # Contains some functions for creating and managing `GameNoteErrorHandler`
@@ -566,8 +567,9 @@ segments:
       - [0x000EFAD0, .data, common/stage_select]
       - [0x000EFC70, data]
       - [0x000F0290, data]
-      - [0x00103680, data]
-      - [0x00103720, data]
+      - [0x00103650, data, common/gameplay_menu_mgr]
+      - [0x00103680, data, common/hud]
+      - [0x00103720, data, common/renon_shop]
       - [0x00103E10, data]
       - [0x001040F0, data]
       - [0x00104190, data]
@@ -595,8 +597,10 @@ segments:
       - [0x0010E070, .rodata, common/stage_select]
       - [0x0010E0F0, rodata]
       - [0x0010E1E0, rodata]
-      - [0x0010E410, rodata]
-      - [0x0010E650, rodata]
+      - [0x0010E410, rodata, common/lens]
+      - [0x0010E4E0, rodata, common/gameplay_menu_mgr]
+      - [0x0010E610, rodata, common/hud]
+      - [0x0010E650, rodata, common/renon_shop]
       - [0x0010E8A0, rodata]
       - [0x0010E8F0, rodata]
       - [0x0010EFC0, rodata]
@@ -618,7 +622,7 @@ segments:
       - [0x0010FA20, rodata]
       - [0x0010FA60, rodata]
       - [0x0010FB60, rodata]
-      - { start: 0x0010FC40, type: bss, vram: 0x8018CA50, name: B9900 }
+      - { start: 0x0010FC40, type: bss, vram: 0x8018CA50, name: common/gameplay_menu_mgr }
       - { start: 0x0010FC40, type: bss, vram: 0x8018CA60, name: common/file_select }
       - { start: 0x0010FC40, type: bss, vram: 0x8018CA80, name: common/map_manager }
       - { start: 0x0010FC40, type: bss, vram: 0x8018CDF0, name: D6C30 }
