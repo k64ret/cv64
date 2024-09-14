@@ -185,7 +185,7 @@ typedef struct {
 
 extern mfds_state* textbox_create(void* parent_object, camera* display_camera, u32 flags);
 extern void
-textbox_setDimensions(mfds_state* self, s8 height, s16 width, u8 param_4, u8 character_spacing);
+textbox_setDimensions(mfds_state* self, u8 height, u16 width, u8 param_4, u8 character_spacing);
 extern void textbox_setPos(mfds_state* self, u16 x, u16 y, s32 unused);
 extern void
 textbox_setMessagePtr(mfds_state* self, u16* text, u16* item_amount_number_text, s16 number);
