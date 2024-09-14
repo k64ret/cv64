@@ -110,7 +110,7 @@ void HUDParams_fillPlayerHealth(
 
 extern u8 player_has_max_health;
 /**
- * Plays the current playeer's "character health fulfilled" sound
+ * Plays the current player's "character health fulfilled" sound
  * after recovering all health.
  *
  * This is used in the Pause Menu, after using a health item, like chicken.
