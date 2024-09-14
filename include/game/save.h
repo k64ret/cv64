@@ -84,7 +84,7 @@ typedef struct cv64_save_state {
         u8 array[SIZE_ITEMS_ARRAY];
     } items;
     u32 player_status;
-    u16 health_depletion_rate_while_poisoned; // TODO: Double check
+    s16 health_depletion_rate_while_poisoned; // TODO: Double check
     /**
     * If greater than 24 (midnight), the player turns into a vampire
     */

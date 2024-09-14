@@ -21,7 +21,8 @@ typedef struct HUDParams {
     u8 field_0x01;
     s16 damage_received;
     f32 health_bar_damage_length;
-    u8 field_0x08[2];
+    u8 field_0x08;
+    u8 field_0x09;
     s16 life_lost_before_entering_loading_zone;
     f32 amount_of_life_lost;
     s16 hour_marker_angle;
