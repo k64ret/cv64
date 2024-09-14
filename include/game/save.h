@@ -70,7 +70,7 @@ typedef struct cv64_save_state {
      * Maybe related to the scrapped S / E meter?
      */
     s16 field_0x5C;
-    u16 subweapon;
+    s16 subweapon;
     u32 gold;
     union {
         struct {
@@ -81,7 +81,7 @@ typedef struct cv64_save_state {
             s8 gold[3];
             s8 field_0x41[SIZE_ITEMS_ARRAY - NUM_ITEMS]; // Probably unused
         } category;
-        u8 array[SIZE_ITEMS_ARRAY];
+        s8 array[SIZE_ITEMS_ARRAY];
     } items;
     u32 player_status;
     s16 health_depletion_rate_while_poisoned; // TODO: Double check
