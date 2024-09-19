@@ -8,7 +8,8 @@
 - use the format `TypeName_methodName` (notice the lowercase "m") for private (static) methods on a
   type
 - use the format `TypeName_VarName` for public variables
-- use `snake_case` for method/function-local and translation-unit private variables
+- use `snake_case` for method/function-local variables, translation-unit private variables,
+  and type member variables
 - use common abbreviations to shorten names - see [abbreviations](#abbreviations)
 
 Some examples of this are:
