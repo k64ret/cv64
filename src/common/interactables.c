@@ -35,6 +35,8 @@ cv64_interactables_func_t interactables_functions[] = {
     interactables_destroy
 };
 
+static void interactables_stopInteraction(Interactable* self);
+
 void interactables_entrypoint(Interactable* self) {
     ENTER(self, interactables_functions);
 }
@@ -467,8 +469,10 @@ void interactables_selectTextboxOption(Interactable* self) {
 
     // If reading a text spot
     if (interactables_settings_table[self->table_index].type == (u32) ITEM_KIND_TEXT_SPOT) {
-        if (interactables_settings_table[self->table_index].flags &
-            TEXT_SPOT_DO_ACTION_AFTER_SELECTING_OPTION) {
+        if (BITS_HAS(
+                interactables_settings_table[self->table_index].flags,
+                TEXT_SPOT_DO_ACTION_AFTER_SELECTING_OPTION
+            )) {
             mfds_state* textbox = self->textbox;
 
             switch (textbox->textbox_option) {

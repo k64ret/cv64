@@ -269,7 +269,6 @@ void interactables_initCheck(Interactable* self);
 void interactables_selectTextboxOption(Interactable* self);
 void interactables_stopCheck(Interactable* self);
 void interactables_destroy(Interactable* self);
-void interactables_stopInteraction(Interactable* self);
 
 typedef enum cv64_interactables_func_id {
     INTERACTABLES_INIT,
