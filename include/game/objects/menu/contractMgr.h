@@ -8,7 +8,7 @@
 typedef struct {
     cv64_object_hdr_t header;
     u8 field_0x20[20];
-    interactables* contract_item;
+    Interactable* contract_item;
     void* field_0x38;
     s32 field_0x3C;
     obj_distortion* distortion;

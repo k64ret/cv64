@@ -36,7 +36,7 @@ specialTextbox* Player_getActorCurrentlyInteractingWith();
 specialTextbox*
 Player_getSpecialTextboxCurrentlyInteractingWith(s16 actor_ID, cv64_model_inf_t* player_model);
 s32 playerCanInteractWithInteractuable(
-    f32 actor_pos_X, f32 actor_pos_Y, f32 actor_pos_Z, interactables* actor
+    f32 actor_pos_X, f32 actor_pos_Y, f32 actor_pos_Z, Interactable* actor
 );
 s32 interactables_getInteractingType(specialTextbox* actor);
 void interactables_enableTextbox(specialTextbox* actor);

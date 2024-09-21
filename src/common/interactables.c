@@ -24,7 +24,7 @@
 
 // Attempt to make this line (needed to match) more readable
 #define INTERACTABLES_SETTINGS_TABLE_ENTRY                                                         \
-    ((interactables_settings*) ((s32) interactables_settings_table + self->table_index * 0x14))
+    ((InteractableConfig*) ((s32) interactables_settings_table + self->table_index * 0x14))
 
 cv64_interactables_func_t interactables_functions[] = {
     interactables_init,
@@ -35,11 +35,11 @@ cv64_interactables_func_t interactables_functions[] = {
     interactables_destroy
 };
 
-void interactables_entrypoint(interactables* self) {
+void interactables_entrypoint(Interactable* self) {
     ENTER(self, interactables_functions);
 }
 
-void interactables_init(interactables* self) {
+void interactables_init(Interactable* self) {
     cv64_actor_settings_t* settings = self->settings;
     u32 sp18;
     item_model_settings* item_appearence_settings;
@@ -191,14 +191,14 @@ void interactables_init(interactables* self) {
     );
 }
 
-void interactables_main(interactables* self) {
+void interactables_main(Interactable* self) {
     cv64_model_inf_t* model;
     f32 current_height;
     pickableItemFlash* flash_effect_obj;
     s32 model_alpha;
     f32 temp;
     u16 item;
-    interactables_settings* settings;
+    InteractableConfig* settings;
 
     if (interactables_settings_table[self->table_index].type == ITEM_KIND_ITEM) {
         model = self->model;
@@ -333,8 +333,8 @@ void interactables_main(interactables* self) {
     );
 }
 
-void interactables_initCheck(interactables* self) {
-    interactables_settings* settings = &interactables_settings_table[self->table_index];
+void interactables_initCheck(Interactable* self) {
+    InteractableConfig* settings = &interactables_settings_table[self->table_index];
     mfds_state* textbox;
     contractMgr* contract;
 
@@ -431,7 +431,7 @@ void interactables_initCheck(interactables* self) {
     );
 }
 
-void interactables_selectTextboxOption(interactables* self) {
+void interactables_selectTextboxOption(Interactable* self) {
     saveGame* saveGameObj;
 
     if (interactables_settings_table[self->table_index].type == ITEM_KIND_ITEM) {
@@ -538,7 +538,7 @@ void interactables_selectTextboxOption(interactables* self) {
     );
 }
 
-void interactables_stopCheck(interactables* self) {
+void interactables_stopCheck(Interactable* self) {
     u32 temp[2];
 
     if (interactables_settings_table[self->table_index].type == ITEM_KIND_ITEM) {
@@ -603,7 +603,7 @@ void interactables_stopCheck(interactables* self) {
     }
 }
 
-void interactables_destroy(interactables* self) {
+void interactables_destroy(Interactable* self) {
     if (interactables_settings_table[self->table_index].type == ITEM_KIND_ITEM) {
         // If we picked up the contract, remove it from the inventory and stop interacting with it
         if (interactables_settings_table[self->table_index].item == ITEM_ID_THE_CONTRACT) {
@@ -647,7 +647,7 @@ void interactables_destroy(interactables* self) {
     self->header.destroy(self);
 }
 
-void interactables_stopInteraction(interactables* self) {
+void interactables_stopInteraction(Interactable* self) {
     self->textbox                       = NULL;
     ITEM_FADE_TIMER                     = 0;
     self->textbox_is_active             = FALSE;

@@ -122,7 +122,7 @@ typedef struct {
     s16 FREEZE_gameplayMenuMgr;
     s16 contPak_file_no;
     Player* ptr_PlayerObject;
-    interactables* actor_player_is_currently_interacting_with;
+    Interactable* actor_player_is_currently_interacting_with;
     u32 pull_lever;
     u8 field50_0x26230[4];
     s16 current_PowerUp_level;

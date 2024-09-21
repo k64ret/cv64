@@ -37,7 +37,7 @@
  * This enum contains the indexes corresponding to
  * each entry from `interactables_settings_table`
  */
-typedef enum cv64_interactables_settings_table_id {
+typedef enum InteractablesConfigTableID {
     //// Items ////
     // Visible + Doesn't vanish
     INTERACT_ID_NO_VANISH_WHITE_JEWEL       = 0x00,
@@ -178,10 +178,11 @@ typedef enum cv64_interactables_settings_table_id {
     INTERACT_ID_TEXT_79                         = 0x79,
     INTERACT_ID_FOREST_LEVER_OPEN_BOSS_DOOR     = 0x7A,
     INTERACT_ID_FORET_LOCKED_FINAL_BOSS_DOOR    = 0x7B,
-    INTERACT_ID_WATERWAY_DOOR_CLOSED            = 0x7C
-} cv64_interactables_settings_table_id_t;
+    INTERACT_ID_WATERWAY_DOOR_CLOSED            = 0x7C,
+    NUM_INTERACTABLES
+} InteractablesConfigTableID;
 
-typedef enum cv64_interactables_settings_flag {
+enum InteractableConfigFlag {
     ITEM_VANISH_OR_UPDATE_POSITION             = 0x0001,
     TEXT_SPOT_DESTROY_AFTER_INTERACTION        = 0x0002,
     TEXT_SPOT_DESTROY_IF_EVENT_FLAG_IS_SET     = 0x0004,
@@ -199,15 +200,20 @@ typedef enum cv64_interactables_settings_flag {
     TEXT_SPOT_IF_YES_PULL_LEVER = 0x0100,
     ITEM_DOES_NOT_FLASH         = 0x0400,
     ITEM_INVISIBLE              = 0x0800
-} cv64_interactables_settings_flag_t;
+};
 
-typedef struct {
+/**
+ * Accepts values from `InteractableConfigFlag` OR'ed together
+ */
+typedef u16 InteractableConfigFlags;
+
+typedef struct InteractableConfig {
     u16 type;
     union {
         u16 item;
         u16 text_ID;
     };
-    u16 flags;
+    InteractableConfigFlags flags;
     u8 field_0x06[2];
     u32 event_flag;
     union {
@@ -218,10 +224,10 @@ typedef struct {
     u16 actor_variable_1;
     u16 trigger_size;
     u8 field_0x12[2];
-} interactables_settings;
+} InteractableConfig;
 
 // ID: 0x0027
-typedef struct {
+typedef struct Interactable {
     cv64_object_hdr_t header;
     u8 field_0x04[4];
     cv64_model_inf_t* model;
@@ -254,16 +260,16 @@ typedef struct {
     };
     vec3f position;
     cv64_actor_settings_t* settings;
-} interactables;
+} Interactable;
 
-void interactables_entrypoint(interactables* self);
-void interactables_init(interactables* self);
-void interactables_main(interactables* self);
-void interactables_initCheck(interactables* self);
-void interactables_selectTextboxOption(interactables* self);
-void interactables_stopCheck(interactables* self);
-void interactables_destroy(interactables* self);
-void interactables_stopInteraction(interactables* self);
+void interactables_entrypoint(Interactable* self);
+void interactables_init(Interactable* self);
+void interactables_main(Interactable* self);
+void interactables_initCheck(Interactable* self);
+void interactables_selectTextboxOption(Interactable* self);
+void interactables_stopCheck(Interactable* self);
+void interactables_destroy(Interactable* self);
+void interactables_stopInteraction(Interactable* self);
 
 typedef enum cv64_interactables_func_id {
     INTERACTABLES_INIT,
@@ -274,8 +280,8 @@ typedef enum cv64_interactables_func_id {
     INTERACTABLES_DESTROY
 } cv64_interactables_func_id_t;
 
-typedef void (*cv64_interactables_func_t)(interactables*);
+typedef void (*cv64_interactables_func_t)(Interactable*);
 
-extern interactables_settings interactables_settings_table[125];
+extern InteractableConfig interactables_settings_table[NUM_INTERACTABLES];
 
 #endif
