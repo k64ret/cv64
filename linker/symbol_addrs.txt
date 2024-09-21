@@ -86,17 +86,17 @@ ptr_gameplayParentObject               = 0x800A7834;
 // src/fade.c ==================================================================
 
 // .text
-fade_setSettings          = 0x8000e618; // type:func
-fade_isFading             = 0x8000e67c; // type:func
-fade_setColor             = 0x8000e5f4; // type:func
-fade_removeFlag           = 0x8000e5cc; // type:func
-fade_setAllFlags          = 0x8000e590; // type:func
-fade_setFlag              = 0x8000e5a8; // type:func
-fade_calc                 = 0x8000e6c4; // type:func
+Fade_setAllFlags          = 0x8000E590; // type:func
+Fade_setFlag              = 0x8000E5A8; // type:func
+Fade_removeFlag           = 0x8000E5CC; // type:func
+Fade_setColor             = 0x8000E5F4; // type:func
+Fade_SetSettings          = 0x8000E618; // type:func
+Fade_IsFading             = 0x8000E67C; // type:func
+Fade_Calc                 = 0x8000E6C4; // type:func
 
 // .data
-//cv64_dl_fade_normal       = 0x80093370; // rom:0x00093F70 size:0x60
-//cv64_dl_fade_with_outline = 0x800933D0; // rom:0x00093FD0 size:0x60
+dl_fade_normal            = 0x80093370; // rom:0x00093F70 size:0x60
+dl_fade_with_outline      = 0x800933D0; // rom:0x00093FD0 size:0x60
 // .rodata
 
 // End of src/fade.c ===========================================================

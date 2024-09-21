@@ -21,7 +21,7 @@
 
 #define FADE_OUT_AND_GO_TO_NEXT_FUNC(fade_time, object)                                            \
     do {                                                                                           \
-        (*fade_setSettings)(FADE_OUT, (s16) (fade_time), 0, 0, 0);                                 \
+        (*Fade_SetSettings)(FADE_OUT, (s16) (fade_time), 0, 0, 0);                                 \
         LOCAL_GO_TO_NEXT_FUNC(object);                                                             \
     } while (0)
 
@@ -61,7 +61,7 @@ void object_fadeOutFortyFiveFramesAndGoToNextFunc(cv64_object_t* self) { FADE_OU
 
 void object_fadeOutSixtyFramesAndGoToNextFunc(cv64_object_t* self) { FADE_OUT_AND_GO_TO_NEXT_FUNC(60, self); }
 
-void object_goToNextFuncIfNotFading(cv64_object_t* self) { if ((*fade_isFading)()) return; LOCAL_GO_TO_NEXT_FUNC(self); }
+void object_goToNextFuncIfNotFading(cv64_object_t* self) { if ((*Fade_IsFading)()) return; LOCAL_GO_TO_NEXT_FUNC(self); }
 
 // clang-format on
 

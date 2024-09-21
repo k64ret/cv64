@@ -8,7 +8,7 @@
 #include "cv64.h"
 #include "system_work.h"
 
-Gfx cv64_dl_fade_normal[] = {
+Gfx dl_fade_normal[] = {
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsSPClearGeometryMode(
@@ -26,7 +26,7 @@ Gfx cv64_dl_fade_normal[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx cv64_dl_fade_with_outline[] = {
+Gfx dl_fade_with_outline[] = {
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_2CYCLE),
     gsSPClearGeometryMode(
@@ -49,35 +49,25 @@ Gfx cv64_dl_fade_with_outline[] = {
     gsSPEndDisplayList(),
 };
 
-void fade_setAllFlags(s16 flags) {
+void Fade_setAllFlags(FadeFlags flags) {
     sys.fade_flags = flags;
 }
 
-void fade_setFlag(s16 flag) {
+void Fade_setFlag(s16 flag) {
     BITS_SET(sys.fade_flags, flag);
 }
 
-void fade_removeFlag(s16 flag) {
+void Fade_removeFlag(s16 flag) {
     BITS_UNSET(sys.fade_flags, flag);
 }
 
-void fade_setColor(u8 R, u8 G, u8 B) {
+void Fade_setColor(u8 R, u8 G, u8 B) {
     sys.fade_color.r = R;
     sys.fade_color.g = G;
     sys.fade_color.b = B;
 }
 
-// The cleaner version
-// void fade_setSettings(s16 flags, u16 fade_time, u8 R, u8 G, u8 B) {
-//     fade_setAllFlags(flags);
-//     sys.fade_max_time = fade_time;
-//     sys.fade_current_time =
-//         (flags & FADE_OUT) ? 1 : fade_time - 1;
-//     fade_setColor(R, G, B);
-// }
-
-// The matching version
-void fade_setSettings(s16 flags, u16 fade_time, u8 R, u8 G, u8 B) {
+void Fade_SetSettings(FadeFlags flags, u16 fade_time, u8 R, u8 G, u8 B) {
     sys.fade_flags    = flags;
     sys.fade_max_time = fade_time;
 
@@ -88,73 +78,62 @@ void fade_setSettings(s16 flags, u16 fade_time, u8 R, u8 G, u8 B) {
     sys.fade_color.b = B;
 }
 
-// The cleaner version
-// u32 fade_isFading(void) {
-//     if (!sys.fade_flags ||
-//         ((sys.fade_flags & FADE_OUT) &&
-//          (sys.fade_current_time ==
-//           sys.fade_max_time))) {
-//         return FALSE;
-//     }
-//
-//     return sys.fade_flags & (FADE_IN | FADE_OUT);
-// }
-
-// The matching version
-u32 fade_isFading(void) {
+u32 Fade_IsFading(void) {
     if (sys.fade_flags != 0) {
         if (BITS_HAS(sys.fade_flags, FADE_OUT) && (sys.fade_current_time == sys.fade_max_time)) {
             return FALSE;
         } else {
             return BITS_HAS(sys.fade_flags, FADE_IN | FADE_OUT);
         }
-    } else {
-        return FALSE;
     }
+
+    return FALSE;
 }
 
 // 0x8000E6C4 (Matched by anon. Original scratch:
 // https://decomp.me/scratch/j0Te1)
-void fade_calc(void) {
+void Fade_Calc(void) {
     f32 alpha;
     s32 flags = sys.fade_flags;
 
-    if ((flags != 0) && (sys.fade_current_time)) {
-        alpha = (f32) sys.fade_current_time / sys.fade_max_time;
+    if ((flags == 0) || !sys.fade_current_time) {
+        return;
+    }
 
-        if (BITS_HAS(flags, FADE_OUT)) {
-            if (sys.fade_current_time < sys.fade_max_time) {
-                sys.fade_current_time++;
-            }
-        } else {
-            sys.fade_current_time--;
-            if (sys.fade_current_time == 0) {
-                sys.fade_flags = 0;
-            }
+    alpha = (f32) sys.fade_current_time / sys.fade_max_time;
+
+    if (BITS_HAS(flags, FADE_OUT)) {
+        if (sys.fade_current_time < sys.fade_max_time) {
+            sys.fade_current_time++;
         }
-
-        sys.fade_color.a = (s32) (alpha * 255.9999);
-
-        if (BITS_HAS(flags, FADE_WITH_OUTLINE)) {
-            gDPSetFogColor(
-                gDisplayListHead++,
-                sys.fade_color.r,
-                sys.fade_color.g,
-                sys.fade_color.b,
-                sys.fade_color.a
-            );
-            gSPDisplayList(gDisplayListHead++, &cv64_dl_fade_with_outline);
-        } else {
-            gDPSetPrimColor(
-                gDisplayListHead++,
-                0,
-                0,
-                sys.fade_color.r,
-                sys.fade_color.g,
-                sys.fade_color.b,
-                sys.fade_color.a
-            );
-            gSPDisplayList(gDisplayListHead++, &cv64_dl_fade_normal);
+    } else {
+        sys.fade_current_time--;
+        if (sys.fade_current_time == 0) {
+            sys.fade_flags = 0;
         }
+    }
+
+    sys.fade_color.a = (s32) (alpha * 255.9999);
+
+    if (BITS_HAS(flags, FADE_WITH_OUTLINE)) {
+        gDPSetFogColor(
+            gDisplayListHead++,
+            sys.fade_color.r,
+            sys.fade_color.g,
+            sys.fade_color.b,
+            sys.fade_color.a
+        );
+        gSPDisplayList(gDisplayListHead++, &dl_fade_with_outline);
+    } else {
+        gDPSetPrimColor(
+            gDisplayListHead++,
+            0,
+            0,
+            sys.fade_color.r,
+            sys.fade_color.g,
+            sys.fade_color.b,
+            sys.fade_color.a
+        );
+        gSPDisplayList(gDisplayListHead++, &dl_fade_normal);
     }
 }

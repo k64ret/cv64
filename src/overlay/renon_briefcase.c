@@ -101,7 +101,7 @@ void cv64_ovl_renonbriefcase_init(cv64_ovl_renonbriefcase_t* self) {
     );
     (*animationInfo_animateFrame)(anim_info, model);
 
-    (*fade_setSettings)(FADE_IN, 15, 0xFF, 0xFF, 0xFF);
+    (*Fade_SetSettings)(FADE_IN, 15, 0xFF, 0xFF, 0xFF);
     (*object_curLevel_goToNextFuncAndClearTimer)(
         self->header.current_function, &self->header.function_info_ID
     );
@@ -160,7 +160,7 @@ void cv64_ovl_renonbriefcase_loop(cv64_ovl_renonbriefcase_t* self) {
 
     //  Step 4. Fade out and destroy the object
     if (self->current_cutscene_time == 93) {
-        (*fade_setSettings)(FADE_OUT, 30, 0, 0, 0);
+        (*Fade_SetSettings)(FADE_OUT, 30, 0, 0, 0);
     }
 
     if (self->current_cutscene_time >= 109) {

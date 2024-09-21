@@ -55,7 +55,7 @@ typedef struct {
      */
     s16 code_execution_delay_timer;
     s16 should_end_master_display_list;
-    s16 fade_flags;
+    FadeFlags fade_flags;
     cv64_rgba_t fade_color;
     /**
      * Likely called "disp_fade_cnt", according to leftover strings in LoD

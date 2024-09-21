@@ -229,7 +229,7 @@ void setup_frame() {
 }
 
 void end_frame(void) {
-    fade_calc();
+    Fade_Calc();
     if (sys.should_end_master_display_list) {
         end_master_display_list();
     }

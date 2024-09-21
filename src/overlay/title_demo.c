@@ -804,7 +804,7 @@ void cv64_ovl_titledemo_init(cv64_ovl_titledemo_t* self) {
     u8 i;
 
     // Make sure not to proceed if the screen is fading or if the game's loading a file
-    if ((*fade_isFading)() || (sys.file_load_array_ID != 0) || (ptr_DMAMgr->DMAChunkMgr == NULL))
+    if ((*Fade_IsFading)() || (sys.file_load_array_ID != 0) || (ptr_DMAMgr->DMAChunkMgr == NULL))
         return;
 
     // Reset much of the save variables before entering gameplay
