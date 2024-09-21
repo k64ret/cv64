@@ -101,11 +101,8 @@ extern void HUD_initGraphics(HUD* self);
 extern void HUD_update(HUD* self);
 extern void HUD_destroy(HUD* self);
 
-void HUDParams_initBossBar(u8 boss_actor_ID, s16* boss_current_life, s16 boss_bar_health);
-void HUDParams_removeBossCurrentLife(void);
-void HUDParams_increaseDamage(s16 damage, u32 player_status);
-void HUDParams_resetPlayerLifeAndStatus(void);
-void HUDParams_fillPlayerHealth(
+void HUDParams_IncreaseDamage(s16 damage, u32 player_status);
+void HUDParams_FillPlayerHealth(
     s16 life, u32 player_flags_to_remove, s32 play_character_health_fulfilled_sound
 );
 

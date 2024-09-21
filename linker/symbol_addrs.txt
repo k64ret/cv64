@@ -2266,16 +2266,16 @@ HUD_destroy = 0x801381dc;
 HUD_updateBossBar = 0x801386e0;
 HUD_updateClockDisplay = 0x80138b68;
 
-// src/common/hud_params.c ================================================================
+// src/common/hud_params.c =====================================================
 
 // .text
-HUDParams_initBossBar = 0x80139340; // type:func
-HUDParams_removeBossCurrentLife = 0x801393ac; // type:func
-HUDParams_increaseDamage = 0x801393d4; // type:func
+HUDParams_initBossBar              = 0x80139340; // type:func
+HUDParams_removeBossCurrentLife    = 0x801393AC; // type:func
+HUDParams_IncreaseDamage           = 0x801393D4; // type:func
 HUDParams_resetPlayerLifeAndStatus = 0x80139424; // type:func
-HUDParams_fillPlayerHealth = 0x80139468; // type:func
+HUDParams_FillPlayerHealth         = 0x80139468; // type:func
 
-// End of src/common/hud_params.c =========================================================
+// End of src/common/hud_params.c ==============================================
 
 renonShop_entrypoint = 0x801394e0;
 renonShop_createBriefcaseCutscene = 0x80139550;

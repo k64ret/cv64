@@ -9,6 +9,7 @@
 #include "objects/menu/HUD.h"
 #include "system_work.h"
 
+// maybe private
 void HUDParams_initBossBar(u8 boss_actor_ID, s16* boss_current_life, s16 boss_bar_health) {
     HUD* obj_HUD = (HUD*) objectList_findFirstObjectByID(MENU_HUD);
     HUDParams* params;
@@ -29,6 +30,7 @@ void HUDParams_initBossBar(u8 boss_actor_ID, s16* boss_current_life, s16 boss_ba
     params->boss_bar_damage_length  = 0.0f;
 }
 
+// maybe private
 void HUDParams_removeBossCurrentLife(void) {
     HUD* obj_HUD = (HUD*) objectList_findFirstObjectByID(MENU_HUD);
     HUDParams* params;
@@ -40,7 +42,8 @@ void HUDParams_removeBossCurrentLife(void) {
     params->boss_current_life = NULL;
 }
 
-void HUDParams_increaseDamage(s16 damage, u32 player_status) {
+// public
+void HUDParams_IncreaseDamage(s16 damage, u32 player_status) {
     HUD* obj_HUD = (HUD*) objectList_findFirstObjectByID(MENU_HUD);
     HUDParams* params;
 
@@ -52,6 +55,7 @@ void HUDParams_increaseDamage(s16 damage, u32 player_status) {
     BITS_SET(sys.SaveStruct_gameplay.player_status, player_status);
 }
 
+// maybe private
 void HUDParams_resetPlayerLifeAndStatus(void) {
     HUD* obj_HUD = (HUD*) objectList_findFirstObjectByID(MENU_HUD);
     HUDParams* params;
@@ -66,7 +70,8 @@ void HUDParams_resetPlayerLifeAndStatus(void) {
     params->health_bar_damage_length      = 0.0f;
 }
 
-void HUDParams_fillPlayerHealth(
+// public
+void HUDParams_FillPlayerHealth(
     s16 life, u32 player_status_to_remove, s32 play_character_health_fulfilled
 ) {
     HUD* obj_HUD = (HUD*) objectList_findFirstObjectByID(MENU_HUD);
