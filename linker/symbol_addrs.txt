@@ -169,14 +169,14 @@ func_80011C6C_1286C         = 0x80011C6C; // type:func
 // src/dma.c ===================================================================
 
 // .text
-dma_init_cart  = 0x80017710; // type:func
-dma_read_write = 0x80017734; // type:func
-dma_rom_copy   = 0x800177EC; // type:func
+DMA_InitCart   = 0x80017710; // type:func
+DMA_readWrite  = 0x80017734; // type:func
+DMA_ROMCopy    = 0x800177EC; // type:func
 
 // .bss
-dmaIoMesgBuf = 0x800d5e60;
-dmaIoMesgQueue = 0x800abfa0;
-gCartHandle = 0x800d5e78;
+dmaIoMesgBuf   = 0x800D5E60;
+dmaIoMesgQueue = 0x800ABFA0;
+gCartHandle    = 0x800D5E78;
 
 // End of src/dma.c ============================================================
 
