@@ -14,10 +14,10 @@ typedef struct cv64_model_inf {
     struct cv64_model_inf_t* sibling;
     struct cv64_model_inf_t* next;
     struct cv64_model_inf_t* parent;
-    cv64_rgba_t primitive_color;
-    cv64_rgba_t environment_color;
-    cv64_rgba_t blend_color;
-    cv64_rgba_t fog_color;
+    RGBA primitive_color;
+    RGBA environment_color;
+    RGBA blend_color;
+    RGBA fog_color;
     u16 texture;
     u16 palette;
     u8 field24_0x28;

@@ -8,12 +8,12 @@
 /**
  * RGBA color separated into 8-bit components
  */
-typedef union cv64_rgba {
+typedef union RGBA {
     u32 integer;
     // u8 bytearray[4];
     struct {
         u8 r, g, b, a;
     };
-} cv64_rgba_t;
+} RGBA;
 
 #endif

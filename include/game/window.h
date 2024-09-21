@@ -51,7 +51,7 @@ typedef struct {
     f32 field_0x20;
     f32 window_closing_speed;
     u8 field_0x28[8];
-    cv64_rgba_t primitive_color;
+    RGBA primitive_color;
     vec3f size;
     struct_78* field_0x40;
 } window_work;

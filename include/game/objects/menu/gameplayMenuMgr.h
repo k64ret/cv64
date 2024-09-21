@@ -35,7 +35,7 @@ typedef struct {
     u8 field_0x48[8];
     u32 update_assets_heap_block_max_size; // See 0x80136C9C
     void* assets_file_buffer_start_ptr;
-    cv64_rgba_t background_color;
+    RGBA background_color;
     mfds_state* common_textbox;
     HUDParams* HUD_params;
     u32 current_opened_menu;

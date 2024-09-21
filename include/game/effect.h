@@ -76,8 +76,8 @@ typedef struct {
     vec3f scale;
     angle_t angle;
     u8 field_0x46[2];
-    cv64_rgba_t primitive_color;
-    cv64_rgba_t environment_color;
+    RGBA primitive_color;
+    RGBA environment_color;
     void (*loop_function)(void*);
     u8 field_0x54; // For damage-related effects, this is `atari_damage_type`
     u8 field_0x55;

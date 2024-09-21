@@ -40,7 +40,7 @@ typedef struct {
     s16 previous_graphic_buffer;
     s16 frameBuffer_index;
     s16 framebuffer_image_pixel_size;
-    cv64_rgba_t background_color;
+    RGBA background_color;
     s16 should_setup_background_color;
     s16 should_setup_Z_buffer;
     /**
@@ -56,7 +56,7 @@ typedef struct {
     s16 code_execution_delay_timer;
     s16 should_end_master_display_list;
     FadeFlags fade_flags;
-    cv64_rgba_t fade_color;
+    RGBA fade_color;
     /**
      * Likely called "disp_fade_cnt", according to leftover strings in LoD
      */
@@ -149,7 +149,7 @@ typedef struct {
     void* ptr_playerCameraController;
     u8 field70_0x263d0[4];
     Matrix44F field_0x263d4;
-    cv64_rgba_t primitive_color;
+    RGBA primitive_color;
     s16 map_is_setup;
     u8 field74_0x2641a;
     u8 field75_0x2641b;
@@ -159,7 +159,7 @@ typedef struct {
     s32 map_assets_file_IDs[3];
     s16 map;
     s16 spawn;
-    cv64_rgba_t map_fade_in_color;
+    RGBA map_fade_in_color;
     s16 map_fade_out_time;
     s16 map_fade_in_time;
     /**

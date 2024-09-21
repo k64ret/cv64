@@ -15,7 +15,7 @@ typedef struct {
     s16 field_0x02;
     vec3f position;
     vec2f max_light_distance;
-    cv64_rgba_t color;
+    RGBA color;
     struct_15 field_0x1C;
 } pointLightData;
 

@@ -242,7 +242,7 @@ typedef struct {
     u16 current_flash_inactive_time;
     u8 field_0x4A[2];
     u32 time_when_flash_appears_over_item;
-    cv64_rgba_t primitive_color;
+    RGBA primitive_color;
     u16 map_event_flag_ID;
     u16 item_model_settings_flags;
     u32 event_flag; // Save event flag that gets set when interacting with the item

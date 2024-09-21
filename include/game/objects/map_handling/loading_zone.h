@@ -12,7 +12,7 @@ typedef struct {
     u16 fade_out_time;
     u16 fade_in_time;
     u8 field_0x0E[2];
-    cv64_rgba_t fade_in_color;
+    RGBA fade_in_color;
     s16 loading_zone_cutscene_settings_table_ID; // ID + 1
     u8 field_0x16[2];
 } map_loading_zone_settings;
