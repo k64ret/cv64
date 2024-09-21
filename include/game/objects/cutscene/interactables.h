@@ -15,7 +15,7 @@
 #define INTERACTABLES_SETTINGS_TYPE_ITEM      1
 #define INTERACTABLES_SETTINGS_TYPE_TEXT_SPOT 2
 
-// Variable 1: ID + 1 in `interactables_settings_table` to get the settings from
+// Variable 1: ID + 1 in `interactables_settings` to get the settings from
 #define INTERACTABLES_SETTINGS_TABLE_ENTRY_ID(id) (id - 1)
 #define INTERACTABLES_VARIABLE_1(id)              (id + 1) // Used in the `interactables`'s actor settings
 
@@ -34,10 +34,9 @@
 #define TEXT_SPOT_Z_SIZE settings->variable_3
 
 /**
- * This enum contains the indexes corresponding to
- * each entry from `interactables_settings_table`
+ * Indexes corresponding to the entries from `interactables_settings`
  */
-typedef enum InteractablesConfigTableID {
+typedef enum InteractableID {
     //// Items ////
     // Visible + Doesn't vanish
     INTERACT_ID_NO_VANISH_WHITE_JEWEL       = 0x00,
@@ -180,7 +179,7 @@ typedef enum InteractablesConfigTableID {
     INTERACT_ID_FORET_LOCKED_FINAL_BOSS_DOOR    = 0x7B,
     INTERACT_ID_WATERWAY_DOOR_CLOSED            = 0x7C,
     NUM_INTERACTABLES
-} InteractablesConfigTableID;
+} InteractableID;
 
 enum InteractableConfigFlag {
     ITEM_VANISH_OR_UPDATE_POSITION             = 0x0001,
@@ -234,9 +233,9 @@ typedef struct Interactable {
     u8 field_0x28[12];
     f32 item_falling_target_height;
     /**
-     * ID in `interactables_settings_table`
+     * Index into `interactables_settings`. Will be value from `InteractableID`.
      */
-    u16 table_index;
+    u16 idx;
     u8 field_0x3A[2];
     u32 interacting_with_interactable;
     u32 textbox_is_active;
@@ -281,6 +280,9 @@ typedef enum cv64_interactables_func_id {
 
 typedef void (*cv64_interactables_func_t)(Interactable*);
 
-extern InteractableConfig interactables_settings_table[NUM_INTERACTABLES];
+/**
+ * Table mapping interactables to their settings
+ */
+extern InteractableConfig interactables_settings[NUM_INTERACTABLES];
 
 #endif

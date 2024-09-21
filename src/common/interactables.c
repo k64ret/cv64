@@ -23,8 +23,8 @@
 #include "system_work.h"
 
 // Attempt to make this line (needed to match) more readable
-#define INTERACTABLES_SETTINGS_TABLE_ENTRY                                                         \
-    ((InteractableConfig*) ((s32) interactables_settings_table + self->table_index * 0x14))
+#define INTERACTABLES_SETTINGS_TABLE_ENTRY(interactable)                                           \
+    ((InteractableConfig*) ((s32) interactables_settings + interactable->idx * 0x14))
 
 cv64_interactables_func_t interactables_functions[] = {
     interactables_init,
@@ -49,9 +49,9 @@ void interactables_init(Interactable* self) {
 
     // clang-format off
 
-    self->table_index = (settings != NULL)
+    self->idx = (settings != NULL)
         ? INTERACTABLES_SETTINGS_TABLE_ENTRY_ID(settings->variable_1)
-        : self->table_index - 1;
+        : self->idx - 1;
 
     // clang-format on
 
@@ -61,9 +61,8 @@ void interactables_init(Interactable* self) {
     self->map_event_flag_ID = getMapEventFlagID(sys.SaveStruct_gameplay.map);
 
     if (settings != NULL) {
-        if (interactables_settings_table[self->table_index].type == ITEM_KIND_ITEM) {
-            self->event_flag =
-                (interactables_settings_table[self->table_index].item == ITEM_ID_WHITE_JEWEL)
+        if (interactables_settings[self->idx].type == ITEM_KIND_ITEM) {
+            self->event_flag = (interactables_settings[self->idx].item == ITEM_ID_WHITE_JEWEL)
                 // Set White Jewel spawn number
                 ? WHITE_JEWEL_SPAWN_NUMBER
                 // Set item event flag (variable_2 = upper 2-bytes, variable_3 -> lower 2-bytes)
@@ -77,9 +76,9 @@ void interactables_init(Interactable* self) {
         // Extra empty "else" needed for matching
     }
 
-    if ((interactables_settings_table[self->table_index].type == ITEM_KIND_ITEM) &&
+    if ((interactables_settings[self->idx].type == ITEM_KIND_ITEM) &&
         // White Jewels always have to spawn
-        (interactables_settings_table[self->table_index].item != ITEM_ID_WHITE_JEWEL)) {
+        (interactables_settings[self->idx].item != ITEM_ID_WHITE_JEWEL)) {
         // Don't spawn the item if it has been picked up already
         // i.e. if the item's associated event flag is set
         if ((self->event_flag != 0) &&
@@ -90,7 +89,7 @@ void interactables_init(Interactable* self) {
         }
     }
 
-    if (interactables_settings_table[self->table_index].type == ITEM_KIND_ITEM) {
+    if (interactables_settings[self->idx].type == ITEM_KIND_ITEM) {
         // Create and setup the item model
         item_model =
             modelInfo_createAndSetChild(FIG_TYPE_0400 | FIG_TYPE_HIERARCHY_NODE, map_lights[2]);
@@ -110,8 +109,7 @@ void interactables_init(Interactable* self) {
         // Configure some of the model variables by loading them from
         // the item model settings table
         item_appearence_settings =
-            itemModelSettings_getEntryFromList(interactables_settings_table[self->table_index].item
-            );
+            itemModelSettings_getEntryFromList(interactables_settings[self->idx].item);
         self->item_model_settings_flags = item_appearence_settings->flags;
 
         // Make the item be able to have variable texture and / or palette.
@@ -125,7 +123,7 @@ void interactables_init(Interactable* self) {
         }
 
         item_model->material_dlist = &ITEM_MATERIAL_DL;
-        if (BITS_HAS(interactables_settings_table[self->table_index].flags, ITEM_INVISIBLE)) {
+        if (BITS_HAS(interactables_settings[self->idx].flags, ITEM_INVISIBLE)) {
             // Hide the item model
             BITS_SET(item_model->type, ~FIG_TYPE_SHOW);
         }
@@ -142,7 +140,7 @@ void interactables_init(Interactable* self) {
 
         item_model->primitive_color.integer = RGBA(255, 255, 255, 255);
         // Make all White Jewels semi-transparent if not playing in a save file
-        if ((interactables_settings_table[self->table_index].item == ITEM_ID_WHITE_JEWEL) &&
+        if ((interactables_settings[self->idx].item == ITEM_ID_WHITE_JEWEL) &&
             (sys.contPak_file_no < 0)) {
             item_model->primitive_color.integer = RGBA(255, 255, 255, 64);
         }
@@ -154,8 +152,8 @@ void interactables_init(Interactable* self) {
         item_model->size.z *= item_appearence_settings->size;
 
         // Spawn the Axe and Cross subweapons at a slightly higher position
-        if ((interactables_settings_table[self->table_index].item == ITEM_ID_AXE) ||
-            (interactables_settings_table[self->table_index].item == ITEM_ID_CROSS)) {
+        if ((interactables_settings[self->idx].item == ITEM_ID_AXE) ||
+            (interactables_settings[self->idx].item == ITEM_ID_CROSS)) {
             item_model->position.y += 3.2;
             self->position.y += 3.2;
             self->item_falling_target_height += 3.2;
@@ -166,14 +164,13 @@ void interactables_init(Interactable* self) {
         // Set the item trigger size
         //
         // This is not necessary, as the trigger size for items is directly checked from
-        // `interactables_settings_table[self->table_index].trigger_size`
+        // `interactables_settings[self->idx].trigger_size`
         // In practice, `trigger_X_size` is only used for text spots
-        self->trigger_X_size = interactables_settings_table[self->table_index].trigger_size;
+        self->trigger_X_size = interactables_settings[self->idx].trigger_size;
     }
 
     // Set the text spot parameters
-    if ((interactables_settings_table[self->table_index].type == ITEM_KIND_TEXT_SPOT) &&
-        (settings != NULL)) {
+    if ((interactables_settings[self->idx].type == ITEM_KIND_TEXT_SPOT) && (settings != NULL)) {
         self->position.x     = settings->position.x;
         self->position.y     = settings->position.y;
         self->position.z     = settings->position.z;
@@ -202,7 +199,7 @@ void interactables_main(Interactable* self) {
     u16 item;
     InteractableConfig* settings;
 
-    if (interactables_settings_table[self->table_index].type == ITEM_KIND_ITEM) {
+    if (interactables_settings[self->idx].type == ITEM_KIND_ITEM) {
         model = self->model;
 
         if (self->flash != NULL) {
@@ -217,9 +214,7 @@ void interactables_main(Interactable* self) {
             ) == FALSE) {
             // Periodically create the flash effect
             if (self->time_when_flash_appears_over_item == self->current_flash_inactive_time) {
-                if (BITS_NOT_HAS(
-                        interactables_settings_table[self->table_index].flags, ITEM_DOES_NOT_FLASH
-                    ) &&
+                if (BITS_NOT_HAS(interactables_settings[self->idx].flags, ITEM_DOES_NOT_FLASH) &&
                     BITS_NOT_HAS(sys.cutscene_flags, CUTSCENE_FLAG_PLAYING) &&
                     (self->item_doesnt_flash == FALSE)) {
                     // Create the effect
@@ -231,8 +226,7 @@ void interactables_main(Interactable* self) {
                         (*effect_setPosition)(
                             self->flash,
                             model->position.x,
-                            interactables_settings_table[self->table_index]
-                                    .pickable_item_flash_height +
+                            interactables_settings[self->idx].pickable_item_flash_height +
                                 model->position.y,
                             model->position.z,
                             POSITION_EQUAL_TO_VISUAL_INFO
@@ -250,8 +244,8 @@ void interactables_main(Interactable* self) {
 
             if (BITS_HAS(self->item_model_settings_flags, ITEM_MODEL_SETTINGS_FLAG_SPINS)) {
                 // Jewels spin slower than the other items
-                if ((interactables_settings_table[self->table_index].item >= ITEM_ID_WHITE_JEWEL) &&
-                    (interactables_settings_table[self->table_index].item <= ITEM_ID_SPECIAL2)) {
+                if ((interactables_settings[self->idx].item >= ITEM_ID_WHITE_JEWEL) &&
+                    (interactables_settings[self->idx].item <= ITEM_ID_SPECIAL2)) {
                     model->angle.yaw += 0x400;
                 } else {
                     model->angle.yaw += 0x800;
@@ -259,11 +253,13 @@ void interactables_main(Interactable* self) {
             }
         }
 
-        if (BITS_HAS(INTERACTABLES_SETTINGS_TABLE_ENTRY->flags, ITEM_VANISH_OR_UPDATE_POSITION)) {
+        if (BITS_HAS(
+                INTERACTABLES_SETTINGS_TABLE_ENTRY(self)->flags, ITEM_VANISH_OR_UPDATE_POSITION
+            )) {
             if (self->item_doesnt_vanish_or_fall == FALSE) {
                 // Start fading out after 10 seconds
                 if (ITEM_FADE_TIMER++ > 300U) {
-                    if (INTERACTABLES_SETTINGS_TABLE_ENTRY->type == ITEM_KIND_ITEM) {
+                    if (INTERACTABLES_SETTINGS_TABLE_ENTRY(self)->type == ITEM_KIND_ITEM) {
                         model = self->model;
                         // Gradually decrease the transparency
                         model_alpha = model->primitive_color.a - 8;
@@ -297,7 +293,7 @@ void interactables_main(Interactable* self) {
             model->position.z = self->position.z;
         }
 
-        switch (INTERACTABLES_SETTINGS_TABLE_ENTRY->item) {
+        switch (INTERACTABLES_SETTINGS_TABLE_ENTRY(self)->item) {
             default:
                 break;
 
@@ -317,7 +313,7 @@ void interactables_main(Interactable* self) {
         return;
 
     // Start the interaction
-    switch (interactables_settings_table[self->table_index].type) {
+    switch (interactables_settings[self->idx].type) {
         default:
             break;
 
@@ -336,7 +332,7 @@ void interactables_main(Interactable* self) {
 }
 
 void interactables_initCheck(Interactable* self) {
-    InteractableConfig* settings = &interactables_settings_table[self->table_index];
+    InteractableConfig* settings = &interactables_settings[self->idx];
     mfds_state* textbox;
     contractMgr* contract;
 
@@ -344,8 +340,7 @@ void interactables_initCheck(Interactable* self) {
     if (settings->type == ITEM_KIND_ITEM) {
         // Setup and display the item name textbox
         textbox = item_prepareTextbox(
-            itemModelSettings_getEntryFromList(interactables_settings_table[self->table_index].item)
-                ->item_ID
+            itemModelSettings_getEntryFromList(interactables_settings[self->idx].item)->item_ID
         );
 
         if (textbox == NULL)
@@ -355,31 +350,29 @@ void interactables_initCheck(Interactable* self) {
 
         // If picking up the contract, create `contractMgr`, which begins
         // the cutscene and warps you to Renon's shop
-        if (interactables_settings_table[self->table_index].item == ITEM_ID_THE_CONTRACT) {
+        if (interactables_settings[self->idx].item == ITEM_ID_THE_CONTRACT) {
             contract = (contractMgr*) (*object_createAndSetChild)(&self->header, MENU_CONTRACTMGR);
             contract->contract_item = self;
         }
 
         // If trying to pick up a White Jewel, freeze the players and all enemies in place
         // and begin reading its textbox. Don't actually pick it up
-        if (interactables_settings_table[self->table_index].item == ITEM_ID_WHITE_JEWEL) {
+        if (interactables_settings[self->idx].item == ITEM_ID_WHITE_JEWEL) {
             sys.FREEZE_PLAYER  = TRUE;
             sys.FREEZE_ENEMIES = TRUE;
             cameraMgr_setReadingTextState(sys.ptr_cameraMgr, TRUE);
             ITEM_FADE_TIMER = 0;
-            settings        = &interactables_settings_table[self->table_index];
+            settings        = &interactables_settings[self->idx];
         }
     }
 
     // If checking a text spot...
-    if (interactables_settings_table[self->table_index].type == ITEM_KIND_TEXT_SPOT) {
+    if (interactables_settings[self->idx].type == ITEM_KIND_TEXT_SPOT) {
         if (BITS_HAS(
-                interactables_settings_table[self->table_index].flags,
-                TEXT_SPOT_DESTROY_IF_EVENT_FLAG_IS_SET
+                interactables_settings[self->idx].flags, TEXT_SPOT_DESTROY_IF_EVENT_FLAG_IS_SET
             )) {
             if (CHECK_EVENT_FLAGS(
-                    self->map_event_flag_ID,
-                    interactables_settings_table[self->table_index].event_flag
+                    self->map_event_flag_ID, interactables_settings[self->idx].event_flag
                 )) {
                 self->header.destroy(self);
                 return;
@@ -387,12 +380,10 @@ void interactables_initCheck(Interactable* self) {
         }
 
         if (BITS_HAS(
-                interactables_settings_table[self->table_index].flags,
-                TEXT_SPOT_DISABLE_IF_EVENT_FLAG_IS_NOT_SET
+                interactables_settings[self->idx].flags, TEXT_SPOT_DISABLE_IF_EVENT_FLAG_IS_NOT_SET
             )) {
             if (!CHECK_EVENT_FLAGS(
-                    self->map_event_flag_ID,
-                    interactables_settings_table[self->table_index].event_flag
+                    self->map_event_flag_ID, interactables_settings[self->idx].event_flag
                 )) {
                 interactables_stopInteraction(self);
                 (*object_curLevel_goToFunc)(
@@ -411,9 +402,9 @@ void interactables_initCheck(Interactable* self) {
          * @bug? No matter if flag `TEXT_SPOT_DO_ACTION_AFTER_SELECTING_OPTION` is set or not,
          * the game will grab the same string
          */
-        textbox = (BITS_HAS(interactables_settings_table[self->table_index].flags, TEXT_SPOT_DO_ACTION_AFTER_SELECTING_OPTION))
-            ? map_getMessageFromPool(interactables_settings_table[self->table_index].text_ID, 0)
-            : map_getMessageFromPool(interactables_settings_table[self->table_index].text_ID, 0);
+        textbox = (BITS_HAS(interactables_settings[self->idx].flags, TEXT_SPOT_DO_ACTION_AFTER_SELECTING_OPTION))
+            ? map_getMessageFromPool(interactables_settings[self->idx].text_ID, 0)
+            : map_getMessageFromPool(interactables_settings[self->idx].text_ID, 0);
 
         // Freeze the player and all enemies in place, then begin reading the message
         sys.FREEZE_PLAYER = TRUE, // comma needed for matching
@@ -436,9 +427,9 @@ void interactables_initCheck(Interactable* self) {
 void interactables_selectTextboxOption(Interactable* self) {
     saveGame* saveGameObj;
 
-    if (interactables_settings_table[self->table_index].type == ITEM_KIND_ITEM) {
+    if (interactables_settings[self->idx].type == ITEM_KIND_ITEM) {
         // If reading a White Jewel...
-        if (interactables_settings_table[self->table_index].item == ITEM_ID_WHITE_JEWEL) {
+        if (interactables_settings[self->idx].item == ITEM_ID_WHITE_JEWEL) {
             mfds_state* textbox = self->textbox;
 
             switch (textbox->textbox_option) {
@@ -468,10 +459,9 @@ void interactables_selectTextboxOption(Interactable* self) {
     }
 
     // If reading a text spot
-    if (interactables_settings_table[self->table_index].type == (u32) ITEM_KIND_TEXT_SPOT) {
+    if (interactables_settings[self->idx].type == (u32) ITEM_KIND_TEXT_SPOT) {
         if (BITS_HAS(
-                interactables_settings_table[self->table_index].flags,
-                TEXT_SPOT_DO_ACTION_AFTER_SELECTING_OPTION
+                interactables_settings[self->idx].flags, TEXT_SPOT_DO_ACTION_AFTER_SELECTING_OPTION
             )) {
             mfds_state* textbox = self->textbox;
 
@@ -482,13 +472,11 @@ void interactables_selectTextboxOption(Interactable* self) {
                     return;
                 case TEXTBOX_OPTION_YES:
                     if (BITS_HAS(
-                            interactables_settings_table[self->table_index].flags,
-                            TEXT_SPOT_IF_YES_START_CUTSCENE
+                            interactables_settings[self->idx].flags, TEXT_SPOT_IF_YES_START_CUTSCENE
                         )) {
                         sys.FREEZE_PLAYER = FALSE, sys.FREEZE_ENEMIES = FALSE;
                         cameraMgr_setReadingTextState(sys.ptr_cameraMgr, FALSE);
-                        sys.cutscene_ID =
-                            interactables_settings_table[self->table_index].cutscene_ID;
+                        sys.cutscene_ID = interactables_settings[self->idx].cutscene_ID;
                     }
 
                     // Empty `if` needed for matching
@@ -496,12 +484,10 @@ void interactables_selectTextboxOption(Interactable* self) {
                     }
 
                     if (BITS_HAS(
-                            interactables_settings_table[self->table_index].flags,
-                            TEXT_SPOT_IF_YES_SET_EVENT_FLAG
+                            interactables_settings[self->idx].flags, TEXT_SPOT_IF_YES_SET_EVENT_FLAG
                         )) {
                         SET_EVENT_FLAGS(
-                            self->map_event_flag_ID,
-                            interactables_settings_table[self->table_index].event_flag
+                            self->map_event_flag_ID, interactables_settings[self->idx].event_flag
                         );
                     }
 
@@ -513,20 +499,19 @@ void interactables_selectTextboxOption(Interactable* self) {
                     // In practice, this is only used for levers
                     // to change their "raised up" state into a "pull" state
                     if (BITS_HAS(
-                            interactables_settings_table[self->table_index].flags,
+                            interactables_settings[self->idx].flags,
                             TEXT_SPOT_IF_YES_CHANGE_ACTOR_STATE
                         )) {
                         (*cutscene_setActorStateIfMatchingVariable1)(
-                            interactables_settings_table[self->table_index].actor_ID,
-                            interactables_settings_table[self->table_index].actor_variable_1,
+                            interactables_settings[self->idx].actor_ID,
+                            interactables_settings[self->idx].actor_variable_1,
                             LEVER_STATE_PULL
                         );
                     }
 
                     // Pull a lever (like those seen in Forest of Silence)
                     if (BITS_HAS(
-                            interactables_settings_table[self->table_index].flags,
-                            TEXT_SPOT_IF_YES_PULL_LEVER
+                            interactables_settings[self->idx].flags, TEXT_SPOT_IF_YES_PULL_LEVER
                         )) {
                         BITS_SET(sys.pull_lever, TRUE);
                     }
@@ -545,9 +530,9 @@ void interactables_selectTextboxOption(Interactable* self) {
 void interactables_stopCheck(Interactable* self) {
     u32 temp[2];
 
-    if (interactables_settings_table[self->table_index].type == ITEM_KIND_ITEM) {
+    if (interactables_settings[self->idx].type == ITEM_KIND_ITEM) {
         // Make sure the `saveGame` object is stopped, then unfreeze the player and the enemies
-        if (interactables_settings_table[self->table_index].item == ITEM_ID_WHITE_JEWEL) {
+        if (interactables_settings[self->idx].item == ITEM_ID_WHITE_JEWEL) {
             if (objectList_findFirstObjectByID(MENU_SAVEGAME) == NULL) {
                 sys.FREEZE_PLAYER  = FALSE;
                 sys.FREEZE_ENEMIES = FALSE;
@@ -584,15 +569,13 @@ void interactables_stopCheck(Interactable* self) {
         }
     }
 
-    if ((interactables_settings_table[self->table_index].type == ITEM_KIND_TEXT_SPOT) &&
-        lensAreClosed()) {
+    if ((interactables_settings[self->idx].type == ITEM_KIND_TEXT_SPOT) && lensAreClosed()) {
         sys.FREEZE_PLAYER  = FALSE;
         sys.FREEZE_ENEMIES = FALSE;
         cameraMgr_setReadingTextState(sys.ptr_cameraMgr, FALSE);
 
         if (BITS_HAS(
-                interactables_settings_table[self->table_index].flags,
-                TEXT_SPOT_DESTROY_AFTER_INTERACTION
+                interactables_settings[self->idx].flags, TEXT_SPOT_DESTROY_AFTER_INTERACTION
             )) {
             (*object_curLevel_goToNextFuncAndClearTimer)(
                 self->header.current_function, &self->header.function_info_ID
@@ -608,9 +591,9 @@ void interactables_stopCheck(Interactable* self) {
 }
 
 void interactables_destroy(Interactable* self) {
-    if (interactables_settings_table[self->table_index].type == ITEM_KIND_ITEM) {
+    if (interactables_settings[self->idx].type == ITEM_KIND_ITEM) {
         // If we picked up the contract, remove it from the inventory and stop interacting with it
-        if (interactables_settings_table[self->table_index].item == ITEM_ID_THE_CONTRACT) {
+        if (interactables_settings[self->idx].item == ITEM_ID_THE_CONTRACT) {
             // Technically speaking, the contract gets added temporarily to your inventory after picking it up
             // until exiting Renon's shop.
             // This could also be a leftover from early development, where using the contract would've consumed
@@ -634,11 +617,11 @@ void interactables_destroy(Interactable* self) {
             SET_EVENT_FLAGS(self->map_event_flag_ID, self->event_flag);
 
             // Unlock the Special1 and Special2 rewards after picking them up
-            if (interactables_settings_table[self->table_index].item == ITEM_ID_SPECIAL1) {
+            if (interactables_settings[self->idx].item == ITEM_ID_SPECIAL1) {
                 BITS_SET(sys.SaveStruct_gameplay.flags, SAVE_FLAG_HARD_MODE_UNLOCKED);
             }
 
-            if (interactables_settings_table[self->table_index].item == ITEM_ID_SPECIAL2) {
+            if (interactables_settings[self->idx].item == ITEM_ID_SPECIAL2) {
                 if (sys.SaveStruct_gameplay.character != REINHARDT) {
                     BITS_SET(sys.SaveStruct_gameplay.flags, SAVE_FLAG_HAVE_CARRIE_ALT_COSTUME);
                 } else {

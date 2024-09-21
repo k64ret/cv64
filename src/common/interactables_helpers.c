@@ -45,7 +45,7 @@ specialTextbox* Player_getActorCurrentlyInteractingWith() {
 
         can_interact = playerCanInteractWithInteractuable(pos.x, pos.y, pos.z, actor);
         if (can_interact) {
-            settings = &interactables_settings_table[actor->table_index];
+            settings = &interactables_settings[actor->idx];
 
             // The interactable is a text spot. Continue to the loop.
             if (settings->type == ITEM_KIND_TEXT_SPOT) {
@@ -77,13 +77,13 @@ specialTextbox* Player_getActorCurrentlyInteractingWith() {
 
             can_interact = playerCanInteractWithInteractuable(pos.x, pos.y, pos.z, actor);
             if (can_interact) {
-                settings = &interactables_settings_table[actor->table_index];
+                settings = &interactables_settings[actor->idx];
 
                 // If the interactable is a text spot
                 if (settings->type == ITEM_KIND_TEXT_SPOT) {
                     if (text_spot != NULL) {
                         if (settings->event_flag ==
-                            interactables_settings_table[text_spot->table_index].event_flag) {
+                            interactables_settings[text_spot->idx].event_flag) {
                             if (settings->flags & TEXT_SPOT_DESTROY_IF_EVENT_FLAG_IS_SET) {
                                 text_spot = actor;
                                 continue;
@@ -267,7 +267,7 @@ s32 playerCanInteractWithInteractuable(
     f32 actor_pos_X, f32 actor_pos_Y, f32 actor_pos_Z, Interactable* actor
 ) {
     cv64_model_inf_t* player_model = ptr_PlayerData->visualData.model;
-    InteractableConfig* settings   = &interactables_settings_table[0, (s16) actor->table_index];
+    InteractableConfig* settings   = &interactables_settings[0, (s16) actor->idx];
     f32 sine;
     f32 cosine;
     u16 angle_player_item;
@@ -337,7 +337,7 @@ s32 interactables_getInteractingType(specialTextbox* actor) {
     s16 actor_ID = actor->header.ID;
 
     if (actor_ID == CUTSCENE_INTERACTABLES) {
-        settings = &interactables_settings_table[((Interactable*) actor)->table_index];
+        settings = &interactables_settings[((Interactable*) actor)->idx];
         if (settings->type == ITEM_KIND_ITEM) {
             return INTERACT_TYPE_ITEM;
         }
