@@ -1579,17 +1579,17 @@ __osSpSetPc = 0x8008FC90; // type:func
 // src/common/interactables.c ==================================================
 
 // .text
-interactables_entrypoint          = 0x80125230; // type:func
-interactables_init                = 0x801252A0; // type:func
-interactables_main                = 0x80125764; // type:func
-interactables_initCheck           = 0x80125B60; // type:func
-interactables_selectTextboxOption = 0x80125D84; // type:func
-interactables_stopCheck           = 0x80126004; // type:func
-interactables_destroy             = 0x801261DC; // type:func
-interactables_stopInteraction     = 0x80126354; // type:func
+Interactable_Entrypoint          = 0x80125230; // type:func
+Interactable_Init                = 0x801252A0; // type:func
+Interactable_Main                = 0x80125764; // type:func
+Interactable_InitCheck           = 0x80125B60; // type:func
+Interactable_SelectTextboxOption = 0x80125D84; // type:func
+Interactable_StopCheck           = 0x80126004; // type:func
+Interactable_Destroy             = 0x801261DC; // type:func
+Interactable_stopInteraction     = 0x80126354; // type:func
 
 // .data
-interactables_functions           = 0x8016B560; // size:0x18
+interactable_funcs               = 0x8016B560; // size:0x18
 
 // End of src/common/interactables.c ===========================================
 

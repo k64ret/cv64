@@ -23,25 +23,25 @@
 #include "system_work.h"
 
 // Attempt to make this line (needed to match) more readable
-#define INTERACTABLES_SETTINGS_TABLE_ENTRY(interactable)                                           \
+#define INTERACTABLES_SETTINGS_ENTRY(interactable)                                                 \
     ((InteractableConfig*) ((s32) interactables_settings + interactable->idx * 0x14))
 
-cv64_interactables_func_t interactables_functions[] = {
-    interactables_init,
-    interactables_main,
-    interactables_initCheck,
-    interactables_selectTextboxOption,
-    interactables_stopCheck,
-    interactables_destroy
+InteractableFunc interactable_funcs[] = {
+    Interactable_Init,
+    Interactable_Main,
+    Interactable_InitCheck,
+    Interactable_SelectTextboxOption,
+    Interactable_StopCheck,
+    Interactable_Destroy
 };
 
-static void interactables_stopInteraction(Interactable* self);
+static void Interactable_stopInteraction(Interactable* self);
 
-void interactables_entrypoint(Interactable* self) {
-    ENTER(self, interactables_functions);
+void Interactable_Entrypoint(Interactable* self) {
+    ENTER(self, interactable_funcs);
 }
 
-void interactables_init(Interactable* self) {
+void Interactable_Init(Interactable* self) {
     cv64_actor_settings_t* settings = self->settings;
     u32 sp18;
     item_model_settings* item_appearence_settings;
@@ -50,7 +50,7 @@ void interactables_init(Interactable* self) {
     // clang-format off
 
     self->idx = (settings != NULL)
-        ? INTERACTABLES_SETTINGS_TABLE_ENTRY_ID(settings->variable_1)
+        ? INTERACTABLES_SETTINGS_ENTRY_ID(settings->variable_1)
         : self->idx - 1;
 
     // clang-format on
@@ -190,7 +190,7 @@ void interactables_init(Interactable* self) {
     );
 }
 
-void interactables_main(Interactable* self) {
+void Interactable_Main(Interactable* self) {
     cv64_model_inf_t* model;
     f32 current_height;
     pickableItemFlash* flash_effect_obj;
@@ -253,13 +253,11 @@ void interactables_main(Interactable* self) {
             }
         }
 
-        if (BITS_HAS(
-                INTERACTABLES_SETTINGS_TABLE_ENTRY(self)->flags, ITEM_VANISH_OR_UPDATE_POSITION
-            )) {
+        if (BITS_HAS(INTERACTABLES_SETTINGS_ENTRY(self)->flags, ITEM_VANISH_OR_UPDATE_POSITION)) {
             if (self->item_doesnt_vanish_or_fall == FALSE) {
                 // Start fading out after 10 seconds
                 if (ITEM_FADE_TIMER++ > 300U) {
-                    if (INTERACTABLES_SETTINGS_TABLE_ENTRY(self)->type == ITEM_KIND_ITEM) {
+                    if (INTERACTABLES_SETTINGS_ENTRY(self)->type == ITEM_KIND_ITEM) {
                         model = self->model;
                         // Gradually decrease the transparency
                         model_alpha = model->primitive_color.a - 8;
@@ -293,7 +291,7 @@ void interactables_main(Interactable* self) {
             model->position.z = self->position.z;
         }
 
-        switch (INTERACTABLES_SETTINGS_TABLE_ENTRY(self)->item) {
+        switch (INTERACTABLES_SETTINGS_ENTRY(self)->item) {
             default:
                 break;
 
@@ -331,7 +329,7 @@ void interactables_main(Interactable* self) {
     );
 }
 
-void interactables_initCheck(Interactable* self) {
+void Interactable_InitCheck(Interactable* self) {
     InteractableConfig* settings = &interactables_settings[self->idx];
     mfds_state* textbox;
     contractMgr* contract;
@@ -385,11 +383,9 @@ void interactables_initCheck(Interactable* self) {
             if (!CHECK_EVENT_FLAGS(
                     self->map_event_flag_ID, interactables_settings[self->idx].event_flag
                 )) {
-                interactables_stopInteraction(self);
+                Interactable_stopInteraction(self);
                 (*object_curLevel_goToFunc)(
-                    self->header.current_function,
-                    &self->header.function_info_ID,
-                    INTERACTABLES_MAIN
+                    self->header.current_function, &self->header.function_info_ID, INTERACTABLE_MAIN
                 );
                 return;
             }
@@ -424,7 +420,7 @@ void interactables_initCheck(Interactable* self) {
     );
 }
 
-void interactables_selectTextboxOption(Interactable* self) {
+void Interactable_SelectTextboxOption(Interactable* self) {
     saveGame* saveGameObj;
 
     if (interactables_settings[self->idx].type == ITEM_KIND_ITEM) {
@@ -447,11 +443,11 @@ void interactables_selectTextboxOption(Interactable* self) {
                     // Stop interaction
                     sys.FREEZE_PLAYER = FALSE, sys.FREEZE_ENEMIES = FALSE;
                     cameraMgr_setReadingTextState(sys.ptr_cameraMgr, FALSE);
-                    interactables_stopInteraction(self);
+                    Interactable_stopInteraction(self);
                     (*object_curLevel_goToFunc)(
                         self->header.current_function,
                         &self->header.function_info_ID,
-                        INTERACTABLES_MAIN
+                        INTERACTABLE_MAIN
                     );
                     return;
             }
@@ -527,7 +523,7 @@ void interactables_selectTextboxOption(Interactable* self) {
     );
 }
 
-void interactables_stopCheck(Interactable* self) {
+void Interactable_StopCheck(Interactable* self) {
     u32 temp[2];
 
     if (interactables_settings[self->idx].type == ITEM_KIND_ITEM) {
@@ -538,12 +534,10 @@ void interactables_stopCheck(Interactable* self) {
                 sys.FREEZE_ENEMIES = FALSE;
 
                 cameraMgr_setReadingTextState(sys.ptr_cameraMgr, FALSE);
-                interactables_stopInteraction(self);
+                Interactable_stopInteraction(self);
 
                 (*object_curLevel_goToFunc)(
-                    self->header.current_function,
-                    &self->header.function_info_ID,
-                    INTERACTABLES_MAIN
+                    self->header.current_function, &self->header.function_info_ID, INTERACTABLE_MAIN
                 );
             }
         } else {
@@ -554,11 +548,9 @@ void interactables_stopCheck(Interactable* self) {
             // Mandragora to the inventory, which in turn will cause `item_prepareTextbox` to
             // return -1, which is then put into `self->textbox`
             if (self->textbox == (mfds_state*) -1) {
-                interactables_stopInteraction(self);
+                Interactable_stopInteraction(self);
                 (*object_curLevel_goToFunc)(
-                    self->header.current_function,
-                    &self->header.function_info_ID,
-                    INTERACTABLES_MAIN
+                    self->header.current_function, &self->header.function_info_ID, INTERACTABLE_MAIN
                 );
                 return;
             }
@@ -583,14 +575,14 @@ void interactables_stopCheck(Interactable* self) {
             return;
         }
 
-        interactables_stopInteraction(self);
+        Interactable_stopInteraction(self);
         (*object_curLevel_goToFunc)(
-            self->header.current_function, &self->header.function_info_ID, INTERACTABLES_MAIN
+            self->header.current_function, &self->header.function_info_ID, INTERACTABLE_MAIN
         );
     }
 }
 
-void interactables_destroy(Interactable* self) {
+void Interactable_Destroy(Interactable* self) {
     if (interactables_settings[self->idx].type == ITEM_KIND_ITEM) {
         // If we picked up the contract, remove it from the inventory and stop interacting with it
         if (interactables_settings[self->idx].item == ITEM_ID_THE_CONTRACT) {
@@ -601,11 +593,9 @@ void interactables_destroy(Interactable* self) {
             (*item_removeAmountFromInventory)(ITEM_ID_THE_CONTRACT, 1);
 
             if (objectList_findFirstObjectByID(MENU_CONTRACTMGR) == NULL) {
-                interactables_stopInteraction(self);
+                Interactable_stopInteraction(self);
                 (*object_curLevel_goToFunc)(
-                    self->header.current_function,
-                    &self->header.function_info_ID,
-                    INTERACTABLES_MAIN
+                    self->header.current_function, &self->header.function_info_ID, INTERACTABLE_MAIN
                 );
             }
 
@@ -634,7 +624,7 @@ void interactables_destroy(Interactable* self) {
     self->header.destroy(self);
 }
 
-void interactables_stopInteraction(Interactable* self) {
+void Interactable_stopInteraction(Interactable* self) {
     self->textbox                       = NULL;
     ITEM_FADE_TIMER                     = 0;
     self->textbox_is_active             = FALSE;

@@ -16,8 +16,8 @@
 #define INTERACTABLES_SETTINGS_TYPE_TEXT_SPOT 2
 
 // Variable 1: ID + 1 in `interactables_settings` to get the settings from
-#define INTERACTABLES_SETTINGS_TABLE_ENTRY_ID(id) (id - 1)
-#define INTERACTABLES_VARIABLE_1(id)              (id + 1) // Used in the `interactables`'s actor settings
+#define INTERACTABLES_SETTINGS_ENTRY_ID(id) (id - 1)
+#define INTERACTABLES_VARIABLE_1(id)        (id + 1) // Used in the `interactables`'s actor settings
 
 // Variable 2:
 // Items: Upper 2-bytes of the event flag
@@ -182,23 +182,23 @@ typedef enum InteractableID {
 } InteractableID;
 
 enum InteractableConfigFlag {
-    ITEM_VANISH_OR_UPDATE_POSITION             = 0x0001,
-    TEXT_SPOT_DESTROY_AFTER_INTERACTION        = 0x0002,
-    TEXT_SPOT_DESTROY_IF_EVENT_FLAG_IS_SET     = 0x0004,
-    TEXT_SPOT_DISABLE_IF_EVENT_FLAG_IS_NOT_SET = 0x0008,
+    ITEM_VANISH_OR_UPDATE_POSITION             = BIT(0),
+    TEXT_SPOT_DESTROY_AFTER_INTERACTION        = BIT(1),
+    TEXT_SPOT_DESTROY_IF_EVENT_FLAG_IS_SET     = BIT(2),
+    TEXT_SPOT_DISABLE_IF_EVENT_FLAG_IS_NOT_SET = BIT(3),
     /**
      * Yes / No selection textbox
      */
-    TEXT_SPOT_DO_ACTION_AFTER_SELECTING_OPTION = 0x0010,
-    TEXT_SPOT_IF_YES_START_CUTSCENE            = 0x0020,
-    TEXT_SPOT_IF_YES_CHANGE_ACTOR_STATE        = 0x0040,
-    TEXT_SPOT_IF_YES_SET_EVENT_FLAG            = 0x0080,
+    TEXT_SPOT_DO_ACTION_AFTER_SELECTING_OPTION = BIT(4),
+    TEXT_SPOT_IF_YES_START_CUTSCENE            = BIT(5),
+    TEXT_SPOT_IF_YES_CHANGE_ACTOR_STATE        = BIT(6),
+    TEXT_SPOT_IF_YES_SET_EVENT_FLAG            = BIT(7),
     /**
      * Yes / No selection textbox
      */
-    TEXT_SPOT_IF_YES_PULL_LEVER = 0x0100,
-    ITEM_DOES_NOT_FLASH         = 0x0400,
-    ITEM_INVISIBLE              = 0x0800
+    TEXT_SPOT_IF_YES_PULL_LEVER = BIT(8),
+    ITEM_DOES_NOT_FLASH         = BIT(10),
+    ITEM_INVISIBLE              = BIT(11)
 };
 
 /**
@@ -261,24 +261,24 @@ typedef struct Interactable {
     cv64_actor_settings_t* settings;
 } Interactable;
 
-void interactables_entrypoint(Interactable* self);
-void interactables_init(Interactable* self);
-void interactables_main(Interactable* self);
-void interactables_initCheck(Interactable* self);
-void interactables_selectTextboxOption(Interactable* self);
-void interactables_stopCheck(Interactable* self);
-void interactables_destroy(Interactable* self);
+void Interactable_Entrypoint(Interactable* self);
+void Interactable_Init(Interactable* self);
+void Interactable_Main(Interactable* self);
+void Interactable_InitCheck(Interactable* self);
+void Interactable_SelectTextboxOption(Interactable* self);
+void Interactable_StopCheck(Interactable* self);
+void Interactable_Destroy(Interactable* self);
 
-typedef enum cv64_interactables_func_id {
-    INTERACTABLES_INIT,
-    INTERACTABLES_MAIN,
-    INTERACTABLES_INIT_CHECK,
-    INTERACTABLES_SELECT_TEXTBOX_OPTION,
-    INTERACTABLES_STOP_CHECK,
-    INTERACTABLES_DESTROY
-} cv64_interactables_func_id_t;
+enum InteractableFuncID {
+    INTERACTABLE_INIT,
+    INTERACTABLE_MAIN,
+    INTERACTABLE_INIT_CHECK,
+    INTERACTABLE_SELECT_TEXTBOX_OPTION,
+    INTERACTABLE_STOP_CHECK,
+    INTERACTABLE_DESTROY
+};
 
-typedef void (*cv64_interactables_func_t)(Interactable*);
+typedef void (*InteractableFunc)(Interactable*);
 
 /**
  * Table mapping interactables to their settings
