@@ -163,7 +163,7 @@ void vec3f_80011808(Vec3f* dest, Vec3f* src1, Vec3f* src2) {
 
 // Possibly transformVectorByMatrix
 // https://decomp.me/scratch/jpCsM
-void func_80011880(Vec3f* dest, Vec3f* src, Matrix44F* mtx) {
+void func_80011880(Vec3f* dest, Vec3f* src, Mat4f* mtx) {
     f32 temp_fa0 = ((mtx[0][0][0] * src->x) + (mtx[0][1][0] * src->y)) + (mtx[0][2][0] * src->z) +
         mtx[0][3][0];
     f32 temp_fa1 = ((mtx[0][0][1] * src->x) + (mtx[0][1][1] * src->y)) + (mtx[0][2][1] * src->z) +
@@ -177,7 +177,7 @@ void func_80011880(Vec3f* dest, Vec3f* src, Matrix44F* mtx) {
 }
 
 void func_80011914_12514(Vec3f* dest, Vec3f* src, Vec3f* rotation, s32 angle) {
-    Matrix44F mtx;
+    Mat4f mtx;
 
     guAlignF(mtx, ANGLE_FIXED_POINT_TO_DEGREES(angle), rotation->x, rotation->y, rotation->z);
     func_80011880(dest, src, mtx);

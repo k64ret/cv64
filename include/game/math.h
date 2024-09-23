@@ -25,7 +25,7 @@ typedef struct Angle {
     s16 pitch, yaw, roll;
 } Angle;
 
-typedef f32 Matrix44F[4][4];
+typedef f32 Mat4f[4][4];
 
 extern f32 atan2f(f32 arg1, f32 arg2);
 extern s16 atan2s(s16 y, s16 x);
@@ -50,7 +50,7 @@ void vec3f_set(Vec3f* vec, f32 x, f32 y, f32 z);
 void vec3f_multiplyByOne(Vec3f* dest);
 void vec3f_800117a4(Vec3f* dest, Vec3f* src1, Vec3f* src2, f32 scalar);
 void vec3f_80011808(Vec3f* dest, Vec3f* src1, Vec3f* src2);
-void func_80011880(Vec3f* dest, Vec3f* src, Matrix44F* mtx);
+void func_80011880(Vec3f* dest, Vec3f* src, Mat4f* mtx);
 void func_80011914_12514(Vec3f* dest, Vec3f* src, Vec3f* rotation, s32 angle);
 void func_80011984_12584(Vec3f* arg0, Vec3f* arg1, Vec3f* arg2);
 void func_800119F0_125F0(Vec3f* arg0, Vec3f* arg1, Vec3f* arg2, Vec3f* arg3);

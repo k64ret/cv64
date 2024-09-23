@@ -96,7 +96,7 @@ typedef struct {
     u8 field40_0x65;
     u8 field41_0x66;
     u8 field42_0x67;
-    Matrix44F matrix;
+    Mat4f matrix;
 } camera;
 
 extern camera* common_camera_8009B430;

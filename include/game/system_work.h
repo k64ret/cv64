@@ -26,7 +26,7 @@ typedef union {
 
 typedef struct {
     Gfx dlists[5120];
-    Matrix44F matrices[FIG_ARRAY_MAX];
+    Mat4f matrices[FIG_ARRAY_MAX];
 } sysw_gfx;
 
 typedef struct {
@@ -71,9 +71,9 @@ typedef struct {
      * See figure_update
      */
     s32 field16_0x2402c;
-    Matrix44F* field17_0x24030;
+    Mat4f* field17_0x24030;
     u8 field18_0x24034[68];
-    Matrix44F field19_0x24078;
+    Mat4f field19_0x24078;
     union {
         s16 field20_0x240b8_s16;
         f32 field20_0x240b8_f32;
@@ -148,7 +148,7 @@ typedef struct {
      */
     void* ptr_playerCameraController;
     u8 field70_0x263d0[4];
-    Matrix44F field_0x263d4;
+    Mat4f field_0x263d4;
     RGBA primitive_color;
     s16 map_is_setup;
     u8 field74_0x2641a;

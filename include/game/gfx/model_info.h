@@ -37,7 +37,7 @@ typedef struct cv64_model_inf {
     Angle field41_0x52;
     Vec3f size;
     cv64_map_actor_model_t* map_actor_model;
-    Matrix44F matrix;
+    Mat4f matrix;
 } cv64_model_inf_t;
 
 typedef struct actorPositionalData {
