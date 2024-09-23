@@ -74,7 +74,7 @@ typedef struct {
     u16 max_spawned_time;
     Vec3f position;
     Vec3f scale;
-    angle_t angle;
+    Angle angle;
     u8 field_0x46[2];
     RGBA primitive_color;
     RGBA environment_color;

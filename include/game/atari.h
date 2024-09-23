@@ -67,7 +67,7 @@ typedef struct cv64_atari_data_work {
     s16 damage_sound_ID;
     s16 field_0x0E;
     u8 field_0x10[2];
-    angle_t direction;
+    Angle direction;
     Vec3f center_point;
     Vec2f size;
     cv64_model_inf_t* attached_model;

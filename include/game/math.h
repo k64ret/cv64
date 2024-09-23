@@ -21,9 +21,9 @@ typedef struct Vec3f {
     f32 x, y, z;
 } Vec3f;
 
-typedef struct {
+typedef struct Angle {
     s16 pitch, yaw, roll;
-} angle_t;
+} Angle;
 
 typedef f32 Matrix44F[4][4];
 
