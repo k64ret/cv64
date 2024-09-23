@@ -10,10 +10,10 @@
 #include <ultra64.h>
 
 // For "axis" argument from `checkIfOutsideEntityIsInsideMainEntityRadius`
-#define AXIS_X   1
-#define AXIS_Y   2
-#define AXIS_Z   4
-#define AXIS_XYZ 8
+#define AXIS_X   BIT(0)
+#define AXIS_Y   BIT(1)
+#define AXIS_Z   BIT(2)
+#define AXIS_XYZ BIT(3)
 
 typedef struct {
     u32 flags;
@@ -24,23 +24,23 @@ typedef struct {
 } actorVisualData;
 
 // Generic actor struct
-typedef struct cv64_actor {
+typedef struct Actor {
     cv64_object_hdr_t header;
     u8 padding1[4];
     cv64_model_inf_t* model;
     u8 field_0x28[OBJECT_SIZE - 0x28];
     ActorConfig* settings;
-} cv64_actor_t;
+} Actor;
 
-extern void actor_model_set_pos(cv64_actor_t* actor, cv64_model_inf_t* actor_model);
-extern void actor_model_set_pos_and_angle(cv64_actor_t* actor, cv64_model_inf_t* actor_model);
+extern void actor_model_set_pos(Actor* actor, cv64_model_inf_t* actor_model);
+extern void actor_model_set_pos_and_angle(Actor* actor, cv64_model_inf_t* actor_model);
 extern s32 actor_playerOutsideActorSpawnRadius(
-    cv64_actor_t* actor, f32 actor_pos_X, f32 actor_pos_Y, f32 actor_pos_Z
+    Actor* actor, f32 actor_pos_X, f32 actor_pos_Y, f32 actor_pos_Z
 );
-extern void func_801578FC(cv64_actor_t* actor);
+extern void func_801578FC(Actor* actor);
 extern u32 checkIfOutsideEntityIsInsideMainEntityRadius(
     cv64_model_inf_t* player_model, cv64_model_inf_t* actor_model, f32 actor_spawn_radius, u32 axis
 );
-extern u8 Actor_getPosAndVariable1(cv64_actor_t* actor, Vec3f* position, u16* variable_1);
+extern u8 Actor_getPosAndVariable1(Actor* actor, Vec3f* position, u16* variable_1);
 
 #endif

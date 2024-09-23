@@ -20,7 +20,7 @@
 
 typedef union {
     void* field_voidptr;
-    cv64_actor_t* enemy;
+    Actor* enemy;
     s16 damage;
 } being_grabbed_frozen_related_union;
 
@@ -137,7 +137,7 @@ typedef struct {
     s16 player_position_log_current;
     Vec3f player_position_log[30];
     being_grabbed_frozen_related_union field62_0x263b4;
-    cv64_actor_t* enemy_grabbing_player;
+    Actor* enemy_grabbing_player;
     u16 angle_of_player_being_grabbed_by_enemy;
     u16 player_grabbed_by_vampire_timer_or_frozen;
     s16 current_boss_actor_ID;
