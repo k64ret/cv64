@@ -5,9 +5,9 @@
 
 #define ANGLE_FIXED_POINT_TO_DEGREES(angle) (angle * (360.0f / 65536))
 
-typedef struct {
+typedef struct Vec2 {
     s16 x, y;
-} vec2s;
+} Vec2;
 
 typedef struct {
     f32 x, y;

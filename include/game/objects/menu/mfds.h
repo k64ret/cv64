@@ -86,8 +86,8 @@ typedef struct {
     s16 field_0x0E;
     u8 flags;
     u8 field_0x11;
-    vec2s position;
-    vec2s field_0x16;
+    Vec2 position;
+    Vec2 field_0x16;
     u8 field_0x1A;
     u8 num_options;
     u8 current_option;
@@ -125,7 +125,7 @@ typedef struct {
     u16* text; // Officially called "str1"
     u16* item_amount_text;
     s32 field_0x10;
-    vec2s position;
+    Vec2 position;
     f32 position_Z;
     vec2f scale;
     s32 number;
