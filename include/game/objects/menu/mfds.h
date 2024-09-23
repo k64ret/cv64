@@ -127,7 +127,7 @@ typedef struct {
     s32 field_0x10;
     Vec2 position;
     f32 position_Z;
-    vec2f scale;
+    Vec2f scale;
     s32 number;
     s32 field_0x28;
     u16 width;

@@ -69,7 +69,7 @@ typedef struct cv64_atari_data_work {
     u8 field_0x10[2];
     angle_t direction;
     vec3f center_point;
-    vec2f size;
+    Vec2f size;
     cv64_model_inf_t* attached_model;
     /**
      * The "atari_base" struct it's attached to
@@ -188,7 +188,7 @@ typedef struct cv64_atari_only_work {
     s16 field_0x50;
     s16 field_0x52;
     vec3f center_point;
-    vec2f size;
+    Vec2f size;
     cv64_model_inf_t* damage_effect_model;
     u8 field30_0x6C;
     u8 field31_0x6D;

@@ -35,11 +35,11 @@
 #define DISABLED_PALETTE 1 // Unused
 
 typedef enum pc_select_work_flags {
-    ENABLE_REINHARDT        = 0x01,
-    ENABLE_CARRIE           = 0x02,
-    ENABLE_CORNELL          = 0x04,   // Unused
-    ENABLE_COLLER           = 0x08,   // Unused
-    PC_SELECT_WORK_FLAG_40  = 0x40    // Used, but never read from in practice
+    ENABLE_REINHARDT       = 0x01,
+    ENABLE_CARRIE          = 0x02,
+    ENABLE_CORNELL         = 0x04, // Unused
+    ENABLE_COLLER          = 0x08, // Unused
+    PC_SELECT_WORK_FLAG_40 = 0x40  // Used, but never read from in practice
 } pc_select_work_flags;
 
 typedef enum difficulty_select_state_enum {
@@ -95,7 +95,7 @@ typedef struct {
     mark_work* mark;
     u8 field_0x50[20];
     f32 lens_pos_multiplier;
-    vec2f lens_pos;
+    Vec2f lens_pos;
     pc_select_work* work;
 } characterSelectInner;
 

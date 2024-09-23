@@ -16,7 +16,7 @@ u16 level_select_text[] = {
 };
 
 // Position of the lens when highlighting a character
-vec2f lens_pos[NUM_CHARACTERS] = {{-82.0f, 52.0f}, {23.0f, 52.0f}};
+Vec2f lens_pos[NUM_CHARACTERS] = {{-82.0f, 52.0f}, {23.0f, 52.0f}};
 
 characterSelect_func_t characterSelect_functions[] = {
     difficultySelect_loop,

@@ -9,9 +9,9 @@ typedef struct Vec2 {
     s16 x, y;
 } Vec2;
 
-typedef struct {
+typedef struct Vec2f {
     f32 x, y;
-} vec2f;
+} Vec2f;
 
 typedef struct {
     s16 x, y, z;
