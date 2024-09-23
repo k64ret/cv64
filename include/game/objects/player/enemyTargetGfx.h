@@ -13,7 +13,7 @@ typedef enum enemyTargetData_flags {
 
 typedef struct {
     u16 flags;
-    vec3s field_0x02;
+    Vec3 field_0x02;
     vec3f field_0x08;
     f32 height_targetGfx_player; // The height difference between the enemy target gfx and the player
     f32 reticle_display_distance; // The maximum distance between the player and the enemy that makes the reticle appear. If you're beyond this distance, the reticle will hide

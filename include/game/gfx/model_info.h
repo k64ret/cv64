@@ -45,7 +45,7 @@ typedef struct actorPositionalData {
     angle_t angle;
 } actorPositionalData;
 
-extern void modelInfo_setPosVec3s(cv64_model_inf_t* self, vec3s* position);
+extern void modelInfo_setPosVec3s(cv64_model_inf_t* self, Vec3* position);
 extern void modelInfo_copyPositionalData(cv64_model_inf_t*, actorPositionalData*);
 extern void modelInfo_setMapActorModel(cv64_model_inf_t*, u32*);
 extern cv64_model_inf_t* modelInfo_createAndSetChild(u32 type, void* parent);

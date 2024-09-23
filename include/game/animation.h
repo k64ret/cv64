@@ -60,7 +60,7 @@ typedef struct {
 } animationMgr;
 
 typedef struct {
-    vec3s translation;
+    Vec3 translation;
     u16 flags;
 } animation_translation_data;
 

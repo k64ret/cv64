@@ -41,8 +41,8 @@ typedef struct {
     u16 mode;
     s16 start_hour;
     s16 end_hour;
-    vec3s trigger_lower_limit;
-    vec3s trigger_upper_limit;
+    Vec3 trigger_lower_limit;
+    Vec3 trigger_upper_limit;
     u8 field_0x22[2];
     u32 required_player_flags;
     /**

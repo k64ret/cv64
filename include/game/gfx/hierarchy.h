@@ -11,7 +11,7 @@
 typedef struct {
     u32 dlist;
     u16 flags;
-    vec3s position;
+    Vec3 position;
 } hierarchy_node;
 
 typedef struct {

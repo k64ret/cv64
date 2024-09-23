@@ -89,7 +89,7 @@ typedef struct {
     u8 field33_0x3b;
     Gfx* clip_ratio_dl;
     vec3f position;
-    vec3s field36_0x4c;
+    Vec3 field36_0x4c;
     angle_t angle;
     vec3f look_at_direction;
     u8 field39_0x64;

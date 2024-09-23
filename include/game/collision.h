@@ -16,7 +16,7 @@ typedef struct cv64_collision_triangle {
         u8 variable;
         u16 type_and_variable;
     };
-    vec3s vtx_pos[3]; // Vertices positions
+    Vec3 vtx_pos[3]; // Vertices positions
 } cv64_collision_triangle_t;
 
 #endif

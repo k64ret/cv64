@@ -13,9 +13,9 @@ typedef struct Vec2f {
     f32 x, y;
 } Vec2f;
 
-typedef struct {
+typedef struct Vec3 {
     s16 x, y, z;
-} vec3s;
+} Vec3;
 
 typedef struct {
     f32 x, y, z;

@@ -6,7 +6,7 @@
 #include "actor_settings.h"
 
 typedef struct {
-    vec3s trigger_position;
+    Vec3 trigger_position;
     s16 map;
     s16 spawn;
     u16 fade_out_time;
