@@ -1,22 +1,29 @@
 #ifndef HIERARCHY_H
 #define HIERARCHY_H
 
+#include "bit.h"
 #include "math.h"
 
-// Hierarchy node flags
-#define ALLOW_CHANGING_TEXTURE_AND_PALETTE 0x2000
-#define CREATE_NEXT_NODE                   0x4000
-#define DONT_CREATE_SIBLING                0x8000
+enum HierarchyNodeFlag {
+    ALLOW_CHANGING_TEXTURE_AND_PALETTE = BIT(13),
+    CREATE_NEXT_NODE                   = BIT(14),
+    DONT_CREATE_SIBLING                = BIT(15)
+};
 
-typedef struct {
+/**
+ * Accepts values from `HierarchyNodeFlag` OR'ed together
+ */
+typedef u16 HierarchyNodeFlags;
+
+typedef struct HierarchyNode {
     u32 dlist;
-    u16 flags;
+    HierarchyNodeFlags flags;
     Vec3 position;
-} hierarchy_node;
+} HierarchyNode;
 
-typedef struct {
+typedef struct Hierarchy {
     s32 assets_file_ID;
-    hierarchy_node nodes[];
-} hierarchy;
+    HierarchyNode nodes[];
+} Hierarchy;
 
 #endif

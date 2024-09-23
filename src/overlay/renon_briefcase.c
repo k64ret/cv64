@@ -13,7 +13,7 @@
 // clang-format off
 
 // TODO: `extern const u32` for the dlists
-hierarchy cv64_ovl_renonbriefcase_hierarchy = {
+Hierarchy cv64_ovl_renonbriefcase_hierarchy = {
     NI_ASSETS_RENON_BRIEFCASE,
     {
         // RENON_BRIEFCASE_LOWER_LID_DL

@@ -10,7 +10,7 @@
 // clang-format off
 
 // TODO: `extern const u32` for the dlists
-hierarchy page_1_hierarchy = {
+Hierarchy page_1_hierarchy = {
     NI_ASSETS_MENU,
     {
         { 0x06007240, CREATE_NEXT_NODE, { -1561, 35, 764 } },
@@ -22,7 +22,7 @@ hierarchy page_1_hierarchy = {
     }
 };
 
-hierarchy page_2_hierarchy = {
+Hierarchy page_2_hierarchy = {
     NI_ASSETS_MENU,
     {
         { 0x06008000, CREATE_NEXT_NODE, { -1561, 35, 764 } },
@@ -34,7 +34,7 @@ hierarchy page_2_hierarchy = {
     }
 };
 
-hierarchy page_3_hierarchy = {
+Hierarchy page_3_hierarchy = {
     NI_ASSETS_MENU,
     {
         { 0x06008DB8, CREATE_NEXT_NODE, { -1561, 35, 764 } },

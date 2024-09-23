@@ -51,6 +51,6 @@ extern void modelInfo_setMapActorModel(cv64_model_inf_t*, u32*);
 extern cv64_model_inf_t* modelInfo_createAndSetChild(u32 type, void* parent);
 extern cv64_model_inf_t* modelInfo_createNextNode(u32 parent_type, void* parent);
 extern cv64_model_inf_t*
-modelInfo_buildHierarchy(u32 type, cv64_model_inf_t* self, hierarchy* mdl_hierarchy);
+modelInfo_buildHierarchy(u32 type, cv64_model_inf_t* self, Hierarchy* mdl_hierarchy);
 
 #endif

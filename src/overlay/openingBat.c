@@ -14,7 +14,7 @@
 // clang-format off
 
 // TODO: `extern const u32` for the dlists
-hierarchy openingBat_hierarchy = {
+Hierarchy openingBat_hierarchy = {
     NI_ASSETS_FIRE_BAT,
     {
         { 0x06000C90, CREATE_NEXT_NODE, { 0, 45, 45 } },
