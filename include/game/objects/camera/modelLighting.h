@@ -13,7 +13,7 @@ typedef struct {
 } light_list_t;
 
 typedef struct {
-    vec3f* target_position;      // The position where the point light target is located at
+    Vec3f* target_position;      // The position where the point light target is located at
     pointLight* point_lights[7]; // See 0x80010F5C
 } point_light_list_t;
 
@@ -31,6 +31,6 @@ typedef struct {
 
 extern modelLighting* modelLighting_create(void* parent);
 extern s32
-modelLighting_createList(modelLighting* self, u32 size_and_index, vec3f* target_position);
+modelLighting_createList(modelLighting* self, u32 size_and_index, Vec3f* target_position);
 
 #endif

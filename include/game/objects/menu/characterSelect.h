@@ -57,7 +57,7 @@ typedef struct {
     light* lens_light;
     u8 flags;
     u8 field_0x0D[3];
-    vec3f field_0x10;
+    Vec3f field_0x10;
     u8 field_0x1C;
     u8 number_of_characters;
     /**

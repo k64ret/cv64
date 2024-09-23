@@ -68,7 +68,7 @@ typedef struct cv64_atari_data_work {
     s16 field_0x0E;
     u8 field_0x10[2];
     angle_t direction;
-    vec3f center_point;
+    Vec3f center_point;
     Vec2f size;
     cv64_model_inf_t* attached_model;
     /**
@@ -77,14 +77,14 @@ typedef struct cv64_atari_data_work {
     struct cv64_atari_data_work* atari_work[2];
     f32 field_0x38;
     f32 field_0x3C;
-    vec3f position;
-    vec3f field_0x4C;
-    vec3f field_0x58;
+    Vec3f position;
+    Vec3f field_0x4C;
+    Vec3f field_0x58;
     f32 field_0x64;
     cv64_model_inf_t* field_0x68;
     struct cv64_atari_data_work* collider_attacker;
-    vec3f damage_effect_position;
-    vec3f damage_effect_scale;
+    Vec3f damage_effect_position;
+    Vec3f damage_effect_scale;
     f32 field_0x88;
     f32 field_0x8C;
     s16 field_0x90;
@@ -108,14 +108,14 @@ typedef struct cv64_atari_base_work {
     u8 field_0x0C;
     u8 field_0x0D;
     s16 push_back_divisor;
-    vec3f push_back_force;
+    Vec3f push_back_force;
     cv64_atari_data_work_t* attacker_atari_data;
     /**
      * Associated colider that was hit by attacker_atari_data
      */
     cv64_atari_data_work_t* collider_hit;
-    vec3f damage_effect_pos;
-    vec3f damage_effect_scale;
+    Vec3f damage_effect_pos;
+    Vec3f damage_effect_scale;
     /**
      * Unused? Copies to field 0x4 of `struct_97`
      */
@@ -160,10 +160,10 @@ typedef struct cv64_atari_only_work {
     u8 field_0x0C;
     u8 on_hit_SFX_set_slot;
     s16 field_0x0E;
-    vec3f push_back_on_collider_contact;
+    Vec3f push_back_on_collider_contact;
     cv64_atari_data_work_t* collider_hit;
-    vec3f damage_effect_position;
-    vec3f damage_effect_scale;
+    Vec3f damage_effect_position;
+    Vec3f damage_effect_scale;
     f32 field_0x38;
     f32 field_0x3C;
     s16 field_0x40;
@@ -187,16 +187,16 @@ typedef struct cv64_atari_only_work {
     s16 angle;
     s16 field_0x50;
     s16 field_0x52;
-    vec3f center_point;
+    Vec3f center_point;
     Vec2f size;
     cv64_model_inf_t* damage_effect_model;
     u8 field30_0x6C;
     u8 field31_0x6D;
     u8 field32_0x6E;
     u8 field33_0x6F;
-    vec3f position;
-    vec3f field_0x7C;
-    vec3f field_0x88;
+    Vec3f position;
+    Vec3f field_0x7C;
+    Vec3f field_0x88;
     f32 field_0x94;
     u8 field_0x98;
     u8 field_0x99;

@@ -26,7 +26,7 @@ typedef struct {
     u8 flip_anim_keyframe;
     u8 field_0x06[2];
     f32 anim_speed;
-    vec3f position;
+    Vec3f position;
 } page_work;
 
 // ID: 0x0131

@@ -41,7 +41,7 @@ typedef struct {
 } effect_info;
 
 typedef struct {
-    vec3f scale;
+    Vec3f scale;
     f32 scale_multiplier;
     s16 angle;
     u16 flags;
@@ -72,8 +72,8 @@ typedef struct {
     u16 color_intensity_transition_max_time;
     s16 field_0x24;
     u16 max_spawned_time;
-    vec3f position;
-    vec3f scale;
+    Vec3f position;
+    Vec3f scale;
     angle_t angle;
     u8 field_0x46[2];
     RGBA primitive_color;

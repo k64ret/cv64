@@ -28,7 +28,7 @@ typedef struct specialTextbox {
     f32 trigger_size_X;
     f32 trigger_size_Z;
     mfds_state* message_textbox;
-    vec3f position;
+    Vec3f position;
     cv64_actor_settings_t* settings;
 } specialTextbox;
 

@@ -26,9 +26,9 @@ typedef struct {
     s32 field_0x3C;
     s32 field_0x40;
     s32 field_0x44;
-    vec3f position;
+    Vec3f position;
     f32 open_max_height;
-    vec3f width;
+    Vec3f width;
     s32 field_0x64;
     s32 field_0x68;
     s32 field_0x6C;

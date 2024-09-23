@@ -25,7 +25,7 @@ typedef struct {
 } loading_zone_cutscene_settings;
 
 typedef struct {
-    vec3f position;
+    Vec3f position;
     s16 field_0x40;
     u8 field_0x42[2];
     void (*obj_destroy_function)(void*);

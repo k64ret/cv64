@@ -66,7 +66,7 @@ void openingBat_init(openingBat* self) {
     s32 temp1;
     modelLighting* lighting;
     cv64_model_inf_t* model;
-    vec3f position;
+    Vec3f position;
     u16 variable_1;
     openingBatDataInner* inner = &data->inner;
 

@@ -13,25 +13,25 @@ typedef struct {
     camera* camera_player;
     void* ptr_playerCameraController; // playerCameraController*
     cv64_model_inf_t* camera_mode_text;
-    vec3f camera_position;
-    vec3f camera_look_at_direction;
+    Vec3f camera_position;
+    Vec3f camera_look_at_direction;
     f32 field_0x30;
     f32 field_0x34;
     f32 field_0x38;
     f32 field_0x3C;
     f32 field_0x40;
     f32 field_0x44;
-    vec3f field_0x48;
+    Vec3f field_0x48;
     f32 field_0x54;
     f32 field_0x58;
     f32 field_0x5C;
     u8 field_0x60;
     u8 field_0x61[3];
     s32 field_0x64;
-    vec3f camera_distance_to_player;
-    vec3f first_person_camera_look_at_dir;
+    Vec3f camera_distance_to_player;
+    Vec3f first_person_camera_look_at_dir;
     s32 player_angle_yaw;
-    vec3f field_0x84;
+    Vec3f field_0x84;
     s32 field_0x90;
     f32 field_0x94;
     s32 field_0x98; // Maybe a u8 / s32 union?

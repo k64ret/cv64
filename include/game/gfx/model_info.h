@@ -32,16 +32,16 @@ typedef struct cv64_model_inf {
     u32 dlist;
     u32 field34_0x38;
     s32 assets_file_ID;
-    vec3f position;
+    Vec3f position;
     angle_t angle;
     angle_t field41_0x52;
-    vec3f size;
+    Vec3f size;
     cv64_map_actor_model_t* map_actor_model;
     Matrix44F matrix;
 } cv64_model_inf_t;
 
 typedef struct actorPositionalData {
-    vec3f position;
+    Vec3f position;
     angle_t angle;
 } actorPositionalData;
 

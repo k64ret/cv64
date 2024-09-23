@@ -32,8 +32,8 @@ typedef struct {
     u32 flags;
     camera* field_0x04;
     camera* display_camera;
-    vec3f position;
-    vec3f width;
+    Vec3f position;
+    Vec3f width;
     u8 open_close_speed;
     u8 params;
     s16 lower_dowel_pitch_angle;
@@ -42,7 +42,7 @@ typedef struct {
     f32 field_0x30;
     u8 field_0x34;
     u8 field_0x35[3];
-    vec3f field_0x38;
+    Vec3f field_0x38;
     f32 open_close_max_speed;
     f32 open_close_current_speed;
     f32 dowel_angle_multiplier;

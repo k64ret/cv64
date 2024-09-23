@@ -14,9 +14,9 @@
 #define FADE_OUT_AUDIO_009 2
 
 extern u8 play_sound(u16 sound_ID);
-extern u8 play_sound_in_position(u16 sound_ID, vec3f* position);
+extern u8 play_sound_in_position(u16 sound_ID, Vec3f* position);
 extern u8
-play_sound_in_position_and_set_volume(u16 sound_ID, vec3f* position, f32 volume_multiplier);
+play_sound_in_position_and_set_volume(u16 sound_ID, Vec3f* position, f32 volume_multiplier);
 extern u8 func_800139D4(u16 sound_ID, f32, f32 volume);
 extern u8 isValidBGM(u16 bgm_ID);
 extern u8 setBGM(u16 bgm_ID);

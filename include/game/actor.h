@@ -41,6 +41,6 @@ extern void func_801578FC(cv64_actor_t* actor);
 extern u32 checkIfOutsideEntityIsInsideMainEntityRadius(
     cv64_model_inf_t* player_model, cv64_model_inf_t* actor_model, f32 actor_spawn_radius, u32 axis
 );
-extern u8 Actor_getPosAndVariable1(cv64_actor_t* actor, vec3f* position, u16* variable_1);
+extern u8 Actor_getPosAndVariable1(cv64_actor_t* actor, Vec3f* position, u16* variable_1);
 
 #endif

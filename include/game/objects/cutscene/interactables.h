@@ -257,7 +257,7 @@ typedef struct Interactable {
         pickableItemFlash* flash;
         mfds_state* textbox;
     };
-    vec3f position;
+    Vec3f position;
     cv64_actor_settings_t* settings;
 } Interactable;
 

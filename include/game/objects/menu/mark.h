@@ -18,8 +18,8 @@ typedef struct {
     camera* display_camera;
     u8 flags;
     u8 field_0x05[3];
-    vec3f position;
-    vec3f size;
+    Vec3f position;
+    Vec3f size;
     u8 display_anim_speed;
     u8 display_anim_timer;
     u8 field_0x22[2];

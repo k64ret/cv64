@@ -135,7 +135,7 @@ typedef struct {
     s32 player_frozenGrab_timer;
     s16 player_position_log_max;
     s16 player_position_log_current;
-    vec3f player_position_log[30];
+    Vec3f player_position_log[30];
     being_grabbed_frozen_related_union field62_0x263b4;
     cv64_actor_t* enemy_grabbing_player;
     u16 angle_of_player_being_grabbed_by_enemy;

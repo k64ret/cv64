@@ -23,7 +23,7 @@ specialTextbox* Player_getActorCurrentlyInteractingWith() {
     Interactable* text_spot = NULL;
     InteractableConfig* settings;
     s32 can_interact = FALSE;
-    vec3f pos;
+    Vec3f pos;
 
     /**
      * Interactuables
