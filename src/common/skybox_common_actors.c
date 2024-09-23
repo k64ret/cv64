@@ -107,7 +107,7 @@ void obj0172_init(object_0172* self) {
 }
 
 void obj0172_loop(object_0172* self) {
-    cv64_actor_settings_t* settings = self->settings;
+    ActorConfig* settings = self->settings;
 
     if (actor_playerOutsideActorSpawnRadius(
             self, settings->position.x, settings->position.y, settings->position.z
@@ -249,7 +249,7 @@ void obj8015C368_entrypoint(object_8015C368* self) {
 }
 
 void obj8015C368_init(object_8015C368* self) {
-    cv64_actor_settings_t* settings = self->settings;
+    ActorConfig* settings = self->settings;
     cv64_model_inf_t* model;
 
     model = modelInfo_createAndSetChild(FIG_TYPE_0400 | FIG_TYPE_HIERARCHY_NODE, map_lights[0]);
@@ -268,7 +268,7 @@ void obj8015C368_init(object_8015C368* self) {
 
 void obj8015C368_loop(object_8015C368* self) {
     cv64_model_inf_t* model = self->model;
-    cv64_actor_settings_t* settings;
+    ActorConfig* settings;
 
     model->primitive_color.integer = sys.background_color.integer;
     if (actor_playerOutsideActorSpawnRadius(

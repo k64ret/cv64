@@ -116,7 +116,7 @@ void cv64_ovl_rose_door_entrypoint(cv64_ovl_rose_door_t* self) {
 
 void cv64_ovl_rose_door_init(cv64_ovl_rose_door_t* self) {
     cv64_map_actor_model_t* map_actor_model;
-    cv64_actor_settings_t* settings           = self->settings;
+    ActorConfig* settings                     = self->settings;
     cv64_ovl_rose_door_cfg_t* height_settings = &self->height_settings;
     cv64_model_inf_t* model = (*modelInfo_createAndSetChild)(FIG_TYPE_STANDALONE, map_lights[0]);
 

@@ -25,7 +25,7 @@ typedef struct {
     cv64_model_inf_t* model;
     openingBatData* data;
     u8 field_0x2C[68];
-    cv64_actor_settings_t* settings;
+    ActorConfig* settings;
 } openingBat;
 
 void openingBat_entrypoint(openingBat* self);

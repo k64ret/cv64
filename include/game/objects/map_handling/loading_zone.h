@@ -35,7 +35,7 @@ typedef struct {
      */
     s16 go_to_konami_logo;
     u8 field_0x4E[34];
-    cv64_actor_settings_t* settings;
+    ActorConfig* settings;
 } loadingZoneInner;
 
 // ID: 0x016A

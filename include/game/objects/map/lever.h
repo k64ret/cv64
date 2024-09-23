@@ -51,7 +51,7 @@ typedef struct {
     s32 model_pitch;
     u8 field_0x54[24];
     s32 state;
-    cv64_actor_settings_t* settings;
+    ActorConfig* settings;
 } lever;
 
 void lever_init(lever* self);

@@ -18,7 +18,7 @@ typedef struct cv64_ovl_rose_ventilator {
     u8 field_0x28[12];
     cv64_ovl_rose_ventilator_cfg_t speed_settings;
     u8 field_0x40[48];
-    cv64_actor_settings_t* settings;
+    ActorConfig* settings;
 } cv64_ovl_rose_ventilator_t;
 
 typedef void (*cv64_ovl_rose_ventilator_func_t)(cv64_ovl_rose_ventilator_t*);

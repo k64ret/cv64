@@ -41,7 +41,7 @@ void cv64_ovl_touturo_door_entrypoint(cv64_ovl_touturo_door_t* self) {
 
 void cv64_ovl_touturo_door_init(cv64_ovl_touturo_door_t* self) {
     s32 unused;
-    cv64_actor_settings_t* settings = self->settings;
+    ActorConfig* settings = self->settings;
     cv64_model_inf_t* model;
 
     if (settings) {
@@ -74,8 +74,8 @@ void cv64_ovl_touturo_door_init(cv64_ovl_touturo_door_t* self) {
 }
 
 void cv64_ovl_touturo_door_loop(cv64_ovl_touturo_door_t* self) {
-    cv64_actor_settings_t* settings = self->settings;
-    cv64_model_inf_t* model         = self->model;
+    ActorConfig* settings   = self->settings;
+    cv64_model_inf_t* model = self->model;
 
     if ((*actor_playerOutsideActorSpawnRadius)(
             self, settings->position.x, settings->position.y, settings->position.z

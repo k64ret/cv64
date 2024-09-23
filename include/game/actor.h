@@ -29,7 +29,7 @@ typedef struct cv64_actor {
     u8 padding1[4];
     cv64_model_inf_t* model;
     u8 field_0x28[OBJECT_SIZE - 0x28];
-    cv64_actor_settings_t* settings;
+    ActorConfig* settings;
 } cv64_actor_t;
 
 extern void actor_model_set_pos(cv64_actor_t* actor, cv64_model_inf_t* actor_model);

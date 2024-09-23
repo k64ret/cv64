@@ -61,7 +61,7 @@ typedef struct cv64_ovl_librarypuzzletxt {
     s16 trigger_size_Z;
     mfds_state* message_textbox;
     Vec3f position;
-    cv64_actor_settings_t* settings;
+    ActorConfig* settings;
 } cv64_ovl_librarypuzzletxt_t;
 
 void cv64_ovl_librarypuzzletxt_entrypoint(cv64_ovl_librarypuzzletxt_t* self);

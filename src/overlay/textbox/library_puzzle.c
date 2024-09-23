@@ -33,7 +33,7 @@ static void print_selected_options(u16*, u16);
 static s32 select_next_option(s32*, u16*, u16*);
 
 void cv64_ovl_librarypuzzletxt_init(cv64_ovl_librarypuzzletxt_t* self) {
-    cv64_actor_settings_t* settings = self->settings;
+    ActorConfig* settings = self->settings;
 
     if (ptr_PlayerData == NULL)
         return;

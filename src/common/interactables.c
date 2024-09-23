@@ -42,7 +42,7 @@ void Interactable_Entrypoint(Interactable* self) {
 }
 
 void Interactable_Init(Interactable* self) {
-    cv64_actor_settings_t* settings = self->settings;
+    ActorConfig* settings = self->settings;
     u32 sp18;
     item_model_settings* item_appearence_settings;
     cv64_model_inf_t* item_model;

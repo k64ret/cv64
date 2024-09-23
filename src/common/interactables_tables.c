@@ -13,7 +13,7 @@
  * Actor settings for the text spot that activates the opening mechanism
  * to open the grating from Castle Wall (`INTERACT_ID_CASTLE_WALL_MAIN_OPEN_GRATING`)
  */
-cv64_actor_settings_t castleWallGratingMechanism_textSpotsActorSettings_openMechanism = {
+ActorConfig castleWallGratingMechanism_textSpotsActorSettings_openMechanism = {
     {257, 306, 71},
     CUTSCENE_INTERACTABLES,
     INTERACTABLES_VARIABLE_1(INTERACT_ID_CASTLE_WALL_MAIN_OPEN_GRATING),
@@ -27,7 +27,7 @@ cv64_actor_settings_t castleWallGratingMechanism_textSpotsActorSettings_openMech
  * Actor settings for the text spot that tells the player that the grating
  * from Castle Wall is already open (`INTERACT_ID_CASTLE_WALL_MAIN_GRATING_OPENED`)
  */
-cv64_actor_settings_t castleWallGratingMechanism_textSpotsActorSettings_mechanismOpened = {
+ActorConfig castleWallGratingMechanism_textSpotsActorSettings_mechanismOpened = {
     {257, 306, 71},
     CUTSCENE_INTERACTABLES,
     INTERACTABLES_VARIABLE_1(INTERACT_ID_CASTLE_WALL_MAIN_GRATING_OPENED),
@@ -64,7 +64,7 @@ door_item_open_verify_struct door_item_open_verify_list[] = {
 /**
  * Used by `spawnCastleWallGratingMechanismTextboxes`
  */
-cv64_actor_settings_t* castleWallGratingMechanism_textSpotsActorSettings[1][3] = {
+ActorConfig* castleWallGratingMechanism_textSpotsActorSettings[1][3] = {
     {NULL,
      &castleWallGratingMechanism_textSpotsActorSettings_openMechanism,
      &castleWallGratingMechanism_textSpotsActorSettings_mechanismOpened}

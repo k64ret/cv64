@@ -93,7 +93,7 @@ typedef struct cv64_effect {
     effect_info* info;
     effect_positional_info* positional_info;
     effect_visual_info* visual_info;
-    cv64_actor_settings_t* settings;
+    ActorConfig* settings;
 } cv64_effect_t;
 
 extern cv64_effect_t* createEffectObjectUnderEffectMgr(

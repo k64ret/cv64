@@ -14,7 +14,7 @@ typedef struct {
      */
     s32 transparency;
     u8 field_0x38[56];
-    cv64_actor_settings_t* settings;
+    ActorConfig* settings;
 } commonMoon;
 
 void commonMoon_entrypoint(commonMoon* self);

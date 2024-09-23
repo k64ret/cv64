@@ -25,7 +25,7 @@ typedef struct {
     u8 field_0x20[20];
     pointLightData data;
     u8 field_0x5C[20];
-    cv64_actor_settings_t* settings;
+    ActorConfig* settings;
 } pointLight;
 
 extern void pointLight_entrypoint(pointLight* self);

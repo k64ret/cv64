@@ -62,7 +62,7 @@ typedef struct {
     u8 field_0x48[8];
     s32 additional_settings_ID;
     u8 field_0x54[28];
-    cv64_actor_settings_t* settings;
+    ActorConfig* settings;
 } cutsceneTrigger;
 
 extern void cutsceneTrigger_entrypoint(cutsceneTrigger* self);

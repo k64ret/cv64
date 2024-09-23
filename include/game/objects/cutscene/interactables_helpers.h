@@ -29,7 +29,7 @@ typedef struct specialTextbox {
     f32 trigger_size_Z;
     mfds_state* message_textbox;
     Vec3f position;
-    cv64_actor_settings_t* settings;
+    ActorConfig* settings;
 } specialTextbox;
 
 specialTextbox* Player_getActorCurrentlyInteractingWith();
@@ -46,6 +46,6 @@ void spawnCastleWallGratingMechanismTextboxes(s16 index);
 void removeKeyWhenOpeningDoor(s16 event_flag_ID, u32 event_flag);
 
 extern door_item_open_verify_struct door_item_open_verify_list[13];
-extern cv64_actor_settings_t* castleWallGratingMechanism_textSpotsActorSettings[1][3];
+extern ActorConfig* castleWallGratingMechanism_textSpotsActorSettings[1][3];
 
 #endif

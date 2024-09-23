@@ -26,7 +26,7 @@ typedef struct {
      * function `cutscene_setActorStateIfMatchingVariable1`
      */
     s32 state;
-    cv64_actor_settings_t* settings;
+    ActorConfig* settings;
 } libraryPiece;
 
 void libraryPiece_entrypoint(libraryPiece* self);

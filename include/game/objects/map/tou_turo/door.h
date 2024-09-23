@@ -25,7 +25,7 @@ typedef struct cv64_ovl_touturo_door {
     u8 padding3[50];
     cv64_map_actor_model_t* map_actor_model;
     u8 padding4[4];
-    cv64_actor_settings_t* settings;
+    ActorConfig* settings;
 } cv64_ovl_touturo_door_t;
 
 // Common to both door types

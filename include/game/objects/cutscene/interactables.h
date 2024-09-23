@@ -258,7 +258,7 @@ typedef struct Interactable {
         mfds_state* textbox;
     };
     Vec3f position;
-    cv64_actor_settings_t* settings;
+    ActorConfig* settings;
 } Interactable;
 
 void Interactable_Entrypoint(Interactable* self);

@@ -13,7 +13,7 @@ typedef struct {
     u8 textbox_option;
     u8 field_0x30[60];
     effect_visual_info* visual_info;
-    cv64_actor_settings_t* settings;
+    ActorConfig* settings;
 } pickableItemFlash;
 
 void pickableItemFlash_entrypoint(pickableItemFlash* self);
