@@ -3,6 +3,7 @@
 
 #include "bit.h"
 #include "math.h"
+#include "nisitenma_ichigo.h"
 
 enum HierarchyNodeFlag {
     ALLOW_CHANGING_TEXTURE_AND_PALETTE = BIT(13),
@@ -22,7 +23,7 @@ typedef struct HierarchyNode {
 } HierarchyNode;
 
 typedef struct Hierarchy {
-    s32 assets_file_ID;
+    AssetsFileID assets_file;
     HierarchyNode nodes[];
 } Hierarchy;
 
