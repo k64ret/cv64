@@ -1,3 +1,6 @@
+#ifndef BIT_H
+#define BIT_H
+
 #define BIT(num) (1 << (num))
 /**
  * Apply `mask` on top of `value`.
@@ -23,3 +26,5 @@
  * Unset `bits` in `value`.
  */
 #define BITS_UNSET(value, bits) ((value) &= ~(bits))
+
+#endif
