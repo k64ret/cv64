@@ -8,16 +8,20 @@
 #define NUM_EVENT_FLAGS  16
 #define SIZE_ITEMS_ARRAY 64 // Size of the whole items array
 
-#define REINHARDT 0
-#define CARRIE    1
+enum PlayerCharacterID {
+    REINHARDT = 0,
+    CARRIE    = 1
+};
 
-#define SUBWEAPON_NONE       0
-#define SUBWEAPON_KNIFE      1
-#define SUBWEAPON_HOLY_WATER 2
-#define SUBWEAPON_CROSS      3
-#define SUBWEAPON_AXE        4
+enum SubweaponID {
+    SUBWEAPON_NONE       = 0,
+    SUBWEAPON_KNIFE      = 1,
+    SUBWEAPON_HOLY_WATER = 2,
+    SUBWEAPON_CROSS      = 3,
+    SUBWEAPON_AXE        = 4
+};
 
-typedef enum cv64_map_ID {
+typedef enum MapID {
     MORI              = 0,
     TOU               = 1,
     TOUOKUJI          = 2,
@@ -49,11 +53,32 @@ typedef enum cv64_map_ID {
     ENDING            = 28,
     TEST_GRID         = 29,
     NONE              = -1
-} cv64_map_ID_t;
+} MapID;
 
-typedef struct cv64_save_state {
+enum SaveFlag {
+    SAVE_FLAG_GAME_WAS_SAVED_MID_PLAY    = BIT(0),
+    SAVE_FLAG_EASY                       = BIT(4),
+    SAVE_FLAG_NORMAL                     = BIT(5),
+    SAVE_FLAG_HARD                       = BIT(6),
+    SAVE_FLAG_HARD_MODE_UNLOCKED         = BIT(8),
+    SAVE_FLAG_HAVE_REINHARDT_ALT_COSTUME = BIT(9),
+    SAVE_FLAG_HAVE_CARRIE_ALT_COSTUME    = BIT(10),
+    SAVE_FLAG_REINDHART_GOOD_ENDING      = BIT(17),
+    SAVE_FLAG_CARRIE_GOOD_ENDING         = BIT(18),
+    SAVE_FLAG_REINDHART_BAD_ENDING       = BIT(19),
+    SAVE_FLAG_CARRIE_BAD_ENDING          = BIT(20),
+    SAVE_FLAG_COSTUME_IS_BEING_USED      = BIT(30),
+    SAVE_FLAG_CAN_EXPLODE_ON_JUMPING     = BIT(31)
+};
+
+/**
+ * Accepts values from `SaveFlag` OR'ed together
+ */
+typedef u32 SaveFlags;
+
+typedef struct SaveState {
     u32 event_flags[NUM_EVENT_FLAGS];
-    u32 flags;
+    SaveFlags flags;
     s16 week;
     s16 day;
     s16 hour;
@@ -108,26 +133,6 @@ typedef struct cv64_save_state {
     s16 field79_0xd4;
     s32 field83_0xd8;
     u32 gold_spent_on_Renon;
-} cv64_save_state_t; // Size = 0xE0
-
-// clang-format off
-
-typedef enum cv64_save_flags {
-    SAVE_FLAG_GAME_WAS_SAVED_MID_PLAY    = 0x00000001,
-    SAVE_FLAG_EASY                       = 0x00000010,
-    SAVE_FLAG_NORMAL                     = 0x00000020,
-    SAVE_FLAG_HARD                       = 0x00000040,
-    SAVE_FLAG_HARD_MODE_UNLOCKED         = 0x00000100,
-    SAVE_FLAG_HAVE_REINHARDT_ALT_COSTUME = 0x00000200,
-    SAVE_FLAG_HAVE_CARRIE_ALT_COSTUME    = 0x00000400,
-    SAVE_FLAG_REINDHART_GOOD_ENDING      = 0x00020000,
-    SAVE_FLAG_CARRIE_GOOD_ENDING         = 0x00040000,
-    SAVE_FLAG_REINDHART_BAD_ENDING       = 0x00080000,
-    SAVE_FLAG_CARRIE_BAD_ENDING          = 0x00100000,
-    SAVE_FLAG_COSTUME_IS_BEING_USED      = 0x40000000,
-    SAVE_FLAG_CAN_EXPLODE_ON_JUMPING     = 0x80000000
-} cv64_save_flags_t;
-
-// clang-format on
+} SaveState; // Size = 0xE0
 
 #endif

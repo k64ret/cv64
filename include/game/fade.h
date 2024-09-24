@@ -1,7 +1,7 @@
 #ifndef FADE_H
 #define FADE_H
 
-#include "cv64.h"
+#include "bit.h"
 #include <ultra64.h>
 
 enum FadeFlag {
