@@ -8,13 +8,13 @@
 #include "nisitenma_ichigo.h"
 #include <ultra64.h>
 
-typedef struct cv64_model_inf {
+typedef struct Model {
     s16 type;
     u16 flags;
-    struct cv64_model_inf_t* prev;
-    struct cv64_model_inf_t* sibling;
-    struct cv64_model_inf_t* next;
-    struct cv64_model_inf_t* parent;
+    struct Model* prev;
+    struct Model* sibling;
+    struct Model* next;
+    struct Model* parent;
     RGBA primitive_color;
     RGBA environment_color;
     RGBA blend_color;
@@ -37,21 +37,20 @@ typedef struct cv64_model_inf {
     Angle angle;
     Angle field41_0x52;
     Vec3f size;
-    cv64_map_actor_model_t* map_actor_model;
+    MapActorModel* map_actor_model;
     Mat4f matrix;
-} cv64_model_inf_t;
+} Model;
 
 typedef struct actorPositionalData {
     Vec3f position;
     Angle angle;
 } actorPositionalData;
 
-extern void modelInfo_setPosVec3s(cv64_model_inf_t* self, Vec3* position);
-extern void modelInfo_copyPositionalData(cv64_model_inf_t*, actorPositionalData*);
-extern void modelInfo_setMapActorModel(cv64_model_inf_t*, u32*);
-extern cv64_model_inf_t* modelInfo_createAndSetChild(u32 type, void* parent);
-extern cv64_model_inf_t* modelInfo_createNextNode(u32 parent_type, void* parent);
-extern cv64_model_inf_t*
-modelInfo_buildHierarchy(u32 type, cv64_model_inf_t* self, Hierarchy* mdl_hierarchy);
+extern void Model_setPosVec3s(Model* self, Vec3* position);
+extern void Model_copyPositionalData(Model*, actorPositionalData*);
+extern void Model_setMapActorModel(Model*, u32*);
+extern Model* Model_createAndSetChild(u32 type, void* parent);
+extern Model* Model_createNextNode(u32 parent_type, void* parent);
+extern Model* Model_buildHierarchy(u32 type, Model* self, Hierarchy* mdl_hierarchy);
 
 #endif

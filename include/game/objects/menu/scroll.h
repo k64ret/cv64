@@ -63,13 +63,13 @@ typedef struct {
 typedef struct {
     cv64_object_hdr_t header;
     u8 field_0x20[4];
-    cv64_model_inf_t* both_dowels;
-    cv64_model_inf_t* lower_dowel;
-    cv64_model_inf_t* scroll_background;
+    Model* both_dowels;
+    Model* lower_dowel;
+    Model* scroll_background;
     /**
      * Data, Player Select, etc textures
      */
-    cv64_model_inf_t* header_texture;
+    Model* header_texture;
     s32 field_0x34;
     void* btnConfigMenu; // buttonConfigMenu*
     u32 field_0x3C;

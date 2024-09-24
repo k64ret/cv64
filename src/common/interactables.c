@@ -45,7 +45,7 @@ void Interactable_Init(Interactable* self) {
     ActorConfig* settings = self->settings;
     u32 sp18;
     item_model_settings* item_appearence_settings;
-    cv64_model_inf_t* item_model;
+    Model* item_model;
 
     // clang-format off
 
@@ -92,7 +92,7 @@ void Interactable_Init(Interactable* self) {
     if (interactables_settings[self->idx].type == ITEM_KIND_ITEM) {
         // Create and setup the item model
         item_model =
-            modelInfo_createAndSetChild(FIG_TYPE_0400 | FIG_TYPE_HIERARCHY_NODE, map_lights[2]);
+            Model_createAndSetChild(FIG_TYPE_0400 | FIG_TYPE_HIERARCHY_NODE, map_lights[2]);
         self->model = item_model;
         if (settings != NULL) {
             actor_model_set_pos(self, item_model);
@@ -191,7 +191,7 @@ void Interactable_Init(Interactable* self) {
 }
 
 void Interactable_Main(Interactable* self) {
-    cv64_model_inf_t* model;
+    Model* model;
     f32 current_height;
     pickableItemFlash* flash_effect_obj;
     s32 model_alpha;

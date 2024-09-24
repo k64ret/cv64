@@ -35,8 +35,7 @@ void cv64_ovl_konamilogo_check_btn_press(cv64_ovl_konamilogo_t* self) {
 }
 
 void cv64_ovl_konamilogo_init(cv64_ovl_konamilogo_t* self) {
-    cv64_model_inf_t* model =
-        (*modelInfo_createAndSetChild)(FIG_TYPE_HUD_ELEMENT, common_camera_HUD);
+    Model* model = (*Model_createAndSetChild)(FIG_TYPE_HUD_ELEMENT, common_camera_HUD);
 
     self->model                  = model;
     model->dlist                 = &KONAMI_LOGO_DL;
@@ -51,7 +50,7 @@ void cv64_ovl_konamilogo_init(cv64_ovl_konamilogo_t* self) {
 }
 
 void cv64_ovl_konamilogo_fade_in(cv64_ovl_konamilogo_t* self) {
-    cv64_model_inf_t* model = self->model;
+    Model* model = self->model;
 
     if (model->primitive_color.a < 243) {
         model->primitive_color.a += 12;
@@ -82,7 +81,7 @@ void cv64_ovl_konamilogo_wait(cv64_ovl_konamilogo_t* self) {
 }
 
 void cv64_ovl_konamilogo_fade_out(cv64_ovl_konamilogo_t* self) {
-    cv64_model_inf_t* model = self->model;
+    Model* model = self->model;
 
     if (model->primitive_color.a >= 10) {
         model->primitive_color.a -= 9;
@@ -96,7 +95,7 @@ void cv64_ovl_konamilogo_fade_out(cv64_ovl_konamilogo_t* self) {
 }
 
 void cv64_ovl_konamilogo_kcek_fade_in(cv64_ovl_konamilogo_t* self) {
-    cv64_model_inf_t* model = self->model;
+    Model* model = self->model;
 
     model->size.x = 0.995f;
     model->dlist  = &KCEK_LOGO_DL;
@@ -112,7 +111,7 @@ void cv64_ovl_konamilogo_kcek_fade_in(cv64_ovl_konamilogo_t* self) {
 }
 
 void cv64_ovl_konamilogo_kcek_wait(cv64_ovl_konamilogo_t* self) {
-    cv64_model_inf_t* model = self->model;
+    Model* model = self->model;
 
     model->size.x = 0.995f;
     if (model->primitive_color.a < 252) {
@@ -129,7 +128,7 @@ void cv64_ovl_konamilogo_kcek_wait(cv64_ovl_konamilogo_t* self) {
 }
 
 void cv64_ovl_konamilogo_kcek_fade_out(cv64_ovl_konamilogo_t* self) {
-    cv64_model_inf_t* model = self->model;
+    Model* model = self->model;
 
     model->dlist = &KCEK_LOGO_DL;
     if (model->primitive_color.a >= 13) {

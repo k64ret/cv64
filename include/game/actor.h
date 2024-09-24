@@ -18,7 +18,7 @@
 typedef struct {
     u32 flags;
     cv64_atari_base_work_t* atari_base;
-    cv64_model_inf_t* model;
+    Model* model;
     modelLighting* lighting;
     animationMgr animMgr;
 } actorVisualData;
@@ -27,19 +27,19 @@ typedef struct {
 typedef struct Actor {
     cv64_object_hdr_t header;
     u8 padding1[4];
-    cv64_model_inf_t* model;
+    Model* model;
     u8 field_0x28[OBJECT_SIZE - 0x28];
     ActorConfig* settings;
 } Actor;
 
-extern void actor_model_set_pos(Actor* actor, cv64_model_inf_t* actor_model);
-extern void actor_model_set_pos_and_angle(Actor* actor, cv64_model_inf_t* actor_model);
+extern void actor_model_set_pos(Actor* actor, Model* actor_model);
+extern void actor_model_set_pos_and_angle(Actor* actor, Model* actor_model);
 extern s32 actor_playerOutsideActorSpawnRadius(
     Actor* actor, f32 actor_pos_X, f32 actor_pos_Y, f32 actor_pos_Z
 );
 extern void func_801578FC(Actor* actor);
 extern u32 checkIfOutsideEntityIsInsideMainEntityRadius(
-    cv64_model_inf_t* player_model, cv64_model_inf_t* actor_model, f32 actor_spawn_radius, u32 axis
+    Model* player_model, Model* actor_model, f32 actor_spawn_radius, u32 axis
 );
 extern u8 Actor_getPosAndVariable1(Actor* actor, Vec3f* position, u16* variable_1);
 

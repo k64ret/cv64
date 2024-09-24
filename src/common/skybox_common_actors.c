@@ -88,9 +88,9 @@ void obj0172_entrypoint(object_0172* self) {
 
 void obj0172_init(object_0172* self) {
     s32 temp;
-    cv64_model_inf_t* model;
+    Model* model;
 
-    model = modelInfo_createAndSetChild(FIG_TYPE_0400 | FIG_TYPE_HIERARCHY_NODE, map_lights[0]);
+    model       = Model_createAndSetChild(FIG_TYPE_0400 | FIG_TYPE_HIERARCHY_NODE, map_lights[0]);
     self->model = model;
     if (model) {
     }
@@ -122,11 +122,11 @@ void commonMoon_entrypoint(commonMoon* self) {
 
 void commonMoon_init(commonMoon* self) {
     s32 temp1;
-    cv64_model_inf_t* model;
+    Model* model;
     s32 temp2;
     s32 temp3;
 
-    model = modelInfo_createAndSetChild(FIG_TYPE_0400 | FIG_TYPE_HIERARCHY_NODE, map_lights[0]);
+    model       = Model_createAndSetChild(FIG_TYPE_0400 | FIG_TYPE_HIERARCHY_NODE, map_lights[0]);
     self->model = model;
     if (model) {
     }
@@ -188,7 +188,7 @@ void commonMoon_init(commonMoon* self) {
 }
 
 void commonMoon_main(commonMoon* self) {
-    cv64_model_inf_t* model = self->model;
+    Model* model = self->model;
 
     if (actor_playerOutsideActorSpawnRadius(
             self, model->position.x, model->position.y, model->position.z
@@ -250,9 +250,9 @@ void obj8015C368_entrypoint(object_8015C368* self) {
 
 void obj8015C368_init(object_8015C368* self) {
     ActorConfig* settings = self->settings;
-    cv64_model_inf_t* model;
+    Model* model;
 
-    model = modelInfo_createAndSetChild(FIG_TYPE_0400 | FIG_TYPE_HIERARCHY_NODE, map_lights[0]);
+    model       = Model_createAndSetChild(FIG_TYPE_0400 | FIG_TYPE_HIERARCHY_NODE, map_lights[0]);
     self->model = model;
     if (model) {
     }
@@ -267,7 +267,7 @@ void obj8015C368_init(object_8015C368* self) {
 }
 
 void obj8015C368_loop(object_8015C368* self) {
-    cv64_model_inf_t* model = self->model;
+    Model* model = self->model;
     ActorConfig* settings;
 
     model->primitive_color.integer = sys.background_color.integer;

@@ -57,12 +57,12 @@ typedef union {
 
 extern union_moonVisibilityVars moonVisibilityVars;
 
-typedef enum cv64_menu_id {
+typedef enum MenuID {
     MENU_ID_NOT_ON_MENU = 0,
     MENU_ID_PAUSE       = 9,
     MENU_ID_RENON_SHOP  = 10,
     MENU_ID_GAME_OVER   = 14
-} cv64_menu_id_t;
+} MenuID;
 
 extern void end_master_display_list();
 extern s32 menuButton_selectNextOption(s32* option, s16* param_2, s16 number_of_options);

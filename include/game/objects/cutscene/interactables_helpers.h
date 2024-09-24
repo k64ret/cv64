@@ -33,8 +33,7 @@ typedef struct specialTextbox {
 } specialTextbox;
 
 specialTextbox* Player_getActorCurrentlyInteractingWith();
-specialTextbox*
-Player_getSpecialTextboxCurrentlyInteractingWith(s16 actor_ID, cv64_model_inf_t* player_model);
+specialTextbox* Player_getSpecialTextboxCurrentlyInteractingWith(s16 actor_ID, Model* player_model);
 s32 playerCanInteractWithInteractuable(
     f32 actor_pos_X, f32 actor_pos_Y, f32 actor_pos_Z, Interactable* actor
 );

@@ -41,7 +41,7 @@ void cv64_ovl_renonbriefcase_entrypoint(cv64_ovl_renonbriefcase_t* self) {
 }
 
 void cv64_ovl_renonbriefcase_init(cv64_ovl_renonbriefcase_t* self) {
-    cv64_model_inf_t* model;
+    Model* model;
     animation_info* anim_info = &self->anim_info;
     u32 i;
     u32 unused;
@@ -69,7 +69,7 @@ void cv64_ovl_renonbriefcase_init(cv64_ovl_renonbriefcase_t* self) {
     // clang-format on
 
     // Create and setup the briefcase model
-    self->model = (*modelInfo_buildHierarchy)(
+    self->model = (*Model_buildHierarchy)(
         FIG_TYPE_0400 | FIG_TYPE_HIERARCHY_NODE,
         common_camera_8009B44C,
         &cv64_ovl_renonbriefcase_hierarchy
@@ -108,7 +108,7 @@ void cv64_ovl_renonbriefcase_init(cv64_ovl_renonbriefcase_t* self) {
 }
 
 void cv64_ovl_renonbriefcase_loop(cv64_ovl_renonbriefcase_t* self) {
-    cv64_model_inf_t* model = self->model;
+    Model* model = self->model;
     f32 volume;
 
     // Step 1. Briefcase is approaching the camera

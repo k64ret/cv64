@@ -17,7 +17,7 @@
  */
 specialTextbox* Player_getActorCurrentlyInteractingWith() {
     s32 temp;
-    cv64_model_inf_t* player_model;
+    Model* player_model;
     specialTextbox* library_puzzle;
     Interactable* actor;
     Interactable* text_spot = NULL;
@@ -217,7 +217,7 @@ specialTextbox* Player_getActorCurrentlyInteractingWith() {
  * the function will return its instance.
  */
 specialTextbox*
-Player_getSpecialTextboxCurrentlyInteractingWith(s16 actor_ID, cv64_model_inf_t* player_model) {
+Player_getSpecialTextboxCurrentlyInteractingWith(s16 actor_ID, Model* player_model) {
     specialTextbox* actor;
     u16 angle_player_textspot;
     u16 player_facing_angle;
@@ -266,8 +266,8 @@ Player_getSpecialTextboxCurrentlyInteractingWith(s16 actor_ID, cv64_model_inf_t*
 s32 playerCanInteractWithInteractuable(
     f32 actor_pos_X, f32 actor_pos_Y, f32 actor_pos_Z, Interactable* actor
 ) {
-    cv64_model_inf_t* player_model = ptr_PlayerData->visualData.model;
-    InteractableConfig* settings   = &interactables_settings[0, (s16) actor->idx];
+    Model* player_model          = ptr_PlayerData->visualData.model;
+    InteractableConfig* settings = &interactables_settings[0, (s16) actor->idx];
     f32 sine;
     f32 cosine;
     u16 angle_player_item;

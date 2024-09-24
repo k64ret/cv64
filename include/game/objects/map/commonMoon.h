@@ -7,7 +7,7 @@
 typedef struct {
     cv64_object_hdr_t header;
     u8 field_0x20[4];
-    cv64_model_inf_t* model;
+    Model* model;
     u8 field_0x28[12];
     /**
      * This variable has to be right-shifted with 8 to get the actual transparency value (a `u8`).

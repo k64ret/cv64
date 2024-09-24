@@ -7,7 +7,7 @@
 typedef struct {
     cv64_object_hdr_t header;
     u8 field_0x20[4];
-    cv64_model_inf_t* model;
+    Model* model;
     u8 field_0x28[OBJECT_SIZE - 0x2C];
     ActorConfig* settings;
 } object_0172;

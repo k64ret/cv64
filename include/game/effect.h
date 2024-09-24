@@ -35,7 +35,7 @@ typedef struct {
     u8 field_0x09;
     u16 color_intensity_transition_speed;
     pointLight* light;
-    cv64_model_inf_t* attached_bone;
+    Model* attached_bone;
     u8 field_0x14[4];
     void (*object_destroy_function)(void*);
 } effect_info;
@@ -63,7 +63,7 @@ typedef struct {
 
 typedef struct {
     u32 flags;
-    cv64_model_inf_t* model;
+    Model* model;
     camera* display_camera;
     effect_animation_info anim_info;
     u16 max_frame_speed;
@@ -88,7 +88,7 @@ typedef struct {
 typedef struct cv64_effect {
     cv64_object_hdr_t header;
     u8 field_0x04[4];
-    cv64_model_inf_t* model;
+    Model* model;
     u8 field_0x28[60];
     effect_info* info;
     effect_positional_info* positional_info;

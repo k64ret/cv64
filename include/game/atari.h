@@ -70,7 +70,7 @@ typedef struct cv64_atari_data_work {
     Angle direction;
     Vec3f center_point;
     Vec2f size;
-    cv64_model_inf_t* attached_model;
+    Model* attached_model;
     /**
      * The "atari_base" struct it's attached to
      */
@@ -81,7 +81,7 @@ typedef struct cv64_atari_data_work {
     Vec3f field_0x4C;
     Vec3f field_0x58;
     f32 field_0x64;
-    cv64_model_inf_t* field_0x68;
+    Model* field_0x68;
     struct cv64_atari_data_work* collider_attacker;
     Vec3f damage_effect_position;
     Vec3f damage_effect_scale;
@@ -131,7 +131,7 @@ typedef struct cv64_atari_base_work {
     u32 damaged_by_attacker_flags;
     s32 field_0x50;
     u32 hit_target_flags;
-    cv64_model_inf_t* attached_model;
+    Model* attached_model;
     cv64_atari_data_work_t* field_0x5C[4];
     cv64_atari_data_work_t* field_0x6C[4];
     s32 field_0x7C;
@@ -189,7 +189,7 @@ typedef struct cv64_atari_only_work {
     s16 field_0x52;
     Vec3f center_point;
     Vec2f size;
-    cv64_model_inf_t* damage_effect_model;
+    Model* damage_effect_model;
     u8 field30_0x6C;
     u8 field31_0x6D;
     u8 field32_0x6E;
@@ -205,10 +205,10 @@ typedef struct cv64_atari_only_work {
 } cv64_atari_only_work_t;
 
 extern void atari_work_table_init();
-extern cv64_atari_base_work_t* atariBaseWork_create(cv64_model_inf_t* attached_bone);
-extern cv64_atari_data_work_t* atariDataWork_create(cv64_model_inf_t* attached_bone, u16 param_2);
+extern cv64_atari_base_work_t* atariBaseWork_create(Model* attached_bone);
+extern cv64_atari_data_work_t* atariDataWork_create(Model* attached_bone, u16 param_2);
 extern cv64_atari_only_work_t*
-atariOnlyWork_create(cv64_model_inf_t* attached_bone, u16 function, u16 param_3);
+atariOnlyWork_create(Model* attached_bone, u16 function, u16 param_3);
 extern u32 atariBaseWork_attachCollider(
     cv64_atari_base_work_t* self, cv64_atari_data_work_t* collider, u32 param_3
 );

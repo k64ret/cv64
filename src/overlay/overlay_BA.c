@@ -27,7 +27,7 @@ void obj213F_entrypoint(object_213F* self) {
 }
 
 void obj213F_isDraculaCutsceneWatched(object_213F* self) {
-    cv64_model_inf_t* player_model;
+    Model* player_model;
 
     if ((ptr_PlayerData != NULL) &&
         CHECK_EVENT_FLAGS(
@@ -44,7 +44,7 @@ void obj213F_isDraculaCutsceneWatched(object_213F* self) {
 }
 
 void obj213F_isPlayerDroppingDown(object_213F* self) {
-    cv64_model_inf_t* model = ptr_PlayerData->visualData.model;
+    Model* model = ptr_PlayerData->visualData.model;
 
     if (model->position.y < 300.0f) {
         (*object_curLevel_goToNextFuncAndClearTimer)(

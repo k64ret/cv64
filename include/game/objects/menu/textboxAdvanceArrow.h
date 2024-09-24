@@ -10,7 +10,7 @@
 typedef struct {
     cv64_object_hdr_t header;
     u8 field_0x20[4];
-    cv64_model_inf_t* model;
+    Model* model;
     light* arrow_light;
     u8 field_0x2C[12];
     s32 fade_timer;

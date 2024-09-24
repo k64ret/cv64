@@ -160,7 +160,7 @@ typedef struct {
     u16 field_0x20;
     u16 field_0x22;
     u8 field_0x24[4];
-    cv64_model_inf_t* model;
+    Model* model;
     u8 field_0x2C[8];
     Gfx** mfds_double;
     void* field_0x38;

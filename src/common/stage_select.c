@@ -62,14 +62,14 @@ void stageSelect_loadAssetsFile(stageSelect* self) {
 }
 
 void stageSelect_initGraphics(stageSelect* self) {
-    cv64_model_inf_t* bg_model;
+    Model* bg_model;
     mfds_state** textbox_array = self->textboxes;
 
     if (self->assets_file_end != NULL) {
         heapBlock_updateBlockMaxSize(
             self->assets_file_start, (u32) self->assets_file_end - (u32) self->assets_file_start
         );
-        bg_model = modelInfo_createAndSetChild(FIG_TYPE_HUD_ELEMENT, common_camera_8009B444);
+        bg_model = Model_createAndSetChild(FIG_TYPE_HUD_ELEMENT, common_camera_8009B444);
         self->red_background_model = bg_model;
         bg_model->assets_file      = NI_ASSETS_MENU;
         bg_model->dlist            = &MENU_RED_BACKGROUND_DL;

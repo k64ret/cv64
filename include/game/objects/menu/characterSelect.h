@@ -103,7 +103,7 @@ typedef struct {
 typedef struct {
     cv64_object_hdr_t header;
     u8 field_0x20[4];
-    cv64_model_inf_t* character_portraits[NUM_CHARACTERS];
+    Model* character_portraits[NUM_CHARACTERS];
     u8 field_0x2C[8];
     characterSelectInner inner;
 } characterSelect;

@@ -182,7 +182,7 @@ typedef struct {
 typedef struct {
     cv64_object_hdr_t header;
     u8 field_0x20[4];
-    cv64_model_inf_t* model;
+    Model* model;
     playerData* data;
     playerMovingAttack* movingAttack;
     u8 field_0x30[OBJECT_SIZE - 0x30];

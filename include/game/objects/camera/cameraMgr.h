@@ -12,7 +12,7 @@ typedef struct {
     u32 previous_camera_mode;
     camera* camera_player;
     void* ptr_playerCameraController; // playerCameraController*
-    cv64_model_inf_t* camera_mode_text;
+    Model* camera_mode_text;
     Vec3f camera_position;
     Vec3f camera_look_at_direction;
     f32 field_0x30;

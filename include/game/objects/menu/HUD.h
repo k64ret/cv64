@@ -52,21 +52,21 @@ typedef struct HUDParams {
 typedef struct {
     cv64_object_hdr_t header;
     u8 field_0x20[4];
-    cv64_model_inf_t* clock_and_health;
-    cv64_model_inf_t* boss_bar;
-    cv64_model_inf_t* status_and_subweapon;
-    cv64_model_inf_t* gold_graphic;
-    cv64_model_inf_t* day_graphic_above_clock;
-    cv64_model_inf_t* clock_minute_marker;
-    cv64_model_inf_t* clock_hour_marker;
-    cv64_model_inf_t* health_bar_overlay;
-    cv64_model_inf_t* health_bar_fill;
-    cv64_model_inf_t* health_bar_fill_damage;
-    cv64_model_inf_t* boss_bar_fill;
-    cv64_model_inf_t* boss_bar_fill_damage;
-    cv64_model_inf_t* status_text;
-    cv64_model_inf_t* subweapon;
-    cv64_model_inf_t* subweapon_icon;
+    Model* clock_and_health;
+    Model* boss_bar;
+    Model* status_and_subweapon;
+    Model* gold_graphic;
+    Model* day_graphic_above_clock;
+    Model* clock_minute_marker;
+    Model* clock_hour_marker;
+    Model* health_bar_overlay;
+    Model* health_bar_fill;
+    Model* health_bar_fill_damage;
+    Model* boss_bar_fill;
+    Model* boss_bar_fill_damage;
+    Model* status_text;
+    Model* subweapon;
+    Model* subweapon_icon;
     f32 day_and_night_switching_alpha;
     /**
      * This value changes when switching from night to day, or viceversa,

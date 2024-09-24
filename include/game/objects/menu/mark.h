@@ -29,7 +29,7 @@ typedef struct {
 typedef struct {
     cv64_object_hdr_t header;
     u8 field_0x20[4];
-    cv64_model_inf_t* model;
+    Model* model;
     u8 field_0x28[68];
     u32 already_played_sound;
     mark_work* work;
