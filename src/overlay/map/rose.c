@@ -49,9 +49,9 @@ void cv64_ovl_rose_ventilator_init(cv64_ovl_rose_ventilator_t* self) {
         // VENTILATOR : Can't allocate F3D.\n
         self->header.destroy(self);
     } else {
-        self->model           = model;
-        model->dlist          = &ROSE_VENTILATOR_DL;
-        model->assets_file_ID = MAP_ASSETS_FILE_ID;
+        self->model        = model;
+        model->dlist       = &ROSE_VENTILATOR_DL;
+        model->assets_file = MAP_ASSETS_FILE_ID;
         BITS_SET(model->flags, FIG_FLAG_APPLY_PRIMITIVE_COLOR | FIG_FLAG_APPLY_FOG_COLOR);
         model->primitive_color.integer = sys.primitive_color.integer;
         model->fog_color.integer       = sys.background_color.integer;
@@ -122,13 +122,13 @@ void cv64_ovl_rose_door_init(cv64_ovl_rose_door_t* self) {
 
     self->model = model;
     (*actor_model_set_pos_and_angle)(self, model);
-    model->assets_file_ID = MAP_ASSETS_FILE_ID;
-    model->dlist          = &ROSE_DOOR_DL;
+    model->assets_file = MAP_ASSETS_FILE_ID;
+    model->dlist       = &ROSE_DOOR_DL;
     BITS_SET(model->flags, FIG_FLAG_APPLY_PRIMITIVE_COLOR | FIG_FLAG_APPLY_FOG_COLOR);
     model->primitive_color.integer = sys.primitive_color.integer;
     model->fog_color.integer       = sys.background_color.integer;
     BITS_SET(self->header.ID, OBJ_FLAG_ENABLE_COLLISION);
-    map_actor_model        = (*getMapActorModelEntryFromArray)(model->dlist, model->assets_file_ID);
+    map_actor_model        = (*getMapActorModelEntryFromArray)(model->dlist, model->assets_file);
     model->map_actor_model = map_actor_model;
     self->map_actor_model  = map_actor_model;
     (*object_curLevel_goToNextFuncAndClearTimer)(

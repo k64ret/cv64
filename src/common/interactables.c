@@ -104,7 +104,7 @@ void Interactable_Init(Interactable* self) {
             item_model->position.y = self->position.y;
             item_model->position.z = self->position.z;
         }
-        item_model->assets_file_ID = ITEM_ASSETS_FILE_ID;
+        item_model->assets_file = ITEM_ASSETS_FILE_ID;
 
         // Configure some of the model variables by loading them from
         // the item model settings table

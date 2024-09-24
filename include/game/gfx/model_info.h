@@ -5,6 +5,7 @@
 #include "gfx/hierarchy.h"
 #include "map_actor_model.h"
 #include "math.h"
+#include "nisitenma_ichigo.h"
 #include <ultra64.h>
 
 typedef struct cv64_model_inf {
@@ -31,7 +32,7 @@ typedef struct cv64_model_inf {
     u32 material_dlist;
     u32 dlist;
     u32 field34_0x38;
-    s32 assets_file_ID;
+    NIFileID assets_file;
     Vec3f position;
     Angle angle;
     Angle field41_0x52;

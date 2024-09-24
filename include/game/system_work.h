@@ -6,6 +6,7 @@
 #include "gfx/color.h"
 #include "actor.h"
 #include "math.h"
+#include "nisitenma_ichigo.h"
 #include "save.h"
 #include "cutscene.h"
 #include "cutscene_ID.h"
@@ -156,7 +157,7 @@ typedef struct {
     /**
      * [0] = map [1] = pickable_items [2] = skybox_assets
      */
-    s32 map_assets_file_IDs[3];
+    NIFileID map_assets_file_IDs[3];
     s16 map;
     s16 spawn;
     RGBA map_fade_in_color;

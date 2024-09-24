@@ -71,7 +71,7 @@ void stageSelect_initGraphics(stageSelect* self) {
         );
         bg_model = modelInfo_createAndSetChild(FIG_TYPE_HUD_ELEMENT, common_camera_8009B444);
         self->red_background_model = bg_model;
-        bg_model->assets_file_ID   = NI_ASSETS_MENU;
+        bg_model->assets_file      = NI_ASSETS_MENU;
         bg_model->dlist            = &MENU_RED_BACKGROUND_DL;
         BITS_SET(bg_model->flags, FIG_FLAG_APPLY_PRIMITIVE_COLOR);
         bg_model->primitive_color.integer = RGBA(255, 255, 255, 255);

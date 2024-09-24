@@ -188,7 +188,7 @@ void characterSelect_init(characterSelect* self) {
     character_portrait->material_dlist   = &REINHARDT_PORTRAIT_MATERIAL_DL;
     character_portrait->dlist =
         FIG_APPLY_VARIABLE_TEXTURE_AND_PALETTE((u32) &REINHARDT_PORTRAIT_DL);
-    character_portrait->assets_file_ID = NI_ASSETS_CHARACTER_SELECTION_SCREEN;
+    character_portrait->assets_file = NI_ASSETS_CHARACTER_SELECTION_SCREEN;
     BITS_SET(character_portrait->flags, FIG_FLAG_APPLY_PRIMITIVE_COLOR);
     BITS_SET(character_portrait->flags, FIG_FLAG_0080);
     character_portrait->primitive_color.integer = RGBA(255, 255, 255, 255);
@@ -210,7 +210,7 @@ void characterSelect_init(characterSelect* self) {
     self->character_portraits[CARRIE]  = character_portrait;
     character_portrait->material_dlist = &CARRIE_PORTRAIT_MATERIAL_DL;
     character_portrait->dlist = FIG_APPLY_VARIABLE_TEXTURE_AND_PALETTE((u32) &CARRIE_PORTRAIT_DL);
-    character_portrait->assets_file_ID = NI_ASSETS_CHARACTER_SELECTION_SCREEN;
+    character_portrait->assets_file = NI_ASSETS_CHARACTER_SELECTION_SCREEN;
     BITS_SET(character_portrait->flags, FIG_FLAG_APPLY_PRIMITIVE_COLOR);
     BITS_SET(character_portrait->flags, FIG_FLAG_0080);
     character_portrait->primitive_color.integer = RGBA(255, 255, 255, 255);

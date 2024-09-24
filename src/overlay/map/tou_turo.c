@@ -55,15 +55,15 @@ void cv64_ovl_touturo_door_init(cv64_ovl_touturo_door_t* self) {
     actor_model_set_pos_and_angle(self, model);
     BITS_SET(model->flags, FIG_FLAG_APPLY_PRIMITIVE_COLOR | FIG_FLAG_APPLY_FOG_COLOR);
 
-    model->assets_file_ID = MAP_ASSETS_FILE_ID;
-    model->dlist          = cv64_ovl_touturo_door_dlists[TOU_TURO_DOOR_TYPE];
+    model->assets_file = MAP_ASSETS_FILE_ID;
+    model->dlist       = cv64_ovl_touturo_door_dlists[TOU_TURO_DOOR_TYPE];
 
     model->primitive_color.integer = sys.primitive_color.integer;
     model->fog_color.integer       = sys.background_color.integer;
 
     BITS_SET(self->header.ID, OBJ_FLAG_ENABLE_COLLISION);
 
-    self->map_actor_model  = getMapActorModelEntryFromArray(model->dlist, model->assets_file_ID);
+    self->map_actor_model  = getMapActorModelEntryFromArray(model->dlist, model->assets_file);
     model->map_actor_model = self->map_actor_model;
 
     self->close_time = 30;

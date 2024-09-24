@@ -1,8 +1,14 @@
 #ifndef NISITENMA_ICHIGO_H
 #define NISITENMA_ICHIGO_H
 
-// Nisitenma-Ichigo file IDs
-typedef enum AssetsFileID {
+#include <ultra64.h>
+
+#define NI_ASSETS_MENU_BUFFER_SIZE 0x30000
+
+/**
+ * Nisitenma-Ichigo file IDs
+ */
+typedef enum NIFileID {
     NI_ASSETS_01                           = 0x01,
     NI_ASSETS_DEBUG_FONT                   = 0x02,
     NI_ASSETS_REINHARDT                    = 0x03,
@@ -257,6 +263,9 @@ typedef enum AssetsFileID {
     NI_OVL_CUTSCENE_56                     = 0xFC,
     NI_OVL_CUTSCENE_57                     = 0xFD,
     NI_OVL_CUTSCENE_63                     = 0xFE
-} AssetsFileID;
+} NIFileID;
+
+extern u32 NisitenmaIchigo_checkAndStoreLoadedFile(u32 file_ID);
+extern void* NisitenmaIchigoFiles_segmentToVirtual(u32 segment_address, s32 file_ID);
 
 #endif

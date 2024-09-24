@@ -23,7 +23,7 @@ typedef struct HierarchyNode {
 } HierarchyNode;
 
 typedef struct Hierarchy {
-    AssetsFileID assets_file;
+    NIFileID assets_file;
     HierarchyNode nodes[];
 } Hierarchy;
 

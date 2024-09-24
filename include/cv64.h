@@ -66,7 +66,6 @@ typedef enum cv64_menu_id {
 
 extern void end_master_display_list();
 extern s32 menuButton_selectNextOption(s32* option, s16* param_2, s16 number_of_options);
-extern u32 NisitenmaIchigo_checkAndStoreLoadedFile(u32 file_ID);
 extern void func_800010A0_1CA0();
 extern void func_8001248C_1308C();
 extern void func_8000C6D0();
@@ -77,7 +76,6 @@ extern void func_80005658();
 extern u32 getMapEventFlagID(s16 stage_ID);
 s32 func_8001A250_1AE50(s32* arg0, u16* arg1, s16 arg2);
 extern void func_80066400(s32);
-extern void* NisitenmaIchigoFiles_segmentToVirtual(u32 segment_address, s32 file_ID);
 
 #define NPTR             0
 #define ARRAY_COUNT(arr) (s32)(sizeof(arr) / sizeof(arr[0])) // Get number of elements in the array
@@ -167,6 +165,5 @@ extern void* NisitenmaIchigoFiles_segmentToVirtual(u32 segment_address, s32 file
     )
 
 extern const u32 MENU_RED_BACKGROUND_DL;
-#define NI_ASSETS_MENU_BUFFER_SIZE 0x30000
 
 #endif // CV64_H
