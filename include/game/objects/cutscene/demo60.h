@@ -36,7 +36,7 @@ typedef struct {
     u8 field_0x6C[4];
     u8 skip_cutscene;
     u8 set_player_anim_speed;
-    DEMO60State state;
+    u8 state;
     u8 field_0x73;
 } Demo60;
 
