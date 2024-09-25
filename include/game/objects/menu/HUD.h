@@ -3,7 +3,7 @@
 
 #include "cv64.h"
 #include "objects/menu/mfds.h"
-#include "gfx/model_info.h"
+#include "gfx/model.h"
 
 #define HUD_PARAMS_ENTERED_PAUSE_MENU        BIT(0)
 #define HUD_PARAMS_IN_PAUSE_MENU             BIT(1)
@@ -50,7 +50,7 @@ typedef struct HUDParams {
 
 // ID: 0x0129
 typedef struct {
-    cv64_object_hdr_t header;
+    ObjectHeader header;
     u8 field_0x20[4];
     Model* clock_and_health;
     Model* boss_bar;

@@ -2,7 +2,7 @@
 #define CV64_H
 
 #include "bit.h"
-#include "gfx/model_info.h"
+#include "gfx/model.h"
 #include "math.h"
 #include "nisitenma_ichigo.h"
 #include <ultra64.h>

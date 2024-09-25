@@ -2,13 +2,13 @@
 #define TEXTBOX_ADVANCE_ARROW_H
 
 #include "object.h"
-#include "gfx/model_info.h"
+#include "gfx/model.h"
 #include "gfx/light.h"
 #include "window.h"
 
 // ID: 0x2138
 typedef struct {
-    cv64_object_hdr_t header;
+    ObjectHeader header;
     u8 field_0x20[4];
     Model* model;
     light* arrow_light;

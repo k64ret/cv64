@@ -2,7 +2,7 @@
 #define PLAYER_H
 
 #include "actor.h"
-#include "gfx/model_info.h"
+#include "gfx/model.h"
 #include "math.h"
 #include "objects/player/attackMgr.h"
 #include "objects/player/player_flags.h"
@@ -180,7 +180,7 @@ typedef struct {
 
 // Generic player actor struct
 typedef struct {
-    cv64_object_hdr_t header;
+    ObjectHeader header;
     u8 field_0x20[4];
     Model* model;
     playerData* data;

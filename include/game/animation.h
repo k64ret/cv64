@@ -1,7 +1,7 @@
 #ifndef ANIMATION_H
 #define ANIMATION_H
 
-#include "gfx/model_info.h"
+#include "gfx/model.h"
 
 // Flags for animation data
 #define ANIM_FLAG_LOOP          0x20000000

@@ -3,7 +3,7 @@
 
 // Collider structs
 
-#include "gfx/model_info.h"
+#include "gfx/model.h"
 #include <ultra64.h>
 
 typedef enum cv64_atari_work_flag {

@@ -2,13 +2,13 @@
 #define LENS_H
 
 #include "object.h"
-#include "gfx/model_info.h"
+#include "gfx/model.h"
 #include "objects/effect/distortion.h"
 #include "window.h"
 
 // ID: 0x0128
 typedef struct {
-    cv64_object_hdr_t header;
+    ObjectHeader header;
     u8 field_0x20[4];
     Model* model;
     Model* lower_left_corner;
@@ -34,7 +34,7 @@ typedef struct {
 
 extern window_work* lens_create(
     void* parent,
-    camera* display_camera,
+    Camera* display_camera,
     u32 flags,
     f32 pos_X,
     f32 pos_Y,

@@ -841,7 +841,7 @@ void cv64_ovl_titledemo_init(cv64_ovl_titledemo_t* self) {
     (*atari_work_table_init)();
 
     for (i = 0; i < OBJ_NUM_ALLOC_DATA; i++) {
-        ((cv64_object_t*) self)->alloc_data[i] = NULL;
+        ((Object*) self)->alloc_data[i] = NULL;
     }
 
     // Prepare character scenarios

@@ -11,7 +11,7 @@
 
 // ID: 0x2025
 typedef struct cv64_ovl_elevatortxt {
-    cv64_object_hdr_t header;
+    ObjectHeader header;
     u8 field_0x20[20];
     /**
      * This field should be the text ID, just like with most of the

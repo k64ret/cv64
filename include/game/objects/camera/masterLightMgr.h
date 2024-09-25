@@ -6,7 +6,7 @@
 
 // ID: 0x006D
 typedef struct {
-    cv64_object_hdr_t header;
+    ObjectHeader header;
     u8 field_0x20[20];
     light* master_light;
     u8 field_0x28[76];

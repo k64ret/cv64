@@ -2,7 +2,7 @@
 #define PAGE_H
 
 #include "object.h"
-#include "gfx/model_info.h"
+#include "gfx/model.h"
 #include "gfx/light.h"
 #include "animation.h"
 
@@ -31,7 +31,7 @@ typedef struct {
 
 // ID: 0x0131
 typedef struct {
-    cv64_object_hdr_t header;
+    ObjectHeader header;
     u8 field_0x20[4];
     Model* model;
     u8 field_0x28[12];

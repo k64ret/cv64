@@ -1,7 +1,7 @@
 #ifndef CV64_EFFECT_H
 #define CV64_EFFECT_H
 
-#include "gfx/model_info.h"
+#include "gfx/model.h"
 #include "gfx/camera.h"
 #include "objects/camera/pointLight.h"
 #include "actor.h"
@@ -64,7 +64,7 @@ typedef struct {
 typedef struct {
     u32 flags;
     Model* model;
-    camera* display_camera;
+    Camera* display_camera;
     effect_animation_info anim_info;
     u16 max_frame_speed;
     u16 field_0x1E; // Another color_intensity_transition_max_time?
@@ -86,7 +86,7 @@ typedef struct {
 
 // Generic effect struct
 typedef struct cv64_effect {
-    cv64_object_hdr_t header;
+    ObjectHeader header;
     u8 field_0x04[4];
     Model* model;
     u8 field_0x28[60];
@@ -97,7 +97,7 @@ typedef struct cv64_effect {
 } cv64_effect_t;
 
 extern cv64_effect_t* createEffectObjectUnderEffectMgr(
-    u16 effect_obj_info_array_index, camera* display_camera, u32 visual_flags
+    u16 effect_obj_info_array_index, Camera* display_camera, u32 visual_flags
 );
 
 extern void effect_setPosition(cv64_effect_t* self, f32 x, f32 y, f32 z, u16 arg4);

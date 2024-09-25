@@ -12,9 +12,33 @@
 #define CUTSCENE_FLAG_10                         0x10
 #define CUTSCENE_FLAG_20                         0x20
 
+typedef struct CutsceneCoordinatesSettings {
+    u8 field_0x00; // See the switches at 0x8012a130 and 0x8012a2b8
+    u8 field_0x01;
+    s8 player_anims_array_index; // Index at arrays 0x8016c884 and 0x8016c75c
+    u8 field_0x03;
+    Vec3 start_coords;
+    Vec3 end_coords;
+    s16 angle;
+    s16 start_time; // Time in frames during the cutscene run time where this camera settings are going to be used
+    s16 end_time; // Time in frames during the cutscene run time where this camera settings stop being used
+} CutsceneCoordinatesSettings;
+
+typedef struct CutsceneCurrentCameraMovement {
+    Vec3f* cam_position;
+    Angle* cam_angle;
+    Vec3f cam_look_at_dir_offset;
+} CutsceneCurrentCameraMovement;
+
+typedef struct CutsceneCameraMovementState {
+    Vec3f start_end_distance;
+    f32 time_left;
+    Vec3f speed;
+} CutsceneCameraMovementState;
+
 // Generic cutscene struct
 typedef struct {
-    cv64_object_hdr_t header;
+    ObjectHeader header;
     u8 field_0x20[40];
     f32 player_animation_speed;
     u8 field_0x4C[28];

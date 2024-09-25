@@ -3,7 +3,7 @@
 
 #include "cv64.h"
 #include "object.h"
-#include "gfx/model_info.h"
+#include "gfx/model.h"
 #include "animation.h"
 
 #define PLAY_SD_RENON_BRIEFCASE_SPIN_2  self->field_0x34[1]
@@ -12,7 +12,7 @@
 
 // ID: 0x213C
 typedef struct cv64_ovl_renonbriefcase {
-    cv64_object_hdr_t header;
+    ObjectHeader header;
     u8 field_0x20[8];
     Model* model;
     u8 field_0x2C[8];

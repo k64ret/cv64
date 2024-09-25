@@ -2,7 +2,7 @@
 #define CHARACTER_SELECT_H
 
 #include "gfx/light.h"
-#include "gfx/model_info.h"
+#include "gfx/model.h"
 #include "objects/menu/mfds.h"
 #include "objects/menu/mark.h"
 #include "objects/menu/scroll.h"
@@ -101,7 +101,7 @@ typedef struct {
 
 // ID: 0x212E
 typedef struct {
-    cv64_object_hdr_t header;
+    ObjectHeader header;
     u8 field_0x20[4];
     Model* character_portraits[NUM_CHARACTERS];
     u8 field_0x2C[8];

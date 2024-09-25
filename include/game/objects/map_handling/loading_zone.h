@@ -40,7 +40,7 @@ typedef struct {
 
 // ID: 0x016A
 typedef struct {
-    cv64_object_hdr_t header;
+    ObjectHeader header;
     u8 field_0x20[20];
     loadingZoneInner inner;
 } loadingZone;

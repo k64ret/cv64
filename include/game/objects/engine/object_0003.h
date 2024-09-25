@@ -10,6 +10,6 @@ typedef struct {
 } object_0003;
 
 extern object_0003* ptr_Object_0003;
-extern s32 func_8000EE18(object_0003* self, cv64_object_hdr_t* new_object);
+extern s32 func_8000EE18(object_0003* self, ObjectHeader* new_object);
 
 #endif

@@ -1,7 +1,7 @@
 #ifndef INTERACTABLES_H
 #define INTERACTABLES_H
 
-#include "gfx/model_info.h"
+#include "gfx/model.h"
 #include "objects/effect/pickableItemFlash.h"
 #include "objects/menu/mfds.h"
 #include "actor.h"
@@ -227,7 +227,7 @@ typedef struct InteractableConfig {
 
 // ID: 0x0027
 typedef struct Interactable {
-    cv64_object_hdr_t header;
+    ObjectHeader header;
     u8 field_0x04[4];
     Model* model;
     u8 field_0x28[12];

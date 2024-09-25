@@ -50,10 +50,10 @@ typedef union {
 typedef struct {
     s16 type;
     u16 flags;
-    struct camera* prev;
-    struct camera* sibling;
-    struct camera* next;
-    struct camera* parent;
+    struct Camera* prev;
+    struct Camera* sibling;
+    struct Camera* next;
+    struct Camera* parent;
     u8 field1_0x14;
     u8 field2_0x15;
     u8 field3_0x16;
@@ -97,18 +97,18 @@ typedef struct {
     u8 field41_0x66;
     u8 field42_0x67;
     Mat4f matrix;
-} camera;
+} Camera;
 
-extern camera* common_camera_8009B430;
-extern camera* common_camera_8009B434;
-extern camera* common_camera_game_view; // 3D view
-extern camera* common_camera_effects;   // Items, shadows, and some other effects
-extern camera* common_camera_8009B440;  // Normal / Action / Battle / Boss view text
-extern camera* common_camera_8009B444;  // Background elements, like in the pause menu
-extern camera* common_camera_8009B448;  // Used for the scrolls?
-extern camera* common_camera_8009B44C;  // Used for the pause menu scroll?
-extern camera* common_camera_HUD;       // Used for the gameplay HUD and text
+extern Camera* common_camera_8009B430;
+extern Camera* common_camera_8009B434;
+extern Camera* common_camera_game_view; // 3D view
+extern Camera* common_camera_effects;   // Items, shadows, and some other effects
+extern Camera* common_camera_8009B440;  // Normal / Action / Battle / Boss view text
+extern Camera* common_camera_8009B444;  // Background elements, like in the pause menu
+extern Camera* common_camera_8009B448;  // Used for the scrolls?
+extern Camera* common_camera_8009B44C;  // Used for the pause menu scroll?
+extern Camera* common_camera_HUD;       // Used for the gameplay HUD and text
 
-extern void camera_setParams(camera* self, s32 index);
+extern void camera_setParams(Camera* self, s32 index);
 
 #endif

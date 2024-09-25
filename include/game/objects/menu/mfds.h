@@ -5,7 +5,7 @@
 
 #include "cv64.h"
 #include "gfx/camera.h"
-#include "gfx/model_info.h"
+#include "gfx/model.h"
 #include "objects/menu/lens.h"
 #include "objects/menu/textboxAdvanceArrow.h"
 #include "window.h"
@@ -121,7 +121,7 @@ typedef struct {
 
 typedef struct {
     u32 flags;
-    camera* display_camera;
+    Camera* display_camera;
     u16* text; // Officially called "str1"
     u16* item_amount_text;
     s32 field_0x10;
@@ -156,7 +156,7 @@ typedef struct {
 // ID: 0x0127
 // Real name: obj_mfds
 typedef struct {
-    cv64_object_hdr_t header;
+    ObjectHeader header;
     u16 field_0x20;
     u16 field_0x22;
     u8 field_0x24[4];
@@ -183,7 +183,7 @@ typedef struct {
     mfds_state* state;
 } obj_mfds;
 
-extern mfds_state* textbox_create(void* parent_object, camera* display_camera, u32 flags);
+extern mfds_state* textbox_create(void* parent_object, Camera* display_camera, u32 flags);
 extern void
 textbox_setDimensions(mfds_state* self, u8 height, u16 width, u8 param_4, u8 character_spacing);
 extern void textbox_setPos(mfds_state* self, u16 x, u16 y, s32 unused);

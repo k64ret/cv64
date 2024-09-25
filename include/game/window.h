@@ -43,7 +43,7 @@ typedef enum cv64_window_flag {
 
 typedef struct {
     u32 flags;
-    camera* display_camera;
+    Camera* display_camera;
     Vec3f position;
     f32 width;
     f32 height;

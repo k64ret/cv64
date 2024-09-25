@@ -6,7 +6,7 @@
 // clang-format off
 
 /**
- * The flags that are part of the `ID` field of `cv64_object_hdr_t`, NOT
+ * The flags that are part of the `ID` field of `ObjectHeader`, NOT
  * `flags`. Only used with `cv64_object_id_t`.
  */
 typedef enum cv64_object_kind {

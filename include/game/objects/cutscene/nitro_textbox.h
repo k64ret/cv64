@@ -6,7 +6,7 @@
 
 // ID: 0x2022
 typedef struct cv64_ovl_nitrotxt {
-    cv64_object_hdr_t header;
+    ObjectHeader header;
     u8 field_0x20[20];
     s32 text_ID;
     u8 field_0x38[4];

@@ -2,7 +2,7 @@
 #define CV64_TOU_TURO_DOOR_H
 
 #include "actor.h"
-#include "gfx/model_info.h"
+#include "gfx/model.h"
 #include "map_actor_model.h"
 #include "object.h"
 
@@ -17,7 +17,7 @@ extern const u32 TOUTURO_DOOR_ENTRANCE_DL;
 // ID: 0x1224
 // Real name: P27TOBIRA
 typedef struct cv64_ovl_touturo_door {
-    cv64_object_hdr_t header;
+    ObjectHeader header;
     u8 padding1[4];
     Model* model;
     u8 padding2[12];

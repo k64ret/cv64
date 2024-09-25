@@ -5,7 +5,7 @@
 
 // ID: 0x0007
 typedef struct {
-    cv64_object_hdr_t header;
+    ObjectHeader header;
     u8 field_0x20[OBJECT_SIZE - 0x20];
 } PlayerController;
 

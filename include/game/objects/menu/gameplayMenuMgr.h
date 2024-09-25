@@ -28,7 +28,7 @@ typedef enum pause_menu_state_t {
 
 // ID: 0x0126
 typedef struct {
-    cv64_object_hdr_t header;
+    ObjectHeader header;
     u8 field_0x20[32];
     s32 field_0x40;
     u32 hide_common_textbox_window;

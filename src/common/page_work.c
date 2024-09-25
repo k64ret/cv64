@@ -8,7 +8,7 @@
 #include "objects/menu/page.h"
 
 page_work* pageWork_create(
-    cv64_object_hdr_t* parent,
+    ObjectHeader* parent,
     light* page_light,
     u8 flags,
     f32 pos_X,

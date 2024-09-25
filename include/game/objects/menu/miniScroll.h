@@ -13,7 +13,7 @@ typedef enum miniScroll_flags {
 
 // ID: 0x213E
 typedef struct {
-    cv64_object_hdr_t header;
+    ObjectHeader header;
     u8 field_0x20[4];
     Model* model;
     u8 field_0x28[12];
@@ -32,10 +32,10 @@ typedef struct {
     s32 field_0x64;
     s32 field_0x68;
     s32 field_0x6C;
-    camera* display_camera;
+    Camera* display_camera;
 } miniScroll;
 
-extern miniScroll* createMiniScroll(void* parent, camera* camera, s32 param_3, s32 param_4);
+extern miniScroll* createMiniScroll(void* parent, Camera* camera, s32 param_3, s32 param_4);
 extern u32 miniScroll_checkFlags(miniScroll* self, u32 flags);
 extern void miniScroll_editFlags(miniScroll* self, u32 flags, s32 setFlags);
 extern Model* miniScroll_getModel(miniScroll* self);

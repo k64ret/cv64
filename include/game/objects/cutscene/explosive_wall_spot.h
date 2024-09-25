@@ -9,7 +9,7 @@
 
 // ID: 0x2024
 typedef struct cv64_ovl_explwalltxt {
-    cv64_object_hdr_t header;
+    ObjectHeader header;
     u8 field_0x20[20];
     u32 state;
     u8 field_0x38[4];

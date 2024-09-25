@@ -56,7 +56,7 @@ typedef struct {
 
 // ID: 0x0029
 typedef struct {
-    cv64_object_hdr_t header;
+    ObjectHeader header;
     u8 field_0x20[36];
     u32 state;
     u8 field_0x48[8];

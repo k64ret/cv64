@@ -5,7 +5,7 @@
 
 // ID: 0x213F
 typedef struct {
-    cv64_object_hdr_t header;
+    ObjectHeader header;
     u8 field_0x20[OBJECT_SIZE - OBJECT_HEADER_SIZE];
 } object_213F;
 
