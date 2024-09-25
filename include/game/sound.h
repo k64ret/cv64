@@ -74,6 +74,8 @@ extern s32 audioControlFadeOutType_setType(u32 type);
 #define SD_RENON_BRIEFCASE_SPIN_2            0x21B
 #define SD_ROSE_DOOR_CLOSE                   0x27B
 #define SD_ROSE_DOOR_CLOSING                 0x29B
+#define SD_CARRIE_BLESSING                   0x2E4
+#define SD_REINHARDT_BLESSING                0x2E5
 #define SD_2E9                               0x2E9
 
 #endif

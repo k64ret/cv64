@@ -1,19 +1,24 @@
+/**
+ * @file demo60.c
+ *
+ * This file contains the code that handles the following cutscene:
+ * - Forest of Silence's Intro
+ */
+
+#include "cv64.h"
 #include "objects/cutscene/demo60.h"
 #include "memory.h"
+#include "sound.h"
 #include "system_work.h"
-
-// clang-format off
 
 extern u8 rot_Reindhart_blessing[];
 extern u8 trans_Reindhart_blessing[];
 extern u8 rot_Carrie_blessing[];
 extern u8 trans_Carrie_blessing[];
 extern Demo60Func Demo60_functions[];
-extern CutsceneCoordinatesSettings D_0E001190[];
-extern CutsceneCoordinatesSettings D_0E0011E8[];
-extern CutsceneCoordinatesSettings D_0E001284[];
-
-// clang-format on
+extern CutsceneCoordinatesSettings D_0E001190[4];
+extern CutsceneCoordinatesSettings D_0E0011E8[7];
+extern CutsceneCoordinatesSettings D_0E001284[4];
 
 void Demo60_Entrypoint(Demo60* self) {
     ENTER(self, Demo60_functions);
@@ -76,11 +81,148 @@ void Demo60_GetPlayerModelAndSetBorders(Demo60* self) {
     }
 }
 
-// clang-format off
+void Demo60_Loop(Demo60* self) {
+    s32 temp[4];
+    CutsceneCoordinatesSettings* coords;
+    Demo60Data* data = self->data;
+    s32 current_time;
+    u32 i;
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/overlay/cutscene/demo60/demo60/Demo60_Loop.s")
+    if (self->skip_cutscene) {
+        if (self->state == DEMO60_RUNNING) {
+            (*Fade_SetSettings)(FADE_OUT, 10, 0, 0, 0);
+            self->state = DEMO60_FADE_OUT;
+        }
 
-// clang-format on
+        if (self->state == DEMO60_SET_MAP_CAMERA_PARAMETERS) {
+            (*Map_SetCameraParams)();
+        }
+
+        if (self->state == DEMO60_RESET_BORDERS) {
+            sys.cutscene_flags &= ~CUTSCENE_FLAG_DISPLAY_WIDESCREEN_BORDERS;
+            (*cutscene_setCameraClippingAndScissoring)(DL_SCISSORING_FULLSCREEN);
+            self->current_time = self->max_time - 1;
+            self->state        = DEMO60_SET_MAP_CAMERA_PARAMETERS;
+        }
+
+        if ((self->state == DEMO60_FADE_OUT) && ((*Fade_IsFading)() == FALSE)) {
+            self->state = DEMO60_RESET_BORDERS;
+        }
+    }
+
+    for (coords = ARRAY_START(D_0E0011E8); coords < ARRAY_END(D_0E0011E8); coords++) {
+        if ((self->current_time >= coords->start_time) &&
+            (coords->end_time >= self->current_time)) {
+            (*func_801299A4)(
+                self->current_time, data->cutscene_camera, coords, &data->cam_mov_state_init, 0
+            );
+        }
+    }
+
+    for (i = 0; i < ARRAY_COUNT(D_0E001190); i++) {
+        coords = &D_0E001190[i];
+        if ((self->current_time >= coords->start_time) &&
+            (coords->end_time >= self->current_time)) {
+            switch (coords->field_0x00) {
+                case 5:
+                case 6:
+                    (*func_80128D20)(
+                        self->current_time,
+                        data->game_camera,
+                        data->cutscene_camera,
+                        coords,
+                        &data->cam_mov_state_turn_and_move_to_player,
+                        0
+                    );
+                    break;
+                default:
+                    (*func_801299A4)(
+                        self->current_time,
+                        data->game_camera,
+                        coords,
+                        &data->cam_mov_state_turn_and_move_to_player,
+                        0
+                    );
+                    break;
+            }
+            (*Cutscene_UpdateCameraLookAtDir)(data->game_camera, &data->current_camera_movement);
+        }
+    }
+
+    for (i = 0; i < ARRAY_COUNT(D_0E001284); i++) {
+        coords = &D_0E001284[i];
+        if ((self->current_time >= coords->start_time) &&
+            (coords->end_time >= self->current_time)) {
+            if (coords->player_anims_array_index == 2) {
+                switch (coords->field_0x00) {
+                    case 0:
+                    case 1:
+                        (*func_801299A4)(
+                            self->current_time,
+                            data->player_model,
+                            coords,
+                            &data->cam_mov_state_blessing,
+                            1
+                        );
+                        break;
+                }
+                Demo60_PlayPlayerBlessingAnim(self, coords);
+            } else {
+                (*func_8012A130)(
+                    self,
+                    data->player_model,
+                    ARRAY_START(D_0E001284),
+                    &data->cam_mov_state_blessing,
+                    ARRAY_COUNT(D_0E001284),
+                    1
+                );
+            }
+        }
+    }
+
+    current_time = self->current_time;
+    if ((current_time == (D_0E001284[2].start_time + 75)) &&
+        (sys.SaveStruct_gameplay.character == REINHARDT)) {
+        (*play_sound)(SD_REINHARDT_BLESSING);
+    }
+
+    current_time = self->current_time;
+    if ((current_time == (D_0E001284[2].start_time + 60)) &&
+        (sys.SaveStruct_gameplay.character == CARRIE)) {
+        (*play_sound)(SD_CARRIE_BLESSING);
+    }
+
+    if (self->state == DEMO60_FADE_IN) {
+        (*Fade_SetSettings)(FADE_IN, 10, 0, 0, 0);
+        self->state = DEMO60_WAIT_UNTIL_FADE_IN_IS_OVER;
+    }
+
+    if (self->state == DEMO60_WAIT_UNTIL_FADE_IN_IS_OVER) {
+        if ((*Fade_IsFading)() == FALSE) {
+            self->state = DEMO60_RUNNING;
+        } else {
+            return;
+        }
+    }
+
+    if (self->max_time >= self->current_time) {
+        self->current_time++;
+    }
+
+    if (self->max_time < self->current_time) {
+        (*Map_SetCameraParams)();
+        if (self->skip_cutscene) {
+            (*Fade_SetSettings)(FADE_IN, 25, 0, 0, 0);
+            (*Cutscene_SetCameraPosToEndCoords)(ARRAY_END(D_0E001190) - 1, data->game_camera);
+            (*Cutscene_SetCameraPosToEndCoords)(ARRAY_END(D_0E0011E8) - 1, data->cutscene_camera);
+            (*Cutscene_UpdateCameraLookAtDir)(data->game_camera, &data->current_camera_movement);
+            (*Cutscene_SetEndCoordsToActor)(ARRAY_END(D_0E001284) - 1, data->player_model);
+        }
+        (*object_curLevel_goToNextFuncAndClearTimer)(
+            self->header.current_function, &self->header.function_info_ID
+        );
+    }
+}
 
 void Demo60_Destroy(Demo60* self) {
     sys.entrance_cutscene_ID = CUTSCENE_ID_NONE;
