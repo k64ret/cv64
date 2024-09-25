@@ -19,12 +19,6 @@
 #define ITEM_ASSETS_FILE_ID   sys.map_assets_file_IDs[1]
 #define SKYBOX_ASSETS_FILE_ID sys.map_assets_file_IDs[2]
 
-typedef union {
-    void* field_voidptr;
-    Actor* enemy;
-    s16 damage;
-} being_grabbed_frozen_related_union;
-
 typedef struct {
     Gfx dlists[5120];
     Mat4f matrices[FIG_ARRAY_MAX];
@@ -137,7 +131,20 @@ typedef struct {
     s16 player_position_log_max;
     s16 player_position_log_current;
     Vec3f player_position_log[30];
-    being_grabbed_frozen_related_union field62_0x263b4;
+    union {
+        /**
+         * Enemy that is grabbing or froze the player
+         */
+        Actor* enemy;
+        /**
+         * Damage dealt to the player while grabbed
+         */
+        s16 damage;
+        /**
+         * Misc. animation flags for when grabbed and launched by some enemies (such as the Weretiger)
+         */
+        u32 grabbed_and_launched_flags;
+    } grabbed_misc_vars;
     Actor* enemy_grabbing_player;
     u16 angle_of_player_being_grabbed_by_enemy;
     u16 player_grabbed_by_vampire_timer_or_frozen;
