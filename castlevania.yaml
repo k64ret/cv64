@@ -2889,8 +2889,8 @@ segments:
     vram: 0x0E000000
     exclusive_ram_id: nisitenma_ichigo_cutscenes
     subsegments:
-      - [0x00EC3950, c, overlay/cutscene/cutscene_60/cutscene_60]
-      - [0x00EC4130, data, overlay/cutscene/cutscene_60/cutscene_60]
+      - [0x00EC3950, c, overlay/cutscene/demo60/demo60]
+      - [0x00EC4130, data, overlay/cutscene/demo60/demo60]
 
   - name: ni_ovl_cutscene_3D
     type: bin
