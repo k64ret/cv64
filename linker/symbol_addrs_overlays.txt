@@ -301,3 +301,23 @@ cv64_ovl_titledemo_funcs      = 0x0F002438; // segment:ni_ovl_title_demo size:0x
 D_0F002450                    = 0x0F002450; // type:asciz segment:ni_ovl_title_demo size:0x0F
 
 // End of src/overlay/title_demo.c =============================================
+
+// src/overlay/cutscene/cutscene_60/cutscene_60.c =========================================
+// .text
+Cutscene60_Entrypoint     = 0x0E000000; // type:func segment:ni_ovl_cutscene_3C
+Cutscene60_Init     = 0x0E000070; // type:func segment:ni_ovl_cutscene_3C
+Cutscene60_CreateCutsceneCamera     = 0x0E0000FC; // type:func segment:ni_ovl_cutscene_3C
+Cutscene60_GetPlayerModelAndSetBorders     = 0x0E0001A8; // type:func segment:ni_ovl_cutscene_3C
+Cutscene60_Loop     = 0x0E000220; // type:func segment:ni_ovl_cutscene_3C
+Cutscene60_Destroy     = 0x0E0006C4; // type:func segment:ni_ovl_cutscene_3C
+Cutscene60_PlayPlayerBlessingAnim     = 0x0E0006F0; // type:func segment:ni_ovl_cutscene_3C
+// .data
+rot_Reindhart_blessing = 0x0e0007e0; // segment:ni_ovl_cutscene_3C size:1408
+trans_Reindhart_blessing = 0x0e000d60; // segment:ni_ovl_cutscene_3C size:176
+rot_Carrie_blessing = 0x0e000e10; // segment:ni_ovl_cutscene_3C size:768
+trans_Carrie_blessing = 0x0e001110; // segment:ni_ovl_cutscene_3C size:96
+Cutscene60_functions = 0x0e001170; // segment:ni_ovl_cutscene_3C size:32
+D_0E001190 = 0x0e001190; // segment:ni_ovl_cutscene_3C size:88
+D_0E0011E8 = 0x0e0011e8; // segment:ni_ovl_cutscene_3C size:156
+D_0E001284 = 0x0E001284; // segment:ni_ovl_cutscene_3C size:92
+// End of src/overlay/cutscene/cutscene_60/cutscene_60.c ==================================
