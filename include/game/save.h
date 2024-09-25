@@ -76,7 +76,7 @@ enum SaveFlag {
  */
 typedef u32 SaveFlags;
 
-typedef struct SaveState {
+typedef struct SaveData {
     u32 event_flags[NUM_EVENT_FLAGS];
     SaveFlags flags;
     s16 week;
@@ -133,6 +133,6 @@ typedef struct SaveState {
     s16 field79_0xd4;
     s32 field83_0xd8;
     u32 gold_spent_on_Renon;
-} SaveState; // Size = 0xE0
+} SaveData; // Size = 0xE0
 
 #endif

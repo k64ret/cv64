@@ -103,7 +103,7 @@ typedef struct {
     u8 field_0x25f20[10];
     s16 field32_0x25f2a;
     u8 field33_0x25f2c[512];
-    SaveState SaveStruct_gameplay;
+    SaveData SaveStruct_gameplay;
     /**
      * Could also be "EXECUTE_GAMEPLAY"
      */
