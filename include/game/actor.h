@@ -42,5 +42,8 @@ extern u32 checkIfOutsideEntityIsInsideMainEntityRadius(
     Model* player_model, Model* actor_model, f32 actor_spawn_radius, u32 axis
 );
 extern u8 Actor_getPosAndVariable1(Actor* actor, Vec3f* position, u16* variable_1);
+extern void Actor_updateAnimParamsWhenDiffRotationPtrs(
+    actorVisualData* visualdata, void* translation_data, void* rotation_data, f32 speed
+);
 
 #endif

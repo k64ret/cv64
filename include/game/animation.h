@@ -70,5 +70,7 @@ extern s32 animationInfo_animateFrame(animation_info* self, Model* model);
 extern void animationMgr_create(
     animationMgr* self, u8 number_of_limbs, u8 anim_switch_time, void* param_4, u8 param_5
 );
+extern s32 animationMgr_animateFrame(animationMgr* self, Model* model);
+extern s32 animationMgr_unsetSmoothEndAnimationFlag(animationMgr* self);
 
 #endif

@@ -59,14 +59,55 @@ void Demo60_CreateCutsceneCamera(Demo60* self) {
     );
 }
 
-// clang-format off
+void Demo60_GetPlayerModelAndSetBorders(Demo60* self) {
+    Demo60Data* data = self->data;
+    Model* player_model;
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/overlay/cutscene/demo60/demo60/Demo60_GetPlayerModelAndSetBorders.s")
+    if ((sys.map_is_setup) && (ptr_PlayerData != NULL)) {
+        if (ptr_PlayerData->visualData.model != NULL) {
+            player_model       = ptr_PlayerData->visualData.model;
+            data->player_model = player_model;
+            sys.cutscene_flags &= ~CUTSCENE_FLAG_10;
+            sys.cutscene_flags |= CUTSCENE_FLAG_DISPLAY_WIDESCREEN_BORDERS;
+            (*object_curLevel_goToNextFuncAndClearTimer)(
+                self->header.current_function, &self->header.function_info_ID
+            );
+        }
+    }
+}
+
+// clang-format off
 
 #pragma GLOBAL_ASM("../asm/nonmatchings/overlay/cutscene/demo60/demo60/Demo60_Loop.s")
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/overlay/cutscene/demo60/demo60/Demo60_Destroy.s")
-
-#pragma GLOBAL_ASM("../asm/nonmatchings/overlay/cutscene/demo60/demo60/Demo60_PlayPlayerBlessingAnim.s")
-
 // clang-format on
+
+void Demo60_Destroy(Demo60* self) {
+    sys.entrance_cutscene_ID = CUTSCENE_ID_NONE;
+    self->header.destroy(self);
+}
+
+void Demo60_PlayPlayerBlessingAnim(Demo60* self, CutsceneCoordinatesSettings* coords) {
+    Demo60Data* data            = self->data;
+    actorVisualData* visualData = &ptr_PlayerData->visualData;
+    s32 temp;
+
+    if (coords->player_anims_array_index == 2) {
+        switch (sys.SaveStruct_gameplay.character) {
+            case REINHARDT:
+                (*Actor_updateAnimParamsWhenDiffRotationPtrs)(
+                    visualData, &trans_Reindhart_blessing, &rot_Reindhart_blessing, 1.0f
+                );
+                break;
+            case CARRIE:
+                (*Actor_updateAnimParamsWhenDiffRotationPtrs)(
+                    visualData, &trans_Carrie_blessing, &rot_Carrie_blessing, 1.0f
+                );
+                break;
+        }
+    }
+
+    if ((*animationMgr_animateFrame)(&visualData->animMgr, data->player_model) == -2) {
+        (*animationMgr_unsetSmoothEndAnimationFlag)(&visualData->animMgr);
+    }
+}
