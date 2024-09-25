@@ -2,7 +2,7 @@
  * @file demo60.c
  *
  * This file contains the code that handles the following cutscene:
- * - Forest of Silence's Intro
+ * - Forest of Silence's Intro (`CUTSCENE_ID_FOREST_INTRO`)
  */
 
 #include "cv64.h"
@@ -11,14 +11,20 @@
 #include "sound.h"
 #include "system_work.h"
 
-extern u8 rot_Reindhart_blessing[];
-extern u8 trans_Reindhart_blessing[];
-extern u8 rot_Carrie_blessing[];
-extern u8 trans_Carrie_blessing[];
-extern Demo60Func Demo60_functions[];
-extern CutsceneCoordinatesSettings D_0E001190[4];
-extern CutsceneCoordinatesSettings D_0E0011E8[7];
-extern CutsceneCoordinatesSettings D_0E001284[4];
+#include "animations/reinhardt/blessing.inc.h"
+#include "animations/carrie/blessing.inc.h"
+
+#include "camera_data/D_0E001190.inc.h"
+#include "camera_data/D_0E0011E8.inc.h"
+#include "camera_data/D_0E001284.inc.h"
+
+Demo60Func Demo60_functions[] = {
+    Demo60_Init,
+    Demo60_CreateCutsceneCamera,
+    Demo60_GetPlayerModelAndSetBorders,
+    Demo60_Loop,
+    Demo60_Destroy
+};
 
 void Demo60_Entrypoint(Demo60* self) {
     ENTER(self, Demo60_functions);

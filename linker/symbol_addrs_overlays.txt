@@ -312,11 +312,12 @@ Demo60_Loop     = 0x0E000220; // type:func segment:ni_ovl_cutscene_3C
 Demo60_Destroy     = 0x0E0006C4; // type:func segment:ni_ovl_cutscene_3C
 Demo60_PlayPlayerBlessingAnim     = 0x0E0006F0; // type:func segment:ni_ovl_cutscene_3C
 // .data
-rot_Reindhart_blessing = 0x0e0007e0; // segment:ni_ovl_cutscene_3C size:0x508
+rot_Reindhart_blessing = 0x0e0007e0; // segment:ni_ovl_cutscene_3C size:0x580
 trans_Reindhart_blessing = 0x0e000d60; // segment:ni_ovl_cutscene_3C size:0xB0
 rot_Carrie_blessing = 0x0e000e10; // segment:ni_ovl_cutscene_3C size:0x300
 trans_Carrie_blessing = 0x0e001110; // segment:ni_ovl_cutscene_3C size:0x60
 Demo60_functions = 0x0e001170; // segment:ni_ovl_cutscene_3C size:0x20
+// .rodata
 D_0E001190 = 0x0e001190; // segment:ni_ovl_cutscene_3C size:0x58
 D_0E0011E8 = 0x0e0011e8; // segment:ni_ovl_cutscene_3C size:0x9C
 D_0E001284 = 0x0E001284; // segment:ni_ovl_cutscene_3C size:0x5C
