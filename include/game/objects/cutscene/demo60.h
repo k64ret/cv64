@@ -2,7 +2,6 @@
 #define DEMO60_H
 
 #include "cutscene.h"
-#include "gfx/camera.h"
 
 typedef enum DEMO60State {
     DEMO60_RUNNING,

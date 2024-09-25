@@ -3059,3 +3059,4 @@ JoystickAndPlayerAngleList = 0x800d7a08;
 func_800217AC_223AC = 0x800217AC;
 JoystickAndPlayerAngleList_pushCurrentDataAtIndex = 0x80021e28;
 D_800D7B00_A8DD0 = 0x800D7B00;
+Cutscene_UpdateCameraLookAtDir = 0x801286cc;

@@ -34,9 +34,32 @@ void Demo60_Init(Demo60* self) {
     );
 }
 
-// clang-format off
+void Demo60_CreateCutsceneCamera(Demo60* self) {
+    s32 temp;
+    Camera* cutscene_camera;
+    Demo60Data* data = self->data;
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/overlay/cutscene/demo60/demo60/Demo60_CreateCutsceneCamera.s")
+    cutscene_camera =
+        (Camera*) (*Model_createAndSetChild)(FIG_TYPE_CAMERA_CUTSCENE, data->game_camera);
+    data->cutscene_camera                      = cutscene_camera;
+    self->cutscene_camera                      = cutscene_camera;
+    data->current_camera_movement.cam_position = &data->cutscene_camera->position;
+    if (1) {
+    }
+    data->current_camera_movement.cam_angle                = &data->cutscene_camera->field36_0x4c;
+    data->current_camera_movement.cam_look_at_dir_offset.y = 0.0f;
+    data->current_camera_movement.cam_look_at_dir_offset.x = 0.0f;
+    data->current_camera_movement.cam_look_at_dir_offset.z = 0.0f;
+
+    (*Cutscene_UpdateCameraLookAtDir)(data->game_camera, &data->current_camera_movement);
+    self->current_time = 0;
+    self->max_time     = 380;
+    (*object_curLevel_goToNextFuncAndClearTimer)(
+        self->header.current_function, &self->header.function_info_ID
+    );
+}
+
+// clang-format off
 
 #pragma GLOBAL_ASM("../asm/nonmatchings/overlay/cutscene/demo60/demo60/Demo60_GetPlayerModelAndSetBorders.s")
 

@@ -2,6 +2,7 @@
 #define CUTSCENE_H
 
 #include "actor.h"
+#include "gfx/camera.h"
 #include "cutscene_ID.h"
 
 #define NUM_CUTSCENES 61
@@ -81,5 +82,7 @@ extern cutscene_parameters cutscene_settings[NUM_CUTSCENES];
 
 extern void cutscene_setCameraClippingAndScissoring(s16 top_edge_coords);
 extern Actor* cutscene_setActorStateIfMatchingVariable1(s16 actor_ID, u16 variable_1, u32 state);
+extern void
+Cutscene_UpdateCameraLookAtDir(Camera* camera, CutsceneCurrentCameraMovement* camera_movement);
 
 #endif
