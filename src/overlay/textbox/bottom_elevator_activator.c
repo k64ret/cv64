@@ -26,7 +26,7 @@ void cv64_ovl_elevatortxt_entrypoint(cv64_ovl_elevatortxt_t* self) {
 }
 
 void cv64_ovl_elevatortxt_init(cv64_ovl_elevatortxt_t* self) {
-    cv64_actor_settings_t* settings = self->settings;
+    ActorConfig* settings = self->settings;
 
     if (ptr_PlayerData == NULL)
         return;

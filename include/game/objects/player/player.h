@@ -29,7 +29,7 @@ typedef struct {
     f32 jump_gravity_accel;
     f32 field17_0x30;
     f32 field18_0x34;
-    vec3f field19_0x38;
+    Vec3f field19_0x38;
     s16 damage_received;
     s16 current_health_depletion_rate_while_poisoned;
     u8 field22_0x48;
@@ -80,7 +80,7 @@ typedef struct {
 
 // Todo: Double check this
 typedef union {
-    vec3f player_hit_launch_velocity;
+    Vec3f player_hit_launch_velocity;
     u32 openingLightDoor;
 } unk_union_playerData;
 
@@ -98,7 +98,7 @@ typedef struct {
     u16 field_0x64;
     u16 field_0x66;
     u8 field_0x68[12];
-    vec3f speed;
+    Vec3f speed;
     f32 field_0x80;
     f32 gravity_accel;
     attackManager* attackMgr;
@@ -182,7 +182,7 @@ typedef struct {
 typedef struct {
     cv64_object_hdr_t header;
     u8 field_0x20[4];
-    cv64_model_inf_t* model;
+    Model* model;
     playerData* data;
     playerMovingAttack* movingAttack;
     u8 field_0x30[OBJECT_SIZE - 0x30];

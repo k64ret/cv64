@@ -15,7 +15,7 @@ typedef enum miniScroll_flags {
 typedef struct {
     cv64_object_hdr_t header;
     u8 field_0x20[4];
-    cv64_model_inf_t* model;
+    Model* model;
     u8 field_0x28[12];
     /**
      * Vertices buffer
@@ -26,9 +26,9 @@ typedef struct {
     s32 field_0x3C;
     s32 field_0x40;
     s32 field_0x44;
-    vec3f position;
+    Vec3f position;
     f32 open_max_height;
-    vec3f width;
+    Vec3f width;
     s32 field_0x64;
     s32 field_0x68;
     s32 field_0x6C;
@@ -38,7 +38,7 @@ typedef struct {
 extern miniScroll* createMiniScroll(void* parent, camera* camera, s32 param_3, s32 param_4);
 extern u32 miniScroll_checkFlags(miniScroll* self, u32 flags);
 extern void miniScroll_editFlags(miniScroll* self, u32 flags, s32 setFlags);
-extern cv64_model_inf_t* miniScroll_getModel(miniScroll* self);
+extern Model* miniScroll_getModel(miniScroll* self);
 extern void miniScroll_setFlags(miniScroll* self, u32 flags);
 extern void miniScroll_setOpenMaxHeight(miniScroll* self, f32 open_max_height, s32 param_3);
 extern void miniScroll_setPosition(miniScroll* self, f32 X, f32 Y, f32 Z);

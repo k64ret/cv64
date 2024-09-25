@@ -88,15 +88,15 @@ typedef struct {
     u8 field32_0x3a;
     u8 field33_0x3b;
     Gfx* clip_ratio_dl;
-    vec3f position;
-    vec3s field36_0x4c;
-    angle_t angle;
-    vec3f look_at_direction;
+    Vec3f position;
+    Vec3 field36_0x4c;
+    Angle angle;
+    Vec3f look_at_direction;
     u8 field39_0x64;
     u8 field40_0x65;
     u8 field41_0x66;
     u8 field42_0x67;
-    Matrix44F matrix;
+    Mat4f matrix;
 } camera;
 
 extern camera* common_camera_8009B430;

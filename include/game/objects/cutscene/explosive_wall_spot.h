@@ -30,8 +30,8 @@ typedef struct cv64_ovl_explwalltxt {
     f32 trigger_size_X;
     f32 trigger_size_Z;
     mfds_state* message_textbox;
-    vec3f position;
-    cv64_actor_settings_t* settings;
+    Vec3f position;
+    ActorConfig* settings;
 } cv64_ovl_explwalltxt_t;
 
 void cv64_ovl_explwalltxt_entrypoint(cv64_ovl_explwalltxt_t* self);

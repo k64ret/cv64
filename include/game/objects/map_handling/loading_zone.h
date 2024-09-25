@@ -6,13 +6,13 @@
 #include "actor_settings.h"
 
 typedef struct {
-    vec3s trigger_position;
+    Vec3 trigger_position;
     s16 map;
     s16 spawn;
     u16 fade_out_time;
     u16 fade_in_time;
     u8 field_0x0E[2];
-    cv64_rgba_t fade_in_color;
+    RGBA fade_in_color;
     s16 loading_zone_cutscene_settings_table_ID; // ID + 1
     u8 field_0x16[2];
 } map_loading_zone_settings;
@@ -25,7 +25,7 @@ typedef struct {
 } loading_zone_cutscene_settings;
 
 typedef struct {
-    vec3f position;
+    Vec3f position;
     s16 field_0x40;
     u8 field_0x42[2];
     void (*obj_destroy_function)(void*);
@@ -35,7 +35,7 @@ typedef struct {
      */
     s16 go_to_konami_logo;
     u8 field_0x4E[34];
-    cv64_actor_settings_t* settings;
+    ActorConfig* settings;
 } loadingZoneInner;
 
 // ID: 0x016A

@@ -13,9 +13,9 @@ typedef struct {
 typedef struct {
     u8 field_0x00[2];
     s16 field_0x02;
-    vec3f position;
-    vec2f max_light_distance;
-    cv64_rgba_t color;
+    Vec3f position;
+    Vec2f max_light_distance;
+    RGBA color;
     struct_15 field_0x1C;
 } pointLightData;
 
@@ -25,7 +25,7 @@ typedef struct {
     u8 field_0x20[20];
     pointLightData data;
     u8 field_0x5C[20];
-    cv64_actor_settings_t* settings;
+    ActorConfig* settings;
 } pointLight;
 
 extern void pointLight_entrypoint(pointLight* self);

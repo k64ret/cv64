@@ -17,13 +17,13 @@
  */
 specialTextbox* Player_getActorCurrentlyInteractingWith() {
     s32 temp;
-    cv64_model_inf_t* player_model;
+    Model* player_model;
     specialTextbox* library_puzzle;
-    interactables* actor;
-    interactables* text_spot = NULL;
-    interactables_settings* settings;
+    Interactable* actor;
+    Interactable* text_spot = NULL;
+    InteractableConfig* settings;
     s32 can_interact = FALSE;
-    vec3f pos;
+    Vec3f pos;
 
     /**
      * Interactuables
@@ -37,7 +37,7 @@ specialTextbox* Player_getActorCurrentlyInteractingWith() {
      * Note that, if the `objectList_findFirstObjectByID` call returns `NULL`,
      * it is assumed that no interactable is spawned
      */
-    actor = (interactables*) objectList_findFirstObjectByID(CUTSCENE_INTERACTABLES);
+    actor = (Interactable*) objectList_findFirstObjectByID(CUTSCENE_INTERACTABLES);
     if (actor != NULL) {
         pos.x = actor->position.x;
         pos.y = actor->position.y;
@@ -45,7 +45,7 @@ specialTextbox* Player_getActorCurrentlyInteractingWith() {
 
         can_interact = playerCanInteractWithInteractuable(pos.x, pos.y, pos.z, actor);
         if (can_interact) {
-            settings = &interactables_settings_table[actor->table_index];
+            settings = &interactables_settings[actor->idx];
 
             // The interactable is a text spot. Continue to the loop.
             if (settings->type == ITEM_KIND_TEXT_SPOT) {
@@ -61,29 +61,29 @@ specialTextbox* Player_getActorCurrentlyInteractingWith() {
 
                 // Return the instance (item)
             } else {
-                return (interactables*) actor;
+                return (Interactable*) actor;
             }
         }
 
         /**
          * Check the rest of the interactables
          */
-        for (actor = (interactables*) object_findFirstObjectByID(CUTSCENE_INTERACTABLES, actor);
+        for (actor = (Interactable*) object_findFirstObjectByID(CUTSCENE_INTERACTABLES, actor);
              actor != NULL;
-             actor = (interactables*) object_findFirstObjectByID(CUTSCENE_INTERACTABLES, actor)) {
+             actor = (Interactable*) object_findFirstObjectByID(CUTSCENE_INTERACTABLES, actor)) {
             pos.x = actor->position.x;
             pos.y = actor->position.y;
             pos.z = actor->position.z;
 
             can_interact = playerCanInteractWithInteractuable(pos.x, pos.y, pos.z, actor);
             if (can_interact) {
-                settings = &interactables_settings_table[actor->table_index];
+                settings = &interactables_settings[actor->idx];
 
                 // If the interactable is a text spot
                 if (settings->type == ITEM_KIND_TEXT_SPOT) {
                     if (text_spot != NULL) {
                         if (settings->event_flag ==
-                            interactables_settings_table[text_spot->table_index].event_flag) {
+                            interactables_settings[text_spot->idx].event_flag) {
                             if (settings->flags & TEXT_SPOT_DESTROY_IF_EVENT_FLAG_IS_SET) {
                                 text_spot = actor;
                                 continue;
@@ -110,14 +110,14 @@ specialTextbox* Player_getActorCurrentlyInteractingWith() {
 
                     // Return the instance (item)
                 } else {
-                    return (interactables*) actor;
+                    return (Interactable*) actor;
                 }
             }
         }
 
         // Return the instance (text spot)
         if (text_spot != NULL) {
-            return (interactables*) text_spot;
+            return (Interactable*) text_spot;
         }
     }
 
@@ -217,7 +217,7 @@ specialTextbox* Player_getActorCurrentlyInteractingWith() {
  * the function will return its instance.
  */
 specialTextbox*
-Player_getSpecialTextboxCurrentlyInteractingWith(s16 actor_ID, cv64_model_inf_t* player_model) {
+Player_getSpecialTextboxCurrentlyInteractingWith(s16 actor_ID, Model* player_model) {
     specialTextbox* actor;
     u16 angle_player_textspot;
     u16 player_facing_angle;
@@ -264,10 +264,10 @@ Player_getSpecialTextboxCurrentlyInteractingWith(s16 actor_ID, cv64_model_inf_t*
  * Returns `TRUE` if the player should interact with it.
  */
 s32 playerCanInteractWithInteractuable(
-    f32 actor_pos_X, f32 actor_pos_Y, f32 actor_pos_Z, interactables* actor
+    f32 actor_pos_X, f32 actor_pos_Y, f32 actor_pos_Z, Interactable* actor
 ) {
-    cv64_model_inf_t* player_model   = ptr_PlayerData->visualData.model;
-    interactables_settings* settings = &interactables_settings_table[0, (s16) actor->table_index];
+    Model* player_model          = ptr_PlayerData->visualData.model;
+    InteractableConfig* settings = &interactables_settings[0, (s16) actor->idx];
     f32 sine;
     f32 cosine;
     u16 angle_player_item;
@@ -333,11 +333,11 @@ s32 playerCanInteractWithInteractuable(
  * they should do next.
  */
 s32 interactables_getInteractingType(specialTextbox* actor) {
-    interactables_settings* settings;
+    InteractableConfig* settings;
     s16 actor_ID = actor->header.ID;
 
     if (actor_ID == CUTSCENE_INTERACTABLES) {
-        settings = &interactables_settings_table[((interactables*) actor)->table_index];
+        settings = &interactables_settings[((Interactable*) actor)->idx];
         if (settings->type == ITEM_KIND_ITEM) {
             return INTERACT_TYPE_ITEM;
         }
@@ -461,18 +461,18 @@ u32 getMapEventFlagID(s16 stage_ID) {
  * when `index` is 0, as any other value will read out of bounds.
  */
 void spawnCastleWallGratingMechanismTextboxes(s16 index) {
-    interactables* text_spot;
+    Interactable* text_spot;
 
     // Spawn trigger text spot
     if (castleWallGratingMechanism_textSpotsActorSettings[index][1] != NULL) {
         text_spot =
-            (interactables*) (*object_createAndSetChild)(ptr_cutsceneMgr, CUTSCENE_INTERACTABLES);
+            (Interactable*) (*object_createAndSetChild)(ptr_cutsceneMgr, CUTSCENE_INTERACTABLES);
         text_spot->settings = castleWallGratingMechanism_textSpotsActorSettings[index][1];
     }
     // Spawn "grating already opened" text spot
     if (castleWallGratingMechanism_textSpotsActorSettings[index][2] != NULL) {
         text_spot =
-            (interactables*) (*object_createAndSetChild)(ptr_cutsceneMgr, CUTSCENE_INTERACTABLES);
+            (Interactable*) (*object_createAndSetChild)(ptr_cutsceneMgr, CUTSCENE_INTERACTABLES);
         text_spot->settings = castleWallGratingMechanism_textSpotsActorSettings[index][2];
     }
 }

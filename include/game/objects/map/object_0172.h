@@ -7,9 +7,9 @@
 typedef struct {
     cv64_object_hdr_t header;
     u8 field_0x20[4];
-    cv64_model_inf_t* model;
+    Model* model;
     u8 field_0x28[OBJECT_SIZE - 0x2C];
-    cv64_actor_settings_t* settings;
+    ActorConfig* settings;
 } object_0172;
 
 void obj0172_entrypoint(object_0172* self);

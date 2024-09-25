@@ -3,21 +3,20 @@
 
 ## DO
 
-- use `snake_case` for functions and variables
-- prefix CV64-specific functions and global variables with `cv64_`
+- use `PascalCase` for types
+- use the format `TypeName_MethodName` for public methods on a type
+- use the format `TypeName_methodName` (notice the lowercase "m") for private (static) methods on a
+  type
+- use the format `TypeName_VarName` for public variables
+- use `snake_case` for method/function-local variables, translation-unit private variables,
+  and type member variables
 - use common abbreviations to shorten names - see [abbreviations](#abbreviations)
-- follow this scheme for member function and variable names
-
-<!-- markdownlint-disable-next-line MD040 -->
-```
-<prefix>_<membertype>_<functionname/variablename>
-```
 
 Some examples of this are:
 
-- `cv64_ovl_konamilogo_check_btn_press`
-- `cv64_ovl_konamilogo_funcs`
-- `cv64_dl_fade_with_outline`
+- `OvlKonamiLogo_CheckBtnPress`
+- `OvlKonamiLogo_Funcs`
+- `dl_fade_with_outline`
 
 ## DON'T
 
@@ -28,12 +27,18 @@ Some examples of this are:
 These are some common abbreviations we should strive to use ubiquitously in the project.
 This table should be updated with new abbreviations as we discover more useful ones.
 
-| Word/Phrase  | Abbreviation |
-| ------------ | ------------ |
-| display list | dl           |
-| function     | func         |
-| header       | hdr          |
-| info         | inf          |
-| manager      | mgr          |
-| object       | obj          |
-| system       | sys          |
+| Word/Phrase   | Abbreviation |
+| ------------- | ------------ |
+| angle         | ang          |
+| block         | blk          |
+| button        | btn          |
+| configuration | cfg          |
+| display list  | dl           |
+| function      | func         |
+| graphic(s)    | gfx          |
+| header        | hdr          |
+| info          | inf          |
+| manager       | mgr          |
+| object        | obj          |
+| overlay       | ovl          |
+| system        | sys          |

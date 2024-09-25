@@ -41,13 +41,13 @@ void cv64_ovl_touturo_door_entrypoint(cv64_ovl_touturo_door_t* self) {
 
 void cv64_ovl_touturo_door_init(cv64_ovl_touturo_door_t* self) {
     s32 unused;
-    cv64_actor_settings_t* settings = self->settings;
-    cv64_model_inf_t* model;
+    ActorConfig* settings = self->settings;
+    Model* model;
 
     if (settings) {
     } // Needed for matching
 
-    model = self->model = modelInfo_createAndSetChild(FIG_TYPE_STANDALONE, map_lights[0]);
+    model = self->model = Model_createAndSetChild(FIG_TYPE_STANDALONE, map_lights[0]);
 
     if (model) {
     } // Needed for matching
@@ -55,15 +55,15 @@ void cv64_ovl_touturo_door_init(cv64_ovl_touturo_door_t* self) {
     actor_model_set_pos_and_angle(self, model);
     BITS_SET(model->flags, FIG_FLAG_APPLY_PRIMITIVE_COLOR | FIG_FLAG_APPLY_FOG_COLOR);
 
-    model->assets_file_ID = MAP_ASSETS_FILE_ID;
-    model->dlist          = cv64_ovl_touturo_door_dlists[TOU_TURO_DOOR_TYPE];
+    model->assets_file = MAP_ASSETS_FILE_ID;
+    model->dlist       = cv64_ovl_touturo_door_dlists[TOU_TURO_DOOR_TYPE];
 
     model->primitive_color.integer = sys.primitive_color.integer;
     model->fog_color.integer       = sys.background_color.integer;
 
     BITS_SET(self->header.ID, OBJ_FLAG_ENABLE_COLLISION);
 
-    self->map_actor_model  = getMapActorModelEntryFromArray(model->dlist, model->assets_file_ID);
+    self->map_actor_model  = getMapActorModelEntryFromArray(model->dlist, model->assets_file);
     model->map_actor_model = self->map_actor_model;
 
     self->close_time = 30;
@@ -74,8 +74,8 @@ void cv64_ovl_touturo_door_init(cv64_ovl_touturo_door_t* self) {
 }
 
 void cv64_ovl_touturo_door_loop(cv64_ovl_touturo_door_t* self) {
-    cv64_actor_settings_t* settings = self->settings;
-    cv64_model_inf_t* model         = self->model;
+    ActorConfig* settings = self->settings;
+    Model* model          = self->model;
 
     if ((*actor_playerOutsideActorSpawnRadius)(
             self, settings->position.x, settings->position.y, settings->position.z
@@ -94,7 +94,7 @@ void cv64_ovl_touturo_door_loop(cv64_ovl_touturo_door_t* self) {
 }
 
 void cv64_ovl_touturo_door_exit_check_event_flags(cv64_ovl_touturo_door_t* self) {
-    cv64_model_inf_t* model = self->model;
+    Model* model = self->model;
 
     if (CHECK_EVENT_FLAGS(EVENT_FLAG_ID_CLOCK_TOWER, EVENT_FLAG_CLOCK_TOWER_DEFEATED_DEATH) ||
         CHECK_EVENT_FLAGS(EVENT_FLAG_ID_CLOCK_TOWER, EVENT_FLAG_CLOCK_TOWER_DEFEATED_ACTRISE)) {
@@ -108,7 +108,7 @@ void cv64_ovl_touturo_door_exit_check_event_flags(cv64_ovl_touturo_door_t* self)
 }
 
 void cv64_ovl_touturo_door_entrance_check_event_flags(cv64_ovl_touturo_door_t* self) {
-    cv64_model_inf_t* model = self->model;
+    Model* model = self->model;
 
     if (CHECK_EVENT_FLAGS(
             EVENT_FLAG_ID_MISC_STAGES, EVENT_FLAG_MISC_STAGES_ENTERED_ROOM_OF_CLOCKS
@@ -129,7 +129,7 @@ void cv64_ovl_touturo_door_entrance_close_door(cv64_ovl_touturo_door_t* self) {
     s16 i;
     f32 rand_Z_pos;
     cv64_effect_t* effect;
-    cv64_model_inf_t* model = self->model;
+    Model* model = self->model;
 
     model->position.y -=
         (0.8166666666666667 * (((self->close_time / 30.0f) * self->close_time) / 30.0f));

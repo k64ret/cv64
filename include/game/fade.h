@@ -1,23 +1,25 @@
 #ifndef FADE_H
 #define FADE_H
 
+#include "bit.h"
 #include <ultra64.h>
 
-typedef enum cv64_fade_flag {
+enum FadeFlag {
     /**
      * Shows a black outline in the edges of all models while fading
      */
-    FADE_WITH_OUTLINE = 0x0001,
-    FADE_IN           = 0x4000,
-    FADE_OUT          = 0x8000
-} cv64_fade_flag_t;
+    FADE_WITH_OUTLINE = BIT(0),
+    FADE_IN           = BIT(14),
+    FADE_OUT          = BIT(15)
+};
 
-void fade_setAllFlags(s16 flags);
-void fade_setFlag(s16 flag);
-void fade_removeFlag(s16 flag);
-void fade_setColor(u8 R, u8 G, u8 B);
-void fade_setSettings(s16 flags, u16 fade_time, u8 R, u8 G, u8 B);
-u32 fade_isFading(void);
-void fade_calc(void);
+/**
+ * Variables with this type can accept values from `FadeFlag` OR'ed together
+ */
+typedef s16 FadeFlags;
+
+void Fade_SetSettings(FadeFlags flags, u16 fade_time, u8 R, u8 G, u8 B);
+u32 Fade_IsFading(void);
+void Fade_Calc(void);
 
 #endif

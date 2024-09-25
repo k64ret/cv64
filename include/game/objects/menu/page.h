@@ -26,14 +26,14 @@ typedef struct {
     u8 flip_anim_keyframe;
     u8 field_0x06[2];
     f32 anim_speed;
-    vec3f position;
+    Vec3f position;
 } page_work;
 
 // ID: 0x0131
 typedef struct {
     cv64_object_hdr_t header;
     u8 field_0x20[4];
-    cv64_model_inf_t* model;
+    Model* model;
     u8 field_0x28[12];
     animationMgr animMgr;
     u8 field_0x64[8];

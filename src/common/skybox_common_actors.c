@@ -88,15 +88,15 @@ void obj0172_entrypoint(object_0172* self) {
 
 void obj0172_init(object_0172* self) {
     s32 temp;
-    cv64_model_inf_t* model;
+    Model* model;
 
-    model = modelInfo_createAndSetChild(FIG_TYPE_0400 | FIG_TYPE_HIERARCHY_NODE, map_lights[0]);
+    model       = Model_createAndSetChild(FIG_TYPE_0400 | FIG_TYPE_HIERARCHY_NODE, map_lights[0]);
     self->model = model;
     if (model) {
     }
     actor_model_set_pos_and_angle(self, model);
-    model->assets_file_ID = MAP_ASSETS_FILE_ID;
-    model->dlist          = obj0172_dlists[sys.SaveStruct_gameplay.map];
+    model->assets_file = MAP_ASSETS_FILE_ID;
+    model->dlist       = obj0172_dlists[sys.SaveStruct_gameplay.map];
     BITS_SET(model->flags, FIG_FLAG_APPLY_PRIMITIVE_COLOR);
     model->primitive_color.integer = RGBA(192, 192, 128, 255);
     model->size.x                  = 0.05f;
@@ -107,7 +107,7 @@ void obj0172_init(object_0172* self) {
 }
 
 void obj0172_loop(object_0172* self) {
-    cv64_actor_settings_t* settings = self->settings;
+    ActorConfig* settings = self->settings;
 
     if (actor_playerOutsideActorSpawnRadius(
             self, settings->position.x, settings->position.y, settings->position.z
@@ -122,17 +122,17 @@ void commonMoon_entrypoint(commonMoon* self) {
 
 void commonMoon_init(commonMoon* self) {
     s32 temp1;
-    cv64_model_inf_t* model;
+    Model* model;
     s32 temp2;
     s32 temp3;
 
-    model = modelInfo_createAndSetChild(FIG_TYPE_0400 | FIG_TYPE_HIERARCHY_NODE, map_lights[0]);
+    model       = Model_createAndSetChild(FIG_TYPE_0400 | FIG_TYPE_HIERARCHY_NODE, map_lights[0]);
     self->model = model;
     if (model) {
     }
     actor_model_set_pos_and_angle(self, model);
-    model->assets_file_ID = MAP_ASSETS_FILE_ID;
-    model->dlist          = commonMoon_dlists[sys.SaveStruct_gameplay.map];
+    model->assets_file = MAP_ASSETS_FILE_ID;
+    model->dlist       = commonMoon_dlists[sys.SaveStruct_gameplay.map];
     BITS_SET(model->flags, FIG_FLAG_APPLY_PRIMITIVE_COLOR);
     model->primitive_color.integer = RGBA(128, 128, 128, 255);
     (*object_curLevel_goToNextFuncAndClearTimer)(
@@ -188,7 +188,7 @@ void commonMoon_init(commonMoon* self) {
 }
 
 void commonMoon_main(commonMoon* self) {
-    cv64_model_inf_t* model = self->model;
+    Model* model = self->model;
 
     if (actor_playerOutsideActorSpawnRadius(
             self, model->position.x, model->position.y, model->position.z
@@ -249,15 +249,15 @@ void obj8015C368_entrypoint(object_8015C368* self) {
 }
 
 void obj8015C368_init(object_8015C368* self) {
-    cv64_actor_settings_t* settings = self->settings;
-    cv64_model_inf_t* model;
+    ActorConfig* settings = self->settings;
+    Model* model;
 
-    model = modelInfo_createAndSetChild(FIG_TYPE_0400 | FIG_TYPE_HIERARCHY_NODE, map_lights[0]);
+    model       = Model_createAndSetChild(FIG_TYPE_0400 | FIG_TYPE_HIERARCHY_NODE, map_lights[0]);
     self->model = model;
     if (model) {
     }
     actor_model_set_pos_and_angle(self, model);
-    model->assets_file_ID = MAP_ASSETS_FILE_ID;
+    model->assets_file = MAP_ASSETS_FILE_ID;
     model->dlist = obj8015C368_dlists[sys.SaveStruct_gameplay.map][settings->variable_1 & 0xFF];
     BITS_SET(model->flags, FIG_FLAG_APPLY_PRIMITIVE_COLOR);
     model->primitive_color.integer = sys.background_color.integer;
@@ -267,8 +267,8 @@ void obj8015C368_init(object_8015C368* self) {
 }
 
 void obj8015C368_loop(object_8015C368* self) {
-    cv64_model_inf_t* model = self->model;
-    cv64_actor_settings_t* settings;
+    Model* model = self->model;
+    ActorConfig* settings;
 
     model->primitive_color.integer = sys.background_color.integer;
     if (actor_playerOutsideActorSpawnRadius(

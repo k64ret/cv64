@@ -29,9 +29,9 @@ void creditsMgr_entrypoint(creditsMgr* self) {
 void creditsMgr_init(creditsMgr* self) {
     u8 i;
 
-    if (((*fade_isFading)() == FALSE) && (sys.file_load_array_ID == 0) &&
+    if (((*Fade_IsFading)() == FALSE) && (sys.file_load_array_ID == 0) &&
         (ptr_DMAMgr->DMAChunkMgr != NULL)) {
-        (*fade_setSettings)(FADE_IN, 30, 0, 0, 0);
+        (*Fade_SetSettings)(FADE_IN, 30, 0, 0, 0);
         sys.cutscene_flags = 0;
         // Both variables have to be assigned the value like this so that
         // it can match (which prevents a t1 vs t0 regswap)
@@ -64,7 +64,7 @@ void creditsMgr_loop(creditsMgr* self) {
         } // Needed for matching
 
         if (self->field_0x34[3] == 2) {
-            (*fade_setSettings)(FADE_OUT, 30, 0, 0, 0);
+            (*Fade_SetSettings)(FADE_OUT, 30, 0, 0, 0);
             (*object_curLevel_goToNextFuncAndClearTimer)(
                 self->header.current_function, &self->header.function_info_ID
             );
@@ -73,7 +73,7 @@ void creditsMgr_loop(creditsMgr* self) {
 }
 
 void creditsMgr_exit(creditsMgr* self) {
-    if ((*fade_isFading)() == FALSE) {
+    if ((*Fade_IsFading)() == FALSE) {
         (*gamestate_change)(GAMESTATE_KONAMI_LOGO);
     }
 }

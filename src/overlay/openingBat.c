@@ -14,7 +14,7 @@
 // clang-format off
 
 // TODO: `extern const u32` for the dlists
-hierarchy openingBat_hierarchy = {
+Hierarchy openingBat_hierarchy = {
     NI_ASSETS_FIRE_BAT,
     {
         { 0x06000C90, CREATE_NEXT_NODE, { 0, 45, 45 } },
@@ -65,8 +65,8 @@ void openingBat_init(openingBat* self) {
     openingBatData* data = self->data;
     s32 temp1;
     modelLighting* lighting;
-    cv64_model_inf_t* model;
-    vec3f position;
+    Model* model;
+    Vec3f position;
     u16 variable_1;
     openingBatDataInner* inner = &data->inner;
 
@@ -80,7 +80,7 @@ void openingBat_init(openingBat* self) {
         GO_TO_FUNC_NOW(self, openingBat_functions, OPENINGBAT_DESTROY);
         return;
     }
-    model = (*modelInfo_buildHierarchy)(
+    model = (*Model_buildHierarchy)(
         FIG_TYPE_HIERARCHY_NODE, lighting->model_light, &openingBat_hierarchy
     );
     self->model  = model;
@@ -107,7 +107,7 @@ void openingBat_init(openingBat* self) {
 }
 
 void openingBat_loop(openingBat* self) {
-    cv64_model_inf_t* model = self->model;
+    Model* model = self->model;
 
     model->type &= FIG_TYPE_SHOW;
     if (!(sys.cutscene_flags & CUTSCENE_FLAG_PLAYING)) {

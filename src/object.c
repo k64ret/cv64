@@ -211,10 +211,6 @@ cv64_object_hdr_t* object_createAndSetChild(cv64_object_hdr_t* parent, cv64_obje
  * and return the first instance of the object with the raw ID
  */
 cv64_object_t* object_findFirstObjectByID(cv64_object_id_t ID, cv64_object_t* current_object) {
-    // The first slot in the object array is always empty.
-    // In that array, objects start at ID 1.
-    current_object++;
-
     // The ID of the object actually consists of a flag variable (upper byte)
     // and the actual ID part (lower byte)
     // Only the ID part of it.
@@ -222,7 +218,10 @@ cv64_object_t* object_findFirstObjectByID(cv64_object_id_t ID, cv64_object_t* cu
 
     // Go through each object sequentially, and when the first object of a given
     // ID is found return a pointer to that object.
-    for (; (u32) current_object < (u32) object_list_free_slot; current_object++) {
+
+    // The first slot in the object array is always empty.
+    // In that array, objects start at ID 1.
+    for (current_object++; (u32) current_object < (u32) object_list_free_slot; current_object++) {
         if (ID != BITS_MASK(current_object->header.ID, 0x07FF))
             continue;
 
@@ -255,9 +254,7 @@ object_findObjectBetweenIDRange(s32 min_ID, s32 max_ID, cv64_object_t* current_o
     BITS_ASSIGN_MASK(min_ID, 0x7FF);
     BITS_ASSIGN_MASK(max_ID, 0x7FF);
 
-    current_object++;
-
-    for (; (u32) current_object < (u32) object_list_free_slot; current_object++) {
+    for (current_object++; (u32) current_object < (u32) object_list_free_slot; current_object++) {
         current_obj_ID = BITS_MASK(current_object->header.ID, 0x7FF);
 
         if ((current_obj_ID < min_ID) || (max_ID < current_obj_ID))
@@ -287,9 +284,7 @@ cv64_object_t* objectList_findObjectBetweenRange(s32 min_ID, s32 max_ID) {
  * common with the object currently being read.
  */
 cv64_object_t* object_findObjectByIDAndType(s32 ID, cv64_object_t* current_object) {
-    current_object++;
-
-    for (; (u32) current_object < (u32) object_list_free_slot; current_object++) {
+    for (current_object++; (u32) current_object < (u32) object_list_free_slot; current_object++) {
         if (BITS_NOT_HAS(current_object->header.ID, ID))
             continue;
 

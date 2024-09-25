@@ -39,7 +39,7 @@ typedef struct {
 typedef struct {
     cv64_object_hdr_t header;
     u8 field_0x20[4];
-    cv64_model_inf_t* model;
+    Model* model;
     u8 field_0x28[12];
     struct_56* field_0x34;
     void* field_0x38; // A function pointer
@@ -51,7 +51,7 @@ typedef struct {
     s32 model_pitch;
     u8 field_0x54[24];
     s32 state;
-    cv64_actor_settings_t* settings;
+    ActorConfig* settings;
 } lever;
 
 void lever_init(lever* self);

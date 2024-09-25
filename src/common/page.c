@@ -10,7 +10,7 @@
 // clang-format off
 
 // TODO: `extern const u32` for the dlists
-hierarchy page_1_hierarchy = {
+Hierarchy page_1_hierarchy = {
     NI_ASSETS_MENU,
     {
         { 0x06007240, CREATE_NEXT_NODE, { -1561, 35, 764 } },
@@ -22,7 +22,7 @@ hierarchy page_1_hierarchy = {
     }
 };
 
-hierarchy page_2_hierarchy = {
+Hierarchy page_2_hierarchy = {
     NI_ASSETS_MENU,
     {
         { 0x06008000, CREATE_NEXT_NODE, { -1561, 35, 764 } },
@@ -34,7 +34,7 @@ hierarchy page_2_hierarchy = {
     }
 };
 
-hierarchy page_3_hierarchy = {
+Hierarchy page_3_hierarchy = {
     NI_ASSETS_MENU,
     {
         { 0x06008DB8, CREATE_NEXT_NODE, { -1561, 35, 764 } },
@@ -80,7 +80,7 @@ void page_isWorkCreated(page* self) {
 }
 
 void page_init(page* self) {
-    cv64_model_inf_t* model;
+    Model* model;
     animationMgr* animMgr             = &self->animMgr;
     animation_info* current_anim_info = &animMgr->current_anim;
     page_work* work                   = self->work;
@@ -91,22 +91,22 @@ void page_init(page* self) {
         default:
             break;
         case PAGE_1:
-            model = (*modelInfo_buildHierarchy)(FIG_TYPE_HIERARCHY_NODE, NULL, &page_1_hierarchy);
-            self->model       = model;
+            model       = (*Model_buildHierarchy)(FIG_TYPE_HIERARCHY_NODE, NULL, &page_1_hierarchy);
+            self->model = model;
             model->position.x = work->position.x;
             model->position.y = work->position.y;
             model->position.z = work->position.z;
             break;
         case PAGE_2:
-            model = (*modelInfo_buildHierarchy)(FIG_TYPE_HIERARCHY_NODE, NULL, &page_2_hierarchy);
-            self->model       = model;
+            model       = (*Model_buildHierarchy)(FIG_TYPE_HIERARCHY_NODE, NULL, &page_2_hierarchy);
+            self->model = model;
             model->position.x = work->position.x;
             model->position.y = work->position.y;
             model->position.z = work->position.z;
             break;
         case PAGE_3:
-            model = (*modelInfo_buildHierarchy)(FIG_TYPE_HIERARCHY_NODE, NULL, &page_3_hierarchy);
-            self->model       = model;
+            model       = (*Model_buildHierarchy)(FIG_TYPE_HIERARCHY_NODE, NULL, &page_3_hierarchy);
+            self->model = model;
             model->position.x = work->position.x;
             model->position.y = work->position.y;
             model->position.z = work->position.z;
@@ -138,7 +138,7 @@ void page_init(page* self) {
 }
 
 void page_loop(page* self) {
-    cv64_model_inf_t* model;
+    Model* model;
     u8 work_flags;
     page_work* work                   = self->work;
     animationMgr* animMgr             = &self->animMgr;

@@ -6,6 +6,7 @@
 #include "gfx/color.h"
 #include "actor.h"
 #include "math.h"
+#include "nisitenma_ichigo.h"
 #include "save.h"
 #include "cutscene.h"
 #include "cutscene_ID.h"
@@ -18,15 +19,9 @@
 #define ITEM_ASSETS_FILE_ID   sys.map_assets_file_IDs[1]
 #define SKYBOX_ASSETS_FILE_ID sys.map_assets_file_IDs[2]
 
-typedef union {
-    void* field_voidptr;
-    cv64_actor_t* enemy;
-    s16 damage;
-} being_grabbed_frozen_related_union;
-
 typedef struct {
     Gfx dlists[5120];
-    Matrix44F matrices[FIG_ARRAY_MAX];
+    Mat4f matrices[FIG_ARRAY_MAX];
 } sysw_gfx;
 
 typedef struct {
@@ -40,7 +35,7 @@ typedef struct {
     s16 previous_graphic_buffer;
     s16 frameBuffer_index;
     s16 framebuffer_image_pixel_size;
-    cv64_rgba_t background_color;
+    RGBA background_color;
     s16 should_setup_background_color;
     s16 should_setup_Z_buffer;
     /**
@@ -55,8 +50,8 @@ typedef struct {
      */
     s16 code_execution_delay_timer;
     s16 should_end_master_display_list;
-    s16 fade_flags;
-    cv64_rgba_t fade_color;
+    FadeFlags fade_flags;
+    RGBA fade_color;
     /**
      * Likely called "disp_fade_cnt", according to leftover strings in LoD
      */
@@ -71,9 +66,9 @@ typedef struct {
      * See figure_update
      */
     s32 field16_0x2402c;
-    Matrix44F* field17_0x24030;
+    Mat4f* field17_0x24030;
     u8 field18_0x24034[68];
-    Matrix44F field19_0x24078;
+    Mat4f field19_0x24078;
     union {
         s16 field20_0x240b8_s16;
         f32 field20_0x240b8_f32;
@@ -102,7 +97,7 @@ typedef struct {
     u8 field_0x25f20[10];
     s16 field32_0x25f2a;
     u8 field33_0x25f2c[512];
-    cv64_save_state_t SaveStruct_gameplay;
+    SaveData SaveStruct_gameplay;
     /**
      * Could also be "EXECUTE_GAMEPLAY"
      */
@@ -122,7 +117,7 @@ typedef struct {
     s16 FREEZE_gameplayMenuMgr;
     s16 contPak_file_no;
     Player* ptr_PlayerObject;
-    interactables* actor_player_is_currently_interacting_with;
+    Interactable* actor_player_is_currently_interacting_with;
     u32 pull_lever;
     u8 field50_0x26230[4];
     s16 current_PowerUp_level;
@@ -135,9 +130,22 @@ typedef struct {
     s32 player_frozenGrab_timer;
     s16 player_position_log_max;
     s16 player_position_log_current;
-    vec3f player_position_log[30];
-    being_grabbed_frozen_related_union field62_0x263b4;
-    cv64_actor_t* enemy_grabbing_player;
+    Vec3f player_position_log[30];
+    union {
+        /**
+         * Enemy that is grabbing or froze the player
+         */
+        Actor* enemy;
+        /**
+         * Damage dealt to the player while grabbed
+         */
+        s16 damage;
+        /**
+         * Misc. animation flags for when grabbed and launched by some enemies (such as the Weretiger)
+         */
+        u32 grabbed_and_launched_flags;
+    } grabbed_misc_vars;
+    Actor* enemy_grabbing_player;
     u16 angle_of_player_being_grabbed_by_enemy;
     u16 player_grabbed_by_vampire_timer_or_frozen;
     s16 current_boss_actor_ID;
@@ -148,18 +156,18 @@ typedef struct {
      */
     void* ptr_playerCameraController;
     u8 field70_0x263d0[4];
-    Matrix44F field_0x263d4;
-    cv64_rgba_t primitive_color;
+    Mat4f field_0x263d4;
+    RGBA primitive_color;
     s16 map_is_setup;
     u8 field74_0x2641a;
     u8 field75_0x2641b;
     /**
      * [0] = map [1] = pickable_items [2] = skybox_assets
      */
-    s32 map_assets_file_IDs[3];
+    NIFileID map_assets_file_IDs[3];
     s16 map;
     s16 spawn;
-    cv64_rgba_t map_fade_in_color;
+    RGBA map_fade_in_color;
     s16 map_fade_out_time;
     s16 map_fade_in_time;
     /**

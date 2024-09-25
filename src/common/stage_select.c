@@ -39,8 +39,8 @@ void stageSelect_entrypoint(stageSelect* self) {
 }
 
 void stageSelect_loadAssetsFile(stageSelect* self) {
-    if (((*fade_isFading)() == FALSE) && ((ptr_DMAMgr->DMAChunkMgr != NULL))) {
-        (*fade_setSettings)(FADE_IN, 30, 0, 0, 0);
+    if (((*Fade_IsFading)() == FALSE) && ((ptr_DMAMgr->DMAChunkMgr != NULL))) {
+        (*Fade_SetSettings)(FADE_IN, 30, 0, 0, 0);
         sys.cutscene_flags = 0;
         (*heap_init)(
             HEAP_KIND_MENU_DATA,
@@ -62,16 +62,16 @@ void stageSelect_loadAssetsFile(stageSelect* self) {
 }
 
 void stageSelect_initGraphics(stageSelect* self) {
-    cv64_model_inf_t* bg_model;
+    Model* bg_model;
     mfds_state** textbox_array = self->textboxes;
 
     if (self->assets_file_end != NULL) {
         heapBlock_updateBlockMaxSize(
             self->assets_file_start, (u32) self->assets_file_end - (u32) self->assets_file_start
         );
-        bg_model = modelInfo_createAndSetChild(FIG_TYPE_HUD_ELEMENT, common_camera_8009B444);
+        bg_model = Model_createAndSetChild(FIG_TYPE_HUD_ELEMENT, common_camera_8009B444);
         self->red_background_model = bg_model;
-        bg_model->assets_file_ID   = NI_ASSETS_MENU;
+        bg_model->assets_file      = NI_ASSETS_MENU;
         bg_model->dlist            = &MENU_RED_BACKGROUND_DL;
         BITS_SET(bg_model->flags, FIG_FLAG_APPLY_PRIMITIVE_COLOR);
         bg_model->primitive_color.integer = RGBA(255, 255, 255, 255);
@@ -121,7 +121,7 @@ void stageSelect_initLens(stageSelect* self) {
     window_work* lens;
     mfds_state** textbox_array = self->textboxes;
 
-    if ((*fade_isFading)() == FALSE) {
+    if ((*Fade_IsFading)() == FALSE) {
         for (self->text_ID = 0; self->text_ID < STAGE_SELECT_NUM_OPTIONS + 1; self->text_ID++) {
             if (BITS_NOT_HAS(textbox_array[self->text_ID]->flags, TEXT_IS_PARSED)) {
                 return;
@@ -204,7 +204,7 @@ void stageSelect_warpToStage(stageSelect* self) {
         sys.SaveStruct_gameplay.life          = 100;
         sys.SaveStruct_gameplay.field_0x5C    = 100;
         sys.SaveStruct_gameplay.subweapon     = SUBWEAPON_NONE;
-        sys.SaveStruct_gameplay.gold         = 0;
+        sys.SaveStruct_gameplay.gold          = 0;
         sys.SaveStruct_gameplay.player_status = 0;
 
         // Remove inventory items

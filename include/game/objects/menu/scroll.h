@@ -32,8 +32,8 @@ typedef struct {
     u32 flags;
     camera* field_0x04;
     camera* display_camera;
-    vec3f position;
-    vec3f width;
+    Vec3f position;
+    Vec3f width;
     u8 open_close_speed;
     u8 params;
     s16 lower_dowel_pitch_angle;
@@ -42,7 +42,7 @@ typedef struct {
     f32 field_0x30;
     u8 field_0x34;
     u8 field_0x35[3];
-    vec3f field_0x38;
+    Vec3f field_0x38;
     f32 open_close_max_speed;
     f32 open_close_current_speed;
     f32 dowel_angle_multiplier;
@@ -63,13 +63,13 @@ typedef struct {
 typedef struct {
     cv64_object_hdr_t header;
     u8 field_0x20[4];
-    cv64_model_inf_t* both_dowels;
-    cv64_model_inf_t* lower_dowel;
-    cv64_model_inf_t* scroll_background;
+    Model* both_dowels;
+    Model* lower_dowel;
+    Model* scroll_background;
     /**
      * Data, Player Select, etc textures
      */
-    cv64_model_inf_t* header_texture;
+    Model* header_texture;
     s32 field_0x34;
     void* btnConfigMenu; // buttonConfigMenu*
     u32 field_0x3C;

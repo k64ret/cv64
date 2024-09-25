@@ -35,13 +35,13 @@ typedef struct {
     u8 field_0x09;
     u16 color_intensity_transition_speed;
     pointLight* light;
-    cv64_model_inf_t* attached_bone;
+    Model* attached_bone;
     u8 field_0x14[4];
     void (*object_destroy_function)(void*);
 } effect_info;
 
 typedef struct {
-    vec3f scale;
+    Vec3f scale;
     f32 scale_multiplier;
     s16 angle;
     u16 flags;
@@ -63,7 +63,7 @@ typedef struct {
 
 typedef struct {
     u32 flags;
-    cv64_model_inf_t* model;
+    Model* model;
     camera* display_camera;
     effect_animation_info anim_info;
     u16 max_frame_speed;
@@ -72,12 +72,12 @@ typedef struct {
     u16 color_intensity_transition_max_time;
     s16 field_0x24;
     u16 max_spawned_time;
-    vec3f position;
-    vec3f scale;
-    angle_t angle;
+    Vec3f position;
+    Vec3f scale;
+    Angle angle;
     u8 field_0x46[2];
-    cv64_rgba_t primitive_color;
-    cv64_rgba_t environment_color;
+    RGBA primitive_color;
+    RGBA environment_color;
     void (*loop_function)(void*);
     u8 field_0x54; // For damage-related effects, this is `atari_damage_type`
     u8 field_0x55;
@@ -88,12 +88,12 @@ typedef struct {
 typedef struct cv64_effect {
     cv64_object_hdr_t header;
     u8 field_0x04[4];
-    cv64_model_inf_t* model;
+    Model* model;
     u8 field_0x28[60];
     effect_info* info;
     effect_positional_info* positional_info;
     effect_visual_info* visual_info;
-    cv64_actor_settings_t* settings;
+    ActorConfig* settings;
 } cv64_effect_t;
 
 extern cv64_effect_t* createEffectObjectUnderEffectMgr(

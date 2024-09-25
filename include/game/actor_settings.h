@@ -17,8 +17,8 @@ typedef enum cv64_actor_settings_spawn_settings_1 {
     SPAWN_SETTINGS_1 = 0x01
 } cv64_actor_settings_spawn_settings_1_t;
 
-typedef struct cv64_actor_settings {
-    vec3s position;
+typedef struct ActorConfig {
+    Vec3 position;
     s16 actor_ID;
     u16 variable_1;
     u16 variable_2;
@@ -31,6 +31,6 @@ typedef struct cv64_actor_settings {
         };
         u16 difficulty__spawn_settings;
     };
-} cv64_actor_settings_t;
+} ActorConfig;
 
 #endif

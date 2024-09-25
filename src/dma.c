@@ -11,11 +11,11 @@ extern OSIoMesg dmaIoMesgBuf;
 extern OSMesgQueue dmaIoMesgQueue;
 extern OSPiHandle* gCartHandle;
 
-void dma_init_cart(void) {
+void DMA_InitCart(void) {
     gCartHandle = osCartRomInit();
 }
 
-static void dma_read_write(OSPiHandle* piHandle, s32 direction, void* dest, void* src, s32 len) {
+static void DMA_readWrite(OSPiHandle* piHandle, s32 direction, void* dest, void* src, s32 len) {
     if (direction == OS_READ) {
         osWritebackDCache(dest, len);
         osInvalDCache(dest, len);
@@ -34,6 +34,6 @@ static void dma_read_write(OSPiHandle* piHandle, s32 direction, void* dest, void
     osRecvMesg(&dmaIoMesgQueue, NULL, OS_MESG_BLOCK);
 }
 
-void dma_rom_copy(void* src, void* dest, s32 len) {
-    dma_read_write(gCartHandle, OS_READ, dest, src, len);
+void DMA_ROMCopy(void* src, void* dest, s32 len) {
+    DMA_readWrite(gCartHandle, OS_READ, dest, src, len);
 }

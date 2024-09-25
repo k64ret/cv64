@@ -75,7 +75,7 @@ void cutsceneMgr_createCutscene(cutsceneMgr* self) {
 
     cutscene_overlay = cutscene_settings[self->cutscene_ID - 1].overlay;
     if (BITS_HAS(cutscene_overlay, CUTSCENE_OVERLAY_FADE)) {
-        (*fade_setSettings)(FADE_OUT, 10, 0, 0, 0);
+        (*Fade_SetSettings)(FADE_OUT, 10, 0, 0, 0);
     }
 
     cutscene_overlay = cutscene_settings[self->cutscene_ID - 1].overlay;
@@ -163,7 +163,7 @@ void cutsceneMgr_stopCutscene(cutsceneMgr* self) {
 
     settings = &cutscene_settings[self->cutscene_ID - 1];
     if (BITS_HAS(settings->overlay, CUTSCENE_OVERLAY_FADE)) {
-        (*fade_setSettings)(FADE_IN, 10, 0, 0, 0);
+        (*Fade_SetSettings)(FADE_IN, 10, 0, 0, 0);
     }
 
     settings = &cutscene_settings[self->cutscene_ID - 1];

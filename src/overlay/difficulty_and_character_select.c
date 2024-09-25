@@ -16,7 +16,7 @@ u16 level_select_text[] = {
 };
 
 // Position of the lens when highlighting a character
-vec2f lens_pos[NUM_CHARACTERS] = {{-82.0f, 52.0f}, {23.0f, 52.0f}};
+Vec2f lens_pos[NUM_CHARACTERS] = {{-82.0f, 52.0f}, {23.0f, 52.0f}};
 
 characterSelect_func_t characterSelect_functions[] = {
     difficultySelect_loop,
@@ -172,7 +172,7 @@ void characterSelect_areStructsCreated(characterSelect* self) {
 
 // Officially called `pc_select_init`
 void characterSelect_init(characterSelect* self) {
-    cv64_model_inf_t* character_portrait;
+    Model* character_portrait;
     mfds_state* character_name;
     s32 temp1;
     scroll_state* scroll_state;
@@ -181,14 +181,14 @@ void characterSelect_init(characterSelect* self) {
     pc_select_work* work        = inner->work;
 
     // Create Reinhardt's portrait
-    character_portrait = (*modelInfo_createAndSetChild)(
+    character_portrait = (*Model_createAndSetChild)(
         FIG_TYPE_0400 | FIG_TYPE_HUD_ELEMENT, work->scroll_elements_light
     );
     self->character_portraits[REINHARDT] = character_portrait;
     character_portrait->material_dlist   = &REINHARDT_PORTRAIT_MATERIAL_DL;
     character_portrait->dlist =
         FIG_APPLY_VARIABLE_TEXTURE_AND_PALETTE((u32) &REINHARDT_PORTRAIT_DL);
-    character_portrait->assets_file_ID = NI_ASSETS_CHARACTER_SELECTION_SCREEN;
+    character_portrait->assets_file = NI_ASSETS_CHARACTER_SELECTION_SCREEN;
     BITS_SET(character_portrait->flags, FIG_FLAG_APPLY_PRIMITIVE_COLOR);
     BITS_SET(character_portrait->flags, FIG_FLAG_0080);
     character_portrait->primitive_color.integer = RGBA(255, 255, 255, 255);
@@ -206,11 +206,11 @@ void characterSelect_init(characterSelect* self) {
 
     // Create Carrie's portrait
     character_portrait =
-        (*modelInfo_createAndSetChild)(FIG_TYPE_0400 | FIG_TYPE_HUD_ELEMENT, character_portrait);
+        (*Model_createAndSetChild)(FIG_TYPE_0400 | FIG_TYPE_HUD_ELEMENT, character_portrait);
     self->character_portraits[CARRIE]  = character_portrait;
     character_portrait->material_dlist = &CARRIE_PORTRAIT_MATERIAL_DL;
     character_portrait->dlist = FIG_APPLY_VARIABLE_TEXTURE_AND_PALETTE((u32) &CARRIE_PORTRAIT_DL);
-    character_portrait->assets_file_ID = NI_ASSETS_CHARACTER_SELECTION_SCREEN;
+    character_portrait->assets_file = NI_ASSETS_CHARACTER_SELECTION_SCREEN;
     BITS_SET(character_portrait->flags, FIG_FLAG_APPLY_PRIMITIVE_COLOR);
     BITS_SET(character_portrait->flags, FIG_FLAG_0080);
     character_portrait->primitive_color.integer = RGBA(255, 255, 255, 255);
@@ -358,7 +358,7 @@ void characterSelect_createLens(characterSelect* self) {
 }
 
 void characterSelect_selectOption(characterSelect* self) {
-    cv64_model_inf_t* character_portrait;
+    Model* character_portrait;
     characterSelect* self_temp;
     window_work* lens;
     mark_work* mark;

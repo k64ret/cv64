@@ -42,20 +42,20 @@ void cv64_ovl_rose_ventilator_entrypoint(cv64_ovl_rose_ventilator_t* self) {
 
 void cv64_ovl_rose_ventilator_init(cv64_ovl_rose_ventilator_t* self) {
     cv64_ovl_rose_ventilator_cfg_t* speed_settings = &self->speed_settings;
-    cv64_model_inf_t* model = (*modelInfo_createAndSetChild)(FIG_TYPE_STANDALONE, map_lights[0]);
+    Model* model = (*Model_createAndSetChild)(FIG_TYPE_STANDALONE, map_lights[0]);
     u32 unused;
 
     if (model == NULL) {
         // VENTILATOR : Can't allocate F3D.\n
         self->header.destroy(self);
     } else {
-        self->model           = model;
-        model->dlist          = &ROSE_VENTILATOR_DL;
-        model->assets_file_ID = MAP_ASSETS_FILE_ID;
+        self->model        = model;
+        model->dlist       = &ROSE_VENTILATOR_DL;
+        model->assets_file = MAP_ASSETS_FILE_ID;
         BITS_SET(model->flags, FIG_FLAG_APPLY_PRIMITIVE_COLOR | FIG_FLAG_APPLY_FOG_COLOR);
         model->primitive_color.integer = sys.primitive_color.integer;
         model->fog_color.integer       = sys.background_color.integer;
-        (*modelInfo_setMapActorModel)(model, &ROSE_VENTILATOR_DL);
+        (*Model_setMapActorModel)(model, &ROSE_VENTILATOR_DL);
         speed_settings->current_speed = speed_settings->max_speed =
             BITS_MASK((*rand)(), 0xFFF) + 16;
         speed_settings->time_until_changing_max_speed = BITS_MASK((*rand)(), 0x1FF) + 30;
@@ -67,7 +67,7 @@ void cv64_ovl_rose_ventilator_init(cv64_ovl_rose_ventilator_t* self) {
 }
 
 void cv64_ovl_rose_ventilator_loop(cv64_ovl_rose_ventilator_t* self) {
-    cv64_model_inf_t* model                        = self->model;
+    Model* model                                   = self->model;
     cv64_ovl_rose_ventilator_cfg_t* speed_settings = &self->speed_settings;
 
     model->primitive_color.integer = sys.primitive_color.integer;
@@ -115,20 +115,20 @@ void cv64_ovl_rose_door_entrypoint(cv64_ovl_rose_door_t* self) {
 }
 
 void cv64_ovl_rose_door_init(cv64_ovl_rose_door_t* self) {
-    cv64_map_actor_model_t* map_actor_model;
-    cv64_actor_settings_t* settings           = self->settings;
+    MapActorModel* map_actor_model;
+    ActorConfig* settings                     = self->settings;
     cv64_ovl_rose_door_cfg_t* height_settings = &self->height_settings;
-    cv64_model_inf_t* model = (*modelInfo_createAndSetChild)(FIG_TYPE_STANDALONE, map_lights[0]);
+    Model* model = (*Model_createAndSetChild)(FIG_TYPE_STANDALONE, map_lights[0]);
 
     self->model = model;
     (*actor_model_set_pos_and_angle)(self, model);
-    model->assets_file_ID = MAP_ASSETS_FILE_ID;
-    model->dlist          = &ROSE_DOOR_DL;
+    model->assets_file = MAP_ASSETS_FILE_ID;
+    model->dlist       = &ROSE_DOOR_DL;
     BITS_SET(model->flags, FIG_FLAG_APPLY_PRIMITIVE_COLOR | FIG_FLAG_APPLY_FOG_COLOR);
     model->primitive_color.integer = sys.primitive_color.integer;
     model->fog_color.integer       = sys.background_color.integer;
     BITS_SET(self->header.ID, OBJ_FLAG_ENABLE_COLLISION);
-    map_actor_model        = (*getMapActorModelEntryFromArray)(model->dlist, model->assets_file_ID);
+    map_actor_model        = (*getMapActorModelEntryFromArray)(model->dlist, model->assets_file);
     model->map_actor_model = map_actor_model;
     self->map_actor_model  = map_actor_model;
     (*object_curLevel_goToNextFuncAndClearTimer)(
@@ -146,7 +146,7 @@ void cv64_ovl_rose_door_init(cv64_ovl_rose_door_t* self) {
 }
 
 void cv64_ovl_rose_door_loop(cv64_ovl_rose_door_t* self) {
-    cv64_model_inf_t* model                   = self->model;
+    Model* model                              = self->model;
     cv64_ovl_rose_door_cfg_t* height_settings = &self->height_settings;
 
     model->primitive_color.integer = sys.primitive_color.integer;
@@ -164,7 +164,7 @@ void cv64_ovl_rose_door_loop(cv64_ovl_rose_door_t* self) {
 
 void cv64_ovl_rose_door_state_startClosing(cv64_ovl_rose_door_t* self) {
     cv64_ovl_rose_door_cfg_t* height_settings = &self->height_settings;
-    cv64_model_inf_t* model                   = self->model;
+    Model* model                              = self->model;
 
     if ((*checkIfOutsideEntityIsInsideMainEntityRadius)(
             model, ptr_PlayerData->visualData.model, 15.0f, AXIS_Z
@@ -187,7 +187,7 @@ void cv64_ovl_rose_door_state_startClosing(cv64_ovl_rose_door_t* self) {
 
 void cv64_ovl_rose_door_state_closing(cv64_ovl_rose_door_t* self) {
     cv64_ovl_rose_door_cfg_t* height_settings = &self->height_settings;
-    cv64_model_inf_t* model                   = self->model;
+    Model* model                              = self->model;
 
     if (height_settings->closing_speed < 0.4166666666666667) {
         height_settings->closing_speed += 0.01388888888888889;

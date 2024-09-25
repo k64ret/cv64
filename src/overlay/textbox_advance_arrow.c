@@ -26,7 +26,7 @@ void textboxAdvanceArrow_entrypoint(textboxAdvanceArrow* self) {
 
 void textboxAdvanceArrow_init(textboxAdvanceArrow* self) {
     light* arrow_light;
-    cv64_model_inf_t* model;
+    Model* model;
 
     arrow_light       = (*light_create)(FIG_TYPE_LIGHT);
     self->arrow_light = arrow_light;
@@ -45,10 +45,10 @@ void textboxAdvanceArrow_init(textboxAdvanceArrow* self) {
     arrow_light->lights[0].direction[0] = 240;
     arrow_light->lights[0].direction[1] = 0;
     arrow_light->lights[0].direction[2] = 16;
-    model                 = (*modelInfo_createAndSetChild)(FIG_TYPE_HUD_ELEMENT, arrow_light);
-    self->model           = model;
-    model->dlist          = &TEXTBOX_ADVANCE_ARROW_DL;
-    model->assets_file_ID = NI_ASSETS_FILE_SELECT;
+    model              = (*Model_createAndSetChild)(FIG_TYPE_HUD_ELEMENT, arrow_light);
+    self->model        = model;
+    model->dlist       = &TEXTBOX_ADVANCE_ARROW_DL;
+    model->assets_file = NI_ASSETS_FILE_SELECT;
     BITS_SET(model->flags, FIG_FLAG_0080);
     BITS_SET(model->flags, FIG_FLAG_APPLY_PRIMITIVE_COLOR);
     model->primitive_color.integer = RGBA(255, 0, 0, 255);
@@ -65,8 +65,8 @@ void textboxAdvanceArrow_init(textboxAdvanceArrow* self) {
 }
 
 void textboxAdvanceArrow_loop(textboxAdvanceArrow* self) {
-    u32 fade_timer_prev     = self->fade_timer;
-    cv64_model_inf_t* model = self->model;
+    u32 fade_timer_prev = self->fade_timer;
+    Model* model        = self->model;
     u8 red;
     u32 new_var;
 

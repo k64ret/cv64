@@ -86,8 +86,8 @@ typedef struct {
     s16 field_0x0E;
     u8 flags;
     u8 field_0x11;
-    vec2s position;
-    vec2s field_0x16;
+    Vec2 position;
+    Vec2 field_0x16;
     u8 field_0x1A;
     u8 num_options;
     u8 current_option;
@@ -125,9 +125,9 @@ typedef struct {
     u16* text; // Officially called "str1"
     u16* item_amount_text;
     s32 field_0x10;
-    vec2s position;
+    Vec2 position;
     f32 position_Z;
-    vec2f scale;
+    Vec2f scale;
     s32 number;
     s32 field_0x28;
     u16 width;
@@ -160,7 +160,7 @@ typedef struct {
     u16 field_0x20;
     u16 field_0x22;
     u8 field_0x24[4];
-    cv64_model_inf_t* model;
+    Model* model;
     u8 field_0x2C[8];
     Gfx** mfds_double;
     void* field_0x38;
@@ -185,7 +185,7 @@ typedef struct {
 
 extern mfds_state* textbox_create(void* parent_object, camera* display_camera, u32 flags);
 extern void
-textbox_setDimensions(mfds_state* self, s8 height, s16 width, u8 param_4, u8 character_spacing);
+textbox_setDimensions(mfds_state* self, u8 height, u16 width, u8 param_4, u8 character_spacing);
 extern void textbox_setPos(mfds_state* self, u16 x, u16 y, s32 unused);
 extern void
 textbox_setMessagePtr(mfds_state* self, u16* text, u16* item_amount_number_text, s16 number);

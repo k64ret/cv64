@@ -86,17 +86,17 @@ ptr_gameplayParentObject               = 0x800A7834;
 // src/fade.c ==================================================================
 
 // .text
-fade_setSettings          = 0x8000e618; // type:func
-fade_isFading             = 0x8000e67c; // type:func
-fade_setColor             = 0x8000e5f4; // type:func
-fade_removeFlag           = 0x8000e5cc; // type:func
-fade_setAllFlags          = 0x8000e590; // type:func
-fade_setFlag              = 0x8000e5a8; // type:func
-fade_calc                 = 0x8000e6c4; // type:func
+Fade_setAllFlags          = 0x8000E590; // type:func
+Fade_setFlag              = 0x8000E5A8; // type:func
+Fade_removeFlag           = 0x8000E5CC; // type:func
+Fade_setColor             = 0x8000E5F4; // type:func
+Fade_SetSettings          = 0x8000E618; // type:func
+Fade_IsFading             = 0x8000E67C; // type:func
+Fade_Calc                 = 0x8000E6C4; // type:func
 
 // .data
-//cv64_dl_fade_normal       = 0x80093370; // rom:0x00093F70 size:0x60
-//cv64_dl_fade_with_outline = 0x800933D0; // rom:0x00093FD0 size:0x60
+dl_fade_normal            = 0x80093370; // rom:0x00093F70 size:0x60
+dl_fade_with_outline      = 0x800933D0; // rom:0x00093FD0 size:0x60
 // .rodata
 
 // End of src/fade.c ===========================================================
@@ -169,14 +169,14 @@ func_80011C6C_1286C         = 0x80011C6C; // type:func
 // src/dma.c ===================================================================
 
 // .text
-dma_init_cart  = 0x80017710; // type:func
-dma_read_write = 0x80017734; // type:func
-dma_rom_copy   = 0x800177EC; // type:func
+DMA_InitCart   = 0x80017710; // type:func
+DMA_readWrite  = 0x80017734; // type:func
+DMA_ROMCopy    = 0x800177EC; // type:func
 
 // .bss
-dmaIoMesgBuf = 0x800d5e60;
-dmaIoMesgQueue = 0x800abfa0;
-gCartHandle = 0x800d5e78;
+dmaIoMesgBuf   = 0x800D5E60;
+dmaIoMesgQueue = 0x800ABFA0;
+gCartHandle    = 0x800D5E78;
 
 // End of src/dma.c ============================================================
 
@@ -1579,17 +1579,17 @@ __osSpSetPc = 0x8008FC90; // type:func
 // src/common/interactables.c ==================================================
 
 // .text
-interactables_entrypoint          = 0x80125230; // type:func
-interactables_init                = 0x801252A0; // type:func
-interactables_main                = 0x80125764; // type:func
-interactables_initCheck           = 0x80125B60; // type:func
-interactables_selectTextboxOption = 0x80125D84; // type:func
-interactables_stopCheck           = 0x80126004; // type:func
-interactables_destroy             = 0x801261DC; // type:func
-interactables_stopInteraction     = 0x80126354; // type:func
+Interactable_Entrypoint          = 0x80125230; // type:func
+Interactable_Init                = 0x801252A0; // type:func
+Interactable_Main                = 0x80125764; // type:func
+Interactable_InitCheck           = 0x80125B60; // type:func
+Interactable_SelectTextboxOption = 0x80125D84; // type:func
+Interactable_StopCheck           = 0x80126004; // type:func
+Interactable_Destroy             = 0x801261DC; // type:func
+Interactable_stopInteraction     = 0x80126354; // type:func
 
 // .data
-interactables_functions           = 0x8016B560; // size:0x18
+interactable_funcs               = 0x8016B560; // size:0x18
 
 // End of src/common/interactables.c ===========================================
 
@@ -1692,13 +1692,13 @@ figure_showModelAndChildren = 0x8000496c;
 fig_allocate = 0x80004b28;
 camera_setParams = 0x80004bb4;
 camera_create = 0x80004c04;
-modelInfo_createAndSetChild = 0x80004e68;
-modelInfo_createNextNode = 0x80004ef4;
+Model_createAndSetChild = 0x80004e68;
+Model_createNextNode = 0x80004ef4;
 modelInfo_createHierarchyNode = 0x80004fac;
-modelInfo_buildHierarchy = 0x800051c8;
+Model_buildHierarchy = 0x800051c8;
 animation_animateRotationFrame = 0x800088ec;
-modelInfo_setPosVec3s = 0x80009330;
-modelInfo_copyPositionalData = 0x80158c98;
+Model_setPosVec3s = 0x80009330;
+Model_copyPositionalData = 0x80158c98;
 animation_animateTranslationFrame = 0x800095e0;
 animationInfo_create = 0x8000b454;
 animationInfo_setParams = 0x8000b5b8;
@@ -2012,7 +2012,7 @@ Actor_findFirstActorWithVariable1 = 0x801589c0;
 modelInfo_copyPosToVec3f = 0x80158c7c;
 isDaytime = 0x801591e4;
 isNightTime = 0x80159214;
-modelInfo_setMapActorModel = 0x80159240;
+Model_setMapActorModel = 0x80159240;
 roomMgr_createActors = 0x8015ddf8;
 roomMgr_initDoors = 0x8015e098;
 actorDoor_checkSpawn = 0x8015f604;
@@ -2233,7 +2233,7 @@ castleWallGratingMechanism_textSpotsActorSettings_openMechanism   = 0x8016A870; 
 castleWallGratingMechanism_textSpotsActorSettings_mechanismOpened = 0x8016A880; // size:0x10
 door_item_open_verify_list                                        = 0x8016A890; // size:0x68
 castleWallGratingMechanism_textSpotsActorSettings                 = 0x8016A8F8; // size:0x0C
-interactables_settings_table                                      = 0x8016A904; // size:0x9C4
+interactables_settings                                            = 0x8016A904; // size:0x9C4
 item_model_settings_list                                          = 0x8016B2C8; // size:0x290
 
 // End of src/common/interactables_tables.c ====================================
@@ -2265,11 +2265,18 @@ HUD_initGraphics = 0x80137638;
 HUD_destroy = 0x801381dc;
 HUD_updateBossBar = 0x801386e0;
 HUD_updateClockDisplay = 0x80138b68;
-HUDParams_initBossBar = 0x80139340;
-HUDParams_removeBossCurrentLife = 0x801393ac;
-HUDParams_increaseDamage = 0x801393d4;
-HUDParams_resetPlayerLifeAndFlags = 0x80139424;
-HUDParams_fillPlayerHealth = 0x80139468;
+
+// src/common/hud_params.c =====================================================
+
+// .text
+HUDParams_initBossBar              = 0x80139340; // type:func
+HUDParams_removeBossCurrentLife    = 0x801393AC; // type:func
+HUDParams_IncreaseDamage           = 0x801393D4; // type:func
+HUDParams_resetPlayerLifeAndStatus = 0x80139424; // type:func
+HUDParams_FillPlayerHealth         = 0x80139468; // type:func
+
+// End of src/common/hud_params.c ==============================================
+
 renonShop_entrypoint = 0x801394e0;
 renonShop_createBriefcaseCutscene = 0x80139550;
 renonShop_fadeInAfterBriefcaseCutscene = 0x80139594;
@@ -2784,7 +2791,7 @@ previous_song_ID = 0x80093d92;
 ptr_currentAudioTrackState = 0x8012262c;
 yet_another_display_list = 0x80180f80;
 pickable_items_assets_file_ID = 0x80389ed8;
-PLAYER_HAS_MAX_HEALTH = 0x80180490;
+player_has_max_health = 0x80180490;
 isPlayerAirborne = 0x8003c9e8;
 forest_of_silence_actor_list = 0x802bcb90;
 ptr_mapObjectParent = 0x800d5f04;
@@ -2947,7 +2954,7 @@ Actor_getInitialPosition = 0x8003bf44;
 vec3f_magnitudeSquared = 0x8003d538;
 modelInfo_setPosVec3f = 0x8003cf74;
 textboxObject_functions = 0x8016d07c;
-play_character_health_fulfilled_sound_after_recovering_health = 0x80180494;
+play_health_recovery_sound = 0x80180494;
 map_objects_overlay_file_info = 0x80095fd0;
 camera_params_array_indexes = 0x80185358;
 shadow_functions = 0x8009ac30;

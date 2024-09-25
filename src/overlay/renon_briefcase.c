@@ -13,7 +13,7 @@
 // clang-format off
 
 // TODO: `extern const u32` for the dlists
-hierarchy cv64_ovl_renonbriefcase_hierarchy = {
+Hierarchy cv64_ovl_renonbriefcase_hierarchy = {
     NI_ASSETS_RENON_BRIEFCASE,
     {
         // RENON_BRIEFCASE_LOWER_LID_DL
@@ -41,7 +41,7 @@ void cv64_ovl_renonbriefcase_entrypoint(cv64_ovl_renonbriefcase_t* self) {
 }
 
 void cv64_ovl_renonbriefcase_init(cv64_ovl_renonbriefcase_t* self) {
-    cv64_model_inf_t* model;
+    Model* model;
     animation_info* anim_info = &self->anim_info;
     u32 i;
     u32 unused;
@@ -69,7 +69,7 @@ void cv64_ovl_renonbriefcase_init(cv64_ovl_renonbriefcase_t* self) {
     // clang-format on
 
     // Create and setup the briefcase model
-    self->model = (*modelInfo_buildHierarchy)(
+    self->model = (*Model_buildHierarchy)(
         FIG_TYPE_0400 | FIG_TYPE_HIERARCHY_NODE,
         common_camera_8009B44C,
         &cv64_ovl_renonbriefcase_hierarchy
@@ -101,14 +101,14 @@ void cv64_ovl_renonbriefcase_init(cv64_ovl_renonbriefcase_t* self) {
     );
     (*animationInfo_animateFrame)(anim_info, model);
 
-    (*fade_setSettings)(FADE_IN, 15, 0xFF, 0xFF, 0xFF);
+    (*Fade_SetSettings)(FADE_IN, 15, 0xFF, 0xFF, 0xFF);
     (*object_curLevel_goToNextFuncAndClearTimer)(
         self->header.current_function, &self->header.function_info_ID
     );
 }
 
 void cv64_ovl_renonbriefcase_loop(cv64_ovl_renonbriefcase_t* self) {
-    cv64_model_inf_t* model = self->model;
+    Model* model = self->model;
     f32 volume;
 
     // Step 1. Briefcase is approaching the camera
@@ -160,7 +160,7 @@ void cv64_ovl_renonbriefcase_loop(cv64_ovl_renonbriefcase_t* self) {
 
     //  Step 4. Fade out and destroy the object
     if (self->current_cutscene_time == 93) {
-        (*fade_setSettings)(FADE_OUT, 30, 0, 0, 0);
+        (*Fade_SetSettings)(FADE_OUT, 30, 0, 0, 0);
     }
 
     if (self->current_cutscene_time >= 109) {

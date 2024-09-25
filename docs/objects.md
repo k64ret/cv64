@@ -127,10 +127,10 @@ than that, it does not seem to affect code execution.
 ### `timer`
 
 This value is used by some objects as a timer for different purposes. For
-example, the `interactables` object[^4] uses this timer to know how much time
+example, the `Interactable` object[^4] uses this timer to know how much time
 has passed before it can begin to disappear after awhile.
 
-[^4]: The `interactables` object handles pickable items and text spots that you
+[^4]: The `Interactable` object handles pickable items and text spots that you
 can read during gameplay when pressing C-Right on a Nintendo 64 controller.
 
 ### `current_function` and `function_info_ID`

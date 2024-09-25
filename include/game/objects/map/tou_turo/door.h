@@ -19,13 +19,13 @@ extern const u32 TOUTURO_DOOR_ENTRANCE_DL;
 typedef struct cv64_ovl_touturo_door {
     cv64_object_hdr_t header;
     u8 padding1[4];
-    cv64_model_inf_t* model;
+    Model* model;
     u8 padding2[12];
     u16 close_time;
     u8 padding3[50];
-    cv64_map_actor_model_t* map_actor_model;
+    MapActorModel* map_actor_model;
     u8 padding4[4];
-    cv64_actor_settings_t* settings;
+    ActorConfig* settings;
 } cv64_ovl_touturo_door_t;
 
 // Common to both door types
