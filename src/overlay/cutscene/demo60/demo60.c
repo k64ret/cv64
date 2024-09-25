@@ -2,7 +2,15 @@
 
 // clang-format off
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/overlay/cutscene/demo60/demo60/Demo60_Entrypoint.s")
+extern Demo60Func Demo60_functions[];
+
+// clang-format on
+
+void Demo60_Entrypoint(Demo60* self) {
+    ENTER(self, Demo60_functions);
+}
+
+// clang-format off
 
 #pragma GLOBAL_ASM("../asm/nonmatchings/overlay/cutscene/demo60/demo60/Demo60_Init.s")
 
