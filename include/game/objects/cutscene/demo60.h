@@ -39,13 +39,13 @@ typedef struct {
     u8 field_0x73;
 } Demo60;
 
-extern void Demo60_Entrypoint(Demo60* self);
-extern void Demo60_Init(Demo60* self);
-extern void Demo60_CreateCutsceneCamera(Demo60* self);
-extern void Demo60_GetPlayerModelAndSetBorders(Demo60* self);
-extern void Demo60_Loop(Demo60* self);
-extern void Demo60_Destroy(Demo60* self);
-extern void Demo60_PlayPlayerBlessingAnim(Demo60* self, CutsceneCoordinatesSettings* coords);
+void Demo60_Entrypoint(Demo60* self);
+void Demo60_Init(Demo60* self);
+void Demo60_CreateCutsceneCamera(Demo60* self);
+void Demo60_GetPlayerModelAndSetBorders(Demo60* self);
+void Demo60_Loop(Demo60* self);
+void Demo60_Destroy(Demo60* self);
+void Demo60_PlayPlayerBlessingAnim(Demo60* self, CutsceneCoordinatesConfig* coords);
 
 typedef void (*Demo60Func)(Demo60*);
 

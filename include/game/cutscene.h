@@ -21,7 +21,7 @@ enum DLScissoringSetting {
     DL_SCISSORING_BORDERS    = 1
 };
 
-typedef struct CutsceneCoordinatesSettings {
+typedef struct CutsceneCoordinatesConfig {
     u8 field_0x00; // See the switches at 0x8012a130 and 0x8012a2b8
     u8 field_0x01;
     s8 player_anims_array_index; // Index at arrays 0x8016c884 and 0x8016c75c
@@ -31,7 +31,7 @@ typedef struct CutsceneCoordinatesSettings {
     s16 angle;
     s16 start_time; // Time in frames during the cutscene run time where this camera settings are going to be used
     s16 end_time; // Time in frames during the cutscene run time where this camera settings stop being used
-} CutsceneCoordinatesSettings;
+} CutsceneCoordinatesConfig;
 
 typedef struct CutsceneCurrentCameraMovement {
     Vec3f* cam_position;
@@ -93,11 +93,11 @@ extern Actor* cutscene_setActorStateIfMatchingVariable1(s16 actor_ID, u16 variab
 extern void
 Cutscene_UpdateCameraLookAtDir(Camera* camera, CutsceneCurrentCameraMovement* camera_movement);
 extern void
-func_801299A4(u32, Model*, CutsceneCoordinatesSettings*, CutsceneCameraMovementState*, u8);
-extern void func_80128D20(u32, Camera*, Camera*, CutsceneCoordinatesSettings*, void*, u8);
+func_801299A4(u32, Model*, CutsceneCoordinatesConfig*, CutsceneCameraMovementState*, u8);
+extern void func_80128D20(u32, Camera*, Camera*, CutsceneCoordinatesConfig*, void*, u8);
 extern void
-func_8012A130(void*, Model*, CutsceneCoordinatesSettings*, CutsceneCameraMovementState*, u8, u32);
-extern void Cutscene_SetCameraPosToEndCoords(CutsceneCoordinatesSettings*, Camera*);
-extern void Cutscene_SetEndCoordsToActor(CutsceneCoordinatesSettings*, Model*);
+func_8012A130(void*, Model*, CutsceneCoordinatesConfig*, CutsceneCameraMovementState*, u8, u32);
+extern void Cutscene_SetCameraPosToEndCoords(CutsceneCoordinatesConfig*, Camera*);
+extern void Cutscene_SetEndCoordsToActor(CutsceneCoordinatesConfig*, Model*);
 
 #endif

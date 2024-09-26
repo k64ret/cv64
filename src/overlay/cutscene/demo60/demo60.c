@@ -89,7 +89,7 @@ void Demo60_GetPlayerModelAndSetBorders(Demo60* self) {
 
 void Demo60_Loop(Demo60* self) {
     s32 temp[4];
-    CutsceneCoordinatesSettings* coords;
+    CutsceneCoordinatesConfig* coords;
     Demo60Data* data = self->data;
     s32 current_time;
     u32 i;
@@ -235,7 +235,7 @@ void Demo60_Destroy(Demo60* self) {
     self->header.destroy(self);
 }
 
-void Demo60_PlayPlayerBlessingAnim(Demo60* self, CutsceneCoordinatesSettings* coords) {
+void Demo60_PlayPlayerBlessingAnim(Demo60* self, CutsceneCoordinatesConfig* coords) {
     Demo60Data* data            = self->data;
     actorVisualData* visualData = &ptr_PlayerData->visualData;
     s32 temp;
