@@ -3,14 +3,14 @@
 
 #include "cutscene.h"
 
-typedef enum DEMO60State {
+enum Demo60State {
     DEMO60_RUNNING,
     DEMO60_FADE_OUT,
     DEMO60_FADE_IN,
     DEMO60_WAIT_UNTIL_FADE_IN_IS_OVER,
     DEMO60_RESET_BORDERS,
     DEMO60_SET_MAP_CAMERA_PARAMETERS
-} DEMO60State;
+};
 
 typedef struct Demo60Data {
     Camera* cutscene_camera;
@@ -23,7 +23,7 @@ typedef struct Demo60Data {
 } Demo60Data;
 
 // ID: 0x205D
-typedef struct {
+typedef struct Demo60 {
     ObjectHeader header;
     u8 field_0x20[4];
     Camera* cutscene_camera;
