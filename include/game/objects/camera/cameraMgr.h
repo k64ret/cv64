@@ -3,14 +3,14 @@
 
 #include "object.h"
 #include "gfx/camera.h"
-#include "gfx/model_info.h"
+#include "gfx/model.h"
 
 // TODO: Add defines / enums for `player_camera_state` and `camera_mode`
 typedef struct {
     u32 player_camera_state;
     u32 camera_mode;
     u32 previous_camera_mode;
-    camera* camera_player;
+    Camera* camera_player;
     void* ptr_playerCameraController; // playerCameraController*
     Model* camera_mode_text;
     Vec3f camera_position;
@@ -39,9 +39,9 @@ typedef struct {
 
 // ID: 0x006A
 typedef struct {
-    cv64_object_hdr_t header;
+    ObjectHeader header;
     u8 field_0x20[4];
-    camera* field_0x24;
+    Camera* field_0x24;
     u8 field_0x28[12];
     cameraMgr_data* data;
     u8 field_0x38[OBJECT_SIZE - 0x38];

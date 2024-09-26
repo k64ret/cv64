@@ -2,7 +2,7 @@
 #define POINT_LIGHT_H
 
 #include "object.h"
-#include "gfx/model_info.h"
+#include "gfx/model.h"
 #include "actor_settings.h"
 
 typedef struct {
@@ -21,7 +21,7 @@ typedef struct {
 
 // ID: 0x006F
 typedef struct {
-    cv64_object_hdr_t header;
+    ObjectHeader header;
     u8 field_0x20[20];
     pointLightData data;
     u8 field_0x5C[20];

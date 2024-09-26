@@ -129,7 +129,7 @@ void cutsceneMgr_loop(cutsceneMgr* self) {
             self->header.current_function, &self->header.function_info_ID
         );
     } else if (CONT_BTNS_PRESSED(CONT_0, START_BUTTON | RECENTER_BUTTON) && (2 < sys.cutscene_ID)) {
-        cutscene* cutscene_obj      = self->cutscene_object;
+        Cutscene* cutscene_obj      = self->cutscene_object;
         cutscene_obj->skip_cutscene = TRUE;
     }
 }

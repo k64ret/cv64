@@ -2,7 +2,7 @@
 #define ROSE_DOOR_H
 
 #include "actor.h"
-#include "gfx/model_info.h"
+#include "gfx/model.h"
 #include "map_actor_model.h"
 
 // Variable 1 = Don't close door
@@ -16,7 +16,7 @@ typedef struct cv64_ovl_rose_door_cfg {
 
 // ID: 0x1221
 typedef struct cv64_ovl_rose_door {
-    cv64_object_hdr_t header;
+    ObjectHeader header;
     u8 field_0x4[4];
     Model* model;
     u8 field_0x28[12];

@@ -5,7 +5,7 @@
 
 // ID 0x0172
 typedef struct {
-    cv64_object_hdr_t header;
+    ObjectHeader header;
     u8 field_0x20[4];
     Model* model;
     u8 field_0x28[OBJECT_SIZE - 0x2C];

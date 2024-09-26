@@ -20,7 +20,7 @@ typedef struct cv64_ovl_titledemo_cont {
 
 // ID: 0x0019
 typedef struct cv64_ovl_titledemo {
-    cv64_object_hdr_t header;
+    ObjectHeader header;
     u8 field_0x20[28];
     u32 cont_data_curr_keyframe;
     u32 state;

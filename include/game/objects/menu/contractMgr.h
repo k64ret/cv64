@@ -6,7 +6,7 @@
 
 // ID: 0x213B
 typedef struct {
-    cv64_object_hdr_t header;
+    ObjectHeader header;
     u8 field_0x20[20];
     Interactable* contract_item;
     void* field_0x38;

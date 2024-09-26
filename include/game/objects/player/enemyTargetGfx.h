@@ -32,7 +32,7 @@ typedef struct {
 
 // ID: 0x007A
 typedef struct {
-    cv64_object_hdr_t header;
+    ObjectHeader header;
     u8 field_0x20[4];
     Model* model;
     u8 field_0x28[72];

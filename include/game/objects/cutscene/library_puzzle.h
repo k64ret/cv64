@@ -45,7 +45,7 @@ typedef struct cv64_ovl_librarypuzzledata {
 
 // ID: 0x2026
 typedef struct cv64_ovl_librarypuzzletxt {
-    cv64_object_hdr_t header;
+    ObjectHeader header;
     u8 field_0x20[20];
     cv64_ovl_librarypuzzledata_t* data;
     u8 field_0x38[4];

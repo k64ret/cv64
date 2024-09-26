@@ -1,12 +1,12 @@
 #ifndef KONAMI_KCEK_LOGOS_H
 #define KONAMI_KCEK_LOGOS_H
 
-#include "gfx/model_info.h"
+#include "gfx/model.h"
 #include "object.h"
 
 // ID: 0x000E
 typedef struct cv64_ovl_konamilogo {
-    cv64_object_hdr_t header;
+    ObjectHeader header;
     u8 padding1[4];
     Model* model;
     u8 padding2[OBJECT_SIZE - 0x28];

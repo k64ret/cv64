@@ -2,7 +2,7 @@
 #define SCROLL_H
 
 #include "gfx/camera.h"
-#include "gfx/model_info.h"
+#include "gfx/model.h"
 #include "objects/menu/mark.h"
 
 typedef enum scroll_state_flags {
@@ -30,8 +30,8 @@ typedef enum scroll_state_params {
 
 typedef struct {
     u32 flags;
-    camera* field_0x04;
-    camera* display_camera;
+    Camera* field_0x04;
+    Camera* display_camera;
     Vec3f position;
     Vec3f width;
     u8 open_close_speed;
@@ -61,7 +61,7 @@ typedef struct {
 
 // ID: 0x0132
 typedef struct {
-    cv64_object_hdr_t header;
+    ObjectHeader header;
     u8 field_0x20[4];
     Model* both_dowels;
     Model* lower_dowel;

@@ -51,10 +51,10 @@ typedef struct cv64_object_hdr {
     cv64_object_func_inf_t current_function[3];
     s16 function_info_ID;
     void (*destroy)(void*); // Officially called "OBJ_destruct"
-    struct cv64_object_hdr_t* parent;
-    struct cv64_object_hdr_t* next;
-    struct cv64_object_hdr_t* child;
-} cv64_object_hdr_t;
+    struct ObjectHeader* parent;
+    struct ObjectHeader* next;
+    struct ObjectHeader* child;
+} ObjectHeader;
 ```
 
 ### `ID`
@@ -209,9 +209,9 @@ game their slot is free for a new object to occupy.
 There are two functions used to spawn an object in memory:
 
 ```c
-void* object_create(void* parent, cv64_object_t ID);
+ObjectHeader* object_create(ObjectHeader* parent, cv64_object_id_t ID);
 
-void* object_createAndSetChild(void* parent, cv64_object_t ID);
+ObjectHeader* object_createAndSetChild(ObjectHeader* parent, cv64_object_id_t ID);
 ```
 
 On these functions, `parent` is the parent object, and `ID` is the identifier of
@@ -272,7 +272,7 @@ In order to execute an object, the game calls `object_execute` to execute an
 object's associated code and all its `child` / `next`.
 
 ```c
-void object_execute(cv64_object_hdr_t* object);
+void object_execute(ObjectHeader* object);
 ```
 
 `object` is the pointer to the object at the beginning of the "branch".

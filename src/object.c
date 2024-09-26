@@ -12,14 +12,14 @@
 #include "objects/engine/object_0003.h"
 
 // .bss
-cv64_object_t* object_list_free_slot;
-cv64_object_t* ptr_gameplayParentObject;
+Object* object_list_free_slot;
+Object* ptr_gameplayParentObject;
 
 /**
  * Checks if the object is allocated inside `objects_array`.
  * Return type explicitly needs to be `int` to match (NOT `s32` typedef)
  */
-int object_isValid(cv64_object_hdr_t* self) {
+int object_isValid(ObjectHeader* self) {
     return ((u32) self >= (u32) ARRAY_START(objects_array)) &&
         ((u32) self < (u32) ARRAY_END(objects_array));
 }
@@ -28,7 +28,7 @@ int object_isValid(cv64_object_hdr_t* self) {
  * Removes the object's instance from `objects_array`, and frees
  * the object's pointer list (`alloc_data`).
  */
-void object_free(cv64_object_t* self) {
+void object_free(Object* self) {
     s32 i;
     s32 alloc_data_slot;
     figure* current_figure;
@@ -67,7 +67,7 @@ void object_free(cv64_object_t* self) {
  */
 void clearAllObjects() {
     u32 i;
-    cv64_object_t* currentObject;
+    Object* currentObject;
 
     // clang-format off
     for (i = 0; i < OBJECT_NUM_MAX; i++) objects_number_of_instances_per_object[i] = 0;
@@ -83,9 +83,9 @@ void clearAllObjects() {
 /**
  * Allocates an object's basic struct in `objects_array`
  */
-cv64_object_hdr_t* object_allocate(cv64_object_id_t ID) {
-    cv64_object_t* current_object;
-    cv64_object_t* last;
+ObjectHeader* object_allocate(cv64_object_id_t ID) {
+    Object* current_object;
+    Object* last;
 
     for (current_object = ARRAY_START(objects_array); current_object < ARRAY_END(objects_array);
          current_object++) {
@@ -93,7 +93,7 @@ cv64_object_hdr_t* object_allocate(cv64_object_id_t ID) {
         // that means that it's free, so we can create our new object here
         if (current_object->header.ID == 0) {
             // Clear the object space by filling its memory space with 0
-            memory_clear(current_object, sizeof(cv64_object_t));
+            memory_clear(current_object, sizeof(Object));
 
             // Assign the ID for our new object
             current_object->header.ID = ID;
@@ -103,7 +103,7 @@ cv64_object_hdr_t* object_allocate(cv64_object_id_t ID) {
                 object_list_free_slot = current_object + 1;
             }
 
-            return (cv64_object_hdr_t*) current_object;
+            return (ObjectHeader*) current_object;
         }
     }
 
@@ -114,8 +114,8 @@ cv64_object_hdr_t* object_allocate(cv64_object_id_t ID) {
  * Updates the `objects_array` free space pointer
  */
 void updateObjectListFreeSlot() {
-    cv64_object_t* current;
-    cv64_object_t* previous;
+    Object* current;
+    Object* previous;
 
     for (current = ARRAY_END(objects_array), previous = current - 1;
          previous >= ARRAY_START(objects_array);) {
@@ -132,9 +132,9 @@ void updateObjectListFreeSlot() {
  * Creates a new object and makes it so that
  * the new object is executed right after `parent`
  */
-cv64_object_hdr_t* object_create(cv64_object_hdr_t* parent, cv64_object_id_t ID) {
+ObjectHeader* object_create(ObjectHeader* parent, cv64_object_id_t ID) {
     // Allocate the object in the objects array
-    cv64_object_hdr_t* new_object = object_allocate(ID);
+    ObjectHeader* new_object = object_allocate(ID);
 
     if (new_object != NULL) {
         // Grab the part of the "ID" field that contains the actual ID of the object
@@ -164,11 +164,11 @@ cv64_object_hdr_t* object_create(cv64_object_hdr_t* parent, cv64_object_id_t ID)
  * the new object is executed after all the `parent`'s children
  * are executed beforehand.
  */
-cv64_object_hdr_t* object_createAndSetChild(cv64_object_hdr_t* parent, cv64_object_id_t ID) {
+ObjectHeader* object_createAndSetChild(ObjectHeader* parent, cv64_object_id_t ID) {
     // Allocate the object in the objects array
-    cv64_object_hdr_t* new_object = object_allocate(ID);
-    cv64_object_hdr_t* var_v0;
-    cv64_object_hdr_t* var_v1;
+    ObjectHeader* new_object = object_allocate(ID);
+    ObjectHeader* var_v0;
+    ObjectHeader* var_v1;
 
     if (new_object != NULL) {
         // Grab the part of the "ID" field that contains the actual ID of the object
@@ -210,7 +210,7 @@ cv64_object_hdr_t* object_createAndSetChild(cv64_object_hdr_t* parent, cv64_obje
  * Traverse the `objects_array`, starting from the `current_object`'s slot
  * and return the first instance of the object with the raw ID
  */
-cv64_object_t* object_findFirstObjectByID(cv64_object_id_t ID, cv64_object_t* current_object) {
+Object* object_findFirstObjectByID(cv64_object_id_t ID, Object* current_object) {
     // The ID of the object actually consists of a flag variable (upper byte)
     // and the actual ID part (lower byte)
     // Only the ID part of it.
@@ -238,7 +238,7 @@ cv64_object_t* object_findFirstObjectByID(cv64_object_id_t ID, cv64_object_t* cu
  * Starts at -1 because `object_findFirstObjectByID` adds it to +1
  * at the beginning of that function.
  */
-cv64_object_t* objectList_findFirstObjectByID(s32 ID) {
+Object* objectList_findFirstObjectByID(s32 ID) {
     return object_findFirstObjectByID(ID, &objects_array[-1]);
 }
 
@@ -247,8 +247,7 @@ cv64_object_t* objectList_findFirstObjectByID(s32 ID) {
  * and return the first instance of the object whose raw ID is higher or equal
  * to `min_ID` or lower or equal to `max_ID`
  */
-cv64_object_t*
-object_findObjectBetweenIDRange(s32 min_ID, s32 max_ID, cv64_object_t* current_object) {
+Object* object_findObjectBetweenIDRange(s32 min_ID, s32 max_ID, Object* current_object) {
     s32 current_obj_ID;
 
     BITS_ASSIGN_MASK(min_ID, 0x7FF);
@@ -274,7 +273,7 @@ object_findObjectBetweenIDRange(s32 min_ID, s32 max_ID, cv64_object_t* current_o
  * Starts at -1 because `object_findFirstObjectByID` adds it to +1
  * at the beginning of that function.
  */
-cv64_object_t* objectList_findObjectBetweenRange(s32 min_ID, s32 max_ID) {
+Object* objectList_findObjectBetweenRange(s32 min_ID, s32 max_ID) {
     return object_findObjectBetweenIDRange(min_ID, max_ID, &objects_array[-1]);
 }
 
@@ -283,7 +282,7 @@ cv64_object_t* objectList_findObjectBetweenRange(s32 min_ID, s32 max_ID) {
  * and return the first instance of the object where the ID passed has bits in
  * common with the object currently being read.
  */
-cv64_object_t* object_findObjectByIDAndType(s32 ID, cv64_object_t* current_object) {
+Object* object_findObjectByIDAndType(s32 ID, Object* current_object) {
     for (current_object++; (u32) current_object < (u32) object_list_free_slot; current_object++) {
         if (BITS_NOT_HAS(current_object->header.ID, ID))
             continue;
@@ -302,7 +301,7 @@ cv64_object_t* object_findObjectByIDAndType(s32 ID, cv64_object_t* current_objec
  * Starts at -1 because `object_findFirstObjectByID` adds it to +1
  * at the beginning of that function.
  */
-cv64_object_t* objectList_findObjectByIDAndType(s32 ID) {
+Object* objectList_findObjectByIDAndType(s32 ID) {
     return object_findObjectByIDAndType(ID, &objects_array[-1]);
 }
 
@@ -326,8 +325,8 @@ cv64_object_t* objectList_findObjectByIDAndType(s32 ID) {
  * - Returns the first occurence of a non-paused object in `objects_array` given
  * its raw ID, and whose code is mapped by the TLB.
  */
-cv64_object_t* func_8000211C_2D1C(s32 ID) {
-    cv64_object_t* var_v0;
+Object* func_8000211C_2D1C(s32 ID) {
+    Object* var_v0;
 
     if (BITS_HAS(ID, OBJ_FLAG_MAP_OVERLAY)) {
         BITS_ASSIGN_MASK(ID, 0x7FF);
@@ -350,7 +349,7 @@ cv64_object_t* func_8000211C_2D1C(s32 ID) {
  * Dynamically allocates arbitrary data, and keeps its pointer
  * in one of the object's pointer list (`alloc_data`).
  */
-void* object_allocEntryInList(cv64_object_t* self, s32 heap_kind, u32 size, s32 alloc_data_index) {
+void* object_allocEntryInList(Object* self, s32 heap_kind, u32 size, s32 alloc_data_index) {
     BITS_SET(self->field_0x20, 1 << alloc_data_index);
     self->alloc_data[alloc_data_index] = heap_alloc(heap_kind, size);
     return self->alloc_data[alloc_data_index];
@@ -361,16 +360,14 @@ void* object_allocEntryInList(cv64_object_t* self, s32 heap_kind, u32 size, s32 
  * in one of the object's pointer list (`alloc_data`),
  * then clears the allocated data.
  */
-void* object_allocEntryInListAndClear(
-    cv64_object_t* self, s32 heap_kind, u32 size, s32 alloc_data_index
-) {
+void* object_allocEntryInListAndClear(Object* self, s32 heap_kind, u32 size, s32 alloc_data_index) {
     BITS_SET(self->field_0x20, 1 << alloc_data_index);
     self->alloc_data[alloc_data_index] = heap_alloc(heap_kind, size);
     memory_clear(self->alloc_data[alloc_data_index], size);
     return self->alloc_data[alloc_data_index];
 }
 
-void* func_80002264_2E64(cv64_object_t* self, u32 size, s32 heap_kind, s32 alloc_data_index) {
+void* func_80002264_2E64(Object* self, u32 size, s32 heap_kind, s32 alloc_data_index) {
     BITS_SET(self->field_0x22, 1 << alloc_data_index);
     self->alloc_data[alloc_data_index] = func_80001008_1C08(size, heap_kind);
     return self->alloc_data[alloc_data_index];
@@ -380,7 +377,7 @@ void* func_80002264_2E64(cv64_object_t* self, u32 size, s32 heap_kind, s32 alloc
  * Frees data previously allocated inside
  * one of the object's pointer list (`alloc_data`).
  */
-void func_800022BC_2EBC(cv64_object_t* self, s32 alloc_data_index) {
+void func_800022BC_2EBC(Object* self, s32 alloc_data_index) {
     if (BITS_HAS(self->field_0x20, 1 << alloc_data_index)) {
         heapBlock_free(self->alloc_data[alloc_data_index]);
     }
@@ -411,7 +408,7 @@ void GameStateMgr_execute(GameStateMgr* self) {
 /**
  * Executes one frame of the object's and all of its children's code
  */
-void object_executeChildObject(cv64_object_hdr_t* self) {
+void object_executeChildObject(ObjectHeader* self) {
     for (; self != NULL; self = self->next) {
         // If a object is waiting to be deleted (i.e. if its ID = 8xxx or
         // Axxx (2xxx | 8xxx)) then don't execute it, nor its children
@@ -445,7 +442,7 @@ void object_executeChildObject(cv64_object_hdr_t* self) {
 /**
  * Executes one frame of the object's and its `child`'s code
  */
-void object_execute(cv64_object_hdr_t* self) {
+void object_execute(ObjectHeader* self) {
     // If a object is waiting to be deleted (i.e. if its ID = 8xxx or Axxx (2xxx
     // | 8xxx)) then don't execute it, nor its children
     if (self->ID <= 0)
@@ -474,9 +471,9 @@ void object_execute(cv64_object_hdr_t* self) {
 /**
  * Destroys the object and all of its children
  */
-void func_800026D8_32D8(cv64_object_hdr_t* self) {
-    cv64_object_hdr_t* temp_s0 = self->child;
-    cv64_object_hdr_t* temp_s1;
+void func_800026D8_32D8(ObjectHeader* self) {
+    ObjectHeader* temp_s0 = self->child;
+    ObjectHeader* temp_s1;
 
     if (temp_s0 == NULL)
         return;
@@ -497,9 +494,9 @@ void func_800026D8_32D8(cv64_object_hdr_t* self) {
  * Destroys the object and all of its children, as well
  * as some additional data, such as their associated models, if any.
  */
-void object_destroyChildrenAndModelInfo(cv64_object_hdr_t* self) {
-    cv64_object_hdr_t* temp_s0 = self->child;
-    cv64_object_hdr_t* temp_s1;
+void object_destroyChildrenAndModelInfo(ObjectHeader* self) {
+    ObjectHeader* temp_s0 = self->child;
+    ObjectHeader* temp_s1;
 
     if (temp_s0 != NULL) {
         temp_s0->destroy(self->child);

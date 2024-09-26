@@ -41,7 +41,7 @@ typedef struct {
 // ID: 0x0004
 // Real name: obj_decode (based on leftover strings from LoD)
 typedef struct {
-    cv64_object_hdr_t header;
+    ObjectHeader header;
     u8 field_0x20[20];
     DMAChunkMgr_t* DMAChunkMgr;
     u8 field_0x38[60];

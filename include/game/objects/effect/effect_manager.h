@@ -6,9 +6,9 @@
 
 // ID: 0x00C0
 typedef struct {
-    cv64_object_hdr_t header;
+    ObjectHeader header;
     u8 field_0x20[4];
-    camera* display_camera;
+    Camera* display_camera;
     u8 field_0x28[14];
     s16 number_of_effects_created;
     u8 field_0x38[OBJECT_SIZE - 0x38];

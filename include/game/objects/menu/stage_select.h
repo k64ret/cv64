@@ -2,7 +2,7 @@
 #define STAGE_SELECT_H
 
 #include "object.h"
-#include "gfx/model_info.h"
+#include "gfx/model.h"
 #include "objects/menu/mfds.h"
 #include "objects/menu/lens.h"
 
@@ -27,7 +27,7 @@ typedef enum stage_select_option_enum {
 } stage_select_option_enum_t;
 
 typedef struct {
-    cv64_object_hdr_t header;
+    ObjectHeader header;
     u8 field_0x20[8];
     Model* red_background_model;
     u8 field_0x2C[8];

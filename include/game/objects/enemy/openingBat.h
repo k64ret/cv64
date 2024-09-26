@@ -20,7 +20,7 @@ typedef struct {
 
 // ID: 0x20A6
 typedef struct {
-    cv64_object_hdr_t header;
+    ObjectHeader header;
     u8 field_0x20[4];
     Model* model;
     openingBatData* data;

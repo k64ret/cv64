@@ -43,7 +43,7 @@ void* func_8013B33C_BE52C(const char* name, u32 size) {
 }
 
 void* allocStructInObjectEntryList(
-    const char* name, cv64_object_t* object, u32 size, s32 alloc_data_index
+    const char* name, Object* object, u32 size, s32 alloc_data_index
 ) {
     void* data;
     u32 temp;
@@ -62,7 +62,7 @@ void* allocStructInObjectEntryList(
     return data;
 }
 
-void* func_8013B454_BE644(const char* name, cv64_object_t* object, u32 size, s32 alloc_data_index) {
+void* func_8013B454_BE644(const char* name, Object* object, u32 size, s32 alloc_data_index) {
     void* data;
     u32 temp;
 

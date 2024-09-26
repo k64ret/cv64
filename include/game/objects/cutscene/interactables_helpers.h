@@ -18,7 +18,7 @@ typedef struct door_item_open_verify_struct {
 
 // Generic special textbox / text spot struct
 typedef struct specialTextbox {
-    cv64_object_hdr_t header;
+    ObjectHeader header;
     u8 field_0x20[20];
     s32 text_ID;
     u8 field_0x38[4];

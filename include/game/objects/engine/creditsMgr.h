@@ -5,7 +5,7 @@
 
 // ID: 0x201B
 typedef struct {
-    cv64_object_hdr_t header;
+    ObjectHeader header;
     u8 field_0x20[20];
     u32 field_0x34[16];
 } creditsMgr;

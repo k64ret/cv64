@@ -5,7 +5,7 @@
 
 // ID: 0x2137
 typedef struct {
-    cv64_object_hdr_t header;
+    ObjectHeader header;
     u8 field_0x20[20];
     s32 field_0x34;
     s32 saveFile_errors;

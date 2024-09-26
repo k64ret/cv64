@@ -25,22 +25,22 @@
         LOCAL_GO_TO_NEXT_FUNC(object);                                                             \
     } while (0)
 
-void object_doNothing(cv64_object_t* self) {}
+void object_doNothing(Object* self) {}
 
 // Turn off clang-format to preserve whitespace for matching
 // clang-format off
 
-void object_goToNextFuncNoCondition(cv64_object_t* self) { LOCAL_GO_TO_NEXT_FUNC(self); }
+void object_goToNextFuncNoCondition(Object* self) { LOCAL_GO_TO_NEXT_FUNC(self); }
 
 // clang-format on
 
-void object_goToNextFuncIfTimerIsTwo(cv64_object_t* self) {
+void object_goToNextFuncIfTimerIsTwo(Object* self) {
     if (self->header.current_function[self->header.function_info_ID].timer == 2) {
         LOCAL_GO_TO_NEXT_FUNC(self);
     }
 }
 
-void object_goToNextFuncIfTimerIsThree(cv64_object_t* self) {
+void object_goToNextFuncIfTimerIsThree(Object* self) {
     if (self->header.current_function[self->header.function_info_ID].timer == 3) {
         LOCAL_GO_TO_NEXT_FUNC(self);
     }
@@ -49,19 +49,19 @@ void object_goToNextFuncIfTimerIsThree(cv64_object_t* self) {
 // Turn off clang-format to preserve whitespace for matching
 // clang-format off
 
-void object_fadeOutNineFramesAndGoToNextFunc(cv64_object_t* self) { FADE_OUT_AND_GO_TO_NEXT_FUNC(9, self); }
+void object_fadeOutNineFramesAndGoToNextFunc(Object* self) { FADE_OUT_AND_GO_TO_NEXT_FUNC(9, self); }
 
-void object_fadeOutFifteenFramesAndGoToNextFunc(cv64_object_t* self) { FADE_OUT_AND_GO_TO_NEXT_FUNC(15, self); }
+void object_fadeOutFifteenFramesAndGoToNextFunc(Object* self) { FADE_OUT_AND_GO_TO_NEXT_FUNC(15, self); }
 
-void object_fadeOutTwentyOneFramesAndGoToNextFunc(cv64_object_t* self) { FADE_OUT_AND_GO_TO_NEXT_FUNC(21, self); }
+void object_fadeOutTwentyOneFramesAndGoToNextFunc(Object* self) { FADE_OUT_AND_GO_TO_NEXT_FUNC(21, self); }
 
-void object_fadeOutThirtyFramesAndGoToNextFunc(cv64_object_t* self) { FADE_OUT_AND_GO_TO_NEXT_FUNC(30, self); }
+void object_fadeOutThirtyFramesAndGoToNextFunc(Object* self) { FADE_OUT_AND_GO_TO_NEXT_FUNC(30, self); }
 
-void object_fadeOutFortyFiveFramesAndGoToNextFunc(cv64_object_t* self) { FADE_OUT_AND_GO_TO_NEXT_FUNC(45, self); }
+void object_fadeOutFortyFiveFramesAndGoToNextFunc(Object* self) { FADE_OUT_AND_GO_TO_NEXT_FUNC(45, self); }
 
-void object_fadeOutSixtyFramesAndGoToNextFunc(cv64_object_t* self) { FADE_OUT_AND_GO_TO_NEXT_FUNC(60, self); }
+void object_fadeOutSixtyFramesAndGoToNextFunc(Object* self) { FADE_OUT_AND_GO_TO_NEXT_FUNC(60, self); }
 
-void object_goToNextFuncIfNotFading(cv64_object_t* self) { if ((*Fade_IsFading)()) return; LOCAL_GO_TO_NEXT_FUNC(self); }
+void object_goToNextFuncIfNotFading(Object* self) { if ((*Fade_IsFading)()) return; LOCAL_GO_TO_NEXT_FUNC(self); }
 
 // clang-format on
 

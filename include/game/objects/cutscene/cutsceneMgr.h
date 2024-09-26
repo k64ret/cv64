@@ -6,7 +6,7 @@
 
 // ID: 0x002A
 typedef struct {
-    cv64_object_hdr_t header;
+    ObjectHeader header;
     u8 field_0x20[32];
     CSFilmReel* csFilmReel;
     /**
@@ -15,7 +15,7 @@ typedef struct {
      * cutscene 0x3C here is 0x32)
      */
     u32 cutscene_ID;
-    cutscene* cutscene_object;
+    Cutscene* cutscene_object;
     u8 field_0x4C[40];
 } cutsceneMgr;
 

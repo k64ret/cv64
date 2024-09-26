@@ -5,7 +5,7 @@
 
 // ID: 0x2140
 typedef struct cv64_ovl_easyending {
-    cv64_object_hdr_t header;
+    ObjectHeader header;
     u8 field_0x20[28];
     mfds_state* ending_textbox;
     u32 active_time;

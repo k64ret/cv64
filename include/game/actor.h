@@ -1,7 +1,7 @@
 #ifndef ACTOR_H
 #define ACTOR_H
 
-#include "gfx/model_info.h"
+#include "gfx/model.h"
 #include "object.h"
 #include "atari.h"
 #include "objects/camera/modelLighting.h"
@@ -25,7 +25,7 @@ typedef struct {
 
 // Generic actor struct
 typedef struct Actor {
-    cv64_object_hdr_t header;
+    ObjectHeader header;
     u8 padding1[4];
     Model* model;
     u8 field_0x28[OBJECT_SIZE - 0x28];
@@ -42,5 +42,8 @@ extern u32 checkIfOutsideEntityIsInsideMainEntityRadius(
     Model* player_model, Model* actor_model, f32 actor_spawn_radius, u32 axis
 );
 extern u8 Actor_getPosAndVariable1(Actor* actor, Vec3f* position, u16* variable_1);
+extern void Actor_updateAnimParamsWhenDiffRotationPtrs(
+    actorVisualData* visualdata, void* translation_data, void* rotation_data, f32 speed
+);
 
 #endif

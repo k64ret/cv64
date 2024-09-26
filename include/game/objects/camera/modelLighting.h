@@ -19,7 +19,7 @@ typedef struct {
 
 // ID: 0x006E
 typedef struct {
-    cv64_object_hdr_t header;
+    ObjectHeader header;
     u8 field_0x20[4];
     light* model_light;
     u8 field_0x28[12];
