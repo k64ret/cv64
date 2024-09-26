@@ -58,7 +58,7 @@ typedef struct {
     u8 set_player_anim_speed;
     u8 state;
     u8 field_0x73;
-} cutscene;
+} Cutscene;
 
 #define CUTSCENE_OVERLAY_FILM_REEL          1 // Unused
 #define CUTSCENE_OVERLAY_WIDESCREEN_BORDERS 2
