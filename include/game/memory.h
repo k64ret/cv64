@@ -3,8 +3,8 @@
 
 #include "gfx/graphic_container.h"
 
-#define ALIGN_8_BITWISE(val)    ((((u32) val) + 7) & ~7)
-#define ALIGN_8_ARITHMETIC(val) ((((u32) (val + 7)) / 8) * 8)
+#define ALIGN8_BITWISE(val)    ((((u32) val) + 7) & ~7)
+#define ALIGN8_ARITHMETIC(val) ((((u32) (val + 7)) / 8) * 8)
 
 #define HEAP_MULTIPURPOSE_SIZE 0xD0000
 /**

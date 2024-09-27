@@ -19,8 +19,8 @@ void heap_init(
     HeapKind kind, HeapBlockHeader* first_block_ptr, s32 heap_size, u32 additional_flags
 ) {
     heaps[kind].flags      = additional_flags | HEAP_ACTIVE;
-    heaps[kind].size       = ALIGN_8_BITWISE(heap_size);
-    heaps[kind].heap_start = ALIGN_8_BITWISE(first_block_ptr);
+    heaps[kind].size       = ALIGN8_BITWISE(heap_size);
+    heaps[kind].heap_start = ALIGN8_BITWISE(first_block_ptr);
     first_block_ptr->flags = HEAP_BLOCK_FREE;
     first_block_ptr->size  = heaps[kind].size - sizeof(HeapBlockHeader);
 }
@@ -72,7 +72,7 @@ void* heap_alloc(HeapKind kind, u32 size) {
     HeapBlockHeader* new_blk;
     u32 curr_blk_sz;
 
-    size = ALIGN_8_ARITHMETIC(size);
+    size = ALIGN8_ARITHMETIC(size);
 
     for (curr_blk  = heap->heap_start,
         second_blk = (HeapBlockHeader*) (heap->size + (u8*) heap->heap_start);
@@ -129,7 +129,7 @@ s32 heapBlock_updateBlockMaxSize(void* data, u32 size) {
     current_block_size_ptr = &current_block_header->size;
     if (1) {
     }
-    size = ALIGN_8_ARITHMETIC(size);
+    size = ALIGN8_ARITHMETIC(size);
     if ((*current_block_size_ptr) < size) {
         return -1;
     }
