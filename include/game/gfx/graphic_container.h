@@ -1,14 +1,11 @@
 #ifndef GRAPHIC_CONTAINER_H
 #define GRAPHIC_CONTAINER_H
 
-#include <ultra64.h>
+#include "cv64.h"
 
 typedef struct GraphicContainerHeader {
     void* field_0x00;
-    /**
-     * One per graphic buffer
-     */
-    void* data_ptrs[2];
+    void* data_ptrs[NUM_GRAPHIC_BUFFERS];
     u8 field_0x0C[4];
 } GraphicContainerHeader;
 

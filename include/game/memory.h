@@ -19,7 +19,7 @@
 
 #define HEAP_NUM 8
 
-typedef enum cv64_heap_kind {
+typedef enum HeapKind {
     /**
      * Most dynamically-allocated data is allocated on this heap
      */
@@ -38,25 +38,25 @@ typedef enum cv64_heap_kind {
      * Current map's data (assets file, collision data, etc)
      */
     HEAP_KIND_MAP_DATA
-} cv64_heap_kind_t;
+} HeapKind;
 
 // clang-format off
 
-typedef enum cv64_heapblock_flag {
+typedef enum HeapBlockFlag {
     HEAP_BLOCK_FREE                = 0x0000,
     HEAP_BLOCK_GRAPHIC_CONTAINER   = 0x4000,
     HEAP_BLOCK_ACTIVE              = 0x8000
-} cv64_heapblock_flag_t;
+} HeapBlockFlag;
 
-typedef enum cv64_heap_flag {
+typedef enum HeapFlag {
     HEAP_INACTIVE                = 0x0000,
     HEAP_WRITE_BACK_CACHE_TO_RAM = 0x4000,
     HEAP_ACTIVE                  = 0x8000
-} cv64_heap_flag_t;
+} HeapFlag;
 
 // clang-format on
 
-typedef struct cv64_heapblock_hdr {
+typedef struct HeapBlockHeader {
     s16 flags;
     u8 field_0x02[2];
     /**
@@ -76,9 +76,9 @@ typedef struct cv64_heapblock_hdr {
      * Related to file decompression?
      */
     u8 field_0x14[4];
-} cv64_heapblock_hdr_t;
+} HeapBlockHeader;
 
-typedef struct cv64_heap_inf {
+typedef struct HeapInfo {
     s16 flags;
     u8 field_0x02[2];
     /**
@@ -88,37 +88,34 @@ typedef struct cv64_heap_inf {
     /**
      * Start of the block array
      */
-    cv64_heapblock_hdr_t* heap_start;
-} cv64_heap_inf_t;
+    HeapBlockHeader* heap_start;
+} HeapInfo;
 
-extern cv64_heap_inf_t heaps[HEAP_NUM];
+extern HeapInfo heaps[HEAP_NUM];
 extern void* HEAP_MULTIPURPOSE_START;
 extern void* HEAP_MENU_DATA_START;
 
 extern void memory_copy(void* src, void* dest, u32 size);
 extern void memory_clear(void* ptr, u32 length);
 void heap_init(
-    cv64_heap_kind_t kind,
-    cv64_heapblock_hdr_t* first_block_ptr,
-    s32 heap_size,
-    u32 additional_flags
+    HeapKind kind, HeapBlockHeader* first_block_ptr, s32 heap_size, u32 additional_flags
 );
-void heap_free(cv64_heap_kind_t kind);
+void heap_free(HeapKind kind);
 void heap_writebackDCache(void);
 void initHeaps(void);
-void* heap_alloc(cv64_heap_kind_t kind, u32 data_size);
-extern void* heap_allocWithAlignment(cv64_heap_kind_t kind, u32 data_size, u32 alignment);
+void* heap_alloc(HeapKind kind, u32 data_size);
+extern void* heap_allocWithAlignment(HeapKind kind, u32 data_size, u32 alignment);
 extern s32 heapBlock_updateBlockMaxSize(void* data, u32 size);
 void heapBlock_free(void* ptr);
 void* allocStruct(const char* name, u32 size);
 void func_8013B4F0_BE6E0(void);
 u32 isMenuDataHeapActive(void);
-void func_80000D68_1968(cv64_heap_kind_t arg0, u32 arg1);
+void func_80000D68_1968(HeapKind arg0, u32 arg1);
 
 /**
  * `GraphicContainer` functions
  */
-GraphicContainerHeader* GraphicContainer_Alloc(cv64_heap_kind_t heap_kind, u32 size);
+GraphicContainerHeader* GraphicContainer_Alloc(HeapKind heap_kind, u32 size);
 GraphicContainerHeader* allocGraphicContainerStruct(const char* name, u32 size);
 void GraphicContainer_Free(void* ptr);
 
