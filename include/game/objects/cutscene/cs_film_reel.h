@@ -50,4 +50,13 @@ typedef struct CSFilmReel {
     u8 field_0x44[48];
 } CSFilmReel;
 
+void CSFilmReel_Entrypoint(CSFilmReel* self);
+void CSFilmReel_CheckInitialConditions(CSFilmReel* self);
+void CSFilmReel_Init(CSFilmReel* self);
+void CSFilmReel_Loop(CSFilmReel* self);
+void CSFilmReel_Destroy(CSFilmReel* self);
+void CSFilmReel_Draw(CSFilmReel* self);
+
+typedef void (*CSFilmReel_func)(CSFilmReel*);
+
 #endif

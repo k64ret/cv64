@@ -1,17 +1,28 @@
-#include "cv64.h"
+#include "objects/cutscene/cs_film_reel.h"
 
 // clang-format off
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/overlay/cs_film_reel/CSFilmReelDraw_entrypoint.s")
+CSFilmReel_func CSFilmReel_functions[] = {
+    CSFilmReel_CheckInitialConditions,
+    CSFilmReel_Init,
+    CSFilmReel_Loop,
+    CSFilmReel_Destroy
+};
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/overlay/cs_film_reel/CSFilmReelDraw_checkInitialConditions.s")
+// clang-format on
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/overlay/cs_film_reel/CSFilmReelDraw_init.s")
+// clang-format off
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/overlay/cs_film_reel/CSFilmReelDraw_loop.s")
+#pragma GLOBAL_ASM("../asm/nonmatchings/overlay/cs_film_reel/CSFilmReel_Entrypoint.s")
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/overlay/cs_film_reel/CSFilmReelDraw_destroy.s")
+#pragma GLOBAL_ASM("../asm/nonmatchings/overlay/cs_film_reel/CSFilmReel_CheckInitialConditions.s")
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/overlay/cs_film_reel/CSFilmReelDraw_draw.s")
+#pragma GLOBAL_ASM("../asm/nonmatchings/overlay/cs_film_reel/CSFilmReel_Init.s")
+
+#pragma GLOBAL_ASM("../asm/nonmatchings/overlay/cs_film_reel/CSFilmReel_Loop.s")
+
+#pragma GLOBAL_ASM("../asm/nonmatchings/overlay/cs_film_reel/CSFilmReel_Destroy.s")
+
+#pragma GLOBAL_ASM("../asm/nonmatchings/overlay/cs_film_reel/CSFilmReel_Draw.s")
 
 // clang-format on

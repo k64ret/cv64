@@ -2554,7 +2554,7 @@ segments:
     exclusive_ram_id: nisitenma_ichigo_cutscenes
     subsegments:
       - [0x00E64E00, c, overlay/cs_film_reel]
-      - [0x00E65450, data, overlay/cs_film_reel]
+      - [0x00E65450, .data, overlay/cs_film_reel]
 
   - name: ni_ovl_cutscene_01
     type: bin

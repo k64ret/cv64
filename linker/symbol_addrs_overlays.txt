@@ -325,12 +325,12 @@ D_0E001284 = 0x0E001284; // segment:ni_ovl_cutscene_3C size:0x5C
 
 // src/cs_film_reel.c =========================================
 // .text
-CSFilmReelDraw_entrypoint     = 0x0E000000; // type:func segment:ni_ovl_cs_film_reel_effect
-CSFilmReelDraw_checkInitialConditions     = 0x0E000070; // type:func segment:ni_ovl_cs_film_reel_effect
-CSFilmReelDraw_init     = 0x0E0000D0; // type:func segment:ni_ovl_cs_film_reel_effect
-CSFilmReelDraw_loop     = 0x0E000338; // type:func segment:ni_ovl_cs_film_reel_effect
-CSFilmReelDraw_destroy     = 0x0E000498; // type:func segment:ni_ovl_cs_film_reel_effect
-CSFilmReelDraw_draw     = 0x0E0004BC; // type:func segment:ni_ovl_cs_film_reel_effect
+CSFilmReel_Entrypoint     = 0x0E000000; // type:func segment:ni_ovl_cs_film_reel_effect
+CSFilmReel_CheckInitialConditions     = 0x0E000070; // type:func segment:ni_ovl_cs_film_reel_effect
+CSFilmReel_Init     = 0x0E0000D0; // type:func segment:ni_ovl_cs_film_reel_effect
+CSFilmReel_Loop     = 0x0E000338; // type:func segment:ni_ovl_cs_film_reel_effect
+CSFilmReel_Destroy     = 0x0E000498; // type:func segment:ni_ovl_cs_film_reel_effect
+CSFilmReel_Draw     = 0x0E0004BC; // type:func segment:ni_ovl_cs_film_reel_effect
 // .data
-CSFilmReelDraw_functions = 0x0e000650; // segment:ni_ovl_cs_film_reel_effect size:0x10
+CSFilmReel_functions = 0x0e000650; // segment:ni_ovl_cs_film_reel_effect size:0x10
 // End of src/cs_film_reel.c ==================================
