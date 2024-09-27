@@ -122,7 +122,7 @@ s32 heapBlock_updateBlockMaxSize(void* data, u32 size) {
     HeapBlockHeader* current_block_header =
         (HeapBlockHeader*) (((s32) data) - sizeof(HeapBlockHeader));
     s32 current_block_size = current_block_header->size;
-    s32 remaining_free_size;
+    s32 remaining_free_space;
     s32* current_block_size_ptr;
     HeapBlockHeader* next_block_header;
 
@@ -133,11 +133,11 @@ s32 heapBlock_updateBlockMaxSize(void* data, u32 size) {
     if ((*current_block_size_ptr) < size) {
         return -1;
     }
-    remaining_free_size = (*current_block_size_ptr - size) - (sizeof(HeapBlockHeader));
-    next_block_header   = (HeapBlockHeader*) (((s32) current_block_header) + size);
-    if (remaining_free_size > 0) {
+    remaining_free_space = (*current_block_size_ptr - size) - (sizeof(HeapBlockHeader));
+    next_block_header    = (HeapBlockHeader*) (((s32) current_block_header) + size);
+    if (remaining_free_space > 0) {
         next_block_header[1].flags = HEAP_BLOCK_FREE;
-        next_block_header[1].size  = remaining_free_size;
+        next_block_header[1].size  = remaining_free_space;
         current_block_header->size = size;
         current_block_size         = size;
     }
