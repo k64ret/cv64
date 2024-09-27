@@ -30,8 +30,8 @@ void heap_free(HeapKind kind) {
 }
 
 void heap_writebackDCache(void) {
-    HeapInfo* first;
-    HeapInfo* current_heap;
+    Heap* first;
+    Heap* current_heap;
 
     first = ARRAY_START(heaps), current_heap = &heaps[ARRAY_COUNT(heaps) - 1];
 
@@ -65,7 +65,7 @@ s32 func_80000D74_1974(s32 arg0) {
 }
 
 void* heap_alloc(HeapKind kind, u32 size) {
-    HeapInfo* heap = &heaps[kind];
+    Heap* heap = &heaps[kind];
     HeapBlockHeader* curr_blk;
     HeapBlockHeader* second_blk;
     HeapBlockHeader* next_blk;

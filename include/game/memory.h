@@ -44,6 +44,10 @@ typedef enum HeapKind {
 
 typedef enum HeapBlockFlag {
     HEAP_BLOCK_FREE                = 0x0000,
+    /**
+     * The data allocated in this block is graphic-related
+     * content, such as display list or vertex buffers, etc.
+     */
     HEAP_BLOCK_GRAPHIC_CONTAINER   = 0x4000,
     HEAP_BLOCK_ACTIVE              = 0x8000
 } HeapBlockFlag;
@@ -74,11 +78,12 @@ typedef struct HeapBlockHeader {
     void* data_ptrs[2];
     /**
      * Related to file decompression?
+     * See 0x80010298
      */
     u8 field_0x14[4];
 } HeapBlockHeader;
 
-typedef struct HeapInfo {
+typedef struct Heap {
     s16 flags;
     u8 field_0x02[2];
     /**
@@ -89,9 +94,9 @@ typedef struct HeapInfo {
      * Start of the block array
      */
     HeapBlockHeader* heap_start;
-} HeapInfo;
+} Heap;
 
-extern HeapInfo heaps[HEAP_NUM];
+extern Heap heaps[HEAP_NUM];
 extern void* HEAP_MULTIPURPOSE_START;
 extern void* HEAP_MENU_DATA_START;
 
