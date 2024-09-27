@@ -5,6 +5,9 @@
 #include "gfx/model.h"
 #include <ultra64.h>
 
+/**
+ * Display List buffers
+ */
 typedef struct CSFilmReelGraphicRawData {
     Gfx dlists[21];
 } CSFilmReelGraphicRawData;
@@ -16,21 +19,39 @@ typedef struct CSFilmReelGraphicContainer {
 
 typedef struct CSFilmReelGraphicData {
     CSFilmReelGraphicContainer* graph_container;
-    Gfx* field_0x04;
     /**
-     * Upper-left corner of texture to load
+     * The display list that is used for configuring the texture
+     * prior to be loaded in
      */
-    f32 height;
+    Gfx* material_dlist;
+    /**
+     * Current vertical position of the texture during scrolling
+     */
+    f32 vertical_pos;
     /**
      * Points to the start of the texture's raw data
      */
     void* texture_ptr;
+    /**
+     * Tile descriptor index
+     */
     u8 tile;
+    /**
+     * If `TRUE`, avoids increasing the transparency
+     * (i.e. fading in the texture)
+     */
     u8 dont_increase_alpha;
     u8 field_0x12;
     u8 field_0x13;
+    /**
+     * Texture's transparency
+     */
     u16 alpha;
-    u16 alpha_change_rate;
+    /**
+     * The rate at which the texture changes
+     * transparency over time
+     */
+    u16 alpha_change_speed;
 } CSFilmReelGraphicData;
 
 typedef struct CSFilmReelData {
@@ -61,6 +82,6 @@ typedef void (*CSFilmReel_func)(CSFilmReel*);
 
 extern const u32 CSFILMREEL_TEXTURE;
 extern const u32 CSFILMREEL_DL;
-extern const u32 CSFILMREEL_06000258;
+extern const u32 CSFILMREEL_MATERIAL_DL;
 
 #endif
