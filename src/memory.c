@@ -125,7 +125,7 @@ void* heap_alloc(cv64_heap_kind_t kind, u32 size) {
 // https://decomp.me/scratch/tHw91
 #pragma GLOBAL_ASM("../asm/nonmatchings/memory/heapBlock_updateBlockMaxSize.s")
 
-void* func_80001008_1C08(cv64_heap_kind_t heap_kind, u32 size) {
+GraphicContainerHeader* GraphicContainer_Alloc(cv64_heap_kind_t heap_kind, u32 size) {
     u32 data;
     cv64_heapblock_hdr_t* data_header;
 
@@ -136,7 +136,7 @@ void* func_80001008_1C08(cv64_heap_kind_t heap_kind, u32 size) {
 
     data_header               = data - sizeof(cv64_heapblock_hdr_t);
     data_header->data_ptrs[0] = data;
-    BITS_SET(data_header->flags, HEAP_BLOCK_4000);
+    BITS_SET(data_header->flags, HEAP_BLOCK_GRAPHIC_CONTAINER);
     data_header->data_ptrs[1] = data + size;
     data_header->field_0x08   = data_header->data_ptrs[sys.current_graphic_buffer];
 
@@ -150,7 +150,7 @@ void heapBlock_free(void* ptr) {
 }
 
 // https://decomp.me/scratch/eT3oh
-#pragma GLOBAL_ASM("../asm/nonmatchings/memory/func_80001080_1C80.s")
+#pragma GLOBAL_ASM("../asm/nonmatchings/memory/GraphicContainer_Free.s")
 
 #pragma GLOBAL_ASM("../asm/nonmatchings/memory/func_800010A0_1CA0.s")
 

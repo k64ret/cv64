@@ -3,6 +3,7 @@
 
 #include "cv64.h"
 #include "gfx/figure.h"
+#include "gfx/graphic_container.h"
 #include "object_ID.h"
 
 #define OBJECT_ARRAY_MAX 384
@@ -61,8 +62,8 @@ typedef struct Object {
      * The following two variables are bitfields, where each bit represents
      * a non-NULL pointer (1) in `alloc_data`
      */
-    u16 field_0x20; // Entries allocated with `heap_alloc`
-    u16 field_0x22; // Entries allocated with `func_80001008_1C08`
+    u16 alloc_data_entries;        // Entries allocated with `heap_alloc`
+    u16 graphic_container_entries; // Entries allocated with `GraphicContainer_Alloc`
     figure* figures[OBJ_NUM_FIGURES];
     void* alloc_data[OBJ_NUM_ALLOC_DATA];
 } Object; // Size = 0x74
@@ -101,8 +102,10 @@ Object* objectList_findObjectByIDAndType(s32 ID);
 Object* func_8000211C_2D1C(s32 ID);
 void* object_allocEntryInList(Object* self, s32 heap_kind, u32 size, s32 alloc_data_index);
 void* object_allocEntryInListAndClear(Object* self, s32 heap_kind, u32 size, s32 alloc_data_index);
-void* func_80002264_2E64(Object* self, u32 size, s32 heap_kind, s32 alloc_data_index);
-void func_800022BC_2EBC(Object* self, s32 alloc_data_index);
+void* object_allocGraphicContainerEntryInList(
+    Object* self, u32 size, s32 heap_kind, s32 alloc_data_index
+);
+void object_freeData(Object* self, s32 alloc_data_index);
 void object_executeChildObject(ObjectHeader* self);
 void object_execute(ObjectHeader* self);
 void func_800026D8_32D8(ObjectHeader* self);
@@ -163,7 +166,9 @@ extern void unmapOverlay();
 void* allocStructInObjectEntryList(
     const char* name, Object* object, u32 size, s32 alloc_data_index
 );
-void* func_8013B454_BE644(const char* name, Object* object, u32 size, s32 alloc_data_index);
+GraphicContainerHeader* allocGraphicContainerInObjectEntryList(
+    const char* name, Object* object, u32 size, s32 alloc_data_index
+);
 
 extern Object objects_array[OBJECT_ARRAY_MAX];
 extern u16 objects_number_of_instances_per_object[OBJECT_NUM_MAX];

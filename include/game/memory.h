@@ -1,7 +1,7 @@
 #ifndef MEMORY_H
 #define MEMORY_H
 
-#include <ultra64.h>
+#include "gfx/graphic_container.h"
 
 #define ALIGN8(val) ((((u32) val) + 7) & ~7)
 
@@ -42,12 +42,9 @@ typedef enum cv64_heap_kind {
 // clang-format off
 
 typedef enum cv64_heapblock_flag {
-    HEAP_BLOCK_FREE   = 0x0000,
-    /**
-     * Display List / GFX related? See `func_80001008_1C08`
-     */
-    HEAP_BLOCK_4000   = 0x4000,
-    HEAP_BLOCK_ACTIVE = 0x8000
+    HEAP_BLOCK_FREE                = 0x0000,
+    HEAP_BLOCK_GRAPHIC_CONTAINER   = 0x4000,
+    HEAP_BLOCK_ACTIVE              = 0x8000
 } cv64_heapblock_flag_t;
 
 typedef enum cv64_heap_flag {
@@ -108,16 +105,20 @@ void heap_init(
 void heap_free(cv64_heap_kind_t kind);
 void heap_writebackDCache(void);
 void initHeaps(void);
-void* heap_alloc(cv64_heap_kind_t kind, u32 data_size); // CV64's malloc()
+void* heap_alloc(cv64_heap_kind_t kind, u32 data_size);
 extern void* heap_allocWithAlignment(cv64_heap_kind_t kind, u32 data_size, u32 alignment);
 extern s32 heapBlock_updateBlockMaxSize(void* data, u32 data_size);
-void heapBlock_free(void* ptr); // CV64's free()
-void* func_80001008_1C08(cv64_heap_kind_t heap_kind, u32 size);
-extern void func_80001080_1C80(void*);
+void heapBlock_free(void* ptr);
 void* allocStruct(const char* name, u32 size);
-void* func_8013B33C_BE52C(const char* name, u32 size);
 void func_8013B4F0_BE6E0(void);
 u32 isMenuDataHeapActive(void);
 void func_80000D68_1968(cv64_heap_kind_t arg0, u32 arg1);
+
+/**
+ * `GraphicContainer` functions
+ */
+GraphicContainerHeader* GraphicContainer_Alloc(cv64_heap_kind_t heap_kind, u32 size);
+GraphicContainerHeader* allocGraphicContainerStruct(const char* name, u32 size);
+extern void GraphicContainer_Free(GraphicContainerHeader*);
 
 #endif

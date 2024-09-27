@@ -5,13 +5,13 @@
  */
 
 #include "object.h"
+#include "gfx/graphic_container.h"
 #include "cv64.h"
 #include "memory.h"
 #include "objects/engine/GameStateMgr.h"
 #include "objects/engine/object_0002.h"
 #include "objects/engine/object_0003.h"
 
-// .bss
 Object* object_list_free_slot;
 Object* ptr_gameplayParentObject;
 
@@ -36,12 +36,12 @@ void object_free(Object* self) {
 
     for (i = 0, alloc_data_slot = 1; i < OBJ_NUM_ALLOC_DATA;
          alloc_data_slot = alloc_data_slot << 1, i++) {
-        if (BITS_HAS(self->field_0x20, alloc_data_slot)) {
+        if (BITS_HAS(self->alloc_data_entries, alloc_data_slot)) {
             heapBlock_free(self->alloc_data[i]);
         }
 
-        if (BITS_HAS(self->field_0x22, alloc_data_slot)) {
-            func_80001080_1C80(self->alloc_data[i]);
+        if (BITS_HAS(self->graphic_container_entries, alloc_data_slot)) {
+            GraphicContainer_Free(self->alloc_data[i]);
         }
     }
 
@@ -350,7 +350,7 @@ Object* func_8000211C_2D1C(s32 ID) {
  * in one of the object's pointer list (`alloc_data`).
  */
 void* object_allocEntryInList(Object* self, s32 heap_kind, u32 size, s32 alloc_data_index) {
-    BITS_SET(self->field_0x20, 1 << alloc_data_index);
+    BITS_SET(self->alloc_data_entries, 1 << alloc_data_index);
     self->alloc_data[alloc_data_index] = heap_alloc(heap_kind, size);
     return self->alloc_data[alloc_data_index];
 }
@@ -361,15 +361,18 @@ void* object_allocEntryInList(Object* self, s32 heap_kind, u32 size, s32 alloc_d
  * then clears the allocated data.
  */
 void* object_allocEntryInListAndClear(Object* self, s32 heap_kind, u32 size, s32 alloc_data_index) {
-    BITS_SET(self->field_0x20, 1 << alloc_data_index);
+    BITS_SET(self->alloc_data_entries, 1 << alloc_data_index);
     self->alloc_data[alloc_data_index] = heap_alloc(heap_kind, size);
     memory_clear(self->alloc_data[alloc_data_index], size);
     return self->alloc_data[alloc_data_index];
 }
 
-void* func_80002264_2E64(Object* self, u32 size, s32 heap_kind, s32 alloc_data_index) {
-    BITS_SET(self->field_0x22, 1 << alloc_data_index);
-    self->alloc_data[alloc_data_index] = func_80001008_1C08(size, heap_kind);
+void* object_allocGraphicContainerEntryInList(
+    Object* self, u32 size, s32 heap_kind, s32 alloc_data_index
+) {
+    BITS_SET(self->graphic_container_entries, 1 << alloc_data_index);
+    self->alloc_data[alloc_data_index] =
+        (GraphicContainerHeader*) GraphicContainer_Alloc(size, heap_kind);
     return self->alloc_data[alloc_data_index];
 }
 
@@ -377,13 +380,13 @@ void* func_80002264_2E64(Object* self, u32 size, s32 heap_kind, s32 alloc_data_i
  * Frees data previously allocated inside
  * one of the object's pointer list (`alloc_data`).
  */
-void func_800022BC_2EBC(Object* self, s32 alloc_data_index) {
-    if (BITS_HAS(self->field_0x20, 1 << alloc_data_index)) {
+void object_freeData(Object* self, s32 alloc_data_index) {
+    if (BITS_HAS(self->alloc_data_entries, 1 << alloc_data_index)) {
         heapBlock_free(self->alloc_data[alloc_data_index]);
     }
 
-    if (BITS_HAS(self->field_0x22, 1 << alloc_data_index)) {
-        func_80001080_1C80(self->alloc_data[alloc_data_index]);
+    if (BITS_HAS(self->graphic_container_entries, 1 << alloc_data_index)) {
+        GraphicContainer_Free(self->alloc_data[alloc_data_index]);
     }
 }
 
