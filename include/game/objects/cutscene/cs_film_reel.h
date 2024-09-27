@@ -55,8 +55,12 @@ void CSFilmReel_CheckInitialConditions(CSFilmReel* self);
 void CSFilmReel_Init(CSFilmReel* self);
 void CSFilmReel_Loop(CSFilmReel* self);
 void CSFilmReel_Destroy(CSFilmReel* self);
-void CSFilmReel_Draw(CSFilmReel* self);
+u32 CSFilmReel_Draw(CSFilmReelGraphicData* graphic_data);
 
 typedef void (*CSFilmReel_func)(CSFilmReel*);
+
+extern const u32 CSFILMREEL_TEXTURE;
+extern const u32 CSFILMREEL_DL;
+extern const u32 CSFILMREEL_06000258;
 
 #endif

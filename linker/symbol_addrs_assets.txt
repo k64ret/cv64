@@ -26,6 +26,10 @@ CARRIE_PORTRAIT_MATERIAL_DL = 0x06000000; // segment:ni_character_select
 
 OPENINGBAT_DLIST = 0x06000E20; // segment:ni_fire_bat
 
+CSFILMREEL_TEXTURE = 0x06000000;  // segment:ni_cs_film_reel
+CSFILMREEL_DL = 0x06000240;       // segment:ni_cs_film_reel
+CSFILMREEL_06000258 = 0x06000258; // segment:ni_cs_film_reel
+
 // test_grid_txt   = 0x06000000; // segment:NI_ASSETS_TEST_GRID
 // test_grid_tlut  = 0x06000800; // segment:NI_ASSETS_TEST_GRID
 // test_grid_vtx   = 0x06000820; // segment:NI_ASSETS_TEST_GRID rom:0x00BD96E0 size:0x780
