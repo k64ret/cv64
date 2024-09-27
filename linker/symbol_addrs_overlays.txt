@@ -322,3 +322,15 @@ D_0E001190 = 0x0e001190; // segment:ni_ovl_cutscene_3C size:0x58
 D_0E0011E8 = 0x0e0011e8; // segment:ni_ovl_cutscene_3C size:0x9C
 D_0E001284 = 0x0E001284; // segment:ni_ovl_cutscene_3C size:0x5C
 // End of src/overlay/cutscene/demo60/demo60.c ==================================
+
+// src/cs_film_reel.c =========================================
+// .text
+CSFilmReelDraw_entrypoint     = 0x0E000000; // type:func segment:ni_ovl_cs_film_reel_effect
+CSFilmReelDraw_checkInitialConditions     = 0x0E000070; // type:func segment:ni_ovl_cs_film_reel_effect
+CSFilmReelDraw_init     = 0x0E0000D0; // type:func segment:ni_ovl_cs_film_reel_effect
+CSFilmReelDraw_loop     = 0x0E000338; // type:func segment:ni_ovl_cs_film_reel_effect
+CSFilmReelDraw_destroy     = 0x0E000498; // type:func segment:ni_ovl_cs_film_reel_effect
+CSFilmReelDraw_draw     = 0x0E0004BC; // type:func segment:ni_ovl_cs_film_reel_effect
+// .data
+CSFilmReelDraw_functions = 0x0e000650; // segment:ni_ovl_cs_film_reel_effect size:0x10
+// End of src/cs_film_reel.c ==================================
