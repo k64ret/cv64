@@ -153,13 +153,14 @@ GraphicContainerHeader* GraphicContainer_Alloc(HeapKind heap_kind, u32 size) {
         return NULL;
     }
 
-    data_header               = data - sizeof(HeapBlockHeader);
-    data_header->data_ptrs[0] = data;
+    data_header                                 = data - sizeof(HeapBlockHeader);
+    data_header->graphic_container.data_ptrs[0] = data;
     BITS_SET(data_header->flags, HEAP_BLOCK_GRAPHIC_CONTAINER);
-    data_header->data_ptrs[1] = data + size;
-    data_header->field_0x08   = data_header->data_ptrs[sys.current_graphic_buffer];
+    data_header->graphic_container.data_ptrs[1] = data + size;
+    data_header->graphic_container.field_0x00 =
+        data_header->graphic_container.data_ptrs[sys.current_graphic_buffer];
 
-    return (GraphicContainerHeader*) &data_header->field_0x08;
+    return &data_header->graphic_container;
 }
 
 void heapBlock_free(void* ptr) {
@@ -176,7 +177,7 @@ void GraphicContainer_Free(void* ptr) {
      *      happens to contain 0, which points to the proper address in its
      *      heap block header.
      */
-    temp                             = temp + ((u8*) ptr - temp) - 8;
+    temp = temp + ((u8*) ptr - temp) - OFFSET_OF(HeapBlockHeader, graphic_container);
     ((HeapBlockHeader*) temp)->flags = HEAP_BLOCK_FREE;
 }
 

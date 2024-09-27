@@ -67,20 +67,7 @@ typedef struct HeapBlockHeader {
      * Size of the block
      */
     u32 size;
-    /**
-     * Display List / GFX related?
-     */
-    void* field_0x08;
-    /**
-     * `data_ptrs[0]` = Start ptr,
-     * `data_ptrs[1]` = End ptr (End of allocated data, NOT end of block)
-     */
-    void* data_ptrs[2];
-    /**
-     * Related to file decompression?
-     * See 0x80010298
-     */
-    u8 field_0x14[4];
+    GraphicContainerHeader graphic_container;
 } HeapBlockHeader;
 
 typedef struct Heap {
