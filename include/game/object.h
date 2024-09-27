@@ -161,6 +161,7 @@ void object_fadeOutFortyFiveFramesAndGoToNextFunc(Object* self);
 void object_fadeOutSixtyFramesAndGoToNextFunc(Object* self);
 void object_goToNextFuncIfNotFading(Object* self);
 void func_80002570_3170(ObjectHeader* self);
+Object* func_80001BE4_27E4(u32 object_ID, Object* arg1);
 extern void mapOverlay(ObjectHeader* self);
 extern void unmapOverlay();
 void* allocStructInObjectEntryList(
@@ -178,6 +179,7 @@ typedef void (*cv64_object_func_t)(ObjectHeader* self);
 
 extern cv64_object_func_t Objects_functions[OBJECT_NUM_MAX];
 extern Object* object_list_free_slot;
+extern Object* ptr_gameplayParentObject;
 
 // Mostly used inside entrypoint functions
 // Commas at the end of statements needed for matching

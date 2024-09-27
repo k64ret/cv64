@@ -22,8 +22,8 @@ void heap_init(
     u32 additional_flags
 ) {
     heaps[kind].flags      = additional_flags | HEAP_ACTIVE;
-    heaps[kind].size       = ALIGN8(heap_size);
-    heaps[kind].heap_start = ALIGN8(first_block_ptr);
+    heaps[kind].size       = ALIGN_8_BITWISE(heap_size);
+    heaps[kind].heap_start = ALIGN_8_BITWISE(first_block_ptr);
     first_block_ptr->flags = HEAP_BLOCK_FREE;
     first_block_ptr->size  = heaps[kind].size - sizeof(cv64_heapblock_hdr_t);
 }
@@ -75,7 +75,7 @@ void* heap_alloc(cv64_heap_kind_t kind, u32 size) {
     cv64_heapblock_hdr_t* new_blk;
     u32 curr_blk_sz;
 
-    size = (((u32) size + 7) >> 3) * 8;
+    size = ALIGN_8_ARITHMETIC(size);
 
     for (curr_blk  = heap->heap_start,
         second_blk = (cv64_heapblock_hdr_t*) (heap->size + (u8*) heap->heap_start);
@@ -122,8 +122,31 @@ void* heap_alloc(cv64_heap_kind_t kind, u32 size) {
 
 #pragma GLOBAL_ASM("../asm/nonmatchings/memory/heap_allocWithAlignment.s")
 
-// https://decomp.me/scratch/tHw91
-#pragma GLOBAL_ASM("../asm/nonmatchings/memory/heapBlock_updateBlockMaxSize.s")
+s32 heapBlock_updateBlockMaxSize(void* data, u32 size) {
+    cv64_heapblock_hdr_t* current_block_header =
+        (cv64_heapblock_hdr_t*) (((s32) data) - sizeof(cv64_heapblock_hdr_t));
+    s32 current_block_size = current_block_header->size;
+    s32 remaining_free_size;
+    s32* current_block_size_ptr;
+    cv64_heapblock_hdr_t* next_block_header;
+
+    current_block_size_ptr = &current_block_header->size;
+    if (1) {
+    }
+    size = ALIGN_8_ARITHMETIC(size);
+    if ((*current_block_size_ptr) < size) {
+        return -1;
+    }
+    remaining_free_size = (*current_block_size_ptr - size) - (sizeof(cv64_heapblock_hdr_t));
+    next_block_header   = (cv64_heapblock_hdr_t*) (((s32) current_block_header) + size);
+    if (remaining_free_size > 0) {
+        next_block_header[1].flags = HEAP_BLOCK_FREE;
+        next_block_header[1].size  = remaining_free_size;
+        current_block_header->size = size;
+        current_block_size         = size;
+    }
+    return current_block_size;
+}
 
 GraphicContainerHeader* GraphicContainer_Alloc(cv64_heap_kind_t heap_kind, u32 size) {
     u32 data;
@@ -140,7 +163,7 @@ GraphicContainerHeader* GraphicContainer_Alloc(cv64_heap_kind_t heap_kind, u32 s
     data_header->data_ptrs[1] = data + size;
     data_header->field_0x08   = data_header->data_ptrs[sys.current_graphic_buffer];
 
-    return &data_header->field_0x08;
+    return (GraphicContainerHeader*) &data_header->field_0x08;
 }
 
 void heapBlock_free(void* ptr) {
@@ -149,8 +172,18 @@ void heapBlock_free(void* ptr) {
     temp->flags = HEAP_BLOCK_FREE;
 }
 
-// https://decomp.me/scratch/eT3oh
-#pragma GLOBAL_ASM("../asm/nonmatchings/memory/GraphicContainer_Free.s")
+void GraphicContainer_Free(void* ptr) {
+    u8* temp;
+
+    /**
+     * @bug `temp` is used before it's initialised.
+     *      This works in practice because the stack allocated for `temp`
+     *      happens to contain 0, which points to the proper address in its
+     *      heap block header.
+     */
+    temp                                  = temp + ((u8*) ptr - temp) - 8;
+    ((cv64_heapblock_hdr_t*) temp)->flags = HEAP_BLOCK_FREE;
+}
 
 #pragma GLOBAL_ASM("../asm/nonmatchings/memory/func_800010A0_1CA0.s")
 

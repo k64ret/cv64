@@ -239,7 +239,7 @@ Object* object_findFirstObjectByID(cv64_object_id_t ID, Object* current_object) 
  * at the beginning of that function.
  */
 Object* objectList_findFirstObjectByID(s32 ID) {
-    return object_findFirstObjectByID(ID, &objects_array[-1]);
+    return object_findFirstObjectByID(ID, ARRAY_START(objects_array) - 1);
 }
 
 /**
@@ -274,7 +274,7 @@ Object* object_findObjectBetweenIDRange(s32 min_ID, s32 max_ID, Object* current_
  * at the beginning of that function.
  */
 Object* objectList_findObjectBetweenRange(s32 min_ID, s32 max_ID) {
-    return object_findObjectBetweenIDRange(min_ID, max_ID, &objects_array[-1]);
+    return object_findObjectBetweenIDRange(min_ID, max_ID, ARRAY_START(objects_array) - 1);
 }
 
 /**
@@ -302,10 +302,48 @@ Object* object_findObjectByIDAndType(s32 ID, Object* current_object) {
  * at the beginning of that function.
  */
 Object* objectList_findObjectByIDAndType(s32 ID) {
-    return object_findObjectByIDAndType(ID, &objects_array[-1]);
+    return object_findObjectByIDAndType(ID, ARRAY_START(objects_array) - 1);
 }
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/object/func_80001BE4_27E4.s")
+Object* func_80001BE4_27E4(u32 object_ID, Object* arg1) {
+    ObjectHeader* child;
+    ObjectHeader* parent;
+    ObjectHeader* next;
+
+    if (ptr_gameplayParentObject == NULL) {
+        return object_findFirstObjectByID(object_ID, arg1);
+    } else {
+        object_ID &= 0x7FF;
+        while (TRUE) {
+            child = arg1->header.child;
+            if (child != NULL) {
+                arg1 = child;
+                if (object_ID == (child->ID & 0x7FF)) {
+                    // @bug Returning nothing in non-void return function.
+                    return;
+                } else {
+                    continue;
+                }
+            }
+            next = arg1->header.next;
+            while (next == NULL) {
+                if (arg1 == ptr_gameplayParentObject) {
+                    return NULL;
+                }
+                parent = arg1->header.parent;
+                if (parent == NULL) {
+                    return NULL;
+                }
+                next = parent->next;
+                arg1 = parent;
+            }
+            arg1 = next;
+            if (object_ID == (next->ID & 0x7FF)) {
+                return next;
+            }
+        }
+    }
+}
 
 #pragma GLOBAL_ASM("../asm/nonmatchings/object/func_80001CA0_28A0.s")
 
@@ -446,8 +484,9 @@ void object_executeChildObject(ObjectHeader* self) {
  * Executes one frame of the object's and its `child`'s code
  */
 void object_execute(ObjectHeader* self) {
-    // If a object is waiting to be deleted (i.e. if its ID = 8xxx or Axxx (2xxx
-    // | 8xxx)) then don't execute it, nor its children
+    // If a object is waiting to be deleted
+    // (i.e. if its ID = 8xxx or Axxx (2xxx | 8xxx)),
+    // then don't execute it, nor its children
     if (self->ID <= 0)
         return;
 

@@ -3,7 +3,8 @@
 
 #include "gfx/graphic_container.h"
 
-#define ALIGN8(val) ((((u32) val) + 7) & ~7)
+#define ALIGN_8_BITWISE(val)    ((((u32) val) + 7) & ~7)
+#define ALIGN_8_ARITHMETIC(val) ((((u32) (val + 7)) / 8) * 8)
 
 #define HEAP_MULTIPURPOSE_SIZE 0xD0000
 /**
@@ -107,7 +108,7 @@ void heap_writebackDCache(void);
 void initHeaps(void);
 void* heap_alloc(cv64_heap_kind_t kind, u32 data_size);
 extern void* heap_allocWithAlignment(cv64_heap_kind_t kind, u32 data_size, u32 alignment);
-extern s32 heapBlock_updateBlockMaxSize(void* data, u32 data_size);
+extern s32 heapBlock_updateBlockMaxSize(void* data, u32 size);
 void heapBlock_free(void* ptr);
 void* allocStruct(const char* name, u32 size);
 void func_8013B4F0_BE6E0(void);
@@ -119,6 +120,6 @@ void func_80000D68_1968(cv64_heap_kind_t arg0, u32 arg1);
  */
 GraphicContainerHeader* GraphicContainer_Alloc(cv64_heap_kind_t heap_kind, u32 size);
 GraphicContainerHeader* allocGraphicContainerStruct(const char* name, u32 size);
-extern void GraphicContainer_Free(GraphicContainerHeader*);
+void GraphicContainer_Free(void* ptr);
 
 #endif
