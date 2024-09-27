@@ -85,7 +85,7 @@ void cutsceneMgr_createCutscene(cutsceneMgr* self) {
         sys.cutscene_flags = cutscene_flags | CUTSCENE_FLAG_FILM_REEL_EFFECT;
         if ((self && self) && self) {
         }
-        self->csFilmReel = object_createAndSetChild(&self->header, CUTSCENE_CSFILMREEL);
+        self->cs_film_reel = object_createAndSetChild(&self->header, CUTSCENE_CS_FILM_REEL);
     }
 
     self->cutscene_object = object_createAndSetChild(
@@ -137,7 +137,7 @@ void cutsceneMgr_loop(cutsceneMgr* self) {
 void cutsceneMgr_stopCutscene(cutsceneMgr* self) {
     cutscene_parameters* settings;
 
-    if (objectList_findFirstObjectByID(CUTSCENE_CSFILMREEL) != NULL) {
+    if (objectList_findFirstObjectByID(CUTSCENE_CS_FILM_REEL) != NULL) {
         return;
     }
 
