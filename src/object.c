@@ -5,13 +5,13 @@
  */
 
 #include "object.h"
+#include "gfx/graphic_container.h"
 #include "cv64.h"
 #include "memory.h"
 #include "objects/engine/GameStateMgr.h"
 #include "objects/engine/object_0002.h"
 #include "objects/engine/object_0003.h"
 
-// .bss
 Object* object_list_free_slot;
 Object* ptr_gameplayParentObject;
 
@@ -36,12 +36,12 @@ void object_free(Object* self) {
 
     for (i = 0, alloc_data_slot = 1; i < OBJ_NUM_ALLOC_DATA;
          alloc_data_slot = alloc_data_slot << 1, i++) {
-        if (BITS_HAS(self->field_0x20, alloc_data_slot)) {
+        if (BITS_HAS(self->alloc_data_entries, alloc_data_slot)) {
             heapBlock_free(self->alloc_data[i]);
         }
 
-        if (BITS_HAS(self->field_0x22, alloc_data_slot)) {
-            func_80001080_1C80(self->alloc_data[i]);
+        if (BITS_HAS(self->graphic_container_entries, alloc_data_slot)) {
+            GraphicContainer_Free(self->alloc_data[i]);
         }
     }
 
@@ -239,7 +239,7 @@ Object* object_findFirstObjectByID(cv64_object_id_t ID, Object* current_object) 
  * at the beginning of that function.
  */
 Object* objectList_findFirstObjectByID(s32 ID) {
-    return object_findFirstObjectByID(ID, &objects_array[-1]);
+    return object_findFirstObjectByID(ID, ARRAY_START(objects_array) - 1);
 }
 
 /**
@@ -274,7 +274,7 @@ Object* object_findObjectBetweenIDRange(s32 min_ID, s32 max_ID, Object* current_
  * at the beginning of that function.
  */
 Object* objectList_findObjectBetweenRange(s32 min_ID, s32 max_ID) {
-    return object_findObjectBetweenIDRange(min_ID, max_ID, &objects_array[-1]);
+    return object_findObjectBetweenIDRange(min_ID, max_ID, ARRAY_START(objects_array) - 1);
 }
 
 /**
@@ -302,10 +302,48 @@ Object* object_findObjectByIDAndType(s32 ID, Object* current_object) {
  * at the beginning of that function.
  */
 Object* objectList_findObjectByIDAndType(s32 ID) {
-    return object_findObjectByIDAndType(ID, &objects_array[-1]);
+    return object_findObjectByIDAndType(ID, ARRAY_START(objects_array) - 1);
 }
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/object/func_80001BE4_27E4.s")
+Object* func_80001BE4_27E4(u32 object_ID, Object* arg1) {
+    ObjectHeader* child;
+    ObjectHeader* parent;
+    ObjectHeader* next;
+
+    if (ptr_gameplayParentObject == NULL) {
+        return object_findFirstObjectByID(object_ID, arg1);
+    } else {
+        object_ID &= 0x7FF;
+        while (TRUE) {
+            child = arg1->header.child;
+            if (child != NULL) {
+                arg1 = child;
+                if (object_ID == (child->ID & 0x7FF)) {
+                    // @bug Returning nothing in non-void return function.
+                    return;
+                } else {
+                    continue;
+                }
+            }
+            next = arg1->header.next;
+            while (next == NULL) {
+                if (arg1 == ptr_gameplayParentObject) {
+                    return NULL;
+                }
+                parent = arg1->header.parent;
+                if (parent == NULL) {
+                    return NULL;
+                }
+                next = parent->next;
+                arg1 = parent;
+            }
+            arg1 = next;
+            if (object_ID == (next->ID & 0x7FF)) {
+                return next;
+            }
+        }
+    }
+}
 
 #pragma GLOBAL_ASM("../asm/nonmatchings/object/func_80001CA0_28A0.s")
 
@@ -350,7 +388,7 @@ Object* func_8000211C_2D1C(s32 ID) {
  * in one of the object's pointer list (`alloc_data`).
  */
 void* object_allocEntryInList(Object* self, s32 heap_kind, u32 size, s32 alloc_data_index) {
-    BITS_SET(self->field_0x20, 1 << alloc_data_index);
+    BITS_SET(self->alloc_data_entries, 1 << alloc_data_index);
     self->alloc_data[alloc_data_index] = heap_alloc(heap_kind, size);
     return self->alloc_data[alloc_data_index];
 }
@@ -361,15 +399,18 @@ void* object_allocEntryInList(Object* self, s32 heap_kind, u32 size, s32 alloc_d
  * then clears the allocated data.
  */
 void* object_allocEntryInListAndClear(Object* self, s32 heap_kind, u32 size, s32 alloc_data_index) {
-    BITS_SET(self->field_0x20, 1 << alloc_data_index);
+    BITS_SET(self->alloc_data_entries, 1 << alloc_data_index);
     self->alloc_data[alloc_data_index] = heap_alloc(heap_kind, size);
     memory_clear(self->alloc_data[alloc_data_index], size);
     return self->alloc_data[alloc_data_index];
 }
 
-void* func_80002264_2E64(Object* self, u32 size, s32 heap_kind, s32 alloc_data_index) {
-    BITS_SET(self->field_0x22, 1 << alloc_data_index);
-    self->alloc_data[alloc_data_index] = func_80001008_1C08(size, heap_kind);
+void* object_allocGraphicContainerEntryInList(
+    Object* self, u32 size, s32 heap_kind, s32 alloc_data_index
+) {
+    BITS_SET(self->graphic_container_entries, 1 << alloc_data_index);
+    self->alloc_data[alloc_data_index] =
+        (GraphicContainerHeader*) GraphicContainer_Alloc(size, heap_kind);
     return self->alloc_data[alloc_data_index];
 }
 
@@ -377,13 +418,13 @@ void* func_80002264_2E64(Object* self, u32 size, s32 heap_kind, s32 alloc_data_i
  * Frees data previously allocated inside
  * one of the object's pointer list (`alloc_data`).
  */
-void func_800022BC_2EBC(Object* self, s32 alloc_data_index) {
-    if (BITS_HAS(self->field_0x20, 1 << alloc_data_index)) {
+void object_freeData(Object* self, s32 alloc_data_index) {
+    if (BITS_HAS(self->alloc_data_entries, 1 << alloc_data_index)) {
         heapBlock_free(self->alloc_data[alloc_data_index]);
     }
 
-    if (BITS_HAS(self->field_0x22, 1 << alloc_data_index)) {
-        func_80001080_1C80(self->alloc_data[alloc_data_index]);
+    if (BITS_HAS(self->graphic_container_entries, 1 << alloc_data_index)) {
+        GraphicContainer_Free(self->alloc_data[alloc_data_index]);
     }
 }
 
@@ -443,8 +484,9 @@ void object_executeChildObject(ObjectHeader* self) {
  * Executes one frame of the object's and its `child`'s code
  */
 void object_execute(ObjectHeader* self) {
-    // If a object is waiting to be deleted (i.e. if its ID = 8xxx or Axxx (2xxx
-    // | 8xxx)) then don't execute it, nor its children
+    // If a object is waiting to be deleted
+    // (i.e. if its ID = 8xxx or Axxx (2xxx | 8xxx)),
+    // then don't execute it, nor its children
     if (self->ID <= 0)
         return;
 

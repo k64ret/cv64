@@ -16,25 +16,22 @@
 #pragma GLOBAL_ASM("../asm/nonmatchings/memory/memory_copy.s")
 
 void heap_init(
-    cv64_heap_kind_t kind,
-    cv64_heapblock_hdr_t* first_block_ptr,
-    s32 heap_size,
-    u32 additional_flags
+    HeapKind kind, HeapBlockHeader* first_block_ptr, s32 heap_size, u32 additional_flags
 ) {
     heaps[kind].flags      = additional_flags | HEAP_ACTIVE;
-    heaps[kind].size       = ALIGN8(heap_size);
-    heaps[kind].heap_start = ALIGN8(first_block_ptr);
+    heaps[kind].size       = ALIGN8_BITWISE(heap_size);
+    heaps[kind].heap_start = ALIGN8_BITWISE(first_block_ptr);
     first_block_ptr->flags = HEAP_BLOCK_FREE;
-    first_block_ptr->size  = heaps[kind].size - sizeof(cv64_heapblock_hdr_t);
+    first_block_ptr->size  = heaps[kind].size - sizeof(HeapBlockHeader);
 }
 
-void heap_free(cv64_heap_kind_t kind) {
+void heap_free(HeapKind kind) {
     heaps[kind].flags = HEAP_INACTIVE;
 }
 
 void heap_writebackDCache(void) {
-    cv64_heap_inf_t* first;
-    cv64_heap_inf_t* current_heap;
+    Heap* first;
+    Heap* current_heap;
 
     first = ARRAY_START(heaps), current_heap = &heaps[ARRAY_COUNT(heaps) - 1];
 
@@ -55,33 +52,33 @@ void initHeaps(void) {
 
     heap_init(
         HEAP_KIND_MULTIPURPOSE,
-        (cv64_heapblock_hdr_t*) &HEAP_MULTIPURPOSE_START,
+        (HeapBlockHeader*) &HEAP_MULTIPURPOSE_START,
         HEAP_MULTIPURPOSE_SIZE,
         HEAP_WRITE_BACK_CACHE_TO_RAM
     );
 }
 
-void func_80000D68_1968(cv64_heap_kind_t arg0, u32 arg1) {}
+void func_80000D68_1968(HeapKind arg0, u32 arg1) {}
 
 s32 func_80000D74_1974(s32 arg0) {
     return 0;
 }
 
-void* heap_alloc(cv64_heap_kind_t kind, u32 size) {
-    cv64_heap_inf_t* heap = &heaps[kind];
-    cv64_heapblock_hdr_t* curr_blk;
-    cv64_heapblock_hdr_t* second_blk;
-    cv64_heapblock_hdr_t* next_blk;
-    cv64_heapblock_hdr_t* new_blk;
+void* heap_alloc(HeapKind kind, u32 size) {
+    Heap* heap = &heaps[kind];
+    HeapBlockHeader* curr_blk;
+    HeapBlockHeader* second_blk;
+    HeapBlockHeader* next_blk;
+    HeapBlockHeader* new_blk;
     u32 curr_blk_sz;
 
-    size = (((u32) size + 7) >> 3) * 8;
+    size = ALIGN8_ARITHMETIC(size);
 
     for (curr_blk  = heap->heap_start,
-        second_blk = (cv64_heapblock_hdr_t*) (heap->size + (u8*) heap->heap_start);
+        second_blk = (HeapBlockHeader*) (heap->size + (u8*) heap->heap_start);
          curr_blk != second_blk;
-         curr_blk = (cv64_heapblock_hdr_t*) ((u8*) curr_blk + curr_blk->size +
-                                             sizeof(cv64_heapblock_hdr_t))) {
+         curr_blk =
+             (HeapBlockHeader*) ((u8*) curr_blk + curr_blk->size + sizeof(HeapBlockHeader))) {
         if (curr_blk->flags == HEAP_BLOCK_FREE) {
             while (TRUE) {
                 next_blk = curr_blk;
@@ -89,10 +86,10 @@ void* heap_alloc(cv64_heap_kind_t kind, u32 size) {
                 }
                 curr_blk_sz = next_blk->size;
                 if (curr_blk_sz < size) {
-                    next_blk = (cv64_heapblock_hdr_t*) ((u8*) next_blk + curr_blk_sz +
-                                                        sizeof(cv64_heapblock_hdr_t));
+                    next_blk =
+                        (HeapBlockHeader*) ((u8*) next_blk + curr_blk_sz + sizeof(HeapBlockHeader));
                     if ((next_blk < second_blk) && (next_blk->flags == HEAP_BLOCK_FREE)) {
-                        curr_blk->size += next_blk->size + sizeof(cv64_heapblock_hdr_t);
+                        curr_blk->size += next_blk->size + sizeof(HeapBlockHeader);
                         continue;
                     }
                 } else {
@@ -100,10 +97,9 @@ void* heap_alloc(cv64_heap_kind_t kind, u32 size) {
                 }
 
                 if (next_blk == NULL) {
-                    next_blk =
-                        (cv64_heapblock_hdr_t*) (curr_blk_sz - size - sizeof(cv64_heapblock_hdr_t));
+                    next_blk = (HeapBlockHeader*) (curr_blk_sz - size - sizeof(HeapBlockHeader));
                     if ((s32) next_blk > 0) {
-                        new_blk          = (cv64_heapblock_hdr_t*) ((u8*) curr_blk + size);
+                        new_blk          = (HeapBlockHeader*) ((u8*) curr_blk + size);
                         new_blk[1].flags = HEAP_BLOCK_FREE;
                         new_blk[1].size  = (u32) next_blk;
                         curr_blk->size   = size;
@@ -122,35 +118,68 @@ void* heap_alloc(cv64_heap_kind_t kind, u32 size) {
 
 #pragma GLOBAL_ASM("../asm/nonmatchings/memory/heap_allocWithAlignment.s")
 
-// https://decomp.me/scratch/tHw91
-#pragma GLOBAL_ASM("../asm/nonmatchings/memory/heapBlock_updateBlockMaxSize.s")
+s32 heapBlock_updateBlockMaxSize(void* data, u32 size) {
+    HeapBlockHeader* current_block_header =
+        (HeapBlockHeader*) (((s32) data) - sizeof(HeapBlockHeader));
+    s32 current_block_size = current_block_header->size;
+    s32 remaining_free_space;
+    s32* current_block_size_ptr;
+    HeapBlockHeader* next_block_header;
 
-void* func_80001008_1C08(cv64_heap_kind_t heap_kind, u32 size) {
+    current_block_size_ptr = &current_block_header->size;
+    if (1) {
+    }
+    size = ALIGN8_ARITHMETIC(size);
+    if ((*current_block_size_ptr) < size) {
+        return -1;
+    }
+    remaining_free_space = (*current_block_size_ptr - size) - (sizeof(HeapBlockHeader));
+    next_block_header    = (HeapBlockHeader*) (((s32) current_block_header) + size);
+    if (remaining_free_space > 0) {
+        next_block_header[1].flags = HEAP_BLOCK_FREE;
+        next_block_header[1].size  = remaining_free_space;
+        current_block_header->size = size;
+        current_block_size         = size;
+    }
+    return current_block_size;
+}
+
+GraphicContainerHeader* GraphicContainer_Alloc(HeapKind heap_kind, u32 size) {
     u32 data;
-    cv64_heapblock_hdr_t* data_header;
+    HeapBlockHeader* data_header;
 
-    data = (u32) heap_alloc(heap_kind, size * 2);
+    data = (u32) heap_alloc(heap_kind, size * NUM_GRAPHIC_BUFFERS);
     if (data == NULL) {
         return NULL;
     }
 
-    data_header               = data - sizeof(cv64_heapblock_hdr_t);
-    data_header->data_ptrs[0] = data;
-    BITS_SET(data_header->flags, HEAP_BLOCK_4000);
-    data_header->data_ptrs[1] = data + size;
-    data_header->field_0x08   = data_header->data_ptrs[sys.current_graphic_buffer];
+    data_header                                 = data - sizeof(HeapBlockHeader);
+    data_header->graphic_container.data_ptrs[0] = data;
+    BITS_SET(data_header->flags, HEAP_BLOCK_GRAPHIC_CONTAINER);
+    data_header->graphic_container.data_ptrs[1] = data + size;
+    data_header->graphic_container.field_0x00 =
+        data_header->graphic_container.data_ptrs[sys.current_graphic_buffer];
 
-    return &data_header->field_0x08;
+    return &data_header->graphic_container;
 }
 
 void heapBlock_free(void* ptr) {
-    cv64_heapblock_hdr_t* temp =
-        (cv64_heapblock_hdr_t*) (((s32) ptr) - sizeof(cv64_heapblock_hdr_t));
-    temp->flags = HEAP_BLOCK_FREE;
+    HeapBlockHeader* temp = (HeapBlockHeader*) (((s32) ptr) - sizeof(HeapBlockHeader));
+    temp->flags           = HEAP_BLOCK_FREE;
 }
 
-// https://decomp.me/scratch/eT3oh
-#pragma GLOBAL_ASM("../asm/nonmatchings/memory/func_80001080_1C80.s")
+void GraphicContainer_Free(void* ptr) {
+    u8* temp;
+
+    /**
+     * @bug `temp` is used before it's initialised.
+     *      This works in practice because the stack allocated for `temp`
+     *      happens to contain 0, which points to the proper address in its
+     *      heap block header.
+     */
+    temp = temp + ((u8*) ptr - temp) - OFFSET_OF(HeapBlockHeader, graphic_container);
+    ((HeapBlockHeader*) temp)->flags = HEAP_BLOCK_FREE;
+}
 
 #pragma GLOBAL_ASM("../asm/nonmatchings/memory/func_800010A0_1CA0.s")
 

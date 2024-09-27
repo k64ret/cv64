@@ -30,7 +30,7 @@ typedef struct {
      */
     u32 global_timer_uncapped;
     u32 execution_flags;
-    sysw_gfx graphic_buffers[2];
+    sysw_gfx graphic_buffers[NUM_GRAPHIC_BUFFERS];
     s16 current_graphic_buffer;
     s16 previous_graphic_buffer;
     s16 frameBuffer_index;

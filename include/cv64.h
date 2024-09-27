@@ -78,10 +78,13 @@ s32 func_8001A250_1AE50(s32* arg0, u16* arg1, s16 arg2);
 extern void func_80066400(s32);
 extern void Map_SetCameraParams();
 
-#define NPTR             0
-#define ARRAY_COUNT(arr) (s32)(sizeof(arr) / sizeof(arr[0])) // Get number of elements in the array
-#define ARRAY_START(arr) &arr[0]                             // Get start address of array
-#define ARRAY_END(arr)   &arr[ARRAY_COUNT(arr)]              // Get end address of array
+#define NPTR 0
+// Gets the offset of a struct member variable
+#define OFFSET_OF(type, member) ((u32) & ((type*) 0)->member)
+#define ARRAY_COUNT(arr)        (s32)(sizeof(arr) / sizeof(arr[0])) // Get number of elements in the array
+#define ARRAY_START(arr)        &arr[0]                             // Get start address of array
+#define ARRAY_END(arr)          &arr[ARRAY_COUNT(arr)]              // Get end address of array
+#define NUM_GRAPHIC_BUFFERS     2
 
 #define SCREEN_WIDTH  320
 #define SCREEN_HEIGHT 240

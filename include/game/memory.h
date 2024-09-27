@@ -1,9 +1,10 @@
 #ifndef MEMORY_H
 #define MEMORY_H
 
-#include <ultra64.h>
+#include "gfx/graphic_container.h"
 
-#define ALIGN8(val) ((((u32) val) + 7) & ~7)
+#define ALIGN8_BITWISE(val)    ((((u32) val) + 7) & ~7)
+#define ALIGN8_ARITHMETIC(val) ((((u32) (val + 7)) / 8) * 8)
 
 #define HEAP_MULTIPURPOSE_SIZE 0xD0000
 /**
@@ -18,7 +19,7 @@
 
 #define HEAP_NUM 8
 
-typedef enum cv64_heap_kind {
+typedef enum HeapKind {
     /**
      * Most dynamically-allocated data is allocated on this heap
      */
@@ -37,50 +38,39 @@ typedef enum cv64_heap_kind {
      * Current map's data (assets file, collision data, etc)
      */
     HEAP_KIND_MAP_DATA
-} cv64_heap_kind_t;
+} HeapKind;
 
 // clang-format off
 
-typedef enum cv64_heapblock_flag {
-    HEAP_BLOCK_FREE   = 0x0000,
+typedef enum HeapBlockFlag {
+    HEAP_BLOCK_FREE                = 0x0000,
     /**
-     * Display List / GFX related? See `func_80001008_1C08`
+     * The data allocated in this block is graphic-related
+     * content, such as display list or vertex buffers, etc.
      */
-    HEAP_BLOCK_4000   = 0x4000,
-    HEAP_BLOCK_ACTIVE = 0x8000
-} cv64_heapblock_flag_t;
+    HEAP_BLOCK_GRAPHIC_CONTAINER   = 0x4000,
+    HEAP_BLOCK_ACTIVE              = 0x8000
+} HeapBlockFlag;
 
-typedef enum cv64_heap_flag {
+typedef enum HeapFlag {
     HEAP_INACTIVE                = 0x0000,
     HEAP_WRITE_BACK_CACHE_TO_RAM = 0x4000,
     HEAP_ACTIVE                  = 0x8000
-} cv64_heap_flag_t;
+} HeapFlag;
 
 // clang-format on
 
-typedef struct cv64_heapblock_hdr {
+typedef struct HeapBlockHeader {
     s16 flags;
     u8 field_0x02[2];
     /**
      * Size of the block
      */
     u32 size;
-    /**
-     * Display List / GFX related?
-     */
-    void* field_0x08;
-    /**
-     * `data_ptrs[0]` = Start ptr,
-     * `data_ptrs[1]` = End ptr (End of allocated data, NOT end of block)
-     */
-    void* data_ptrs[2];
-    /**
-     * Related to file decompression?
-     */
-    u8 field_0x14[4];
-} cv64_heapblock_hdr_t;
+    GraphicContainerHeader graphic_container;
+} HeapBlockHeader;
 
-typedef struct cv64_heap_inf {
+typedef struct Heap {
     s16 flags;
     u8 field_0x02[2];
     /**
@@ -90,34 +80,35 @@ typedef struct cv64_heap_inf {
     /**
      * Start of the block array
      */
-    cv64_heapblock_hdr_t* heap_start;
-} cv64_heap_inf_t;
+    HeapBlockHeader* heap_start;
+} Heap;
 
-extern cv64_heap_inf_t heaps[HEAP_NUM];
+extern Heap heaps[HEAP_NUM];
 extern void* HEAP_MULTIPURPOSE_START;
 extern void* HEAP_MENU_DATA_START;
 
 extern void memory_copy(void* src, void* dest, u32 size);
 extern void memory_clear(void* ptr, u32 length);
 void heap_init(
-    cv64_heap_kind_t kind,
-    cv64_heapblock_hdr_t* first_block_ptr,
-    s32 heap_size,
-    u32 additional_flags
+    HeapKind kind, HeapBlockHeader* first_block_ptr, s32 heap_size, u32 additional_flags
 );
-void heap_free(cv64_heap_kind_t kind);
+void heap_free(HeapKind kind);
 void heap_writebackDCache(void);
 void initHeaps(void);
-void* heap_alloc(cv64_heap_kind_t kind, u32 data_size); // CV64's malloc()
-extern void* heap_allocWithAlignment(cv64_heap_kind_t kind, u32 data_size, u32 alignment);
-extern s32 heapBlock_updateBlockMaxSize(void* data, u32 data_size);
-void heapBlock_free(void* ptr); // CV64's free()
-void* func_80001008_1C08(cv64_heap_kind_t heap_kind, u32 size);
-extern void func_80001080_1C80(void*);
+void* heap_alloc(HeapKind kind, u32 data_size);
+extern void* heap_allocWithAlignment(HeapKind kind, u32 data_size, u32 alignment);
+extern s32 heapBlock_updateBlockMaxSize(void* data, u32 size);
+void heapBlock_free(void* ptr);
 void* allocStruct(const char* name, u32 size);
-void* func_8013B33C_BE52C(const char* name, u32 size);
 void func_8013B4F0_BE6E0(void);
 u32 isMenuDataHeapActive(void);
-void func_80000D68_1968(cv64_heap_kind_t arg0, u32 arg1);
+void func_80000D68_1968(HeapKind arg0, u32 arg1);
+
+/**
+ * `GraphicContainer` functions
+ */
+GraphicContainerHeader* GraphicContainer_Alloc(HeapKind heap_kind, u32 size);
+GraphicContainerHeader* allocGraphicContainerStruct(const char* name, u32 size);
+void GraphicContainer_Free(void* ptr);
 
 #endif
