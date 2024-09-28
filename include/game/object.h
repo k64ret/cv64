@@ -4,6 +4,7 @@
 #include "cv64.h"
 #include "gfx/figure.h"
 #include "gfx/graphic_container.h"
+#include "memory.h"
 #include "object_ID.h"
 
 #define OBJECT_ARRAY_MAX 384
@@ -89,21 +90,23 @@ typedef struct cv64_object_file_info {
 int object_isValid(ObjectHeader* self);
 void object_free(Object* self);
 void clearAllObjects();
-ObjectHeader* object_allocate(cv64_object_id_t ID);
+ObjectHeader* object_allocate(ObjectID ID);
 void updateObjectListFreeSlot();
-ObjectHeader* object_create(ObjectHeader* parent, cv64_object_id_t ID);
-ObjectHeader* object_createAndSetChild(ObjectHeader* parent, cv64_object_id_t ID);
-Object* object_findFirstObjectByID(cv64_object_id_t ID, Object* current_object);
-Object* objectList_findFirstObjectByID(s32 ID);
-Object* object_findObjectBetweenIDRange(s32 min_ID, s32 max_ID, Object* current_object);
-Object* objectList_findObjectBetweenRange(s32 min_ID, s32 max_ID);
-Object* object_findObjectByIDAndType(s32 ID, Object* current_object);
-Object* objectList_findObjectByIDAndType(s32 ID);
+ObjectHeader* object_create(ObjectHeader* parent, ObjectID ID);
+ObjectHeader* object_createAndSetChild(ObjectHeader* parent, ObjectID ID);
+Object* object_findFirstObjectByID(ObjectID ID, Object* current_object);
+Object* objectList_findFirstObjectByID(ObjectID ID);
+Object* object_findObjectBetweenIDRange(ObjectID min_ID, ObjectID max_ID, Object* current_object);
+Object* objectList_findObjectBetweenRange(ObjectID min_ID, ObjectID max_ID);
+Object* object_findObjectByIDAndType(ObjectID ID, Object* current_object);
+Object* objectList_findObjectByIDAndType(ObjectID ID);
 Object* func_8000211C_2D1C(s32 ID);
-void* object_allocEntryInList(Object* self, s32 heap_kind, u32 size, s32 alloc_data_index);
-void* object_allocEntryInListAndClear(Object* self, s32 heap_kind, u32 size, s32 alloc_data_index);
+void* object_allocEntryInList(Object* self, HeapKind heap_kind, u32 size, s32 alloc_data_index);
+void* object_allocEntryInListAndClear(
+    Object* self, HeapKind heap_kind, u32 size, s32 alloc_data_index
+);
 void* object_allocGraphicContainerEntryInList(
-    Object* self, u32 size, s32 heap_kind, s32 alloc_data_index
+    Object* self, u32 size, HeapKind heap_kind, s32 alloc_data_index
 );
 void object_freeData(Object* self, s32 alloc_data_index);
 void object_executeChildObject(ObjectHeader* self);
@@ -161,7 +164,7 @@ void object_fadeOutFortyFiveFramesAndGoToNextFunc(Object* self);
 void object_fadeOutSixtyFramesAndGoToNextFunc(Object* self);
 void object_goToNextFuncIfNotFading(Object* self);
 void func_80002570_3170(ObjectHeader* self);
-Object* func_80001BE4_27E4(cv64_object_id_t object_ID, Object* arg1);
+Object* func_80001BE4_27E4(ObjectID object_ID, Object* arg1);
 extern void mapOverlay(ObjectHeader* self);
 extern void unmapOverlay();
 void* allocStructInObjectEntryList(

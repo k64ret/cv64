@@ -83,7 +83,7 @@ void clearAllObjects() {
 /**
  * Allocates an object's basic struct in `objects_array`
  */
-ObjectHeader* object_allocate(cv64_object_id_t ID) {
+ObjectHeader* object_allocate(ObjectID ID) {
     Object* current_object;
     Object* last;
 
@@ -132,7 +132,7 @@ void updateObjectListFreeSlot() {
  * Creates a new object and makes it so that
  * the new object is executed right after `parent`
  */
-ObjectHeader* object_create(ObjectHeader* parent, cv64_object_id_t ID) {
+ObjectHeader* object_create(ObjectHeader* parent, ObjectID ID) {
     // Allocate the object in the objects array
     ObjectHeader* new_object = object_allocate(ID);
 
@@ -164,7 +164,7 @@ ObjectHeader* object_create(ObjectHeader* parent, cv64_object_id_t ID) {
  * the new object is executed after all the `parent`'s children
  * are executed beforehand.
  */
-ObjectHeader* object_createAndSetChild(ObjectHeader* parent, cv64_object_id_t ID) {
+ObjectHeader* object_createAndSetChild(ObjectHeader* parent, ObjectID ID) {
     // Allocate the object in the objects array
     ObjectHeader* new_object = object_allocate(ID);
     ObjectHeader* var_v0;
@@ -210,7 +210,7 @@ ObjectHeader* object_createAndSetChild(ObjectHeader* parent, cv64_object_id_t ID
  * Traverse the `objects_array`, starting from the `current_object`'s slot
  * and return the first instance of the object with the raw ID
  */
-Object* object_findFirstObjectByID(cv64_object_id_t ID, Object* current_object) {
+Object* object_findFirstObjectByID(ObjectID ID, Object* current_object) {
     // The ID of the object actually consists of a flag variable (upper byte)
     // and the actual ID part (lower byte)
     // Only the ID part of it.
@@ -238,7 +238,7 @@ Object* object_findFirstObjectByID(cv64_object_id_t ID, Object* current_object) 
  * Starts at -1 because `object_findFirstObjectByID` adds it to +1
  * at the beginning of that function.
  */
-Object* objectList_findFirstObjectByID(s32 ID) {
+Object* objectList_findFirstObjectByID(ObjectID ID) {
     return object_findFirstObjectByID(ID, ARRAY_START(objects_array) - 1);
 }
 
@@ -247,7 +247,7 @@ Object* objectList_findFirstObjectByID(s32 ID) {
  * and return the first instance of the object whose raw ID is higher or equal
  * to `min_ID` or lower or equal to `max_ID`
  */
-Object* object_findObjectBetweenIDRange(s32 min_ID, s32 max_ID, Object* current_object) {
+Object* object_findObjectBetweenIDRange(ObjectID min_ID, ObjectID max_ID, Object* current_object) {
     s32 current_obj_ID;
 
     BITS_ASSIGN_MASK(min_ID, 0x7FF);
@@ -273,7 +273,7 @@ Object* object_findObjectBetweenIDRange(s32 min_ID, s32 max_ID, Object* current_
  * Starts at -1 because `object_findFirstObjectByID` adds it to +1
  * at the beginning of that function.
  */
-Object* objectList_findObjectBetweenRange(s32 min_ID, s32 max_ID) {
+Object* objectList_findObjectBetweenRange(ObjectID min_ID, ObjectID max_ID) {
     return object_findObjectBetweenIDRange(min_ID, max_ID, ARRAY_START(objects_array) - 1);
 }
 
@@ -282,7 +282,7 @@ Object* objectList_findObjectBetweenRange(s32 min_ID, s32 max_ID) {
  * and return the first instance of the object where the ID passed has bits in
  * common with the object currently being read.
  */
-Object* object_findObjectByIDAndType(s32 ID, Object* current_object) {
+Object* object_findObjectByIDAndType(ObjectID ID, Object* current_object) {
     for (current_object++; (u32) current_object < (u32) object_list_free_slot; current_object++) {
         if (BITS_NOT_HAS(current_object->header.ID, ID))
             continue;
@@ -301,11 +301,11 @@ Object* object_findObjectByIDAndType(s32 ID, Object* current_object) {
  * Starts at -1 because `object_findFirstObjectByID` adds it to +1
  * at the beginning of that function.
  */
-Object* objectList_findObjectByIDAndType(s32 ID) {
+Object* objectList_findObjectByIDAndType(ObjectID ID) {
     return object_findObjectByIDAndType(ID, ARRAY_START(objects_array) - 1);
 }
 
-Object* func_80001BE4_27E4(cv64_object_id_t object_ID, Object* arg1) {
+Object* func_80001BE4_27E4(ObjectID object_ID, Object* arg1) {
     ObjectHeader* child;
     ObjectHeader* parent;
     ObjectHeader* next;
@@ -393,8 +393,8 @@ Object* func_8000211C_2D1C(s32 ID) {
  * Dynamically allocates arbitrary data, and keeps its pointer
  * in one of the object's pointer list (`alloc_data`).
  */
-void* object_allocEntryInList(Object* self, s32 heap_kind, u32 size, s32 alloc_data_index) {
-    BITS_SET(self->alloc_data_entries, 1 << alloc_data_index);
+void* object_allocEntryInList(Object* self, HeapKind heap_kind, u32 size, s32 alloc_data_index) {
+    BITS_SET(self->alloc_data_entries, BIT(alloc_data_index));
     self->alloc_data[alloc_data_index] = heap_alloc(heap_kind, size);
     return self->alloc_data[alloc_data_index];
 }
@@ -404,17 +404,19 @@ void* object_allocEntryInList(Object* self, s32 heap_kind, u32 size, s32 alloc_d
  * in one of the object's pointer list (`alloc_data`),
  * then clears the allocated data.
  */
-void* object_allocEntryInListAndClear(Object* self, s32 heap_kind, u32 size, s32 alloc_data_index) {
-    BITS_SET(self->alloc_data_entries, 1 << alloc_data_index);
+void* object_allocEntryInListAndClear(
+    Object* self, HeapKind heap_kind, u32 size, s32 alloc_data_index
+) {
+    BITS_SET(self->alloc_data_entries, BIT(alloc_data_index));
     self->alloc_data[alloc_data_index] = heap_alloc(heap_kind, size);
     memory_clear(self->alloc_data[alloc_data_index], size);
     return self->alloc_data[alloc_data_index];
 }
 
 void* object_allocGraphicContainerEntryInList(
-    Object* self, u32 size, s32 heap_kind, s32 alloc_data_index
+    Object* self, u32 size, HeapKind heap_kind, s32 alloc_data_index
 ) {
-    BITS_SET(self->graphic_container_entries, 1 << alloc_data_index);
+    BITS_SET(self->graphic_container_entries, BIT(alloc_data_index));
     self->alloc_data[alloc_data_index] =
         (GraphicContainerHeader*) GraphicContainer_Alloc(size, heap_kind);
     return self->alloc_data[alloc_data_index];
@@ -425,11 +427,11 @@ void* object_allocGraphicContainerEntryInList(
  * one of the object's pointer list (`alloc_data`).
  */
 void object_freeData(Object* self, s32 alloc_data_index) {
-    if (BITS_HAS(self->alloc_data_entries, 1 << alloc_data_index)) {
+    if (BITS_HAS(self->alloc_data_entries, BIT(alloc_data_index))) {
         heapBlock_free(self->alloc_data[alloc_data_index]);
     }
 
-    if (BITS_HAS(self->graphic_container_entries, 1 << alloc_data_index)) {
+    if (BITS_HAS(self->graphic_container_entries, BIT(alloc_data_index))) {
         GraphicContainer_Free(self->alloc_data[alloc_data_index]);
     }
 }
