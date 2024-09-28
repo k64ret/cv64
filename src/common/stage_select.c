@@ -241,7 +241,7 @@ void StageSelect_warpToStage(StageSelect* self) {
                 break;
 
             case INSIDE_OF_RAMPART:
-                sys.entrance_cutscene_ID = CUTSCENE_ID_04;
+                sys.entrance_cutscene_ID = CUTSCENE_ID_CASTLE_WALL_BRIDGE_RAISES;
                 sys.map                  = TOUOKUJI;
                 sys.map_fade_out_time    = 30;
                 sys.map_fade_in_time     = 30;
@@ -253,7 +253,7 @@ void StageSelect_warpToStage(StageSelect* self) {
 
             case COURTYARD:
                 BITS_SET(sys.cutscene_flags, CUTSCENE_FLAG_IS_ENTRANCE_CUTSCENE);
-                sys.entrance_cutscene_ID = CUTSCENE_ID_09;
+                sys.entrance_cutscene_ID = CUTSCENE_ID_ENTERING_VILLA;
                 sys.map                  = NAKANIWA;
                 sys.map_fade_out_time    = 30;
                 sys.map_fade_in_time     = 30;
