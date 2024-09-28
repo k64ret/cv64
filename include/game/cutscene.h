@@ -33,7 +33,8 @@ typedef enum CutsceneFlag {
      *
      * The camera will also remain in the position it was when the cutscene ended.
      */
-    CUTSCENE_FLAG_PLAY_DURING_CUTSCENE_STATE_AFTER_IT_ENDS = BIT(5)
+    CUTSCENE_FLAG_PLAY_DURING_CUTSCENE_STATE_AFTER_IT_ENDS = BIT(5),
+    CUTSCENE_FLAG_80000000                                 = BIT(31)
 } CutsceneFlag;
 
 /**
