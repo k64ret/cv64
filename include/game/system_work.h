@@ -81,7 +81,7 @@ typedef struct {
     u16 global_timer_capped;
     s16 field24_0x242be;
     u8 field_0x242c0[4];
-    cv64_cont_state_t controllers[4];
+    Controller controllers[4];
     u8 file_load_array_ID;
     u8 field27_0x242fd[3];
     void* Nisitenma_Ichigo_loaded_files_ptr[255];
