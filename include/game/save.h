@@ -22,37 +22,67 @@ enum SubweaponID {
 };
 
 typedef enum MapID {
-    MORI              = 0,
-    TOU               = 1,
-    TOUOKUJI          = 2,
-    NAKANIWA          = 3,
-    BEKKAN_1F         = 4,
-    BEKKAN_2F         = 5,
-    MEIRO_TEIEN       = 6,
-    CHIKA_KODO        = 7,
-    CHIKA_SUIRO       = 8,
-    HONMARU_B1F       = 9,
-    HONMARU_1F        = 10,
-    HONMARU_2F        = 11,
+    /* Forest of Silence */
+    MORI = 0,
+    /* Castle Wall (Towers) */
+    TOU = 1,
+    /* Castle Wall (Main) */
+    TOUOKUJI = 2,
+    /* Villa (Yard) */
+    NAKANIWA = 3,
+    /* Villa (Foyer) */
+    BEKKAN_1F = 4,
+    /* Villa (Hallway) */
+    BEKKAN_2F = 5,
+    /* Villa (Maze Garden) */
+    MEIRO_TEIEN = 6,
+    /* Tunnel */
+    CHIKA_KODO = 7,
+    /* Underground Waterway */
+    CHIKA_SUIRO = 8,
+    /* Castle Center (Main) */
+    HONMARU_B1F = 9,
+    /* Castle Center (Bottom Elevator) */
+    HONMARU_1F = 10,
+    /* Castle Center (Gears) */
+    HONMARU_2F = 11,
+    /* Castle Center (Friendly Lizard-man) */
     HONMARU_3F_MINAMI = 12,
+    /* Castle Center (Library) */
     HONMARU_4F_MINAMI = 13,
-    HONMARU_3F_KITA   = 14,
-    HONMARU_5F        = 15,
-    SHOKEI_TOU        = 16,
-    MAHOU_TOU         = 17,
-    KAGAKU_TOU        = 18,
-    KETTOU_TOU        = 19,
-    TURO_TOKEITOU     = 20,
-    TENSHU            = 21,
-    ENDING_DUMMY      = 22,
-    TOKEITOU_NAI      = 23,
-    DRACULA           = 24,
-    ROSE              = 25,
-    BEKKAN_BOSS       = 26,
-    TOU_TURO          = 27,
-    ENDING            = 28,
-    TEST_GRID         = 29,
-    MAP_NONE          = -1
+    /* Castle Center (Nitro Room) */
+    HONMARU_3F_KITA = 14,
+    /* Castle Center (Top Elevator) */
+    HONMARU_5F = 15,
+    /* Tower of Execution */
+    SHOKEI_TOU = 16,
+    /* Tower of Sorcery */
+    MAHOU_TOU = 17,
+    /* Tower of Science */
+    KAGAKU_TOU = 18,
+    /* Duel Tower */
+    KETTOU_TOU = 19,
+    /* Castle Keep Stairs */
+    TURO_TOKEITOU = 20,
+    /* Castle Keep */
+    TENSHU = 21,
+    /* Intro Cutscene Map */
+    ENDING_DUMMY = 22,
+    /* Clock Tower */
+    TOKEITOU_NAI = 23,
+    /* Dracula Desert */
+    DRACULA = 24,
+    /* Rose / Actrice Fan Room */
+    ROSE = 25,
+    /* Villa (Vampire Crypt) */
+    BEKKAN_BOSS = 26,
+    /* Room of Clocks */
+    TOU_TURO = 27,
+    /* Ending Map */
+    ENDING = 28,
+    /* Test Grid */
+    TEST_GRID = 29,
+    MAP_NONE  = -1
 } MapID;
 
 enum SaveFlag {
