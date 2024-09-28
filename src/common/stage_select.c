@@ -230,7 +230,7 @@ void stageSelect_warpToStage(stageSelect* self) {
 
         switch (self->current_option) {
             case FOREST:
-                sys.entrance_cutscene_ID = 60;
+                sys.entrance_cutscene_ID = CUTSCENE_ID_FOREST_INTRO;
                 sys.map_fade_out_time    = 30;
                 sys.map_fade_in_time     = 30;
                 sys.map                  = MORI;
@@ -241,7 +241,7 @@ void stageSelect_warpToStage(stageSelect* self) {
                 break;
 
             case INSIDE_OF_RAMPART:
-                sys.entrance_cutscene_ID = 4;
+                sys.entrance_cutscene_ID = CUTSCENE_ID_04;
                 sys.map                  = TOUOKUJI;
                 sys.map_fade_out_time    = 30;
                 sys.map_fade_in_time     = 30;
@@ -253,7 +253,7 @@ void stageSelect_warpToStage(stageSelect* self) {
 
             case COURTYARD:
                 BITS_SET(sys.cutscene_flags, CUTSCENE_FLAG_IS_ENTRANCE_CUTSCENE);
-                sys.entrance_cutscene_ID = 9;
+                sys.entrance_cutscene_ID = CUTSCENE_ID_09;
                 sys.map                  = NAKANIWA;
                 sys.map_fade_out_time    = 30;
                 sys.map_fade_in_time     = 30;
