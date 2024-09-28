@@ -8,10 +8,10 @@
 #define NUM_EVENT_FLAGS  16
 #define SIZE_ITEMS_ARRAY 64 // Size of the whole items array
 
-enum PlayerCharacterID {
+typedef enum PlayerCharacterID {
     REINHARDT = 0,
     CARRIE    = 1
-};
+} PlayerCharacterID;
 
 enum SubweaponID {
     SUBWEAPON_NONE       = 0,

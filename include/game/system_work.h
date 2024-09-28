@@ -179,10 +179,7 @@ typedef struct {
      */
     s16 current_opened_menu;
     u8 field84_0x26438[4];
-    /**
-     * 0 = REINHARDT, 1 = CARRIE
-     */
-    u32 title_demo_character;
+    PlayerCharacterID title_demo_character;
     u32 cutscene_ID;
     u32 entrance_cutscene_ID;
     u32 cutscene_flags;
