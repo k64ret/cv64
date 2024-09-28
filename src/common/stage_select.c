@@ -200,7 +200,7 @@ void StageSelect_warpToStage(StageSelect* self) {
         StageSelect_closeTextboxes(self);
 
         sys.SaveStruct_gameplay.map           = MAP_NONE;
-        sys.SaveStruct_gameplay.spawn         = 0;
+        sys.SaveStruct_gameplay.spawn         = -1;
         sys.SaveStruct_gameplay.life          = 100;
         sys.SaveStruct_gameplay.field_0x5C    = 100;
         sys.SaveStruct_gameplay.subweapon     = SUBWEAPON_NONE;
