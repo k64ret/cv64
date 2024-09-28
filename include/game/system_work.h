@@ -175,7 +175,7 @@ typedef struct {
      */
     s16 NOT_ON_MENU;
     /**
-     * NOT_ON_MENU = 0, PAUSE = 9, RENON_SHOP = 10, GAME_OVER = 14
+     * See the `MenuID` enum for possible values
      */
     s16 current_opened_menu;
     u8 field84_0x26438[4];
@@ -184,7 +184,9 @@ typedef struct {
     u32 entrance_cutscene_ID;
     u32 cutscene_flags;
     /**
-     * DESTROY_CUTSCENE_TRIGGERS --> |= 0x00000001
+     * If OR'd with 1, cutscene triggers won't spawn
+     *
+     * See `cutsceneTrigger_init`
      */
     u32 field89_0x2644c;
 } system_work; // Size = 0x26450

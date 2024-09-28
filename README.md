@@ -160,7 +160,7 @@ python3 ./tools/m2ctx.py <your_C_file>
 ```
 
 > [!TIP]
-> Or run `mise run ctx -- <your_C_file>` if you are already using [mise][mise].
+> Or run `mise run ctx <your_C_file>` if you are already using [mise][mise].
 
 [mise]: https://github.com/jdx/mise
 [research-spreadsheets]: https://docs.google.com/spreadsheets/d/1nzh_nFf26oVZy6uWeNYiYGXAto6Yz3xypZwWqwJBBJQ/edit#gid=74717405
@@ -183,7 +183,7 @@ or when instructions are placed in a different order than the target assembly.
    ```
 
    This will create a directory called `perm` in the root of the project.
-   
+
 > [!TIP]
 > Or run `mise r pp putFunctionNameHere` if you are already using [mise][mise].
 
@@ -194,6 +194,6 @@ or when instructions are placed in a different order than the target assembly.
    ```
 
    Add the `-j` option to utilize multiple cores, followed by the number of cores.
-   
+
 > [!TIP]
 > Or run `mise r p perm` if you are already using [mise][mise].
