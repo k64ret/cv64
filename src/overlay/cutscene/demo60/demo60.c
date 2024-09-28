@@ -78,7 +78,7 @@ void Demo60_GetPlayerModelAndSetBorders(Demo60* self) {
         if (ptr_PlayerData->visualData.model != NULL) {
             player_model       = ptr_PlayerData->visualData.model;
             data->player_model = player_model;
-            sys.cutscene_flags &= ~CUTSCENE_FLAG_10;
+            sys.cutscene_flags &= ~CUTSCENE_FLAG_IS_ENTRANCE_CUTSCENE;
             sys.cutscene_flags |= CUTSCENE_FLAG_DISPLAY_WIDESCREEN_BORDERS;
             (*object_curLevel_goToNextFuncAndClearTimer)(
                 self->header.current_function, &self->header.function_info_ID

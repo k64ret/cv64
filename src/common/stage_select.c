@@ -252,7 +252,7 @@ void stageSelect_warpToStage(stageSelect* self) {
                 break;
 
             case COURTYARD:
-                BITS_SET(sys.cutscene_flags, CUTSCENE_FLAG_10);
+                BITS_SET(sys.cutscene_flags, CUTSCENE_FLAG_IS_ENTRANCE_CUTSCENE);
                 sys.entrance_cutscene_ID = 9;
                 sys.map                  = NAKANIWA;
                 sys.map_fade_out_time    = 30;

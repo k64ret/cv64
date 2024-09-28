@@ -141,7 +141,7 @@ void cutsceneMgr_stopCutscene(cutsceneMgr* self) {
         return;
     }
 
-    if (BITS_NOT_HAS(sys.cutscene_flags, CUTSCENE_FLAG_10) &&
+    if (BITS_NOT_HAS(sys.cutscene_flags, CUTSCENE_FLAG_IS_ENTRANCE_CUTSCENE) &&
         BITS_HAS(
             cutscene_settings[self->cutscene_ID - 1].overlay, CUTSCENE_OVERLAY_WIDESCREEN_BORDERS
         )) {
@@ -154,9 +154,9 @@ void cutsceneMgr_stopCutscene(cutsceneMgr* self) {
         sys.cutscene_ID = CUTSCENE_ID_NONE;
     }
 
-    if (BITS_NOT_HAS(sys.cutscene_flags, CUTSCENE_FLAG_20)) {
+    if (BITS_NOT_HAS(sys.cutscene_flags, CUTSCENE_FLAG_PLAY_DURING_CUTSCENE_STATE_AFTER_IT_ENDS)) {
         BITS_UNSET(sys.cutscene_flags, CUTSCENE_FLAG_PLAYING);
-        if (BITS_NOT_HAS(sys.cutscene_flags, CUTSCENE_FLAG_10)) {
+        if (BITS_NOT_HAS(sys.cutscene_flags, CUTSCENE_FLAG_IS_ENTRANCE_CUTSCENE)) {
             BITS_UNSET(sys.cutscene_flags, CUTSCENE_FLAG_DISPLAY_WIDESCREEN_BORDERS);
         }
     }

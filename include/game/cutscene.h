@@ -4,14 +4,37 @@
 #include "actor.h"
 #include "gfx/camera.h"
 #include "cutscene_ID.h"
+#include "bit.h"
 
 #define NUM_CUTSCENES 61
 
-#define CUTSCENE_FLAG_PLAYING                    0x01
-#define CUTSCENE_FLAG_FILM_REEL_EFFECT           0x04
-#define CUTSCENE_FLAG_DISPLAY_WIDESCREEN_BORDERS 0x08 // Assumption
-#define CUTSCENE_FLAG_10                         0x10
-#define CUTSCENE_FLAG_20                         0x20
+typedef enum CutsceneFlag {
+    /**
+     * A cutscene is currently active
+     */
+    CUTSCENE_FLAG_PLAYING = BIT(0),
+    /**
+     * The unused film reel effect is currently active
+     */
+    CUTSCENE_FLAG_FILM_REEL_EFFECT           = BIT(2),
+    CUTSCENE_FLAG_DISPLAY_WIDESCREEN_BORDERS = BIT(3),
+    /**
+     * Indicates that the current cutscene is an entrance cutscene
+     * (a cutscene that is meant to be played when entering a map)
+     */
+    CUTSCENE_FLAG_IS_ENTRANCE_CUTSCENE = BIT(4),
+    /**
+     * If this flag is set, then at the end of a cutscene,
+     * the `CUTSCENE_FLAG_PLAYING` flag won't be unset,
+     * making most of the game "think" a cutscene is still playing.
+     *
+     * Because of this, most entities will be paused,
+     * with a few exceptions such as the player which can still be controlled.
+     *
+     * The camera will also remain in the position it was when the cutscene ended.
+     */
+    CUTSCENE_FLAG_PLAY_DURING_CUTSCENE_STATE_AFTER_IT_ENDS = BIT(5)
+} CutsceneFlag;
 
 /**
  * The argument of function `cutscene_setCameraClippingAndScissoring`
