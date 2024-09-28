@@ -52,7 +52,7 @@ typedef enum MapID {
     TOU_TURO          = 27,
     ENDING            = 28,
     TEST_GRID         = 29,
-    NONE              = -1
+    MAP_NONE          = -1
 } MapID;
 
 enum SaveFlag {

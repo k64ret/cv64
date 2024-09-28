@@ -1,18 +1,18 @@
 // src/overlay/stage_select.c ==================================================
 // .text
-stageSelect_entrypoint              = 0x8012A520; // type:func segment:common
-stageSelect_loadAssetsFile          = 0x8012A590; // type:func segment:common
-stageSelect_initGraphics            = 0x8012A688; // type:func segment:common
-stageSelect_initLens                = 0x8012A904; // type:func segment:common
-stageSelect_moveLens                = 0x8012AA60; // type:func segment:common
-stageSelect_warpToStage             = 0x8012AC04; // type:func segment:common
-stageSelect_closeTextboxes          = 0x8012AEA0; // type:func segment:common
+StageSelect_entrypoint              = 0x8012A520; // type:func segment:common
+StageSelect_loadAssetsFile          = 0x8012A590; // type:func segment:common
+StageSelect_initGraphics            = 0x8012A688; // type:func segment:common
+StageSelect_initLens                = 0x8012A904; // type:func segment:common
+StageSelect_moveLens                = 0x8012AA60; // type:func segment:common
+StageSelect_warpToStage             = 0x8012AC04; // type:func segment:common
+StageSelect_closeTextboxes          = 0x8012AEA0; // type:func segment:common
 // .data
-//stageSelect_text                  = 0x8016C8E0; // type:u16 segment:common size:0x017C
-//stageSelect_functions             = 0x8016CA5C; // segment:common size:0x18
+//StageSelect_text                  = 0x8016C8E0; // type:u16 segment:common size:0x017C
+//StageSelect_functions             = 0x8016CA5C; // segment:common size:0x18
 // .rodata
-//stageSelect_lens_background_size  = 0x8018AEC8; // type:f32 segment:common
-//stageSelect_warpToStage_jumptable = 0x8018AED8; // type:jtbl segment:common
+//StageSelect_lens_background_size  = 0x8018AEC8; // type:f32 segment:common
+//StageSelect_warpToStage_jumptable = 0x8018AED8; // type:jtbl segment:common
 // .L8012AD0C_ADEFC                  = 0x8018AED8; // type:jtbl_label segment:common
 // .L8012AD38_ADF28                  = 0x8018AEDC; // type:jtbl_label segment:common
 // .L8012AD68_ADF58                  = 0x8018AEE0; // type:jtbl_label segment:common

@@ -16,16 +16,16 @@
 #include "system_work.h"
 #include "objects/menu/stage_select.h"
 
-u16 stageSelect_text[] = {
+u16 StageSelect_text[] = {
 #include "objects/menu/stage_select.msg"
 };
 
-cv64_stage_select_func_t stageSelect_functions[] = {
-    stageSelect_loadAssetsFile,
-    stageSelect_initGraphics,
-    stageSelect_initLens,
-    stageSelect_moveLens,
-    stageSelect_warpToStage,
+StageSelectFunc StageSelect_functions[] = {
+    StageSelect_loadAssetsFile,
+    StageSelect_initGraphics,
+    StageSelect_initLens,
+    StageSelect_moveLens,
+    StageSelect_warpToStage,
     object_doNothing
 };
 
@@ -34,11 +34,11 @@ const char cv64_stage_select_unused_str_2[] = "Mfds Set OK!!\n";
 const char cv64_stage_select_unused_str_3[] = "Rens Set OK!!\n";
 const char cv64_stage_select_unused_str_4[] = "Slect Stage : %02d\n";
 
-void stageSelect_entrypoint(stageSelect* self) {
-    ENTER(self, stageSelect_functions);
+void StageSelect_entrypoint(StageSelect* self) {
+    ENTER(self, StageSelect_functions);
 }
 
-void stageSelect_loadAssetsFile(stageSelect* self) {
+void StageSelect_loadAssetsFile(StageSelect* self) {
     if (((*Fade_IsFading)() == FALSE) && ((ptr_DMAMgr->DMAChunkMgr != NULL))) {
         (*Fade_SetSettings)(FADE_IN, 30, 0, 0, 0);
         sys.cutscene_flags = 0;
@@ -61,7 +61,7 @@ void stageSelect_loadAssetsFile(stageSelect* self) {
     }
 }
 
-void stageSelect_initGraphics(stageSelect* self) {
+void StageSelect_initGraphics(StageSelect* self) {
     Model* bg_model;
     mfds_state** textbox_array = self->textboxes;
 
@@ -104,7 +104,7 @@ void stageSelect_initGraphics(stageSelect* self) {
                 (*textbox_setDimensions)(textbox_array[self->text_ID], 1, 300, 0, 0);
                 (*textbox_setMessagePtr)(
                     textbox_array[self->text_ID],
-                    text_getMessageFromPool(stageSelect_text, self->text_ID),
+                    text_getMessageFromPool(StageSelect_text, self->text_ID),
                     NULL,
                     0
                 );
@@ -117,7 +117,7 @@ void stageSelect_initGraphics(stageSelect* self) {
     }
 }
 
-void stageSelect_initLens(stageSelect* self) {
+void StageSelect_initLens(StageSelect* self) {
     window_work* lens;
     mfds_state** textbox_array = self->textboxes;
 
@@ -151,7 +151,7 @@ void stageSelect_initLens(stageSelect* self) {
     }
 }
 
-void stageSelect_moveLens(stageSelect* self) {
+void StageSelect_moveLens(StageSelect* self) {
     window_work* lens = self->lens;
     s32 current_option;
     s8 previous_option;
@@ -192,15 +192,15 @@ void stageSelect_moveLens(stageSelect* self) {
     self->lens_move_vertical_difference = self->next_text_ID - self->text_ID;
 }
 
-void stageSelect_warpToStage(stageSelect* self) {
+void StageSelect_warpToStage(StageSelect* self) {
     s16 i, j;
     window_work* lens = self->lens;
 
     if (BITS_MASK(lens->flags, WINDOW_FLAG_4000 | WINDOW_FLAG_8000) >> 0xE) {
-        stageSelect_closeTextboxes(self);
+        StageSelect_closeTextboxes(self);
 
-        sys.SaveStruct_gameplay.map           = NONE;
-        sys.SaveStruct_gameplay.spawn         = NONE;
+        sys.SaveStruct_gameplay.map           = MAP_NONE;
+        sys.SaveStruct_gameplay.spawn         = 0;
         sys.SaveStruct_gameplay.life          = 100;
         sys.SaveStruct_gameplay.field_0x5C    = 100;
         sys.SaveStruct_gameplay.subweapon     = SUBWEAPON_NONE;
@@ -323,7 +323,7 @@ void stageSelect_warpToStage(stageSelect* self) {
     }
 }
 
-void stageSelect_closeTextboxes(stageSelect* self) {
+void StageSelect_closeTextboxes(StageSelect* self) {
     mfds_state** textbox_array = self->textboxes;
 
     // TODO: (WINDOW_CLOSING | WINDOW_OPENING) represents flag 0x300.
