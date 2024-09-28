@@ -74,17 +74,19 @@ void Demo60_GetPlayerModelAndSetBorders(Demo60* self) {
     Demo60Data* data = self->data;
     Model* player_model;
 
-    if ((sys.map_is_setup) && (ptr_PlayerData != NULL)) {
-        if (ptr_PlayerData->visualData.model != NULL) {
-            player_model       = ptr_PlayerData->visualData.model;
-            data->player_model = player_model;
-            sys.cutscene_flags &= ~CUTSCENE_FLAG_IS_ENTRANCE_CUTSCENE;
-            sys.cutscene_flags |= CUTSCENE_FLAG_DISPLAY_WIDESCREEN_BORDERS;
-            (*object_curLevel_goToNextFuncAndClearTimer)(
-                self->header.current_function, &self->header.function_info_ID
-            );
-        }
-    }
+    if (!sys.map_is_setup || (ptr_PlayerData == NULL))
+        return;
+
+    if (ptr_PlayerData->visualData.model == NULL)
+        return;
+
+    player_model       = ptr_PlayerData->visualData.model;
+    data->player_model = player_model;
+    BITS_UNSET(sys.cutscene_flags, CUTSCENE_FLAG_IS_ENTRANCE_CUTSCENE);
+    BITS_SET(sys.cutscene_flags, CUTSCENE_FLAG_DISPLAY_WIDESCREEN_BORDERS);
+    (*object_curLevel_goToNextFuncAndClearTimer)(
+        self->header.current_function, &self->header.function_info_ID
+    );
 }
 
 void Demo60_Loop(Demo60* self) {

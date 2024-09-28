@@ -5,6 +5,7 @@
  * that can be drawn on the screen during cutscenes.
  */
 
+#include "cv64.h"
 #include "objects/cutscene/cs_film_reel.h"
 #include "system_work.h"
 #include <ultra64.h>
@@ -25,20 +26,23 @@ void CSFilmReel_Entrypoint(CSFilmReel* self) {
 }
 
 void CSFilmReel_CheckInitialConditions(CSFilmReel* self) {
-    if (sys.cutscene_flags & CUTSCENE_FLAG_FILM_REEL_EFFECT) {
-
+    if (BITS_HAS(sys.cutscene_flags, CUTSCENE_FLAG_FILM_REEL_EFFECT)) {
         /**
          * Only play the cutscene if it displays widescreen borders
          * (i.e. this effect won't show up for fullscreen cutscenes)
          */
-        if (sys.cutscene_flags & CUTSCENE_FLAG_DISPLAY_WIDESCREEN_BORDERS) {
-            (*object_curLevel_goToNextFuncAndClearTimer)(
-                self->header.current_function, &self->header.function_info_ID
-            );
+        if (BITS_NOT_HAS(sys.cutscene_flags, CUTSCENE_FLAG_DISPLAY_WIDESCREEN_BORDERS)) {
+            return;
         }
-    } else {
-        self->header.destroy(self);
+
+        (*object_curLevel_goToNextFuncAndClearTimer)(
+            self->header.current_function, &self->header.function_info_ID
+        );
+
+        return;
     }
+
+    self->header.destroy(self);
 }
 
 // https://decomp.me/scratch/bftIF
@@ -145,7 +149,7 @@ void CSFilmReel_Loop(CSFilmReel* self) {
     u32 material_dlist;
 
     // If the effect is active, increase the transparency until the texture is fully opaque
-    if (sys.cutscene_flags & CUTSCENE_FLAG_FILM_REEL_EFFECT) {
+    if (BITS_HAS(sys.cutscene_flags, CUTSCENE_FLAG_FILM_REEL_EFFECT)) {
         if (graphic_data->dont_increase_alpha == FALSE) {
             graphic_data->alpha += graphic_data->alpha_change_speed;
             if (graphic_data->alpha > 255) {

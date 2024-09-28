@@ -312,35 +312,35 @@ Object* func_80001BE4_27E4(u32 object_ID, Object* arg1) {
 
     if (ptr_gameplayParentObject == NULL) {
         return object_findFirstObjectByID(object_ID, arg1);
-    } else {
-        object_ID &= 0x7FF;
-        while (TRUE) {
-            child = arg1->header.child;
-            if (child != NULL) {
-                arg1 = child;
-                if (object_ID == (child->ID & 0x7FF)) {
-                    // @bug Returning nothing in non-void return function.
-                    return;
-                } else {
-                    continue;
-                }
+    }
+
+    BITS_ASSIGN_MASK(object_ID, 0x7FF);
+    while (TRUE) {
+        child = arg1->header.child;
+        if (child != NULL) {
+            arg1 = child;
+            if (object_ID == BITS_MASK(child->ID, 0x7FF)) {
+                // @bug Returning nothing in non-void return function.
+                return;
             }
-            next = arg1->header.next;
-            while (next == NULL) {
-                if (arg1 == ptr_gameplayParentObject) {
-                    return NULL;
-                }
-                parent = arg1->header.parent;
-                if (parent == NULL) {
-                    return NULL;
-                }
-                next = parent->next;
-                arg1 = parent;
+
+            continue;
+        }
+        next = arg1->header.next;
+        while (next == NULL) {
+            if (arg1 == ptr_gameplayParentObject) {
+                return NULL;
             }
-            arg1 = next;
-            if (object_ID == (next->ID & 0x7FF)) {
-                return next;
+            parent = arg1->header.parent;
+            if (parent == NULL) {
+                return NULL;
             }
+            next = parent->next;
+            arg1 = parent;
+        }
+        arg1 = next;
+        if (object_ID == BITS_MASK(next->ID, 0x7FF)) {
+            return next;
         }
     }
 }
