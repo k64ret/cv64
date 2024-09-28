@@ -161,7 +161,7 @@ void object_fadeOutFortyFiveFramesAndGoToNextFunc(Object* self);
 void object_fadeOutSixtyFramesAndGoToNextFunc(Object* self);
 void object_goToNextFuncIfNotFading(Object* self);
 void func_80002570_3170(ObjectHeader* self);
-Object* func_80001BE4_27E4(u32 object_ID, Object* arg1);
+Object* func_80001BE4_27E4(cv64_object_id_t object_ID, Object* arg1);
 extern void mapOverlay(ObjectHeader* self);
 extern void unmapOverlay();
 void* allocStructInObjectEntryList(

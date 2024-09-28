@@ -305,7 +305,7 @@ Object* objectList_findObjectByIDAndType(s32 ID) {
     return object_findObjectByIDAndType(ID, ARRAY_START(objects_array) - 1);
 }
 
-Object* func_80001BE4_27E4(u32 object_ID, Object* arg1) {
+Object* func_80001BE4_27E4(cv64_object_id_t object_ID, Object* arg1) {
     ObjectHeader* child;
     ObjectHeader* parent;
     ObjectHeader* next;
@@ -326,19 +326,25 @@ Object* func_80001BE4_27E4(u32 object_ID, Object* arg1) {
 
             continue;
         }
+
         next = arg1->header.next;
+
         while (next == NULL) {
             if (arg1 == ptr_gameplayParentObject) {
                 return NULL;
             }
+
             parent = arg1->header.parent;
             if (parent == NULL) {
                 return NULL;
             }
+
             next = parent->next;
             arg1 = parent;
         }
+
         arg1 = next;
+
         if (object_ID == BITS_MASK(next->ID, 0x7FF)) {
             return next;
         }
