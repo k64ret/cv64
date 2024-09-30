@@ -64,7 +64,8 @@ extern figHeader* fig_allocate(s16 type);
 extern void clearAllFigs();
 extern void figure_showModelAndChildren(figHeader*, u16);
 extern void figure_hideSelfAndChildren(figHeader*, u16);
-extern void* figure_setChild(figHeader* new_child, figHeader* self);
+extern figHeader* figure_setChild(figHeader* new_child, figHeader* self);
+extern figHeader* Figure_SetSibling(figHeader* new_sibling, figHeader* self);
 
 extern figure figures_array[FIG_ARRAY_MAX];
 

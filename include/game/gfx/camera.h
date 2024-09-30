@@ -1,8 +1,8 @@
 #ifndef CAMERA_H
 #define CAMERA_H
 
+#include "gfx/figure.h"
 #include "math.h"
-#include <ultra64.h>
 
 typedef struct {
     s16 screen_width;
@@ -109,6 +109,7 @@ extern Camera* common_camera_8009B448;  // Used for the scrolls?
 extern Camera* common_camera_8009B44C;  // Used for the pause menu scroll?
 extern Camera* common_camera_HUD;       // Used for the gameplay HUD and text
 
-extern void camera_setParams(Camera* self, s32 index);
+extern Camera* Camera_Create(u16 type, s32 index);
+extern void Camera_SetParams(Camera* self, s32 index);
 
 #endif

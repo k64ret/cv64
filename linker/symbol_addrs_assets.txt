@@ -22,11 +22,11 @@ RENON_BRIEFCASE_UPPER_LID_DL = 0x06002A40; // segment:ni_renon_briefcase
 REINHARDT_PORTRAIT_DL = 0x06002708; // segment:ni_character_select
 REINHARDT_PORTRAIT_MATERIAL_DL = 0x06000020; // segment:ni_character_select
 CARRIE_PORTRAIT_DL = 0x06004DE0; // segment:ni_character_select
-CARRIE_PORTRAIT_MATERIAL_DL = 0x06000000; // segment:ni_character_select
+CARRIE_PORTRAIT_MATERIAL_DL = 0x06000000; // segment:ni_character_select rom:0xC434B0
 
 OPENINGBAT_DLIST = 0x06000E20; // segment:ni_fire_bat
 
-CSFILMREEL_TEXTURE = 0x06000000;  // segment:ni_cs_film_reel
+CSFILMREEL_TEXTURE = 0x06000000;  // segment:ni_cs_film_reel rom:0xC6D9B0
 CSFILMREEL_DL = 0x06000240;       // segment:ni_cs_film_reel
 CSFILMREEL_MATERIAL_DL = 0x06000258; // segment:ni_cs_film_reel
 
