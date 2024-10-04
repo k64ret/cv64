@@ -3,6 +3,7 @@
 
 #include "cutscene.h"
 #include "animation.h"
+#include "objects/enemy/death.h"
 
 typedef struct Demo50Data {
     Model* death_model;

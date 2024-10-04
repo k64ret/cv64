@@ -2864,7 +2864,7 @@ segments:
     vram: 0x0E000000
     exclusive_ram_id: nisitenma_ichigo_cutscenes
     subsegments:
-      - [0x00EBFB40, asm, overlay/cutscene/demo50/demo50]
+      - [0x00EBFB40, c, overlay/cutscene/demo50/demo50]
       - [0x00EC0260, data, overlay/cutscene/demo50/demo50]
       - [0x00EC0280, rodata, overlay/cutscene/demo50/demo50]
 
