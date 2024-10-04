@@ -2858,11 +2858,15 @@ segments:
     exclusive_ram_id: nisitenma_ichigo_cutscenes
 
   - name: ni_ovl_cutscene_32
-    type: bin
+    type: code
     # start: 0x00B9FDF4
     start: 0x00EBFB40
     vram: 0x0E000000
     exclusive_ram_id: nisitenma_ichigo_cutscenes
+    subsegments:
+      - [0x00EBFB40, asm, overlay/cutscene/demo50/demo50]
+      - [0x00EC0260, data, overlay/cutscene/demo50/demo50]
+      - [0x00EC0280, rodata, overlay/cutscene/demo50/demo50]
 
   - name: ni_ovl_cutscene_33
     type: bin
