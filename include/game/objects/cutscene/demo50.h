@@ -7,7 +7,7 @@
 
 typedef struct Demo50Data {
     Model* death_model;
-    animationMgr death_anim_mgr;
+    animationMgr* death_anim_mgr;
     Camera* cutscene_camera;
     Model* player_model;
     Camera* game_camera;
@@ -40,8 +40,16 @@ extern void Demo50_CreateCutsceneCamera(Demo50* self);
 extern void Demo50_GetPlayerModelAndSetBorders(Demo50* self);
 extern void Demo50_Loop(Demo50* self);
 extern void Demo50_Restart(Demo50* self);
-extern void DEMO50_PlayDeathAnimations(Demo50* self, CutsceneCoordinatesConfig* coords);
+extern void Demo50_PlayDeathAnimations(Demo50* self, CutsceneCoordinatesConfig* coords);
 
 typedef void (*Demo50Func)(Demo50*);
+
+typedef enum Demo50FuncId {
+    DEMO50_INIT,
+    DEMO50_CREATE_CUTSCENE_CAMERA,
+    DEMO50_GET_PLAYER_MODEL_AND_SET_BORDERS,
+    DEMO50_LOOP,
+    DEMO50_RESTART
+} Demo50FuncId;
 
 #endif

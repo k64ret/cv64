@@ -19,7 +19,7 @@ typedef struct {
     u8 state;
     u8 substate;
     u8 field_0x62[2];
-    f23 field_0x64;
+    f32 field_0x64;
     Vec3f field_0x68;
     u8 field_0x74[2];
     s16 angle;

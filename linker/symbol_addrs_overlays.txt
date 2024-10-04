@@ -302,6 +302,24 @@ D_0F002450                    = 0x0F002450; // type:asciz segment:ni_ovl_title_d
 
 // End of src/overlay/title_demo.c =============================================
 
+// src/overlay/cutscene/demo50/demo50.c =========================================
+// .text
+Demo50_Entrypoint     = 0x0E000000; // type:func segment:ni_ovl_cutscene_32
+Demo50_Init     = 0x0E000070; // type:func segment:ni_ovl_cutscene_32
+Demo50_CreateCutsceneCamera     = 0x0E0000CC; // type:func segment:ni_ovl_cutscene_32
+Demo50_GetPlayerModelAndSetBorders     = 0x0E0001B8; // type:func segment:ni_ovl_cutscene_32
+Demo50_Loop     = 0x0E0002BC; // type:func segment:ni_ovl_cutscene_32
+Demo50_Restart     = 0x0E0005D0; // type:func segment:ni_ovl_cutscene_32
+Demo50_PlayDeathAnimations     = 0x0E000604; // type:func segment:ni_ovl_cutscene_32
+// .data
+Demo50_functions = 0x0E000720; // segment:ni_ovl_cutscene_32 size:0x20
+// .rodata
+D_0E000740 = 0x0E000740; // segment:ni_ovl_cutscene_32 size:0x16
+D_0E000784 = 0x0E000784; // segment:ni_ovl_cutscene_32 size:0x42
+D_0E00079C = 0x0E00079C; // segment:ni_ovl_cutscene_32 size:0x42
+D_0E0007E0 = 0x0E0007E0; // segment:ni_ovl_cutscene_32 size:0x16
+// End of src/overlay/cutscene/demo50/demo50.c ==================================
+
 // src/overlay/cutscene/demo60/demo60.c =========================================
 // .text
 Demo60_Entrypoint     = 0x0E000000; // type:func segment:ni_ovl_cutscene_3C

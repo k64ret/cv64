@@ -129,5 +129,11 @@ extern void
 func_8012A130(void*, Model*, CutsceneCoordinatesConfig*, CutsceneCameraMovementState*, u8, u32);
 extern void Cutscene_SetCameraPosToEndCoords(CutsceneCoordinatesConfig*, Camera*);
 extern void Cutscene_SetEndCoordsToActor(CutsceneCoordinatesConfig*, Model*);
+extern void func_8012B2B8(
+    Cutscene* self,
+    Model*,
+    CutsceneCoordinatesConfig* coords,
+    CutsceneCameraMovementState* cam_mov_state
+);
 
 #endif

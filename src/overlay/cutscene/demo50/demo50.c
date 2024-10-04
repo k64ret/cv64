@@ -12,16 +12,30 @@
 #include "memory.h"
 #include "system_work.h"
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/overlay/cutscene/demo50/demo50/func_0E000000_EBFB40.s")
+Demo50Func Demo50_functions[] = {
+    Demo50_Init,
+    Demo50_CreateCutsceneCamera,
+    Demo50_GetPlayerModelAndSetBorders,
+    Demo50_Loop,
+    Demo50_Restart
+};
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/overlay/cutscene/demo50/demo50/func_0E000070_EBFBB0.s")
+#pragma GLOBAL_ASM("../asm/nonmatchings/overlay/cutscene/demo50/demo50/Demo50_Entrypoint.s")
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/overlay/cutscene/demo50/demo50/func_0E0000CC_EBFC0C.s")
+#pragma GLOBAL_ASM("../asm/nonmatchings/overlay/cutscene/demo50/demo50/Demo50_Init.s")
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/overlay/cutscene/demo50/demo50/func_0E0001B8_EBFCF8.s")
+#pragma GLOBAL_ASM(                                                                                \
+    "../asm/nonmatchings/overlay/cutscene/demo50/demo50/Demo50_CreateCutsceneCamera.s"             \
+)
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/overlay/cutscene/demo50/demo50/func_0E0002BC_EBFDFC.s")
+#pragma GLOBAL_ASM(                                                                                \
+    "../asm/nonmatchings/overlay/cutscene/demo50/demo50/Demo50_GetPlayerModelAndSetBorders.s"      \
+)
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/overlay/cutscene/demo50/demo50/func_0E0005D0_EC0110.s")
+#pragma GLOBAL_ASM("../asm/nonmatchings/overlay/cutscene/demo50/demo50/Demo50_Loop.s")
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/overlay/cutscene/demo50/demo50/func_0E000604_EC0144.s")
+#pragma GLOBAL_ASM("../asm/nonmatchings/overlay/cutscene/demo50/demo50/Demo50_Restart.s")
+
+#pragma GLOBAL_ASM(                                                                                \
+    "../asm/nonmatchings/overlay/cutscene/demo50/demo50/Demo50_PlayDeathAnimations.s"              \
+)
