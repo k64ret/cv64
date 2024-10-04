@@ -34,12 +34,12 @@ typedef struct Demo50 {
     u8 field_0x73;
 } Demo50;
 
-extern void Demo50_Entrypoint(Demo50* self);
-extern void Demo50_Init(Demo50* self);
-extern void Demo50_CreateCutsceneCamera(Demo50* self);
-extern void Demo50_GetPlayerModelAndSetBorders(Demo50* self);
+void Demo50_Entrypoint(Demo50* self);
+void Demo50_Init(Demo50* self);
+void Demo50_CreateCutsceneCamera(Demo50* self);
+void Demo50_GetPlayerModelAndSetBorders(Demo50* self);
 extern void Demo50_Loop(Demo50* self);
-extern void Demo50_Restart(Demo50* self);
+void Demo50_Restart(Demo50* self);
 extern void Demo50_PlayDeathAnimations(Demo50* self, CutsceneCoordinatesConfig* coords);
 
 typedef void (*Demo50Func)(Demo50*);

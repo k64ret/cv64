@@ -3,7 +3,13 @@
 
 #include "actor.h"
 
-typedef struct {
+typedef enum DeathAnimId {
+    DEATH_ANIM_0  = 0,
+    DEATH_ANIM_3  = 3,
+    DEATH_ANIM_12 = 12
+} DeathAnimId;
+
+typedef struct DeathData {
     u8 field_0x00[4];
     actorVisualData visual_data;
     u8 field_0x44;
@@ -44,7 +50,7 @@ typedef struct {
 } DeathData;
 
 // ID: 0x2095
-typedef struct {
+typedef struct Death {
     ObjectHeader header;
     u8 field_0x20[4];
     Model* model;
