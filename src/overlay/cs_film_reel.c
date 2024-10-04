@@ -53,6 +53,13 @@ void CSFilmReel_CheckInitialConditions(CSFilmReel* self) {
     self->header.destroy(self);
 }
 
+/**
+ * Have to include ASM here until we can solve the "undefined reference" errors
+ * related to `CSFILMREEL_TEXTURE`. Otherwise, the function matches.
+ */
+#ifdef NON_MATCHING
+    #pragma GLOBAL_ASM("../asm/nonmatchings/overlay/cs_film_reel/CSFilmReel_Init.s")
+#else
 void CSFilmReel_Init(CSFilmReel* self) {
     CSFilmReelData* data;
     CSFilmReelGraphicContainer* graphic_container;
@@ -140,6 +147,7 @@ void CSFilmReel_Init(CSFilmReel* self) {
         self->header.current_function, &self->header.function_info_ID
     );
 }
+#endif
 
 void CSFilmReel_Loop(CSFilmReel* self) {
     CSFilmReelData* data                = self->data;
