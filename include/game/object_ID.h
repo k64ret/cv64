@@ -198,7 +198,7 @@ enum ObjectRawID {
     ID_OBJECT_092                        = 0x092,
     ID_OBJECT_093                        = 0x093,
     ID_OBJECT_094                        = 0x094,
-    ID_OBJECT_095                        = 0x095,
+    ID_DEATH                             = 0x095,
     ID_OBJECT_096                        = 0x096,
     ID_OBJECT_097                        = 0x097,
     ID_OBJECT_098                        = 0x098,
@@ -681,6 +681,7 @@ typedef enum ObjectID {
 
     // Enemy
     ENEMY_GARDENER                               = OBJECT_ID(OBJ_KIND_MAP_OVERLAY, ID_GARDENER),
+    ENEMY_DEATH                                  = OBJECT_ID(OBJ_KIND_MAP_OVERLAY, ID_DEATH),
     ENEMY_DEMON_DRACULA_ASSETS_LOADER            = OBJECT_ID(OBJ_KIND_MAP_OVERLAY, ID_DEMON_DRACULA_ASSETS_LOADER),
     ENEMY_MUD_MAN_ASSETS_LOADER                  = OBJECT_ID(OBJ_KIND_MAP_OVERLAY, ID_MUD_MAN_ASSETS_LOADER),
     ENEMY_BLOOD_MAN_ASSETS_LOADER                = OBJECT_ID(OBJ_KIND_MAP_OVERLAY, ID_BLOOD_MAN_ASSETS_LOADER),

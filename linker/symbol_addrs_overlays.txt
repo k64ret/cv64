@@ -323,7 +323,7 @@ D_0E0011E8 = 0x0e0011e8; // segment:ni_ovl_cutscene_3C size:0x9C
 D_0E001284 = 0x0E001284; // segment:ni_ovl_cutscene_3C size:0x5C
 // End of src/overlay/cutscene/demo60/demo60.c ==================================
 
-// src/cs_film_reel.c =========================================
+// src/overlay/cs_film_reel.c =========================================
 // .text
 CSFilmReel_Entrypoint     = 0x0E000000; // type:func segment:ni_ovl_cs_film_reel_effect
 CSFilmReel_CheckInitialConditions     = 0x0E000070; // type:func segment:ni_ovl_cs_film_reel_effect
@@ -333,4 +333,11 @@ CSFilmReel_Destroy     = 0x0E000498; // type:func segment:ni_ovl_cs_film_reel_ef
 CSFilmReel_Draw     = 0x0E0004BC; // type:func segment:ni_ovl_cs_film_reel_effect
 // .data
 CSFilmReel_functions = 0x0e000650; // segment:ni_ovl_cs_film_reel_effect size:0x10
-// End of src/cs_film_reel.c ==================================
+// End of src/overlay/cs_film_reel.c ==================================
+
+// src/overlay/death.c =========================================
+// .text
+func_0F00EB78     = 0x0F00EB78; // type:func segment:ni_ovl_death
+func_0F00EBFC     = 0x0F00EBFC; // type:func segment:ni_ovl_death
+Death_CreateMultipleScythes     = 0x0F00D298; // type:func segment:ni_ovl_death
+// End of src/overlay/death.c ==================================
