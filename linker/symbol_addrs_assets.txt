@@ -27,8 +27,8 @@ CARRIE_PORTRAIT_DL          = 0x06004DE0; // segment:ni_character_select
 
 OPENINGBAT_DLIST = 0x06000E20; // segment:ni_fire_bat
 
-CSFILMREEL_TEXTURE     = 0x06000000; // segment:ni_cs_film_reel rom:0xC6D9B0 defined:true
-CSFILMREEL_DL          = 0x06000240; // segment:ni_cs_film_reel
+CSFILMREEL_TEXTURE = 0x06000000;  // segment:ni_cs_film_reel rom:0xC6D9B0 defined:true
+CSFILMREEL_DL = 0x06000240;       // segment:ni_cs_film_reel
 CSFILMREEL_MATERIAL_DL = 0x06000258; // segment:ni_cs_film_reel
 
 // test_grid_txt   = 0x06000000; // segment:NI_ASSETS_TEST_GRID
