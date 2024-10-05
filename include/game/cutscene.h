@@ -53,7 +53,7 @@ enum DLScissoringSetting {
 
 typedef struct CutsceneCoordinatesConfig {
     u8 field_0x00; // See the switches at 0x8012a130 and 0x8012a2b8
-    u8 field_0x01;
+    s8 field_0x01;
     s8 player_anims_array_index; // Index at arrays 0x8016c884 and 0x8016c75c
     u8 field_0x03;
     Vec3 start_coords;

@@ -3,7 +3,15 @@
 
 #include <ultra64.h>
 
-#define ANGLE_FIXED_POINT_TO_DEGREES(angle) (angle * (360.0f / 65536))
+/**
+ * Converts a fixed point angle into degrees
+ */
+#define FIXED_TO_DEG(fixed) (fixed * (360.0f / 65536))
+
+/**
+ * Converts an angle in degrees into fixed point
+ */
+#define DEG_TO_FIXED(degrees) ((s16) ((degrees) * 65536.0f / 360.0f) & 0xFFFF)
 
 typedef struct Vec2 {
     s16 x, y;

@@ -236,7 +236,7 @@ Player_getSpecialTextboxCurrentlyInteractingWith(s16 actor_ID, Model* player_mod
                     (player_model->position.z <= (actor->trigger_size_Z + actor->position.z))) {
                     if (1) {
                     }
-                    player_facing_angle = (u16) player_model->angle.yaw + 0x2000;
+                    player_facing_angle = (u16) player_model->angle.yaw + DEG_TO_FIXED(45);
                     if (1) {
                     }
                     angle_player_textspot = getAngleBetweenPlayerAndInteractable(
@@ -280,7 +280,7 @@ s32 playerCanInteractWithInteractuable(
                 (player_model->position.y <= (settings->trigger_size + actor_pos_Y))) {
                 if (((actor_pos_Z - settings->trigger_size) <= player_model->position.z) &&
                     (player_model->position.z <= (settings->trigger_size + actor_pos_Z))) {
-                    player_facing_angle = (u16) player_model->angle.yaw + 0x2000;
+                    player_facing_angle = (u16) player_model->angle.yaw + DEG_TO_FIXED(45);
                     sine                = ((*sins)(player_facing_angle) / 32768.0f) * -2.0 * 1.0f;
                     cosine              = ((*coss)(player_facing_angle) / 32768.0f) * -2.0 * 1.0f;
                     angle_player_item   = getAngleBetweenPlayerAndInteractable(
@@ -307,7 +307,7 @@ s32 playerCanInteractWithInteractuable(
                 (player_model->position.y <= (actor_pos_Y + 8.0f))) {
                 if (((actor_pos_Z - actor->trigger_Z_size) <= player_model->position.z) &&
                     (player_model->position.z <= (actor->trigger_Z_size + actor_pos_Z))) {
-                    player_facing_angle = (u16) player_model->angle.yaw + 0x2000;
+                    player_facing_angle = (u16) player_model->angle.yaw + DEG_TO_FIXED(45);
                     angle_player_item   = getAngleBetweenPlayerAndInteractable(
                                             player_model->position.x,
                                             player_model->position.z,

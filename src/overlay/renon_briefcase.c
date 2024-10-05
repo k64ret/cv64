@@ -78,7 +78,7 @@ void cv64_ovl_renonbriefcase_init(cv64_ovl_renonbriefcase_t* self) {
     BITS_SET(model->flags, FIG_FLAG_APPLY_PRIMITIVE_COLOR | FIG_FLAG_0080);
     model->primitive_color.integer = RGBA(255, 255, 255, 255);
     model->angle.pitch             = 0;
-    model->angle.yaw               = 0x4000;
+    model->angle.yaw               = DEG_TO_FIXED(90);
     model->angle.roll              = 0;
     model->size.x                  = 1.0f;
     model->size.y                  = 1.0f;
