@@ -12,6 +12,11 @@
 #include "memory.h"
 #include "system_work.h"
 
+#include "camera_data/D_0E000740.inc.h"
+#include "camera_data/D_0E000784.inc.h"
+#include "camera_data/D_0E00079C.inc.h"
+#include "camera_data/D_0E0007E0.inc.h"
+
 Demo50Func Demo50_functions[] = {
     Demo50_Init,
     Demo50_CreateCutsceneCamera,
