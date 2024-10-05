@@ -24,7 +24,7 @@ typedef struct {
 } light_parameters;
 
 // TODO: Figure this out better
-typedef struct {
+typedef struct light {
     s16 type;
     u16 flags;
     struct light* prev;

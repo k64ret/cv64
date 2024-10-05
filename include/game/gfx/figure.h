@@ -43,7 +43,7 @@
 #define FIG_VARIABLE_TEXTURE_AND_PALETTE              0x40000000
 #define FIG_APPLY_VARIABLE_TEXTURE_AND_PALETTE(dlist) (FIG_VARIABLE_TEXTURE_AND_PALETTE | (dlist))
 
-typedef struct {
+typedef struct figHeader {
     s16 type;
     u16 flags;
     struct figHeader* prev;

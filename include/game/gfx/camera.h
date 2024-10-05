@@ -47,7 +47,7 @@ typedef union {
     projection_matrix_params_ORTHO* ortho;
 } union_projection_matrix;
 
-typedef struct {
+typedef struct Camera {
     s16 type;
     u16 flags;
     struct Camera* prev;
