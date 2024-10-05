@@ -306,8 +306,8 @@ D_0F002450                    = 0x0F002450; // type:asciz segment:ni_ovl_title_d
 // .text
 Demo50_Entrypoint     = 0x0E000000; // type:func segment:ni_ovl_cutscene_32
 Demo50_Init     = 0x0E000070; // type:func segment:ni_ovl_cutscene_32
-Demo50_CreateCutsceneCamera     = 0x0E0000CC; // type:func segment:ni_ovl_cutscene_32
-Demo50_GetPlayerModelAndSetBorders     = 0x0E0001B8; // type:func segment:ni_ovl_cutscene_32
+Demo50_SetupMainCutsceneParams     = 0x0E0000CC; // type:func segment:ni_ovl_cutscene_32
+Demo50_SetupData     = 0x0E0001B8; // type:func segment:ni_ovl_cutscene_32
 Demo50_Loop     = 0x0E0002BC; // type:func segment:ni_ovl_cutscene_32
 Demo50_Restart     = 0x0E0005D0; // type:func segment:ni_ovl_cutscene_32
 Demo50_PlayDeathAnimations     = 0x0E000604; // type:func segment:ni_ovl_cutscene_32
@@ -324,8 +324,8 @@ D_0E0007E0 = 0x0E0007E0; // segment:ni_ovl_cutscene_32 size:0x16
 // .text
 Demo60_Entrypoint     = 0x0E000000; // type:func segment:ni_ovl_cutscene_3C
 Demo60_Init     = 0x0E000070; // type:func segment:ni_ovl_cutscene_3C
-Demo60_CreateCutsceneCamera     = 0x0E0000FC; // type:func segment:ni_ovl_cutscene_3C
-Demo60_GetPlayerModelAndSetBorders     = 0x0E0001A8; // type:func segment:ni_ovl_cutscene_3C
+Demo60_SetupMainCutsceneParams     = 0x0E0000FC; // type:func segment:ni_ovl_cutscene_3C
+Demo60_SetupData     = 0x0E0001A8; // type:func segment:ni_ovl_cutscene_3C
 Demo60_Loop     = 0x0E000220; // type:func segment:ni_ovl_cutscene_3C
 Demo60_Destroy     = 0x0E0006C4; // type:func segment:ni_ovl_cutscene_3C
 Demo60_PlayPlayerBlessingAnim     = 0x0E0006F0; // type:func segment:ni_ovl_cutscene_3C

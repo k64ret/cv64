@@ -19,11 +19,7 @@
 #include "camera_data/D_0E001284.inc.h"
 
 Demo60Func Demo60_functions[] = {
-    Demo60_Init,
-    Demo60_CreateCutsceneCamera,
-    Demo60_GetPlayerModelAndSetBorders,
-    Demo60_Loop,
-    Demo60_Destroy
+    Demo60_Init, Demo60_SetupMainCutsceneParams, Demo60_SetupData, Demo60_Loop, Demo60_Destroy
 };
 
 void Demo60_Entrypoint(Demo60* self) {
@@ -45,7 +41,7 @@ void Demo60_Init(Demo60* self) {
     );
 }
 
-void Demo60_CreateCutsceneCamera(Demo60* self) {
+void Demo60_SetupMainCutsceneParams(Demo60* self) {
     s32 temp;
     Camera* cutscene_camera;
     Demo60Data* data = self->data;
@@ -70,7 +66,7 @@ void Demo60_CreateCutsceneCamera(Demo60* self) {
     );
 }
 
-void Demo60_GetPlayerModelAndSetBorders(Demo60* self) {
+void Demo60_SetupData(Demo60* self) {
     Demo60Data* data = self->data;
     Model* player_model;
 

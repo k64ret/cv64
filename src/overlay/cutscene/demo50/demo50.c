@@ -18,11 +18,7 @@
 #include "camera_data/D_0E0007E0.inc.h"
 
 Demo50Func Demo50_functions[] = {
-    Demo50_Init,
-    Demo50_CreateCutsceneCamera,
-    Demo50_GetPlayerModelAndSetBorders,
-    Demo50_Loop,
-    Demo50_Restart
+    Demo50_Init, Demo50_SetupMainCutsceneParams, Demo50_SetupData, Demo50_Loop, Demo50_Restart
 };
 
 void Demo50_Entrypoint(Demo50* self) {
@@ -47,7 +43,7 @@ void Demo50_Init(Demo50* self) {
     );
 }
 
-void Demo50_CreateCutsceneCamera(Demo50* self) {
+void Demo50_SetupMainCutsceneParams(Demo50* self) {
     s32 temp;
     Camera* cutscene_camera;
     Demo50Data* data;
@@ -88,11 +84,11 @@ void Demo50_CreateCutsceneCamera(Demo50* self) {
 
 // https://decomp.me/scratch/BGJXP
 #ifdef NON_MATCHING
-    #pragma GLOBAL_ASM(                                                                            \
-        "../asm/nonmatchings/overlay/cutscene/demo50/demo50/Demo50_GetPlayerModelAndSetBorders.s"  \
-    )
+// clang-format off
+    #pragma GLOBAL_ASM("../asm/nonmatchings/overlay/cutscene/demo50/demo50/Demo50_SetupData.s")
+// clang-format on
 #else
-void Demo50_GetPlayerModelAndSetBorders(Demo50* self) {
+void Demo50_SetupData(Demo50* self) {
     Model* death_model;
     Demo50Data* data;
     actorVisualData* death_visual_data;
@@ -116,9 +112,6 @@ void Demo50_GetPlayerModelAndSetBorders(Demo50* self) {
             data->death_anim_mgr[0] = &death_visual_data->animMgr;
             data->death_data        = death_data;
 
-            /**
-             * Animate Death
-             */
             (*mapOverlay)(self->death);
             (*Death_UpdateAnimParamsCutscene)(
                 DEATH_ANIM_IDLE, 1.0f, death_visual_data, data->death_data
@@ -139,7 +132,9 @@ void Demo50_GetPlayerModelAndSetBorders(Demo50* self) {
 
 // https://decomp.me/scratch/JbQZ3
 #ifdef NON_MATCHING
+// clang-format off
     #pragma GLOBAL_ASM("../asm/nonmatchings/overlay/cutscene/demo50/demo50/Demo50_Loop.s")
+// clang-format on
 #else
 void Demo50_Loop(Demo50* self) {
     CutsceneCoordinatesConfig* coords;
