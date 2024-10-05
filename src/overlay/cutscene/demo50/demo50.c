@@ -17,9 +17,17 @@
 #include "camera_data/D_0E00079C.inc.h"
 #include "camera_data/D_0E0007E0.inc.h"
 
+// clang-format off
+
 Demo50Func Demo50_functions[] = {
-    Demo50_Init, Demo50_SetupMainCutsceneParams, Demo50_SetupData, Demo50_Loop, Demo50_Restart
+    Demo50_Init,
+    Demo50_SetupMainCutsceneParams,
+    Demo50_SetupData,
+    Demo50_Loop,
+    Demo50_Restart
 };
+
+// clang-format on
 
 void Demo50_Entrypoint(Demo50* self) {
     ENTER(self, Demo50_functions);

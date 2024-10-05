@@ -18,9 +18,17 @@
 #include "camera_data/D_0E0011E8.inc.h"
 #include "camera_data/D_0E001284.inc.h"
 
+// clang-format off
+
 Demo60Func Demo60_functions[] = {
-    Demo60_Init, Demo60_SetupMainCutsceneParams, Demo60_SetupData, Demo60_Loop, Demo60_Destroy
+    Demo60_Init,
+    Demo60_SetupMainCutsceneParams,
+    Demo60_SetupData,
+    Demo60_Loop,
+    Demo60_Destroy
 };
+
+// clang-format on
 
 void Demo60_Entrypoint(Demo60* self) {
     ENTER(self, Demo60_functions);
