@@ -3068,6 +3068,6 @@ animationMgr_unsetSmoothEndAnimationFlag = 0x8000C078;
 func_801299A4 = 0x801299A4;
 func_80128D20 = 0x80128D20;
 func_8012A130 = 0x8012A130;
-func_8012B2B8 = 0x8012B2B8;
+func_8012A2B8 = 0x8012A2B8;
 Cutscene_SetCameraPosToEndCoords = 0x80127f48;
 Cutscene_SetEndCoordsToActor = 0x80127f88;

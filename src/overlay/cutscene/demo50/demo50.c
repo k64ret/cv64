@@ -41,6 +41,7 @@ void Demo50_Init(Demo50* self) {
 
     self->skip_cutscene = FALSE;
     data->game_camera   = common_camera_game_view;
+
     (*object_curLevel_goToNextFuncAndClearTimer)(
         self->header.current_function, &self->header.function_info_ID
     );
@@ -51,12 +52,20 @@ void Demo50_CreateCutsceneCamera(Demo50* self) {
     Camera* cutscene_camera;
     Demo50Data* data;
 
+    /**
+     * @bug Restarting the cutscene at this point will make the game unable
+     *      to initialize important data needed for it to work.
+     *
+     *      Although it appears that triggering this is not normally possible,
+     *      even when trying to skip the cutscene as early as possible.
+     */
     if (self->skip_cutscene) {
         (*object_curLevel_goToFunc)(
             self->header.current_function, &self->header.function_info_ID, DEMO50_RESTART
         );
         return;
     }
+
     data = self->data;
     cutscene_camera =
         (Camera*) (*Model_createAndSetChild)(FIG_TYPE_CAMERA_CUTSCENE, data->game_camera);
@@ -71,6 +80,7 @@ void Demo50_CreateCutsceneCamera(Demo50* self) {
     self->death        = (Death*) (*object_createAndSetChild)(self, ENEMY_DEATH);
     self->current_time = 0;
     self->max_time     = 200;
+
     (*object_curLevel_goToNextFuncAndClearTimer)(
         self->header.current_function, &self->header.function_info_ID
     );
@@ -90,8 +100,40 @@ void Demo50_Restart(Demo50* self) {
     );
 }
 
-// clang-format off
+void Demo50_PlayDeathAnimations(Demo50* self, CutsceneCoordinatesConfig* coords) {
+    Demo50Data* data                   = self->data;
+    actorVisualData* death_visual_data = &data->death_data->visual_data;
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/overlay/cutscene/demo50/demo50/Demo50_PlayDeathAnimations.s")
-
-// clang-format on
+    /**
+     * @note Death will only perform animations if `coords->field_0x01` is equal to 0,
+     *       but the checks below (and the fact that there are various arrays of size 1
+     *       in `Demo50Data`) suggests that there was originally more data that
+     *       could be indexed by `coords->field_0x01` for this cutscene.
+     */
+    if ((coords->field_0x01 >= 0) && (coords->field_0x01 <= 0)) {
+        (*mapOverlay)(self->death);
+        switch (coords->player_anims_array_index) {
+            case 0:
+                (*Death_UpdateAnimParamsCutscene)(
+                    DEATH_ANIM_IDLE, 1.0f, death_visual_data, data->death_data
+                );
+                break;
+            case 3:
+                (*Death_UpdateAnimParamsCutscene)(
+                    DEATH_ANIM_FLYING_BACK, 1.0f, death_visual_data, data->death_data
+                );
+                break;
+            case 7:
+                (*Death_UpdateAnimParamsCutscene)(
+                    DEATH_ANIM_THROW_MULTIPLE_SCYTHES, 1.0f, death_visual_data, data->death_data
+                );
+                break;
+        }
+        (*Death_AnimateFrameCutscene)(
+            data->death_data,
+            data->death_model[coords->field_0x01],
+            data->death_anim_mgr[coords->field_0x01]
+        );
+        (*unmapOverlay)(self->death);
+    }
+}

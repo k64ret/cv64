@@ -88,7 +88,7 @@ void cutsceneMgr_createCutscene(cutsceneMgr* self) {
         self->cs_film_reel = object_createAndSetChild(&self->header, CUTSCENE_CS_FILM_REEL);
     }
 
-    self->cutscene_object = object_createAndSetChild(
+    self->cutscene_object = (Cutscene*) object_createAndSetChild(
         &self->header, cutscene_settings[(*cutscene_ID_ptr) - 1].object_ID
     );
     if (self->cutscene_object != NULL) {

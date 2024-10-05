@@ -84,6 +84,10 @@ typedef struct {
     u16 current_time;
     s16 max_time;
     u8 field_0x6C[4];
+    /**
+     * This is set to `TRUE` when pressing Start
+     * to skip the cutscene
+     */
     u8 skip_cutscene;
     u8 set_player_anim_speed;
     u8 state;
@@ -129,7 +133,7 @@ extern void
 func_8012A130(void*, Model*, CutsceneCoordinatesConfig*, CutsceneCameraMovementState*, u8, u32);
 extern void Cutscene_SetCameraPosToEndCoords(CutsceneCoordinatesConfig*, Camera*);
 extern void Cutscene_SetEndCoordsToActor(CutsceneCoordinatesConfig*, Model*);
-extern void func_8012B2B8(
+extern void func_8012A2B8(
     Cutscene* self,
     Model*,
     CutsceneCoordinatesConfig* coords,

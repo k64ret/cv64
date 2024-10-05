@@ -4,9 +4,9 @@
 #include "actor.h"
 
 typedef enum DeathAnimId {
-    DEATH_ANIM_0  = 0,
-    DEATH_ANIM_3  = 3,
-    DEATH_ANIM_12 = 12
+    DEATH_ANIM_IDLE                   = 0,
+    DEATH_ANIM_FLYING_BACK            = 3,
+    DEATH_ANIM_THROW_MULTIPLE_SCYTHES = 12
 } DeathAnimId;
 
 typedef struct DeathData {
@@ -62,9 +62,10 @@ typedef struct Death {
     ActorConfig* settings;
 } Death;
 
-extern void
-func_0F00EB78(u8 animation_ID, f32 anim_speed, actorVisualData* visual_data, DeathData* data);
-extern void func_0F00EBFC(DeathData* data, Model* model, animationMgr* anim_mgr);
+extern void Death_UpdateAnimParamsCutscene(
+    u8 animation_ID, f32 anim_speed, actorVisualData* visual_data, DeathData* data
+);
+extern void Death_AnimateFrameCutscene(DeathData* data, Model* model, animationMgr* anim_mgr);
 extern void
 Death_CreateMultipleScythes(Death* self, DeathData* data, u8, u8, u8 num_scythes, s16 angle, f32);
 

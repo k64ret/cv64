@@ -6,13 +6,16 @@
 #include "objects/enemy/death.h"
 
 typedef struct Demo50Data {
-    Model* death_model;
-    animationMgr* death_anim_mgr;
+    Model* death_model[1];
+    animationMgr* death_anim_mgr[1];
     Camera* cutscene_camera;
     Model* player_model;
     Camera* game_camera;
     CutsceneCurrentCameraMovement current_camera_movement;
-    CutsceneCameraMovementState cam_mov_states[4];
+    CutsceneCameraMovementState cam_mov_state_1[1];
+    CutsceneCameraMovementState cam_mov_state_2;
+    CutsceneCameraMovementState cam_mov_state_3;
+    CutsceneCameraMovementState cam_mov_state_4;
     DeathData* death_data;
 } Demo50Data;
 

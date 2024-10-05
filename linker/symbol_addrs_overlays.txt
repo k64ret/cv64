@@ -355,7 +355,7 @@ CSFilmReel_functions = 0x0e000650; // segment:ni_ovl_cs_film_reel_effect size:0x
 
 // src/overlay/death.c =========================================
 // .text
-func_0F00EB78     = 0x0F00EB78; // type:func segment:ni_ovl_death
-func_0F00EBFC     = 0x0F00EBFC; // type:func segment:ni_ovl_death
+Death_UpdateAnimParamsCutscene     = 0x0F00EB78; // type:func segment:ni_ovl_death
+Death_AnimateFrameCutscene     = 0x0F00EBFC; // type:func segment:ni_ovl_death
 Death_CreateMultipleScythes     = 0x0F00D298; // type:func segment:ni_ovl_death
 // End of src/overlay/death.c ==================================
