@@ -90,12 +90,6 @@ void Demo50_SetupMainCutsceneParams(Demo50* self) {
     );
 }
 
-// https://decomp.me/scratch/BGJXP
-#ifdef NON_MATCHING
-// clang-format off
-    #pragma GLOBAL_ASM("../asm/nonmatchings/overlay/cutscene/demo50/demo50/Demo50_SetupData.s")
-// clang-format on
-#else
 void Demo50_SetupData(Demo50* self) {
     Model* death_model;
     Demo50Data* data;
@@ -107,18 +101,14 @@ void Demo50_SetupData(Demo50* self) {
         data->player_model = ptr_PlayerData->visualData.model;
         death_model        = self->death->model;
 
-        if (death_data) {
-        }
-
         if (death_model != NULL) {
             /**
-             * Setup death parameters on cutscene's struct
+             * Setup the death parameters on the cutscene's struct
              */
             data->death_model[0]    = death_model;
-            death_data              = self->death->data;
-            death_visual_data       = &self->death->data->visual_data;
+            data->death_data        = self->death->data;
+            death_visual_data       = &data->death_data->visual_data;
             data->death_anim_mgr[0] = &death_visual_data->animMgr;
-            data->death_data        = death_data;
 
             (*mapOverlay)(self->death);
             (*Death_UpdateAnimParamsCutscene)(
@@ -136,7 +126,6 @@ void Demo50_SetupData(Demo50* self) {
         }
     }
 }
-#endif
 
 // https://decomp.me/scratch/JbQZ3
 #ifdef NON_MATCHING
