@@ -31,8 +31,8 @@ int object_isValid(ObjectHeader* self) {
 void object_free(Object* self) {
     s32 i;
     s32 alloc_data_slot;
-    figure* current_figure;
-    figure** current_figure_ptr;
+    Figure* current_figure;
+    Figure** current_figure_ptr;
 
     for (i = 0, alloc_data_slot = 1; i < OBJ_NUM_ALLOC_DATA;
          alloc_data_slot = alloc_data_slot << 1, i++) {

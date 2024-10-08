@@ -65,7 +65,7 @@ typedef struct Object {
      */
     u16 alloc_data_entries;        // Entries allocated with `heap_alloc`
     u16 graphic_container_entries; // Entries allocated with `GraphicContainer_Alloc`
-    figure* figures[OBJ_NUM_FIGURES];
+    Figure* figures[OBJ_NUM_FIGURES];
     void* alloc_data[OBJ_NUM_ALLOC_DATA];
 } Object; // Size = 0x74
 
