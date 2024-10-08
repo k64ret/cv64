@@ -127,12 +127,6 @@ void Demo50_SetupData(Demo50* self) {
     }
 }
 
-// https://decomp.me/scratch/JbQZ3
-#ifdef NON_MATCHING
-// clang-format off
-    #pragma GLOBAL_ASM("../asm/nonmatchings/overlay/cutscene/demo50/demo50/Demo50_Loop.s")
-// clang-format on
-#else
 void Demo50_Loop(Demo50* self) {
     CutsceneCoordinatesConfig* coords;
     DeathData* death_data;
@@ -143,11 +137,11 @@ void Demo50_Loop(Demo50* self) {
     data = self->data;
 
     /**
-    * @bug Skipping the cutscene will make it stuck infinitely
-    *      on the current frame, since it's not possible for `self->skip_cutscene`
-    *      to become `FALSE` after it's been set to `TRUE`
+    * @note Skipping the cutscene will make it stuck infinitely
+    *       on the current frame, since it's not possible for `self->skip_cutscene`
+    *       to become `FALSE` after it's been set to `TRUE`
     *
-    *      This in turn prevents the cutscene's timer (`self->current_time`) to advance
+    *       This in turn prevents the cutscene's timer (`self->current_time`) to advance
     */
     if (self->skip_cutscene) {
         (*object_curLevel_goToNextFuncAndClearTimer)(
@@ -164,7 +158,7 @@ void Demo50_Loop(Demo50* self) {
                 self,
                 data->death_model[coords->field_0x01],
                 coords,
-                &data->cam_mov_state_1[coords->field_0x01]
+                &data->field_0x28[coords->field_0x01]
             );
             /**
             * None of the `CutsceneCoordinatesConfig` arrays for this cutscene
@@ -184,7 +178,7 @@ void Demo50_Loop(Demo50* self) {
         if ((self->current_time >= coords->start_time) &&
             (coords->end_time >= self->current_time)) {
             (*func_801299A4)(
-                self->current_time, data->cutscene_camera, coords, &data->cam_mov_state_3, 0
+                self->current_time, data->cutscene_camera, coords, &data->field_0x60, 0
             );
         }
     }
@@ -193,9 +187,7 @@ void Demo50_Loop(Demo50* self) {
         coords = &D_0E000784[i];
         if ((self->current_time >= coords->start_time) &&
             (coords->end_time >= self->current_time)) {
-            (*func_801299A4)(
-                self->current_time, data->game_camera, coords, &data->cam_mov_state_2, 0
-            );
+            (*func_801299A4)(self->current_time, data->game_camera, coords, &data->field_0x44, 0);
             (*Cutscene_UpdateCameraLookAtDir)(data->game_camera, &data->current_camera_movement);
         }
     }
@@ -204,7 +196,7 @@ void Demo50_Loop(Demo50* self) {
         self,
         data->player_model,
         ARRAY_START(D_0E0007E0),
-        &data->cam_mov_state_4,
+        &data->field_0x7C,
         ARRAY_COUNT(D_0E0007E0),
         1
     );
@@ -217,7 +209,7 @@ void Demo50_Loop(Demo50* self) {
     if ((self->current_time > 150.0f) && (self->current_time < 165.0f)) {
         death_data = data->death_data;
         if (death_data->anim_state != 0) {
-            death_data->angle = data->death_model[0]->angle.yaw + DEG_TO_FIXED(90);
+            death_data->angle = (data->death_model[0]->angle.yaw + DEG_TO_FIXED(90)) & 0xFFFF;
             death             = self->death;
             (*mapOverlay)(self->death);
             (*Death_CreateMultipleScythes)(death, death_data, 3, 2, 8, DEG_TO_FIXED(90), 20.0f);
@@ -239,7 +231,6 @@ void Demo50_Loop(Demo50* self) {
         );
     }
 }
-#endif
 
 void Demo50_Restart(Demo50* self) {
     (*object_curLevel_goToFunc)(
