@@ -15,7 +15,7 @@
 */
 #define OPTION_SELECTION_TIMER self->header.timer
 
-typedef enum StageSelectOption {
+typedef enum StageSelectOptionID {
     FOREST            = 0,
     INSIDE_OF_RAMPART = 1,
     COURTYARD         = 2,
@@ -24,9 +24,9 @@ typedef enum StageSelectOption {
     VS_DEATH          = 5,
     VS_ACTRIESE       = 6,
     VS_BEHIMOS        = 7
-} StageSelectOption;
+} StageSelectOptionID;
 
-typedef struct {
+typedef struct StageSelect {
     ObjectHeader header;
     u8 field_0x20[8];
     Model* red_background_model;
