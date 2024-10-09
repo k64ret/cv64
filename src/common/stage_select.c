@@ -39,26 +39,27 @@ void StageSelect_entrypoint(StageSelect* self) {
 }
 
 void StageSelect_loadAssetsFile(StageSelect* self) {
-    if (((*Fade_IsFading)() == FALSE) && ((ptr_DMAMgr->DMAChunkMgr != NULL))) {
-        (*Fade_SetSettings)(FADE_IN, 30, 0, 0, 0);
-        sys.cutscene_flags = 0;
-        (*heap_init)(
-            HEAP_KIND_MENU_DATA,
-            &HEAP_MENU_DATA_START,
-            HEAP_MENU_DATA_SIZE,
-            HEAP_WRITE_BACK_CACHE_TO_RAM
-        );
-        self->assets_file_end   = NULL;
-        self->assets_file_start = (*heap_alloc)(HEAP_KIND_MENU_DATA, NI_ASSETS_MENU_BUFFER_SIZE);
-        DMAMgr_loadNisitenmaIchigoFile(
-            ptr_DMAMgr, NI_ASSETS_MENU, (u32) self->assets_file_start, &self->assets_file_end
-        );
-        NisitenmaIchigo_checkAndStoreLoadedFile(NI_ASSETS_MENU);
-        (*object_allocEntryInList)(self, HEAP_KIND_MULTIPURPOSE, sizeof(mfds_state* [10]), 0);
-        (*object_curLevel_goToNextFuncAndClearTimer)(
-            self->header.current_function, &self->header.function_info_ID
-        );
-    }
+    if (((*Fade_IsFading)() != FALSE) || (ptr_DMAMgr->DMAChunkMgr == NULL))
+        return;
+
+    (*Fade_SetSettings)(FADE_IN, 30, 0, 0, 0);
+    sys.cutscene_flags = 0;
+    (*heap_init)(
+        HEAP_KIND_MENU_DATA,
+        &HEAP_MENU_DATA_START,
+        HEAP_MENU_DATA_SIZE,
+        HEAP_WRITE_BACK_CACHE_TO_RAM
+    );
+    self->assets_file_end   = NULL;
+    self->assets_file_start = (*heap_alloc)(HEAP_KIND_MENU_DATA, NI_ASSETS_MENU_BUFFER_SIZE);
+    DMAMgr_loadNisitenmaIchigoFile(
+        ptr_DMAMgr, NI_ASSETS_MENU, (u32) self->assets_file_start, &self->assets_file_end
+    );
+    NisitenmaIchigo_checkAndStoreLoadedFile(NI_ASSETS_MENU);
+    (*object_allocEntryInList)(self, HEAP_KIND_MULTIPURPOSE, sizeof(mfds_state* [10]), 0);
+    (*object_curLevel_goToNextFuncAndClearTimer)(
+        self->header.current_function, &self->header.function_info_ID
+    );
 }
 
 void StageSelect_initGraphics(StageSelect* self) {
