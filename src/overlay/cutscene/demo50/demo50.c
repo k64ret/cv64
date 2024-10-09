@@ -92,39 +92,35 @@ void Demo50_SetupMainCutsceneParams(Demo50* self) {
 
 void Demo50_SetupData(Demo50* self) {
     Model* death_model;
-    Demo50Data* data;
+    Demo50Data* data = self->data;
     actorVisualData* death_visual_data;
     DeathData* death_data;
 
-    data = self->data;
-    if ((sys.map_is_setup) && (ptr_PlayerData != NULL)) {
-        data->player_model = ptr_PlayerData->visualData.model;
-        death_model        = self->death->model;
+    if (!sys.map_is_setup || (ptr_PlayerData == NULL))
+        return;
 
-        if (death_model != NULL) {
-            /**
-             * Setup the death parameters on the cutscene's struct
-             */
-            data->death_model[0]    = death_model;
-            data->death_data        = self->death->data;
-            death_visual_data       = &data->death_data->visual_data;
-            data->death_anim_mgr[0] = &death_visual_data->animMgr;
+    data->player_model = ptr_PlayerData->visualData.model;
 
-            (*mapOverlay)(self->death);
-            (*Death_UpdateAnimParamsCutscene)(
-                DEATH_ANIM_IDLE, 1.0f, death_visual_data, data->death_data
-            );
-            (*Death_AnimateFrameCutscene)(
-                data->death_data, data->death_model[0], data->death_anim_mgr[0]
-            );
-            (*unmapOverlay)(self->death);
+    if ((death_model = self->death->model) == NULL)
+        return;
 
-            sys.cutscene_flags |= CUTSCENE_FLAG_DISPLAY_WIDESCREEN_BORDERS;
-            (*object_curLevel_goToNextFuncAndClearTimer)(
-                self->header.current_function, &self->header.function_info_ID
-            );
-        }
-    }
+    /**
+     * Setup the death parameters on the cutscene's struct
+     */
+    data->death_model[0]    = death_model;
+    data->death_data        = self->death->data;
+    death_visual_data       = &data->death_data->visual_data;
+    data->death_anim_mgr[0] = &death_visual_data->animMgr;
+
+    (*mapOverlay)(self->death);
+    (*Death_UpdateAnimParamsCutscene)(DEATH_ANIM_IDLE, 1.0f, death_visual_data, data->death_data);
+    (*Death_AnimateFrameCutscene)(data->death_data, data->death_model[0], data->death_anim_mgr[0]);
+    (*unmapOverlay)(self->death);
+
+    BITS_SET(sys.cutscene_flags, CUTSCENE_FLAG_DISPLAY_WIDESCREEN_BORDERS);
+    (*object_curLevel_goToNextFuncAndClearTimer)(
+        self->header.current_function, &self->header.function_info_ID
+    );
 }
 
 // https://decomp.me/scratch/JbQZ3
