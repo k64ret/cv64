@@ -3,11 +3,11 @@
 
 #include "actor.h"
 
-typedef enum DeathAnimId {
+typedef enum DeathAnimID {
     DEATH_ANIM_IDLE                   = 0,
     DEATH_ANIM_FLYING_BACK            = 3,
     DEATH_ANIM_THROW_MULTIPLE_SCYTHES = 12
-} DeathAnimId;
+} DeathAnimID;
 
 typedef struct DeathData {
     u8 field_0x00[4];
