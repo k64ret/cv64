@@ -25,7 +25,7 @@ void textboxAdvanceArrow_entrypoint(textboxAdvanceArrow* self) {
 }
 
 void textboxAdvanceArrow_init(textboxAdvanceArrow* self) {
-    light* arrow_light;
+    struct Light* arrow_light;
     Model* model;
 
     arrow_light       = (*light_create)(FIG_TYPE_LIGHT);

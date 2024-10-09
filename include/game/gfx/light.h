@@ -23,16 +23,21 @@ typedef struct {
     u8 index;
 } light_parameters;
 
-// TODO: Figure this out better
-typedef struct light {
+/**
+ * TODO: Figure this out better
+ *
+ * @note Can't `typedef` this struct defintion as `Light` because there is a conflicting
+ * `union` definition in libultra, so we use the old fashioned `struct Light` syntax.
+ */
+struct Light {
     s16 type;
     u16 flags;
-    struct light* prev;
-    struct light* sibling;
-    struct light* next;
-    struct light* parent;
+    struct Light* prev;
+    struct Light* sibling;
+    struct Light* next;
+    struct Light* parent;
     u8 field1_0x14[28];
-    struct light* field2_0x30;
+    struct Light* field2_0x30;
     /**
      * The actual data starts at +0x10
      */
@@ -50,17 +55,17 @@ typedef struct light {
      * Light list
      */
     light_parameters lights[7];
-} light;
+};
 
-extern light* light_create(u16 type);
-extern light* map_lights[3];
-extern light* ptr_master_light;
+extern struct Light* light_create(u16 type);
+extern struct Light* map_lights[3];
+extern struct Light* ptr_master_light;
 
-extern void light_setAmbientColor(light* self, u32 ambient_color);
-extern void light_setColorAndDirection(light* self, s32 index, u32 color, u32 direction);
-extern s32 light_addColorAndDirection(light* self, u32 color, u32 direction);
+extern void light_setAmbientColor(struct Light* self, u32 ambient_color);
+extern void light_setColorAndDirection(struct Light* self, s32 index, u32 color, u32 direction);
+extern s32 light_addColorAndDirection(struct Light* self, u32 color, u32 direction);
 extern s32 light_addColorAndDirectionOrSetAmbientColorIfListIsEmpty(
-    light* self, u32 ambient_color, u32 direction
+    struct Light* self, u32 ambient_color, u32 direction
 );
 
 #endif
