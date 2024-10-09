@@ -25,7 +25,7 @@ typedef struct {
 
 /**
  * @note Can't `typedef` this struct defintion as `Light` because there is a conflicting
- * `union` definition in libultra, so we use decided to rename it to `FigureLight`.
+ * `union` definition in libultra, so we decided to rename it to `FigureLight`.
  */
 typedef struct FigureLight {
     s16 type;
