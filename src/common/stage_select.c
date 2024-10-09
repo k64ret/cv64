@@ -29,10 +29,10 @@ StageSelectFunc stageselect_funcs[] = {
     object_doNothing
 };
 
-const char cv64_stage_select_unused_str_1[] = "Model Trans OK!!\n";
-const char cv64_stage_select_unused_str_2[] = "Mfds Set OK!!\n";
-const char cv64_stage_select_unused_str_3[] = "Rens Set OK!!\n";
-const char cv64_stage_select_unused_str_4[] = "Slect Stage : %02d\n";
+const char stageselect_unused_str_1[] = "Model Trans OK!!\n";
+const char stageselect_unused_str_2[] = "Mfds Set OK!!\n";
+const char stageselect_unused_str_3[] = "Rens Set OK!!\n";
+const char stageselect_unused_str_4[] = "Slect Stage : %02d\n";
 
 void StageSelect_entrypoint(StageSelect* self) {
     ENTER(self, stageselect_funcs);
