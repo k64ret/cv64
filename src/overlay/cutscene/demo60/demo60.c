@@ -221,19 +221,20 @@ void Demo60_Loop(Demo60* self) {
         self->current_time++;
     }
 
-    if (self->max_time < self->current_time) {
-        (*Map_SetCameraParams)();
-        if (self->skip_cutscene) {
-            (*Fade_SetSettings)(FADE_IN, 25, 0, 0, 0);
-            (*Cutscene_SetCameraPosToEndCoords)(ARRAY_END(D_0E001190) - 1, data->game_camera);
-            (*Cutscene_SetCameraPosToEndCoords)(ARRAY_END(D_0E0011E8) - 1, data->cutscene_camera);
-            (*Cutscene_UpdateCameraLookAtDir)(data->game_camera, &data->current_camera_movement);
-            (*Cutscene_SetEndCoordsToActor)(ARRAY_END(D_0E001284) - 1, data->player_model);
-        }
-        (*object_curLevel_goToNextFuncAndClearTimer)(
-            self->header.current_function, &self->header.function_info_ID
-        );
+    if (self->max_time >= self->current_time)
+        return;
+
+    (*Map_SetCameraParams)();
+    if (self->skip_cutscene) {
+        (*Fade_SetSettings)(FADE_IN, 25, 0, 0, 0);
+        (*Cutscene_SetCameraPosToEndCoords)(ARRAY_END(D_0E001190) - 1, data->game_camera);
+        (*Cutscene_SetCameraPosToEndCoords)(ARRAY_END(D_0E0011E8) - 1, data->cutscene_camera);
+        (*Cutscene_UpdateCameraLookAtDir)(data->game_camera, &data->current_camera_movement);
+        (*Cutscene_SetEndCoordsToActor)(ARRAY_END(D_0E001284) - 1, data->player_model);
     }
+    (*object_curLevel_goToNextFuncAndClearTimer)(
+        self->header.current_function, &self->header.function_info_ID
+    );
 }
 
 void Demo60_Destroy(Demo60* self) {
