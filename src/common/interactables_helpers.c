@@ -246,7 +246,7 @@ Player_getSpecialTextboxCurrentlyInteractingWith(s16 actor_ID, Model* player_mod
                                                 actor->position.z
                                             ) -
                         player_facing_angle;
-                    if ((((angle_player_textspot) + 0x4000) & 0xFFFF) <= 0x9000) {
+                    if ((u16) (angle_player_textspot + DEG_TO_FIXED(90)) <= DEG_TO_FIXED(202.5)) {
                         return actor;
                     }
                 }
@@ -290,7 +290,7 @@ s32 playerCanInteractWithInteractuable(
                                             actor_pos_Z
                                         ) -
                         player_facing_angle;
-                    if ((((angle_player_item) + 0x4000) & 0xFFFF) <= 0x8000) {
+                    if ((u16) (angle_player_item + DEG_TO_FIXED(90)) <= DEG_TO_FIXED(180)) {
                         return TRUE;
                     }
                 }
@@ -315,7 +315,7 @@ s32 playerCanInteractWithInteractuable(
                                             actor_pos_Z
                                         ) -
                         player_facing_angle;
-                    if ((((angle_player_item) + 0x4000) & 0xFFFF) <= 0x9000) {
+                    if ((u16) (angle_player_item + DEG_TO_FIXED(90)) <= DEG_TO_FIXED(202.5)) {
                         return TRUE;
                     }
                 }

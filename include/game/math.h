@@ -6,12 +6,12 @@
 /**
  * Converts a fixed point angle into degrees
  */
-#define FIXED_TO_DEG(fixed) (fixed * (360.0f / 65536))
+#define FIXED_TO_DEG(fixed) (f32)(fixed * (360.0f / 65536.0f))
 
 /**
  * Converts an angle in degrees into fixed point
  */
-#define DEG_TO_FIXED(degrees) ((s16) ((degrees) * 65536.0f / 360.0f) & 0xFFFF)
+#define DEG_TO_FIXED(degrees) (u16)((degrees) * 65536.0f / 360.0f)
 
 typedef struct Vec2 {
     s16 x, y;

@@ -205,7 +205,7 @@ void Demo50_Loop(Demo50* self) {
     if ((self->current_time > 150.0f) && (self->current_time < 165.0f)) {
         death_data = data->death_data;
         if (death_data->anim_state != 0) {
-            death_data->angle = (data->death_model[0]->angle.yaw + DEG_TO_FIXED(90)) & 0xFFFF;
+            death_data->angle = data->death_model[0]->angle.yaw + DEG_TO_FIXED(90) & 0xFFFF;
             death             = self->death;
             (*mapOverlay)(self->death);
             (*Death_CreateMultipleScythes)(death, death_data, 3, 2, 8, DEG_TO_FIXED(90), 20.0f);
