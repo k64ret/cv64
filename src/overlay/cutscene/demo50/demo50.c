@@ -257,30 +257,31 @@ void Demo50_PlayDeathAnimations(Demo50* self, CutsceneCoordinatesConfig* coords)
      *       in `Demo50Data`) suggests that there was originally more data that
      *       could be indexed by `coords->field_0x01` for this cutscene.
      */
-    if ((coords->field_0x01 >= 0) && (coords->field_0x01 <= 0)) {
-        (*mapOverlay)(self->death);
-        switch (coords->player_anims_array_index) {
-            case 0:
-                (*Death_UpdateAnimParamsCutscene)(
-                    DEATH_ANIM_IDLE, 1.0f, death_visual_data, data->death_data
-                );
-                break;
-            case 3:
-                (*Death_UpdateAnimParamsCutscene)(
-                    DEATH_ANIM_FLYING_BACK, 1.0f, death_visual_data, data->death_data
-                );
-                break;
-            case 7:
-                (*Death_UpdateAnimParamsCutscene)(
-                    DEATH_ANIM_THROW_MULTIPLE_SCYTHES, 1.0f, death_visual_data, data->death_data
-                );
-                break;
-        }
-        (*Death_AnimateFrameCutscene)(
-            data->death_data,
-            data->death_model[coords->field_0x01],
-            data->death_anim_mgr[coords->field_0x01]
-        );
-        (*unmapOverlay)(self->death);
+    if ((coords->field_0x01 < 0) || (coords->field_0x01 > 0))
+        return;
+
+    (*mapOverlay)(self->death);
+    switch (coords->player_anims_array_index) {
+        case 0:
+            (*Death_UpdateAnimParamsCutscene)(
+                DEATH_ANIM_IDLE, 1.0f, death_visual_data, data->death_data
+            );
+            break;
+        case 3:
+            (*Death_UpdateAnimParamsCutscene)(
+                DEATH_ANIM_FLYING_BACK, 1.0f, death_visual_data, data->death_data
+            );
+            break;
+        case 7:
+            (*Death_UpdateAnimParamsCutscene)(
+                DEATH_ANIM_THROW_MULTIPLE_SCYTHES, 1.0f, death_visual_data, data->death_data
+            );
+            break;
     }
+    (*Death_AnimateFrameCutscene)(
+        data->death_data,
+        data->death_model[coords->field_0x01],
+        data->death_anim_mgr[coords->field_0x01]
+    );
+    (*unmapOverlay)(self->death);
 }
