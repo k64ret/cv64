@@ -8,19 +8,19 @@ StageSelect_moveLens                = 0x8012AA60; // type:func segment:common
 StageSelect_warpToStage             = 0x8012AC04; // type:func segment:common
 StageSelect_closeTextboxes          = 0x8012AEA0; // type:func segment:common
 // .data
-//StageSelect_text                  = 0x8016C8E0; // type:u16 segment:common size:0x017C
-//StageSelect_functions             = 0x8016CA5C; // segment:common size:0x18
+//StageSelect_text                    = 0x8016C8E0; // type:u16 segment:common size:0x017C
+//StageSelect_functions               = 0x8016CA5C; // segment:common size:0x18
 // .rodata
-//StageSelect_lens_background_size  = 0x8018AEC8; // type:f32 segment:common
-//StageSelect_warpToStage_jumptable = 0x8018AED8; // type:jtbl segment:common
-// .L8012AD0C_ADEFC                  = 0x8018AED8; // type:jtbl_label segment:common
-// .L8012AD38_ADF28                  = 0x8018AEDC; // type:jtbl_label segment:common
-// .L8012AD68_ADF58                  = 0x8018AEE0; // type:jtbl_label segment:common
-// .L8012ADA4_ADF94                  = 0x8018AEE4; // type:jtbl_label segment:common
-// .L8012ADCC_ADFBC                  = 0x8018AEE8; // type:jtbl_label segment:common
-// .L8012ADF4_ADFE4                  = 0x8018AEEC; // type:jtbl_label segment:common
-// .L8012AE20_AE010                  = 0x8018AEF0; // type:jtbl_label segment:common
-// .L8012AE48_AE038                  = 0x8018AEF4; // type:jtbl_label segment:common
+//StageSelect_lens_background_size    = 0x8018AEC8; // type:f32 segment:common
+//StageSelect_warpToStage_jumptable   = 0x8018AED8; // type:jtbl segment:common
+// .L8012AD0C_ADEFC                   = 0x8018AED8; // type:jtbl_label segment:common
+// .L8012AD38_ADF28                   = 0x8018AEDC; // type:jtbl_label segment:common
+// .L8012AD68_ADF58                   = 0x8018AEE0; // type:jtbl_label segment:common
+// .L8012ADA4_ADF94                   = 0x8018AEE4; // type:jtbl_label segment:common
+// .L8012ADCC_ADFBC                   = 0x8018AEE8; // type:jtbl_label segment:common
+// .L8012ADF4_ADFE4                   = 0x8018AEEC; // type:jtbl_label segment:common
+// .L8012AE20_AE010                   = 0x8018AEF0; // type:jtbl_label segment:common
+// .L8012AE48_AE038                   = 0x8018AEF4; // type:jtbl_label segment:common
 // End of src/overlay/stage_select.c ===========================================
 
 
@@ -188,7 +188,7 @@ cv64_ovl_librarypuzzletxt_entrypoint     = 0x0E000000; // type:func segment:ni_o
 cv64_ovl_librarypuzzletxt_init           = 0x0E000070; // type:func segment:ni_ovl_library_puzzle_textbox
 cv64_ovl_librarypuzzletxt_idle           = 0x0E000140; // type:func segment:ni_ovl_library_puzzle_textbox
 cv64_ovl_librarypuzzletxt_show           = 0x0E0001D8; // type:func segment:ni_ovl_library_puzzle_textbox
-cv64_ovl_librarypuzzletxt_prepare_msg       = 0x0E0003C0; // type:func segment:ni_ovl_library_puzzle_textbox
+cv64_ovl_librarypuzzletxt_prepare_msg    = 0x0E0003C0; // type:func segment:ni_ovl_library_puzzle_textbox
 cv64_ovl_librarypuzzletxt_select         = 0x0E0004DC; // type:func segment:ni_ovl_library_puzzle_textbox
 cv64_ovl_librarypuzzletxt_fail           = 0x0E000824; // type:func segment:ni_ovl_library_puzzle_textbox
 cv64_ovl_librarypuzzletxt_success        = 0x0E000954; // type:func segment:ni_ovl_library_puzzle_textbox
@@ -202,73 +202,72 @@ cv64_ovl_librarypuzzletxt_funcs          = 0x0E000C60; // segment:ni_ovl_library
 
 // src/overlay/textbox/mandragora.c ============================================
 // .text
-cv64_ovl_mandragoratxt_entrypoint = 0x0E000000; // type:func segment:ni_ovl_mandragora_textbox
-cv64_ovl_mandragoratxt_init       = 0x0E000070; // type:func segment:ni_ovl_mandragora_textbox
-cv64_ovl_mandragoratxt_idle       = 0x0E000134; // type:func segment:ni_ovl_mandragora_textbox
-cv64_ovl_mandragoratxt_prepare_msg   = 0x0E0001CC; // type:func segment:ni_ovl_mandragora_textbox
-cv64_ovl_mandragoratxt_yes_no     = 0x0E0002AC; // type:func segment:ni_ovl_mandragora_textbox
-cv64_ovl_mandragoratxt_close      = 0x0E000338; // type:func segment:ni_ovl_mandragora_textbox
-cv64_ovl_mandragoratxt_destroy    = 0x0E0003E0; // type:func segment:ni_ovl_mandragora_textbox
-cannot_collect_mandragora             = 0x0E000404; // type:func segment:ni_ovl_mandragora_textbox
+cv64_ovl_mandragoratxt_entrypoint  = 0x0E000000; // type:func segment:ni_ovl_mandragora_textbox
+cv64_ovl_mandragoratxt_init        = 0x0E000070; // type:func segment:ni_ovl_mandragora_textbox
+cv64_ovl_mandragoratxt_idle        = 0x0E000134; // type:func segment:ni_ovl_mandragora_textbox
+cv64_ovl_mandragoratxt_prepare_msg = 0x0E0001CC; // type:func segment:ni_ovl_mandragora_textbox
+cv64_ovl_mandragoratxt_yes_no      = 0x0E0002AC; // type:func segment:ni_ovl_mandragora_textbox
+cv64_ovl_mandragoratxt_close       = 0x0E000338; // type:func segment:ni_ovl_mandragora_textbox
+cv64_ovl_mandragoratxt_destroy     = 0x0E0003E0; // type:func segment:ni_ovl_mandragora_textbox
+cannot_collect_mandragora          = 0x0E000404; // type:func segment:ni_ovl_mandragora_textbox
 // .data
-cv64_ovl_mandragoratxt_funcs      = 0x0E000480; // segment:ni_ovl_mandragora_textbox size:0x18
+cv64_ovl_mandragoratxt_funcs       = 0x0E000480; // segment:ni_ovl_mandragora_textbox size:0x18
 // End of src/overlay/textbox/mandragora.c =====================================
 
 
 // src/overlay/textbox/nitro.c =================================================
 // .text
-cv64_ovl_nitrotxt_entrypoint = 0x0E000000; // type:func segment:ni_ovl_nitro_textbox
-cv64_ovl_nitrotxt_init       = 0x0E000070; // type:func segment:ni_ovl_nitro_textbox
-cv64_ovl_nitrotxt_idle       = 0x0E000134; // type:func segment:ni_ovl_nitro_textbox
-cv64_ovl_nitrotxt_prepare_msg   = 0x0E000258; // type:func segment:ni_ovl_nitro_textbox
-cv64_ovl_nitrotxt_yes_no     = 0x0E0002B4; // type:func segment:ni_ovl_nitro_textbox
-cv64_ovl_nitrotxt_close      = 0x0E000358; // type:func segment:ni_ovl_nitro_textbox
-cv64_ovl_nitrotxt_destroy    = 0x0E000400; // type:func segment:ni_ovl_nitro_textbox
-cannot_collect_nitro         = 0x0E000424; // type:func segment:ni_ovl_nitro_textbox
+cv64_ovl_nitrotxt_entrypoint  = 0x0E000000; // type:func segment:ni_ovl_nitro_textbox
+cv64_ovl_nitrotxt_init        = 0x0E000070; // type:func segment:ni_ovl_nitro_textbox
+cv64_ovl_nitrotxt_idle        = 0x0E000134; // type:func segment:ni_ovl_nitro_textbox
+cv64_ovl_nitrotxt_prepare_msg = 0x0E000258; // type:func segment:ni_ovl_nitro_textbox
+cv64_ovl_nitrotxt_yes_no      = 0x0E0002B4; // type:func segment:ni_ovl_nitro_textbox
+cv64_ovl_nitrotxt_close       = 0x0E000358; // type:func segment:ni_ovl_nitro_textbox
+cv64_ovl_nitrotxt_destroy     = 0x0E000400; // type:func segment:ni_ovl_nitro_textbox
+cannot_collect_nitro          = 0x0E000424; // type:func segment:ni_ovl_nitro_textbox
 // .data
-cv64_ovl_nitrotxt_funcs      = 0x0E0004A0; // segment:ni_ovl_nitro_textbox size:0x18
+cv64_ovl_nitrotxt_funcs       = 0x0E0004A0; // segment:ni_ovl_nitro_textbox size:0x18
 // .rodata
-cv64_ovl_nitrotxt_unused_str = 0x0E0004C0; // type:asciz segment:ni_ovl_nitro_textbox size:0x04
+cv64_ovl_nitrotxt_unused_str  = 0x0E0004C0; // type:asciz segment:ni_ovl_nitro_textbox size:0x04
 // End of src/overlay/textbox/nitro.c ==========================================
 
 
 // src/overlay/textbox/nitro_disposal.c ========================================
 // .text
-cv64_ovl_nitrodisposaltxt_entrypoint = 0x0E000000; // type:func segment:ni_ovl_nitro_disposal_textbox
-cv64_ovl_nitrodisposaltxt_init       = 0x0E000070; // type:func segment:ni_ovl_nitro_disposal_textbox
-cv64_ovl_nitrodisposaltxt_idle       = 0x0E00018C; // type:func segment:ni_ovl_nitro_disposal_textbox
-cv64_ovl_nitrodisposaltxt_prepare_msg   = 0x0E00020C; // type:func segment:ni_ovl_nitro_disposal_textbox
-cv64_ovl_nitrodisposaltxt_yes_no     = 0x0E0002B8; // type:func segment:ni_ovl_nitro_disposal_textbox
-cv64_ovl_nitrodisposaltxt_close      = 0x0E00035C; // type:func segment:ni_ovl_nitro_disposal_textbox
-cv64_ovl_nitrodisposaltxt_destroy    = 0x0E0003DC; // type:func segment:ni_ovl_nitro_disposal_textbox
+cv64_ovl_nitrodisposaltxt_entrypoint  = 0x0E000000; // type:func segment:ni_ovl_nitro_disposal_textbox
+cv64_ovl_nitrodisposaltxt_init        = 0x0E000070; // type:func segment:ni_ovl_nitro_disposal_textbox
+cv64_ovl_nitrodisposaltxt_idle        = 0x0E00018C; // type:func segment:ni_ovl_nitro_disposal_textbox
+cv64_ovl_nitrodisposaltxt_prepare_msg = 0x0E00020C; // type:func segment:ni_ovl_nitro_disposal_textbox
+cv64_ovl_nitrodisposaltxt_yes_no      = 0x0E0002B8; // type:func segment:ni_ovl_nitro_disposal_textbox
+cv64_ovl_nitrodisposaltxt_close       = 0x0E00035C; // type:func segment:ni_ovl_nitro_disposal_textbox
+cv64_ovl_nitrodisposaltxt_destroy     = 0x0E0003DC; // type:func segment:ni_ovl_nitro_disposal_textbox
 // .data
-cv64_ovl_nitrodisposaltxt_funcs      = 0x0E000400; // segment:ni_ovl_nitro_disposal_textbox size:0x18
+cv64_ovl_nitrodisposaltxt_funcs       = 0x0E000400; // segment:ni_ovl_nitro_disposal_textbox size:0x18
 // End of src/overlay/textbox/nitro_disposal.c =================================
 
 
 // src/overlay/textbox/explosive_wall_spot.c ===================================
 // .text
-cv64_ovl_explwalltxt_entrypoint        = 0x0E000000; // type:func segment:ni_explosive_wall_spot
-cv64_ovl_explwalltxt_init              = 0x0E000070; // type:func segment:ni_explosive_wall_spot
-cv64_ovl_explwalltxt_idle              = 0x0E0001B4; // type:func segment:ni_explosive_wall_spot
+cv64_ovl_explwalltxt_entrypoint              = 0x0E000000; // type:func segment:ni_explosive_wall_spot
+cv64_ovl_explwalltxt_init                    = 0x0E000070; // type:func segment:ni_explosive_wall_spot
+cv64_ovl_explwalltxt_idle                    = 0x0E0001B4; // type:func segment:ni_explosive_wall_spot
 cv64_ovl_explwalltxt_determine_msg           = 0x0E00028C; // type:func segment:ni_explosive_wall_spot
-cv64_ovl_explwalltxt_item_prepare_msg     = 0x0E000400; // type:func segment:ni_explosive_wall_spot
-cv64_ovl_explwalltxt_item_idle         = 0x0E00048C; // type:func segment:ni_explosive_wall_spot
+cv64_ovl_explwalltxt_item_prepare_msg        = 0x0E000400; // type:func segment:ni_explosive_wall_spot
+cv64_ovl_explwalltxt_item_idle               = 0x0E00048C; // type:func segment:ni_explosive_wall_spot
 cv64_ovl_explwalltxt_item_determine_next_txt = 0x0E0005F0; // type:func segment:ni_explosive_wall_spot
-cv64_ovl_explwalltxt_item_no           = 0x0E000748; // type:func segment:ni_explosive_wall_spot
-cv64_ovl_explwalltxt_ready_for_blast   = 0x0E0007C4; // type:func segment:ni_explosive_wall_spot
-cv64_ovl_explwalltxt_nitro_is_set      = 0x0E0008AC; // type:func segment:ni_explosive_wall_spot
-cv64_ovl_explwalltxt_mandragora_is_set = 0x0E00095C; // type:func segment:ni_explosive_wall_spot
-cv64_ovl_explwalltxt_default_desc      = 0x0E000A0C; // type:func segment:ni_explosive_wall_spot
-cv64_ovl_explwalltxt_item_already_set      = 0x0E000ABC; // type:func segment:ni_explosive_wall_spot
-cv64_ovl_explwalltxt_destroy           = 0x0E000B6C; // type:func segment:ni_explosive_wall_spot
+cv64_ovl_explwalltxt_item_no                 = 0x0E000748; // type:func segment:ni_explosive_wall_spot
+cv64_ovl_explwalltxt_ready_for_blast         = 0x0E0007C4; // type:func segment:ni_explosive_wall_spot
+cv64_ovl_explwalltxt_nitro_is_set            = 0x0E0008AC; // type:func segment:ni_explosive_wall_spot
+cv64_ovl_explwalltxt_mandragora_is_set       = 0x0E00095C; // type:func segment:ni_explosive_wall_spot
+cv64_ovl_explwalltxt_default_desc            = 0x0E000A0C; // type:func segment:ni_explosive_wall_spot
+cv64_ovl_explwalltxt_item_already_set        = 0x0E000ABC; // type:func segment:ni_explosive_wall_spot
+cv64_ovl_explwalltxt_destroy                 = 0x0E000B6C; // type:func segment:ni_explosive_wall_spot
 // .data
-cv64_ovl_explwalltxt_funcs             = 0x0E000B90; // segment:ni_explosive_wall_spot size:0x34
+cv64_ovl_explwalltxt_funcs                   = 0x0E000B90; // segment:ni_explosive_wall_spot size:0x34
 // End of src/overlay/textbox/explosive_wall_spot.c ============================
 
 
 // src/overlay/textbox/bottom_elevator_activator.c =============================
-
 // .text
 cv64_ovl_elevatortxt_entrypoint  = 0x0E000000; // type:func segment:ni_ovl_bottom_elevator_activator_textbox
 cv64_ovl_elevatortxt_init        = 0x0E000070; // type:func segment:ni_ovl_bottom_elevator_activator_textbox
@@ -277,85 +276,83 @@ cv64_ovl_elevatortxt_prepare_msg = 0x0E0001A0; // type:func segment:ni_ovl_botto
 cv64_ovl_elevatortxt_yes_no      = 0x0E000278; // type:func segment:ni_ovl_bottom_elevator_activator_textbox
 cv64_ovl_elevatortxt_close       = 0x0E000314; // type:func segment:ni_ovl_bottom_elevator_activator_textbox
 cv64_ovl_elevatortxt_destroy     = 0x0E0003D4; // type:func segment:ni_ovl_bottom_elevator_activator_textbox
-
 // .data
 cv64_ovl_elevatortxt_funcs       = 0x0E000400; // segment:ni_ovl_bottom_elevator_activator_textbox size:0x18
-
 // End of src/overlay/textbox/bottom_elevator_activator.c ======================
 
 
 // src/overlay/title_demo.c ====================================================
-
 // .text
 cv64_ovl_titledemo_entrypoint = 0x0F000000; // type:func segment:ni_ovl_title_demo
 cv64_ovl_titledemo_init       = 0x0F000070; // type:func segment:ni_ovl_title_demo
 cv64_ovl_titledemo_loop       = 0x0F000238; // type:func segment:ni_ovl_title_demo
 cv64_ovl_titledemo_exit       = 0x0F000574; // type:func segment:ni_ovl_title_demo
-
 // .data
 controller_data_REINHARDT     = 0x0F000670; // segment:ni_ovl_title_demo size:0x1072
 controller_data_CARRIE        = 0x0F0016E4; // segment:ni_ovl_title_demo size:0xD52
 cv64_ovl_titledemo_funcs      = 0x0F002438; // segment:ni_ovl_title_demo size:0x0C
-
 // .rodata
 D_0F002450                    = 0x0F002450; // type:asciz segment:ni_ovl_title_demo size:0x0F
-
 // End of src/overlay/title_demo.c =============================================
 
-// src/overlay/cutscene/demo50/demo50.c =========================================
+
+// src/overlay/cutscene/demo50/demo50.c ========================================
 // .text
-Demo50_Entrypoint     = 0x0E000000; // type:func segment:ni_ovl_cutscene_32
-Demo50_Init     = 0x0E000070; // type:func segment:ni_ovl_cutscene_32
-Demo50_SetupMainCutsceneParams     = 0x0E0000CC; // type:func segment:ni_ovl_cutscene_32
-Demo50_SetupData     = 0x0E0001B8; // type:func segment:ni_ovl_cutscene_32
-Demo50_Loop     = 0x0E0002BC; // type:func segment:ni_ovl_cutscene_32
-Demo50_Restart     = 0x0E0005D0; // type:func segment:ni_ovl_cutscene_32
+Demo50_Entrypoint              = 0x0E000000; // type:func segment:ni_ovl_cutscene_32
+Demo50_Init                    = 0x0E000070; // type:func segment:ni_ovl_cutscene_32
+Demo50_SetupMainCutsceneParams = 0x0E0000CC; // type:func segment:ni_ovl_cutscene_32
+Demo50_SetupData               = 0x0E0001B8; // type:func segment:ni_ovl_cutscene_32
+Demo50_Loop                    = 0x0E0002BC; // type:func segment:ni_ovl_cutscene_32
+Demo50_Restart                 = 0x0E0005D0; // type:func segment:ni_ovl_cutscene_32
 Demo50_PlayDeathAnimations     = 0x0E000604; // type:func segment:ni_ovl_cutscene_32
 // .data
-Demo50_functions = 0x0E000720; // segment:ni_ovl_cutscene_32 size:0x20
+Demo50_functions               = 0x0E000720; // segment:ni_ovl_cutscene_32 size:0x20
 // .rodata
-D_0E000740 = 0x0E000740; // segment:ni_ovl_cutscene_32 size:0x42
-D_0E000784 = 0x0E000784; // segment:ni_ovl_cutscene_32 size:0x16
-D_0E00079C = 0x0E00079C; // segment:ni_ovl_cutscene_32 size:0x42
-D_0E0007E0 = 0x0E0007E0; // segment:ni_ovl_cutscene_32 size:0x16
-// End of src/overlay/cutscene/demo50/demo50.c ==================================
+D_0E000740                     = 0x0E000740; // segment:ni_ovl_cutscene_32 size:0x42
+D_0E000784                     = 0x0E000784; // segment:ni_ovl_cutscene_32 size:0x16
+D_0E00079C                     = 0x0E00079C; // segment:ni_ovl_cutscene_32 size:0x42
+D_0E0007E0                     = 0x0E0007E0; // segment:ni_ovl_cutscene_32 size:0x16
+// End of src/overlay/cutscene/demo50/demo50.c =================================
 
-// src/overlay/cutscene/demo60/demo60.c =========================================
+
+// src/overlay/cutscene/demo60/demo60.c ========================================
 // .text
-Demo60_Entrypoint     = 0x0E000000; // type:func segment:ni_ovl_cutscene_3C
-Demo60_Init     = 0x0E000070; // type:func segment:ni_ovl_cutscene_3C
-Demo60_SetupMainCutsceneParams     = 0x0E0000FC; // type:func segment:ni_ovl_cutscene_3C
-Demo60_SetupData     = 0x0E0001A8; // type:func segment:ni_ovl_cutscene_3C
-Demo60_Loop     = 0x0E000220; // type:func segment:ni_ovl_cutscene_3C
-Demo60_Destroy     = 0x0E0006C4; // type:func segment:ni_ovl_cutscene_3C
-Demo60_PlayPlayerBlessingAnim     = 0x0E0006F0; // type:func segment:ni_ovl_cutscene_3C
+Demo60_Entrypoint              = 0x0E000000; // type:func segment:ni_ovl_cutscene_3C
+Demo60_Init                    = 0x0E000070; // type:func segment:ni_ovl_cutscene_3C
+Demo60_SetupMainCutsceneParams = 0x0E0000FC; // type:func segment:ni_ovl_cutscene_3C
+Demo60_SetupData               = 0x0E0001A8; // type:func segment:ni_ovl_cutscene_3C
+Demo60_Loop                    = 0x0E000220; // type:func segment:ni_ovl_cutscene_3C
+Demo60_Destroy                 = 0x0E0006C4; // type:func segment:ni_ovl_cutscene_3C
+Demo60_PlayPlayerBlessingAnim  = 0x0E0006F0; // type:func segment:ni_ovl_cutscene_3C
 // .data
-rot_Reindhart_blessing = 0x0e0007e0; // segment:ni_ovl_cutscene_3C size:0x580
-trans_Reindhart_blessing = 0x0e000d60; // segment:ni_ovl_cutscene_3C size:0xB0
-rot_Carrie_blessing = 0x0e000e10; // segment:ni_ovl_cutscene_3C size:0x300
-trans_Carrie_blessing = 0x0e001110; // segment:ni_ovl_cutscene_3C size:0x60
-Demo60_functions = 0x0e001170; // segment:ni_ovl_cutscene_3C size:0x20
+rot_Reindhart_blessing         = 0x0e0007e0; // segment:ni_ovl_cutscene_3C size:0x580
+trans_Reindhart_blessing       = 0x0e000d60; // segment:ni_ovl_cutscene_3C size:0xB0
+rot_Carrie_blessing            = 0x0e000e10; // segment:ni_ovl_cutscene_3C size:0x300
+trans_Carrie_blessing          = 0x0e001110; // segment:ni_ovl_cutscene_3C size:0x60
+Demo60_functions               = 0x0e001170; // segment:ni_ovl_cutscene_3C size:0x20
 // .rodata
-D_0E001190 = 0x0e001190; // segment:ni_ovl_cutscene_3C size:0x58
-D_0E0011E8 = 0x0e0011e8; // segment:ni_ovl_cutscene_3C size:0x9C
-D_0E001284 = 0x0E001284; // segment:ni_ovl_cutscene_3C size:0x5C
-// End of src/overlay/cutscene/demo60/demo60.c ==================================
+D_0E001190                     = 0x0e001190; // segment:ni_ovl_cutscene_3C size:0x58
+D_0E0011E8                     = 0x0e0011e8; // segment:ni_ovl_cutscene_3C size:0x9C
+D_0E001284                     = 0x0E001284; // segment:ni_ovl_cutscene_3C size:0x5C
+// End of src/overlay/cutscene/demo60/demo60.c =================================
 
-// src/overlay/cs_film_reel.c =========================================
+
+// src/overlay/cs_film_reel.c ==================================================
 // .text
-CSFilmReel_Entrypoint     = 0x0E000000; // type:func segment:ni_ovl_cs_film_reel_effect
-CSFilmReel_CheckInitialConditions     = 0x0E000070; // type:func segment:ni_ovl_cs_film_reel_effect
-CSFilmReel_Init     = 0x0E0000D0; // type:func segment:ni_ovl_cs_film_reel_effect
-CSFilmReel_Loop     = 0x0E000338; // type:func segment:ni_ovl_cs_film_reel_effect
-CSFilmReel_Destroy     = 0x0E000498; // type:func segment:ni_ovl_cs_film_reel_effect
-CSFilmReel_draw     = 0x0E0004BC; // type:func segment:ni_ovl_cs_film_reel_effect
+CSFilmReel_Entrypoint             = 0x0E000000; // type:func segment:ni_ovl_cs_film_reel_effect
+CSFilmReel_CheckInitialConditions = 0x0E000070; // type:func segment:ni_ovl_cs_film_reel_effect
+CSFilmReel_Init                   = 0x0E0000D0; // type:func segment:ni_ovl_cs_film_reel_effect
+CSFilmReel_Loop                   = 0x0E000338; // type:func segment:ni_ovl_cs_film_reel_effect
+CSFilmReel_Destroy                = 0x0E000498; // type:func segment:ni_ovl_cs_film_reel_effect
+CSFilmReel_draw                   = 0x0E0004BC; // type:func segment:ni_ovl_cs_film_reel_effect
 // .data
-ovl_csfilmreel_funcs = 0x0e000650; // segment:ni_ovl_cs_film_reel_effect size:0x10
-// End of src/overlay/cs_film_reel.c ==================================
+ovl_csfilmreel_funcs              = 0x0e000650; // segment:ni_ovl_cs_film_reel_effect size:0x10
+// End of src/overlay/cs_film_reel.c ===========================================
 
-// src/overlay/death.c =========================================
+
+// src/overlay/death.c =========================================================
 // .text
-Death_UpdateAnimParamsCutscene     = 0x0F00EB78; // type:func segment:ni_ovl_death
+Death_UpdateAnimParamsCutscene = 0x0F00EB78; // type:func segment:ni_ovl_death
 Death_AnimateFrameCutscene     = 0x0F00EBFC; // type:func segment:ni_ovl_death
-Death_CreateMultipleScythes     = 0x0F00D298; // type:func segment:ni_ovl_death
-// End of src/overlay/death.c ==================================
+Death_CreateMultipleScythes    = 0x0F00D298; // type:func segment:ni_ovl_death
+// End of src/overlay/death.c ==================================================
