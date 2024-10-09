@@ -20,7 +20,7 @@ u16 stageselect_text[] = {
 #include "objects/menu/stage_select.msg"
 };
 
-StageSelectFunc StageSelect_functions[] = {
+StageSelectFunc stageselect_funcs[] = {
     StageSelect_loadAssetsFile,
     StageSelect_initGraphics,
     StageSelect_initLens,
@@ -35,7 +35,7 @@ const char cv64_stage_select_unused_str_3[] = "Rens Set OK!!\n";
 const char cv64_stage_select_unused_str_4[] = "Slect Stage : %02d\n";
 
 void StageSelect_entrypoint(StageSelect* self) {
-    ENTER(self, StageSelect_functions);
+    ENTER(self, stageselect_funcs);
 }
 
 void StageSelect_loadAssetsFile(StageSelect* self) {
