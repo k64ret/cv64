@@ -12,10 +12,10 @@ typedef struct Demo50Data {
     Model* player_model;
     Camera* game_camera;
     CutsceneCurrentCameraMovement current_camera_movement;
-    CutsceneCameraMovementState cam_mov_state_1[1];
-    CutsceneCameraMovementState cam_mov_state_2;
-    CutsceneCameraMovementState cam_mov_state_3;
-    CutsceneCameraMovementState cam_mov_state_4;
+    CutsceneCameraMovementState field_0x28[1];
+    CutsceneCameraMovementState field_0x44;
+    CutsceneCameraMovementState field_0x60;
+    CutsceneCameraMovementState field_0x7C;
     DeathData* death_data;
 } Demo50Data;
 
@@ -40,8 +40,8 @@ typedef struct Demo50 {
 void Demo50_Entrypoint(Demo50* self);
 void Demo50_Init(Demo50* self);
 void Demo50_SetupMainCutsceneParams(Demo50* self);
-extern void Demo50_SetupData(Demo50* self);
-extern void Demo50_Loop(Demo50* self);
+void Demo50_SetupData(Demo50* self);
+void Demo50_Loop(Demo50* self);
 void Demo50_Restart(Demo50* self);
 void Demo50_PlayDeathAnimations(Demo50* self, CutsceneCoordinatesConfig* coords);
 
@@ -49,8 +49,8 @@ typedef void (*Demo50Func)(Demo50*);
 
 typedef enum Demo50FuncID {
     DEMO50_INIT,
-    DEMO50_CREATE_CUTSCENE_CAMERA,
-    DEMO50_GET_PLAYER_MODEL_AND_SET_BORDERS,
+    DEMO50_SETUP_MAIN_CUTSCENE_PARAMS,
+    DEMO50_SETUP_DATA,
     DEMO50_LOOP,
     DEMO50_RESTART
 } Demo50FuncID;
