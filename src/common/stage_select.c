@@ -66,56 +66,53 @@ void StageSelect_initGraphics(StageSelect* self) {
     Model* bg_model;
     mfds_state** textbox_array = self->textboxes;
 
-    if (self->assets_file_end != NULL) {
-        heapBlock_updateBlockMaxSize(
-            self->assets_file_start, (u32) self->assets_file_end - (u32) self->assets_file_start
-        );
-        bg_model = Model_createAndSetChild(FIG_TYPE_HUD_ELEMENT, common_camera_8009B444);
-        self->red_background_model = bg_model;
-        bg_model->assets_file      = NI_ASSETS_MENU;
-        bg_model->dlist            = &MENU_RED_BACKGROUND_DL;
-        BITS_SET(bg_model->flags, FIG_FLAG_APPLY_PRIMITIVE_COLOR);
-        bg_model->primitive_color.integer = RGBA(255, 255, 255, 255);
-        bg_model->position.x              = 0.0f;
-        bg_model->position.y              = 0.0f;
-        bg_model->position.z              = 0.0f;
-        bg_model->size.x                  = 1.0f;
-        bg_model->size.y                  = 1.0f;
-        bg_model->size.z                  = 1.0f;
+    if (self->assets_file_end == NULL)
+        return;
 
-        for (self->text_ID = 0; self->text_ID < STAGE_SELECT_NUM_OPTIONS + 1; self->text_ID++) {
-            textbox_array[self->text_ID] = (*textbox_create)(
-                self,
-                common_camera_8009B444,
-                (OPEN_TEXTBOX | MFDS_FLAG_400000 | FAST_TEXT_TRANSITION)
-            );
-            if (textbox_array[self->text_ID] == 0) {
-                continue;
-            } else {
-                textbox_array[self->text_ID]->palette = TEXT_COLOR_WHITE;
-                if (self->text_ID != 0) {
-                    (*textbox_setPos)(
-                        textbox_array[self->text_ID], 30, (self->text_ID * 23) + 23, 1
-                    );
-                } else {
-                    textbox_array[self->text_ID]->palette = TEXT_COLOR_BEIGE;
-                    (*textbox_setPos)(textbox_array[self->text_ID], 100, 10, 1);
-                    (*textbox_setHeightAndWidth)(textbox_array[self->text_ID], 1, 2, 1);
-                }
-                (*textbox_setDimensions)(textbox_array[self->text_ID], 1, 300, 0, 0);
-                (*textbox_setMessagePtr)(
-                    textbox_array[self->text_ID],
-                    text_getMessageFromPool(stageselect_text, self->text_ID),
-                    NULL,
-                    0
-                );
-            }
+    heapBlock_updateBlockMaxSize(
+        self->assets_file_start, (u32) self->assets_file_end - (u32) self->assets_file_start
+    );
+    bg_model = Model_createAndSetChild(FIG_TYPE_HUD_ELEMENT, common_camera_8009B444);
+    self->red_background_model = bg_model;
+    bg_model->assets_file      = NI_ASSETS_MENU;
+    bg_model->dlist            = &MENU_RED_BACKGROUND_DL;
+    BITS_SET(bg_model->flags, FIG_FLAG_APPLY_PRIMITIVE_COLOR);
+    bg_model->primitive_color.integer = RGBA(255, 255, 255, 255);
+    bg_model->position.x              = 0.0f;
+    bg_model->position.y              = 0.0f;
+    bg_model->position.z              = 0.0f;
+    bg_model->size.x                  = 1.0f;
+    bg_model->size.y                  = 1.0f;
+    bg_model->size.z                  = 1.0f;
+
+    for (self->text_ID = 0; self->text_ID < STAGE_SELECT_NUM_OPTIONS + 1; self->text_ID++) {
+        textbox_array[self->text_ID] = (*textbox_create)(
+            self, common_camera_8009B444, (OPEN_TEXTBOX | MFDS_FLAG_400000 | FAST_TEXT_TRANSITION)
+        );
+
+        if (textbox_array[self->text_ID] == 0)
+            continue;
+
+        textbox_array[self->text_ID]->palette = TEXT_COLOR_WHITE;
+        if (self->text_ID != 0) {
+            (*textbox_setPos)(textbox_array[self->text_ID], 30, (self->text_ID * 23) + 23, 1);
+        } else {
+            textbox_array[self->text_ID]->palette = TEXT_COLOR_BEIGE;
+            (*textbox_setPos)(textbox_array[self->text_ID], 100, 10, 1);
+            (*textbox_setHeightAndWidth)(textbox_array[self->text_ID], 1, 2, 1);
         }
-        (*atari_work_table_init)();
-        (*object_curLevel_goToNextFuncAndClearTimer)(
-            self->header.current_function, &self->header.function_info_ID
+        (*textbox_setDimensions)(textbox_array[self->text_ID], 1, 300, 0, 0);
+        (*textbox_setMessagePtr)(
+            textbox_array[self->text_ID],
+            text_getMessageFromPool(stageselect_text, self->text_ID),
+            NULL,
+            0
         );
     }
+    (*atari_work_table_init)();
+    (*object_curLevel_goToNextFuncAndClearTimer)(
+        self->header.current_function, &self->header.function_info_ID
+    );
 }
 
 void StageSelect_initLens(StageSelect* self) {
