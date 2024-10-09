@@ -1857,7 +1857,7 @@ segments:
     vram: 0x06000000
     exclusive_ram_id: nisitenma_ichigo_assets
 
-  - name: ni_film_reel
+  - name: ni_cs_film_reel
     type: bin
     # start: 0x00A008AA
     start: 0x00C6D9B0
@@ -2546,12 +2546,15 @@ segments:
       - [0x00E649E0, c, overlay/textbox/bottom_elevator_activator]
       - [0x00E64DE0, .data, overlay/textbox/bottom_elevator_activator]
 
-  - name: ni_ovl_film_reel_effect
-    type: bin
+  - name: ni_ovl_cs_film_reel_effect
+    type: code
     # start: 0x00B5E4DC
     start: 0x00E64E00
     vram: 0x0E000000
     exclusive_ram_id: nisitenma_ichigo_cutscenes
+    subsegments:
+      - [0x00E64E00, c, overlay/cs_film_reel]
+      - [0x00E65450, .data, overlay/cs_film_reel]
 
   - name: ni_ovl_cutscene_01
     type: bin
@@ -2855,11 +2858,15 @@ segments:
     exclusive_ram_id: nisitenma_ichigo_cutscenes
 
   - name: ni_ovl_cutscene_32
-    type: bin
+    type: code
     # start: 0x00B9FDF4
     start: 0x00EBFB40
     vram: 0x0E000000
     exclusive_ram_id: nisitenma_ichigo_cutscenes
+    subsegments:
+      - [0x00EBFB40, c, overlay/cutscene/demo50/demo50]
+      - [0x00EC0260, .data, overlay/cutscene/demo50/demo50]
+      - [0x00EC0280, .rodata, overlay/cutscene/demo50/demo50]
 
   - name: ni_ovl_cutscene_33
     type: bin

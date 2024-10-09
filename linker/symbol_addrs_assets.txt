@@ -1,8 +1,8 @@
 KONAMI_LOGO_DL = 0x0600C650; // segment:ni_konami_kcek_logos
 KCEK_LOGO_DL   = 0x06015CA0; // segment:ni_konami_kcek_logos
 
-COMMON_MOON_BEKKAN_1F_DL       = 0x0601C918; // segment:NI_ASSETS_BEKKAN_1F
-COMMON_MOON_BEKKAN_2F_DL       = 0x06024EF0; // segment:NI_ASSETS_BEKKAN_2F
+COMMON_MOON_BEKKAN_1F_DL = 0x0601C918; // segment:NI_ASSETS_BEKKAN_1F
+COMMON_MOON_BEKKAN_2F_DL = 0x06024EF0; // segment:NI_ASSETS_BEKKAN_2F
 
 ROSE_VENTILATOR_DL = 0x06005400; // segment:NI_ASSETS_ROSE
 ROSE_DOOR_DL       = 0x06005A30; // segment:NI_ASSETS_ROSE
@@ -19,12 +19,17 @@ ITEM_MATERIAL_DL = 0x06005DE0; // segment:ni_pickable_items
 RENON_BRIEFCASE_LOWER_LID_DL = 0x060026E0; // segment:ni_renon_briefcase
 RENON_BRIEFCASE_UPPER_LID_DL = 0x06002A40; // segment:ni_renon_briefcase
 
-REINHARDT_PORTRAIT_DL = 0x06002708; // segment:ni_character_select
 REINHARDT_PORTRAIT_MATERIAL_DL = 0x06000020; // segment:ni_character_select
-CARRIE_PORTRAIT_DL = 0x06004DE0; // segment:ni_character_select
-CARRIE_PORTRAIT_MATERIAL_DL = 0x06000000; // segment:ni_character_select
+REINHARDT_PORTRAIT_DL          = 0x06002708; // segment:ni_character_select
+
+CARRIE_PORTRAIT_MATERIAL_DL = 0x06000000; // segment:ni_character_select rom:0xC434B0
+CARRIE_PORTRAIT_DL          = 0x06004DE0; // segment:ni_character_select
 
 OPENINGBAT_DLIST = 0x06000E20; // segment:ni_fire_bat
+
+CSFILMREEL_TEXTURE = 0x06000000;  // segment:ni_cs_film_reel rom:0xC6D9B0 defined:true
+CSFILMREEL_DL = 0x06000240;       // segment:ni_cs_film_reel
+CSFILMREEL_MATERIAL_DL = 0x06000258; // segment:ni_cs_film_reel
 
 // test_grid_txt   = 0x06000000; // segment:NI_ASSETS_TEST_GRID
 // test_grid_tlut  = 0x06000800; // segment:NI_ASSETS_TEST_GRID

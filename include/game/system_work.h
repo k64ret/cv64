@@ -81,7 +81,7 @@ typedef struct {
     u16 global_timer_capped;
     s16 field24_0x242be;
     u8 field_0x242c0[4];
-    cv64_cont_state_t controllers[4];
+    Controller controllers[4];
     u8 file_load_array_ID;
     u8 field27_0x242fd[3];
     void* Nisitenma_Ichigo_loaded_files_ptr[255];
@@ -175,19 +175,18 @@ typedef struct {
      */
     s16 NOT_ON_MENU;
     /**
-     * NOT_ON_MENU = 0, PAUSE = 9, RENON_SHOP = 10, GAME_OVER = 14
+     * See the `MenuID` enum for possible values
      */
     s16 current_opened_menu;
     u8 field84_0x26438[4];
-    /**
-     * 0 = REINHARDT, 1 = CARRIE
-     */
-    u32 title_demo_character;
+    PlayerCharacterID title_demo_character;
     u32 cutscene_ID;
     u32 entrance_cutscene_ID;
     u32 cutscene_flags;
     /**
-     * DESTROY_CUTSCENE_TRIGGERS --> |= 0x00000001
+     * If OR'd with 1, cutscene triggers won't spawn
+     *
+     * See `cutsceneTrigger_init`
      */
     u32 field89_0x2644c;
 } system_work; // Size = 0x26450

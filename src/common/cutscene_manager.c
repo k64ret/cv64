@@ -85,10 +85,10 @@ void cutsceneMgr_createCutscene(cutsceneMgr* self) {
         sys.cutscene_flags = cutscene_flags | CUTSCENE_FLAG_FILM_REEL_EFFECT;
         if ((self && self) && self) {
         }
-        self->csFilmReel = object_createAndSetChild(&self->header, CUTSCENE_CSFILMREEL);
+        self->cs_film_reel = object_createAndSetChild(&self->header, CUTSCENE_CS_FILM_REEL);
     }
 
-    self->cutscene_object = object_createAndSetChild(
+    self->cutscene_object = (Cutscene*) object_createAndSetChild(
         &self->header, cutscene_settings[(*cutscene_ID_ptr) - 1].object_ID
     );
     if (self->cutscene_object != NULL) {
@@ -137,11 +137,11 @@ void cutsceneMgr_loop(cutsceneMgr* self) {
 void cutsceneMgr_stopCutscene(cutsceneMgr* self) {
     cutscene_parameters* settings;
 
-    if (objectList_findFirstObjectByID(CUTSCENE_CSFILMREEL) != NULL) {
+    if (objectList_findFirstObjectByID(CUTSCENE_CS_FILM_REEL) != NULL) {
         return;
     }
 
-    if (BITS_NOT_HAS(sys.cutscene_flags, CUTSCENE_FLAG_10) &&
+    if (BITS_NOT_HAS(sys.cutscene_flags, CUTSCENE_FLAG_IS_ENTRANCE_CUTSCENE) &&
         BITS_HAS(
             cutscene_settings[self->cutscene_ID - 1].overlay, CUTSCENE_OVERLAY_WIDESCREEN_BORDERS
         )) {
@@ -154,9 +154,9 @@ void cutsceneMgr_stopCutscene(cutsceneMgr* self) {
         sys.cutscene_ID = CUTSCENE_ID_NONE;
     }
 
-    if (BITS_NOT_HAS(sys.cutscene_flags, CUTSCENE_FLAG_20)) {
+    if (BITS_NOT_HAS(sys.cutscene_flags, CUTSCENE_FLAG_PLAY_DURING_CUTSCENE_STATE_AFTER_IT_ENDS)) {
         BITS_UNSET(sys.cutscene_flags, CUTSCENE_FLAG_PLAYING);
-        if (BITS_NOT_HAS(sys.cutscene_flags, CUTSCENE_FLAG_10)) {
+        if (BITS_NOT_HAS(sys.cutscene_flags, CUTSCENE_FLAG_IS_ENTRANCE_CUTSCENE)) {
             BITS_UNSET(sys.cutscene_flags, CUTSCENE_FLAG_DISPLAY_WIDESCREEN_BORDERS);
         }
     }

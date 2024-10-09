@@ -209,9 +209,9 @@ game their slot is free for a new object to occupy.
 There are two functions used to spawn an object in memory:
 
 ```c
-ObjectHeader* object_create(ObjectHeader* parent, cv64_object_id_t ID);
+ObjectHeader* object_create(ObjectHeader* parent, ObjectID ID);
 
-ObjectHeader* object_createAndSetChild(ObjectHeader* parent, cv64_object_id_t ID);
+ObjectHeader* object_createAndSetChild(ObjectHeader* parent, ObjectID ID);
 ```
 
 On these functions, `parent` is the parent object, and `ID` is the identifier of

@@ -43,37 +43,38 @@
 #define FIG_VARIABLE_TEXTURE_AND_PALETTE              0x40000000
 #define FIG_APPLY_VARIABLE_TEXTURE_AND_PALETTE(dlist) (FIG_VARIABLE_TEXTURE_AND_PALETTE | (dlist))
 
-typedef struct {
+typedef struct FigureHeader {
     s16 type;
     u16 flags;
-    struct figHeader* prev;
-    struct figHeader* sibling;
-    struct figHeader* next;
-    struct figHeader* parent;
-} figHeader; // Size = 0x14
+    struct FigureHeader* prev;
+    struct FigureHeader* sibling;
+    struct FigureHeader* next;
+    struct FigureHeader* parent;
+} FigureHeader; // Size = 0x14
 
-#define FIG_HEADER_SIZE sizeof(figHeader)
+#define FIG_HEADER_SIZE sizeof(FigureHeader)
 
 // Generic figure struct
-typedef struct {
-    figHeader header;
+typedef struct Figure {
+    FigureHeader header;
     u8 field_0x14[FIG_SIZE - FIG_HEADER_SIZE];
-} figure; // Size = 0xA8
+} Figure; // Size = 0xA8
 
-extern figHeader* fig_allocate(s16 type);
+extern FigureHeader* fig_allocate(s16 type);
 extern void clearAllFigs();
-extern void figure_showModelAndChildren(figHeader*, u16);
-extern void figure_hideSelfAndChildren(figHeader*, u16);
-extern void* figure_setChild(figHeader* new_child, figHeader* self);
+extern void figure_showModelAndChildren(FigureHeader*, u16);
+extern void figure_hideSelfAndChildren(FigureHeader*, u16);
+extern FigureHeader* figure_setChild(FigureHeader* new_child, FigureHeader* self);
+extern FigureHeader* Figure_SetSibling(FigureHeader* new_sibling, FigureHeader* self);
 
-extern figure figures_array[FIG_ARRAY_MAX];
+extern Figure figures_array[FIG_ARRAY_MAX];
 
 typedef struct {
     u32 field_0x00;
-    figure* field_0x04;
+    Figure* field_0x04;
     f32 far;
     u8 field_0x0C[4];
-    struct struct_106* field_0x10; // Could also be `light*` ?
+    struct struct_106* field_0x10; // Could also be `FigureLight*` ?
     struct struct_106* field_0x14;
 } struct_106;
 

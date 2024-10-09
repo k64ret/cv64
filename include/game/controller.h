@@ -8,7 +8,7 @@
 #define CONT_2 2
 #define CONT_3 3
 
-typedef struct cv64_cont_state {
+typedef struct Controller {
     u16 is_connected;
     u16 btns_held;
     u16 btns_pressed;
@@ -16,7 +16,7 @@ typedef struct cv64_cont_state {
     s16 joy_y;
     s16 joy_ang;
     s16 joy_held; // TODO: Maybe search another name for this variable.
-} cv64_cont_state_t;
+} Controller;
 
 extern OSMesgQueue controllerMsgQ;
 extern OSContStatus controller_status[MAXCONTROLLERS];

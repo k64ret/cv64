@@ -41,8 +41,8 @@ typedef struct Demo60 {
 
 void Demo60_Entrypoint(Demo60* self);
 void Demo60_Init(Demo60* self);
-void Demo60_CreateCutsceneCamera(Demo60* self);
-void Demo60_GetPlayerModelAndSetBorders(Demo60* self);
+void Demo60_SetupMainCutsceneParams(Demo60* self);
+void Demo60_SetupData(Demo60* self);
 void Demo60_Loop(Demo60* self);
 void Demo60_Destroy(Demo60* self);
 void Demo60_PlayPlayerBlessingAnim(Demo60* self, CutsceneCoordinatesConfig* coords);

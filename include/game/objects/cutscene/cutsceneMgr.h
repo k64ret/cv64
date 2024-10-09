@@ -2,15 +2,15 @@
 #define CUTSCENE_MGR_H
 
 #include "cutscene.h"
-#include "CSFilmReel.h"
+#include "cs_film_reel.h"
 
 // ID: 0x002A
 typedef struct {
     ObjectHeader header;
     u8 field_0x20[32];
-    CSFilmReel* csFilmReel;
+    CSFilmReel* cs_film_reel;
     /**
-     * NOTE:
+     * @note
      * Follows the cutscene ID listing WITHOUT the empty slots (for example,
      * cutscene 0x3C here is 0x32)
      */

@@ -11,7 +11,7 @@ typedef struct {
     ObjectHeader header;
     u8 field_0x20[4];
     Model* model;
-    light* arrow_light;
+    FigureLight* arrow_light;
     u8 field_0x2C[12];
     s32 fade_timer;
     u8 field_0x3C[28];

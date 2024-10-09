@@ -47,7 +47,7 @@ void cv64_ovl_renonbriefcase_init(cv64_ovl_renonbriefcase_t* self) {
     u32 unused;
 
     // `common_camera_8009B448` is unused on this cutscene
-    (*camera_setParams)(common_camera_8009B448, 0);
+    (*Camera_SetParams)(common_camera_8009B448, 0);
     common_camera_8009B448->position.x = 0.0f;
     common_camera_8009B448->position.y = 0.0f;
     common_camera_8009B448->position.z = 100.0f;
@@ -58,7 +58,7 @@ void cv64_ovl_renonbriefcase_init(cv64_ovl_renonbriefcase_t* self) {
     // clang-format on
 
     // Initialize the cutscene's camera
-    (*camera_setParams)(common_camera_8009B44C, 3);
+    (*Camera_SetParams)(common_camera_8009B44C, 3);
     common_camera_8009B44C->position.x = 0.0f;
     common_camera_8009B44C->position.y = 0.0f;
     common_camera_8009B44C->position.z = 100.0f;
@@ -78,7 +78,7 @@ void cv64_ovl_renonbriefcase_init(cv64_ovl_renonbriefcase_t* self) {
     BITS_SET(model->flags, FIG_FLAG_APPLY_PRIMITIVE_COLOR | FIG_FLAG_0080);
     model->primitive_color.integer = RGBA(255, 255, 255, 255);
     model->angle.pitch             = 0;
-    model->angle.yaw               = 0x4000;
+    model->angle.yaw               = DEG_TO_FIXED(90);
     model->angle.roll              = 0;
     model->size.x                  = 1.0f;
     model->size.y                  = 1.0f;

@@ -4,8 +4,8 @@
 #include "controller.h"
 
 typedef struct cv64_player_cont_data {
-    cv64_cont_state_t cont;
-    cv64_cont_state_t cont_prev_frame;
+    Controller cont;
+    Controller cont_prev_frame;
     s16 joy_ang;
     /**
      * Player's facing angle (yaw)

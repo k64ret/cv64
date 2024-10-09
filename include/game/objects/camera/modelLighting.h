@@ -21,7 +21,7 @@ typedef struct {
 typedef struct {
     ObjectHeader header;
     u8 field_0x20[4];
-    light* model_light;
+    FigureLight* model_light;
     u8 field_0x28[12];
     union {
         light_list_t light_list;

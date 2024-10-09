@@ -8,10 +8,10 @@
 #define NUM_EVENT_FLAGS  16
 #define SIZE_ITEMS_ARRAY 64 // Size of the whole items array
 
-enum PlayerCharacterID {
+typedef enum PlayerCharacterID {
     REINHARDT = 0,
     CARRIE    = 1
-};
+} PlayerCharacterID;
 
 enum SubweaponID {
     SUBWEAPON_NONE       = 0,
@@ -21,39 +21,73 @@ enum SubweaponID {
     SUBWEAPON_AXE        = 4
 };
 
+// clang-format off
+
 typedef enum MapID {
+    /** Forest of Silence */
     MORI              = 0,
+    /** Castle Wall (Towers) */
     TOU               = 1,
+    /** Castle Wall (Main) */
     TOUOKUJI          = 2,
+    /** Villa (Yard) */
     NAKANIWA          = 3,
+    /** Villa (Foyer) */
     BEKKAN_1F         = 4,
+    /** Villa (Hallway) */
     BEKKAN_2F         = 5,
+    /** Villa (Maze Garden) */
     MEIRO_TEIEN       = 6,
+    /** Tunnel */
     CHIKA_KODO        = 7,
+    /** Underground Waterway */
     CHIKA_SUIRO       = 8,
+    /** Castle Center (Main) */
     HONMARU_B1F       = 9,
+    /** Castle Center (Bottom Elevator) */
     HONMARU_1F        = 10,
+    /** Castle Center (Gears) */
     HONMARU_2F        = 11,
+    /** Castle Center (Friendly Lizard-man) */
     HONMARU_3F_MINAMI = 12,
+    /** Castle Center (Library) */
     HONMARU_4F_MINAMI = 13,
+    /** Castle Center (Nitro Room) */
     HONMARU_3F_KITA   = 14,
+    /** Castle Center (Top Elevator) */
     HONMARU_5F        = 15,
+    /** Tower of Execution */
     SHOKEI_TOU        = 16,
+    /** Tower of Sorcery */
     MAHOU_TOU         = 17,
+    /** Tower of Science */
     KAGAKU_TOU        = 18,
+    /** Duel Tower */
     KETTOU_TOU        = 19,
+    /** Castle Keep Stairs */
     TURO_TOKEITOU     = 20,
+    /** Castle Keep */
     TENSHU            = 21,
+    /** Intro Cutscene Map */
     ENDING_DUMMY      = 22,
+    /** Clock Tower */
     TOKEITOU_NAI      = 23,
+    /** Dracula Desert */
     DRACULA           = 24,
+    /** Rose / Actrice Fan Room */
     ROSE              = 25,
+    /** Villa (Vampire Crypt) */
     BEKKAN_BOSS       = 26,
+    /** Room of Clocks */
     TOU_TURO          = 27,
+    /** Ending Map */
     ENDING            = 28,
+    /** Test Grid */
     TEST_GRID         = 29,
-    NONE              = -1
+    MAP_NONE          = -1
 } MapID;
+
+// clang-format on
 
 enum SaveFlag {
     SAVE_FLAG_GAME_WAS_SAVED_MID_PLAY    = BIT(0),

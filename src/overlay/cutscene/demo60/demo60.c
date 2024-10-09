@@ -18,13 +18,17 @@
 #include "camera_data/D_0E0011E8.inc.h"
 #include "camera_data/D_0E001284.inc.h"
 
+// clang-format off
+
 Demo60Func Demo60_functions[] = {
     Demo60_Init,
-    Demo60_CreateCutsceneCamera,
-    Demo60_GetPlayerModelAndSetBorders,
+    Demo60_SetupMainCutsceneParams,
+    Demo60_SetupData,
     Demo60_Loop,
     Demo60_Destroy
 };
+
+// clang-format on
 
 void Demo60_Entrypoint(Demo60* self) {
     ENTER(self, Demo60_functions);
@@ -45,7 +49,7 @@ void Demo60_Init(Demo60* self) {
     );
 }
 
-void Demo60_CreateCutsceneCamera(Demo60* self) {
+void Demo60_SetupMainCutsceneParams(Demo60* self) {
     s32 temp;
     Camera* cutscene_camera;
     Demo60Data* data = self->data;
@@ -70,21 +74,23 @@ void Demo60_CreateCutsceneCamera(Demo60* self) {
     );
 }
 
-void Demo60_GetPlayerModelAndSetBorders(Demo60* self) {
+void Demo60_SetupData(Demo60* self) {
     Demo60Data* data = self->data;
     Model* player_model;
 
-    if ((sys.map_is_setup) && (ptr_PlayerData != NULL)) {
-        if (ptr_PlayerData->visualData.model != NULL) {
-            player_model       = ptr_PlayerData->visualData.model;
-            data->player_model = player_model;
-            sys.cutscene_flags &= ~CUTSCENE_FLAG_10;
-            sys.cutscene_flags |= CUTSCENE_FLAG_DISPLAY_WIDESCREEN_BORDERS;
-            (*object_curLevel_goToNextFuncAndClearTimer)(
-                self->header.current_function, &self->header.function_info_ID
-            );
-        }
-    }
+    if (!sys.map_is_setup || (ptr_PlayerData == NULL))
+        return;
+
+    if (ptr_PlayerData->visualData.model == NULL)
+        return;
+
+    player_model       = ptr_PlayerData->visualData.model;
+    data->player_model = player_model;
+    BITS_UNSET(sys.cutscene_flags, CUTSCENE_FLAG_IS_ENTRANCE_CUTSCENE);
+    BITS_SET(sys.cutscene_flags, CUTSCENE_FLAG_DISPLAY_WIDESCREEN_BORDERS);
+    (*object_curLevel_goToNextFuncAndClearTimer)(
+        self->header.current_function, &self->header.function_info_ID
+    );
 }
 
 void Demo60_Loop(Demo60* self) {
@@ -215,19 +221,20 @@ void Demo60_Loop(Demo60* self) {
         self->current_time++;
     }
 
-    if (self->max_time < self->current_time) {
-        (*Map_SetCameraParams)();
-        if (self->skip_cutscene) {
-            (*Fade_SetSettings)(FADE_IN, 25, 0, 0, 0);
-            (*Cutscene_SetCameraPosToEndCoords)(ARRAY_END(D_0E001190) - 1, data->game_camera);
-            (*Cutscene_SetCameraPosToEndCoords)(ARRAY_END(D_0E0011E8) - 1, data->cutscene_camera);
-            (*Cutscene_UpdateCameraLookAtDir)(data->game_camera, &data->current_camera_movement);
-            (*Cutscene_SetEndCoordsToActor)(ARRAY_END(D_0E001284) - 1, data->player_model);
-        }
-        (*object_curLevel_goToNextFuncAndClearTimer)(
-            self->header.current_function, &self->header.function_info_ID
-        );
+    if (self->max_time >= self->current_time)
+        return;
+
+    (*Map_SetCameraParams)();
+    if (self->skip_cutscene) {
+        (*Fade_SetSettings)(FADE_IN, 25, 0, 0, 0);
+        (*Cutscene_SetCameraPosToEndCoords)(ARRAY_END(D_0E001190) - 1, data->game_camera);
+        (*Cutscene_SetCameraPosToEndCoords)(ARRAY_END(D_0E0011E8) - 1, data->cutscene_camera);
+        (*Cutscene_UpdateCameraLookAtDir)(data->game_camera, &data->current_camera_movement);
+        (*Cutscene_SetEndCoordsToActor)(ARRAY_END(D_0E001284) - 1, data->player_model);
     }
+    (*object_curLevel_goToNextFuncAndClearTimer)(
+        self->header.current_function, &self->header.function_info_ID
+    );
 }
 
 void Demo60_Destroy(Demo60* self) {
