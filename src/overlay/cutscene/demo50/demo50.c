@@ -217,15 +217,16 @@ void Demo50_Loop(Demo50* self) {
         self->current_time++;
     }
 
-    if (self->max_time < self->current_time) {
-        /**
-        * Restart the cutscene
-        */
-        self->current_time = 0;
-        (*object_curLevel_goToNextFuncAndClearTimer)(
-            self->header.current_function, &self->header.function_info_ID
-        );
-    }
+    if (self->max_time >= self->current_time)
+        return;
+
+    /**
+     * Restart the cutscene
+     */
+    self->current_time = 0;
+    (*object_curLevel_goToNextFuncAndClearTimer)(
+        self->header.current_function, &self->header.function_info_ID
+    );
 }
 
 void Demo50_Restart(Demo50* self) {
