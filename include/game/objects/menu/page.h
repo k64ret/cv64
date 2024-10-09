@@ -21,7 +21,7 @@ typedef enum page_work_flags {
 } page_work_flags;
 
 typedef struct {
-    struct Light* page_light;
+    FigureLight* page_light;
     u8 flags;
     u8 flip_anim_keyframe;
     u8 field_0x06[2];

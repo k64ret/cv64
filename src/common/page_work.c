@@ -9,7 +9,7 @@
 
 page_work* pageWork_create(
     ObjectHeader* parent,
-    struct Light* page_light,
+    FigureLight* page_light,
     u8 flags,
     f32 pos_X,
     f32 pos_Y,

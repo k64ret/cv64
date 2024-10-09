@@ -74,7 +74,7 @@ typedef struct {
     Figure* field_0x04;
     f32 far;
     u8 field_0x0C[4];
-    struct struct_106* field_0x10; // Could also be `struct Light*` ?
+    struct struct_106* field_0x10; // Could also be `FigureLight*` ?
     struct struct_106* field_0x14;
 } struct_106;
 
