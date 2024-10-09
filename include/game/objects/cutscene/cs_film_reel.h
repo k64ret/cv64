@@ -76,7 +76,6 @@ void CSFilmReel_CheckInitialConditions(CSFilmReel* self);
 void CSFilmReel_Init(CSFilmReel* self);
 void CSFilmReel_Loop(CSFilmReel* self);
 void CSFilmReel_Destroy(CSFilmReel* self);
-u32 CSFilmReel_Draw(CSFilmReelGraphicData* graphic_data);
 
 typedef void (*CSFilmReelFunc)(CSFilmReel*);
 

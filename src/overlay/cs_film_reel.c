@@ -22,6 +22,8 @@ CSFilmReelFunc ovl_csfilmreel_funcs[] = {
 
 // clang-format on
 
+static u32 CSFilmReel_draw(CSFilmReelGraphicData*);
+
 void CSFilmReel_Entrypoint(CSFilmReel* self) {
     ENTER(self, ovl_csfilmreel_funcs);
 }
@@ -139,7 +141,7 @@ void CSFilmReel_Init(CSFilmReel* self) {
 
     left_reel_model                  = self->left_reel_model;
     right_reel_model                 = self->right_reel_model;
-    material_dlist                   = CSFilmReel_Draw(graphic_data);
+    material_dlist                   = CSFilmReel_draw(graphic_data);
     left_reel_model->material_dlist  = material_dlist;
     right_reel_model->material_dlist = material_dlist;
 
@@ -193,7 +195,7 @@ void CSFilmReel_Loop(CSFilmReel* self) {
     }
 
     // Draw the effect
-    material_dlist                   = CSFilmReel_Draw(graphic_data);
+    material_dlist                   = CSFilmReel_draw(graphic_data);
     left_reel_model->material_dlist  = material_dlist;
     right_reel_model->material_dlist = material_dlist;
 }
@@ -247,7 +249,7 @@ void CSFilmReel_Destroy(CSFilmReel* self) {
     );                                                                                             \
     gDPSetTileSize(dlist++, tile, 0, ult, 124, 124);
 
-u32 CSFilmReel_Draw(CSFilmReelGraphicData* graphic_data) {
+u32 CSFilmReel_draw(CSFilmReelGraphicData* graphic_data) {
     CSFilmReelGraphicRawData* raw_data =
         (CSFilmReelGraphicRawData*)
             graphic_data->graph_container->header.data_ptrs[sys.current_graphic_buffer];
