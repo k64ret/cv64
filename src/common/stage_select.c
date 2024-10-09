@@ -194,131 +194,132 @@ void StageSelect_warpToStage(StageSelect* self) {
     s16 i, j;
     window_work* lens = self->lens;
 
-    if (BITS_MASK(lens->flags, WINDOW_FLAG_4000 | WINDOW_FLAG_8000) >> 0xE) {
-        StageSelect_closeTextboxes(self);
+    if (!(BITS_MASK(lens->flags, WINDOW_FLAG_4000 | WINDOW_FLAG_8000) >> 0xE))
+        return;
 
-        sys.SaveStruct_gameplay.map           = MAP_NONE;
-        sys.SaveStruct_gameplay.spawn         = -1;
-        sys.SaveStruct_gameplay.life          = 100;
-        sys.SaveStruct_gameplay.field_0x5C    = 100;
-        sys.SaveStruct_gameplay.subweapon     = SUBWEAPON_NONE;
-        sys.SaveStruct_gameplay.gold          = 0;
-        sys.SaveStruct_gameplay.player_status = 0;
+    StageSelect_closeTextboxes(self);
 
-        // Remove inventory items
-        // clang-format off
-        for (i = 1; i < NUM_ITEMS + 1; i++) sys.SaveStruct_gameplay.items.array[i - 1] = 0;
-        // clang-format on
+    sys.SaveStruct_gameplay.map           = MAP_NONE;
+    sys.SaveStruct_gameplay.spawn         = -1;
+    sys.SaveStruct_gameplay.life          = 100;
+    sys.SaveStruct_gameplay.field_0x5C    = 100;
+    sys.SaveStruct_gameplay.subweapon     = SUBWEAPON_NONE;
+    sys.SaveStruct_gameplay.gold          = 0;
+    sys.SaveStruct_gameplay.player_status = 0;
 
-        sys.SaveStruct_gameplay.week         = 0;
-        sys.SaveStruct_gameplay.day          = 0;
-        sys.SaveStruct_gameplay.hour         = 0;
-        sys.SaveStruct_gameplay.minute       = 0;
-        sys.SaveStruct_gameplay.seconds      = 0;
-        sys.SaveStruct_gameplay.milliseconds = 0;
+    // Remove inventory items
+    // clang-format off
+    for (i = 1; i < NUM_ITEMS + 1; i++) sys.SaveStruct_gameplay.items.array[i - 1] = 0;
+    // clang-format on
 
-        // Clear event flags
-        // clang-format off
-        for (j = 0; j < NUM_EVENT_FLAGS; j++) sys.SaveStruct_gameplay.event_flags[j] = 0;
-        // clang-format on
+    sys.SaveStruct_gameplay.week         = 0;
+    sys.SaveStruct_gameplay.day          = 0;
+    sys.SaveStruct_gameplay.hour         = 0;
+    sys.SaveStruct_gameplay.minute       = 0;
+    sys.SaveStruct_gameplay.seconds      = 0;
+    sys.SaveStruct_gameplay.milliseconds = 0;
 
-        sys.field89_0x2644c = 0;
-        BITS_UNSET(sys.cutscene_flags, CUTSCENE_FLAG_PLAYING);
-        sys.current_boss_actor_ID = 0;
+    // Clear event flags
+    // clang-format off
+    for (j = 0; j < NUM_EVENT_FLAGS; j++) sys.SaveStruct_gameplay.event_flags[j] = 0;
+    // clang-format on
 
-        switch (self->current_option) {
-            case FOREST:
-                sys.entrance_cutscene_ID = CUTSCENE_ID_FOREST_INTRO;
-                sys.map_fade_out_time    = 30;
-                sys.map_fade_in_time     = 30;
-                sys.map                  = MORI;
-                sys.spawn                = 0;
-                sys.map_fade_in_color.r  = 0;
-                sys.map_fade_in_color.g  = 0;
-                sys.map_fade_in_color.b  = 0;
-                break;
+    sys.field89_0x2644c = 0;
+    BITS_UNSET(sys.cutscene_flags, CUTSCENE_FLAG_PLAYING);
+    sys.current_boss_actor_ID = 0;
 
-            case INSIDE_OF_RAMPART:
-                sys.entrance_cutscene_ID = CUTSCENE_ID_CASTLE_WALL_BRIDGE_RAISES;
-                sys.map                  = TOUOKUJI;
-                sys.map_fade_out_time    = 30;
-                sys.map_fade_in_time     = 30;
-                sys.spawn                = 0;
-                sys.map_fade_in_color.r  = 0;
-                sys.map_fade_in_color.g  = 0;
-                sys.map_fade_in_color.b  = 0;
-                break;
+    switch (self->current_option) {
+        case FOREST:
+            sys.entrance_cutscene_ID = CUTSCENE_ID_FOREST_INTRO;
+            sys.map_fade_out_time    = 30;
+            sys.map_fade_in_time     = 30;
+            sys.map                  = MORI;
+            sys.spawn                = 0;
+            sys.map_fade_in_color.r  = 0;
+            sys.map_fade_in_color.g  = 0;
+            sys.map_fade_in_color.b  = 0;
+            break;
 
-            case COURTYARD:
-                BITS_SET(sys.cutscene_flags, CUTSCENE_FLAG_IS_ENTRANCE_CUTSCENE);
-                sys.entrance_cutscene_ID = CUTSCENE_ID_ENTERING_VILLA;
-                sys.map                  = NAKANIWA;
-                sys.map_fade_out_time    = 30;
-                sys.map_fade_in_time     = 30;
-                sys.spawn                = 0;
-                sys.map_fade_in_color.r  = 0;
-                sys.map_fade_in_color.g  = 0;
-                sys.map_fade_in_color.b  = 0;
-                break;
+        case INSIDE_OF_RAMPART:
+            sys.entrance_cutscene_ID = CUTSCENE_ID_CASTLE_WALL_BRIDGE_RAISES;
+            sys.map                  = TOUOKUJI;
+            sys.map_fade_out_time    = 30;
+            sys.map_fade_in_time     = 30;
+            sys.spawn                = 0;
+            sys.map_fade_in_color.r  = 0;
+            sys.map_fade_in_color.g  = 0;
+            sys.map_fade_in_color.b  = 0;
+            break;
 
-            case EXECUTION_TOWER:
-                sys.map                 = SHOKEI_TOU;
-                sys.map_fade_out_time   = 30;
-                sys.map_fade_in_time    = 30;
-                sys.spawn               = 0;
-                sys.map_fade_in_color.r = 0;
-                sys.map_fade_in_color.g = 0;
-                sys.map_fade_in_color.b = 0;
-                break;
+        case COURTYARD:
+            BITS_SET(sys.cutscene_flags, CUTSCENE_FLAG_IS_ENTRANCE_CUTSCENE);
+            sys.entrance_cutscene_ID = CUTSCENE_ID_ENTERING_VILLA;
+            sys.map                  = NAKANIWA;
+            sys.map_fade_out_time    = 30;
+            sys.map_fade_in_time     = 30;
+            sys.spawn                = 0;
+            sys.map_fade_in_color.r  = 0;
+            sys.map_fade_in_color.g  = 0;
+            sys.map_fade_in_color.b  = 0;
+            break;
 
-            case CLOCK_TOWER:
-                sys.map                 = TOKEITOU_NAI;
-                sys.map_fade_out_time   = 30;
-                sys.map_fade_in_time    = 30;
-                sys.spawn               = 0;
-                sys.map_fade_in_color.r = 0;
-                sys.map_fade_in_color.g = 0;
-                sys.map_fade_in_color.b = 0;
-                break;
+        case EXECUTION_TOWER:
+            sys.map                 = SHOKEI_TOU;
+            sys.map_fade_out_time   = 30;
+            sys.map_fade_in_time    = 30;
+            sys.spawn               = 0;
+            sys.map_fade_in_color.r = 0;
+            sys.map_fade_in_color.g = 0;
+            sys.map_fade_in_color.b = 0;
+            break;
 
-            case VS_DEATH:
-                // clang-format off
-                sys.map = TURO_TOKEITOU, // Comma needed for matching
+        case CLOCK_TOWER:
+            sys.map                 = TOKEITOU_NAI;
+            sys.map_fade_out_time   = 30;
+            sys.map_fade_in_time    = 30;
+            sys.spawn               = 0;
+            sys.map_fade_in_color.r = 0;
+            sys.map_fade_in_color.g = 0;
+            sys.map_fade_in_color.b = 0;
+            break;
+
+        case VS_DEATH:
+            // clang-format off
+            sys.map = TURO_TOKEITOU, // Comma needed for matching
                 sys.spawn = 1;
-                // clang-format on
-                sys.map_fade_out_time   = 30;
-                sys.map_fade_in_time    = 30;
-                sys.map_fade_in_color.r = 0;
-                sys.map_fade_in_color.g = 0;
-                sys.map_fade_in_color.b = 0;
-                break;
+            // clang-format on
+            sys.map_fade_out_time   = 30;
+            sys.map_fade_in_time    = 30;
+            sys.map_fade_in_color.r = 0;
+            sys.map_fade_in_color.g = 0;
+            sys.map_fade_in_color.b = 0;
+            break;
 
-            case VS_ACTRIESE:
-                sys.map                 = TURO_TOKEITOU;
-                sys.map_fade_out_time   = 30;
-                sys.map_fade_in_time    = 30;
-                sys.spawn               = 0;
-                sys.map_fade_in_color.r = 0;
-                sys.map_fade_in_color.g = 0;
-                sys.map_fade_in_color.b = 0;
-                break;
+        case VS_ACTRIESE:
+            sys.map                 = TURO_TOKEITOU;
+            sys.map_fade_out_time   = 30;
+            sys.map_fade_in_time    = 30;
+            sys.spawn               = 0;
+            sys.map_fade_in_color.r = 0;
+            sys.map_fade_in_color.g = 0;
+            sys.map_fade_in_color.b = 0;
+            break;
 
-            case VS_BEHIMOS:
-                sys.map                 = HONMARU_B1F;
-                sys.map_fade_out_time   = 30;
-                sys.map_fade_in_time    = 30;
-                sys.spawn               = 0;
-                sys.map_fade_in_color.r = 0;
-                sys.map_fade_in_color.g = 0;
-                sys.map_fade_in_color.b = 0;
-                break;
-        }
-
-        gamestate_change(GAMESTATE_GAMEPLAY);
-        (*object_curLevel_goToNextFuncAndClearTimer)(
-            self->header.current_function, &self->header.function_info_ID
-        );
+        case VS_BEHIMOS:
+            sys.map                 = HONMARU_B1F;
+            sys.map_fade_out_time   = 30;
+            sys.map_fade_in_time    = 30;
+            sys.spawn               = 0;
+            sys.map_fade_in_color.r = 0;
+            sys.map_fade_in_color.g = 0;
+            sys.map_fade_in_color.b = 0;
+            break;
     }
+
+    gamestate_change(GAMESTATE_GAMEPLAY);
+    (*object_curLevel_goToNextFuncAndClearTimer)(
+        self->header.current_function, &self->header.function_info_ID
+    );
 }
 
 void StageSelect_closeTextboxes(StageSelect* self) {
