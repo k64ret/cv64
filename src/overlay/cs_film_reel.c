@@ -13,7 +13,7 @@
 
 // clang-format off
 
-CSFilmReel_func CSFilmReel_functions[] = {
+CSFilmReelFunc ovl_csfilmreel_funcs[] = {
     CSFilmReel_CheckInitialConditions,
     CSFilmReel_Init,
     CSFilmReel_Loop,
@@ -23,7 +23,7 @@ CSFilmReel_func CSFilmReel_functions[] = {
 // clang-format on
 
 void CSFilmReel_Entrypoint(CSFilmReel* self) {
-    ENTER(self, CSFilmReel_functions);
+    ENTER(self, ovl_csfilmreel_funcs);
 }
 
 void CSFilmReel_CheckInitialConditions(CSFilmReel* self) {
