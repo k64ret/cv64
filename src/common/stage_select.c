@@ -16,7 +16,7 @@
 #include "system_work.h"
 #include "objects/menu/stage_select.h"
 
-u16 StageSelect_text[] = {
+u16 stageselect_text[] = {
 #include "objects/menu/stage_select.msg"
 };
 
@@ -104,7 +104,7 @@ void StageSelect_initGraphics(StageSelect* self) {
                 (*textbox_setDimensions)(textbox_array[self->text_ID], 1, 300, 0, 0);
                 (*textbox_setMessagePtr)(
                     textbox_array[self->text_ID],
-                    text_getMessageFromPool(StageSelect_text, self->text_ID),
+                    text_getMessageFromPool(stageselect_text, self->text_ID),
                     NULL,
                     0
                 );

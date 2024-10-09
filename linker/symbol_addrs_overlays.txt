@@ -8,7 +8,7 @@ StageSelect_moveLens                = 0x8012AA60; // type:func segment:common
 StageSelect_warpToStage             = 0x8012AC04; // type:func segment:common
 StageSelect_closeTextboxes          = 0x8012AEA0; // type:func segment:common
 // .data
-//StageSelect_text                    = 0x8016C8E0; // type:u16 segment:common size:0x017C
+//stageselect_text                    = 0x8016C8E0; // type:u16 segment:common size:0x017C
 //StageSelect_functions               = 0x8016CA5C; // segment:common size:0x18
 // .rodata
 //StageSelect_lens_background_size    = 0x8018AEC8; // type:f32 segment:common
