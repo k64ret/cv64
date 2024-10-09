@@ -119,34 +119,34 @@ void StageSelect_initLens(StageSelect* self) {
     window_work* lens;
     mfds_state** textbox_array = self->textboxes;
 
-    if ((*Fade_IsFading)() == FALSE) {
-        for (self->text_ID = 0; self->text_ID < STAGE_SELECT_NUM_OPTIONS + 1; self->text_ID++) {
-            if (BITS_NOT_HAS(textbox_array[self->text_ID]->flags, TEXT_IS_PARSED)) {
-                return;
-            }
+    if ((*Fade_IsFading)() != FALSE)
+        return;
+
+    for (self->text_ID = 0; self->text_ID < STAGE_SELECT_NUM_OPTIONS + 1; self->text_ID++) {
+        if (BITS_NOT_HAS(textbox_array[self->text_ID]->flags, TEXT_IS_PARSED)) {
+            return;
         }
-        self->lens = (*lens_create)(
-            self,
-            common_camera_HUD,
-            (WINDOW_FLAG_ENABLE_DISTORTION_EFFECT | WINDOW_FLAG_80 | WINDOW_FLAG_OPEN_DOWN_RIGHT |
-             WINDOW_FLAG_OPEN_RIGHT_DOWN | WINDOW_FLAG_OPEN_DOWN | WINDOW_FLAG_OPEN_RIGHT),
-            -120.0f,
-            61.0f,
-            10.0f,
-            2.0f,
-            240.0f,
-            90.0f
-        );
-        lens = self->lens;
-        if (lens != NULL) {
-            (*windowWork_setParams)(lens, 0, 7, 5, 1.6f, 1.0f, NULL);
-            BITS_UNSET(lens->flags, WINDOW_CLOSING);
-            BITS_SET(lens->flags, WINDOW_OPENING);
-        }
-        (*object_curLevel_goToNextFuncAndClearTimer)(
-            self->header.current_function, &self->header.function_info_ID
-        );
     }
+    self->lens = (*lens_create)(
+        self,
+        common_camera_HUD,
+        (WINDOW_FLAG_ENABLE_DISTORTION_EFFECT | WINDOW_FLAG_80 | WINDOW_FLAG_OPEN_DOWN_RIGHT |
+         WINDOW_FLAG_OPEN_RIGHT_DOWN | WINDOW_FLAG_OPEN_DOWN | WINDOW_FLAG_OPEN_RIGHT),
+        -120.0f,
+        61.0f,
+        10.0f,
+        2.0f,
+        240.0f,
+        90.0f
+    );
+    if ((lens = self->lens) != NULL) {
+        (*windowWork_setParams)(lens, 0, 7, 5, 1.6f, 1.0f, NULL);
+        BITS_UNSET(lens->flags, WINDOW_CLOSING);
+        BITS_SET(lens->flags, WINDOW_OPENING);
+    }
+    (*object_curLevel_goToNextFuncAndClearTimer)(
+        self->header.current_function, &self->header.function_info_ID
+    );
 }
 
 void StageSelect_moveLens(StageSelect* self) {
