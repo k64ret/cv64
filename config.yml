@@ -1,6 +1,6 @@
 c176c2493d90e12d0a2b6873cfcbc611a9bea245:
   name: Castlevania (North America)
-  path: assets/yml
+  path: yml
   config:
     gbi: F3DEX2
     sort: OFFSET
