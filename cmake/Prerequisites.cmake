@@ -1,7 +1,5 @@
 find_package(Python REQUIRED COMPONENTS Interpreter)
 
-
-
 if(Python_FOUND)
   # Install Python dependencies
   execute_process(
@@ -30,6 +28,7 @@ if(Python_FOUND)
   # Run Torch
   execute_process(
     COMMAND ${TORCH} code ${BASEROM_UNCOMPRESSED} -v
+    COMMAND ${TORCH} header ${BASEROM_UNCOMPRESSED}
     COMMAND ${TORCH} modding export ${BASEROM_UNCOMPRESSED}
     WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
 endif()

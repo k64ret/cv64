@@ -3,6 +3,8 @@
     - [0x06, 0x007F9CA0]
   header:
     code:
+    - '#include "assets/ni_rosa_petals.h"'
+    header:
     - '#include <ultra64.h>'
 
 rosa_petals_vtx:
