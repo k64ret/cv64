@@ -5,7 +5,11 @@
 # Ignored project folders
 asm/
 bin/
-assets/
+# Ignore everything in the assets directory
+# Except for the yml directory and its contents
+assets/*
+!assets/yml/
+!assets/yml/**
 build/
 perm/
 

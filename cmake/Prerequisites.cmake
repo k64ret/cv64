@@ -14,15 +14,12 @@ if(Python_FOUND)
 
   # Decompress baserom
   execute_process(
-    COMMAND ${Python_EXECUTABLE} ${DECOMPRESS} ${BASEROM} ${CMAKE_SOURCE_DIR}/baserom_uncompressed.z64
+    COMMAND ${Python_EXECUTABLE} ${DECOMPRESS} ${BASEROM} ${BASEROM_UNCOMPRESSED}
     OUTPUT_FILE ${CMAKE_BINARY_DIR}/decompress.log
     WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
 
   # Build Torch
-  execute_process(
-    COMMAND make -C ${TOOLS_DIR}/torch type=release
-    OUTPUT_FILE ${CMAKE_BINARY_DIR}/torch_build.log
-    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
+  execute_process(COMMAND make -C ${TOOLS_DIR}/torch type=release WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
 
   # Run Splat
   execute_process(
@@ -32,9 +29,8 @@ if(Python_FOUND)
 
   # Run Torch
   execute_process(
-    COMMAND ${TOOLS_DIR}/torch/cmake-build-release/torch code baserom_uncompressed.z64 -v
-    COMMAND ${TOOLS_DIR}/torch/cmake-build-release/torch modding export baserom_uncompressed.z64
-    OUTPUT_FILE ${CMAKE_BINARY_DIR}/torch.log
+    COMMAND ${TOOLS_DIR}/torch/cmake-build-release/torch code ${BASEROM_UNCOMPRESSED} -v
+    COMMAND ${TOOLS_DIR}/torch/cmake-build-release/torch modding export ${BASEROM_UNCOMPRESSED}
     WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
 endif()
 
