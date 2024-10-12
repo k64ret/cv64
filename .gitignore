@@ -21,3 +21,4 @@ perm/
 
 # Ignored misc. files
 ctx.c
+torch.hash.yml

@@ -1458,7 +1458,7 @@ segments:
     vram: 0x06000000
     exclusive_ram_id: nisitenma_ichigo_assets
 
-  - name: ni_788720
+  - name: ni_rosa_petals
     type: bin
     # start: 0x00788720
     start: 0x007F9CA0
