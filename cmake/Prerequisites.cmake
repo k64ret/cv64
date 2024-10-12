@@ -1,6 +1,6 @@
 find_package(Python REQUIRED COMPONENTS Interpreter)
 
-set(TOOLS_DIR ${CMAKE_SOURCE_DIR}/tools)
+
 
 if(Python_FOUND)
   # Install Python dependencies
@@ -29,8 +29,8 @@ if(Python_FOUND)
 
   # Run Torch
   execute_process(
-    COMMAND ${TOOLS_DIR}/torch/cmake-build-release/torch code ${BASEROM_UNCOMPRESSED} -v
-    COMMAND ${TOOLS_DIR}/torch/cmake-build-release/torch modding export ${BASEROM_UNCOMPRESSED}
+    COMMAND ${TORCH} code ${BASEROM_UNCOMPRESSED} -v
+    COMMAND ${TORCH} modding export ${BASEROM_UNCOMPRESSED}
     WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
 endif()
 
