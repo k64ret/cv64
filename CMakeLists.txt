@@ -95,7 +95,8 @@ target_include_directories(
           $<$<COMPILE_LANGUAGE:C>:${CMAKE_SOURCE_DIR}/include
           ${CMAKE_SOURCE_DIR}/include/ultra64
           ${CMAKE_SOURCE_DIR}/include/game
-          ${CMAKE_SOURCE_DIR}/assets>)
+          ${CMAKE_SOURCE_DIR}/assets
+          ${CMAKE_SOURCE_DIR}/include/assets>)
 
 target_link_options(
   ${TARGET}

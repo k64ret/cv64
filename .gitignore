@@ -5,6 +5,8 @@
 # Ignored project folders
 asm/
 bin/
+src/assets/
+include/assets/
 # Ignore everything in the assets directory
 # Except for the yml directory and its contents
 assets/*
