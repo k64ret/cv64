@@ -86,9 +86,12 @@ docker run --rm -ti -v $(pwd):/c64 c64
 
 #### Linux (Debian/Ubuntu offshoots)
 
+- cmake
 - build-essential
 - binutils-mips-linux-gnu
-- python3/pip3 (I recommend managing this through [mise][mise])
+- python3/pip3 (We recommend managing this through [mise][mise])
+- ninja-build
+- libbz2-dev
 
 #### Windows
 
