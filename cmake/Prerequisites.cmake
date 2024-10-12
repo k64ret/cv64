@@ -1,5 +1,7 @@
 find_package(Python REQUIRED COMPONENTS Interpreter)
 
+set(TOOLS_DIR ${CMAKE_SOURCE_DIR}/tools)
+
 if(Python_FOUND)
   # Install Python dependencies
   execute_process(
@@ -16,15 +18,27 @@ if(Python_FOUND)
     OUTPUT_FILE ${CMAKE_BINARY_DIR}/decompress.log
     WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
 
+  # Build Torch
+  execute_process(
+    COMMAND make -C ${TOOLS_DIR}/torch type=release
+    OUTPUT_FILE ${CMAKE_BINARY_DIR}/torch_build.log
+    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
+
   # Run Splat
   execute_process(
     COMMAND ${Python_EXECUTABLE} -m splat split ${SPLAT_CONFIG}
     OUTPUT_FILE ${CMAKE_BINARY_DIR}/splat.log
     WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
+
+  # Run Torch
+  execute_process(
+    COMMAND ${TOOLS_DIR}/torch/cmake-build-release/torch code baserom_uncompressed.z64 -v
+    COMMAND ${TOOLS_DIR}/torch/cmake-build-release/torch modding export baserom_uncompressed.z64
+    OUTPUT_FILE ${CMAKE_BINARY_DIR}/torch.log
+    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
 endif()
 
 set(MIPS_BINUTILS_PREFIX mips-linux-gnu-)
-set(TOOLS_DIR ${CMAKE_SOURCE_DIR}/tools)
 
 # Install IDO compilers
 execute_process(COMMAND ${CMAKE_COMMAND} -P ${CMAKE_SOURCE_DIR}/cmake/IDO.cmake WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
