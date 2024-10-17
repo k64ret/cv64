@@ -85,11 +85,11 @@ typedef struct {
     };
     union {
         miniScroll* mini_scroll;
-        window_work* lens;
+        WindowWork* lens;
     };
     union {
-        mfds_state* character_names[NUM_CHARACTERS];
-        mfds_state* difficulty_text;
+        MfdsState* character_names[NUM_CHARACTERS];
+        MfdsState* difficulty_text;
     };
     u8 field_0x44[8];
     mark_work* mark;

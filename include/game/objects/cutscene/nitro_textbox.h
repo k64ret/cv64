@@ -18,7 +18,7 @@ typedef struct cv64_ovl_nitrotxt {
     u32 message_display_time;
     f32 trigger_size_X;
     f32 trigger_size_Z;
-    mfds_state* message_textbox;
+    MfdsState* message_textbox;
     Vec3f position;
     ActorConfig* settings;
 } cv64_ovl_nitrotxt_t;
@@ -36,7 +36,7 @@ typedef enum cv64_ovl_nitrotxt_func_id {
     NITRO_TEXTBOX_IDLE,
     NITRO_TEXTBOX_PREPARE_MESSAGE,
     NITRO_TEXTBOX_SELECT_OPTION,
-    NITRO_TEXTBOX_CLOSE_TEXTBOX,
+    NITRO_TEXTBOX_MFDS_FLAG_CLOSE_TEXTBOX,
     NITRO_TEXTBOX_DESTROY
 } cv64_ovl_nitrotxt_func_id_t;
 

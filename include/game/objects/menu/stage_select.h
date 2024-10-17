@@ -31,9 +31,9 @@ typedef struct StageSelect {
     u8 field_0x20[8];
     Model* red_background_model;
     u8 field_0x2C[8];
-    mfds_state** textboxes;
+    MfdsState** textboxes;
     u8 field_0x38[24];
-    window_work* lens;
+    WindowWork* lens;
     u8* assets_file_start;
     u8* assets_file_end;
     s8 text_ID;

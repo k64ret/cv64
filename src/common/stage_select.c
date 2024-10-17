@@ -56,7 +56,7 @@ void StageSelect_loadAssetsFile(StageSelect* self) {
         ptr_DMAMgr, NI_ASSETS_MENU, (u32) self->assets_file_start, &self->assets_file_end
     );
     NisitenmaIchigo_checkAndStoreLoadedFile(NI_ASSETS_MENU);
-    (*object_allocEntryInList)(self, HEAP_KIND_MULTIPURPOSE, sizeof(mfds_state* [10]), 0);
+    (*object_allocEntryInList)(self, HEAP_KIND_MULTIPURPOSE, sizeof(MfdsState* [10]), 0);
     (*object_curLevel_goToNextFuncAndClearTimer)(
         self->header.current_function, &self->header.function_info_ID
     );
@@ -64,7 +64,7 @@ void StageSelect_loadAssetsFile(StageSelect* self) {
 
 void StageSelect_initGraphics(StageSelect* self) {
     Model* bg_model;
-    mfds_state** textbox_array = self->textboxes;
+    MfdsState** textbox_array = self->textboxes;
 
     if (self->assets_file_end == NULL)
         return;
@@ -87,7 +87,9 @@ void StageSelect_initGraphics(StageSelect* self) {
 
     for (self->text_ID = 0; self->text_ID < STAGE_SELECT_NUM_OPTIONS + 1; self->text_ID++) {
         textbox_array[self->text_ID] = (*textbox_create)(
-            self, common_camera_8009B444, (OPEN_TEXTBOX | MFDS_FLAG_400000 | FAST_TEXT_TRANSITION)
+            self,
+            common_camera_8009B444,
+            (MFDS_FLAG_OPEN_TEXTBOX | MFDS_FLAG_400000 | MFDS_FLAG_FAST_TEXT_TRANSITION)
         );
 
         if (textbox_array[self->text_ID] == 0)
@@ -116,14 +118,14 @@ void StageSelect_initGraphics(StageSelect* self) {
 }
 
 void StageSelect_initLens(StageSelect* self) {
-    window_work* lens;
-    mfds_state** textbox_array = self->textboxes;
+    WindowWork* lens;
+    MfdsState** textbox_array = self->textboxes;
 
     if ((*Fade_IsFading)() != FALSE)
         return;
 
     for (self->text_ID = 0; self->text_ID < STAGE_SELECT_NUM_OPTIONS + 1; self->text_ID++) {
-        if (BITS_NOT_HAS(textbox_array[self->text_ID]->flags, TEXT_IS_PARSED)) {
+        if (BITS_NOT_HAS(textbox_array[self->text_ID]->flags, MFDS_FLAG_TEXT_IS_PARSED)) {
             return;
         }
     }
@@ -140,7 +142,7 @@ void StageSelect_initLens(StageSelect* self) {
         90.0f
     );
     if ((lens = self->lens) != NULL) {
-        (*windowWork_setParams)(lens, 0, 7, 5, 1.6f, 1.0f, NULL);
+        (*WindowWork_setParams)(lens, 0, 7, 5, 1.6f, 1.0f, NULL);
         BITS_UNSET(lens->flags, WINDOW_CLOSING);
         BITS_SET(lens->flags, WINDOW_OPENING);
     }
@@ -150,7 +152,7 @@ void StageSelect_initLens(StageSelect* self) {
 }
 
 void StageSelect_moveLens(StageSelect* self) {
-    window_work* lens = self->lens;
+    WindowWork* lens = self->lens;
     s32 current_option;
     s8 previous_option;
 
@@ -192,7 +194,7 @@ void StageSelect_moveLens(StageSelect* self) {
 
 void StageSelect_warpToStage(StageSelect* self) {
     s16 i, j;
-    window_work* lens = self->lens;
+    WindowWork* lens = self->lens;
 
     if (!(BITS_MASK(lens->flags, WINDOW_FLAG_4000 | WINDOW_FLAG_8000) >> 0xE))
         return;
@@ -323,14 +325,14 @@ void StageSelect_warpToStage(StageSelect* self) {
 }
 
 void StageSelect_closeTextboxes(StageSelect* self) {
-    mfds_state** textbox_array = self->textboxes;
+    MfdsState** textbox_array = self->textboxes;
 
     // TODO: (WINDOW_CLOSING | WINDOW_OPENING) represents flag 0x300.
     // However, we don't know if that specific flag represents something
     // not related to opening / closing the lens
     BITS_SET(self->lens->flags, WINDOW_CLOSING | WINDOW_OPENING);
     for (self->text_ID = 0; self->text_ID < STAGE_SELECT_NUM_OPTIONS + 1; self->text_ID++) {
-        BITS_SET(textbox_array[self->text_ID]->flags, CLOSE_TEXTBOX);
+        BITS_SET(textbox_array[self->text_ID]->flags, MFDS_FLAG_CLOSE_TEXTBOX);
     }
     (*heap_free)(HEAP_KIND_MENU_DATA);
 }

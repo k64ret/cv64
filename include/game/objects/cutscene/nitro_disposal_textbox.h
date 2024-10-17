@@ -23,7 +23,7 @@ typedef struct cv64_ovl_nitrodisposaltxt {
     u8 field_0x54[4];
     f32 trigger_size_X;
     f32 trigger_size_Z;
-    mfds_state* message_textbox;
+    MfdsState* message_textbox;
     Vec3f position;
     ActorConfig* settings;
 } cv64_ovl_nitrodisposaltxt_t;
@@ -41,7 +41,7 @@ typedef enum cv64_ovl_nitrodisposaltxt_func_id {
     NITRO_DISPOSAL_TEXTBOX_IDLE,
     NITRO_DISPOSAL_TEXTBOX_PREPARE_MESSAGE,
     NITRO_DISPOSAL_TEXTBOX_SELECT_OPTION,
-    NITRO_DISPOSAL_TEXTBOX_CLOSE_TEXTBOX,
+    NITRO_DISPOSAL_TEXTBOX_MFDS_FLAG_CLOSE_TEXTBOX,
     NITRO_DISPOSAL_TEXTBOX_DESTROY
 } cv64_ovl_nitrodisposaltxt_func_id_t;
 

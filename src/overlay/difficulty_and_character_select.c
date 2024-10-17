@@ -41,7 +41,7 @@ void characterSelect_entrypoint(characterSelect* self) {
 
 void difficultySelect_loop(characterSelect* self) {
     miniScroll* mini_scroll;
-    mfds_state* difficulty_text;
+    MfdsState* difficulty_text;
     characterSelectInner* inner = &self->inner;
     u8 option;
 
@@ -73,11 +73,13 @@ void difficultySelect_loop(characterSelect* self) {
         // Draw the Easy and Normal text strings
         case CREATE_TEXT_NON_HARD_MODE:
             difficulty_text = (*textbox_create)(
-                self, common_camera_HUD, (OPEN_TEXTBOX | MFDS_FLAG_400000 | FAST_TEXT_TRANSITION)
+                self,
+                common_camera_HUD,
+                (MFDS_FLAG_OPEN_TEXTBOX | MFDS_FLAG_400000 | MFDS_FLAG_FAST_TEXT_TRANSITION)
             );
             inner->difficulty_text = difficulty_text;
             (*textbox_setDimensions)(inner->difficulty_text, 5, 128, 0, 0);
-            (*textbox_setScaleAndSomethingElse)(
+            (*textbox_setScaleParameters)(
                 inner->difficulty_text, 2, 2, 81.0f, 1.0f, 1.0f, FALSE, FALSE
             );
             (*textbox_setMessagePtr)(
@@ -94,11 +96,13 @@ void difficultySelect_loop(characterSelect* self) {
         // Draw the Easy, Normal and Hard text strings
         case CREATE_TEXT_HARD_MODE:
             difficulty_text = (*textbox_create)(
-                self, common_camera_HUD, (OPEN_TEXTBOX | MFDS_FLAG_400000 | FAST_TEXT_TRANSITION)
+                self,
+                common_camera_HUD,
+                (MFDS_FLAG_OPEN_TEXTBOX | MFDS_FLAG_400000 | MFDS_FLAG_FAST_TEXT_TRANSITION)
             );
             inner->difficulty_text = difficulty_text;
             (*textbox_setDimensions)(inner->difficulty_text, 5, 128, 0, 0);
-            (*textbox_setScaleAndSomethingElse)(
+            (*textbox_setScaleParameters)(
                 inner->difficulty_text, 2, 2, 81.0f, 1.0f, 1.0f, FALSE, FALSE
             );
             (*textbox_setMessagePtr)(
@@ -150,7 +154,7 @@ void difficultySelect_loop(characterSelect* self) {
             (*miniScroll_setFlags)(
                 inner->mini_scroll, MINISCROLL_FLAG_00000004 | MINISCROLL_FLAG_00000001
             );
-            BITS_SET(inner->difficulty_text->flags, CLOSE_TEXTBOX);
+            BITS_SET(inner->difficulty_text->flags, MFDS_FLAG_CLOSE_TEXTBOX);
             inner->difficulty_select_state = CREATE_SCROLL;
             inner->difficulty_text         = NULL;
             inner->mini_scroll             = NULL;
@@ -173,7 +177,7 @@ void characterSelect_areStructsCreated(characterSelect* self) {
 // Officially called `pc_select_init`
 void characterSelect_init(characterSelect* self) {
     Model* character_portrait;
-    mfds_state* character_name;
+    MfdsState* character_name;
     s32 temp1;
     scroll_state* scroll_state;
     s32 temp2;
@@ -250,8 +254,9 @@ void characterSelect_init(characterSelect* self) {
     character_name = (*textbox_create)(
         self,
         work->scroll_elements_light,
-        OPEN_TEXTBOX | MFDS_FLAG_400000 | FAST_TEXT_TRANSITION | ALLOC_TEXTBOX_IN_MENU_DATA_HEAP |
-            MFDS_FLAG_00000008 | MENU_TEXT_ID_PRINTS_MENU_STRING
+        MFDS_FLAG_OPEN_TEXTBOX | MFDS_FLAG_400000 | MFDS_FLAG_FAST_TEXT_TRANSITION |
+            MFDS_FLAG_ALLOC_TEXTBOX_IN_MENU_DATA_HEAP | MFDS_FLAG_00000008 |
+            MFDS_FLAG_MENU_TEXT_ID_PRINTS_MENU_STRING
     );
     if (character_name == NULL) {
         self->header.destroy(self);
@@ -260,17 +265,18 @@ void characterSelect_init(characterSelect* self) {
     self->inner.character_names[REINHARDT] = character_name;
     (*textbox_setPos)(character_name, 70, 170, 1);
     (*textbox_setDimensions)(character_name, 1, 100, 0, 0);
-    character_name->palette      = TEXT_COLOR_BEIGE;
-    character_name->menu_text_ID = MENU_TEXT_REINHARDT;
+    character_name->palette                       = TEXT_COLOR_BEIGE;
+    character_name->misc_text_IDs[0].menu_text_ID = MENU_TEXT_REINHARDT;
     (*textbox_setMessagePtr)(character_name, NULL, NULL, 0);
-    (*textbox_setScaleAndSomethingElse)(character_name, 2, 2, 67.0f, 1.0f, 1.0f, TRUE, TRUE);
+    (*textbox_setScaleParameters)(character_name, 2, 2, 67.0f, 1.0f, 1.0f, TRUE, TRUE);
 
     // Create Carrie's name text string
     character_name = (*textbox_create)(
         self,
         work->scroll_elements_light,
-        OPEN_TEXTBOX | MFDS_FLAG_400000 | FAST_TEXT_TRANSITION | ALLOC_TEXTBOX_IN_MENU_DATA_HEAP |
-            MFDS_FLAG_00000008 | MENU_TEXT_ID_PRINTS_MENU_STRING
+        MFDS_FLAG_OPEN_TEXTBOX | MFDS_FLAG_400000 | MFDS_FLAG_FAST_TEXT_TRANSITION |
+            MFDS_FLAG_ALLOC_TEXTBOX_IN_MENU_DATA_HEAP | MFDS_FLAG_00000008 |
+            MFDS_FLAG_MENU_TEXT_ID_PRINTS_MENU_STRING
     );
     if (character_name == NULL) {
         self->header.destroy(self);
@@ -279,10 +285,10 @@ void characterSelect_init(characterSelect* self) {
     self->inner.character_names[CARRIE] = character_name;
     (*textbox_setPos)(character_name, 185, 170, 1);
     (*textbox_setDimensions)(character_name, 1, 100, 0, 0);
-    character_name->palette      = TEXT_COLOR_BEIGE;
-    character_name->menu_text_ID = MENU_TEXT_CARRIE;
+    character_name->palette                       = TEXT_COLOR_BEIGE;
+    character_name->misc_text_IDs[0].menu_text_ID = MENU_TEXT_CARRIE;
     (*textbox_setMessagePtr)(character_name, NULL, NULL, 0);
-    (*textbox_setScaleAndSomethingElse)(character_name, 2, 2, 67.0f, 1.0f, 1.0f, TRUE, TRUE);
+    (*textbox_setScaleParameters)(character_name, 2, 2, 67.0f, 1.0f, 1.0f, TRUE, TRUE);
     (*object_curLevel_goToNextFuncAndClearTimer)(
         self->header.current_function, &self->header.function_info_ID
     );
@@ -305,7 +311,7 @@ void characterSelect_openScroll(characterSelect* self) {
 void characterSelect_createLens(characterSelect* self) {
     pc_select_work* work       = self->inner.work;
     scroll_state* scroll_state = self->inner.scrollState;
-    window_work* lens;
+    WindowWork* lens;
 
     if ((s8) work->lens_not_moving) {
         /**
@@ -342,7 +348,7 @@ void characterSelect_createLens(characterSelect* self) {
                 30.0f
             );
             lens = self->inner.lens;
-            (*windowWork_setParams)(lens, WINDOW_FLAG_200000, 9, 9, 6.0f, 3.299999952f, NULL);
+            (*WindowWork_setParams)(lens, WINDOW_FLAG_200000, 9, 9, 6.0f, 3.299999952f, NULL);
         }
         // Open the lens
         BITS_UNSET(lens->flags, WINDOW_CLOSING);
@@ -360,7 +366,7 @@ void characterSelect_createLens(characterSelect* self) {
 void characterSelect_selectOption(characterSelect* self) {
     Model* character_portrait;
     characterSelect* self_temp;
-    window_work* lens;
+    WindowWork* lens;
     mark_work* mark;
     characterSelectInner* inner;
     pc_select_work* work;
@@ -525,8 +531,8 @@ void characterSelect_selectOption(characterSelect* self) {
 void characterSelect_optionSelected(characterSelect* self) {
     pc_select_work* work       = self->inner.work;
     scroll_state* scroll_state = self->inner.scrollState;
-    window_work* lens_temp1    = self->inner.lens;
-    window_work* lens_temp2    = lens_temp1;
+    WindowWork* lens_temp1     = self->inner.lens;
+    WindowWork* lens_temp2     = lens_temp1;
     mark_work* mark            = self->inner.mark;
 
     if ((s8) work->lens_not_moving == FALSE) {
@@ -553,10 +559,10 @@ void characterSelect_optionSelected(characterSelect* self) {
             }
             BITS_UNSET(mark->flags, MARK_FLAG_DISPLAY);
             BITS_SET(mark->flags, MARK_FLAG_DESTROY);
-            BITS_SET(self->inner.character_names[REINHARDT]->flags, CLOSE_TEXTBOX);
+            BITS_SET(self->inner.character_names[REINHARDT]->flags, MFDS_FLAG_CLOSE_TEXTBOX);
             if (1) {
             }
-            BITS_SET(self->inner.character_names[CARRIE]->flags, CLOSE_TEXTBOX);
+            BITS_SET(self->inner.character_names[CARRIE]->flags, MFDS_FLAG_CLOSE_TEXTBOX);
             scroll_state->flags     = SCROLL_STATE_FLAG_HIDE;
             self->inner.scrollState = NULL;
             work->player_character  = work->current_character_option + 1;

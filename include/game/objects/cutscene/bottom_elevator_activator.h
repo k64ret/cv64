@@ -30,7 +30,7 @@ typedef struct cv64_ovl_elevatortxt {
     u8 field_0x44[20];
     f32 trigger_size_X;
     f32 trigger_size_Z;
-    mfds_state* message_textbox;
+    MfdsState* message_textbox;
     Vec3f position;
     ActorConfig* settings;
 } cv64_ovl_elevatortxt_t;
@@ -48,7 +48,7 @@ typedef enum cv64_ovl_elevatortxt_func_id {
     BOTTOM_ELEVATOR_ACTIVATOR_IDLE,
     BOTTOM_ELEVATOR_ACTIVATOR_PREPARE_MESSAGE,
     BOTTOM_ELEVATOR_ACTIVATOR_SELECT_OPTION,
-    BOTTOM_ELEVATOR_ACTIVATOR_CLOSE_TEXTBOX,
+    BOTTOM_ELEVATOR_ACTIVATOR_MFDS_FLAG_CLOSE_TEXTBOX,
     BOTTOM_ELEVATOR_ACTIVATOR_DESTROY
 } cv64_ovl_elevatortxt_func_id_t;
 

@@ -7,7 +7,7 @@
 typedef struct cv64_ovl_easyending {
     ObjectHeader header;
     u8 field_0x20[28];
-    mfds_state* ending_textbox;
+    MfdsState* ending_textbox;
     u32 active_time;
     u8 field_0x44[48];
 } cv64_ovl_easyending_t;

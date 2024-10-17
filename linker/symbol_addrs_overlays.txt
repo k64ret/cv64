@@ -95,10 +95,10 @@ cv64_ovl_creditsmgr_funcs = 0x0F000230; // segment:ni_ovl_credits_manager size:0
 
 // src/overlay/textbox_advance_arrow.c =========================================
 // .text
-textboxAdvanceArrow_entrypoint     = 0x0F000000; // type:func segment:ni_ovl_textbox_advance_arrow
-textboxAdvanceArrow_init           = 0x0F000070; // type:func segment:ni_ovl_textbox_advance_arrow
-textboxAdvanceArrow_loop           = 0x0F000190; // type:func segment:ni_ovl_textbox_advance_arrow
-textboxAdvanceArrow_destroy        = 0x0F00037C; // type:func segment:ni_ovl_textbox_advance_arrow
+TextboxAdvanceArrow_entrypoint     = 0x0F000000; // type:func segment:ni_ovl_textbox_advance_arrow
+TextboxAdvanceArrow_init           = 0x0F000070; // type:func segment:ni_ovl_textbox_advance_arrow
+TextboxAdvanceArrow_loop           = 0x0F000190; // type:func segment:ni_ovl_textbox_advance_arrow
+TextboxAdvanceArrow_destroy        = 0x0F00037C; // type:func segment:ni_ovl_textbox_advance_arrow
 // .data
 cv64_ovl_textboxadvancearrow_funcs = 0x0F0003A0; // segment:ni_ovl_textbox_advance_arrow size:0x0C
 // End of src/overlay/textbox_advance_arrow.c ==================================
