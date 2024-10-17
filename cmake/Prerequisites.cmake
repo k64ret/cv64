@@ -21,12 +21,15 @@ if(Python_FOUND)
 
   # Run Splat
   execute_process(
-    COMMAND ${Python_EXECUTABLE} -m splat split ${SPLAT_CONFIG}
+    COMMAND ${Python_EXECUTABLE} -m splat split --verbose ${SPLAT_CONFIG}
     OUTPUT_FILE ${CMAKE_BINARY_DIR}/splat.log
     WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
 
   # Run Torch Extract assets as source code files
-  execute_process(COMMAND ${TORCH} code ${BASEROM_UNCOMPRESSED} -v WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
+  execute_process(
+    COMMAND ${TORCH} code ${BASEROM_UNCOMPRESSED} -v
+    OUTPUT_FILE ${CMAKE_BINARY_DIR}/torch.log
+    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
 
   # Extract header files
   execute_process(COMMAND ${TORCH} header ${BASEROM_UNCOMPRESSED} WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
