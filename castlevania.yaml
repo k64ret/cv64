@@ -1030,7 +1030,7 @@ segments:
       - [0x006E7F20, data, overlay/map/kettou_tou]
       - [0x006E8550, rodata, overlay/map/kettou_tou]
 
-  - name: TURO_TOKEITOU # Clock Tower
+  - name: TURO_TOKEITOU # Castle Keep (Exterior)
     type: code
     start: 0x006E86B0
     vram: 0x8018EB10
@@ -1043,7 +1043,7 @@ segments:
       - [0x006EA460, rodata, overlay/map/6E86B0] # Not sure if this rodata belongs to the first/second translation unit
       # - [0x006EA460, rodata, overlay/map/6E96D0]
 
-  - name: TENSHU # Castle Tower
+  - name: TENSHU # Castle Keep
     type: code
     start: 0x006EA480
     vram: 0x8018EB10
@@ -1053,7 +1053,7 @@ segments:
       - [0x006EBBD0, data, overlay/map/tenshu]
       - [0x006EBCE0, rodata, overlay/map/tenshu]
 
-  - name: TOKEITOU_NAI # Ending Dummy
+  - name: TOKEITOU_NAI # Clock Tower
     type: code
     start: 0x006EBD90
     vram: 0x8018EB10
@@ -1093,7 +1093,7 @@ segments:
       - [0x006F1B00, data, overlay/map/bekkan_boss]
       - [0x006F1B40, rodata, overlay/map/bekkan_boss]
 
-  - name: TOU_TURO # Tower Passage
+  - name: TOU_TURO # Room of Clocks
     type: code
     start: 0x006F1B80
     vram: 0x8018EB10
