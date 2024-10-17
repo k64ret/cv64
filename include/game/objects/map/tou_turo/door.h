@@ -15,7 +15,7 @@ extern const u32 TOUTURO_DOOR_EXIT_DL;
 extern const u32 TOUTURO_DOOR_ENTRANCE_DL;
 
 // ID: 0x1224
-// Real name: P27TOBIRA
+// Real name: `P27TOBIRA`
 typedef struct cv64_ovl_touturo_door {
     ObjectHeader header;
     u8 padding1[4];

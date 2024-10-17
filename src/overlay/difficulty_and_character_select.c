@@ -174,7 +174,7 @@ void characterSelect_areStructsCreated(characterSelect* self) {
     }
 }
 
-// Officially called `pc_select_init`
+// Real name: `pc_select_init`
 void characterSelect_init(characterSelect* self) {
     Model* character_portrait;
     MfdsState* character_name;

@@ -30,7 +30,7 @@
 /**
  * Common menu text IDs
  *
- * Used in the `menu_text_ID` variable from `MfdsState`
+ * Used in the `menu_text_ID` variable from `MfdsStateMiscTextIds`
  */
 #define MENU_TEXT_KEY_CONFIG  1
 #define MENU_TEXT_SOUND       2
@@ -192,7 +192,7 @@ typedef struct MfdsHeightWidthParams {
 typedef struct MfdsState {
     u32 flags;
     Camera* display_camera;
-    u16* text; // Real name: "str1"
+    u16* text; // Real name: `str1`
     u16* item_amount_text;
     MfdsWork* mfds_work;
     Vec2 position;
@@ -213,7 +213,7 @@ typedef struct MfdsState {
     u8 display_time;
     /**
      * @note The 11th entry of this array appears to be the number of vertical and horizontal
-     *       vertices of the model that encapsulates the text's texture
+     *       vertices of the quadrilateral that encapsulates the text's texture.
      */
     MfdsHeightWidthParams height_and_width_per_line[11];
     u8 field_0x52;
