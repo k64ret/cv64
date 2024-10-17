@@ -1,3 +1,5 @@
+D_03000000_6F3BD0 = 0x03000000; // ignore:true
+
 // src/overlay/stage_select.c ==================================================
 // .text
 StageSelect_entrypoint              = 0x8012A520; // type:func segment:common

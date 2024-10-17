@@ -4,6 +4,6 @@
 [submodule "tools/decomp-permuter"]
 	path = tools/decomp-permuter
 	url = https://github.com/simonlindholm/decomp-permuter.git
-[submodule "tools/torch"]
-	path = tools/torch
-	url = https://github.com/HarbourMasters/Torch
+[submodule "tools/Torch"]
+	path = tools/Torch
+	url = https://github.com/HarbourMasters/Torch.git

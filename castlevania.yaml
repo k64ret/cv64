@@ -1117,10 +1117,12 @@ segments:
 
   # Compressed (Nisitenma-Ichigo) files
   - name: ni_6F3BD0
-    type: bin
+    type: code
     start: 0x006F3BD0
     vram: 0x03000000
     exclusive_ram_id: nisitenma_ichigo_assets_6F3BD0
+    subsegments:
+      - [0x006F3BD0, .data, assets/ni_6F3BD0/ni_6F3BD0]
 
   - name: ni_debug_font_texture         # Officially known as "ascii_seg"
     type: bin
