@@ -50,7 +50,7 @@ typedef struct cv64_object_hdr {
     s16 field_0x06;
     cv64_object_func_inf_t current_function[3];
     s16 function_info_ID;
-    void (*destroy)(void*); // Officially called "OBJ_destruct"
+    void (*destroy)(void*); // Real name: `OBJ_destruct`
     struct ObjectHeader* parent;
     struct ObjectHeader* next;
     struct ObjectHeader* child;

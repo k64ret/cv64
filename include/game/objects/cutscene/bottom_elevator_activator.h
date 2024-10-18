@@ -30,7 +30,7 @@ typedef struct cv64_ovl_elevatortxt {
     u8 field_0x44[20];
     f32 trigger_size_X;
     f32 trigger_size_Z;
-    mfds_state* message_textbox;
+    MfdsState* message_textbox;
     Vec3f position;
     ActorConfig* settings;
 } cv64_ovl_elevatortxt_t;

@@ -12,19 +12,33 @@ if(Python_FOUND)
 
   # Decompress baserom
   execute_process(
-    COMMAND ${Python_EXECUTABLE} ${DECOMPRESS} ${BASEROM} ${CMAKE_SOURCE_DIR}/baserom_uncompressed.z64
+    COMMAND ${Python_EXECUTABLE} ${DECOMPRESS} ${BASEROM} ${BASEROM_UNCOMPRESSED}
     OUTPUT_FILE ${CMAKE_BINARY_DIR}/decompress.log
     WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
 
+  # Build Torch
+  execute_process(COMMAND make -C ${TOOLS_DIR}/Torch type=release WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
+
   # Run Splat
   execute_process(
-    COMMAND ${Python_EXECUTABLE} -m splat split ${SPLAT_CONFIG}
+    COMMAND ${Python_EXECUTABLE} -m splat split --verbose ${SPLAT_CONFIG}
     OUTPUT_FILE ${CMAKE_BINARY_DIR}/splat.log
     WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
+
+  # Run Torch Extract assets as source code files
+  execute_process(
+    COMMAND ${TORCH} code ${BASEROM_UNCOMPRESSED} -v
+    OUTPUT_FILE ${CMAKE_BINARY_DIR}/torch.log
+    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
+
+  # Extract header files
+  execute_process(COMMAND ${TORCH} header ${BASEROM_UNCOMPRESSED} WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
+
+  # Extract some data into humanly-readable formats (such as image data to .png)
+  execute_process(COMMAND ${TORCH} modding export ${BASEROM_UNCOMPRESSED} WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
 endif()
 
 set(MIPS_BINUTILS_PREFIX mips-linux-gnu-)
-set(TOOLS_DIR ${CMAKE_SOURCE_DIR}/tools)
 
 # Install IDO compilers
 execute_process(COMMAND ${CMAKE_COMMAND} -P ${CMAKE_SOURCE_DIR}/cmake/IDO.cmake WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})

@@ -1,0 +1,71 @@
+:config:
+  segments:
+    - [0x03, 0x006F3BD0]
+  header:
+    code:
+    - '#include "assets/ni_6F3BD0.h"'
+    header:
+    - '#include <ultra64.h>'
+
+ni_6F3BD0_dl_1:
+  { type: GFX, offset: 0x03000000, symbol: ni_6F3BD0_dl_1 }
+
+ni_6F3BD0_dl_2:
+  { type: GFX, offset: 0x03000038, symbol: ni_6F3BD0_dl_2 }
+
+ni_6F3BD0_dl_3:
+  { type: GFX, offset: 0x03000060, symbol: ni_6F3BD0_dl_3 }
+
+ni_6F3BD0_dl_4:
+  { type: GFX, offset: 0x030000D0, symbol: ni_6F3BD0_dl_4 }
+
+ni_6F3BD0_dl_5:
+  { type: GFX, offset: 0x03000100, symbol: ni_6F3BD0_dl_5 }
+
+ni_6F3BD0_dl_6:
+  { type: GFX, offset: 0x03000128, symbol: ni_6F3BD0_dl_6 }
+
+ni_6F3BD0_dl_7:
+  { type: GFX, offset: 0x03000150, symbol: ni_6F3BD0_dl_7 }
+
+ni_6F3BD0_dl_8:
+  { type: GFX, offset: 0x03000178, symbol: ni_6F3BD0_dl_8 }
+
+ni_6F3BD0_dl_9:
+  { type: GFX, offset: 0x030001A0, symbol: ni_6F3BD0_dl_9 }
+
+ni_6F3BD0_dl_10:
+  { type: GFX, offset: 0x030001C8, symbol: ni_6F3BD0_dl_10 }
+
+ni_6F3BD0_dl_11:
+  { type: GFX, offset: 0x030001F0, symbol: ni_6F3BD0_dl_11 }
+
+ni_6F3BD0_dl_12:
+  { type: GFX, offset: 0x03000218, symbol: ni_6F3BD0_dl_12 }
+
+ni_6F3BD0_dl_13:
+  { type: GFX, offset: 0x03000240, symbol: ni_6F3BD0_dl_13 }
+
+ni_6F3BD0_dl_14:
+  { type: GFX, offset: 0x03000268, symbol: ni_6F3BD0_dl_14 }
+
+ni_6F3BD0_dl_15:
+  { type: GFX, offset: 0x03000290, symbol: ni_6F3BD0_dl_15 }
+
+ni_6F3BD0_dl_16:
+  { type: GFX, offset: 0x030002B8, symbol: ni_6F3BD0_dl_16 }
+
+ni_6F3BD0_dl_17:
+  { type: GFX, offset: 0x030002E0, symbol: ni_6F3BD0_dl_17 }
+
+ni_6F3BD0_dl_18:
+  { type: GFX, offset: 0x03000308, symbol: ni_6F3BD0_dl_18 }
+
+ni_6F3BD0_dl_19:
+  { type: GFX, offset: 0x03000330, symbol: ni_6F3BD0_dl_19 }
+
+ni_6F3BD0_dl_20:
+  { type: GFX, offset: 0x03000358, symbol: ni_6F3BD0_dl_20 }
+
+ni_6F3BD0_dl_21:
+  { type: GFX, offset: 0x03000380, symbol: ni_6F3BD0_dl_21 }

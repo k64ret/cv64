@@ -37,11 +37,13 @@ void cv64_ovl_easyending_entrypoint(cv64_ovl_easyending_t* self) {
 }
 
 void cv64_ovl_easyending_init(cv64_ovl_easyending_t* self) {
-    mfds_state* new_textbox;
+    MfdsState* new_textbox;
     u32 message_ptr;
 
     (*play_sound)(SD_CTRL_FADE_OUT_AUDIO_00A);
-    new_textbox = (*textbox_create)(self, common_camera_HUD, (OPEN_TEXTBOX | FAST_TEXT_TRANSITION));
+    new_textbox = (*textbox_create)(
+        self, common_camera_HUD, (MFDS_FLAG_OPEN_TEXTBOX | MFDS_FLAG_FAST_TEXT_TRANSITION)
+    );
     self->ending_textbox = new_textbox;
     (*textbox_setPos)(new_textbox, 30, 110, 1);
     (*textbox_setDimensions)(new_textbox, 6, 250, 0, 0);
@@ -70,7 +72,7 @@ void cv64_ovl_easyending_loop(cv64_ovl_easyending_t* self) {
 
     self->active_time++;
     if ((self->active_time > 120) && CONT_BTNS_PRESSED(CONT_0, A_BUTTON)) {
-        BITS_SET(*textbox_flags, CLOSE_TEXTBOX);
+        BITS_SET(*textbox_flags, MFDS_FLAG_CLOSE_TEXTBOX);
         sys.SaveStruct_gameplay.gold                                 = 0;
         sys.SaveStruct_gameplay.time_saved_counter                   = 0;
         sys.SaveStruct_gameplay.death_counter                        = 0;
@@ -122,11 +124,11 @@ void cv64_ovl_easyending_destroy(cv64_ovl_easyending_t* self) {
     self->active_time++;
     if (self->active_time > 30) {
         textbox_flags = self->ending_textbox->flags;
-        if (BITS_NOT_HAS(textbox_flags, MFDS_FLAG_20000000) &&
-            BITS_NOT_HAS(textbox_flags, CLOSE_LENS) &&
+        if (BITS_NOT_HAS(textbox_flags, MFDS_FLAG_OPEN_LENS) &&
+            BITS_NOT_HAS(textbox_flags, MFDS_FLAG_CLOSE_LENS) &&
             BITS_NOT_HAS(textbox_flags, MFDS_FLAG_2000000)) {
-            if (BITS_NOT_HAS(textbox_flags, TEXT_IS_PARSED)) {
-                self->ending_textbox->flags = textbox_flags | CLOSE_TEXTBOX;
+            if (BITS_NOT_HAS(textbox_flags, MFDS_FLAG_TEXT_IS_PARSED)) {
+                self->ending_textbox->flags = textbox_flags | MFDS_FLAG_CLOSE_TEXTBOX;
             }
             self->header.destroy(self);
         }

@@ -40,8 +40,8 @@ typedef struct HUDParams {
     s16 boss_bar_damage;
     u8 field_0x22[2];
     f32 boss_bar_damage_length;
-    mfds_state* gold_amount_textbox;
-    mfds_state* item_amount_textbox;
+    MfdsState* gold_amount_textbox;
+    MfdsState* item_amount_textbox;
     u8 field_0x30[4];
     u16* gold_amount_text;
     u16* item_amount_text;

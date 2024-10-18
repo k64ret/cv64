@@ -14,7 +14,7 @@ typedef struct {
     u8 field_0x42[2];
     s32 field_0x44;
     void* saveGameResults; // saveGameResults*
-    mfds_state* textbox;
+    MfdsState* textbox;
     u8 field_0x50[36];
 } saveGame;
 

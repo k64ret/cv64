@@ -1,0 +1,14 @@
+:config:
+  segments:
+    - [0x06, 0x007F9CA0]
+  header:
+    code:
+    - '#include "assets/ni_rosa_petals.h"'
+    header:
+    - '#include <ultra64.h>'
+
+rosa_petals_vtx:
+  { type: VTX, count: 8, offset: 0x06000000, symbol: rosa_petals_vtx }
+
+rosa_petals_dl:
+  { type: GFX, offset: 0x06000080, symbol: rosa_petals_dl }

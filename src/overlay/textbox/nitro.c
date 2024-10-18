@@ -94,7 +94,7 @@ void cv64_ovl_nitrotxt_idle(cv64_ovl_nitrotxt_t* self) {
 }
 
 void cv64_ovl_nitrotxt_prepare_msg(cv64_ovl_nitrotxt_t* self) {
-    mfds_state* message;
+    MfdsState* message;
 
     message = (*map_getMessageFromPool)(self->text_ID, self->message_display_time);
     if (message == NULL)
@@ -109,7 +109,7 @@ void cv64_ovl_nitrotxt_prepare_msg(cv64_ovl_nitrotxt_t* self) {
 }
 
 void cv64_ovl_nitrotxt_yes_no(cv64_ovl_nitrotxt_t* self) {
-    mfds_state* textbox = self->message_textbox;
+    MfdsState* textbox = self->message_textbox;
 
     if (self->text_ID == CASTLE_CENTER_3F_TAKE_NITRO) {
         switch (textbox->textbox_option) {
@@ -132,7 +132,7 @@ void cv64_ovl_nitrotxt_yes_no(cv64_ovl_nitrotxt_t* self) {
 }
 
 void cv64_ovl_nitrotxt_close(cv64_ovl_nitrotxt_t* self) {
-    mfds_state* message_textbox;
+    MfdsState* message_textbox;
 
     if (self->text_ID == CASTLE_CENTER_3F_NITRO_WARNING) {
         message_textbox = (*map_getMessageFromPool)(self->text_ID, 0);

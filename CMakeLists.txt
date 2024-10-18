@@ -2,11 +2,15 @@ cmake_minimum_required(VERSION 3.22)
 
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
 
+set(TOOLS_DIR ${CMAKE_SOURCE_DIR}/tools)
+
 set(TARGET castlevania)
 set(ELF ${CMAKE_BINARY_DIR}/${TARGET})
 set(ROM ${CMAKE_BINARY_DIR}/${TARGET}.z64)
 set(BASEROM ${CMAKE_SOURCE_DIR}/baserom.z64)
+set(BASEROM_UNCOMPRESSED ${CMAKE_SOURCE_DIR}/baserom_uncompressed.z64)
 set(SPLAT_CONFIG ${CMAKE_SOURCE_DIR}/${TARGET}.yaml)
+set(TORCH ${TOOLS_DIR}/Torch/cmake-build-release/torch)
 set(DECOMPRESS ${CMAKE_SOURCE_DIR}/tools/decompress.py)
 set(COMPRESS ${CMAKE_SOURCE_DIR}/tools/compress.py)
 
@@ -91,7 +95,8 @@ target_include_directories(
           $<$<COMPILE_LANGUAGE:C>:${CMAKE_SOURCE_DIR}/include
           ${CMAKE_SOURCE_DIR}/include/ultra64
           ${CMAKE_SOURCE_DIR}/include/game
-          ${CMAKE_SOURCE_DIR}/assets>)
+          ${CMAKE_SOURCE_DIR}/assets
+          ${CMAKE_SOURCE_DIR}/include/assets>)
 
 target_link_options(
   ${TARGET}

@@ -23,8 +23,8 @@ typedef enum cv64_ovl_librarypuzzledata_opt_id {
 } cv64_ovl_librarypuzzledata_opt_id_t;
 
 typedef struct cv64_ovl_librarypuzzledata {
-    mfds_state* options_textbox;
-    window_work* lens;
+    MfdsState* options_textbox;
+    WindowWork* lens;
     /**
      * Buffer that holds the 1, 2, 3, etc. text
      */
@@ -59,7 +59,7 @@ typedef struct cv64_ovl_librarypuzzletxt {
     u8 field_0x58[4];
     s16 trigger_size_X;
     s16 trigger_size_Z;
-    mfds_state* message_textbox;
+    MfdsState* message_textbox;
     Vec3f position;
     ActorConfig* settings;
 } cv64_ovl_librarypuzzletxt_t;

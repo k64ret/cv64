@@ -45,7 +45,7 @@ typedef struct ObjectHeader {
     cv64_object_func_inf_t current_function[3];
     s16 function_info_ID;
     /**
-     * Officially called "OBJ_destruct"
+     * Real name: `OBJ_destruct`
      */
     void (*destroy)(void*);
     struct ObjectHeader* parent;

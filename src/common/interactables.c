@@ -331,7 +331,7 @@ void Interactable_Main(Interactable* self) {
 
 void Interactable_InitCheck(Interactable* self) {
     InteractableConfig* settings = &interactables_settings[self->idx];
-    mfds_state* textbox;
+    MfdsState* textbox;
     contractMgr* contract;
 
     // If picking up an item...
@@ -426,7 +426,7 @@ void Interactable_SelectTextboxOption(Interactable* self) {
     if (interactables_settings[self->idx].type == ITEM_KIND_ITEM) {
         // If reading a White Jewel...
         if (interactables_settings[self->idx].item == ITEM_ID_WHITE_JEWEL) {
-            mfds_state* textbox = self->textbox;
+            MfdsState* textbox = self->textbox;
 
             switch (textbox->textbox_option) {
                 default:
@@ -459,7 +459,7 @@ void Interactable_SelectTextboxOption(Interactable* self) {
         if (BITS_HAS(
                 interactables_settings[self->idx].flags, TEXT_SPOT_DO_ACTION_AFTER_SELECTING_OPTION
             )) {
-            mfds_state* textbox = self->textbox;
+            MfdsState* textbox = self->textbox;
 
             switch (textbox->textbox_option) {
                 default:
@@ -547,7 +547,7 @@ void Interactable_StopCheck(Interactable* self) {
             // `item_addAmountToInventory` returns -1 if trying to add another Nitro or
             // Mandragora to the inventory, which in turn will cause `item_prepareTextbox` to
             // return -1, which is then put into `self->textbox`
-            if (self->textbox == (mfds_state*) -1) {
+            if (self->textbox == (MfdsState*) -1) {
                 Interactable_stopInteraction(self);
                 (*object_curLevel_goToFunc)(
                     self->header.current_function, &self->header.function_info_ID, INTERACTABLE_MAIN

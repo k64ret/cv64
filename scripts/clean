@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 
+# Remove uncompressed ROM
 rm -f baserom_uncompressed.z64
+
+# Remove extracted code and binary files
 rm -rf build
 rm -rf assets/nisitenma_ichigo
 rm -f assets/*.bin
@@ -9,3 +12,8 @@ rm -rf asm/common
 rm -rf asm/data
 rm -rf asm/overlay
 rm -f asm/*.s
+
+# Remove extracted assets
+rm -rf src/assets
+rm -rf include/assets
+rm -f torch.hash.yml

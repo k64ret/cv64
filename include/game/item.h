@@ -78,7 +78,7 @@ typedef enum cv64_item_id {
 extern s8 item_addAmountToInventory(s32 item, s32 amount);
 extern s8 item_removeAmountFromInventory(s32 item, s32 amount);
 extern s8 item_getAmountUntilMaxCapacity(s32 item);
-extern mfds_state* item_prepareTextbox(s32 item);
+extern MfdsState* item_prepareTextbox(s32 item);
 extern item_model_settings* itemModelSettings_getEntryFromList(s32 item);
 
 extern item_model_settings item_model_settings_list[NUM_ITEMS];

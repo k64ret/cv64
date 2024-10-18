@@ -55,7 +55,7 @@ void cv64_ovl_elevatortxt_idle(cv64_ovl_elevatortxt_t* self) {
 }
 
 void cv64_ovl_elevatortxt_prepare_msg(cv64_ovl_elevatortxt_t* self) {
-    mfds_state* message;
+    MfdsState* message;
 
     if (CHECK_EVENT_FLAGS(
             EVENT_FLAG_ID_CASTLE_CENTER_MAIN,
@@ -86,7 +86,7 @@ void cv64_ovl_elevatortxt_prepare_msg(cv64_ovl_elevatortxt_t* self) {
 }
 
 void cv64_ovl_elevatortxt_yes_no(cv64_ovl_elevatortxt_t* self) {
-    mfds_state* textbox = self->message_textbox;
+    MfdsState* textbox = self->message_textbox;
 
     if (self->state == BOTTOM_ELEVATOR_ACTIVATOR_STATE_ACTIVATE_ELEVATOR) {
         switch (textbox->textbox_option) {
@@ -111,7 +111,7 @@ void cv64_ovl_elevatortxt_yes_no(cv64_ovl_elevatortxt_t* self) {
 }
 
 void cv64_ovl_elevatortxt_close(cv64_ovl_elevatortxt_t* self) {
-    mfds_state* message;
+    MfdsState* message;
 
     if (self->state == BOTTOM_ELEVATOR_ACTIVATOR_STATE_ACTIVATE_ELEVATOR) {
         message = (*map_getMessageFromPool)(CASTLE_CENTER_1F_ELEVATOR_ACTIVATED, 0);
