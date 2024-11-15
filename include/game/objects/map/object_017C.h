@@ -3,6 +3,11 @@
 
 #include "actor.h"
 
+/**
+ * Variable 1: ID in the array associated to each map
+ *             where we can get the model's dlist address.
+ */
+
 // ID 0x017C
 typedef struct {
     ObjectHeader header;
