@@ -186,7 +186,7 @@ void characterSelect_init(characterSelect* self) {
 
     // Create Reinhardt's portrait
     character_portrait = (*Model_createAndSetChild)(
-        FIG_TYPE_0400 | FIG_TYPE_HUD_ELEMENT, work->scroll_elements_light
+        FIG_TYPE_ALLOW_TRANSPARENCY_CHANGE | FIG_TYPE_HUD_ELEMENT, work->scroll_elements_light
     );
     self->character_portraits[REINHARDT] = character_portrait;
     character_portrait->material_dlist   = &REINHARDT_PORTRAIT_MATERIAL_DL;
@@ -209,8 +209,9 @@ void characterSelect_init(characterSelect* self) {
     }
 
     // Create Carrie's portrait
-    character_portrait =
-        (*Model_createAndSetChild)(FIG_TYPE_0400 | FIG_TYPE_HUD_ELEMENT, character_portrait);
+    character_portrait = (*Model_createAndSetChild)(
+        FIG_TYPE_ALLOW_TRANSPARENCY_CHANGE | FIG_TYPE_HUD_ELEMENT, character_portrait
+    );
     self->character_portraits[CARRIE]  = character_portrait;
     character_portrait->material_dlist = &CARRIE_PORTRAIT_MATERIAL_DL;
     character_portrait->dlist = FIG_APPLY_VARIABLE_TEXTURE_AND_PALETTE((u32) &CARRIE_PORTRAIT_DL);

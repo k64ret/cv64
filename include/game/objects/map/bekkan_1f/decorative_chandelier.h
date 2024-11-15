@@ -17,9 +17,9 @@ void DecorativeChandelier_Entrypoint(DecorativeChandelier* self);
 void DecorativeChandelier_Init(DecorativeChandelier* self);
 void DecorativeChandelier_PauseTransformations(DecorativeChandelier* self);
 
-typedef void (*DecorativeChandelier_func_t)(DecorativeChandelier*);
+typedef void (*DecorativeChandelierFuncs)(DecorativeChandelier*);
 
-extern const u32 BEKKAN_1F_SQUARE_DL;
-extern const u32 BEKKAN_1F_SQUARE_DL;
+extern const u32 BEKKAN_1F_CHANDELIER_PENDANT_DL;
+extern const u32 BEKKAN_1F_CHANDELIER_DECORATION_DL;
 
 #endif

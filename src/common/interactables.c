@@ -91,8 +91,9 @@ void Interactable_Init(Interactable* self) {
 
     if (interactables_settings[self->idx].type == ITEM_KIND_ITEM) {
         // Create and setup the item model
-        item_model =
-            Model_createAndSetChild(FIG_TYPE_0400 | FIG_TYPE_HIERARCHY_NODE, map_lights[2]);
+        item_model = Model_createAndSetChild(
+            FIG_TYPE_ALLOW_TRANSPARENCY_CHANGE | FIG_TYPE_HIERARCHY_NODE, map_lights[2]
+        );
         self->model = item_model;
         if (settings != NULL) {
             Actor_SetPos(self, item_model);

@@ -90,7 +90,9 @@ void obj0172_init(object_0172* self) {
     s32 temp;
     Model* model;
 
-    model       = Model_createAndSetChild(FIG_TYPE_0400 | FIG_TYPE_HIERARCHY_NODE, map_lights[0]);
+    model = Model_createAndSetChild(
+        FIG_TYPE_ALLOW_TRANSPARENCY_CHANGE | FIG_TYPE_HIERARCHY_NODE, map_lights[0]
+    );
     self->model = model;
     if (model) {
     }
@@ -126,7 +128,9 @@ void commonMoon_init(commonMoon* self) {
     s32 temp2;
     s32 temp3;
 
-    model       = Model_createAndSetChild(FIG_TYPE_0400 | FIG_TYPE_HIERARCHY_NODE, map_lights[0]);
+    model = Model_createAndSetChild(
+        FIG_TYPE_ALLOW_TRANSPARENCY_CHANGE | FIG_TYPE_HIERARCHY_NODE, map_lights[0]
+    );
     self->model = model;
     if (model) {
     }
@@ -252,7 +256,9 @@ void obj8015C368_init(object_8015C368* self) {
     ActorConfig* settings = self->settings;
     Model* model;
 
-    model       = Model_createAndSetChild(FIG_TYPE_0400 | FIG_TYPE_HIERARCHY_NODE, map_lights[0]);
+    model = Model_createAndSetChild(
+        FIG_TYPE_ALLOW_TRANSPARENCY_CHANGE | FIG_TYPE_HIERARCHY_NODE, map_lights[0]
+    );
     self->model = model;
     if (model) {
     }

@@ -870,7 +870,7 @@ segments:
     exclusive_ram_id: ovl_map_objects
     subsegments:
       - [0x006C2F20, c, overlay/map/bekkan_1f]
-      - [0x006C32E0, data, overlay/map/bekkan_1f]
+      - [0x006C32E0, .data, overlay/map/bekkan_1f]
 
   - name: BEKKAN_2F # Annex 2F
     type: code

@@ -17,9 +17,8 @@ void Bekkan1FSquare_Init(Bekkan1FSquare* self);
 void Bekkan1FSquare_PauseTransformations(Bekkan1FSquare* self);
 void Bekkan1FSquare_Loop(Bekkan1FSquare* self);
 
-typedef void (*Bekkan1FSquare_func_t)(Bekkan1FSquare*);
+typedef void (*Bekkan1FSquareFuncs)(Bekkan1FSquare*);
 
-extern const u32 BEKKAN_1F_CHANDELIER_PENDANT_DL;
-extern const u32 BEKKAN_1F_CHANDELIER_DECORATION_DL;
+extern const u32 BEKKAN_1F_SQUARE_DL;
 
 #endif

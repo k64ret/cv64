@@ -13,14 +13,14 @@
 #define FIG_ARRAY_MAX 512
 
 // Types
-#define FIG_TYPE_STANDALONE         0x0004 // Assumption
-#define FIG_TYPE_MAP_PIECE          0x0008
-#define FIG_TYPE_HUD_ELEMENT        0x0010
-#define FIG_TYPE_HIERARCHY_NODE     0x0040 // "offset", according to leftover strings
-#define FIG_TYPE_LIGHT              0x0080
-#define FIG_TYPE_CAMERA_ORTHO       0x0100
-#define FIG_TYPE_CAMERA_PERSPECTIVE 0x0200
-#define FIG_TYPE_0400               0x0400
+#define FIG_TYPE_STANDALONE                0x0004 // Assumption
+#define FIG_TYPE_MAP_PIECE                 0x0008
+#define FIG_TYPE_HUD_ELEMENT               0x0010
+#define FIG_TYPE_HIERARCHY_NODE            0x0040 // "offset", according to leftover strings
+#define FIG_TYPE_LIGHT                     0x0080
+#define FIG_TYPE_CAMERA_ORTHO              0x0100
+#define FIG_TYPE_CAMERA_PERSPECTIVE        0x0200
+#define FIG_TYPE_ALLOW_TRANSPARENCY_CHANGE 0x0400
 #define FIG_TYPE_CAMERA_CUTSCENE                                                                   \
     0x0800 // Also assigned to the Player's mirrored copy in the Villa's mirror \
            // room

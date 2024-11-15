@@ -115,7 +115,7 @@ void cv64_ovl_touturo_door_entrance_check_event_flags(cv64_ovl_touturo_door_t* s
         )) {
         model->position.y = 6.0f;
         (*object_curLevel_goToFunc)(
-            self->header.current_function, &self->header.function_info_ID, TOU_TURO_StageProp_Loop
+            self->header.current_function, &self->header.function_info_ID, TOU_TURO_STAGE_PROP_LOOP
         );
     } else {
         SET_EVENT_FLAGS(EVENT_FLAG_ID_MISC_STAGES, EVENT_FLAG_MISC_STAGES_ENTERED_ROOM_OF_CLOCKS);
