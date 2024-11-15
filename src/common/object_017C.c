@@ -10,7 +10,6 @@
 #include "objects/map/object_017C.h"
 #include "system_work.h"
 
-/*
 // clang-format off
 
 u32 obj017C_dlists_shokei_tou[] = {
@@ -57,11 +56,6 @@ obj017CFuncs obj017C_functions[] = {
 };
 
 // clang-format on
-*/
-
-extern u32 obj017C_dlists_shokei_tou[];
-extern u32* obj017C_dlists[];
-extern obj017CFuncs obj017C_functions[];
 
 void obj017C_Entrypoint(object_017C* self) {
     ENTER(self, obj017C_functions);
