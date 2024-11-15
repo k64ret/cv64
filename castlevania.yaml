@@ -549,7 +549,7 @@ segments:
       - [0x000E3290, asm, common/lever]
       - [0x000E3820, asm, common/river_water]   # Contains code for the river water seen in Forest of Silence
       - [0x000E3CA0, asm]
-      - [0x000E41F0, asm]
+      - [0x000E41F0, c, common/object_017C]
       - [0x000E4350, asm]
       - [0x000E4DC0, asm, common/elevator]
       - [0x000E5980, asm]
@@ -588,6 +588,7 @@ segments:
       - [0x0010A660, data]
       - [0x0010A730, data]
       - [0x0010A800, data]
+      - [0x0010BAD0, data, common/object_017C]
       - [0x0010D8E0, data]
       - [0x0010D900, data]
       - [0x0010DC60, data]
