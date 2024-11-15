@@ -8,7 +8,7 @@
 #include "struct_78.h"
 #include <ultra64.h>
 
-typedef enum WindowFlags {
+typedef enum WindowFlag {
     WINDOW_FLAG_OPEN_RIGHT = BIT(0),
     WINDOW_FLAG_OPEN_LEFT  = BIT(1),
     WINDOW_FLAG_OPEN_DOWN  = BIT(2),
@@ -39,7 +39,7 @@ typedef enum WindowFlags {
      */
     WINDOW_FLAG_400000                   = BIT(22),
     WINDOW_FLAG_ENABLE_DISTORTION_EFFECT = BIT(23)
-} WindowFlags;
+} WindowFlag;
 
 typedef struct WindowWork {
     u32 flags;

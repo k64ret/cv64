@@ -16,7 +16,7 @@
 /**
  * Converts an ASCII char to a character in the game's custom
  * text format
-*/
+ */
 #define ASCII_TO_CV64(ascii) (ascii - 0x1E)
 
 // Special control characters
@@ -62,50 +62,73 @@
 #define TEXTBOX_OPTION_YES  1
 #define TEXTBOX_OPTION_NO   2
 
-typedef enum MfdsStateFlags {
+typedef enum MfdsStateFlag {
     MFDS_FLAG_MENU_TEXT_ID_PRINTS_ITEM        = BIT(0),
     MFDS_FLAG_MENU_TEXT_ID_PRINTS_MENU_STRING = BIT(1),
-    MFDS_FLAG_KEEP_SHOWING_LINE               = BIT(2
-    ), // This is used for the character names, so that they appear static while the text advances?
-    MFDS_FLAG_00000008                        = BIT(3),
-    MFDS_FLAG_PRINT_NUMBER                    = BIT(4),
-    MFDS_FLAG_OPTION_SELECTION                = BIT(5),
-    MFDS_FLAG_DISPLAY_LENS                    = BIT(6), // Aka enable WindowWork
+    /**
+     * This is used for the character names, so that they appear static while the text advances?
+     */
+    MFDS_FLAG_KEEP_SHOWING_LINE = BIT(2),
+    MFDS_FLAG_00000008          = BIT(3),
+    MFDS_FLAG_PRINT_NUMBER      = BIT(4),
+    MFDS_FLAG_OPTION_SELECTION  = BIT(5),
+    /**
+     * Aka enable WindowWork
+     */
+    MFDS_FLAG_DISPLAY_LENS                    = BIT(6),
     MFDS_FLAG_ALLOC_TEXTBOX_IN_MENU_DATA_HEAP = BIT(14),
     MFDS_FLAG_GAMEPLAYMENUMGR_TEXTBOX         = BIT(16),
-    MFDS_FLAG_LEAVE_SPACE_FOR_SELECTION_ARROW =
-        BIT(17), // Leaves a small space on the left of the text for the red selection arrow
-    MFDS_FLAG_ALLOW_TRANSPARENCY_CHANGE =
-        BIT(18),                      // Allows the text to change the `primitive_color`'s alpha
-    MFDS_FLAG_UPDATE_SCALE = BIT(19), // Allow updating the scale parameters from `MfdsState` struct
+    /**
+     * Leaves a small space on the left of the text for the red selection arrow
+     */
+    MFDS_FLAG_LEAVE_SPACE_FOR_SELECTION_ARROW = BIT(17),
+    /**
+     * Allows the text to change the `primitive_color`'s alpha
+     */
+    MFDS_FLAG_ALLOW_TRANSPARENCY_CHANGE = BIT(18),
+    /**
+     * Allow updating the scale parameters from `MfdsState` struct
+     */
+    MFDS_FLAG_UPDATE_SCALE         = BIT(19),
     MFDS_FLAG_SLOW_TEXT_TRANSITION = BIT(20),
     MFDS_FLAG_FAST_TEXT_TRANSITION = BIT(21),
     MFDS_FLAG_400000               = BIT(22),
-    MFDS_FLAG_INSTANT_TEXT_TRANSITION =
-        (BIT(21) | BIT(22)
-        ), // Fastest speed. It also auto skips the text red advance arrow. There doesn't seem to be a valid 0x400000 flag.
-    MFDS_FLAG_UPDATE_STRING  = BIT(24),
-    MFDS_FLAG_2000000        = BIT(25),
-    MFDS_FLAG_CLOSE_TEXTBOX  = BIT(26),
-    MFDS_FLAG_OPEN_TEXTBOX   = BIT(27),
-    MFDS_FLAG_CLOSE_LENS     = BIT(28),
-    MFDS_FLAG_OPEN_LENS      = BIT(29),
-    MFDS_FLAG_TEXT_IS_PARSED = BIT(30), // The text is completely processed
+    /**
+     * Fastest speed. It also auto skips the text red advance arrow. There doesn't seem to be a
+     * valid 0x400000 flag.
+     */
+    MFDS_FLAG_INSTANT_TEXT_TRANSITION = (BIT(21) | BIT(22)),
+    MFDS_FLAG_UPDATE_STRING           = BIT(24),
+    MFDS_FLAG_2000000                 = BIT(25),
+    MFDS_FLAG_CLOSE_TEXTBOX           = BIT(26),
+    MFDS_FLAG_OPEN_TEXTBOX            = BIT(27),
+    MFDS_FLAG_CLOSE_LENS              = BIT(28),
+    MFDS_FLAG_OPEN_LENS               = BIT(29),
+    /**
+     * The text is completely processed
+     */
+    MFDS_FLAG_TEXT_IS_PARSED = BIT(30),
     MFDS_FLAG_HIDE_TEXTBOX   = BIT(31)
-} MfdsStateFlags;
+} MfdsStateFlag;
 
-typedef enum MfdsWorkFlags {
+typedef enum MfdsWorkFlag {
     MFDS_WORK_FLAG_TEXT_SHOULD_SCROLL = BIT(0)
-} MfdsWorkFlags;
+} MfdsWorkFlag;
 
-typedef enum MfdsStateNumberVisualFlags {
-    NUMBER_VISUAL_FLAG_PRINT_IN_HEX = BIT(0), // Print number in hexadecimal. Unused.
+typedef enum MfdsStateNumberVisualFlag {
+    /**
+     * Print number in hexadecimal. Unused.
+     */
+    NUMBER_VISUAL_FLAG_PRINT_IN_HEX                           = BIT(0),
     NUMBER_VISUAL_FLAG_PRINT_PLUS_SYMBOL_FOR_POSITIVE_NUMBERS = BIT(1),
     NUMBER_VISUAL_FLAG_ADD_LEADING_ZEROES                     = BIT(2),
     NUMBER_VISUAL_FLAG_ADD_NEW_LINE                           = BIT(3),
     NUMBER_VISUAL_FLAG_USE_GOLD_JEWEL_FONT                    = BIT(4),
-    NUMBER_VISUAL_FLAG_ADD_G_AFTER_NUMBER = BIT(5) // Used in Renon's Shop after the gold amount
-} MfdsStateNumberVisualFlags;
+    /**
+     * Used in Renon's Shop after the gold amount
+     */
+    NUMBER_VISUAL_FLAG_ADD_G_AFTER_NUMBER = BIT(5)
+} MfdsStateNumberVisualFlag;
 
 typedef struct MfdsColorAnimData {
     u16 color;
@@ -129,7 +152,10 @@ typedef struct MfdsWork {
     u8 field_0x04[2];
     s16 indentation;
     s16 field_0x08;
-    u8 scroll_timer; // Timer for when a line is scrolling up to view the rest of the text
+    /**
+     * Timer for when a line is scrolling up to view the rest of the text
+     */
+    u8 scroll_timer;
     u8 palette;
     u8 field_0x0C[2];
     s16 time_until_auto_advance_textbox;
@@ -169,8 +195,14 @@ typedef struct MfdsLtexBuffer {
 // Real name: `mfds_dl_size`
 typedef struct MfdsDlSize {
     u32 dlist_buffer_size;
-    u32 dlist_graphic_buffer_start_offset; // Offset within the current graphic buffer where the dlists will start
-    u32 vertices_graphic_buffer_start_offset; // Offset within the current graphic buffer where the vertices will start
+    /**
+     * Offset within the current graphic buffer where the dlists will start
+     */
+    u32 dlist_graphic_buffer_start_offset;
+    /**
+     * Offset within the current graphic buffer where the vertices will start
+     */
+    u32 vertices_graphic_buffer_start_offset;
 } MfdsDlSize;
 
 // Real name: `mfds_number_work`
@@ -179,8 +211,14 @@ typedef struct MfdsNumberWork {
 } MfdsNumberWork;
 
 typedef union MfdsStateMiscTextIds {
-    u8 menu_text_ID; // Used for displaying some menu-related strings
-    u8 item_ID;      // Used for displaying item names when picking them up. Real name: `item_no`
+    /**
+     * Used for displaying some menu-related strings
+     */
+    u8 menu_text_ID;
+    /**
+     * Used for displaying item names when picking them up. Real name: `item_no`
+     */
+    u8 item_ID;
 } MfdsStateMiscTextIds;
 
 typedef struct MfdsHeightWidthParams {
