@@ -70,7 +70,7 @@ extern void func_800010A0_1CA0();
 extern void func_8001248C_1308C();
 extern void func_8000C6D0();
 extern void updateGameSound();
-extern void figure_update();
+extern void Figure_Update();
 extern void drawFog();
 extern void func_80005658();
 extern u32 getMapEventFlagID(s16 stage_ID);

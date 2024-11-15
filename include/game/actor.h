@@ -32,12 +32,12 @@ typedef struct Actor {
     ActorConfig* settings;
 } Actor;
 
-extern void actor_model_set_pos(Actor* actor, Model* actor_model);
-extern void actor_model_set_pos_and_angle(Actor* actor, Model* actor_model);
+extern void Actor_SetPos(Actor* actor, Model* actor_model);
+extern void Actor_SetPosAndAngle(Actor* actor, Model* actor_model);
 extern s32 actor_playerOutsideActorSpawnRadius(
     Actor* actor, f32 actor_pos_X, f32 actor_pos_Y, f32 actor_pos_Z
 );
-extern void func_801578FC(Actor* actor);
+extern void StageProp_Loop(Actor* actor);
 extern u32 checkIfOutsideEntityIsInsideMainEntityRadius(
     Model* player_model, Model* actor_model, f32 actor_spawn_radius, u32 axis
 );

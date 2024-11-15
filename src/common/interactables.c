@@ -95,7 +95,7 @@ void Interactable_Init(Interactable* self) {
             Model_createAndSetChild(FIG_TYPE_0400 | FIG_TYPE_HIERARCHY_NODE, map_lights[2]);
         self->model = item_model;
         if (settings != NULL) {
-            actor_model_set_pos(self, item_model);
+            Actor_SetPos(self, item_model);
             self->position.x = item_model->position.x;
             self->position.y = item_model->position.y;
             self->position.z = item_model->position.z;

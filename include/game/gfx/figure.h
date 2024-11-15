@@ -38,6 +38,10 @@
 #define FIG_FLAG_APPLY_BLEND_COLOR       0x0200
 #define FIG_FLAG_APPLY_ENVIRONMENT_COLOR 0x0400
 #define FIG_FLAG_APPLY_PRIMITIVE_COLOR   0x0800
+/**
+ * If this flag is set, all transformations, such as position, size, rotation, etc, changes won't be updated
+ */
+#define FIG_FLAG_PAUSE_TRANSFORMATIONS 0x4000
 
 // Misc. flags that aren't part of the set above
 #define FIG_VARIABLE_TEXTURE_AND_PALETTE              0x40000000

@@ -42,6 +42,21 @@ cv64_ovl_konamilogo_funcs           = 0x801D0160; // segment:konami_kcek_logos s
 // End of src/overlay/konami_kcek_logos.c ======================================
 
 
+// src/overlay/map/bekkan_1f.c =============================================
+// .text
+Bekkan1FSquare_Entrypoint      = 0x8018eb10; // type:func segment:BEKKAN_1F
+Bekkan1FSquare_Init = 0x8018eb80; // type:func segment:BEKKAN_1F
+Bekkan1FSquare_PauseTransformations            = 0x8018ec28; // type:func segment:BEKKAN_1F
+Bekkan1FSquare_Loop         = 0x8018ec7c; // type:func segment:BEKKAN_1F
+DecorativeChandelier_Entrypoint            = 0x8018ece4; // type:func segment:BEKKAN_1F
+DecorativeChandelier_Init        = 0x8018ed54; // type:func segment:BEKKAN_1F
+DecorativeChandelier_PauseTransformations    = 0x8018ee8c; // type:func segment:BEKKAN_1F
+// .data
+Bekkan1FSquare_functions           = 0x8018eed0; // segment:BEKKAN_1F size:0x0C
+DecorativeChandelier_functions           = 0x8018eedc; // segment:BEKKAN_1F size:0x10
+// End of src/overlay/map/bekkan_1f.c ======================================
+
+
 // src/overlay/map/rose.c ======================================================
 // .text
 cv64_ovl_rose_ventilator_entrypoint   = 0x8018EB10; // type:func segment:ROSE

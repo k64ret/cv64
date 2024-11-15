@@ -94,7 +94,7 @@ void obj0172_init(object_0172* self) {
     self->model = model;
     if (model) {
     }
-    actor_model_set_pos_and_angle(self, model);
+    Actor_SetPosAndAngle(self, model);
     model->assets_file = MAP_ASSETS_FILE_ID;
     model->dlist       = obj0172_dlists[sys.SaveStruct_gameplay.map];
     BITS_SET(model->flags, FIG_FLAG_APPLY_PRIMITIVE_COLOR);
@@ -130,7 +130,7 @@ void commonMoon_init(commonMoon* self) {
     self->model = model;
     if (model) {
     }
-    actor_model_set_pos_and_angle(self, model);
+    Actor_SetPosAndAngle(self, model);
     model->assets_file = MAP_ASSETS_FILE_ID;
     model->dlist       = commonMoon_dlists[sys.SaveStruct_gameplay.map];
     BITS_SET(model->flags, FIG_FLAG_APPLY_PRIMITIVE_COLOR);
@@ -256,7 +256,7 @@ void obj8015C368_init(object_8015C368* self) {
     self->model = model;
     if (model) {
     }
-    actor_model_set_pos_and_angle(self, model);
+    Actor_SetPosAndAngle(self, model);
     model->assets_file = MAP_ASSETS_FILE_ID;
     model->dlist = obj8015C368_dlists[sys.SaveStruct_gameplay.map][settings->variable_1 & 0xFF];
     BITS_SET(model->flags, FIG_FLAG_APPLY_PRIMITIVE_COLOR);

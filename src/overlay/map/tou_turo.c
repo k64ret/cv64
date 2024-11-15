@@ -24,13 +24,13 @@ extern cv64_ovl_touturo_door_func_t cv64_ovl_touturo_door_funcs[];
 extern const u32 cv64_ovl_touturo_door_dlists[];
 
 // cv64_ovl_touturo_door_exit_func_t cv64_ovl_touturo_door_exit_funcs[] = {
-//     cv64_ovl_touturo_door_exit_check_event_flags, func_801578FC};
+//     cv64_ovl_touturo_door_exit_check_event_flags, StageProp_Loop};
 extern cv64_ovl_touturo_door_exit_func_t cv64_ovl_touturo_door_exit_funcs[];
 
 // cv64_ovl_touturo_door_entrance_func_t cv64_ovl_touturo_door_entrance_funcs[]
 // = {
 //     cv64_ovl_touturo_door_entrance_check_event_flags,
-//     cv64_ovl_touturo_door_entrance_close_door, func_801578FC};
+//     cv64_ovl_touturo_door_entrance_close_door, StageProp_Loop};
 extern cv64_ovl_touturo_door_entrance_func_t cv64_ovl_touturo_door_entrance_funcs[];
 
 const char cv64_ovl_touturo_unused_str[] = "ERROR P27TOBIRA : EFFECT SPAWN ERROR\n";
@@ -52,7 +52,7 @@ void cv64_ovl_touturo_door_init(cv64_ovl_touturo_door_t* self) {
     if (model) {
     } // Needed for matching
 
-    actor_model_set_pos_and_angle(self, model);
+    Actor_SetPosAndAngle(self, model);
     BITS_SET(model->flags, FIG_FLAG_APPLY_PRIMITIVE_COLOR | FIG_FLAG_APPLY_FOG_COLOR);
 
     model->assets_file = MAP_ASSETS_FILE_ID;
@@ -115,7 +115,7 @@ void cv64_ovl_touturo_door_entrance_check_event_flags(cv64_ovl_touturo_door_t* s
         )) {
         model->position.y = 6.0f;
         (*object_curLevel_goToFunc)(
-            self->header.current_function, &self->header.function_info_ID, TOU_TURO_FUNC_801578FC
+            self->header.current_function, &self->header.function_info_ID, TOU_TURO_StageProp_Loop
         );
     } else {
         SET_EVENT_FLAGS(EVENT_FLAG_ID_MISC_STAGES, EVENT_FLAG_MISC_STAGES_ENTERED_ROOM_OF_CLOCKS);
