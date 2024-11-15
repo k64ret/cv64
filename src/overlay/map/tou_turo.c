@@ -14,8 +14,11 @@
 #include "gfx/light.h"
 #include <ultra64.h>
 
+// clang-format off
+
 cv64_ovl_touturo_door_func_t cv64_ovl_touturo_door_funcs[] = {
-    cv64_ovl_touturo_door_init, cv64_ovl_touturo_door_loop
+    cv64_ovl_touturo_door_init,
+    cv64_ovl_touturo_door_loop
 };
 
 // TODO: `extern const u32` for the dlists
@@ -25,7 +28,8 @@ u32 cv64_ovl_touturo_door_dlists[] = {
 };
 
 cv64_ovl_touturo_door_exit_func_t cv64_ovl_touturo_door_exit_funcs[] = {
-    cv64_ovl_touturo_door_exit_check_event_flags, StageProp_Loop
+    cv64_ovl_touturo_door_exit_check_event_flags,
+    StageProp_Loop
 };
 
 cv64_ovl_touturo_door_entrance_func_t cv64_ovl_touturo_door_entrance_funcs[] = {
@@ -33,6 +37,8 @@ cv64_ovl_touturo_door_entrance_func_t cv64_ovl_touturo_door_entrance_funcs[] = {
     cv64_ovl_touturo_door_entrance_close_door,
     StageProp_Loop
 };
+
+// clang-format on
 
 const char cv64_ovl_touturo_unused_str[] = "ERROR P27TOBIRA : EFFECT SPAWN ERROR\n";
 
