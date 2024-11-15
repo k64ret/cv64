@@ -1,4 +1,7 @@
-#include "cv64.h"
+#include "objects/map/bekkan_1f/decorative_chandelier.h"
+#include "objects/map/bekkan_1f/square.h"
+#include "gfx/figure.h"
+#include "system_work.h"
 
 // clang-format off
 

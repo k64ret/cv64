@@ -66,6 +66,8 @@ typedef struct Figure {
 
 extern FigureHeader* fig_allocate(s16 type);
 extern void clearAllFigs();
+extern void Figure_Update();
+extern void Figure_UpdateMatrices();
 extern void figure_showModelAndChildren(FigureHeader*, u16);
 extern void figure_hideSelfAndChildren(FigureHeader*, u16);
 extern FigureHeader* figure_setChild(FigureHeader* new_child, FigureHeader* self);
