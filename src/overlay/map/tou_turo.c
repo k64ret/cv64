@@ -14,24 +14,25 @@
 #include "gfx/light.h"
 #include <ultra64.h>
 
-// cv64_ovl_touturo_door_func_t cv64_ovl_touturo_door_funcs[] =
-// {cv64_ovl_touturo_door_init,
-//                                                       cv64_ovl_touturo_door_loop};
-extern cv64_ovl_touturo_door_func_t cv64_ovl_touturo_door_funcs[];
+cv64_ovl_touturo_door_func_t cv64_ovl_touturo_door_funcs[] = {
+    cv64_ovl_touturo_door_init, cv64_ovl_touturo_door_loop
+};
 
-// const u32 cv64_ovl_touturo_door_dlists[] = {TOUTURO_DOOR_EXIT_DL,
-//                                   TOUTURO_DOOR_ENTRANCE_DL};
-extern const u32 cv64_ovl_touturo_door_dlists[];
+// TODO: `extern const u32` for the dlists
+u32 cv64_ovl_touturo_door_dlists[] = {
+    0x0600A300, // TOUTURO_DOOR_EXIT_DL
+    0x0600AB00  // TOUTURO_DOOR_ENTRANCE_DL
+};
 
-// cv64_ovl_touturo_door_exit_func_t cv64_ovl_touturo_door_exit_funcs[] = {
-//     cv64_ovl_touturo_door_exit_check_event_flags, StageProp_Loop};
-extern cv64_ovl_touturo_door_exit_func_t cv64_ovl_touturo_door_exit_funcs[];
+cv64_ovl_touturo_door_exit_func_t cv64_ovl_touturo_door_exit_funcs[] = {
+    cv64_ovl_touturo_door_exit_check_event_flags, StageProp_Loop
+};
 
-// cv64_ovl_touturo_door_entrance_func_t cv64_ovl_touturo_door_entrance_funcs[]
-// = {
-//     cv64_ovl_touturo_door_entrance_check_event_flags,
-//     cv64_ovl_touturo_door_entrance_close_door, StageProp_Loop};
-extern cv64_ovl_touturo_door_entrance_func_t cv64_ovl_touturo_door_entrance_funcs[];
+cv64_ovl_touturo_door_entrance_func_t cv64_ovl_touturo_door_entrance_funcs[] = {
+    cv64_ovl_touturo_door_entrance_check_event_flags,
+    cv64_ovl_touturo_door_entrance_close_door,
+    StageProp_Loop
+};
 
 const char cv64_ovl_touturo_unused_str[] = "ERROR P27TOBIRA : EFFECT SPAWN ERROR\n";
 
