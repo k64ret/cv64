@@ -13,18 +13,18 @@
 // clang-format off
 
 cv64_ovl_textboxadvancearrow_func_t cv64_ovl_textboxadvancearrow_funcs[] = {
-    textboxAdvanceArrow_init,
-    textboxAdvanceArrow_loop,
-    textboxAdvanceArrow_destroy
+    TextboxAdvanceArrow_init,
+    TextboxAdvanceArrow_loop,
+    TextboxAdvanceArrow_destroy
 };
 
 // clang-format on
 
-void textboxAdvanceArrow_entrypoint(textboxAdvanceArrow* self) {
+void TextboxAdvanceArrow_entrypoint(TextboxAdvanceArrow* self) {
     ENTER(self, cv64_ovl_textboxadvancearrow_funcs);
 }
 
-void textboxAdvanceArrow_init(textboxAdvanceArrow* self) {
+void TextboxAdvanceArrow_init(TextboxAdvanceArrow* self) {
     FigureLight* arrow_light;
     Model* model;
 
@@ -64,7 +64,7 @@ void textboxAdvanceArrow_init(textboxAdvanceArrow* self) {
     );
 }
 
-void textboxAdvanceArrow_loop(textboxAdvanceArrow* self) {
+void TextboxAdvanceArrow_loop(TextboxAdvanceArrow* self) {
     u32 fade_timer_prev = self->fade_timer;
     Model* model        = self->model;
     u8 red;
@@ -90,6 +90,6 @@ void textboxAdvanceArrow_loop(textboxAdvanceArrow* self) {
     }
 }
 
-void textboxAdvanceArrow_destroy(textboxAdvanceArrow* self) {
+void TextboxAdvanceArrow_destroy(TextboxAdvanceArrow* self) {
     self->header.destroy(self);
 }

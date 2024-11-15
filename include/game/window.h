@@ -8,7 +8,7 @@
 #include "struct_78.h"
 #include <ultra64.h>
 
-typedef enum cv64_window_flag {
+typedef enum WindowFlag {
     WINDOW_FLAG_OPEN_RIGHT = BIT(0),
     WINDOW_FLAG_OPEN_LEFT  = BIT(1),
     WINDOW_FLAG_OPEN_DOWN  = BIT(2),
@@ -39,9 +39,9 @@ typedef enum cv64_window_flag {
      */
     WINDOW_FLAG_400000                   = BIT(22),
     WINDOW_FLAG_ENABLE_DISTORTION_EFFECT = BIT(23)
-} cv64_window_flag_t;
+} WindowFlag;
 
-typedef struct {
+typedef struct WindowWork {
     u32 flags;
     Camera* display_camera;
     Vec3f position;
@@ -54,10 +54,10 @@ typedef struct {
     RGBA primitive_color;
     Vec3f size;
     struct_78* field_0x40;
-} window_work;
+} WindowWork;
 
-extern void windowWork_setParams(
-    window_work* window_work,
+extern void WindowWork_setParams(
+    WindowWork* work,
     u32 flags,
     u8 param_3,
     u8 param_4,

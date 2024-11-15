@@ -255,7 +255,7 @@ typedef struct Interactable {
     s16 trigger_Z_size;
     union {
         pickableItemFlash* flash;
-        mfds_state* textbox;
+        MfdsState* textbox;
     };
     Vec3f position;
     ActorConfig* settings;

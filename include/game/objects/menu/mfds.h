@@ -1,11 +1,14 @@
 #ifndef MFDS_H
 #define MFDS_H
 
-// Textbox structs
+/**
+ * This header file contains structs that handle textboxes.
+ */
 
 #include "cv64.h"
 #include "gfx/camera.h"
 #include "gfx/model.h"
+#include "gfx/graphic_container.h"
 #include "objects/menu/lens.h"
 #include "objects/menu/textboxAdvanceArrow.h"
 #include "window.h"
@@ -13,77 +16,149 @@
 /**
  * Converts an ASCII char to a character in the game's custom
  * text format
-*/
+ */
 #define ASCII_TO_CV64(ascii) (ascii - 0x1E)
 
 // Special control characters
 #define CTRL_SET_COLOR(arg) (0xA200 | (arg & 0xFF))
-
-// clang-format off
 
 #define TEXT_COLOR_WHITE 0
 #define TEXT_COLOR_RED   1
 #define TEXT_COLOR_BEIGE 2
 #define TEXT_COLOR_BROWN 3
 
-// Common menu text IDs
-// Used in the `menu_text_ID` of `mfds_state`
-#define MENU_TEXT_REINHARDT 10
-#define MENU_TEXT_CARRIE    11
-#define MENU_TEXT_CORNELL   12  // Unused
-#define MENU_TEXT_COLLER    13  // Unused
+/**
+ * Common menu text IDs
+ *
+ * Used in the `menu_text_ID` variable from `MfdsStateMiscTextIds`
+ */
+#define MENU_TEXT_KEY_CONFIG  1
+#define MENU_TEXT_SOUND       2
+#define MENU_TEXT_DEFAULT     3
+#define MENU_TEXT_EXIT        4
+#define MENU_TEXT_GAME_START  5
+#define MENU_TEXT_DATA_COPY   6
+#define MENU_TEXT_DATA_DELETE 7
+#define MENU_TEXT_NEW_GAME    8
+#define MENU_TEXT_USED_MEMORY 9 // Unused
+#define MENU_TEXT_REINHARDT   10
+#define MENU_TEXT_CARRIE      11
+#define MENU_TEXT_CORNELL     12 // Unused
+#define MENU_TEXT_COLLER      13 // Unused
+#define MENU_TEXT_TYPE        14
+#define MENU_TEXT_A           15
+#define MENU_TEXT_B           16
+#define MENU_TEXT_C           17
+#define MENU_TEXT_STEREO      18
+#define MENU_TEXT_MONOAURAL   19
+#define MENU_TEXT_NO          20
+#define MENU_TEXT_1           21
+#define MENU_TEXT_2           22
+#define MENU_TEXT_3           23
+#define MENU_TEXT_OK_A        24
+#define MENU_TEXT_CANCEL_B    25
 
 #define TEXTBOX_OPTION_IDLE 0
 #define TEXTBOX_OPTION_YES  1
 #define TEXTBOX_OPTION_NO   2
 
-typedef enum cv64_textbox_flag {
-    MENU_TEXT_ID_PRINTS_ITEM        = BIT(0),
-    MENU_TEXT_ID_PRINTS_MENU_STRING = BIT(1),
-    MFDS_FLAG_00000004              = BIT(2),
-    MFDS_FLAG_00000008              = BIT(3),
-    PRINT_NUMBER                    = BIT(4),
-    DISPLAY_LENS                    = BIT(6),      // Aka enable window_work
-    ALLOC_TEXTBOX_IN_MENU_DATA_HEAP = BIT(14),
-    SLOW_TEXT_TRANSITION            = BIT(20),
-    FAST_TEXT_TRANSITION            = BIT(21),
-    MFDS_FLAG_400000                = BIT(22),
-    UPDATE_STRING                   = BIT(24),
-    MFDS_FLAG_2000000               = BIT(25),
-    CLOSE_TEXTBOX                   = BIT(26),
-    OPEN_TEXTBOX                    = BIT(27),
-    CLOSE_LENS                      = BIT(28),
-    MFDS_FLAG_20000000              = BIT(29),
-    TEXT_IS_PARSED                  = BIT(30),     // The text is completely processed
-    HIDE_TEXTBOX                    = BIT(31)
-} cv64_textbox_flag_t;
+typedef enum MfdsStateFlag {
+    MFDS_FLAG_MENU_TEXT_ID_PRINTS_ITEM        = BIT(0),
+    MFDS_FLAG_MENU_TEXT_ID_PRINTS_MENU_STRING = BIT(1),
+    /**
+     * This is used for the character names, so that they appear static while the text advances?
+     */
+    MFDS_FLAG_KEEP_SHOWING_LINE = BIT(2),
+    MFDS_FLAG_00000008          = BIT(3),
+    MFDS_FLAG_PRINT_NUMBER      = BIT(4),
+    MFDS_FLAG_OPTION_SELECTION  = BIT(5),
+    /**
+     * Aka enable WindowWork
+     */
+    MFDS_FLAG_DISPLAY_LENS                    = BIT(6),
+    MFDS_FLAG_ALLOC_TEXTBOX_IN_MENU_DATA_HEAP = BIT(14),
+    MFDS_FLAG_GAMEPLAYMENUMGR_TEXTBOX         = BIT(16),
+    /**
+     * Leaves a small space on the left of the text for the red selection arrow
+     */
+    MFDS_FLAG_LEAVE_SPACE_FOR_SELECTION_ARROW = BIT(17),
+    /**
+     * Allows the text to change the `primitive_color`'s alpha
+     */
+    MFDS_FLAG_ALLOW_TRANSPARENCY_CHANGE = BIT(18),
+    /**
+     * Allow updating the scale parameters from `MfdsState` struct
+     */
+    MFDS_FLAG_UPDATE_SCALE         = BIT(19),
+    MFDS_FLAG_SLOW_TEXT_TRANSITION = BIT(20),
+    MFDS_FLAG_FAST_TEXT_TRANSITION = BIT(21),
+    MFDS_FLAG_400000               = BIT(22),
+    /**
+     * Fastest speed. It also auto skips the text red advance arrow. There doesn't seem to be a
+     * valid 0x400000 flag.
+     */
+    MFDS_FLAG_INSTANT_TEXT_TRANSITION = (BIT(21) | BIT(22)),
+    MFDS_FLAG_UPDATE_STRING           = BIT(24),
+    MFDS_FLAG_2000000                 = BIT(25),
+    MFDS_FLAG_CLOSE_TEXTBOX           = BIT(26),
+    MFDS_FLAG_OPEN_TEXTBOX            = BIT(27),
+    MFDS_FLAG_CLOSE_LENS              = BIT(28),
+    MFDS_FLAG_OPEN_LENS               = BIT(29),
+    /**
+     * The text is completely processed
+     */
+    MFDS_FLAG_TEXT_IS_PARSED = BIT(30),
+    MFDS_FLAG_HIDE_TEXTBOX   = BIT(31)
+} MfdsStateFlag;
 
-// clang-format on
+typedef enum MfdsWorkFlag {
+    MFDS_WORK_FLAG_TEXT_SHOULD_SCROLL = BIT(0)
+} MfdsWorkFlag;
 
-typedef struct {
+typedef enum MfdsStateNumberVisualFlag {
+    /**
+     * Print number in hexadecimal. Unused.
+     */
+    NUMBER_VISUAL_FLAG_PRINT_IN_HEX                           = BIT(0),
+    NUMBER_VISUAL_FLAG_PRINT_PLUS_SYMBOL_FOR_POSITIVE_NUMBERS = BIT(1),
+    NUMBER_VISUAL_FLAG_ADD_LEADING_ZEROES                     = BIT(2),
+    NUMBER_VISUAL_FLAG_ADD_NEW_LINE                           = BIT(3),
+    NUMBER_VISUAL_FLAG_USE_GOLD_JEWEL_FONT                    = BIT(4),
+    /**
+     * Used in Renon's Shop after the gold amount
+     */
+    NUMBER_VISUAL_FLAG_ADD_G_AFTER_NUMBER = BIT(5)
+} MfdsStateNumberVisualFlag;
+
+typedef struct MfdsColorAnimData {
     u16 color;
     u16 time;
-} mfds_color_anim_data;
+} MfdsColorAnimData;
 
-typedef struct {
+// Real name: `mfds_color_animation_state`
+typedef struct MfdsColorAnimationState {
     u8 field_0x00;
     u8 transition_time[4];
     u8 field_0x05[4];
     u8 transition_point[4];
     u8 field_0x0D[3];
-    mfds_color_anim_data* color_anim_data[4];
+    MfdsColorAnimData* color_anim_data[4];
     u8 max_transition_time[4];
-} mfds_color_animation_state;
+} MfdsColorAnimationState;
 
-typedef struct {
-    u16* text;
+// Real name: `mfds_work`
+typedef struct MfdsWork {
+    u16* parsed_text_ptr;
     u8 field_0x04[2];
-    s16 field_0x06;
+    s16 indentation;
     s16 field_0x08;
+    /**
+     * Timer for when a line is scrolling up to view the rest of the text
+     */
     u8 scroll_timer;
     u8 palette;
     u8 field_0x0C[2];
-    s16 field_0x0E;
+    s16 time_until_auto_advance_textbox;
     u8 flags;
     u8 field_0x11;
     Vec2 position;
@@ -91,121 +166,156 @@ typedef struct {
     u8 field_0x1A;
     u8 num_options;
     u8 current_option;
-    u8 field_0x1C[17];
+    u8 field_0x1D;
+    u8 option_selection_IDs[6];
+    u8 field_0x24[10];
     u8 display_time;
     u8 field_0x2F;
-    mfds_color_animation_state* color_animation_state;
-} mfds_work;
+    MfdsColorAnimationState* color_anim_state;
+} MfdsWork;
 
-// TODO: Fill This
-typedef struct {
-    u8 field_0x00[0x2B2];
-} mfds_tex_buffer;
+// Real name: `mfds_tex_buffer`
+typedef struct MfdsTexBuffer {
+    u16 field_0x00[5][69];
+} MfdsTexBuffer;
 
-// TODO: Fill This
-typedef struct {
-    u8 text_char;
-    u8 field_0x01[519];
-} mfds_ltex_buffer;
+typedef struct MfdsLtexBufferEntry {
+    u16 text_char;
+    u16 field_0x02;
+    u8 field_0x04;
+    u16 char_texture_raw_data[49];
+    u8 field_0x67;
+} MfdsLtexBufferEntry;
 
-typedef struct {
-    u32 field_0x00;
-    u32 field_0x04;
-    u32 field_0x08;
-} mfds_dl_size;
+// Real name: `mfds_ltex_buffer`
+typedef struct MfdsLtexBuffer {
+    MfdsLtexBufferEntry entries[5];
+} MfdsLtexBuffer;
 
-// TODO: Fill This
-typedef struct {
-    u8 field_0x00[0x1A];
-} mfds_number_work;
+// Real name: `mfds_dl_size`
+typedef struct MfdsDlSize {
+    u32 dlist_buffer_size;
+    /**
+     * Offset within the current graphic buffer where the dlists will start
+     */
+    u32 dlist_graphic_buffer_start_offset;
+    /**
+     * Offset within the current graphic buffer where the vertices will start
+     */
+    u32 vertices_graphic_buffer_start_offset;
+} MfdsDlSize;
 
-typedef struct {
+// Real name: `mfds_number_work`
+typedef struct MfdsNumberWork {
+    u16 text_buffer[13];
+} MfdsNumberWork;
+
+typedef union MfdsStateMiscTextIds {
+    /**
+     * Used for displaying some menu-related strings
+     */
+    u8 menu_text_ID;
+    /**
+     * Used for displaying item names when picking them up. Real name: `item_no`
+     */
+    u8 item_ID;
+} MfdsStateMiscTextIds;
+
+typedef struct MfdsHeightWidthParams {
+    s8 height;
+    s8 width;
+} MfdsHeightWidthParams;
+
+// Real name: `mfds_state`
+typedef struct MfdsState {
     u32 flags;
     Camera* display_camera;
-    u16* text; // Officially called "str1"
+    u16* text; // Real name: `str1`
     u16* item_amount_text;
-    s32 field_0x10;
+    MfdsWork* mfds_work;
     Vec2 position;
     f32 position_Z;
     Vec2f scale;
     s32 number;
-    s32 field_0x28;
+    s32 previous_number;
     u16 width;
-    u8 field_0x2E;
+    u8 previous_textbox_option;
     u8 textbox_option;
     u8 line;
     u8 field_0x31;
     u8 character_spacing;
     u8 field_0x33;
     u8 palette;
-    u8 menu_text_ID; // ID in the menu text pool that starts at 0x8016CEB8
-    u8 field_0x36;
-    u8 field_0x37[3];
-    u8 visual_flags;
+    MfdsStateMiscTextIds misc_text_IDs[5];
+    u8 number_visual_flags;
     u8 display_time;
-    s8 field_0x3C;
-    u8 field_0x3D[19];
-    u8 field_0x50;
-    u8 field_0x51;
-    u8 field_0x52[2];
+    /**
+     * @note The 11th entry of this array appears to be the number of vertical and horizontal
+     *       vertices of the quadrilateral that encapsulates the text's texture.
+     */
+    MfdsHeightWidthParams height_and_width_per_line[11];
+    u8 field_0x52;
+    u8 field_0x53;
     u32 window_flags;
     f32 window_closing_speed;
-    lens_obj* lens;
-} mfds_state;
+    ObjLens* lens;
+} MfdsState;
 
 // ID: 0x0127
-// Real name: obj_mfds
-typedef struct {
+// Real name: `obj_mfds`
+typedef struct ObjMfds {
     ObjectHeader header;
     u16 field_0x20;
     u16 field_0x22;
     u8 field_0x24[4];
     Model* model;
     u8 field_0x2C[8];
-    Gfx** mfds_double;
+    GraphicContainerHeader* mfds_double; // Real name
     void* field_0x38;
     void* field_0x3C;
-    textboxAdvanceArrow* advance_arrow;
+    TextboxAdvanceArrow* advance_arrow;
     void* field_0x44;
     void* field_0x48;
     void* field_0x4C;
     union {
-        u16* mfds_menu_string;
-        u16* mfds_item_form;
+        u16* mfds_menu_string; // Real name
+        u16* mfds_item_form;   // Real name
     };
-    mfds_number_work* number;
-    mfds_color_animation_state* color_animation_state;
-    window_work* window;
-    mfds_dl_size* dl_size;
-    mfds_ltex_buffer* ltex_buffer;
-    mfds_tex_buffer* tex_buffer;
-    mfds_work* work;
-    mfds_state* state;
-} obj_mfds;
+    MfdsNumberWork* number;
+    MfdsColorAnimationState* color_anim_state;
+    WindowWork* window;
+    MfdsDlSize* dl_size;
+    MfdsLtexBuffer* ltex_buffer;
+    MfdsTexBuffer* tex_buffer;
+    MfdsWork* work;
+    MfdsState* state;
+} ObjMfds;
 
-extern mfds_state* textbox_create(void* parent_object, Camera* display_camera, u32 flags);
+extern MfdsState* textbox_create(ObjectHeader* parent_object, Camera* display_camera, u32 flags);
 extern void
-textbox_setDimensions(mfds_state* self, u8 height, u16 width, u8 param_4, u8 character_spacing);
-extern void textbox_setPos(mfds_state* self, u16 x, u16 y, s32 unused);
+textbox_setDimensions(MfdsState* self, u8 line, u16 width, u8 param_4, u8 character_spacing);
+extern void textbox_setPos(MfdsState* self, u16 x, u16 y, s32);
 extern void
-textbox_setMessagePtr(mfds_state* self, u16* text, u16* item_amount_number_text, s16 number);
-extern void textbox_enableLens(mfds_state* self, u32 window_work_flags, f32 window_closing_speed);
+textbox_setMessagePtr(MfdsState* self, u16* text, u16* item_amount_number_text, s16 number);
+extern void textbox_enableLens(MfdsState* self, u32 window_work_flags, f32 window_closing_speed);
 extern u16* text_getMessageFromPool(u16* message_pool_base_ptr, s32 id);
-extern void textbox_setScaleAndSomethingElse(
-    mfds_state* self,
-    u8 param_2,
-    u8 param_3,
+extern void textbox_setScaleParameters(
+    MfdsState* self,
+    u8 number_of_vertical_vertices,
+    u8 number_of_horizontal_vertices,
     f32 position_Z,
     f32 scale_X,
     f32 scale_Y,
-    u8 param_7,
+    u8 allow_transparency_change,
     u8 leave_space_for_selection_arrow
 );
-extern void text_convertIntNumberToText(u32, u16*, u8, u32);
+extern void
+text_convertSignedIntegerToText(u32 number, u16* dest, u8 number_of_chars, u32 number_visual_flags);
 extern u16* text_findCharInString(u16* text, u16 char_to_find);
-extern mfds_color_anim_data text_color_anim_data_table[4][8];
 extern u16* convertUTF16ToCustomTextFormat(u16* text_buffer);
-extern void textbox_setHeightAndWidth(mfds_state* self, u32 index, u8 text_height, u8 text_width);
-extern mfds_state* map_getMessageFromPool(u16 text_ID, u8 textbox_display_time);
+extern void textbox_setHeightAndWidth(MfdsState* self, u32 index, u8 text_height, u8 text_width);
+extern MfdsState* map_getMessageFromPool(u16 text_ID, u8 textbox_display_time);
+
+extern MfdsColorAnimData text_color_anim_data_table[4][8];
 
 #endif

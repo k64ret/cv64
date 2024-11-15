@@ -27,12 +27,12 @@ typedef struct {
     void* field_0x5C;
     obj_distortion* distortion;
     struct_78* field_0x64;
-    window_work* field_0x68;
-    window_work* field_0x6C;
-    window_work* main_window;
-} lens_obj;
+    WindowWork* field_0x68;
+    WindowWork* field_0x6C;
+    WindowWork* main_window;
+} ObjLens;
 
-extern window_work* lens_create(
+extern WindowWork* lens_create(
     void* parent,
     Camera* display_camera,
     u32 flags,

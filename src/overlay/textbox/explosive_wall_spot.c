@@ -184,7 +184,7 @@ void cv64_ovl_explwalltxt_determine_msg(cv64_ovl_explwalltxt_t* self) {
 
 void cv64_ovl_explwalltxt_item_prepare_msg(cv64_ovl_explwalltxt_t* self) {
     // clang-format off
-    mfds_state* message = (self->nitro_amount_until_max_capacity <= 0)
+    MfdsState* message = (self->nitro_amount_until_max_capacity <= 0)
         ? (*map_getMessageFromPool)(self->set_nitro_text_ID, 0)
         : (*map_getMessageFromPool)(self->set_mandragora_text_ID, 0);
     // clang-format on
@@ -199,8 +199,8 @@ void cv64_ovl_explwalltxt_item_prepare_msg(cv64_ovl_explwalltxt_t* self) {
 }
 
 void cv64_ovl_explwalltxt_item_idle(cv64_ovl_explwalltxt_t* self) {
-    mfds_state* textbox = self->message_textbox;
-    u8 textbox_option   = textbox->textbox_option;
+    MfdsState* textbox = self->message_textbox;
+    u8 textbox_option  = textbox->textbox_option;
 
     switch (textbox_option) {
         case TEXTBOX_OPTION_IDLE:
@@ -364,7 +364,7 @@ void cv64_ovl_explwalltxt_item_no(cv64_ovl_explwalltxt_t* self) {
 }
 
 void cv64_ovl_explwalltxt_ready_for_blast(cv64_ovl_explwalltxt_t* self) {
-    mfds_state* message;
+    MfdsState* message;
 
     if (self->state == 0) {
         message = (*map_getMessageFromPool)(self->ready_for_blasting_text_ID, 0);
@@ -398,7 +398,7 @@ void cv64_ovl_explwalltxt_ready_for_blast(cv64_ovl_explwalltxt_t* self) {
 }
 
 void cv64_ovl_explwalltxt_nitro_is_set(cv64_ovl_explwalltxt_t* self) {
-    mfds_state* message;
+    MfdsState* message;
 
     if (self->state == 0) {
         message = (*map_getMessageFromPool)(self->nitro_set_text_ID, 0);
@@ -424,7 +424,7 @@ void cv64_ovl_explwalltxt_nitro_is_set(cv64_ovl_explwalltxt_t* self) {
 }
 
 void cv64_ovl_explwalltxt_mandragora_is_set(cv64_ovl_explwalltxt_t* self) {
-    mfds_state* message;
+    MfdsState* message;
 
     if (self->state == 0) {
         message = (*map_getMessageFromPool)(self->mandragora_set_text_ID, 0);
@@ -450,7 +450,7 @@ void cv64_ovl_explwalltxt_mandragora_is_set(cv64_ovl_explwalltxt_t* self) {
 }
 
 void cv64_ovl_explwalltxt_default_desc(cv64_ovl_explwalltxt_t* self) {
-    mfds_state* message;
+    MfdsState* message;
 
     if (self->state == 0) {
         message = (*map_getMessageFromPool)(self->default_description_text_ID, 0);
@@ -476,7 +476,7 @@ void cv64_ovl_explwalltxt_default_desc(cv64_ovl_explwalltxt_t* self) {
 }
 
 void cv64_ovl_explwalltxt_item_already_set(cv64_ovl_explwalltxt_t* self) {
-    mfds_state* message;
+    MfdsState* message;
 
     if (self->state == 0) {
         message = (*map_getMessageFromPool)(self->item_already_set_text_ID, 0);

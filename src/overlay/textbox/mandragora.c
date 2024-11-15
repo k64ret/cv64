@@ -62,7 +62,7 @@ void cv64_ovl_mandragoratxt_idle(cv64_ovl_mandragoratxt_t* self) {
 }
 
 void cv64_ovl_mandragoratxt_prepare_msg(cv64_ovl_mandragoratxt_t* self) {
-    mfds_state* message;
+    MfdsState* message;
 
     // Both walls are blown up
     if (CHECK_EVENT_FLAGS(
@@ -105,7 +105,7 @@ void cv64_ovl_mandragoratxt_prepare_msg(cv64_ovl_mandragoratxt_t* self) {
 }
 
 void cv64_ovl_mandragoratxt_yes_no(cv64_ovl_mandragoratxt_t* self) {
-    mfds_state* textbox = self->message_textbox;
+    MfdsState* textbox = self->message_textbox;
 
     if (self->text_ID == CASTLE_CENTER_MAIN_TAKE_MANDRAGORA) {
         switch (textbox->textbox_option) {
@@ -127,7 +127,7 @@ void cv64_ovl_mandragoratxt_yes_no(cv64_ovl_mandragoratxt_t* self) {
 }
 
 void cv64_ovl_mandragoratxt_close(cv64_ovl_mandragoratxt_t* self) {
-    mfds_state* message_textbox;
+    MfdsState* message_textbox;
 
     if (self->text_ID == CASTLE_CENTER_MAIN_OBTAINED_MANDRAGORA) {
         message_textbox = (*map_getMessageFromPool)(self->text_ID, 0);

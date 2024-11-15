@@ -65,7 +65,7 @@ void cv64_ovl_librarypuzzletxt_init(cv64_ovl_librarypuzzletxt_t* self) {
 }
 
 void cv64_ovl_librarypuzzletxt_idle(cv64_ovl_librarypuzzletxt_t* self) {
-    mfds_state* message;
+    MfdsState* message;
 
     if (self->interacting_with_interactable != TRUE)
         return;
@@ -88,10 +88,10 @@ void cv64_ovl_librarypuzzletxt_idle(cv64_ovl_librarypuzzletxt_t* self) {
  * Shows the initial textbox in the Library Puzzle interaction
  */
 void cv64_ovl_librarypuzzletxt_show(cv64_ovl_librarypuzzletxt_t* self) {
-    mfds_state* options_textbox;
+    MfdsState* options_textbox;
     cv64_ovl_librarypuzzledata_t* data;
-    window_work* lens;
-    mfds_state* textbox = self->message_textbox;
+    WindowWork* lens;
+    MfdsState* textbox = self->message_textbox;
 
     switch (textbox->textbox_option) {
         case TEXTBOX_OPTION_IDLE:
@@ -105,7 +105,9 @@ void cv64_ovl_librarypuzzletxt_show(cv64_ovl_librarypuzzletxt_t* self) {
 
             // Create and setup the textbox that holds the 1, 2, 3, etc. options
             data->options_textbox = (*textbox_create)(
-                self, common_camera_HUD, (OPEN_TEXTBOX | FAST_TEXT_TRANSITION | MFDS_FLAG_00000008)
+                self,
+                common_camera_HUD,
+                (MFDS_FLAG_OPEN_TEXTBOX | MFDS_FLAG_FAST_TEXT_TRANSITION | MFDS_FLAG_00000008)
             );
             options_textbox = data->options_textbox;
             if (options_textbox != NULL) {
@@ -160,7 +162,7 @@ void cv64_ovl_librarypuzzletxt_show(cv64_ovl_librarypuzzletxt_t* self) {
 }
 
 void cv64_ovl_librarypuzzletxt_prepare_msg(cv64_ovl_librarypuzzletxt_t* self) {
-    mfds_state* textbox;
+    MfdsState* textbox;
     u16* message_ptr;
 
     /**
@@ -168,7 +170,9 @@ void cv64_ovl_librarypuzzletxt_prepare_msg(cv64_ovl_librarypuzzletxt_t* self) {
      * and display it for the gold piece first
      */
     textbox = (*textbox_create)(
-        self, common_camera_HUD, (OPEN_TEXTBOX | FAST_TEXT_TRANSITION | MFDS_FLAG_400000)
+        self,
+        common_camera_HUD,
+        (MFDS_FLAG_OPEN_TEXTBOX | MFDS_FLAG_FAST_TEXT_TRANSITION | MFDS_FLAG_400000)
     );
     self->message_textbox = textbox;
     if (textbox != NULL) {
@@ -196,11 +200,11 @@ void cv64_ovl_librarypuzzletxt_prepare_msg(cv64_ovl_librarypuzzletxt_t* self) {
  */
 void cv64_ovl_librarypuzzletxt_select(cv64_ovl_librarypuzzletxt_t* self) {
     cv64_ovl_librarypuzzledata_t* data;
-    window_work* lens;
-    mfds_state* textbox = self->message_textbox;
-    s32 set_piece       = 0;
+    WindowWork* lens;
+    MfdsState* textbox = self->message_textbox;
+    s32 set_piece      = 0;
 
-    if (BITS_HAS(textbox->flags, TEXT_IS_PARSED)) {
+    if (BITS_HAS(textbox->flags, MFDS_FLAG_TEXT_IS_PARSED)) {
         data = self->data;
         if (self->option_selected == FALSE) {
             set_piece = select_next_option(
@@ -215,7 +219,7 @@ void cv64_ovl_librarypuzzletxt_select(cv64_ovl_librarypuzzletxt_t* self) {
         if (set_piece > 0) {
             print_selected_options(data->options_text, data->selected_options_IDs);
             (*textbox_setMessagePtr)(data->options_textbox, data->options_text, NULL, 0);
-            BITS_SET(data->options_textbox->flags, UPDATE_STRING);
+            BITS_SET(data->options_textbox->flags, MFDS_FLAG_UPDATE_STRING);
             self->option_selected = TRUE;
             self->number_of_options_selected++;
             (*play_sound)(SD_LIBRARY_PIECE_SET);
@@ -241,8 +245,8 @@ void cv64_ovl_librarypuzzletxt_select(cv64_ovl_librarypuzzletxt_t* self) {
                         NULL,
                         0
                     );
-                    BITS_UNSET(textbox->flags, HIDE_TEXTBOX);
-                    BITS_SET(textbox->flags, UPDATE_STRING);
+                    BITS_UNSET(textbox->flags, MFDS_FLAG_HIDE_TEXTBOX);
+                    BITS_SET(textbox->flags, MFDS_FLAG_UPDATE_STRING);
                     self->first_option = data->highlighted_option;
                     (*cutscene_setActorStateIfMatchingVariable1)(
                         STAGE_OBJECT_HONMARU_4F_MINAMI_LIBRARY_PIECE,
@@ -265,8 +269,8 @@ void cv64_ovl_librarypuzzletxt_select(cv64_ovl_librarypuzzletxt_t* self) {
                         NULL,
                         0
                     );
-                    BITS_UNSET(textbox->flags, HIDE_TEXTBOX);
-                    BITS_SET(textbox->flags, UPDATE_STRING);
+                    BITS_UNSET(textbox->flags, MFDS_FLAG_HIDE_TEXTBOX);
+                    BITS_SET(textbox->flags, MFDS_FLAG_UPDATE_STRING);
                     self->second_option = data->highlighted_option;
                     (*cutscene_setActorStateIfMatchingVariable1)(
                         STAGE_OBJECT_HONMARU_4F_MINAMI_LIBRARY_PIECE,
@@ -282,7 +286,7 @@ void cv64_ovl_librarypuzzletxt_select(cv64_ovl_librarypuzzletxt_t* self) {
                  */
                 case 3:
                     self->third_option = data->highlighted_option;
-                    BITS_SET(textbox->flags, CLOSE_TEXTBOX);
+                    BITS_SET(textbox->flags, MFDS_FLAG_CLOSE_TEXTBOX);
                     (*cutscene_setActorStateIfMatchingVariable1)(
                         STAGE_OBJECT_HONMARU_4F_MINAMI_LIBRARY_PIECE,
                         BLUE_PIECE,
@@ -318,7 +322,7 @@ void cv64_ovl_librarypuzzletxt_select(cv64_ovl_librarypuzzletxt_t* self) {
 
 void cv64_ovl_librarypuzzletxt_fail(cv64_ovl_librarypuzzletxt_t* self) {
     cv64_ovl_librarypuzzledata_t* data = self->data;
-    mfds_state* textbox                = self->message_textbox;
+    MfdsState* textbox                 = self->message_textbox;
     s32 temp[2];
 
     // Open up the common textbox again, and display the failed message
@@ -353,7 +357,7 @@ void cv64_ovl_librarypuzzletxt_fail(cv64_ovl_librarypuzzletxt_t* self) {
     self->interacting_with_interactable = FALSE;
     BITS_SET(data->lens->flags, WINDOW_CLOSING | WINDOW_OPENING);
     textbox = data->options_textbox;
-    BITS_SET(textbox->flags, CLOSE_TEXTBOX);
+    BITS_SET(textbox->flags, MFDS_FLAG_CLOSE_TEXTBOX);
     sys.FREEZE_ENEMIES = FALSE;
     sys.FREEZE_PLAYER  = FALSE;
     (*cameraMgr_setLockCameraAtPointState)(sys.ptr_cameraMgr, FALSE);
@@ -375,7 +379,7 @@ void cv64_ovl_librarypuzzletxt_success(cv64_ovl_librarypuzzletxt_t* self) {
         EVENT_FLAG_CASTLE_CENTER_4F_AND_MAZE_GARDEN_LIBRARY_PUZZLE_SOLVED
     );
     BITS_SET(data->lens->flags, WINDOW_CLOSING | WINDOW_OPENING);
-    BITS_SET(data->options_textbox->flags, CLOSE_TEXTBOX);
+    BITS_SET(data->options_textbox->flags, MFDS_FLAG_CLOSE_TEXTBOX);
     sys.FREEZE_ENEMIES = FALSE;
     sys.FREEZE_PLAYER  = FALSE;
     (*cameraMgr_setLockCameraAtPointState)(sys.ptr_cameraMgr, FALSE);

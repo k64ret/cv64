@@ -39,7 +39,7 @@ typedef struct {
 } DMAChunkMgr_t;
 
 // ID: 0x0004
-// Real name: obj_decode (based on leftover strings from LoD)
+// Real name: `obj_decode` (based on leftover strings from LoD)
 typedef struct {
     ObjectHeader header;
     u8 field_0x20[20];

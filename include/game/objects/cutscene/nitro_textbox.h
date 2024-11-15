@@ -18,7 +18,7 @@ typedef struct cv64_ovl_nitrotxt {
     u32 message_display_time;
     f32 trigger_size_X;
     f32 trigger_size_Z;
-    mfds_state* message_textbox;
+    MfdsState* message_textbox;
     Vec3f position;
     ActorConfig* settings;
 } cv64_ovl_nitrotxt_t;

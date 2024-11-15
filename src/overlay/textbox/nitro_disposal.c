@@ -70,7 +70,7 @@ void cv64_ovl_nitrodisposaltxt_idle(cv64_ovl_nitrodisposaltxt_t* self) {
 }
 
 void cv64_ovl_nitrodisposaltxt_prepare_msg(cv64_ovl_nitrodisposaltxt_t* self) {
-    mfds_state* message;
+    MfdsState* message;
 
     // Both walls have been blown up already
     if (CHECK_EVENT_FLAGS(
@@ -103,7 +103,7 @@ void cv64_ovl_nitrodisposaltxt_prepare_msg(cv64_ovl_nitrodisposaltxt_t* self) {
 }
 
 void cv64_ovl_nitrodisposaltxt_yes_no(cv64_ovl_nitrodisposaltxt_t* self) {
-    mfds_state* textbox = self->message_textbox;
+    MfdsState* textbox = self->message_textbox;
 
     if (self->has_nitro_text_ID == self->text_ID) {
         switch (textbox->textbox_option) {
