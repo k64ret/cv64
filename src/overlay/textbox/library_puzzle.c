@@ -107,7 +107,7 @@ void cv64_ovl_librarypuzzletxt_show(cv64_ovl_librarypuzzletxt_t* self) {
             data->options_textbox = (*textbox_create)(
                 self,
                 common_camera_HUD,
-                (MFDS_FLAG_OPEN_TEXTBOX | MFDS_FLAG_FAST_TEXT_TRANSITION | MFDS_FLAG_00000008)
+                (MFDS_FLAG_OPEN_TEXTBOX | MFDS_FLAG_ALLOW_VARIABLE_SPEED | MFDS_FLAG_00000008)
             );
             options_textbox = data->options_textbox;
             if (options_textbox != NULL) {
@@ -172,7 +172,7 @@ void cv64_ovl_librarypuzzletxt_prepare_msg(cv64_ovl_librarypuzzletxt_t* self) {
     textbox = (*textbox_create)(
         self,
         common_camera_HUD,
-        (MFDS_FLAG_OPEN_TEXTBOX | MFDS_FLAG_FAST_TEXT_TRANSITION | MFDS_FLAG_400000)
+        (MFDS_FLAG_OPEN_TEXTBOX | MFDS_FLAG_ALLOW_VARIABLE_SPEED | MFDS_FLAG_FAST_TEXT_SPEED)
     );
     self->message_textbox = textbox;
     if (textbox != NULL) {

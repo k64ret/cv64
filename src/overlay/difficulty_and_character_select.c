@@ -75,7 +75,8 @@ void difficultySelect_loop(characterSelect* self) {
             difficulty_text = (*textbox_create)(
                 self,
                 common_camera_HUD,
-                (MFDS_FLAG_OPEN_TEXTBOX | MFDS_FLAG_400000 | MFDS_FLAG_FAST_TEXT_TRANSITION)
+                (MFDS_FLAG_OPEN_TEXTBOX | MFDS_FLAG_FAST_TEXT_SPEED | MFDS_FLAG_ALLOW_VARIABLE_SPEED
+                )
             );
             inner->difficulty_text = difficulty_text;
             (*textbox_setDimensions)(inner->difficulty_text, 5, 128, 0, 0);
@@ -98,7 +99,8 @@ void difficultySelect_loop(characterSelect* self) {
             difficulty_text = (*textbox_create)(
                 self,
                 common_camera_HUD,
-                (MFDS_FLAG_OPEN_TEXTBOX | MFDS_FLAG_400000 | MFDS_FLAG_FAST_TEXT_TRANSITION)
+                (MFDS_FLAG_OPEN_TEXTBOX | MFDS_FLAG_FAST_TEXT_SPEED | MFDS_FLAG_ALLOW_VARIABLE_SPEED
+                )
             );
             inner->difficulty_text = difficulty_text;
             (*textbox_setDimensions)(inner->difficulty_text, 5, 128, 0, 0);
@@ -255,7 +257,7 @@ void characterSelect_init(characterSelect* self) {
     character_name = (*textbox_create)(
         self,
         work->scroll_elements_light,
-        MFDS_FLAG_OPEN_TEXTBOX | MFDS_FLAG_400000 | MFDS_FLAG_FAST_TEXT_TRANSITION |
+        MFDS_FLAG_OPEN_TEXTBOX | MFDS_FLAG_FAST_TEXT_SPEED | MFDS_FLAG_ALLOW_VARIABLE_SPEED |
             MFDS_FLAG_ALLOC_TEXTBOX_IN_MENU_DATA_HEAP | MFDS_FLAG_00000008 |
             MFDS_FLAG_MENU_TEXT_ID_PRINTS_MENU_STRING
     );
@@ -275,7 +277,7 @@ void characterSelect_init(characterSelect* self) {
     character_name = (*textbox_create)(
         self,
         work->scroll_elements_light,
-        MFDS_FLAG_OPEN_TEXTBOX | MFDS_FLAG_400000 | MFDS_FLAG_FAST_TEXT_TRANSITION |
+        MFDS_FLAG_OPEN_TEXTBOX | MFDS_FLAG_FAST_TEXT_SPEED | MFDS_FLAG_ALLOW_VARIABLE_SPEED |
             MFDS_FLAG_ALLOC_TEXTBOX_IN_MENU_DATA_HEAP | MFDS_FLAG_00000008 |
             MFDS_FLAG_MENU_TEXT_ID_PRINTS_MENU_STRING
     );
