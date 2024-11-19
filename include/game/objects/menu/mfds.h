@@ -93,7 +93,11 @@ typedef enum MfdsStateFlag {
     /**
      * Forces the text speed to be 0
      */
-    MFDS_FLAG_SLOW_TEXT_SPEED      = BIT(20),
+    MFDS_FLAG_SLOW_TEXT_SPEED = BIT(20),
+    /**
+     * Allows the game to set the text speed from the `text_speed` field from `MfdsWork`.
+     * Sets the text speed to 1 by default
+     */
     MFDS_FLAG_ALLOW_VARIABLE_SPEED = BIT(21),
     /**
      * Forces the text speed to be 16. `MFDS_FLAG_ALLOW_VARIABLE_SPEED`
