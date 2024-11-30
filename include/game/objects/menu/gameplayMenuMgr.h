@@ -30,7 +30,7 @@ typedef enum gameplayMenuMgrMenuState {
 typedef struct {
     ObjectHeader header;
     u8 field_0x20[32];
-    s32 bought_item_from_renon_shop; // Set to `TRUE` when buting an item in Renon's shop
+    s32 bought_item_from_renon_shop; // Set to `TRUE` when buying an item in Renon's shop
     u32 hide_common_textbox_window;
     u8 field_0x48[8];
     u32 update_assets_heap_block_max_size; // See 0x80136C9C
