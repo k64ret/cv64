@@ -55,7 +55,7 @@ typedef enum ActorConfigSpawnSettings {
     /**
      * Marks the end of an actor list
      */
-    SETTING_END_OF_ACTOR_LIST = 0x80,
+    SETTING_END_OF_ACTOR_LIST = 0x80
 } ActorConfigSpawnSettings;
 
 typedef enum ActorConfigSpawnFlags {
@@ -73,9 +73,9 @@ typedef enum ActorConfigSpawnFlags {
      */
     SPAWNED = 0x04,
     /**
-     * See `ALLOW_SPAWN_ONLY_ONCE_MANUALLY` from `ActorConfigSpawnSettings`
+     * See `ENABLE_ALTERNATE_BETWEEN_SPAWN_AND_DESPAWN` from `ActorConfigSpawnSettings`
      */
-    ENABLE_ALTERNATE_BETWEEN_SPAWN_AND_DESPAWN = 0x08
+    ALTERNATE_BETWEEN_SPAWN_AND_DESPAWN = 0x08
 } ActorConfigSpawnFlags;
 
 typedef struct ActorConfig {
@@ -95,24 +95,20 @@ typedef struct ActorConfig {
     u16 variable_2;
     u16 variable_3;
     union {
-        /**
-         * `difficulty__spawn_settings`
-         *
-         * - difficulty: Determines if an actor should only spawn on a specific difficulty settings,
-         *               or if it should spawn no matter the difficulty
-         *
-         * - spawn_settings: Used in conjuction with field `spawn_flags` to configure the actor's
-         *                   spawn behaviour. See `ActorConfigSpawnSettings`
-         *
-         * - spawn_flags:    Used in conjuction with field `spawn_settings` to configure the actor's
-         *                   spawn behaviour. See `ActorConfigSpawnFlags`
-         */
         struct {
             /**
-             * Difficulty      = 4 upper bits
-             * Spawn settings  = 4 lower bits
+             * - difficulty: Determines if an actor should only spawn on a specific difficulty settings,
+             *               or if it should spawn no matter the difficulty. 4 upper bits
+             *
+             * - spawn_settings: Used in conjuction with field `spawn_flags` to configure the actor's
+             *                   spawn behaviour. See `ActorConfigSpawnSettings`. 4 lower bits
              */
             u8 difficulty__spawn_settings;
+
+            /**
+             * - spawn_flags:    Used in conjuction with field `spawn_settings` to configure the actor's
+             *                   spawn behaviour. See `ActorConfigSpawnFlags`
+             */
             u8 spawn_flags;
         };
         /**
