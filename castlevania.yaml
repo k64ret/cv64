@@ -508,7 +508,7 @@ segments:
       - [0x000AE120, asm, common/textbox_object]
       - [0x000AFD00, asm, common/textbox]
       - [0x000B5720, asm, common/lens]
-      - [0x000B9900, asm, common/gameplay_menu_mgr]
+      - [0x000B9900, c, common/gameplay_menu_mgr]
       - [0x000BA6F0, asm, common/hud]
       - [0x000BC530, c, common/hud_params]  # HUD_params is an struct associated to the HUD object
       - [0x000BC6D0, asm, common/renon_shop]
@@ -567,7 +567,7 @@ segments:
       - [0x000EFAD0, .data, common/stage_select]
       - [0x000EFC70, data]
       - [0x000F0290, data]
-      - [0x00103650, data, common/gameplay_menu_mgr]
+      - [0x00103650, .data, common/gameplay_menu_mgr]
       - [0x00103680, data, common/hud]
       - [0x00103720, data, common/renon_shop]
       - [0x00103E10, data]
@@ -624,7 +624,7 @@ segments:
       - [0x0010FA20, rodata]
       - [0x0010FA60, rodata]
       - [0x0010FB60, rodata]
-      - { start: 0x0010FC40, type: bss, vram: 0x8018CA50, name: common/gameplay_menu_mgr }
+      - { start: 0x0010FC40, type: .bss, vram: 0x8018CA50, name: common/gameplay_menu_mgr }
       - { start: 0x0010FC40, type: bss, vram: 0x8018CA60, name: common/file_select }
       - { start: 0x0010FC40, type: bss, vram: 0x8018CA80, name: common/map_manager }
       - { start: 0x0010FC40, type: bss, vram: 0x8018CDF0, name: D6C30 }

@@ -28,13 +28,14 @@ typedef enum gameplayMenuMgrMenuState {
 } gameplayMenuMgrMenuState;
 
 // ID: 0x0126
-typedef struct {
+// Real name: `etc_ctrl`
+typedef struct gameplayMenuMgr {
     ObjectHeader header;
     u8 field_0x20[32];
     s32 bought_item_from_renon_shop; // Set to `TRUE` when buying an item in Renon's shop
     u32 hide_common_textbox_window;
     u8 field_0x48[8];
-    u32 update_assets_heap_block_max_size; // See 0x80136C9C
+    u32 update_assets_heap_block_max_size;
     void* assets_file_buffer_start_ptr;
     RGBA background_color;
     MfdsState* common_textbox;
@@ -54,20 +55,26 @@ typedef struct {
     u32 menu_state;
 } gameplayMenuMgr;
 
-extern void gameplayMenuMgr_entrypoint(gameplayMenuMgr* self);
-extern void gameplayMenuMgr_initMainStructs(gameplayMenuMgr* self);
-extern void gameplayMenuMgr_initHUDParams(gameplayMenuMgr* self);
-extern void gameplayMenuMgr_outsideMenuLoop(gameplayMenuMgr* self);
-extern void gameplayMenuMgr_initMenu(gameplayMenuMgr* self);
-extern void gameplayMenuMgr_insideMenuLoop(gameplayMenuMgr* self);
-extern void gameplayMenuMgr_exitMenu(gameplayMenuMgr* self);
-extern u32 moveSelectionCursor(u32 button);
+void gameplayMenuMgr_entrypoint(gameplayMenuMgr* self);
+void gameplayMenuMgr_initMainStructs(gameplayMenuMgr* self);
+void gameplayMenuMgr_initHUDParams(gameplayMenuMgr* self);
+void gameplayMenuMgr_outsideMenuLoop(gameplayMenuMgr* self);
+void gameplayMenuMgr_initMenu(gameplayMenuMgr* self);
+void gameplayMenuMgr_insideMenuLoop(gameplayMenuMgr* self);
+void gameplayMenuMgr_exitMenu(gameplayMenuMgr* self);
+u32 moveSelectionCursor(u32 button);
 extern ObjMfds* getGameplayMenuMgrTextboxObject(u16 object_ID, ObjectHeader* start);
 extern ObjMfds* getGameplayMenuMgrTextboxObjectFromList();
 extern MfdsState* gameplayMenuMgr_closeCommonTextbox();
 
 typedef enum gameplayMenuMgrFuncId {
-    GAMEPLAYMENUMGR_OUTSIDE_MENU_LOOP = 2
+    GAMEPLAYMENUMGR_INIT_MAIN_STRUCTS,
+    GAMEPLAYMENUMGR_INIT_HUD_PARAMS,
+    GAMEPLAYMENUMGR_OUTSIDE_MENU_LOOP,
+    GAMEPLAYMENUMGR_INIT_MENU,
+    GAMEPLAYMENUMGR_INSIDE_MENU_LOOP,
+    GAMEPLAYMENUMGR_EXIT_MENU,
+    GAMEPLAYMENUMGR_DO_NOTHING
 } gameplayMenuMgrFuncId;
 
 typedef void (*gameplayMenuMgrFuncs)(gameplayMenuMgr*);
