@@ -6,7 +6,7 @@
 #include "atari.h"
 #include "objects/camera/modelLighting.h"
 #include "animation.h"
-#include "actor_settings.h"
+#include "actor_config.h"
 #include <ultra64.h>
 
 // For "axis" argument from `checkIfOutsideEntityIsInsideMainEntityRadius`

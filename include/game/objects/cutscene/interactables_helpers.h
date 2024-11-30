@@ -3,7 +3,7 @@
 
 #include "interactables.h"
 #include "save.h"
-#include "actor_settings.h"
+#include "actor_config.h"
 
 #define INTERACT_TYPE_NONE       0
 #define INTERACT_TYPE_ITEM       1
@@ -45,6 +45,6 @@ void spawnCastleWallGratingMechanismTextboxes(s16 index);
 void removeKeyWhenOpeningDoor(s16 event_flag_ID, u32 event_flag);
 
 extern door_item_open_verify_struct door_item_open_verify_list[13];
-extern ActorConfig* castleWallGratingMechanism_textSpotsActorSettings[1][3];
+extern ActorConfig* castleWallGratingMechanism_textSpotsActorConfig[1][3];
 
 #endif

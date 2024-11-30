@@ -2034,7 +2034,7 @@ Actor_SetPosAndAngle = 0x8016823c;
 actor_checkProximityDespawn = 0x801683d8;
 generator_createActorAndSettings = 0x8016a1ec;
 generator_createActor = 0x8016a2dc;
-generator_allocActorSettings = 0x8016a660;
+generator_allocActorConfig = 0x8016a660;
 getMapModelPosMultiplier = 0x8016a7bc;
 generator_checkInTimeRange = 0x8016a7ec;
 Carrie_stopAirborne = 0x803d36b0;
@@ -2233,10 +2233,10 @@ D_8018ab80                                       = 0x8018AB80; // type:jtbl size
 // src/common/interactables_tables.c ===========================================
 
 // .data
-castleWallGratingMechanism_textSpotsActorSettings_openMechanism   = 0x8016A870; // size:0x10
-castleWallGratingMechanism_textSpotsActorSettings_mechanismOpened = 0x8016A880; // size:0x10
+castleWallGratingMechanism_textSpotsActorConfig_openMechanism   = 0x8016A870; // size:0x10
+castleWallGratingMechanism_textSpotsActorConfig_mechanismOpened = 0x8016A880; // size:0x10
 door_item_open_verify_list                                        = 0x8016A890; // size:0x68
-castleWallGratingMechanism_textSpotsActorSettings                 = 0x8016A8F8; // size:0x0C
+castleWallGratingMechanism_textSpotsActorConfig                 = 0x8016A8F8; // size:0x0C
 interactables_settings                                            = 0x8016A904; // size:0x9C4
 item_model_settings_list                                          = 0x8016B2C8; // size:0x290
 
