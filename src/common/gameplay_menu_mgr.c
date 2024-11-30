@@ -31,7 +31,7 @@ u32 selection_text_idle_time           = 0;
  */
 const char gameplayMenuMgr_unusedString1[] = "文字侮ｦシステムを起動しました。(%p)\n";
 /**
- * etc_ctrl : No. %02d Unknown screen request.\nEntering standby mode.
+ * etc_ctrl : No. %02d Unknown screen request.\nEntering standby mode.\n
  */
 const char gameplayMenuMgr_unusedString2[] =
     "etc_ctrl : No. %02d 不明な画面要求がありました。\n待機モードに移行します。\n";
