@@ -60,7 +60,7 @@ typedef enum ActorConfigSpawnSettings {
 
 typedef enum ActorConfigSpawnFlags {
     /**
-     * Automatically set when an actor spawns.
+     * Automatically set when an actor spawns, assuming it's *not* part of rooms
      * Allows the usage of `SPAWN_ONLY_ONCE_AUTOMATICALLY` from `ActorConfigSpawnSettings`
      */
     ALLOW_SPAWN_ONLY_ONCE_AUTOMATICALLY = 0x01,
