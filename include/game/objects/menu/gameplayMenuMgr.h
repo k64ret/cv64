@@ -10,7 +10,7 @@ typedef enum gameplayMenuMgrFlags {
     IN_FILE_SELECT  = BIT(1),
     IN_OPTIONS_MENU = BIT(2),
     IN_GAMEPLAY     = BIT(3),
-    QUIT_GAME       = BIT(4),
+    IN_QUIT_GAME    = BIT(4),
     IN_GAME_OVER    = BIT(5),
     IN_RENON_SHOP   = BIT(6)
 } gameplayMenuMgrFlags;
@@ -23,6 +23,7 @@ typedef enum gameplayMenuMgrMenuState {
     QUIT_GAME            = BIT(4),
     ENTERING_GAME_OVER   = BIT(5),
     ENTERING_RENON_SHOP  = BIT(6),
+    MENU_STATE_100       = BIT(8),
     INIT_NEW_GAME        = BIT(9)
 } gameplayMenuMgrMenuState;
 
@@ -37,7 +38,16 @@ typedef struct {
     void* assets_file_buffer_start_ptr;
     RGBA background_color;
     MfdsState* common_textbox;
-    HUDParams* HUD_params;
+    /**
+     * `obj_hud` is only written to instead of `HUD_params`
+     * if the `HUD` object is not created during the initialization of `gameplayMenuMgr`.
+     *
+     * See `gameplayMenuMgr_initMainStructs`
+     */
+    union {
+        HUDParams* HUD_params;
+        HUD* obj_hud;
+    };
     u32 current_opened_menu;
     void* assets_file_buffer_end_ptr;
     u32 flags;
@@ -51,10 +61,14 @@ extern void gameplayMenuMgr_outsideMenuLoop(gameplayMenuMgr* self);
 extern void gameplayMenuMgr_initMenu(gameplayMenuMgr* self);
 extern void gameplayMenuMgr_insideMenuLoop(gameplayMenuMgr* self);
 extern void gameplayMenuMgr_exitMenu(gameplayMenuMgr* self);
-extern void moveSelectionCursor(u32 button);
+extern u32 moveSelectionCursor(u32 button);
 extern ObjMfds* getGameplayMenuMgrTextboxObject(u16 object_ID, ObjectHeader* start);
 extern ObjMfds* getGameplayMenuMgrTextboxObjectFromList();
 extern MfdsState* gameplayMenuMgr_closeCommonTextbox();
+
+typedef enum gameplayMenuMgrFuncId {
+    GAMEPLAYMENUMGR_OUTSIDE_MENU_LOOP = 2
+} gameplayMenuMgrFuncId;
 
 typedef void (*gameplayMenuMgrFuncs)(gameplayMenuMgr*);
 
