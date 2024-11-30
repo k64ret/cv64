@@ -74,8 +74,6 @@ void processMeter_setSizeDivisor(f32 size_divisor) {
 // TODO: This function can't be matched until we can include this file's `bss`
 //       in without having linker errors.
 #ifdef NON_MATCHING
-    #pragma GLOBAL_ASM("../asm/nonmatchings/debug/processMeter_update.s")
-#else
 /**
  * Updates the size of each process bar.
  *
@@ -109,13 +107,13 @@ void processMeter_update(s32 state) {
             break;
     }
 }
+#else
+    #pragma GLOBAL_ASM("../asm/nonmatchings/debug/processMeter_update.s")
 #endif
 
 // TODO: This function can't be matched until we can include this file's `bss`
 //       in without having linker errors.
 #ifdef NON_MATCHING
-    #pragma GLOBAL_ASM("../asm/nonmatchings/debug/processMeter_render.s")
-#else
 /**
  * Render both the green and blue process bars.
  */
@@ -135,6 +133,8 @@ void processMeter_render(Gfx** dlist) {
     processMeter_renderDivisions(dlist, number_of_divisions);
     gDPPipeSync(dlist[0]++);
 }
+#else
+    #pragma GLOBAL_ASM("../asm/nonmatchings/debug/processMeter_render.s")
 #endif
 
 /**

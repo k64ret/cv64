@@ -72,7 +72,7 @@ if(compress)
     VERBATIM)
 endif()
 
-target_compile_definitions(${TARGET} PRIVATE $<$<COMPILE_LANGUAGE:C>:_LANGUAGE_C F3DEX_GBI_2 NON_MATCHING>)
+target_compile_definitions(${TARGET} PRIVATE $<$<COMPILE_LANGUAGE:C>:_LANGUAGE_C F3DEX_GBI_2>)
 
 target_compile_options(
   ${TARGET}
