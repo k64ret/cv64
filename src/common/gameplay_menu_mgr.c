@@ -250,14 +250,12 @@ void gameplayMenuMgr_initMenu(gameplayMenuMgr* self) {
     );
 }
 
+// clang-format off
 void gameplayMenuMgr_insideMenuLoop(gameplayMenuMgr* self) {
     s32 temp[2];
 
     if ((self->assets_file_buffer_end_ptr != NULL) && (self->update_assets_heap_block_max_size)) {
-        heapBlock_updateBlockMaxSize(
-            self->assets_file_buffer_start_ptr,
-            (u32) self->assets_file_buffer_end_ptr - (u32) self->assets_file_buffer_start_ptr
-        );
+        heapBlock_updateBlockMaxSize(self->assets_file_buffer_start_ptr, (u32) self->assets_file_buffer_end_ptr - (u32) self->assets_file_buffer_start_ptr);
         self->update_assets_heap_block_max_size = FALSE;
     }
 
@@ -267,9 +265,7 @@ void gameplayMenuMgr_insideMenuLoop(gameplayMenuMgr* self) {
             if (self->menu_state & ENTERING_PAUSE_MENU) {
                 if (objectList_findFirstObjectByID(MENU_PAUSE) == NULL) {
                     object_createAndSetChild(self, MENU_PAUSE);
-                    self->menu_state &= ~ENTERING_PAUSE_MENU;
-                    self->flags &= ~IN_GAMEPLAY;
-                    self->flags |= IN_PAUSE_MENU;
+                    self->menu_state &= ~ENTERING_PAUSE_MENU; self->flags &= ~IN_GAMEPLAY; self->flags |= IN_PAUSE_MENU;
                     if ((*Fade_IsFading)() == FALSE) {
                         (*Fade_SetSettings)(FADE_IN, 22, 0, 0, 0);
                     }
@@ -277,131 +273,114 @@ void gameplayMenuMgr_insideMenuLoop(gameplayMenuMgr* self) {
                         self->HUD_params->flags ^= HUD_PARAMS_ENTERED_PAUSE_MENU;
                     }
                 }
-            } else if (self->menu_state & ENTERING_RENON_SHOP) {
+            }
+            else if (self->menu_state & ENTERING_RENON_SHOP) {
                 if (objectList_findFirstObjectByID(MENU_RENON_SHOP) == NULL) {
                     object_createAndSetChild(self, MENU_RENON_SHOP);
-                    if (1) {
-                    }
-                    self->menu_state &= ~ENTERING_RENON_SHOP;
-                    self->flags &= ~IN_GAMEPLAY;
-                    self->flags |= IN_RENON_SHOP;
+                    if (1) {}
+                    self->menu_state &= ~ENTERING_RENON_SHOP; self->flags &= ~IN_GAMEPLAY; self->flags |= IN_RENON_SHOP;
                     sys.cutscene_flags |= CUTSCENE_FLAG_PLAYING;
                 }
-            } else if (self->menu_state & ENTERING_GAME_OVER) {
+            }
+            else if (self->menu_state & ENTERING_GAME_OVER) {
                 if (objectList_findFirstObjectByID(ENGINE_GAME_OVER) == NULL) {
                     object_createAndSetChild(self, ENGINE_GAME_OVER);
-                    self->menu_state &= ~ENTERING_GAME_OVER;
-                    self->flags &= ~IN_GAMEPLAY;
-                    self->flags |= IN_GAME_OVER;
+                    self->menu_state &= ~ENTERING_GAME_OVER; self->flags &= ~IN_GAMEPLAY; self->flags |= IN_GAME_OVER;
                     if ((*Fade_IsFading)() == FALSE) {
                         (*Fade_SetSettings)(FADE_IN, 15, 0, 0, 0);
                     }
                     sys.cutscene_flags |= CUTSCENE_FLAG_PLAYING;
                 }
             }
-        } else if (self->flags & IN_PAUSE_MENU) {
+        }
+        else if (self->flags & IN_PAUSE_MENU) {
             if (objectList_findFirstObjectByID(MENU_PAUSE) == NULL) {
                 if (self->menu_state & ENTERING_FILE_SELECT) {
                     if (objectList_findFirstObjectByID(MENU_FILE_SELECT_CONTROLLER) == NULL) {
                         object_createAndSetChild(self, MENU_FILE_SELECT_CONTROLLER);
-                        self->menu_state &= ~ENTERING_FILE_SELECT;
-                        self->flags &= ~IN_PAUSE_MENU;
-                        self->flags |= IN_FILE_SELECT;
+                        self->menu_state &= ~ENTERING_FILE_SELECT; self->flags &= ~IN_PAUSE_MENU; self->flags |= IN_FILE_SELECT;
                         (*Fade_SetSettings)(FADE_IN, 45, 0, 0, 0);
                         sys.cutscene_flags |= CUTSCENE_FLAG_PLAYING;
                         return;
                     }
-                } else if (self->menu_state & ENTERING_OPTION) {
+                }
+                else if (self->menu_state & ENTERING_OPTION) {
                     if (objectList_findFirstObjectByID(MENU_OPTIONS_CONTROLLER) == NULL) {
                         object_createAndSetChild(self, MENU_OPTIONS_CONTROLLER);
-                        self->menu_state &= ~ENTERING_OPTION;
-                        self->flags &= ~IN_PAUSE_MENU;
-                        self->flags |= IN_OPTIONS_MENU;
+                        self->menu_state &= ~ENTERING_OPTION; self->flags &= ~IN_PAUSE_MENU; self->flags |= IN_OPTIONS_MENU;
                         (*Fade_SetSettings)(FADE_IN, 60, 0, 0, 0);
                         sys.cutscene_flags |= CUTSCENE_FLAG_PLAYING;
                     }
-                } else if (self->menu_state & EXIT_MENU) {
+                }
+                else if (self->menu_state & EXIT_MENU) {
                     if (objectList_findFirstObjectByID(MENU_PAUSE) == NULL) {
                         if (self->HUD_params != NULL) {
                             self->HUD_params->flags ^= HUD_PARAMS_ENTERED_PAUSE_MENU;
                         }
-                        (*object_curLevel_goToNextFuncAndClearTimer)(
-                            self->header.current_function, &self->header.function_info_ID
-                        );
+                        (*object_curLevel_goToNextFuncAndClearTimer)(self->header.current_function, &self->header.function_info_ID);
                     }
-                } else if (self->menu_state & QUIT_GAME) {
+                }
+                else if (self->menu_state & QUIT_GAME) {
                     if (objectList_findFirstObjectByID(MENU_PAUSE) == NULL) {
-                        (*object_curLevel_goToNextFuncAndClearTimer)(
-                            self->header.current_function, &self->header.function_info_ID
-                        );
+                        (*object_curLevel_goToNextFuncAndClearTimer)(self->header.current_function, &self->header.function_info_ID);
                     }
                 }
             }
-        } else if (self->flags & IN_FILE_SELECT) {
+        }
+        else if (self->flags & IN_FILE_SELECT) {
             if (self->menu_state & ENTERING_PAUSE_MENU) {
-                if ((objectList_findFirstObjectByID(MENU_FILE_SELECT_CONTROLLER) == NULL) &&
-                    (objectList_findFirstObjectByID(MENU_PAUSE) == NULL)) {
+                if ((objectList_findFirstObjectByID(MENU_FILE_SELECT_CONTROLLER) == NULL) && (objectList_findFirstObjectByID(MENU_PAUSE) == NULL)) {
                     object_createAndSetChild(self, MENU_PAUSE);
-                    self->menu_state &= ~ENTERING_PAUSE_MENU;
-                    self->flags &= ~IN_FILE_SELECT;
-                    self->flags |= IN_PAUSE_MENU;
-                    (*Fade_SetSettings)(FADE_IN, 15, 0, 0, 0);
-                }
-            } else if (self->menu_state & INIT_NEW_GAME) {
-                if ((objectList_findFirstObjectByID(MENU_FILE_SELECT_CONTROLLER) == NULL) &&
-                    (objectList_findFirstObjectByID(MENU_PAUSE) == NULL)) {
-                    object_createAndSetChild(self, MENU_PAUSE);
-                    self->menu_state &= ~ENTERING_PAUSE_MENU;
-                    self->flags &= ~IN_FILE_SELECT;
-                    self->flags |= IN_PAUSE_MENU;
-                    (*Fade_SetSettings)(FADE_IN, 15, 0, 0, 0);
-                }
-            } else if (self->menu_state & MENU_STATE_100) {
-                if ((objectList_findFirstObjectByID(MENU_FILE_SELECT_CONTROLLER) == NULL) &&
-                    (objectList_findFirstObjectByID(MENU_PAUSE) == NULL)) {
-                    object_createAndSetChild(self, MENU_PAUSE);
-                    self->menu_state &= ~ENTERING_PAUSE_MENU;
-                    self->flags &= ~IN_FILE_SELECT;
-                    self->flags |= IN_PAUSE_MENU;
+                    self->menu_state &= ~ENTERING_PAUSE_MENU; self->flags &= ~IN_FILE_SELECT; self->flags |= IN_PAUSE_MENU;
                     (*Fade_SetSettings)(FADE_IN, 15, 0, 0, 0);
                 }
             }
-        } else if (self->flags & IN_OPTIONS_MENU) {
-            if (self->menu_state & ENTERING_PAUSE_MENU) {
-                if ((objectList_findFirstObjectByID(MENU_OPTIONS_CONTROLLER) == NULL) &&
-                    (objectList_findFirstObjectByID(MENU_PAUSE) == NULL)) {
+            else if (self->menu_state & INIT_NEW_GAME) {
+                if ((objectList_findFirstObjectByID(MENU_FILE_SELECT_CONTROLLER) == NULL) && (objectList_findFirstObjectByID(MENU_PAUSE) == NULL)) {
                     object_createAndSetChild(self, MENU_PAUSE);
-                    self->menu_state &= ~ENTERING_PAUSE_MENU;
-                    self->flags &= ~IN_OPTIONS_MENU;
-                    self->flags |= IN_PAUSE_MENU;
+                    self->menu_state &= ~ENTERING_PAUSE_MENU; self->flags &= ~IN_FILE_SELECT; self->flags |= IN_PAUSE_MENU;
                     (*Fade_SetSettings)(FADE_IN, 15, 0, 0, 0);
                 }
             }
-        } else if (self->flags & IN_RENON_SHOP) {
+            else if (self->menu_state & MENU_STATE_100) {
+                if ((objectList_findFirstObjectByID(MENU_FILE_SELECT_CONTROLLER) == NULL) && (objectList_findFirstObjectByID(MENU_PAUSE) == NULL)) {
+                    object_createAndSetChild(self, MENU_PAUSE);
+                    self->menu_state &= ~ENTERING_PAUSE_MENU; self->flags &= ~IN_FILE_SELECT; self->flags |= IN_PAUSE_MENU;
+                    (*Fade_SetSettings)(FADE_IN, 15, 0, 0, 0);
+                }
+            }
+        }
+        else if (self->flags & IN_OPTIONS_MENU) {
+            if (self->menu_state & ENTERING_PAUSE_MENU) {
+                if ((objectList_findFirstObjectByID(MENU_OPTIONS_CONTROLLER) == NULL) && (objectList_findFirstObjectByID(MENU_PAUSE) == NULL)) {
+                    object_createAndSetChild(self, MENU_PAUSE);
+                    self->menu_state &= ~ENTERING_PAUSE_MENU; self->flags &= ~IN_OPTIONS_MENU; self->flags |= IN_PAUSE_MENU;
+                    (*Fade_SetSettings)(FADE_IN, 15, 0, 0, 0);
+                }
+            }
+        }
+        else if (self->flags & IN_RENON_SHOP) {
             if (self->menu_state & EXIT_MENU) {
                 if (objectList_findFirstObjectByID(MENU_RENON_SHOP) == NULL) {
-                    (*object_curLevel_goToNextFuncAndClearTimer)(
-                        self->header.current_function, &self->header.function_info_ID
-                    );
+                    (*object_curLevel_goToNextFuncAndClearTimer)(self->header.current_function, &self->header.function_info_ID);
                 }
             }
-        } else if (self->flags & IN_GAME_OVER) {
+        }
+        else if (self->flags & IN_GAME_OVER) {
             if (self->menu_state & EXIT_MENU) {
                 if (objectList_findFirstObjectByID(MENU_PAUSE) == NULL) {
-                    (*object_curLevel_goToNextFuncAndClearTimer)(
-                        self->header.current_function, &self->header.function_info_ID
-                    );
+                    (*object_curLevel_goToNextFuncAndClearTimer)(self->header.current_function, &self->header.function_info_ID);
                 }
-            } else if (self->menu_state & QUIT_GAME) {
+            }
+            else if (self->menu_state & QUIT_GAME) {
                 if (objectList_findFirstObjectByID(MENU_PAUSE) == NULL) {
-                    (*object_curLevel_goToNextFuncAndClearTimer)(
-                        self->header.current_function, &self->header.function_info_ID
-                    );
+                    (*object_curLevel_goToNextFuncAndClearTimer)(self->header.current_function, &self->header.function_info_ID);
                 }
             }
         }
     }
 }
+// clang-format off
 
 void gameplayMenuMgr_exitMenu(gameplayMenuMgr* self) {
     if ((*Fade_IsFading)() == FALSE) {
