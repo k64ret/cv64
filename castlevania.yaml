@@ -2182,14 +2182,14 @@ segments:
     vram: 0x0F000000
     exclusive_ram_id: nisitenma_ichigo_overlays
 
-  - name: ni_ovl_demonDraculaAssetsLoader
+  - name: ni_ovl_demon_dracula_assets_loader
     type: code
     # start: 0x00AD7B1C
     start: 0x00DA6B60
     vram: 0x0F000000
     exclusive_ram_id: nisitenma_ichigo_overlays
     subsegments:
-      - [0x00DA6B60, c, overlay/demonDraculaAssetsLoader]
+      - [0x00DA6B60, c, overlay/demon_dracula_assets_loader]
 
   - name: ni_AD7B28
     type: bin

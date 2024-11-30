@@ -44,6 +44,7 @@ extern WindowWork* lens_create(
     f32 closing_speed
 );
 
+extern u32 lensAreOpened(void);
 extern u32 lensAreClosed(void);
 
 #endif

@@ -5,7 +5,7 @@
 #include "objects/menu/mfds.h"
 #include "objects/menu/HUD.h"
 
-typedef enum gameplayMenuMgr_flags_t {
+typedef enum gameplayMenuMgrFlags {
     IN_PAUSE_MENU   = BIT(0),
     IN_FILE_SELECT  = BIT(1),
     IN_OPTIONS_MENU = BIT(2),
@@ -13,9 +13,9 @@ typedef enum gameplayMenuMgr_flags_t {
     QUIT_GAME       = BIT(4),
     IN_GAME_OVER    = BIT(5),
     IN_RENON_SHOP   = BIT(6)
-} gameplayMenuMgr_flags_t;
+} gameplayMenuMgrFlags;
 
-typedef enum pause_menu_state_t {
+typedef enum gameplayMenuMgrMenuState {
     ENTERING_PAUSE_MENU  = BIT(0),
     ENTERING_FILE_SELECT = BIT(1), // Unused
     ENTERING_OPTION      = BIT(2),
@@ -24,13 +24,13 @@ typedef enum pause_menu_state_t {
     ENTERING_GAME_OVER   = BIT(5),
     ENTERING_RENON_SHOP  = BIT(6),
     INIT_NEW_GAME        = BIT(9)
-} pause_menu_state_t;
+} gameplayMenuMgrMenuState;
 
 // ID: 0x0126
 typedef struct {
     ObjectHeader header;
     u8 field_0x20[32];
-    s32 field_0x40;
+    s32 bought_item_from_renon_shop; // Set to `TRUE` when buting an item in Renon's shop
     u32 hide_common_textbox_window;
     u8 field_0x48[8];
     u32 update_assets_heap_block_max_size; // See 0x80136C9C
@@ -44,9 +44,19 @@ typedef struct {
     u32 menu_state;
 } gameplayMenuMgr;
 
-void gameplayMenuMgr_entrypoint(gameplayMenuMgr* self);
+extern void gameplayMenuMgr_entrypoint(gameplayMenuMgr* self);
+extern void gameplayMenuMgr_initMainStructs(gameplayMenuMgr* self);
+extern void gameplayMenuMgr_initHUDParams(gameplayMenuMgr* self);
+extern void gameplayMenuMgr_outsideMenuLoop(gameplayMenuMgr* self);
+extern void gameplayMenuMgr_initMenu(gameplayMenuMgr* self);
+extern void gameplayMenuMgr_insideMenuLoop(gameplayMenuMgr* self);
+extern void gameplayMenuMgr_exitMenu(gameplayMenuMgr* self);
+extern void moveSelectionCursor(u32 button);
+extern ObjMfds* getGameplayMenuMgrTextboxObject(u16 object_ID, ObjectHeader* start);
+extern ObjMfds* getGameplayMenuMgrTextboxObjectFromList();
+extern MfdsState* gameplayMenuMgr_closeCommonTextbox();
 
-typedef void (*gameplayMenuMgr_func_t)(gameplayMenuMgr*);
+typedef void (*gameplayMenuMgrFuncs)(gameplayMenuMgr*);
 
 extern gameplayMenuMgr* ptr_gameplayMenuMgr;
 
