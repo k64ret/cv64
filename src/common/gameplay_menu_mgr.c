@@ -29,17 +29,18 @@ u32 selection_text_idle_time           = 0;
 /**
  * The character display system has been started. (%p)\n
  */
-//const char gameplayMenuMgr_unusedString1[] = "æ–‡å­—ä¾®ï½¦ã‚·ã‚¹ãƒ†ãƒ ã‚’èµ·å‹•ã—ã¾ã—ãŸã€‚(%p)\n";
+const char gameplayMenuMgr_unusedString1[] = "•¶š•¦ƒVƒXƒeƒ€‚ğ‹N“®‚µ‚Ü‚µ‚½B(%p)\n";
 /**
  * etc_ctrl : No. %02d Unknown screen request.\nEntering standby mode.
  */
-//const char gameplayMenuMgr_unusedString2[] = "etc_ctrl : No. %02d ä¸æ˜ãªç”»é¢è¦æ±‚ãŒã‚ã‚Šã¾ã—ãŸã€‚\nå¾…æ©Ÿãƒ¢ãƒ¼ãƒ‰ã«ç§»è¡Œã—ã¾ã™ã€‚";
-//const char gameplayMenuMgr_unusedString3[] = "etc_ctrl : alloc trunc size = 0x%08x!!\n";
-//const char gameplayMenuMgr_unusedString4[] = "etc_ctrl : Call Status!!\n";
-//const char gameplayMenuMgr_unusedString5[] = "etc_ctrl : Call Item Shop!!\n";
-//const char gameplayMenuMgr_unusedString6[] = "etc_ctrl : Call Gameover!!\n";
-//const char gameplayMenuMgr_unusedString7[] = "etc_ctrl : Return to GAME!!\n";
-//const char gameplayMenuMgr_unusedString8[] = "etc_ctrl : Call Title!!\n";
+const char gameplayMenuMgr_unusedString2[] =
+    "etc_ctrl : No. %02d •s–¾‚È‰æ–Ê—v‹‚ª‚ ‚è‚Ü‚µ‚½B\n‘Ò‹@ƒ‚[ƒh‚ÉˆÚs‚µ‚Ü‚·B\n";
+const char gameplayMenuMgr_unusedString3[] = "etc_ctrl : alloc trunc size = 0x%08x!!\n";
+const char gameplayMenuMgr_unusedString4[] = "etc_ctrl : Call Status!!\n";
+const char gameplayMenuMgr_unusedString5[] = "etc_ctrl : Call Item Shop!!\n";
+const char gameplayMenuMgr_unusedString6[] = "etc_ctrl : Call Gameover!!\n";
+const char gameplayMenuMgr_unusedString7[] = "etc_ctrl : Return to GAME!!\n";
+const char gameplayMenuMgr_unusedString8[] = "etc_ctrl : Call Title!!\n";
 
 u32 gameplayMenuMgr_wait;
 
