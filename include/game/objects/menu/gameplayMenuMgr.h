@@ -82,7 +82,7 @@ MfdsState*
 gameplayMenuMgr_setMessageAndColorPalette(u16* message_pool_base_ptr, u8 id, u8 color_palette);
 u32 lensAreOpened();
 u32 lensAreClosed();
-ObjMfds* getGameplayMenuMgrTextboxObject(u16 object_ID, ObjectHeader* start);
+ObjMfds* getGameplayMenuMgrTextboxObject(s32 ID, Object* current_object);
 ObjMfds* getGameplayMenuMgrTextboxObjectFromList();
 
 typedef enum gameplayMenuMgrFuncId {
