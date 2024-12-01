@@ -32,8 +32,8 @@ options:
   asm_function_macro: glabel
   asm_jtbl_label_macro: jlabel
   asm_data_macro: dlabel
+  string_encoding: EUC-JP
   rodata_string_guesser_level: 2
-  data_string_guesser_level: 2
   gfx_ucode: f3dex2
 segments:
   - name: header
