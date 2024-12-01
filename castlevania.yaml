@@ -36,11 +36,11 @@ options:
   rodata_string_guesser_level: 2
   gfx_ucode: f3dex2
 segments:
+  # `header`, `boot` and `entrypoint` are part of `makerom`
   - name: header
-    type: code
+    type: header
     start: 0x00000000
-    # Uncommenting this causes linking to fail
-    # vram: 0xA4000000
+    vram: 0x00000000
     subsegments:
       - [0x00000000, header, header]
 
@@ -48,9 +48,6 @@ segments:
     type: code
     start: 0x00000040
     vram: 0xA4000040
-    # Same here...
-    # follows_vram: header
-    exclusive_ram_id: ipl3
     subsegments:
       - [0x00000040, hasm, ipl3]
       - [0x00000B70, bin, ipl3font]
