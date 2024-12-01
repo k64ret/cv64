@@ -11,6 +11,20 @@ typedef enum miniScroll_flags {
     MINISCROLL_FLAG_08000000 = 0x08000000
 } miniScroll_flags;
 
+typedef struct miniScrollInner {
+    u32 flags;
+    s32 field_0x04;
+    s32 field_0x08;
+    s32 field_0x0C;
+    Vec3f position;
+    f32 open_max_height;
+    Vec3f width;
+    s32 field_0x2C;
+    s32 field_0x30;
+    s32 field_0x34;
+    Camera* display_camera;
+} miniScrollInner;
+
 // ID: 0x213E
 typedef struct {
     ObjectHeader header;
@@ -22,27 +36,17 @@ typedef struct {
      * TODO: This may need its own struct
      */
     void* vtx_buffer;
-    u32 flags;
-    s32 field_0x3C;
-    s32 field_0x40;
-    s32 field_0x44;
-    Vec3f position;
-    f32 open_max_height;
-    Vec3f width;
-    s32 field_0x64;
-    s32 field_0x68;
-    s32 field_0x6C;
-    Camera* display_camera;
+    miniScrollInner inner;
 } miniScroll;
 
-extern miniScroll* createMiniScroll(void* parent, Camera* camera, s32 param_3, s32 param_4);
-extern u32 miniScroll_checkFlags(miniScroll* self, u32 flags);
-extern void miniScroll_editFlags(miniScroll* self, u32 flags, s32 setFlags);
-extern Model* miniScroll_getModel(miniScroll* self);
-extern void miniScroll_setFlags(miniScroll* self, u32 flags);
-extern void miniScroll_setOpenMaxHeight(miniScroll* self, f32 open_max_height, s32 param_3);
-extern void miniScroll_setPosition(miniScroll* self, f32 X, f32 Y, f32 Z);
-extern void miniScroll_setWidth(miniScroll* self, f32 X, f32 Y, f32 Z);
+miniScroll* createMiniScroll(void* parent, Camera* camera, s32 param_3, s32 param_4);
+u32 miniScroll_checkFlags(miniScroll* self, u32 flags);
+void miniScroll_editFlags(miniScroll* self, u32 flags, s32 setFlags);
+Model* miniScroll_getModel(miniScroll* self);
+void miniScroll_setFlags(miniScroll* self, u32 flags);
+void miniScroll_setOpenMaxHeight(miniScroll* self, f32 open_max_height, s32 param_3);
+void miniScroll_setPosition(miniScroll* self, f32 X, f32 Y, f32 Z);
+void miniScroll_setWidth(miniScroll* self, f32 X, f32 Y, f32 Z);
 
 typedef void (*miniScroll_func_t)(miniScroll*);
 

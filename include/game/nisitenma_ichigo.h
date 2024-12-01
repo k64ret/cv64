@@ -175,7 +175,7 @@ typedef enum NIFileID {
     NI_OVL_A4                              = 0xA4,
     NI_OVL_HELL_KNIGHT_STATIC              = 0xA5,
     NI_OVL_A6                              = 0xA6,
-    NI_OVL_SCROLL                          = 0xA7,
+    ni_ovl_mini_scroll                     = 0xA7,
     NI_OVL_A8                              = 0xA8,
     NI_OVL_GAMENOTE_DELETE_MGR             = 0xA9,
     NI_OVL_TITLE_SCREEN                    = 0xAA,

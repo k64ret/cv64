@@ -516,7 +516,7 @@ segments:
       - [0x000BE4B0, c, common/menu_alloc_struct]  # Contains functions for allocating menu-related structs
       - [0x000BE740, c, common/gameplay_common_textbox]
       - [0x000BEF40, asm, common/item]   # Contains item / inventory handling code, as well as code for handling displaying these
-      - [0x000BFFB0, asm, common/mini_scroll]
+      - [0x000BFFB0, c, common/mini_scroll_setup]
       - [0x000C0120, asm]   # Contains some functions for creating and managing `GameNoteErrorHandler`
       - [0x000C01A0, asm, common/distortion]
       - [0x000C2770, asm]   # Contains object 0x0167's code
@@ -2304,14 +2304,14 @@ segments:
     vram: 0x0F000000
     exclusive_ram_id: nisitenma_ichigo_overlays
 
-  - name: ni_B48BE0
+  - name: ni_gondola_pathway_data_loader
     type: bin
     # start: 0x00B48BE0
     start: 0x00E40A30
     vram: 0x0F000000
     exclusive_ram_id: nisitenma_ichigo_overlays
 
-  - name: ni_ovl_scroll
+  - name: ni_ovl_mini_scroll
     type: bin
     # start: 0x00B4F7DC
     start: 0x00E4DD00
