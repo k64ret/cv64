@@ -186,8 +186,8 @@ void cv64_ovl_explwalltxt_determine_msg(cv64_ovl_explwalltxt_t* self) {
 void cv64_ovl_explwalltxt_item_prepare_msg(cv64_ovl_explwalltxt_t* self) {
     // clang-format off
     MfdsState* message = (self->nitro_amount_until_max_capacity <= 0)
-        ? (*map_getMessageFromPool)(self->set_nitro_text_ID, 0)
-        : (*map_getMessageFromPool)(self->set_mandragora_text_ID, 0);
+        ? (*gameplayCommonTextbox_displayMapMessage)(self->set_nitro_text_ID, 0)
+        : (*gameplayCommonTextbox_displayMapMessage)(self->set_mandragora_text_ID, 0);
     // clang-format on
 
     if (message == NULL)
@@ -351,7 +351,7 @@ void cv64_ovl_explwalltxt_item_determine_next_txt(cv64_ovl_explwalltxt_t* self) 
  * "Set X item?" textbox
  */
 void cv64_ovl_explwalltxt_item_no(cv64_ovl_explwalltxt_t* self) {
-    if (!(*lensAreClosed)())
+    if (!(*gameplayCommonTextbox_lensAreClosed)())
         return;
 
     self->header.timer                  = 0;
@@ -368,7 +368,7 @@ void cv64_ovl_explwalltxt_ready_for_blast(cv64_ovl_explwalltxt_t* self) {
     MfdsState* message;
 
     if (self->state == 0) {
-        message = (*map_getMessageFromPool)(self->ready_for_blasting_text_ID, 0);
+        message = (*gameplayCommonTextbox_displayMapMessage)(self->ready_for_blasting_text_ID, 0);
     }
 
     if (message == NULL)
@@ -377,7 +377,7 @@ void cv64_ovl_explwalltxt_ready_for_blast(cv64_ovl_explwalltxt_t* self) {
     self->state           = 1;
     self->message_textbox = message;
 
-    if (!(*lensAreClosed)())
+    if (!(*gameplayCommonTextbox_lensAreClosed)())
         return;
 
     switch (self->wall_type) {
@@ -402,7 +402,7 @@ void cv64_ovl_explwalltxt_nitro_is_set(cv64_ovl_explwalltxt_t* self) {
     MfdsState* message;
 
     if (self->state == 0) {
-        message = (*map_getMessageFromPool)(self->nitro_set_text_ID, 0);
+        message = (*gameplayCommonTextbox_displayMapMessage)(self->nitro_set_text_ID, 0);
     }
 
     if (message == NULL)
@@ -411,7 +411,7 @@ void cv64_ovl_explwalltxt_nitro_is_set(cv64_ovl_explwalltxt_t* self) {
     self->state           = 1;
     self->message_textbox = message;
 
-    if (!(*lensAreClosed)())
+    if (!(*gameplayCommonTextbox_lensAreClosed)())
         return;
 
     self->header.timer                  = 0;
@@ -428,7 +428,7 @@ void cv64_ovl_explwalltxt_mandragora_is_set(cv64_ovl_explwalltxt_t* self) {
     MfdsState* message;
 
     if (self->state == 0) {
-        message = (*map_getMessageFromPool)(self->mandragora_set_text_ID, 0);
+        message = (*gameplayCommonTextbox_displayMapMessage)(self->mandragora_set_text_ID, 0);
     }
 
     if (message == NULL)
@@ -437,7 +437,7 @@ void cv64_ovl_explwalltxt_mandragora_is_set(cv64_ovl_explwalltxt_t* self) {
     self->state           = 1;
     self->message_textbox = message;
 
-    if (!(*lensAreClosed)())
+    if (!(*gameplayCommonTextbox_lensAreClosed)())
         return;
 
     self->header.timer                  = 0;
@@ -454,7 +454,7 @@ void cv64_ovl_explwalltxt_default_desc(cv64_ovl_explwalltxt_t* self) {
     MfdsState* message;
 
     if (self->state == 0) {
-        message = (*map_getMessageFromPool)(self->default_description_text_ID, 0);
+        message = (*gameplayCommonTextbox_displayMapMessage)(self->default_description_text_ID, 0);
     }
 
     if (message == NULL)
@@ -463,7 +463,7 @@ void cv64_ovl_explwalltxt_default_desc(cv64_ovl_explwalltxt_t* self) {
     self->state           = 1;
     self->message_textbox = message;
 
-    if (!(*lensAreClosed)())
+    if (!(*gameplayCommonTextbox_lensAreClosed)())
         return;
 
     self->header.timer                  = 0;
@@ -480,7 +480,7 @@ void cv64_ovl_explwalltxt_item_already_set(cv64_ovl_explwalltxt_t* self) {
     MfdsState* message;
 
     if (self->state == 0) {
-        message = (*map_getMessageFromPool)(self->item_already_set_text_ID, 0);
+        message = (*gameplayCommonTextbox_displayMapMessage)(self->item_already_set_text_ID, 0);
     }
 
     if (message == NULL)
@@ -489,7 +489,7 @@ void cv64_ovl_explwalltxt_item_already_set(cv64_ovl_explwalltxt_t* self) {
     self->state           = 1;
     self->message_textbox = message;
 
-    if (!(*lensAreClosed)())
+    if (!(*gameplayCommonTextbox_lensAreClosed)())
         return;
 
     self->header.timer                  = 0;

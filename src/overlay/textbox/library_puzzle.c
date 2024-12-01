@@ -72,7 +72,8 @@ void cv64_ovl_librarypuzzletxt_idle(cv64_ovl_librarypuzzletxt_t* self) {
         return;
 
     // Freeze player and ask the user if they want to do the puzzle
-    message = (*map_getMessageFromPool)(CASTLE_CENTER_4F_LIBRARY_PUZZLE_DESCRIPTION, 0);
+    message =
+        (*gameplayCommonTextbox_displayMapMessage)(CASTLE_CENTER_4F_LIBRARY_PUZZLE_DESCRIPTION, 0);
     if (message == NULL)
         return;
 
@@ -141,8 +142,9 @@ void cv64_ovl_librarypuzzletxt_show(cv64_ovl_librarypuzzletxt_t* self) {
              * textbox, and not to gameplayMenuMgr's common textbox, which closes after
              * said message displays
              */
-            self->message_textbox =
-                (*map_getMessageFromPool)(CASTLE_CENTER_4F_LIBRARY_PUZZLE_GOLD_PIECE, 0);
+            self->message_textbox = (*gameplayCommonTextbox_displayMapMessage)(
+                CASTLE_CENTER_4F_LIBRARY_PUZZLE_GOLD_PIECE, 0
+            );
 
             (*object_curLevel_goToNextFuncAndClearTimer)(
                 self->header.current_function, &self->header.function_info_ID
@@ -314,7 +316,8 @@ void cv64_ovl_librarypuzzletxt_select(cv64_ovl_librarypuzzletxt_t* self) {
     }
 
     // Fail
-    self->message_textbox = (*map_getMessageFromPool)(CASTLE_CENTER_4F_LIBRARY_PUZZLE_FAIL, 0);
+    self->message_textbox =
+        (*gameplayCommonTextbox_displayMapMessage)(CASTLE_CENTER_4F_LIBRARY_PUZZLE_FAIL, 0);
     SELECTION_DELAY_TIMER(self) = 0;
     (*object_curLevel_goToNextFuncAndClearTimer)(
         self->header.current_function, &self->header.function_info_ID
@@ -328,12 +331,13 @@ void cv64_ovl_librarypuzzletxt_fail(cv64_ovl_librarypuzzletxt_t* self) {
 
     // Open up the common textbox again, and display the failed message
     if (textbox == NULL) {
-        textbox               = (*map_getMessageFromPool)(CASTLE_CENTER_4F_LIBRARY_PUZZLE_FAIL, 0);
+        textbox =
+            (*gameplayCommonTextbox_displayMapMessage)(CASTLE_CENTER_4F_LIBRARY_PUZZLE_FAIL, 0);
         self->message_textbox = textbox;
         return;
     }
 
-    if (!(*lensAreClosed)())
+    if (!(*gameplayCommonTextbox_lensAreClosed)())
         return;
 
     // Close the message and go back to normal

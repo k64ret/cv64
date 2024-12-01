@@ -93,7 +93,7 @@ void cv64_ovl_mandragoratxt_prepare_msg(cv64_ovl_mandragoratxt_t* self) {
         self->text_ID = CASTLE_CENTER_MAIN_MANDRAGORA_INFO;
     }
 
-    message = (*map_getMessageFromPool)(self->text_ID, 0);
+    message = (*gameplayCommonTextbox_displayMapMessage)(self->text_ID, 0);
     if (message == NULL)
         return;
 
@@ -131,7 +131,7 @@ void cv64_ovl_mandragoratxt_close(cv64_ovl_mandragoratxt_t* self) {
     MfdsState* message_textbox;
 
     if (self->text_ID == CASTLE_CENTER_MAIN_OBTAINED_MANDRAGORA) {
-        message_textbox = (*map_getMessageFromPool)(self->text_ID, 0);
+        message_textbox = (*gameplayCommonTextbox_displayMapMessage)(self->text_ID, 0);
         if (message_textbox == NULL)
             return;
 
@@ -140,7 +140,7 @@ void cv64_ovl_mandragoratxt_close(cv64_ovl_mandragoratxt_t* self) {
 
     self->text_ID = 0;
 
-    if (!(*lensAreClosed)())
+    if (!(*gameplayCommonTextbox_lensAreClosed)())
         return;
 
     self->header.timer                  = 0;

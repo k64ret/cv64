@@ -64,9 +64,9 @@ void gameplayMenuMgr_insideMenuLoop(gameplayMenuMgr* self);
 void gameplayMenuMgr_exitMenu(gameplayMenuMgr* self);
 u32 moveSelectionCursor(u32 button);
 
-MfdsState* gameplayMenuMgr_getCommonTextboxIfClosed();
-MfdsState* gameplayMenuMgr_closeCommonTextbox();
-ObjMfds* func_8013B608_BE7F8(
+MfdsState* gameplayCommonTextbox_getIfClosed();
+MfdsState* gameplayCommonTextbox_close();
+ObjMfds* gameplayCommonTextbox_displayMessage(
     u16* text_ptr,
     u32 flags,
     u8 line,
@@ -74,16 +74,15 @@ ObjMfds* func_8013B608_BE7F8(
     u8 color_palette,
     s16 X_pos,
     s16 Y_pos,
-    u8 textbox_display_time
+    u8 display_time
 );
-MfdsState* item_prepareTextbox(s32 item);
-MfdsState* map_getMessageFromPool(u16 text_ID, u8 textbox_display_time);
-MfdsState*
-gameplayMenuMgr_setMessageAndColorPalette(u16* message_pool_base_ptr, u8 id, u8 color_palette);
-u32 lensAreOpened();
-u32 lensAreClosed();
-ObjMfds* getGameplayMenuMgrTextboxObject(s32 ID, Object* current_object);
-ObjMfds* getGameplayMenuMgrTextboxObjectFromList();
+MfdsState* gameplayCommonTextbox_displayItemName(s32);
+MfdsState* gameplayCommonTextbox_displayMapMessage(u16, u8);
+MfdsState* gameplayCommonTextbox_displayMessageGivenPalette(u16*, u8, u8);
+u32 gameplayCommonTextbox_lensAreOpened();
+u32 gameplayCommonTextbox_lensAreClosed();
+ObjMfds* gameplayCommonTextbox_get(s32, Object*);
+ObjMfds* gameplayCommonTextbox_getFromList();
 
 typedef enum gameplayMenuMgrFuncId {
     GAMEPLAYMENUMGR_INIT_MAIN_STRUCTS,

@@ -514,7 +514,7 @@ segments:
       - [0x000BC6D0, asm, common/renon_shop]
       - [0x000BDFE0, asm]
       - [0x000BE4B0, c, common/menu_alloc_struct]  # Contains functions for allocating menu-related structs
-      - [0x000BE740, c, common/gameplay_menu_mgr_textbox]
+      - [0x000BE740, c, common/gameplay_common_textbox]
       - [0x000BEF40, asm, common/item]   # Contains item / inventory handling code, as well as code for handling displaying these
       - [0x000BFFB0, asm, common/mini_scroll]
       - [0x000C0120, asm]   # Contains some functions for creating and managing `GameNoteErrorHandler`
@@ -570,7 +570,7 @@ segments:
       - [0x00103650, .data, common/gameplay_menu_mgr]
       - [0x00103680, data, common/hud]
       - [0x00103720, data, common/renon_shop]
-      - [0x00103E10, .data, common/gameplay_menu_mgr_textbox]
+      - [0x00103E10, .data, common/gameplay_common_textbox]
       - [0x00103F00, data, common/distortion]
       - [0x001040F0, data]
       - [0x00104190, data]

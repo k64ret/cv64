@@ -1,7 +1,7 @@
 /**
- * @file gameplay_menu_mgr_textbox.c
+ * @file gameplay_common_textbox.c
  *
- * This file contains code that operates with the common gameplay textbox
+ * This file contains code that operates with the gameplay common textbox
  * (aka the `gameplayMenuMgr` textbox, as it is created by said object).
  *
  * This textbox displays most of the messages seen during gameplay, including
@@ -13,10 +13,10 @@
 #include "system_work.h"
 
 u16 YOU_CANNOT_CARRY_MORE_ITEMS_TEXT[] = {
-#include "objects/menu/gameplay_menu_mgr_textbox.msg"
+#include "objects/menu/gameplay_common_textbox.msg"
 };
 
-MfdsState* gameplayMenuMgr_getCommonTextboxIfClosed() {
+MfdsState* gameplayCommonTextbox_getIfClosed() {
     MfdsState* common_textbox;
     gameplayMenuMgr* gameplay_menu_mgr;
 
@@ -35,7 +35,7 @@ MfdsState* gameplayMenuMgr_getCommonTextboxIfClosed() {
     }
 }
 
-MfdsState* gameplayMenuMgr_closeCommonTextbox() {
+MfdsState* gameplayCommonTextbox_close() {
     MfdsState* common_textbox;
     gameplayMenuMgr* gameplay_menu_mgr;
 
@@ -55,7 +55,7 @@ MfdsState* gameplayMenuMgr_closeCommonTextbox() {
     return NULL;
 }
 
-ObjMfds* func_8013B608_BE7F8(
+ObjMfds* gameplayCommonTextbox_displayMessage(
     u16* text_ptr,
     u32 flags,
     u8 line,
@@ -63,7 +63,7 @@ ObjMfds* func_8013B608_BE7F8(
     u8 color_palette,
     s16 X_pos,
     s16 Y_pos,
-    u8 textbox_display_time
+    u8 display_time
 ) {
     MfdsState* common_textbox;
     gameplayMenuMgr* gameplay_menu_mgr;
@@ -95,12 +95,12 @@ ObjMfds* func_8013B608_BE7F8(
         (*textbox_setDimensions)(common_textbox, line, width, 0, 0);
         (*textbox_setMessagePtr)(common_textbox, text_ptr, NULL, 0);
         common_textbox->palette      = color_palette % 4;
-        common_textbox->display_time = textbox_display_time;
+        common_textbox->display_time = display_time;
         return common_textbox;
     }
 }
 
-MfdsState* item_prepareTextbox(s32 item) {
+MfdsState* gameplayCommonTextbox_displayItemName(s32 item) {
     MfdsState* common_textbox;
     gameplayMenuMgr* gameplay_menu_mgr;
 
@@ -155,7 +155,7 @@ MfdsState* item_prepareTextbox(s32 item) {
     }
 }
 
-MfdsState* map_getMessageFromPool(u16 text_ID, u8 textbox_display_time) {
+MfdsState* gameplayCommonTextbox_displayMapMessage(u16 id, u8 display_time) {
     MfdsState* common_textbox;
     gameplayMenuMgr* gameplay_menu_mgr;
 
@@ -182,18 +182,18 @@ MfdsState* map_getMessageFromPool(u16 text_ID, u8 textbox_display_time) {
         textbox_setDimensions(common_textbox, 4, 240, 0, 0);
         textbox_setMessagePtr(
             common_textbox,
-            text_getMessageFromPool(GET_MAP_MESSAGE_POOL_PTR_NO_FUNC_PTR(), text_ID),
+            text_getMessageFromPool(GET_MAP_MESSAGE_POOL_PTR_NO_FUNC_PTR(), id),
             NULL,
             0
         );
         common_textbox->palette      = 0;
-        common_textbox->display_time = textbox_display_time * 30.0f;
+        common_textbox->display_time = display_time * 30.0f;
         return common_textbox;
     }
 }
 
 MfdsState*
-gameplayMenuMgr_setMessageAndColorPalette(u16* message_pool_base_ptr, u8 id, u8 color_palette) {
+gameplayCommonTextbox_displayMessageGivenPalette(u16* text_ptr, u8 id, u8 color_palette) {
     MfdsState* common_textbox;
     gameplayMenuMgr* gameplay_menu_mgr;
 
@@ -218,21 +218,19 @@ gameplayMenuMgr_setMessageAndColorPalette(u16* message_pool_base_ptr, u8 id, u8 
         common_textbox->flags |= (MFDS_FLAG_OPEN_LENS | MFDS_FLAG_OPEN_TEXTBOX);
         textbox_setPos(common_textbox, 38, 140, 1);
         textbox_setDimensions(common_textbox, 4, 240, 0, 0);
-        textbox_setMessagePtr(
-            common_textbox, (*text_getMessageFromPool)(message_pool_base_ptr, id), NULL, 0
-        );
+        textbox_setMessagePtr(common_textbox, (*text_getMessageFromPool)(text_ptr, id), NULL, 0);
         common_textbox->palette      = color_palette % 4;
         common_textbox->display_time = 0;
         return common_textbox;
     }
 }
 
-u32 lensAreOpened() {
+u32 gameplayCommonTextbox_lensAreOpened() {
     ObjMfds* common_textbox;
     WindowWork* lens;
     u32 flags;
 
-    common_textbox = getGameplayMenuMgrTextboxObjectFromList();
+    common_textbox = gameplayCommonTextbox_getFromList();
     lens           = common_textbox->window;
     if (lens != NULL) {
         flags = lens->flags;
@@ -244,12 +242,12 @@ u32 lensAreOpened() {
     }
 }
 
-u32 lensAreClosed() {
+u32 gameplayCommonTextbox_lensAreClosed() {
     ObjMfds* common_textbox;
     WindowWork* lens;
     u32 flags;
 
-    common_textbox = getGameplayMenuMgrTextboxObjectFromList();
+    common_textbox = gameplayCommonTextbox_getFromList();
     lens           = common_textbox->window;
     if (lens != NULL) {
         flags = lens->flags;
@@ -260,13 +258,13 @@ u32 lensAreClosed() {
     }
 }
 
-ObjMfds* getGameplayMenuMgrTextboxObject(s32 ID, Object* current_object) {
+ObjMfds* gameplayCommonTextbox_get(s32 id, Object* current_object) {
     MfdsState* textbox;
 
-    BITS_ASSIGN_MASK(ID, 0x7FF);
+    BITS_ASSIGN_MASK(id, 0x7FF);
 
     for (current_object++; current_object < ARRAY_END(objects_array); current_object++) {
-        if (BITS_MASK(current_object->header.ID, 0x07FF) == ID) {
+        if (BITS_MASK(current_object->header.ID, 0x07FF) == id) {
             textbox = ((ObjMfds*) current_object)->state;
             if (textbox->flags & MFDS_FLAG_GAMEPLAYMENUMGR_TEXTBOX) {
                 return current_object;
@@ -277,6 +275,6 @@ ObjMfds* getGameplayMenuMgrTextboxObject(s32 ID, Object* current_object) {
     return NULL;
 }
 
-ObjMfds* getGameplayMenuMgrTextboxObjectFromList() {
-    return getGameplayMenuMgrTextboxObject(MENU_MFDS, ARRAY_START(objects_array) - 1);
+ObjMfds* gameplayCommonTextbox_getFromList() {
+    return gameplayCommonTextbox_get(MENU_MFDS, ARRAY_START(objects_array) - 1);
 }

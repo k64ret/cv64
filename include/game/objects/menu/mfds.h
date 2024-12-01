@@ -349,7 +349,7 @@ text_convertSignedIntegerToText(u32 number, u16* dest, u8 number_of_chars, u32 n
 extern u16* text_findCharInString(u16* text, u16 char_to_find);
 extern u16* convertUTF16ToCustomTextFormat(u16* text_buffer);
 extern void textbox_setHeightAndWidth(MfdsState* self, u32 index, u8 text_height, u8 text_width);
-extern MfdsState* map_getMessageFromPool(u16 text_ID, u8 textbox_display_time);
+extern MfdsState* gameplayCommonTextbox_displayMapMessage(u16 text_ID, u8 textbox_display_time);
 
 extern MfdsColorAnimData text_color_anim_data_table[4][8];
 

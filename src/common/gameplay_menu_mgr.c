@@ -160,7 +160,7 @@ void gameplayMenuMgr_outsideMenuLoop(gameplayMenuMgr* self) {
              */
             if (self->common_textbox->flags & MFDS_FLAG_OPEN_TEXTBOX) {
                 self->hide_common_textbox_window = TRUE;
-                gameplayMenuMgr_closeCommonTextbox();
+                gameplayCommonTextbox_close();
                 self->common_textbox->flags |= MFDS_FLAG_HIDE_TEXTBOX;
             } else {
                 self->hide_common_textbox_window = FALSE;
@@ -181,8 +181,8 @@ void gameplayMenuMgr_initMenu(gameplayMenuMgr* self) {
      * Hide the common gameplay textbox's lens if opened
      */
     if (self->hide_common_textbox_window) {
-        if (lensAreClosed() == FALSE) {
-            getGameplayMenuMgrTextboxObjectFromList()->window->flags |= WINDOW_HIDE;
+        if (gameplayCommonTextbox_lensAreClosed() == FALSE) {
+            gameplayCommonTextbox_getFromList()->window->flags |= WINDOW_HIDE;
         }
         self->hide_common_textbox_window = FALSE;
     }
