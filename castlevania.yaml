@@ -600,7 +600,7 @@ segments:
       - [0x0010E0F0, rodata]
       - [0x0010E1E0, rodata]
       - [0x0010E410, rodata, common/lens]
-      - [0x0010E4E0, .rodata, common/gameplay_menu_mgr]
+      - [0x0010E4E0, rodata, common/gameplay_menu_mgr]
       - [0x0010E610, rodata, common/hud]
       - [0x0010E650, rodata, common/renon_shop]
       - [0x0010E8A0, rodata]

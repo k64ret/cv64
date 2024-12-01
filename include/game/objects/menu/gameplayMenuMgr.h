@@ -23,7 +23,7 @@ typedef enum gameplayMenuMgrMenuState {
     QUIT_GAME            = BIT(4),
     ENTERING_GAME_OVER   = BIT(5),
     ENTERING_RENON_SHOP  = BIT(6),
-    MENU_STATE_100       = BIT(8),
+    MENU_STATE_100       = BIT(8), // Unused
     INIT_NEW_GAME        = BIT(9)
 } gameplayMenuMgrMenuState;
 
