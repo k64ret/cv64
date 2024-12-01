@@ -6,6 +6,7 @@
 
 #include "objects/cutscene/library_puzzle.h"
 #include "objects/map/honmaru_4f_minami/library_piece.h"
+#include "objects/menu/gameplayMenuMgr.h"
 #include "memory.h"
 #include "sound.h"
 #include "system_work.h"

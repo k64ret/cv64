@@ -63,9 +63,27 @@ void gameplayMenuMgr_initMenu(gameplayMenuMgr* self);
 void gameplayMenuMgr_insideMenuLoop(gameplayMenuMgr* self);
 void gameplayMenuMgr_exitMenu(gameplayMenuMgr* self);
 u32 moveSelectionCursor(u32 button);
-extern ObjMfds* getGameplayMenuMgrTextboxObject(u16 object_ID, ObjectHeader* start);
-extern ObjMfds* getGameplayMenuMgrTextboxObjectFromList();
-extern MfdsState* gameplayMenuMgr_closeCommonTextbox();
+
+MfdsState* gameplayMenuMgr_getCommonTextboxIfClosed();
+MfdsState* gameplayMenuMgr_closeCommonTextbox();
+ObjMfds* func_8013B608_BE7F8(
+    u16* text_ptr,
+    u32 flags,
+    u8 line,
+    u16 width,
+    u8 color_palette,
+    s16 X_pos,
+    s16 Y_pos,
+    u8 textbox_display_time
+);
+MfdsState* item_prepareTextbox(s32 item);
+MfdsState* map_getMessageFromPool(u16 text_ID, u8 textbox_display_time);
+MfdsState*
+gameplayMenuMgr_setMessageAndColorPalette(u16* message_pool_base_ptr, u8 id, u8 color_palette);
+u32 lensAreOpened();
+u32 lensAreClosed();
+ObjMfds* getGameplayMenuMgrTextboxObject(u16 object_ID, ObjectHeader* start);
+ObjMfds* getGameplayMenuMgrTextboxObjectFromList();
 
 typedef enum gameplayMenuMgrFuncId {
     GAMEPLAYMENUMGR_INIT_MAIN_STRUCTS,

@@ -167,6 +167,14 @@ extern void Map_SetCameraParams();
         map_text_segment_address[sys.SaveStruct_gameplay.map], MAP_ASSETS_FILE_ID                  \
     )
 
+/**
+ * Same as `GET_MAP_MESSAGE_POOL_PTR`, but this is not accessed through a function pointer
+ */
+#define GET_MAP_MESSAGE_POOL_PTR_NO_FUNC_PTR()                                                     \
+    NisitenmaIchigoFiles_segmentToVirtual(                                                         \
+        map_text_segment_address[sys.SaveStruct_gameplay.map], MAP_ASSETS_FILE_ID                  \
+    )
+
 extern const u32 MENU_RED_BACKGROUND_DL;
 
 #endif // CV64_H

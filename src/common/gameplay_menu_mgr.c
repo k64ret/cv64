@@ -7,6 +7,7 @@
 
 #include "objects/menu/gameplayMenuMgr.h"
 #include "objects/engine/DMAMgr.h"
+#include "objects/menu/gameplayMenuMgr.h"
 #include "memory.h"
 #include "sound.h"
 #include "gamestate.h"

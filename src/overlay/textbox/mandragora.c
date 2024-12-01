@@ -5,6 +5,7 @@
  */
 
 #include "objects/cutscene/mandragora_textbox.h"
+#include "objects/menu/gameplayMenuMgr.h"
 #include "system_work.h"
 
 // clang-format off
