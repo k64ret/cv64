@@ -97,7 +97,7 @@ void cv64_ovl_nitrotxt_idle(cv64_ovl_nitrotxt_t* self) {
 void cv64_ovl_nitrotxt_prepare_msg(cv64_ovl_nitrotxt_t* self) {
     MfdsState* message;
 
-    message = (*gameplayCommonTextbox_displayMapMessage)(self->text_ID, self->message_display_time);
+    message = (*gameplayCommonTextbox_getMapMessage)(self->text_ID, self->message_display_time);
     if (message == NULL)
         return;
 
@@ -136,7 +136,7 @@ void cv64_ovl_nitrotxt_close(cv64_ovl_nitrotxt_t* self) {
     MfdsState* message_textbox;
 
     if (self->text_ID == CASTLE_CENTER_3F_NITRO_WARNING) {
-        message_textbox = (*gameplayCommonTextbox_displayMapMessage)(self->text_ID, 0);
+        message_textbox = (*gameplayCommonTextbox_getMapMessage)(self->text_ID, 0);
         if (message_textbox == NULL)
             return;
 

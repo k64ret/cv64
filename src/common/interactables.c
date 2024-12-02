@@ -339,7 +339,7 @@ void Interactable_InitCheck(Interactable* self) {
     // If picking up an item...
     if (settings->type == ITEM_KIND_ITEM) {
         // Setup and display the item name textbox
-        textbox = gameplayCommonTextbox_displayItemName(
+        textbox = gameplayCommonTextbox_addItemAndPrepareName(
             itemModelSettings_getEntryFromList(interactables_settings[self->idx].item)->item_ID
         );
 
@@ -401,8 +401,8 @@ void Interactable_InitCheck(Interactable* self) {
          * the game will grab the same string
          */
         textbox = (BITS_HAS(interactables_settings[self->idx].flags, TEXT_SPOT_DO_ACTION_AFTER_SELECTING_OPTION))
-            ? gameplayCommonTextbox_displayMapMessage(interactables_settings[self->idx].text_ID, 0)
-            : gameplayCommonTextbox_displayMapMessage(interactables_settings[self->idx].text_ID, 0);
+            ? gameplayCommonTextbox_getMapMessage(interactables_settings[self->idx].text_ID, 0)
+            : gameplayCommonTextbox_getMapMessage(interactables_settings[self->idx].text_ID, 0);
 
         // Freeze the player and all enemies in place, then begin reading the message
         sys.FREEZE_PLAYER = TRUE, // comma needed for matching
@@ -547,7 +547,7 @@ void Interactable_StopCheck(Interactable* self) {
             // then don't destroy those items after checking them.
             //
             // `item_addAmountToInventory` returns -1 if trying to add another Nitro or
-            // Mandragora to the inventory, which in turn will cause `gameplayCommonTextbox_displayItemName` to
+            // Mandragora to the inventory, which in turn will cause `gameplayCommonTextbox_addItemAndPrepareName` to
             // return -1, which is then put into `self->textbox`
             if (self->textbox == (MfdsState*) -1) {
                 Interactable_stopInteraction(self);

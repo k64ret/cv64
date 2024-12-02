@@ -66,23 +66,16 @@ u32 moveSelectionCursor(u32 button);
 
 MfdsState* gameplayCommonTextbox_getIfClosed();
 MfdsState* gameplayCommonTextbox_close();
-ObjMfds* gameplayCommonTextbox_displayMessage(
-    u16* text_ptr,
-    u32 flags,
-    u8 line,
-    u16 width,
-    u8 color_palette,
-    s16 X_pos,
-    s16 Y_pos,
-    u8 display_time
+MfdsState* gameplayCommonTextbox_prepare(
+    u16* text_ptr, u32 flags, u8 line, u16 width, u8 palette, s16 X_pos, s16 Y_pos, u8 display_time
 );
-MfdsState* gameplayCommonTextbox_displayItemName(s32);
-MfdsState* gameplayCommonTextbox_displayMapMessage(u16, u8);
-MfdsState* gameplayCommonTextbox_displayMessageGivenPalette(u16*, u8, u8);
+MfdsState* gameplayCommonTextbox_addItemAndPrepareName(s32);
+MfdsState* gameplayCommonTextbox_getMapMessage(u16, u8);
+MfdsState* gameplayCommonTextbox_getMessageFromPool(u16*, u8, u8);
 u32 gameplayCommonTextbox_lensAreOpened();
 u32 gameplayCommonTextbox_lensAreClosed();
-ObjMfds* gameplayCommonTextbox_get(s32, Object*);
-ObjMfds* gameplayCommonTextbox_getFromList();
+ObjMfds* gameplayCommonTextbox_getObject(s32, Object*);
+ObjMfds* gameplayCommonTextbox_getObjectFromList();
 
 typedef enum gameplayMenuMgrFuncId {
     GAMEPLAYMENUMGR_INIT_MAIN_STRUCTS,

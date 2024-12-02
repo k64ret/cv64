@@ -91,7 +91,7 @@ void cv64_ovl_nitrodisposaltxt_prepare_msg(cv64_ovl_nitrodisposaltxt_t* self) {
         self->text_ID = self->has_nitro_text_ID;
     }
 
-    message = (*gameplayCommonTextbox_displayMapMessage)(self->text_ID, 0);
+    message = (*gameplayCommonTextbox_getMapMessage)(self->text_ID, 0);
     if (message == NULL)
         return;
 

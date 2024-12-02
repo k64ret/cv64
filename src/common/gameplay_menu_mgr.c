@@ -182,7 +182,7 @@ void gameplayMenuMgr_initMenu(gameplayMenuMgr* self) {
      */
     if (self->hide_common_textbox_window) {
         if (gameplayCommonTextbox_lensAreClosed() == FALSE) {
-            gameplayCommonTextbox_getFromList()->window->flags |= WINDOW_HIDE;
+            gameplayCommonTextbox_getObjectFromList()->window->flags |= WINDOW_HIDE;
         }
         self->hide_common_textbox_window = FALSE;
     }

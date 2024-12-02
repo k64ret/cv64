@@ -65,19 +65,16 @@ void cv64_ovl_elevatortxt_prepare_msg(cv64_ovl_elevatortxt_t* self) {
         if (CHECK_EVENT_FLAGS(
                 EVENT_FLAG_ID_CASTLE_CENTER_1F_2F, EVENT_FLAG_CASTLE_CENTER_1F_2F_ELEVATOR_ACTIVATED
             )) {
-            message = (*gameplayCommonTextbox_displayMapMessage)(
-                CASTLE_CENTER_1F_ELEVATOR_ALREADY_USED, 0
-            );
+            message =
+                (*gameplayCommonTextbox_getMapMessage)(CASTLE_CENTER_1F_ELEVATOR_ALREADY_USED, 0);
             self->state = BOTTOM_ELEVATOR_ACTIVATOR_STATE_ALREADY_USED;
         } else {
-            message =
-                (*gameplayCommonTextbox_displayMapMessage)(CASTLE_CENTER_1F_ACTIVATE_ELEVATOR, 0);
+            message = (*gameplayCommonTextbox_getMapMessage)(CASTLE_CENTER_1F_ACTIVATE_ELEVATOR, 0);
             self->state = BOTTOM_ELEVATOR_ACTIVATOR_STATE_ACTIVATE_ELEVATOR;
         }
     } else {
-        message = (*gameplayCommonTextbox_displayMapMessage)(
-            CASTLE_CENTER_1F_CANT_ACTIVATE_ELEVATOR_YET, 0
-        );
+        message =
+            (*gameplayCommonTextbox_getMapMessage)(CASTLE_CENTER_1F_CANT_ACTIVATE_ELEVATOR_YET, 0);
     }
 
     if (message == NULL)
@@ -120,8 +117,7 @@ void cv64_ovl_elevatortxt_close(cv64_ovl_elevatortxt_t* self) {
     MfdsState* message;
 
     if (self->state == BOTTOM_ELEVATOR_ACTIVATOR_STATE_ACTIVATE_ELEVATOR) {
-        message =
-            (*gameplayCommonTextbox_displayMapMessage)(CASTLE_CENTER_1F_ELEVATOR_ACTIVATED, 0);
+        message = (*gameplayCommonTextbox_getMapMessage)(CASTLE_CENTER_1F_ELEVATOR_ACTIVATED, 0);
         if (message == NULL)
             return;
 
