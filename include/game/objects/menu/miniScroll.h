@@ -19,11 +19,11 @@ typedef enum miniScrollFlags {
  * 15 least significant bits from `miniScrollInner`'s `flags` field
  */
 typedef enum miniScrollState {
-    MINISCROLL_STATE_OPEN             = 1,
-    MINISCROLL_STATE_CLOSE            = 2,
-    MINISCROLL_STATE_SCROLL_UPWARDS   = 3,
-    MINISCROLL_STATE_SCROLL_DOWNWARDS = 4,
-    MINISCROLL_STATE_DESTROY          = 5
+    MINISCROLL_STATE_OPEN             = 1, // Real name: `SCROLL_REQ_OPEN`
+    MINISCROLL_STATE_CLOSE            = 2, // Real name: `SCROLL_REQ_CLOSE`
+    MINISCROLL_STATE_SCROLL_UPWARDS   = 3, // Real name: `SCROLL_REQ_UP`
+    MINISCROLL_STATE_SCROLL_DOWNWARDS = 4, // Real name: `SCROLL_REQ_DOWN`
+    MINISCROLL_STATE_DESTROY          = 5  // Real name: `SCROLL_REQ_KILL`
 } miniScrollState;
 
 typedef struct miniScrollInner {
@@ -33,7 +33,8 @@ typedef struct miniScrollInner {
     s32 scrolling_speed;
     Vec3f position;
     f32 open_max_height;
-    Vec3f width;
+    Vec2f width;
+    f32 scroll_opened_bottom_limit; // How far the scroll opens up downwards
     s32 field_0x2C;
     s32 field_0x30;
     s32 field_0x34;
@@ -50,8 +51,7 @@ typedef struct {
     ObjectHeader header;
     u8 field_0x20[4];
     Model* model;
-    Model*
-        field_0x28; // Assumption based on function 0x0F0011f8 from the `NI_OVL_MINI_SCROLL` overlay
+    Model* field_0x28; // Assumption based on `func_0F0011F8` from the `NI_OVL_MINI_SCROLL` overlay
     u8 field_0x2C[8];
     miniScrollVertexBuffer* vtx_buffer;
     miniScrollInner inner;
@@ -64,8 +64,26 @@ Model* miniScroll_getModel(miniScroll* self);
 void miniScroll_setState(miniScroll* self, u32 state);
 void miniScroll_setScrollingParams(miniScroll* self, f32 open_max_height, s32 scrolling_speed);
 void miniScroll_setPosition(miniScroll* self, f32 X, f32 Y, f32 Z);
-void miniScroll_setWidth(miniScroll* self, f32 X, f32 Y, f32 Z);
+void miniScroll_setWidth(miniScroll* self, f32 X, f32 Y, f32 scroll_opened_bottom_limit);
 
-typedef void (*miniScroll_func_t)(miniScroll*);
+extern void miniScroll_entrypoint(miniScroll* self);
+extern void miniScroll_init(miniScroll* self);
+extern void miniScroll_loop(miniScroll* self);
+extern void miniScroll_open(miniScroll* self);
+extern void miniScroll_close(miniScroll* self);
+extern void miniScroll_scrollUpwards(miniScroll* self);
+extern void miniScroll_scrollDownwards(miniScroll* self);
+extern void miniScroll_destroy(miniScroll* self);
+extern u32
+miniScroll_renderScroll(miniScroll* self, s32 scroll_offset, s32 scroll_vertical_position);
+extern void miniScroll_animateOpen(miniScroll* self);
+extern void miniScroll_animateClose(miniScroll* self);
+extern void miniScroll_animateScrolling(miniScroll* self);
+extern void func_0F0011F8(miniScroll* self);
+extern void func_0F001248(miniScroll* self);
+extern void func_0F001250(miniScroll* self);
+extern void func_0F001258(miniScroll* self);
+
+typedef void (*miniScrollFuncs)(miniScroll*);
 
 #endif

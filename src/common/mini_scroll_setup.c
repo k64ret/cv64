@@ -14,18 +14,18 @@ miniScroll* miniScroll_create(void* parent, Camera* camera, s32 param_3, s32 par
     miniScroll* obj_mini_scroll;
     miniScrollInner* inner;
 
-    obj_mini_scroll        = (*object_create)(parent, MENU_MINI_SCROLL);
-    inner                  = &obj_mini_scroll->inner;
-    inner->flags           = 0;
-    inner->scrolling_timer = 320;
-    inner->scroll_offset   = 0;
-    inner->scrolling_speed = 1;
-    inner->width.x         = 1.0f;
-    inner->width.y         = 1.0f;
-    inner->width.z         = 1.0f;
-    inner->position.x      = 0.0f;
-    inner->position.y      = 0.0f;
-    inner->open_max_height = 20.0f;
+    obj_mini_scroll                   = (*object_create)(parent, MENU_MINI_SCROLL);
+    inner                             = &obj_mini_scroll->inner;
+    inner->flags                      = 0;
+    inner->scrolling_timer            = 320;
+    inner->scroll_offset              = 0;
+    inner->scrolling_speed            = 1;
+    inner->width.x                    = 1.0f;
+    inner->width.y                    = 1.0f;
+    inner->scroll_opened_bottom_limit = 1.0f;
+    inner->position.x                 = 0.0f;
+    inner->position.y                 = 0.0f;
+    inner->open_max_height            = 20.0f;
 
     if (param_3 != 0) {
         inner->field_0x2C = param_3;
@@ -57,10 +57,10 @@ void miniScroll_setScrollingParams(miniScroll* self, f32 open_max_height, s32 sc
     self->inner.open_max_height = open_max_height;
 }
 
-void miniScroll_setWidth(miniScroll* self, f32 X, f32 Y, f32 Z) {
-    self->inner.width.x = X;
-    self->inner.width.y = Y;
-    self->inner.width.z = Z;
+void miniScroll_setWidth(miniScroll* self, f32 X, f32 Y, f32 scroll_opened_bottom_limit) {
+    self->inner.width.x                    = X;
+    self->inner.width.y                    = Y;
+    self->inner.scroll_opened_bottom_limit = scroll_opened_bottom_limit;
 }
 
 Model* miniScroll_getModel(miniScroll* self) {
