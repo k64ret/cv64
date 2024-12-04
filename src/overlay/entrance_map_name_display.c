@@ -122,7 +122,7 @@ void entranceMapNameDisplay_init(entranceMapNameDisplay* self) {
 
     /**
      * The map's name will display if either we've entered through the first entrance only,
-     * or if we've entered Clock Tower through any of its entrances
+     * or if we've entered Clock Tower through any of its entrances.
      */
     display_name = FALSE;
     if (sys.SaveStruct_gameplay.map != TOKEITOU_NAI) {
@@ -155,8 +155,14 @@ void entranceMapNameDisplay_init(entranceMapNameDisplay* self) {
         /**
          * Obtains the map name's text ID
          *
-         * @note - entranceMapNameDisplay_mapList[i]: The map ID
-         *       - entranceMapNameDisplay_mapList[i + 1]: The map name's text ID
+         * @note
+         *
+         * - entranceMapNameDisplay_mapList[i]: The map ID
+         *   entranceMapNameDisplay_mapList[i + 1]: The map name's text ID
+         *
+         * - If the map we're in does not appear in the `entranceMapNameDisplay_mapList`,
+         *   then it will display the "Forest of Silence" name, as the
+         *   `text_ID` value is assigned to 0 by default
          */
         text_ID = 0;
         i       = 0;
