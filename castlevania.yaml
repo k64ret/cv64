@@ -2439,11 +2439,15 @@ segments:
     exclusive_ram_id: nisitenma_ichigo_overlays
 
   - name: ni_ovl_entrance_map_name_display
-    type: bin
+    type: code
     # start: 0x00B5ADC8
     start: 0x00E60300
     vram: 0x0F000000
     exclusive_ram_id: nisitenma_ichigo_overlays
+    subsegments:
+      - [0x00E60300, c, overlay/entrance_map_name_display]
+      - [0x00E60A70, data, overlay/entrance_map_name_display]
+      - [0x00E60DA0, rodata, overlay/entrance_map_name_display]
 
   - name: ni_B5B5D0
     type: bin
