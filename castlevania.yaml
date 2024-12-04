@@ -2447,7 +2447,7 @@ segments:
     subsegments:
       - [0x00E60300, c, overlay/entrance_map_name_display]
       - [0x00E60A70, data, overlay/entrance_map_name_display]
-      - [0x00E60DA0, rodata, overlay/entrance_map_name_display]
+      - [0x00E60DA0, .rodata, overlay/entrance_map_name_display]
 
   - name: ni_B5B5D0
     type: bin
