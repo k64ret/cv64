@@ -383,8 +383,8 @@ entranceMapNameDisplay_loop                   = 0x0F0005E4; // type:func segment
 entranceMapNameDisplay_hide                = 0x0F0006A4; // type:func segment:ni_ovl_entrance_map_name_display
 entranceMapNameDisplay_destroy                   = 0x0F000740; // type:func segment:ni_ovl_entrance_map_name_display
 // .data
-map_names = 0x0F000770; // segment:ni_ovl_entrance_map_name_display size:0x184
-maps_that_display_message = 0x0F0008F8; // segment:ni_ovl_entrance_map_name_display size:0x38
+entranceMapNameDisplay_mapNames = 0x0F000770; // segment:ni_ovl_entrance_map_name_display size:0x184
+entranceMapNameDisplay_mapsThatDisplayMessage = 0x0F0008F8; // segment:ni_ovl_entrance_map_name_display size:0x38
 map_names_width = 0x0F000930; // segment:ni_ovl_entrance_map_name_display size:0x20
 D_0F000950_E60C50 = 0x0F000950; // segment:ni_ovl_entrance_map_name_display size:0x38
 D_0F000988 = 0x0F000988; // segment:ni_ovl_entrance_map_name_display size:0x48

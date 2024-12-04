@@ -89,6 +89,22 @@ extern void Map_SetCameraParams();
 #define SCREEN_WIDTH  320
 #define SCREEN_HEIGHT 240
 
+// Text IDs for `entranceMapNameDisplay_mapsThatDisplayMessage`
+#define ENTRANCE_MAP_NAME_MORI         0
+#define ENTRANCE_MAP_NAME_TOUOKUJI     1
+#define ENTRANCE_MAP_NAME_NAKANIWA     2
+#define ENTRANCE_MAP_NAME_CHIKA_KODO   3
+#define ENTRANCE_MAP_NAME_CHIKA_SUIRO  4
+#define ENTRANCE_MAP_NAME_HONMARU_B1F  5
+#define ENTRANCE_MAP_NAME_KETTOU_TOU   6
+#define ENTRANCE_MAP_NAME_KAGAKU_TOU   7
+#define ENTRANCE_MAP_NAME_SHOKEI_TOU   8
+#define ENTRANCE_MAP_NAME_MAHOU_TOU    9
+#define ENTRANCE_MAP_NAME_TOU_TURO     10
+#define ENTRANCE_MAP_NAME_TOKEITOU_NAI 11
+#define ENTRANCE_MAP_NAME_TENSHU       12
+#define ENTRANCE_MAP_NAME_NONE         -1
+
 // Text IDs for Forest of Silence
 #define FOREST_LOCKED_DOOR 1
 /**
