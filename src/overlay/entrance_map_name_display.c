@@ -50,11 +50,10 @@ s16 entranceMapNameDisplay_mapNamesWidth[] = {
 
 /**
  * Buffer where the display lists for the background model
- * are stored at
+ * are stored at.
+ * Only the first seven display lists from this buffer are used.
  */
-Gfx entranceMapNameDisplay_bgModelDlists[7] = {0};
-
-u8 D_0F000988[72] = {0};
+Gfx entranceMapNameDisplay_bgModelDlists[16] = {0};
 
 /**
  * The vertices associated to the background model.
