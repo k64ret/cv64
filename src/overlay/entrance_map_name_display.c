@@ -9,13 +9,14 @@
 #include "system_work.h"
 
 extern u16 map_names[];
+extern s16 maps_that_display_message[];
 extern s16 map_names_width[];
-extern entranceMapNameDisplayFuncs entranceMapNameDisplay_functions[];
+extern Gfx* D_0F000950_E60C50;
+extern u8 D_0F000988;
 extern Vtx D_0F0009D0_E60CD0[];
 extern Gfx D_0F000A10_E60D10[];
 extern Gfx D_0F000A68_E60D68[];
-extern Gfx* D_0F000950_E60C50;
-extern s16 maps_that_display_message[];
+extern entranceMapNameDisplayFuncs entranceMapNameDisplay_functions[];
 
 void entranceMapNameDisplay_entrypoint(entranceMapNameDisplay* self) {
     ENTER(self, entranceMapNameDisplay_functions);
@@ -94,7 +95,7 @@ void entranceMapNameDisplay_display(entranceMapNameDisplay* self) {
     MfdsState* textbox;
     s16 map_name_width;
 
-    self->bg_model_transparency += 2184.466666666667;
+    self->bg_model_transparency += 2184.46666666666667;
     if (self->bg_model_transparency < 0x7FFF) {
         bg_model->primitive_color.a = self->bg_model_transparency / 256;
         return;
@@ -148,7 +149,7 @@ void entranceMapNameDisplay_loop(entranceMapNameDisplay* self) {
 void entranceMapNameDisplay_hide(entranceMapNameDisplay* self) {
     Model* bg_model = self->bg_model;
 
-    self->bg_model_transparency -= 2184.466666666667;
+    self->bg_model_transparency -= 2184.46666666666667;
     if (self->bg_model_transparency < 0) {
         self->bg_model_transparency = 0;
         bg_model->type |= ~FIG_TYPE_SHOW;
