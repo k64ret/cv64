@@ -57,7 +57,10 @@ Gfx entranceMapNameDisplay_bgModelDlists[7] = {0};
 u8 D_0F000988[72] = {0};
 
 /**
- * The vertices associated to the background model
+ * The vertices associated to the background model.
+ *
+ * The background model's blue color is assigned in
+ * the vertices' color field (the last 4 values on each vertex, see below).
  *
  * @note The X position for each vertex is determined
  *       in function `entranceMapNameDisplay_init`
