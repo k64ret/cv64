@@ -89,7 +89,7 @@ extern void Map_SetCameraParams();
 #define SCREEN_WIDTH  320
 #define SCREEN_HEIGHT 240
 
-// Text IDs for `entranceMapNameDisplay_mapsThatDisplayMessage`
+// Text IDs for `entranceMapNameDisplay_mapList`
 #define ENTRANCE_MAP_NAME_MORI         0
 #define ENTRANCE_MAP_NAME_TOUOKUJI     1
 #define ENTRANCE_MAP_NAME_NAKANIWA     2

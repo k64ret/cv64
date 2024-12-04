@@ -378,19 +378,19 @@ Death_CreateMultipleScythes    = 0x0F00D298; // type:func segment:ni_ovl_death
 // .text
 entranceMapNameDisplay_entrypoint             = 0x0F000000; // type:func segment:ni_ovl_entrance_map_name_display
 entranceMapNameDisplay_init = 0x0F000070; // type:func segment:ni_ovl_entrance_map_name_display
-entranceMapNameDisplay_display                   = 0x0F000308; // type:func segment:ni_ovl_entrance_map_name_display
-entranceMapNameDisplay_loop                   = 0x0F0005E4; // type:func segment:ni_ovl_entrance_map_name_display
+entranceMapNameDisplay_show                   = 0x0F000308; // type:func segment:ni_ovl_entrance_map_name_display
+entranceMapNameDisplay_idle                   = 0x0F0005E4; // type:func segment:ni_ovl_entrance_map_name_display
 entranceMapNameDisplay_hide                = 0x0F0006A4; // type:func segment:ni_ovl_entrance_map_name_display
 entranceMapNameDisplay_destroy                   = 0x0F000740; // type:func segment:ni_ovl_entrance_map_name_display
 // .data
 entranceMapNameDisplay_mapNames = 0x0F000770; // segment:ni_ovl_entrance_map_name_display size:0x184
-entranceMapNameDisplay_mapsThatDisplayMessage = 0x0F0008F8; // segment:ni_ovl_entrance_map_name_display size:0x38
-map_names_width = 0x0F000930; // segment:ni_ovl_entrance_map_name_display size:0x20
-D_0F000950_E60C50 = 0x0F000950; // segment:ni_ovl_entrance_map_name_display size:0x38
+entranceMapNameDisplay_mapList = 0x0F0008F8; // segment:ni_ovl_entrance_map_name_display size:0x38
+entranceMapNameDisplay_mapNamesWidth = 0x0F000930; // segment:ni_ovl_entrance_map_name_display size:0x20
+entranceMapNameDisplay_bgModelDlists = 0x0F000950; // segment:ni_ovl_entrance_map_name_display size:0x38
 D_0F000988 = 0x0F000988; // segment:ni_ovl_entrance_map_name_display size:0x48
-D_0F0009D0_E60CD0 = 0x0F0009D0; // segment:ni_ovl_entrance_map_name_display size:0x40
-D_0F000A10_E60D10 = 0x0F000A10; // segment:ni_ovl_entrance_map_name_display size:0x58
-D_0F000A68_E60D68 = 0x0F000A68; // segment:ni_ovl_entrance_map_name_display size:0x18
+entranceMapNameDisplay_bgModelVertices = 0x0F0009D0; // segment:ni_ovl_entrance_map_name_display size:0x40
+entranceMapNameDisplay_bgModelMaterial1 = 0x0F000A10; // segment:ni_ovl_entrance_map_name_display size:0x58
+entranceMapNameDisplay_bgModelMaterial2 = 0x0F000A68; // segment:ni_ovl_entrance_map_name_display size:0x18
 entranceMapNameDisplay_functions = 0x0F000A80; // segment:ni_ovl_entrance_map_name_display size:0x14
 // .rodata
 D_0F000AA0              = 0x0F000AA0; // type:f64 segment:ni_ovl_entrance_map_name_display
