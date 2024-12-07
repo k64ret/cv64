@@ -5,6 +5,9 @@
 
 #define MAX_NUM_ENEMIES_SPAWNED 32
 
+/**
+ * Flags indicating the current state of the enemy
+ */
 typedef enum EnemyListEntryFlag {
     ENEMY_ALIVE           = BIT(0),
     ENEMY_ACTIVE          = BIT(1),
@@ -15,13 +18,8 @@ typedef enum EnemyListEntryFlag {
 } EnemyListEntryFlag;
 
 typedef struct EnemyListEntry {
-    union {
-        struct {
-            u16 flags;
-            u16 field_0x02;
-        };
-        u32 whole;
-    };
+    u16 flags;
+    u16 field_0x02;
     Actor* enemy;
 } EnemyListEntry;
 

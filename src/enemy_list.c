@@ -11,6 +11,9 @@
 
 // clang-format off
 
+/**
+ * @note State `ENEMY_GRABBING_PLAYER` is missing a unique letter.
+ */
 char EnemyList_enemyStates[] = {
     'P', 'C', 'A', 'D', 'O',
     '?', '?', '?', '?', '?',
@@ -35,10 +38,18 @@ s32 D_800D80C4;
  */
 u8 D_800D80D0[128];
 
+/**
+ * Clears the enemy list
+ */
 void EnemyList_init() {
     memory_clear(&enemy_list, sizeof(enemy_list));
 }
 
+/**
+ * Given an enemy actor and its state flags, this function either
+ * - Adds an enemy and its state flags to `enemy_list` if not present
+ * - Modifies its state flags if the enemy is already on said list
+ */
 EnemyListEntry* EnemyList_addOrModifyEntry(Actor* actor, u16 flags) {
     s32 i;
     EnemyListEntry* entry;
@@ -58,6 +69,10 @@ EnemyListEntry* EnemyList_addOrModifyEntry(Actor* actor, u16 flags) {
         } while (i < enemy_list.num_enemies);
     }
 
+    /**
+     * If the enemy is not on the list, add it.
+     * Otherwise just modify its state flags.
+     */
     if (i == enemy_list.num_enemies) {
         EnemyList_clearEntry(entry);
         entry->flags = flags;
@@ -70,8 +85,9 @@ EnemyListEntry* EnemyList_addOrModifyEntry(Actor* actor, u16 flags) {
     return entry;
 }
 
-// https://decomp.me/scratch/7IsbK
-#ifdef NON_MATCHING
+/**
+ * Given an enemy actor, this function removes it from the list if present
+ */
 void EnemyList_removeEntry(Actor* actor) {
     s32 i;
     EnemyListEntry* entry;
@@ -82,16 +98,18 @@ void EnemyList_removeEntry(Actor* actor) {
     if (enemy_list.num_enemies > 0) {
         do {
             if (actor == entry->enemy) {
+                // If the enemy found is the last one on the list
                 if ((i + 1) == enemy_list.num_enemies) {
                     EnemyList_clearEntry(entry);
                     enemy_list.num_enemies--;
-                    break;
                 }
-                last_entry   = &enemy_list.enemies[enemy_list.num_enemies - 1];
-                entry->whole = last_entry->whole;
-                entry->enemy = last_entry->enemy;
-                EnemyList_clearEntry(last_entry);
-                enemy_list.num_enemies--;
+                // Otherwise copy the last entry into the removed enemy's slot and clear the last entry
+                else {
+                    last_entry = &enemy_list.enemies[enemy_list.num_enemies - 1];
+                    *entry     = *last_entry;
+                    EnemyList_clearEntry(last_entry);
+                    enemy_list.num_enemies--;
+                }
                 break;
             }
             i++;
@@ -99,12 +117,23 @@ void EnemyList_removeEntry(Actor* actor) {
         } while (i < enemy_list.num_enemies);
     }
 }
-#else
-    #pragma GLOBAL_ASM("../asm/nonmatchings/enemy_list/EnemyList_removeEntry.s")
-#endif
 
 void func_8003E98C_3F58C() {}
 
+/**
+ * Given a set of enemy state flags, this function would print into the destination string
+ * a letter for each state flag that was set, and a space otherwise.
+ * See `EnemyList_enemyStates` for all possible letters, one per `EnemyListEntryFlag` value, in order.
+ *
+ * For example, if the state flags `(ENEMY_ALIVE | ENEMY_ACTIVE | ENEMY_DAMAGED)` are passed,
+ * the function would have printed the following into the destination string: "PC D "
+ *
+ * @bug The function can only print the first 5 states from `EnemyListEntryFlag`,
+ *       despite `EnemyList_enemyStates` supporting more letters.
+ *
+ *       This means that the `ENEMY_GRABBING_PLAYER` state will be printed as a space,
+ *       despite being a valid state.
+ */
 void EnemyList_printEnemyState(u16 flags, char* string) {
     s32 i;
     u16 j;
@@ -124,6 +153,9 @@ void func_8003EA7C_3F67C() {}
 
 void func_8003EA84_3F684(void* arg0) {}
 
+/**
+ * Clears an enemy entry
+ */
 void EnemyList_clearEntry(EnemyListEntry* entry) {
     memory_clear(entry, sizeof(EnemyListEntry));
 }
@@ -154,6 +186,10 @@ s32 EnemyList_getNumberOfActiveEnemies() {
     #pragma GLOBAL_ASM("../asm/nonmatchings/enemy_list/EnemyList_getNumberOfActiveEnemies.s")
 #endif
 
+/**
+ * Given a position vector, this function returns `TRUE` if there's at least one active enemy
+ * that's inside the radius delimited by the given X, Y and Z maximum distances.
+ */
 s32 EnemyList_isAnyEnemyWithinRange(Vec3f* position, f32 max_XZ_distance, f32 max_height) {
     s32 i;
     Vec3f pos_difference;
@@ -189,6 +225,11 @@ s32 EnemyList_isAnyEnemyWithinRange(Vec3f* position, f32 max_XZ_distance, f32 ma
     return FALSE;
 }
 
+/**
+ * Returns the current time of the day.
+ *
+ * See `TimeOfDay` for all possible values
+ */
 s32 EnemyList_getTimeOfDay() {
     s16 adjusted_hour = sys.SaveStruct_gameplay.hour - 4;
 
