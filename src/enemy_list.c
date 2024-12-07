@@ -27,9 +27,13 @@ s32 Enemy_timeOfDayList[] = {
 
 // clang-format on
 
-// TODO: Temporarily commented out until we can fix .bss-related linker errors
-// EnemyList enemy_list;
-// s32 D_800D80C4;
+EnemyList enemy_list;
+s32 D_800D80C4;
+/**
+ * @note `D_800D80D0` is `.bss` padding.
+ *       It's unknown whether it was actually part of `enemy_list.c` or not.
+ */
+u8 D_800D80D0[128];
 
 void EnemyList_init() {
     memory_clear(&enemy_list, sizeof(enemy_list));
