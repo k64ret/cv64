@@ -162,6 +162,9 @@ void EnemyList_clearEntry(EnemyListEntry* entry) {
 
 // https://decomp.me/scratch/DngTK
 #ifdef NON_MATCHING
+/**
+ * Returns the total number of enemies that are currently alive and active
+ */
 s32 EnemyList_getNumberOfActiveEnemies() {
     s32 i;
     EnemyListEntry* entry;
@@ -228,7 +231,7 @@ s32 EnemyList_isAnyEnemyWithinRange(Vec3f* position, f32 max_XZ_distance, f32 ma
 /**
  * Returns the current time of the day.
  *
- * See `TimeOfDay` for all possible values
+ * See `Enemy_timeOfDayList` for all possible values
  */
 s32 EnemyList_getTimeOfDay() {
     s16 adjusted_hour = sys.SaveStruct_gameplay.hour - 4;
