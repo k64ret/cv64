@@ -381,7 +381,7 @@ segments:
       - [0x000976C0, .data, debug]
       - [0x000976D0, data, save]
       - [0x00097710, data]
-      - [0x000991D0, data, enemy_list]
+      - [0x000991D0, .data, enemy_list]
       - [0x00099200, data]
       - [0x0009B8D0, data, 56B60]
       - [0x0009B8E0, data, 57050]

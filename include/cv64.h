@@ -26,6 +26,12 @@ extern u32 map_text_segment_address[28]; // 0x8016D008
  */
 extern u32 dont_update_map_lighting;
 
+typedef enum TimeOfDay {
+    TIME_DAY,
+    TIME_EVENING_MORNING,
+    TIME_NIGHT
+} TimeOfDay;
+
 typedef enum cv64_moon_visibility {
     MOON_VISIBILITY_DAY   = 0, // Moon is invisible
     MOON_VISIBILITY_NIGHT = 1, // Moon is visible
