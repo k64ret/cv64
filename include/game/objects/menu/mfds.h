@@ -77,6 +77,7 @@ typedef enum MfdsStateFlag {
      */
     MFDS_FLAG_DISPLAY_LENS                    = BIT(6),
     MFDS_FLAG_ALLOC_TEXTBOX_IN_MENU_DATA_HEAP = BIT(14),
+    MFDS_FLAG_8000                            = BIT(15),
     MFDS_FLAG_GAMEPLAYMENUMGR_TEXTBOX         = BIT(16),
     /**
      * Leaves a small space on the left of the text for the red selection arrow
@@ -106,12 +107,17 @@ typedef enum MfdsStateFlag {
      * Setting this flag will also make the red textbox advance arrow to be automatically skipped.
      */
     MFDS_FLAG_FAST_TEXT_SPEED = BIT(22),
-    MFDS_FLAG_UPDATE_STRING   = BIT(24),
-    MFDS_FLAG_2000000         = BIT(25),
-    MFDS_FLAG_CLOSE_TEXTBOX   = BIT(26),
-    MFDS_FLAG_OPEN_TEXTBOX    = BIT(27),
-    MFDS_FLAG_CLOSE_LENS      = BIT(28),
-    MFDS_FLAG_OPEN_LENS       = BIT(29),
+    /**
+     * When set, the game will skip to the next string that should be printed.
+     * This is often used to advance text during cutscenes
+     */
+    MFDS_FLAG_AUTO_SKIP_TEXT = BIT(23),
+    MFDS_FLAG_UPDATE_STRING  = BIT(24),
+    MFDS_FLAG_2000000        = BIT(25),
+    MFDS_FLAG_CLOSE_TEXTBOX  = BIT(26),
+    MFDS_FLAG_OPEN_TEXTBOX   = BIT(27),
+    MFDS_FLAG_CLOSE_LENS     = BIT(28),
+    MFDS_FLAG_OPEN_LENS      = BIT(29),
     /**
      * The text is completely processed
      */
