@@ -125,7 +125,7 @@ segments:
       - [0x0002FA90, asm]
       - [0x000333F0, asm]
       - [0x00039330, asm]
-      - [0x0003F400, asm]
+      - [0x0003F400, c, enemy_list]
       - [0x0003F870, asm]
       - [0x000407B0, asm]
       - [0x00041170, asm]
@@ -381,6 +381,8 @@ segments:
       - [0x000976C0, .data, debug]
       - [0x000976D0, data, save]
       - [0x00097710, data]
+      - [0x000991D0, data, enemy_list]
+      - [0x00099200, data]
       - [0x0009B8D0, data, 56B60]
       - [0x0009B8E0, data, 57050]
       - [0x0009B900, data, 574C0]
@@ -479,6 +481,7 @@ segments:
       - { start: 0x000A8420, type: bss, vram: 0x800D5F40, name: crash_screen_init }
       - { start: 0x000A8420, type: bss, vram: 0x800D7120, name: debug }
       - { start: 0x000A8420, type: bss, vram: 0x800D7150, name: controller_pak }
+      - { start: 0x000A8420, type: bss, vram: 0x800D7FC0, name: enemy_list }
       - { start: 0x000A8420, type: .bss, vram: 0x800DD0D0, name: effect_manager }
       - { start: 0x000A8420, type: bss, vram: 0x800DD0E0 }  # Used in `func_80066400`
       - { start: 0x000A8420, type: bss, vram: 0x801229B0, name: libultra/io/motor }
