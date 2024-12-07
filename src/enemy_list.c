@@ -18,8 +18,10 @@ char EnemyList_enemyStates[] = {
     'P', 'C', 'A', 'D', 'O',
     '?', '?', '?', '?', '?',
     '?', '?', '?', '?', '?',
-    '?', '\0', '\0', '\0', '\0'
+    '?'
 };
+
+u8 D_800985E0_991E0[4] = {0};
 
 s32 Enemy_timeOfDayList[] = {
     TIME_EVENING_MORNING,
