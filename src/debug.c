@@ -105,6 +105,9 @@ void processMeter_update(s32 state) {
     }
 }
 
+/**
+ * Render both the green and blue process bars.
+ */
 void processMeter_render(Gfx** dlist) {
     f32 number_of_divisions = SCREEN_HEIGHT / processMeter_number_of_divisions;
     f32 green_bar_size;
