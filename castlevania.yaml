@@ -418,7 +418,7 @@ segments:
       - [0x000A3430, rodata, 12900]
       - [0x000A34A0, rodata, 17A00]
       - [0x000A34F0, rodata, crash_screen_init]
-      - [0x000A3C80, rodata, debug]
+      - [0x000A3C80, .rodata, debug]
       - [0x000A3CA0, rodata, save]
       - [0x000A3D10, rodata]
       - [0x000A41E0, rodata]
@@ -479,7 +479,7 @@ segments:
       # - { start: 0x000A8420, type: bss, vram: 0x800D5E60, name: dma }
       - { start: 0x000A8420, type: bss, vram: 0x800D5F20, name: 19630 }
       - { start: 0x000A8420, type: bss, vram: 0x800D5F40, name: crash_screen_init }
-      - { start: 0x000A8420, type: bss, vram: 0x800D7120, name: debug }
+      - { start: 0x000A8420, type: .bss, vram: 0x800D7120, name: debug }
       - { start: 0x000A8420, type: bss, vram: 0x800D7150, name: controller_pak }
       - { start: 0x000A8420, type: .bss, vram: 0x800D7FC0, name: enemy_list }
       - { start: 0x000A8420, type: bss, vram: 0x800D8150, name: atari }
