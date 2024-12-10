@@ -162,34 +162,24 @@ void EnemyList_clearEntry(EnemyListEntry* entry) {
     memory_clear(entry, sizeof(EnemyListEntry));
 }
 
-// https://decomp.me/scratch/DngTK
-#ifdef NON_MATCHING
 /**
  * Returns the total number of enemies that are currently alive and active
  */
 s32 EnemyList_getNumberOfActiveEnemies() {
-    s32 i;
     EnemyListEntry* entry;
+    s32 i;
     s32 num_active_enemies;
 
-    entry              = ARRAY_START(enemy_list.enemies);
-    num_active_enemies = 0;
-    i                  = 0;
-    if (enemy_list.num_enemies > 0) {
-        do {
-            if (entry->flags & (ENEMY_ALIVE | ENEMY_ACTIVE)) {
-                num_active_enemies++;
-            }
-            i++;
-            entry++;
-        } while (i < enemy_list.num_enemies);
+    for (num_active_enemies = 0, i = 0, entry = ARRAY_START(enemy_list.enemies);
+         i < enemy_list.num_enemies;
+         i++, entry++) {
+        if (entry->flags & (ENEMY_ALIVE | ENEMY_ACTIVE)) {
+            num_active_enemies++;
+        }
     }
 
     return num_active_enemies;
 }
-#else
-    #pragma GLOBAL_ASM("../asm/nonmatchings/enemy_list/EnemyList_getNumberOfActiveEnemies.s")
-#endif
 
 /**
  * Given a position vector, this function returns `TRUE` if there's at least one active enemy
