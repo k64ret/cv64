@@ -242,7 +242,7 @@ enum ObjectRawID {
     ID_OBJECT_0BE                        = 0x0BE,
     ID_OBJECT_0BF                        = 0x0BF,
     ID_EFFECTMGR                         = 0x0C0,
-    ID_OBJECT_0C1                        = 0x0C1,
+    ID_FIRE                              = 0x0C1,
     ID_OBJECT_0C2                        = 0x0C2,
     ID_OBJECT_0C3                        = 0x0C3,
     ID_OBJECT_0C4                        = 0x0C4,
@@ -273,7 +273,7 @@ enum ObjectRawID {
     ID_OBJECT_0DD                        = 0x0DD,
     ID_OBJECT_0DE                        = 0x0DE,
     ID_OBJECT_0DF                        = 0x0DF,
-    ID_OBJECT_0E0                        = 0x0E0,
+    ID_FIRE_SPARKLES                     = 0x0E0,
     ID_OBJECT_0E1                        = 0x0E1,
     ID_OBJECT_0E2                        = 0x0E2,
     ID_OBJECT_0E3                        = 0x0E3,
@@ -690,6 +690,8 @@ typedef enum ObjectID {
 
     // Effect
     EFFECT_EFFECTMGR                             = OBJECT_ID(OBJ_KIND_NONE, ID_EFFECTMGR),
+    EFFECT_FIRE                                  = OBJECT_ID(OBJ_KIND_NONE, ID_FIRE),
+    EFFECT_FIRE_SPARKLES                         = OBJECT_ID(OBJ_KIND_NONE, ID_FIRE_SPARKLES),
     EFFECT_PICKABLE_ITEM_FLASH                   = OBJECT_ID(OBJ_KIND_NONE, ID_PICKABLE_ITEM_FLASH),
 
     // Menu

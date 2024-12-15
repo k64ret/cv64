@@ -9,9 +9,10 @@
  * IDs in `effect_obj_info_array`
  */
 typedef enum EffectObjInfoArrayID {
-    EFFECT_ID_00 = 0x00,
-    EFFECT_ID_01 = 0x01,
-    EFFECT_ID_1A = 0x1A EFFECT_ID_PICKABLE_ITEM_FLASH = 0x25
+    EFFECT_ID_FIRE                = 0x00,
+    EFFECT_ID_01                  = 0x01,
+    EFFECT_ID_FIRE_SPARKLES       = 0x1A,
+    EFFECT_ID_PICKABLE_ITEM_FLASH = 0x25
 } EffectObjInfoArrayID;
 
 typedef enum EffectVisualFlag {
@@ -28,7 +29,7 @@ typedef enum EffectVisualFlag {
     EFF_VISUAL_FLAG_LOOK_AT_CAMERA_PITCH                    = BIT(23),
     EFF_VISUAL_FLAG_CREATE_MODEL_AND_SET_CHILD_AFTER_PARENT = BIT(26),
     EFF_VISUAL_FLAG_CREATE_MODEL_AND_SET_CHILD              = BIT(27),
-    EFF_VISUAL_FLAG_20000000                                = BIT(29),
+    EFF_VISUAL_FLAG_20000000                                = BIT(29)
 } EffectVisualFlag;
 
 typedef enum EffectAnimInfoVisualFlag {
@@ -63,7 +64,7 @@ typedef enum EffectAnimInfoFlag {
 #define EFF_COLOR_TYPE_ENVIRONMENT 4
 #define EFF_COLOR_TYPE_PRIMITIVE   8
 
-typedef struct {
+typedef struct EffectInfo {
     u32 flags;
     u16 color_intensity_transition_current_time;
     u16 current_spawned_time;
@@ -74,16 +75,16 @@ typedef struct {
     Model* attached_bone;
     u8 field_0x14[4];
     void (*object_destroy_function)(void*);
-} effect_info;
+} EffectInfo;
 
-typedef struct {
+typedef struct EffectPositionalInfo {
     Vec3f scale;
     f32 scale_multiplier;
     s16 angle;
     u16 flags;
 } EffectPositionalInfo;
 
-typedef struct {
+typedef struct EffectAnimationInfo {
     u8 visual_flags;
     u8 field_0x01;
     u8 field_0x02;
@@ -98,18 +99,18 @@ typedef struct {
 } EffectAnimationInfo;
 
 // Generic effect struct
-typedef struct cv64_effect {
+typedef struct Effect {
     ObjectHeader header;
     u8 field_0x04[4];
     Model* model;
     u8 field_0x28[60];
-    effect_info* info;
+    EffectInfo* info;
     EffectPositionalInfo* positional_info;
     EffectVisualInfo* visual_info;
     ActorConfig* settings;
 } Effect;
 
-typedef struct {
+typedef struct EffectVisualInfo {
     u32 flags;
     Model* model;
     Camera* display_camera;

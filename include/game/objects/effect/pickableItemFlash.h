@@ -5,7 +5,7 @@
 #include "object.h"
 
 // ID: 0x00E5
-typedef struct {
+typedef struct pickableItemFlash {
     ObjectHeader header;
     u8 field_0x20[4];
     Model* model;
