@@ -2766,7 +2766,6 @@ angle_of_player_being_grabbed_by_vampire = 0x80389e74;
 currentPlayingSequence_uncompressed = 0x803a4770;
 sequences_ROM_start_address = 0x8009f764;
 sequences_ROM_end_address = 0x8009f90c;
-a_gsDPSetCombineLERP_display_list = 0x8009ac80;
 ptr_scheduler_graphicsRequestMQ = 0x800ac9d0;
 DAT_8018cda0 = 0x8018cda0;
 map_loading_zone_settings_array = 0x80186d18;
