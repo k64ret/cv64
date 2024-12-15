@@ -23,6 +23,14 @@ extern void Fire_Init(Fire* self);
 extern void Fire_Loop(Fire* self);
 extern void Fire_Destroy(Fire* self);
 
+typedef enum FireFuncID() {
+    FIRE_INIT,
+    FIRE_LOOP,
+    FIRE_DESTROY
+} FireFuncID;
+
+extern const u32 FIRE_DLIST;
+
 typedef void (*FireFuncs)(Fire*);
 
 #endif

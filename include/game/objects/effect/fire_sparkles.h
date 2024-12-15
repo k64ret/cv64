@@ -20,6 +20,14 @@ extern void FireSparkles_Init(FireSparkles* self);
 extern void FireSparkles_Loop(FireSparkles* self);
 extern void FireSparkles_Destroy(FireSparkles* self);
 
+typedef enum FireFuncID() {
+    FIRE_SPARKLES_INIT,
+    FIRE_SPARKLES_LOOP,
+    FIRE_SPARKLES_DESTROY
+} FireFuncID;
+
+extern const u32 FIRE_SPARKLES_DLIST;
+
 typedef void (*FireSparklesFuncs)(FireSparkles*);
 
 #endif
