@@ -16,10 +16,14 @@ FireFuncs Fire_functions[] = {
 
 // clang-format on
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/effect/fire/Fire_Entrypoint.s")
+void Fire_Entrypoint(Fire* self) {
+    ENTER(self, Fire_functions);
+}
 
 #pragma GLOBAL_ASM("../asm/nonmatchings/effect/fire/Fire_Init.s")
 
 #pragma GLOBAL_ASM("../asm/nonmatchings/effect/fire/Fire_Loop.s")
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/effect/fire/Fire_Destroy.s")
+void Fire_Destroy(Fire* self) {
+    self->header.destroy(self);
+}

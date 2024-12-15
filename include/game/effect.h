@@ -140,15 +140,15 @@ extern Effect* createEffectObjectUnderEffectMgr(
     u16 effect_obj_info_array_index, Camera* display_camera, u32 visual_flags
 );
 
-extern void effect_init(Effect* self);
+extern u16 effect_init(Effect* self);
 extern void effect_initParams(Effect* self, s32 index, Camera* display_camera, u32 visual_flags);
-extern void effect_getModel(Effect* self);
+extern Model* effect_getModel(Effect* self);
 extern void effect_updateGraphicParams(Effect* self);
 extern void effect_setPosition(Effect* self, f32 x, f32 y, f32 z, u16 arg4);
 extern void effect_setAngle(Effect* self, s16 pitch, s16 yaw, s16 roll, u16 arg4);
 extern void effect_setScale(Effect* self, f32 x, f32 y, f32 z, u16 arg4);
 extern void effect_setMaxFrameSpeed(Effect* self, u16 max_frame_speed);
-extern void effect_loop(Effect* self);
+extern u8 effect_loop(Effect* self);
 extern u8 effect_isMarkForDeletion(Effect* self);
 extern void effect_markForDeletion(Effect* self);
 extern void effect_createPointLight(Effect* self);

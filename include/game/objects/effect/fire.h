@@ -2,13 +2,16 @@
 #define EFF_FIRE_H
 
 #include "effect.h"
+#include "objects/effect/fire_sparkles.h"
 
 // ID: 0x00C1
 typedef struct Fire {
     ObjectHeader header;
     u8 field_0x04[4];
     Model* model;
-    u8 field_0x28[60];
+    u8 field_0x28[4];
+    FireSparkles* sparkles;
+    u8 field_0x30[52];
     EffectInfo* info;
     EffectPositionalInfo* positional_info;
     EffectVisualInfo* visual_info;
