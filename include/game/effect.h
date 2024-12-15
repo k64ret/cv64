@@ -1,8 +1,7 @@
 #ifndef CV64_EFFECT_H
 #define CV64_EFFECT_H
 
-#include "gfx/model.h"
-#include "gfx/camera.h"
+#include "objects/effect/effect_manager.h"
 #include "objects/camera/pointLight.h"
 #include "actor.h"
 
