@@ -25,6 +25,7 @@ typedef enum EffectVisualFlag {
     EFF_VISUAL_FLAG_DONT_ANIMATE =
         BIT(18), // Don't animate through the usual rotation / translation system
     EFF_VISUAL_FLAG_HIDE                                    = BIT(19),
+    EFF_VISUAL_FLAG_200000                                  = BIT(21),
     EFF_VISUAL_FLAG_LOOK_AT_CAMERA_YAW                      = BIT(22),
     EFF_VISUAL_FLAG_LOOK_AT_CAMERA_PITCH                    = BIT(23),
     EFF_VISUAL_FLAG_CREATE_MODEL_AND_SET_CHILD_AFTER_PARENT = BIT(26),
@@ -159,11 +160,11 @@ extern void effect_setLoopFunction(Effect* self, void (*loop_function)(Effect*))
 
 extern void effectAnimationInfo_create(EffectAnimationInfo* anim_info, u16);
 extern void effectAnimationInfo_init(
-    EffectAnimationInfo* anim_info, Model* model, u32 max_frame_speed, f32 speed
+    EffectAnimationInfo* anim_info, Model* model, u8 max_frame_speed, f32 speed
 );
 extern void
-func_8000E1B4(EffectAnimationInfo* anim_info, Model* model, u32 max_frame_speed, f32 speed);
+func_8000E1B4(EffectAnimationInfo* anim_info, Model* model, u8 max_frame_speed, f32 speed);
 extern void
-effectAnimationInfo_setAnimParams(EffectAnimationInfo* anim_info, u32 max_frame_speed, f32 speed);
+effectAnimationInfo_setAnimParams(EffectAnimationInfo* anim_info, u8 max_frame_speed, f32 speed);
 
 #endif // CV64_EFFECT_H

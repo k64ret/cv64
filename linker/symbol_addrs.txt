@@ -3120,4 +3120,5 @@ FireSparkles_Entrypoint = 0x80055890;
 FireSparkles_Init = 0x80055900;
 FireSparkles_Loop = 0x80055a6c;
 FireSparkles_Destroy = 0x80055aa8;
+FireSparkles_material_dlist = 0x8009ac80;
 FireSparkles_functions = 0x8009ac98;

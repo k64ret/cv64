@@ -1,10 +1,11 @@
 /**
- * @file dma.c
+ * @file fire.c
  *
- * This file defines functions involved with direct memory access and retrieving data from the cartridge.
+ * The common decorative fire effect seeing above candles and other elements.
  */
 
 #include "objects/effect/fire.h"
+#include "objects/effect/fire_sparkles.h"
 
 // clang-format off
 
@@ -20,9 +21,13 @@ void Fire_Entrypoint(Fire* self) {
     ENTER(self, Fire_functions);
 }
 
+// clang-format off
+
 #pragma GLOBAL_ASM("../asm/nonmatchings/effect/fire/Fire_Init.s")
 
 #pragma GLOBAL_ASM("../asm/nonmatchings/effect/fire/Fire_Loop.s")
+
+// clang-format on
 
 void Fire_Destroy(Fire* self) {
     self->header.destroy(self);

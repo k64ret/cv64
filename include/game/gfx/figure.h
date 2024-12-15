@@ -13,9 +13,11 @@
 #define FIG_ARRAY_MAX 512
 
 // Types
-#define FIG_TYPE_STANDALONE                0x0004 // Assumption
-#define FIG_TYPE_MAP_PIECE                 0x0008
-#define FIG_TYPE_HUD_ELEMENT               0x0010
+#define FIG_TYPE_STANDALONE  0x0004 // Assumption
+#define FIG_TYPE_MAP_PIECE   0x0008
+#define FIG_TYPE_HUD_ELEMENT 0x0010
+#define FIG_TYPE_DONT_ANIMATE                                                                      \
+    0x0020 // Don't animate through the usual rotation / translation system
 #define FIG_TYPE_HIERARCHY_NODE            0x0040 // "offset", according to leftover strings
 #define FIG_TYPE_LIGHT                     0x0080
 #define FIG_TYPE_CAMERA_ORTHO              0x0100
@@ -46,6 +48,9 @@
 // Misc. flags that aren't part of the set above
 #define FIG_VARIABLE_TEXTURE_AND_PALETTE              0x40000000
 #define FIG_APPLY_VARIABLE_TEXTURE_AND_PALETTE(dlist) (FIG_VARIABLE_TEXTURE_AND_PALETTE | (dlist))
+
+// The figure is invisible and / or inactive
+#define FIG_IS_HIDDEN(fig) (fig->type < 0)
 
 typedef struct FigureHeader {
     s16 type;
