@@ -149,7 +149,7 @@ void cv64_ovl_touturo_door_entrance_close_door(cv64_ovl_touturo_door_t* self) {
         for (i = 0; i < 6; i++) {
             rand_Z_pos = ((*rand_f32)() * 40.0f) - 20.0f;
 
-            effect = (*createEffectObjectUnderEffectMgr)(EFFECT_ID_1, NULL, 0);
+            effect = (*createEffectObjectUnderEffectMgr)(EFFECT_ID_01, NULL, 0);
 
             if (effect != NULL) {
                 (*effect_setMaxFrameSpeed)(effect, 3);

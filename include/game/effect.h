@@ -9,10 +9,27 @@
  * IDs in `effect_obj_info_array`
  */
 typedef enum EffectObjInfoArrayID {
-    EFFECT_ID_0                   = 0x00,
-    EFFECT_ID_1                   = 0x01,
-    EFFECT_ID_PICKABLE_ITEM_FLASH = 0x25
+    EFFECT_ID_00 = 0x00,
+    EFFECT_ID_01 = 0x01,
+    EFFECT_ID_1A = 0x1A EFFECT_ID_PICKABLE_ITEM_FLASH = 0x25
 } EffectObjInfoArrayID;
+
+typedef enum EffectVisualFlag {
+    EFF_VISUAL_FLAG_DESTROY                                = BIT(3),
+    EFF_VISUAL_FLAG_EMIT_LIGHT                             = BIT(4),
+    EFF_VISUAL_FLAG_ANIMATE_SCALE                          = BIT(5),
+    EFF_VISUAL_FLAG_NO_VARIABLE_TRANSPARENCY               = BIT(7),
+    EFF_VISUAL_FLAG_200                                    = BIT(9),
+    EFF_VISUAL_FLAG_DONT_FADE_OUT_WHEN_MARKED_FOR_DELETION = BIT(14),
+    EFF_VISUAL_FLAG_DONT_ANIMATE =
+        BIT(18), // Don't animate through the usual rotation / translation system
+    EFF_VISUAL_FLAG_HIDE                                    = BIT(19),
+    EFF_VISUAL_FLAG_LOOK_AT_CAMERA_YAW                      = BIT(22),
+    EFF_VISUAL_FLAG_LOOK_AT_CAMERA_PITCH                    = BIT(23),
+    EFF_VISUAL_FLAG_CREATE_MODEL_AND_SET_CHILD_AFTER_PARENT = BIT(26),
+    EFF_VISUAL_FLAG_CREATE_MODEL_AND_SET_CHILD              = BIT(27),
+    EFF_VISUAL_FLAG_20000000                                = BIT(29),
+} EffectVisualFlag;
 
 typedef enum EffectAnimInfoVisualFlag {
     EFF_ANIM_VISUAL_FLAG_VARIABLE_TRANSPARENCY = BIT(1)
@@ -39,6 +56,12 @@ typedef enum EffectAnimInfoFlag {
 #define SIZE_MULTIPLIED_BY_VISUAL_INFO 2
 #define SIZE_PLUS_VISUAL_INFO          4
 #define SIZE_EQUAL_TO_VISUAL_INFO      8
+
+#define REMOVE_FLAGS 4
+#define SET_FLAGS    8
+
+#define EFF_COLOR_TYPE_ENVIRONMENT 4
+#define EFF_COLOR_TYPE_PRIMITIVE   8
 
 typedef struct {
     u32 flags;
@@ -109,15 +132,37 @@ typedef struct {
     u8 field_0x56[2];
 } EffectVisualInfo;
 
+extern Effect* createEffectObject(
+    u16 effect_obj_info_array_index, Camera* display_camera, u32 visual_flags, void* parent
+);
 extern Effect* createEffectObjectUnderEffectMgr(
     u16 effect_obj_info_array_index, Camera* display_camera, u32 visual_flags
 );
 
+extern void effect_init(Effect* self);
+extern void effect_initParams(Effect* self, s32 index, Camera* display_camera, u32 visual_flags);
+extern void effect_getModel(Effect* self);
+extern void effect_updateGraphicParams(Effect* self);
 extern void effect_setPosition(Effect* self, f32 x, f32 y, f32 z, u16 arg4);
 extern void effect_setAngle(Effect* self, s16 pitch, s16 yaw, s16 roll, u16 arg4);
 extern void effect_setScale(Effect* self, f32 x, f32 y, f32 z, u16 arg4);
 extern void effect_setMaxFrameSpeed(Effect* self, u16 max_frame_speed);
+extern void effect_loop(Effect* self);
 extern u8 effect_isMarkForDeletion(Effect* self);
 extern void effect_markForDeletion(Effect* self);
+extern void effect_createPointLight(Effect* self);
+extern void effect_editVisualInfoFlags(Effect* self, u32 visual_flags, u32 edit_type);
+extern u32 effect_getColor(Effect* self, u32 color_type);
+extern void effect_setColor(Effect* self, u32 color, u32 color_type);
+extern void effect_setLoopFunction(Effect* self, void (*loop_function)(Effect*));
+
+extern void effectAnimationInfo_create(EffectAnimationInfo* anim_info, u16);
+extern void effectAnimationInfo_init(
+    EffectAnimationInfo* anim_info, Model* model, u32 max_frame_speed, f32 speed
+);
+extern void
+func_8000E1B4(EffectAnimationInfo* anim_info, Model* model, u32 max_frame_speed, f32 speed);
+extern void
+effectAnimationInfo_setAnimParams(EffectAnimationInfo* anim_info, u32 max_frame_speed, f32 speed);
 
 #endif // CV64_EFFECT_H
