@@ -64,7 +64,7 @@ typedef enum NIFileID {
     NI_ASSETS_CAMILLA_FIGHT                = 0x35,
     NI_ASSETS_36                           = 0x36,
     NI_ASSETS_37                           = 0x37,
-    NI_ASSETS_38                           = 0x38,
+    NI_COMMON_GAMEPLAY_EFFECTS             = 0x38,
     NI_ASSETS_39                           = 0x39,
     NI_ASSETS_3A                           = 0x3A,
     NI_ASSETS_3B                           = 0x3B,

@@ -1513,7 +1513,7 @@ segments:
     vram: 0x06000000
     exclusive_ram_id: nisitenma_ichigo_assets
 
-  - name: ni_7940E2
+  - name: ni_common_gameplay_effects
     type: bin
     # start: 0x007940E2
     start: 0x0080FA80

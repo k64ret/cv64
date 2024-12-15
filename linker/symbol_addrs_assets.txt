@@ -35,8 +35,8 @@ BEKKAN_1F_SQUARE_DL = 0x0601c2d0;  // segment:NI_ASSETS_BEKKAN_1F
 BEKKAN_1F_CHANDELIER_PENDANT_DL = 0x0601d208;  // segment:NI_ASSETS_BEKKAN_1F
 BEKKAN_1F_CHANDELIER_DECORATION_DL = 0x0601e428;  // segment:NI_ASSETS_BEKKAN_1F
 
-FIRE_DLIST = 0x06031F28;  // segment:ni_7940E2
-FIRE_SPARKLES_DLIST = 0x06031E40;  // segment:ni_7940E2
+FIRE_DLIST = 0x06031F28;  // segment:ni_common_gameplay_effects
+FIRE_SPARKLES_DLIST = 0x06031E40;  // segment:ni_common_gameplay_effects
 
 // test_grid_txt   = 0x06000000; // segment:NI_ASSETS_TEST_GRID
 // test_grid_tlut  = 0x06000800; // segment:NI_ASSETS_TEST_GRID
