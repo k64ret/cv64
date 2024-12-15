@@ -135,7 +135,7 @@ void cv64_ovl_touturo_door_entrance_check_event_flags(cv64_ovl_touturo_door_t* s
 void cv64_ovl_touturo_door_entrance_close_door(cv64_ovl_touturo_door_t* self) {
     s16 i;
     f32 rand_Z_pos;
-    cv64_effect_t* effect;
+    Effect* effect;
     Model* model = self->model;
 
     model->position.y -=
