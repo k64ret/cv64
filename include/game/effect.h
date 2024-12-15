@@ -38,7 +38,7 @@ typedef enum EffectAnimInfoVisualFlag {
 
 typedef enum EffectAnimInfoFlag {
     EFF_ANIM_FLAG_ACTIVE = BIT(13)
-} EffectAnimInfoVisualFlag;
+} EffectAnimInfoFlag;
 
 /**
 * These defines are used for the last arguments
@@ -98,18 +98,6 @@ typedef struct EffectAnimationInfo {
     u8 field_0x0C[4];
 } EffectAnimationInfo;
 
-// Generic effect struct
-typedef struct Effect {
-    ObjectHeader header;
-    u8 field_0x04[4];
-    Model* model;
-    u8 field_0x28[60];
-    EffectInfo* info;
-    EffectPositionalInfo* positional_info;
-    EffectVisualInfo* visual_info;
-    ActorConfig* settings;
-} Effect;
-
 typedef struct EffectVisualInfo {
     u32 flags;
     Model* model;
@@ -127,11 +115,23 @@ typedef struct EffectVisualInfo {
     u8 field_0x46[2];
     RGBA primitive_color;
     RGBA environment_color;
-    void (*loop_function)(Effect*);
+    void (*loop_function)(void*);
     u8 field_0x54; // For damage-related effects, this is `atari_damage_type`
     u8 field_0x55;
     u8 field_0x56[2];
 } EffectVisualInfo;
+
+// Generic effect struct
+typedef struct Effect {
+    ObjectHeader header;
+    u8 field_0x04[4];
+    Model* model;
+    u8 field_0x28[60];
+    EffectInfo* info;
+    EffectPositionalInfo* positional_info;
+    EffectVisualInfo* visual_info;
+    ActorConfig* settings;
+} Effect;
 
 extern Effect* createEffectObject(
     u16 effect_obj_info_array_index, Camera* display_camera, u32 visual_flags, void* parent
