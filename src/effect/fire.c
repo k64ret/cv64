@@ -5,7 +5,6 @@
  */
 
 #include "objects/effect/fire.h"
-#include "objects/effect/fire_sparkles.h"
 
 // clang-format off
 

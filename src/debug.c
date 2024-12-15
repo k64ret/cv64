@@ -78,7 +78,7 @@ void processMeter_setSizeDivisor(f32 size_divisor) {
  * Once with the `START` state, and another one with the `END` state,
  * in order for the size to update correctly.
  *
- * See the `DebugProcessMeterState_t` enum for all possible values.
+ * See the `DebugProcessMeterState` enum for all possible values.
  */
 void processMeter_update(s32 state) {
     switch (state) {
