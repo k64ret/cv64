@@ -27,8 +27,6 @@ void FireSparkles_Entrypoint(FireSparkles* self) {
     ENTER(self, FireSparkles_functions);
 }
 
-// https://decomp.me/scratch/osCNP
-#ifdef NON_MATCHING
 void FireSparkles_Init(FireSparkles* self) {
     EffectVisualInfo* visual_info;
     EffectAnimationInfo* anim_info;
@@ -41,31 +39,30 @@ void FireSparkles_Init(FireSparkles* self) {
     visual_info        = self->visual_info;
     visual_info->model = self->model = model = effect_getModel(self);
 
-    if (model == NULL) {
-        GO_TO_FUNC_NOW(self, FireSparkles_functions, FIRE_SPARKLES_DESTROY);
-        return;
+    if (1) {
+        if (model == NULL) {
+            GO_TO_FUNC_NOW(self, FireSparkles_functions, FIRE_SPARKLES_DESTROY);
+            return;
+        }
+
+        model->material_dlist = (*osVirtualToPhysical)(FireSparkles_material_dlist);
+        model->dlist          = FIG_APPLY_VARIABLE_TEXTURE_AND_PALETTE((u32) &FIRE_SPARKLES_DLIST);
+        model->assets_file    = NI_COMMON_GAMEPLAY_EFFECTS;
+        effect_updateGraphicParams(self);
+
+        anim_info = &visual_info->anim_info;
+        effectAnimationInfo_create(anim_info, 0);
+        effectAnimationInfo_init(anim_info, model, visual_info->max_frame_speed, 1.0f);
+        if (visual_info->flags & EFF_VISUAL_FLAG_NO_VARIABLE_TRANSPARENCY) {
+            visual_info->anim_info.visual_flags &= ~EFF_ANIM_VISUAL_FLAG_VARIABLE_TRANSPARENCY;
+        }
+
+        effect_createPointLight(self);
+        (*object_curLevel_goToNextFuncAndClearTimer)(
+            self->header.current_function, &self->header.function_info_ID
+        );
     }
-
-    model->material_dlist = (*osVirtualToPhysical)(FireSparkles_material_dlist);
-    model->dlist          = FIG_APPLY_VARIABLE_TEXTURE_AND_PALETTE((u32) &FIRE_SPARKLES_DLIST);
-    model->assets_file    = NI_COMMON_GAMEPLAY_EFFECTS;
-    effect_updateGraphicParams(self);
-
-    anim_info = &visual_info->anim_info;
-    effectAnimationInfo_create(anim_info, 0);
-    effectAnimationInfo_init(anim_info, model, visual_info->max_frame_speed, 1.0f);
-    if (visual_info->flags & EFF_VISUAL_FLAG_NO_VARIABLE_TRANSPARENCY) {
-        visual_info->anim_info.visual_flags &= ~EFF_ANIM_VISUAL_FLAG_VARIABLE_TRANSPARENCY;
-    }
-
-    effect_createPointLight(self);
-    (*object_curLevel_goToNextFuncAndClearTimer)(
-        self->header.current_function, &self->header.function_info_ID
-    );
 }
-#else
-    #pragma GLOBAL_ASM("../asm/nonmatchings/effect/fire_sparkles/FireSparkles_Init.s")
-#endif
 
 void FireSparkles_Loop(FireSparkles* self) {
     s32 should_despawn = effect_loop(self);
