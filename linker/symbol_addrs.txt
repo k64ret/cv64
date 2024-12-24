@@ -3121,3 +3121,6 @@ FireSparkles_Loop = 0x80055a6c;
 FireSparkles_Destroy = 0x80055aa8;
 FireSparkles_material_dlist = 0x8009ac80;
 FireSparkles_functions = 0x8009ac98;
+isSoundVolumeDecreased = 0x80013574;
+decreaseSoundVolume = 0x80013518;
+prepareSoundForPlay_defaultSettings = 0x80079d7c;

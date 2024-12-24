@@ -5,7 +5,7 @@
 #include "gfx/light.h"
 
 // ID: 0x006D
-typedef struct {
+typedef struct masterLightMgr {
     ObjectHeader header;
     u8 field_0x20[20];
     FigureLight* master_light;

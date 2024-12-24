@@ -33,6 +33,9 @@ extern u16 getCurrentBGM();
 extern u8 resetCurrentBGM();
 extern u32 setPreviousBGM();
 extern s32 audioControlFadeOutType_setType(u32 type);
+extern u8 isSoundVolumeDecreased();
+extern void decreaseSoundVolume(u8 decrease);
+extern void prepareSoundForPlay_defaultSettings(u32 sound_ID);
 
 // Sound IDs (officially referred to as "sound codes")
 #define SD_INVALID 0x000

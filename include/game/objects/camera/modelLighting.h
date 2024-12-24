@@ -18,7 +18,7 @@ typedef struct {
 } point_light_list_t;
 
 // ID: 0x006E
-typedef struct {
+typedef struct modelLighting {
     ObjectHeader header;
     u8 field_0x20[4];
     FigureLight* model_light;

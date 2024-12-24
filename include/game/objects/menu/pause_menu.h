@@ -2,9 +2,22 @@
 #define PAUSE_MENU_H
 
 #include "objects/menu/gameplayMenuMgr.h"
+#include "objects/camera/modelLighting.h"
 #include "menu/sound_menu_work.h"
 #include "gfx/light.h"
 #include "item.h"
+
+typedef struct ItemUseSettings {
+    u8 item;
+    /**
+     * This value is AND with 0xE, and then << 0x19 to obtain the actual player flag value
+     */
+    s8 player_flag_to_change;
+    /**
+     * For example, for Healing Kit, this value is 100 (100 health recovered)
+     */
+    s8 amount_to_fill;
+} ItemUseSettings;
 
 // Real name: `Digital_Clock`
 typedef struct DigitalClock {
@@ -58,6 +71,23 @@ typedef struct PauseMenu {
     u8 selected_item_can_be_used;
     u8 field_0x73;
 } PauseMenu;
+
+extern void pauseMenu_entrypoint(PauseMenu*);
+extern void pauseMenu_init(PauseMenu*);
+extern void pauseMenu_createMainMenu(PauseMenu*);
+extern void pauseMenu_calcMainMenu(PauseMenu*);
+extern void pauseMenu_checkScrollObjExists(PauseMenu*);
+extern void pauseMenu_calcItemList(PauseMenu*);
+extern void pauseMenu_calcItemSelectedMenu(PauseMenu*);
+extern void pauseMenu_destroy(PauseMenu*);
+extern void pauseMenu_calcQuitMenu(PauseMenu*);
+extern void pauseMenu_updateDigitalClockDisplay(PauseMenu*);
+extern void pauseMenu_createSoundMenuWork(PauseMenu*, u8, modelLighting*, modelLighting*);
+extern void func_0F001BF0();
+extern void pauseMenu_createItemDescription(PauseMenu*);
+extern s32 getItemUseArrayEntry(u8);
+extern void pauseMenu_updateClock(PauseMenu*);
+extern void pauseMenu_checkIfItemCanBeUsed(PauseMenu*);
 
 typedef void (*PauseMenuFuncs)(PauseMenu*);
 
