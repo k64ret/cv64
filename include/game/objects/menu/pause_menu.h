@@ -11,6 +11,7 @@ typedef struct ItemUseSettings {
     u8 item;
     /**
      * This value is AND with 0xE, and then << 0x19 to obtain the actual player flag value
+     * See `pauseMenu_checkIfItemCanBeUsed`
      */
     s8 player_flag_to_change;
     /**
@@ -83,12 +84,12 @@ extern void pauseMenu_calcItemSelectedMenu(PauseMenu*);
 extern void pauseMenu_destroy(PauseMenu*);
 extern void pauseMenu_calcQuitMenu(PauseMenu*);
 extern void pauseMenu_updateDigitalClockDisplay(PauseMenu*);
-extern void pauseMenu_createSoundMenuWork(PauseMenu*, u8, modelLighting*, modelLighting*);
+extern SoundMenuWork* pauseMenu_createSoundMenuWork(PauseMenu*, u8, modelLighting*, modelLighting*);
 extern void func_0F001BF0();
 extern void pauseMenu_createItemDescription(PauseMenu*);
 extern s32 getItemUseArrayEntry(s32);
 extern void pauseMenu_updateClock(PauseMenu*);
-extern void pauseMenu_checkIfItemCanBeUsed(PauseMenu*);
+extern s32 pauseMenu_checkIfItemCanBeUsed(PauseMenu*);
 
 typedef void (*PauseMenuFuncs)(PauseMenu*);
 
