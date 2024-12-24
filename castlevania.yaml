@@ -2383,11 +2383,15 @@ segments:
       - [0x00E557A0, .data, overlay/credits_manager]
 
   - name: ni_ovl_pause_menu
-    type: bin
+    type: code
     # start: 0x00B543C0
     start: 0x00E557B0
     vram: 0x0F000000
     exclusive_ram_id: nisitenma_ichigo_overlays
+    subsegments:
+      - [0x00E557B0, asm, overlay/pause_menu]
+      - [0x00E57840, data, overlay/pause_menu]
+      - [0x00E58780, rodata, overlay/pause_menu]
 
   - name: ni_ovl_difficulty_and_character_select
     type: code
