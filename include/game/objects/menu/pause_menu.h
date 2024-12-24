@@ -31,6 +31,7 @@ typedef struct DigitalClock {
 // ID: 0x2134
 typedef struct PauseMenu {
     ObjectHeader header;
+    u8 field_0x20[4];
     Model* scroll_background_model;
     Light* scrolls_borders_light;
     Light* scrolls_background_light;
@@ -85,7 +86,7 @@ extern void pauseMenu_updateDigitalClockDisplay(PauseMenu*);
 extern void pauseMenu_createSoundMenuWork(PauseMenu*, u8, modelLighting*, modelLighting*);
 extern void func_0F001BF0();
 extern void pauseMenu_createItemDescription(PauseMenu*);
-extern s32 getItemUseArrayEntry(u8);
+extern s32 getItemUseArrayEntry(s32);
 extern void pauseMenu_updateClock(PauseMenu*);
 extern void pauseMenu_checkIfItemCanBeUsed(PauseMenu*);
 

@@ -80,5 +80,6 @@ extern void prepareSoundForPlay_defaultSettings(u32 sound_ID);
 #define SD_CARRIE_BLESSING                   0x2E4
 #define SD_REINHARDT_BLESSING                0x2E5
 #define SD_2E9                               0x2E9
+#define SD_CLOCK_TICKING                     0x2DC
 
 #endif

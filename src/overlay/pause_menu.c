@@ -65,9 +65,41 @@ void func_0F001BF0() {}
 
 #pragma GLOBAL_ASM("../asm/nonmatchings/overlay/pause_menu/pauseMenu_createItemDescription.s")
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/overlay/pause_menu/getItemUseArrayEntry.s")
+s32 getItemUseArrayEntry(s32 item_ID) {
+    s32 entry_ID;
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/overlay/pause_menu/pauseMenu_updateClock.s")
+    for (entry_ID = 0; item_use_settings_array[entry_ID].item != ITEM_ID_NOTHING; entry_ID++) {
+        if (item_ID == item_use_settings_array[entry_ID].item) {
+            return entry_ID;
+        }
+    }
+    return -1;
+}
+
+void pauseMenu_updateClock(PauseMenu* self) {
+    sys.SaveStruct_gameplay.minute += 5.0f;
+    if (sys.SaveStruct_gameplay.minute >= 60) {
+        sys.SaveStruct_gameplay.minute -= 60;
+        sys.SaveStruct_gameplay.hour++;
+        if (sys.SaveStruct_gameplay.hour >= 24) {
+            sys.SaveStruct_gameplay.hour = 0;
+            sys.SaveStruct_gameplay.day++;
+            if (sys.SaveStruct_gameplay.day >= 7) {
+                sys.SaveStruct_gameplay.day = 0;
+                sys.SaveStruct_gameplay.week++;
+            }
+        }
+        if (self->target_hour == sys.SaveStruct_gameplay.hour) {
+            (*play_sound)(STOP_SOUND(SD_CLOCK_TICKING));
+            sys.SaveStruct_gameplay.minute = 0;
+            sys.SaveStruct_gameplay.seconds = 0;
+            self->target_hour = 0;
+        }
+    }
+    pauseMenu_updateDigitalClockDisplay(self);
+    (*textbox_setMessagePtr)(self->digital_clock_textbox, self->digital_clock_text, NULL, 0);
+    self->digital_clock_textbox->flags |= MFDS_FLAG_UPDATE_STRING;
+}
 
 #pragma GLOBAL_ASM("../asm/nonmatchings/overlay/pause_menu/pauseMenu_checkIfItemCanBeUsed.s")
 
