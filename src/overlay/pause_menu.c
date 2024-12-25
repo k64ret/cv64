@@ -6,6 +6,8 @@
 
 extern u16 item_descriptions[];
 
+extern u16 options_text[];
+
 extern ItemUseSettings item_use_settings_array[];
 
 extern s32 sound_volume_decreased;
@@ -37,7 +39,37 @@ void pauseMenu_decreaseSoundVolume(PauseMenu* self) {
 
 #pragma GLOBAL_ASM("../asm/nonmatchings/overlay/pause_menu/pauseMenu_init.s")
 
+// TODO: Remove `NON_MATCHING` label when linking .rodata
+#ifdef NON_MATCHING
+void pauseMenu_createMainMenu(PauseMenu* self) {
+    scroll_state* scroll;
+    MfdsState* textbox;
+
+    if (1) {}
+    if (1) {}
+    if ((*objectList_findFirstObjectByID)(MENU_SCROLL) == NULL) {
+        scroll = (*createScrollState)(self, self->scrolls_borders_light, self->scrolls_background_light, SCROLL_STATE_FLAG_WHITE_DOWELS | SCROLL_STATE_FLAG_02, 0, -6.0f, -3.0f, 10.0f, 50.0f, NULL);
+        scroll->width.x = 0.5f;
+        scroll->width.y = 0.5f;
+        scroll->width.z = 0.44999999f;
+        scroll->flags &= ~SCROLL_STATE_FLAG_CLOSING;
+        scroll->flags |= SCROLL_STATE_FLAG_OPENING;
+        self->main_menu_options_scroll = scroll;
+
+        textbox = (*textbox_create)(self, self->scrolls_borders_light, MFDS_FLAG_OPEN_TEXTBOX | MFDS_FLAG_ALLOW_VARIABLE_SPEED | MFDS_FLAG_FAST_TEXT_SPEED | MFDS_FLAG_ALLOC_TEXTBOX_IN_MENU_DATA_HEAP);
+        self->options_textbox = textbox;
+        if (textbox) {}
+        textbox->palette = TEXT_COLOR_WHITE;
+        (*textbox_setPos)(textbox, 95, 90, 1);
+        (*textbox_setDimensions)(textbox, 5, 100, 0, 0);
+        (*textbox_setScaleParameters)(textbox, 2, 2, 11.0f, 1.0f, 1.0f, FALSE, TRUE);
+        (*textbox_setMessagePtr)(textbox, GET_UNMAPPED_ADDRESS(NI_OVL_PAUSE_MENU, &options_text), NULL, 0);
+        (*object_curLevel_goToNextFuncAndClearTimer)(self->header.current_function, &self->header.function_info_ID);
+    }
+}
+#else
 #pragma GLOBAL_ASM("../asm/nonmatchings/overlay/pause_menu/pauseMenu_createMainMenu.s")
+#endif
 
 #pragma GLOBAL_ASM("../asm/nonmatchings/overlay/pause_menu/pauseMenu_calcMainMenu.s")
 
@@ -70,7 +102,7 @@ void pauseMenu_destroy(PauseMenu* self) {
 
 #pragma GLOBAL_ASM("../asm/nonmatchings/overlay/pause_menu/pauseMenu_updateDigitalClockDisplay.s")
 
-// TODO: Remove when linking .rodata
+// TODO: Remove `NON_MATCHING` label when linking .rodata
 #ifdef NON_MATCHING
 SoundMenuWork* pauseMenu_createSoundMenuWork(PauseMenu* self, u8 ptrs_array_index, modelLighting* arg2, modelLighting* arg3, s32 arg4) {
     SoundMenuWork* work;
@@ -111,7 +143,7 @@ SoundMenuWork* pauseMenu_createSoundMenuWork(PauseMenu* self, u8 ptrs_array_inde
 
 void func_0F001BF0() {}
 
-// TODO: Remove when linking .rodata
+// TODO: Remove `NON_MATCHING` label when linking .rodata
 #ifdef NON_MATCHING
 void pauseMenu_createItemDescription(PauseMenu* self) {
     scroll_state* scroll;
