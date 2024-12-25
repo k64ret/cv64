@@ -41,7 +41,12 @@ void pauseMenu_decreaseSoundVolume(PauseMenu* self) {
 
 #pragma GLOBAL_ASM("../asm/nonmatchings/overlay/pause_menu/pauseMenu_calcMainMenu.s")
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/overlay/pause_menu/pauseMenu_checkScrollObjExists.s")
+void pauseMenu_checkScrollObjExists(PauseMenu* self) {
+    if ((*objectList_findFirstObjectByID)(MENU_SCROLL) == NULL) {
+        pauseMenu_createSoundMenuWork(self, 2, self->scrolls_borders_light, self->scrolls_background_light, 0);
+        (*object_curLevel_goToNextFuncAndClearTimer)(self->header.current_function, &self->header.function_info_ID);
+    }
+}
 
 #pragma GLOBAL_ASM("../asm/nonmatchings/overlay/pause_menu/pauseMenu_calcItemList.s")
 
