@@ -7,6 +7,13 @@
 #include "gfx/light.h"
 #include "item.h"
 
+typedef enum PauseMenuMainOptions {
+    PAUSE_MENU_ITEM   = 1,
+    PAUSE_MENU_OPTION = 2,
+    PAUSE_MENU_QUIT   = 3,
+    PAUSE_MENU_BACK   = 4
+} PauseMenuMainOptions;
+
 typedef struct ItemUseSettings {
     u8 item;
     /**
@@ -93,5 +100,18 @@ void pauseMenu_updateClock(PauseMenu*);
 extern s32 pauseMenu_checkIfItemCanBeUsed(PauseMenu*);
 
 typedef void (*PauseMenuFuncs)(PauseMenu*);
+
+typedef enum PauseMenuFuncId {
+    PAUSE_MENU_DECREASE_SOUND_VOLUME,
+    PAUSE_MENU_INIT,
+    PAUSE_MENU_CREATE_MAIN_MENU,
+    PAUSE_MENU_CALC_MAIN_MENU,
+    PAUSE_MENU_CHECK_SCROLL_OBJ_EXISTS,
+    PAUSE_MENU_CALC_ITEM_LIST,
+    PAUSE_MENU_CALC_ITEM_SELECTED,
+    PAUSE_MENU_DESTROY,
+    PAUSE_MENU_CALC_QUIT_MENU,
+    PAUSE_MENU_DO_NOTHING
+} PauseMenuFuncId;
 
 #endif
