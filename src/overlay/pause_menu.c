@@ -70,7 +70,42 @@ void pauseMenu_destroy(PauseMenu* self) {
 
 #pragma GLOBAL_ASM("../asm/nonmatchings/overlay/pause_menu/pauseMenu_updateDigitalClockDisplay.s")
 
+// TODO: Remove when linking .rodata
+#ifdef NON_MATCHING
+SoundMenuWork* pauseMenu_createSoundMenuWork(PauseMenu* self, u8 ptrs_array_index, modelLighting* arg2, modelLighting* arg3, s32 arg4) {
+    SoundMenuWork* work;
+    scroll_state* scroll;
+
+    if (self != NULL) {
+        (*allocStructInObjectEntryList)("work_work", self, sizeof(SoundMenuWork), ptrs_array_index);
+        work = ((Object*) self)->alloc_data[ptrs_array_index];
+        if (work != NULL) {
+            work->field_0x01 = 1;
+            work->field_0x05 = 0;
+            work->field_0x06 = 0;
+            work->field_0x02 = 0;
+            work->selected_item_ID_in_item_list = ITEM_ID_NOTHING;
+
+            scroll = (*createScrollState)(self, arg2, arg3, SCROLL_STATE_FLAG_WHITE_DOWELS | SCROLL_STATE_FLAG_02, 9, 0.0f, -30.0f, 90.0f, 30.0f, work);
+            scroll->width.z = 0.6f;
+            scroll->width.y = 0.6f;
+            scroll->width.x = 1.5f;
+            scroll->flags &= ~SCROLL_STATE_FLAG_CLOSING;
+            scroll->flags |= SCROLL_STATE_FLAG_OPENING;
+            work->scroll = scroll;
+        }
+        else {
+            return NULL;
+        }
+    }
+    else {
+        return NULL;
+    }
+    return work;
+}
+#else
 #pragma GLOBAL_ASM("../asm/nonmatchings/overlay/pause_menu/pauseMenu_createSoundMenuWork.s")
+#endif
 
 // clang-format on
 

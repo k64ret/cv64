@@ -74,22 +74,22 @@ typedef struct PauseMenu {
     u8 field_0x73;
 } PauseMenu;
 
-extern void pauseMenu_entrypoint(PauseMenu*);
+void pauseMenu_entrypoint(PauseMenu*);
 extern void pauseMenu_init(PauseMenu*);
 extern void pauseMenu_createMainMenu(PauseMenu*);
 extern void pauseMenu_calcMainMenu(PauseMenu*);
-extern void pauseMenu_checkScrollObjExists(PauseMenu*);
+void pauseMenu_checkScrollObjExists(PauseMenu*);
 extern void pauseMenu_calcItemList(PauseMenu*);
 extern void pauseMenu_calcItemSelectedMenu(PauseMenu*);
-extern void pauseMenu_destroy(PauseMenu*);
+void pauseMenu_destroy(PauseMenu*);
 extern void pauseMenu_calcQuitMenu(PauseMenu*);
 extern void pauseMenu_updateDigitalClockDisplay(PauseMenu*);
 extern SoundMenuWork*
 pauseMenu_createSoundMenuWork(PauseMenu*, u8, modelLighting*, modelLighting*, s32);
-extern void func_0F001BF0();
+void func_0F001BF0();
 extern void pauseMenu_createItemDescription(PauseMenu*);
-extern s32 getItemUseArrayEntry(s32);
-extern void pauseMenu_updateClock(PauseMenu*);
+s32 getItemUseArrayEntry(s32);
+void pauseMenu_updateClock(PauseMenu*);
 extern s32 pauseMenu_checkIfItemCanBeUsed(PauseMenu*);
 
 typedef void (*PauseMenuFuncs)(PauseMenu*);
