@@ -8,6 +8,10 @@ extern u16 item_descriptions[];
 
 extern u16 options_text[];
 
+extern u16 item_usage_text[];
+
+extern u16 selection_arrow_character[];
+
 extern ItemUseSettings item_use_settings_array[];
 
 extern s32 sound_volume_decreased;
@@ -80,7 +84,84 @@ void pauseMenu_checkScrollObjExists(PauseMenu* self) {
     }
 }
 
+// TODO: Remove `NON_MATCHING` label when linking .rodata
+#ifdef NON_MATCHING
+void pauseMenu_calcItemList(PauseMenu* self) {
+    MfdsState* textbox;
+    Model* item_model;
+    s32 temp[2];
+    SoundMenuWork* sound_menu;
+    s32 selected_item_ID_in_item_list;
+    scroll_state* item_scroll;
+    scroll_state* options_scroll;
+
+    sound_menu = self->sound_menu;
+    if (sound_menu != NULL) {
+        selected_item_ID_in_item_list = sound_menu->selected_item_ID_in_item_list;
+        if (selected_item_ID_in_item_list != ITEM_ID_NOTHING) {
+            if (selected_item_ID_in_item_list == 0xFF) {
+                (*object_curLevel_goToFunc)(self->header.current_function, &self->header.function_info_ID, PAUSE_MENU_CREATE_MAIN_MENU);
+                return;
+            }
+            self->selected_item_ID = selected_item_ID_in_item_list;
+            pauseMenu_createItemDescription(self);
+
+            item_scroll = (*createScrollState)(self, self->scrolls_borders_light, self->scrolls_background_light, SCROLL_STATE_FLAG_WHITE_DOWELS | SCROLL_STATE_FLAG_02, 0, -55.0f, 5.0f, 120.0f, 30.0f, NULL);
+            item_scroll->width.x = 0.6f;
+            item_scroll->width.y = 0.3f;
+            item_scroll->width.z = 0.27f;
+            item_scroll->flags &= ~SCROLL_STATE_FLAG_CLOSING;
+            item_scroll->flags |= SCROLL_STATE_FLAG_OPENING;
+            self->item_model_scroll = item_scroll;
+
+            options_scroll = (*createScrollState)(self, self->scrolls_borders_light, self->scrolls_background_light, SCROLL_STATE_FLAG_WHITE_DOWELS | SCROLL_STATE_FLAG_02, 0, 45.0f, 5.0f, 120.0f, 30.0f, NULL);
+            options_scroll->width.x = 0.69999999f;
+            options_scroll->width.y = 0.3f;
+            options_scroll->width.z = 0.27f;
+            options_scroll->flags &= ~SCROLL_STATE_FLAG_CLOSING;
+            options_scroll->flags |= SCROLL_STATE_FLAG_OPENING;
+            self->options_text_scroll = options_scroll;
+
+            textbox = (*textbox_create)(self, self->scrolls_background_light, MFDS_FLAG_OPEN_TEXTBOX | MFDS_FLAG_ALLOW_VARIABLE_SPEED | MFDS_FLAG_FAST_TEXT_SPEED | MFDS_FLAG_ALLOC_TEXTBOX_IN_MENU_DATA_HEAP);
+            self->options_textbox = textbox;
+            if (textbox) {}
+            textbox->palette = TEXT_COLOR_BEIGE;
+            (*textbox_setPos)(textbox, 165, 100, 1);
+            (*textbox_setDimensions)(textbox, 3, 100, 0, 0);
+            (*textbox_setMessagePtr)(textbox, GET_UNMAPPED_ADDRESS(NI_OVL_PAUSE_MENU, &item_usage_text), NULL, 0);
+            (*textbox_setScaleParameters)(textbox, 2, 2, 120.0f, 0.8f, 0.8f, TRUE, TRUE);
+
+            textbox = (*textbox_create)(self, self->scrolls_background_light, MFDS_FLAG_OPEN_TEXTBOX | MFDS_FLAG_ALLOW_VARIABLE_SPEED | MFDS_FLAG_FAST_TEXT_SPEED | MFDS_FLAG_ALLOC_TEXTBOX_IN_MENU_DATA_HEAP);
+            self->selection_arrow_textbox = textbox;
+            if (textbox) {}
+            textbox->palette = TEXT_COLOR_RED;
+            (*textbox_setPos)(textbox, 160, 100, 1);
+            (*textbox_setDimensions)(textbox, 1, 16, 0, 0);
+            (*textbox_setMessagePtr)(textbox, GET_UNMAPPED_ADDRESS(NI_OVL_PAUSE_MENU, &selection_arrow_character), NULL, 0);
+            (*textbox_setScaleParameters)(textbox, 2, 2, 120.0f, 0.8f, 0.8f, TRUE, TRUE);
+
+            self->outside_item_selected_menu = FALSE;
+
+            self->selected_item_ID_in_item_list = sound_menu->selected_item_ID_in_item_list;
+            item_model = (*createItemModel)(self->selected_item_ID_in_item_list, common_camera_HUD, "item");
+            self->item_model = item_model;
+            self->field_0x51 = FALSE;
+            self->delay_before_being_able_to_select_option = 0;
+            self->option_selection_inside_selected_item = 0;
+            self->target_health = 0;
+            self->target_hour = 0;
+            item_model->position.x = -80.0f;
+            item_model->position.y = -10.0f;
+
+            (*object_curLevel_goToNextFuncAndClearTimer)(self->header.current_function, &self->header.function_info_ID);
+            return;
+        }
+    }
+    self->selected_item_can_be_used = FALSE;
+}
+#else
 #pragma GLOBAL_ASM("../asm/nonmatchings/overlay/pause_menu/pauseMenu_calcItemList.s")
+#endif
 
 #pragma GLOBAL_ASM("../asm/nonmatchings/overlay/pause_menu/pauseMenu_calcItemSelectedMenu.s")
 

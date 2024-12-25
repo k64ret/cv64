@@ -75,6 +75,7 @@ typedef enum cv64_item_id {
     ITEM_ID_GOLD_100          = 41
 } cv64_item_id_t;
 
+extern Model* createItemModel(s32 item_ID, Camera* display_camera, const char* name);
 extern s8 item_addAmountToInventory(s32 item, s32 amount);
 extern s8 item_removeAmountFromInventory(s32 item, s32 amount);
 extern s8 item_getAmountUntilMaxCapacity(s32 item);
