@@ -164,8 +164,8 @@ void pauseMenu_createItemDescription(PauseMenu* self) {
     scroll->width.x = 1.5f;
     scroll->width.y = 0.5f;
     scroll->width.z = 0.33f;
-    scroll->flags &= ~0x80;
-    scroll->flags |= 0x40;
+    scroll->flags &= ~SCROLL_STATE_FLAG_CLOSING;
+    scroll->flags |= SCROLL_STATE_FLAG_OPENING;
     self->description_text_scroll = scroll;
 
     textbox = (*textbox_create)(
