@@ -47,7 +47,7 @@ typedef struct miniScrollVertexBuffer {
 } miniScrollVertexBuffer;
 
 // ID: 0x213E
-typedef struct {
+typedef struct miniScroll {
     ObjectHeader header;
     u8 field_0x20[4];
     Model* model;
