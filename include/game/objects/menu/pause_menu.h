@@ -85,7 +85,7 @@ extern void pauseMenu_destroy(PauseMenu*);
 extern void pauseMenu_calcQuitMenu(PauseMenu*);
 extern void pauseMenu_updateDigitalClockDisplay(PauseMenu*);
 extern SoundMenuWork*
-pauseMenu_createSoundMenuWork(PauseMenu*, s32, modelLighting*, modelLighting*, s32);
+pauseMenu_createSoundMenuWork(PauseMenu*, u8, modelLighting*, modelLighting*, s32);
 extern void func_0F001BF0();
 extern void pauseMenu_createItemDescription(PauseMenu*);
 extern s32 getItemUseArrayEntry(s32);
