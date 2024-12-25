@@ -71,6 +71,8 @@ void pauseMenu_destroy(PauseMenu* self) {
 
 void func_0F001BF0() {}
 
+// TODO: Remove when linking .rodata
+#ifdef NON_MATCHING
 void pauseMenu_createItemDescription(PauseMenu* self) {
     scroll_state* scroll;
     MfdsState* textbox;
@@ -116,6 +118,9 @@ void pauseMenu_createItemDescription(PauseMenu* self) {
     );
     (*textbox_setScaleParameters)(textbox, 2, 2, 100.0f, 0.8f, 0.8f, TRUE, TRUE);
 }
+#else
+    #pragma GLOBAL_ASM("../asm/nonmatchings/overlay/pause_menu/pauseMenu_createItemDescription.s")
+#endif
 
 s32 getItemUseArrayEntry(s32 item_ID) {
     s32 entry_ID;
