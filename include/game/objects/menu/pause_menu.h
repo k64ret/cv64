@@ -114,4 +114,9 @@ typedef enum PauseMenuFuncId {
     PAUSE_MENU_DO_NOTHING
 } PauseMenuFuncId;
 
+extern const u32 PAUSE_SCROLL_BG_MODEL_DL;
+extern const u32 PAUSE_CHARACTER_PORTRAIT_MATERIAL_DL;
+extern const u32 PAUSE_CHARACTER_PORTRAIT_REINHARDT_DL;
+extern const u32 PAUSE_CHARACTER_PORTRAIT_CARRIE_DL;
+
 #endif
