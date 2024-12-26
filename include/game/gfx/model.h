@@ -6,7 +6,18 @@
 #include "map_actor_model.h"
 #include "math.h"
 #include "nisitenma_ichigo.h"
+#include "objects/menu/miniScroll.h"
+#include "objects/menu/mfds.h"
 #include <ultra64.h>
+
+typedef struct ModelUnk68 {
+    s32 field_0x00;
+    s32 field_0x04;
+    s32 field_0x08;
+    struct miniScroll* field_0x0C;
+    struct MfdsState* field_0x10;
+    u8 field_0x14[44];
+} ModelUnk68;
 
 typedef struct Model {
     s16 type;
@@ -40,6 +51,7 @@ typedef struct Model {
     MapActorModel* map_actor_model;
     union {
         Mat4f matrix;
+        ModelUnk68 field_0x68;
     };
 } Model;
 

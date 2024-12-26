@@ -5,7 +5,6 @@
  * This header file contains structs that handle textboxes.
  */
 
-#include "cv64.h"
 #include "gfx/camera.h"
 #include "gfx/model.h"
 #include "gfx/graphic_container.h"
@@ -309,12 +308,12 @@ typedef struct ObjMfds {
     u16 field_0x20;
     u16 field_0x22;
     u8 field_0x24[4];
-    Model* model;
+    struct Model* model;
     u8 field_0x2C[8];
     GraphicContainerHeader* mfds_double; // Real name
     void* field_0x38;
     void* field_0x3C;
-    TextboxAdvanceArrow* advance_arrow;
+    struct TextboxAdvanceArrow* advance_arrow;
     void* field_0x44;
     void* field_0x48;
     void* field_0x4C;

@@ -50,8 +50,9 @@ typedef struct miniScrollVertexBuffer {
 typedef struct miniScroll {
     ObjectHeader header;
     u8 field_0x20[4];
-    Model* model;
-    Model* field_0x28; // Assumption based on `func_0F0011F8` from the `NI_OVL_MINI_SCROLL` overlay
+    struct Model* model;
+    struct Model*
+        field_0x28; // Assumption based on `func_0F0011F8` from the `NI_OVL_MINI_SCROLL` overlay
     u8 field_0x2C[8];
     miniScrollVertexBuffer* vtx_buffer;
     miniScrollInner inner;
@@ -60,7 +61,7 @@ typedef struct miniScroll {
 miniScroll* miniScroll_create(void* parent, Camera* camera, s32 param_3, s32 param_4);
 u32 miniScroll_checkFlags(miniScroll* self, u32 flags);
 void miniScroll_editFlags(miniScroll* self, u32 flags, s32 setFlags);
-Model* miniScroll_getModel(miniScroll* self);
+struct Model* miniScroll_getModel(miniScroll* self);
 void miniScroll_setState(miniScroll* self, u32 state);
 void miniScroll_setScrollingParams(miniScroll* self, f32 open_max_height, s32 scrolling_speed);
 void miniScroll_setPosition(miniScroll* self, f32 X, f32 Y, f32 Z);
