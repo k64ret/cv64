@@ -82,6 +82,7 @@ extern u32 getMapEventFlagID(s16 stage_ID);
 s32 func_8001A250_1AE50(s32* arg0, u16* arg1, s16 arg2);
 extern void func_80066400(s32);
 extern void Map_SetCameraParams();
+extern void player_status_init();
 
 #define NPTR 0
 // Gets the offset of a struct member variable

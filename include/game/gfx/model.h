@@ -13,7 +13,7 @@
 typedef struct ModelUnk68 {
     s32 field_0x00;
     s32 field_0x04;
-    s32 field_0x08;
+    u32 field_0x08;
     struct miniScroll* field_0x0C;
     struct MfdsState* field_0x10;
     u8 field_0x14[44];

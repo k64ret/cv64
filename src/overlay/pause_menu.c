@@ -10,6 +10,8 @@ extern u16 options_text[];
 
 extern u16 item_usage_text[];
 
+extern u16 confirmation_text[];
+
 extern u16 selection_arrow_character[];
 
 extern ItemUseSettings item_use_settings_array[];
@@ -179,7 +181,115 @@ void pauseMenu_destroy(PauseMenu* self) {
 
 // clang-format off
 
+// TODO: Remove `NON_MATCHING` label when linking .rodata
+#ifdef NON_MATCHING
+void pauseMenu_calcQuitMenu(PauseMenu* self) {
+    s32 temp;
+    Model* scroll_background_model;
+    MfdsState* textbox;
+    gameplayMenuMgr* gameplay_menu_mgr;
+    MfdsState* options_textbox;
+    ModelUnk68* temp_s0;
+    miniScroll* mini_scroll;
+
+    scroll_background_model = self->scroll_background_model;
+    options_textbox = self->options_textbox;
+    temp_s0 = &scroll_background_model->field_0x68;
+
+    switch (temp_s0->field_0x00) {
+        case 0:
+            mini_scroll = (*miniScroll_create)(self, self->scrolls_borders_light, 0, 0);
+            temp_s0->field_0x0C = mini_scroll;
+            (*miniScroll_setPosition)(temp_s0->field_0x0C, -6.0f, 26.0f, 100.0f);
+            (*miniScroll_setWidth)(temp_s0->field_0x0C, 0.7f, 0.36f, 1.0f);
+            (*miniScroll_setScrollingParams)(temp_s0->field_0x0C, 50.0f, 1);
+            (*miniScroll_setState)(temp_s0->field_0x0C, MINISCROLL_STATE_OPEN);
+            temp_s0->field_0x00++;
+            break;
+
+        case 1:
+            temp_s0->field_0x08++;
+            if (temp_s0->field_0x08 >= 5) {
+                temp_s0->field_0x08 = 0;
+                temp_s0->field_0x00++;
+                break;
+            }
+            break;
+
+        case 2:
+            textbox = (*textbox_create)(self, self->scrolls_borders_light, MFDS_FLAG_OPEN_TEXTBOX | MFDS_FLAG_ALLOW_VARIABLE_SPEED);
+            temp_s0->field_0x10 = textbox;
+            (*textbox_setDimensions)(textbox, 3, 128, 0, 0);
+            (*textbox_setScaleParameters)(temp_s0->field_0x10, 2, 2, 101.0f, 0.8f, 0.8f, FALSE, FALSE);
+            (*textbox_setMessagePtr)(temp_s0->field_0x10, GET_UNMAPPED_ADDRESS(NI_OVL_PAUSE_MENU, &confirmation_text), NULL, 0);
+            (*textbox_setPos)(temp_s0->field_0x10, 104, 103, 0);
+            temp_s0->field_0x00++;
+            break;
+
+        case 3:
+            if ((*miniScroll_checkFlags)(temp_s0->field_0x0C, MINISCROLL_FLAG_OPENED)) {
+                options_textbox->flags |= MINISCROLL_FLAG_CLOSED;
+                temp_s0->field_0x00++;
+                break;
+            }
+            break;
+
+        case 4:
+            if (temp_s0->field_0x10->textbox_option != TEXTBOX_OPTION_IDLE) {
+                (*miniScroll_setState)(temp_s0->field_0x0C, MINISCROLL_STATE_CLOSE);
+                temp_s0->field_0x10->flags |= MFDS_FLAG_CLOSE_TEXTBOX;
+                switch (temp_s0->field_0x10->textbox_option - 1) {
+                    case 0:
+                        temp_s0->field_0x00 = 5;
+                        break;
+                    case 1:
+                        temp_s0->field_0x00 = 6;
+                        break;
+                }
+            }
+            break;
+
+        case 5:
+            scroll_background_model = scroll_background_model;
+            gameplay_menu_mgr = (gameplayMenuMgr*) (*objectList_findFirstObjectByID)(MENU_GAMEPLAY_MENUMGR);
+            if (gameplay_menu_mgr != NULL) {
+                 gameplay_menu_mgr->menu_state |= QUIT_GAME;
+            }
+            textbox = temp_s0->field_0x10;
+            textbox->flags |= MFDS_FLAG_CLOSE_TEXTBOX;
+            self->main_menu_options_scroll->flags = SCROLL_STATE_FLAG_HIDE;
+            (*Fade_SetSettings)(FADE_OUT, 15, 0, 0, 0);
+            (*player_status_init)();
+            temp_s0->field_0x04 = PAUSE_MENU_DESTROY;
+            temp_s0->field_0x00 = 7;
+            break;
+
+        case 6:
+            temp_s0->field_0x04 = PAUSE_MENU_CALC_MAIN_MENU;
+            textbox = (*textbox_create)(self, self->scrolls_borders_light, MFDS_FLAG_OPEN_TEXTBOX | MFDS_FLAG_ALLOW_VARIABLE_SPEED | MFDS_FLAG_FAST_TEXT_SPEED | MFDS_FLAG_ALLOC_TEXTBOX_IN_MENU_DATA_HEAP);
+            self->options_textbox = textbox;
+            textbox->palette = TEXT_COLOR_WHITE;
+            options_textbox = textbox;
+            if (options_textbox) {}
+            (*textbox_setPos)(textbox, 95, 90, 1);
+            (*textbox_setDimensions)(options_textbox, 5, 100, 0, 0);
+            if (options_textbox) {}
+            (*textbox_setScaleParameters)(options_textbox, 2, 2, 11.0f, 1.0f, 1.0f, FALSE, TRUE);
+            (*textbox_setMessagePtr)(options_textbox, GET_UNMAPPED_ADDRESS(NI_OVL_PAUSE_MENU, &options_text), NULL, 0);
+            temp_s0->field_0x00 = 7;
+            break;
+
+        case 7:
+            if ((*miniScroll_checkFlags)(temp_s0->field_0x0C, MINISCROLL_FLAG_CLOSED)) {
+                (*miniScroll_editFlags)(temp_s0->field_0x0C, MINISCROLL_STATE_DESTROY, -1);
+                (*object_curLevel_goToFunc)(self->header.current_function, &self->header.function_info_ID, temp_s0->field_0x04);
+            }
+            break;
+    }
+}
+#else
 #pragma GLOBAL_ASM("../asm/nonmatchings/overlay/pause_menu/pauseMenu_calcQuitMenu.s")
+#endif
 
 #pragma GLOBAL_ASM("../asm/nonmatchings/overlay/pause_menu/pauseMenu_updateDigitalClockDisplay.s")
 
