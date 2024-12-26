@@ -1,13 +1,12 @@
 #ifndef ACTOR_H
 #define ACTOR_H
 
-#include "gfx/model.h"
 #include "object.h"
+#include "gfx/model.h"
 #include "atari.h"
 #include "objects/camera/modelLighting.h"
 #include "animation.h"
 #include "actor_config.h"
-#include <ultra64.h>
 
 // For "axis" argument from `checkIfOutsideEntityIsInsideMainEntityRadius`
 #define AXIS_X   BIT(0)

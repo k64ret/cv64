@@ -3,7 +3,9 @@
 
 #include "controller.h"
 #include "fade.h"
+#include "gfx/figure.h"
 #include "gfx/color.h"
+#include "gfx/misc.h"
 #include "actor.h"
 #include "math.h"
 #include "nisitenma_ichigo.h"

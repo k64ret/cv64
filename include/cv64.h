@@ -89,7 +89,6 @@ extern void Map_SetCameraParams();
 #define ARRAY_COUNT(arr)        (s32)(sizeof(arr) / sizeof(arr[0])) // Get number of elements in the array
 #define ARRAY_START(arr)        &arr[0]                             // Get start address of array
 #define ARRAY_END(arr)          &arr[ARRAY_COUNT(arr)]              // Get end address of array
-#define NUM_GRAPHIC_BUFFERS     2
 
 #define SCREEN_WIDTH  320
 #define SCREEN_HEIGHT 240

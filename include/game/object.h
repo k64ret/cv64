@@ -1,9 +1,9 @@
 #ifndef OBJECT_H
 #define OBJECT_H
 
-#include "cv64.h"
 #include "gfx/figure.h"
 #include "gfx/graphic_container.h"
+#include "bit.h"
 #include "memory.h"
 #include "object_ID.h"
 
@@ -78,7 +78,9 @@ typedef struct Object {
 typedef struct cv64_object_file_info {
     /**
      * Can be either a pointer to another struct that holds the information,
-     * or simply the NI file ID The first byte is used as a "flag"
+     * or simply the NI file ID.
+     *
+     * The first byte is used as a "flag"
      */
     union {
         u32 addr;

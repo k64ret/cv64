@@ -1,11 +1,10 @@
 #ifndef MINI_SCROLL_H
 #define MINI_SCROLL_H
 
-#include "cv64.h"
+#include "object.h"
 #include "gfx/model.h"
 #include "gfx/camera.h"
 #include "gfx/graphic_container.h"
-#include "object.h"
 
 typedef enum miniScrollFlags {
     MINISCROLL_FLAG_DESTROY_IF_CLOSED = BIT(24),
