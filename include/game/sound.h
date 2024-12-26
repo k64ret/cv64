@@ -75,6 +75,8 @@ extern void prepareSoundForPlay_defaultSettings(u32 sound_ID);
 #define SD_LIBRARY_PIECE_SET                 0x1A0
 #define SD_RENON_BRIEFCASE_SPIN_1            0x21A
 #define SD_RENON_BRIEFCASE_SPIN_2            0x21B
+#define SD_REINHARDT_HEALTH_RECOVERY         0x257
+#define SD_CARRIE_HEALTH_RECOVERY            0x258
 #define SD_ROSE_DOOR_CLOSE                   0x27B
 #define SD_ROSE_DOOR_CLOSING                 0x29B
 #define SD_CARRIE_BLESSING                   0x2E4

@@ -55,7 +55,7 @@ typedef struct PauseMenu {
     scroll_state* options_text_scroll;
     scroll_state* description_text_scroll;
     MfdsState* item_description;
-    u8 outside_item_selected_menu;
+    s8 outside_item_selected_menu;
     /**
      * Similar to `outside_item_selected_menu`? Although this field doesn't seem to be read.
      * Set to 1 when entering the menu, and to 0 when viewing an item.
@@ -77,7 +77,7 @@ typedef struct PauseMenu {
     s8 player_flag_to_change;
     gameplayMenuMgr* gameplay_menu_mgr;
     u8 field_0x70[2];
-    u8 selected_item_can_be_used;
+    s8 selected_item_can_be_used;
     u8 field_0x73;
 } PauseMenu;
 

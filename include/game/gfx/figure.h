@@ -77,6 +77,7 @@ extern void figure_showModelAndChildren(FigureHeader*, u16);
 extern void figure_hideSelfAndChildren(FigureHeader*, u16);
 extern FigureHeader* figure_setChild(FigureHeader* new_child, FigureHeader* self);
 extern FigureHeader* Figure_SetSibling(FigureHeader* new_sibling, FigureHeader* self);
+extern void figure_destroySelfAndChildren_2(FigureHeader*, u16);
 
 extern Figure figures_array[FIG_ARRAY_MAX];
 
