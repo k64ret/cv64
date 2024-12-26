@@ -2,6 +2,7 @@
 #define MINI_SCROLL_H
 
 #include "cv64.h"
+#include "gfx/model.h"
 #include "gfx/camera.h"
 #include "gfx/graphic_container.h"
 #include "object.h"

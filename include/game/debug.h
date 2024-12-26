@@ -3,7 +3,6 @@
 
 // General debug functions
 
-#include "cv64.h"
 #include <ultra64.h>
 
 typedef enum DebugProcessMeterState {

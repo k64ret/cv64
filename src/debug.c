@@ -12,6 +12,8 @@
  */
 
 #include "debug.h"
+#include "gfx/color.h"
+#include "cv64.h"
 
 s32 processMeter_number_of_divisions = 3;
 f32 processBar_sizeDivisor           = 45720360.0f;
