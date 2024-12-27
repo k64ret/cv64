@@ -7,7 +7,14 @@
 #include "gfx/light.h"
 #include "item.h"
 
-#define PLAYER_FLAGS_TO_CHANGE(player_flags) (((player_flags) >> 0x19) | 0x10)
+/**
+ * Player status to remove when using an item from `item_use_settings_array`.
+ * If the argument is set to 0, the game won't remove any status.
+ *
+ * @note Because of the way the checks are setup, only the VAMP, POISON and STO statuses
+ *       can be removed from items in the pause menu.
+ */
+#define PLAYER_STATUS_TO_REMOVE(player_status) (((player_status) >> 0x19) | 0x10)
 /**
  * The item in question from `item_use_settings_array` is either a sun or a moon card
  */
