@@ -5,14 +5,14 @@
 #include "object.h"
 
 // ID: 0x00E5
-typedef struct {
+typedef struct pickableItemFlash {
     ObjectHeader header;
     u8 field_0x20[4];
     Model* model;
     u8 field_0x28[7];
     u8 textbox_option;
     u8 field_0x30[60];
-    effect_visual_info* visual_info;
+    EffectVisualInfo* visual_info;
     ActorConfig* settings;
 } pickableItemFlash;
 

@@ -46,7 +46,7 @@ extern void cv64_ovl_touturo_door_entrance_close_door(cv64_ovl_touturo_door_t* s
 typedef enum cv64_ovl_touturo_door_entrance_func_id {
     TOU_TURO_DOOR_ENTRANCE_CHECK_EVENT_FLAGS,
     TOU_TURO_DOOR_ENTRANCE_CLOSE_DOOR,
-    TOU_TURO_FUNC_801578FC
+    TOU_TURO_STAGE_PROP_LOOP
 } cv64_ovl_touturo_door_entrance_func_id_t;
 
 #endif // CV64_TOU_TURO_DOOR_H

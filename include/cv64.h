@@ -18,12 +18,19 @@ typedef u8 Addr[];
 extern u32 D_80092F50;
 extern Gfx* gDisplayListHead; // 0x800B49E0
 extern u32 map_misc_event_flags;
+extern u16 item_pickables_text[];
 extern u32 map_text_segment_address[28]; // 0x8016D008
 /**
  * If set to `TRUE`, the dynamic map lighting won't be updated
  * (for example, when transitioning from day to night)
  */
 extern u32 dont_update_map_lighting;
+
+typedef enum TimeOfDay {
+    TIME_DAY,
+    TIME_EVENING_MORNING,
+    TIME_NIGHT
+} TimeOfDay;
 
 typedef enum cv64_moon_visibility {
     MOON_VISIBILITY_DAY   = 0, // Moon is invisible
@@ -70,7 +77,6 @@ extern void func_800010A0_1CA0();
 extern void func_8001248C_1308C();
 extern void func_8000C6D0();
 extern void updateGameSound();
-extern void figure_update();
 extern void drawFog();
 extern void func_80005658();
 extern u32 getMapEventFlagID(s16 stage_ID);
@@ -88,6 +94,22 @@ extern void Map_SetCameraParams();
 
 #define SCREEN_WIDTH  320
 #define SCREEN_HEIGHT 240
+
+// Text IDs for `entranceMapNameDisplay_mapList`
+#define ENTRANCE_MAP_NAME_MORI         0
+#define ENTRANCE_MAP_NAME_TOUOKUJI     1
+#define ENTRANCE_MAP_NAME_NAKANIWA     2
+#define ENTRANCE_MAP_NAME_CHIKA_KODO   3
+#define ENTRANCE_MAP_NAME_CHIKA_SUIRO  4
+#define ENTRANCE_MAP_NAME_HONMARU_B1F  5
+#define ENTRANCE_MAP_NAME_KETTOU_TOU   6
+#define ENTRANCE_MAP_NAME_KAGAKU_TOU   7
+#define ENTRANCE_MAP_NAME_SHOKEI_TOU   8
+#define ENTRANCE_MAP_NAME_MAHOU_TOU    9
+#define ENTRANCE_MAP_NAME_TOU_TURO     10
+#define ENTRANCE_MAP_NAME_TOKEITOU_NAI 11
+#define ENTRANCE_MAP_NAME_TENSHU       12
+#define ENTRANCE_MAP_NAME_NONE         -1
 
 // Text IDs for Forest of Silence
 #define FOREST_LOCKED_DOOR 1
@@ -165,6 +187,14 @@ extern void Map_SetCameraParams();
  */
 #define GET_MAP_MESSAGE_POOL_PTR()                                                                 \
     (*NisitenmaIchigoFiles_segmentToVirtual)(                                                      \
+        map_text_segment_address[sys.SaveStruct_gameplay.map], MAP_ASSETS_FILE_ID                  \
+    )
+
+/**
+ * Same as `GET_MAP_MESSAGE_POOL_PTR`, but this is not accessed through a function pointer
+ */
+#define GET_MAP_MESSAGE_POOL_PTR_NO_FUNC_PTR()                                                     \
+    NisitenmaIchigoFiles_segmentToVirtual(                                                         \
         map_text_segment_address[sys.SaveStruct_gameplay.map], MAP_ASSETS_FILE_ID                  \
     )
 

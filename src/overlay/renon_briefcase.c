@@ -70,7 +70,7 @@ void cv64_ovl_renonbriefcase_init(cv64_ovl_renonbriefcase_t* self) {
 
     // Create and setup the briefcase model
     self->model = (*Model_buildHierarchy)(
-        FIG_TYPE_0400 | FIG_TYPE_HIERARCHY_NODE,
+        FIG_TYPE_ALLOW_TRANSPARENCY_CHANGE | FIG_TYPE_HIERARCHY_NODE,
         common_camera_8009B44C,
         &cv64_ovl_renonbriefcase_hierarchy
     );

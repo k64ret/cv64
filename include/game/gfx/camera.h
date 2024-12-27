@@ -100,7 +100,7 @@ typedef struct Camera {
 } Camera;
 
 extern Camera* common_camera_8009B430;
-extern Camera* common_camera_8009B434;
+extern Camera* common_camera_8009B434;  // Used by the skybox's moon
 extern Camera* common_camera_game_view; // 3D view
 extern Camera* common_camera_effects;   // Items, shadows, and some other effects
 extern Camera* common_camera_8009B440;  // Normal / Action / Battle / Boss view text

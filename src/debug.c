@@ -16,12 +16,12 @@
 s32 processMeter_number_of_divisions = 3;
 f32 processBar_sizeDivisor           = 45720360.0f;
 
-extern OSTime processMeter_greenBar_beginTime;
-extern OSTime processMeter_greenBar_endTime;
-extern OSTime processMeter_blueBar_beginTime;
-extern OSTime processMeter_blueBar_endTime;
-extern f32 processMeter_greenBarSize;
-extern f32 processMeter_blueBarSize;
+OSTime processMeter_greenBar_beginTime;
+OSTime processMeter_greenBar_endTime;
+OSTime processMeter_blueBar_beginTime;
+OSTime processMeter_blueBar_endTime;
+f32 processMeter_greenBarSize;
+f32 processMeter_blueBarSize;
 
 void func_80019BC0_1A7C0() {}
 
@@ -71,11 +71,6 @@ void processMeter_setSizeDivisor(f32 size_divisor) {
     processBar_sizeDivisor = size_divisor;
 }
 
-// TODO: This function can't be matched until we can include this file's `bss`
-//       in without having linker errors.
-#ifdef NON_MATCHING
-    #pragma GLOBAL_ASM("../asm/nonmatchings/debug/processMeter_update.s")
-#else
 /**
  * Updates the size of each process bar.
  *
@@ -83,7 +78,7 @@ void processMeter_setSizeDivisor(f32 size_divisor) {
  * Once with the `START` state, and another one with the `END` state,
  * in order for the size to update correctly.
  *
- * See the `dbg_processmeter_state_t` enum for all possible values.
+ * See the `DebugProcessMeterState` enum for all possible values.
  */
 void processMeter_update(s32 state) {
     switch (state) {
@@ -109,13 +104,7 @@ void processMeter_update(s32 state) {
             break;
     }
 }
-#endif
 
-// TODO: This function can't be matched until we can include this file's `bss`
-//       in without having linker errors.
-#ifdef NON_MATCHING
-    #pragma GLOBAL_ASM("../asm/nonmatchings/debug/processMeter_render.s")
-#else
 /**
  * Render both the green and blue process bars.
  */
@@ -135,7 +124,6 @@ void processMeter_render(Gfx** dlist) {
     processMeter_renderDivisions(dlist, number_of_divisions);
     gDPPipeSync(dlist[0]++);
 }
-#endif
 
 /**
  * Renders each black division bar.

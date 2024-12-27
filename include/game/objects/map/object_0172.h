@@ -16,6 +16,6 @@ void obj0172_entrypoint(object_0172* self);
 void obj0172_init(object_0172* self);
 void obj0172_loop(object_0172* self);
 
-typedef void (*obj0172_func_t)(object_0172*);
+typedef void (*obj0172Funcs)(object_0172*);
 
 #endif

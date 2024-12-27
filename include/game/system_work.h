@@ -63,7 +63,7 @@ typedef struct {
     u16 fog_distance_near;
     u16 fog_distance_far;
     /**
-     * See figure_update
+     * See Figure_Update
      */
     s32 field16_0x2402c;
     Mat4f* field17_0x24030;

@@ -19,6 +19,7 @@
 #include "objects/menu/contractMgr.h"
 #include "objects/player/player.h"
 #include "objects/menu/saveGame.h"
+#include "objects/menu/gameplayMenuMgr.h"
 #include "random.h"
 #include "system_work.h"
 
@@ -91,11 +92,12 @@ void Interactable_Init(Interactable* self) {
 
     if (interactables_settings[self->idx].type == ITEM_KIND_ITEM) {
         // Create and setup the item model
-        item_model =
-            Model_createAndSetChild(FIG_TYPE_0400 | FIG_TYPE_HIERARCHY_NODE, map_lights[2]);
+        item_model = Model_createAndSetChild(
+            FIG_TYPE_ALLOW_TRANSPARENCY_CHANGE | FIG_TYPE_HIERARCHY_NODE, map_lights[2]
+        );
         self->model = item_model;
         if (settings != NULL) {
-            actor_model_set_pos(self, item_model);
+            Actor_SetPos(self, item_model);
             self->position.x = item_model->position.x;
             self->position.y = item_model->position.y;
             self->position.z = item_model->position.z;
@@ -337,7 +339,7 @@ void Interactable_InitCheck(Interactable* self) {
     // If picking up an item...
     if (settings->type == ITEM_KIND_ITEM) {
         // Setup and display the item name textbox
-        textbox = item_prepareTextbox(
+        textbox = gameplayCommonTextbox_addItemAndPrepareName(
             itemModelSettings_getEntryFromList(interactables_settings[self->idx].item)->item_ID
         );
 
@@ -399,8 +401,8 @@ void Interactable_InitCheck(Interactable* self) {
          * the game will grab the same string
          */
         textbox = (BITS_HAS(interactables_settings[self->idx].flags, TEXT_SPOT_DO_ACTION_AFTER_SELECTING_OPTION))
-            ? map_getMessageFromPool(interactables_settings[self->idx].text_ID, 0)
-            : map_getMessageFromPool(interactables_settings[self->idx].text_ID, 0);
+            ? gameplayCommonTextbox_getMapMessage(interactables_settings[self->idx].text_ID, 0)
+            : gameplayCommonTextbox_getMapMessage(interactables_settings[self->idx].text_ID, 0);
 
         // Freeze the player and all enemies in place, then begin reading the message
         sys.FREEZE_PLAYER = TRUE, // comma needed for matching
@@ -545,7 +547,7 @@ void Interactable_StopCheck(Interactable* self) {
             // then don't destroy those items after checking them.
             //
             // `item_addAmountToInventory` returns -1 if trying to add another Nitro or
-            // Mandragora to the inventory, which in turn will cause `item_prepareTextbox` to
+            // Mandragora to the inventory, which in turn will cause `gameplayCommonTextbox_addItemAndPrepareName` to
             // return -1, which is then put into `self->textbox`
             if (self->textbox == (MfdsState*) -1) {
                 Interactable_stopInteraction(self);
@@ -561,7 +563,8 @@ void Interactable_StopCheck(Interactable* self) {
         }
     }
 
-    if ((interactables_settings[self->idx].type == ITEM_KIND_TEXT_SPOT) && lensAreClosed()) {
+    if ((interactables_settings[self->idx].type == ITEM_KIND_TEXT_SPOT) &&
+        gameplayCommonTextbox_lensAreClosed()) {
         sys.FREEZE_PLAYER  = FALSE;
         sys.FREEZE_ENEMIES = FALSE;
         cameraMgr_setReadingTextState(sys.ptr_cameraMgr, FALSE);
