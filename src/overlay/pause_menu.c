@@ -4,25 +4,55 @@
 #include "gfx/figure.h"
 #include "system_work.h"
 
-extern u16 item_descriptions[];
+u16 item_descriptions[] = {
+#include "objects/menu/pause_menu_item_description_text.msg"
+};
 
-extern u16 options_text[];
+u16 options_text[] = {
+#include "objects/menu/pause_menu_options_text.msg"
+};
 
-extern u16 item_usage_text[];
+u16 item_usage_text[] = {
+#include "objects/menu/pause_menu_item_usage_text.msg"
+};
 
-extern u16 confirmation_text[];
+u16 confirmation_text[] = {
+#include "objects/menu/pause_menu_confirmation_text.msg"
+};
 
-extern u16 selection_arrow_character[];
+u16 selection_arrow_character[] = {
+#include "objects/menu/pause_menu_arrow_selection_char.msg"
+};
 
-extern ItemUseSettings item_use_settings_array[];
+ItemUseSettings item_use_settings_array[] = {
+    {ITEM_ID_HEALING_KIT, PLAYER_FLAGS_TO_CHANGE(PLAYER_FLAG_POISON | PLAYER_FLAG_VAMP), 100},
+    {ITEM_ID_ROAST_BEEF, PLAYER_FLAGS_TO_CHANGE(0), 80},
+    {ITEM_ID_ROAST_CHICKEN, PLAYER_FLAGS_TO_CHANGE(0), 50},
+    {ITEM_ID_PURIFYING, PLAYER_FLAGS_TO_CHANGE(PLAYER_FLAG_VAMP), 0},
+    {ITEM_ID_CURE_AMPOULE, PLAYER_FLAGS_TO_CHANGE(PLAYER_FLAG_POISON), 0},
+    {ITEM_ID_SUN_CARD, ITEM_IS_CARD, 6},
+    {ITEM_ID_MOON_CARD, ITEM_IS_CARD, 18}
+};
 
-extern s32 sound_volume_decreased;
+s32 sound_volume_decreased = FALSE;
 
-extern PauseMenuFuncs pauseMenu_functions[];
+PauseMenuFuncs pauseMenu_functions[] = {
+    pauseMenu_decreaseSoundVolume,
+    pauseMenu_init,
+    pauseMenu_createMainMenu,
+    pauseMenu_calcMainMenu,
+    pauseMenu_checkScrollObjExists,
+    pauseMenu_calcItemList,
+    pauseMenu_calcItemSelectedMenu,
+    pauseMenu_destroy,
+    pauseMenu_calcQuitMenu,
+    object_doNothing
+};
 
-extern u32 character_portraits[];
+// TODO: `extern const u32` for the dlists
+u32 character_portraits[NUM_CHARACTERS] = {0x06013988, 0x06015360};
 
-extern u32 D_0F002FBC[];
+u32 D_0F002FBC[NUM_CHARACTERS] = {10, 10};
 
 void pauseMenu_entrypoint(PauseMenu* self) {
     ENTER(self, pauseMenu_functions);
@@ -300,7 +330,7 @@ SoundMenuWork* pauseMenu_createSoundMenuWork(PauseMenu* self, u8 ptrs_array_inde
     scroll_state* scroll;
 
     if (self != NULL) {
-        (*allocStructInObjectEntryList)("work_work", self, sizeof(SoundMenuWork), ptrs_array_index);
+        (*allocStructInObjectEntryList)("sound_menu_work", self, sizeof(SoundMenuWork), ptrs_array_index);
         work = ((Object*) self)->alloc_data[ptrs_array_index];
         if (work != NULL) {
             work->field_0x01 = 1;

@@ -7,6 +7,12 @@
 #include "gfx/light.h"
 #include "item.h"
 
+#define PLAYER_FLAGS_TO_CHANGE(player_flags) (((player_flags) >> 0x19) | 0x10)
+/**
+ * The item in question from `item_use_settings_array` is either a sun or a moon card
+ */
+#define ITEM_IS_CARD 1
+
 typedef enum PauseMenuMainOptions {
     PAUSE_MENU_ITEM   = 1,
     PAUSE_MENU_OPTION = 2,
@@ -82,6 +88,7 @@ typedef struct PauseMenu {
 } PauseMenu;
 
 void pauseMenu_entrypoint(PauseMenu*);
+void pauseMenu_decreaseSoundVolume(PauseMenu*);
 extern void pauseMenu_init(PauseMenu*);
 extern void pauseMenu_createMainMenu(PauseMenu*);
 extern void pauseMenu_calcMainMenu(PauseMenu*);
