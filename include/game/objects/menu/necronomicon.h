@@ -9,7 +9,7 @@ typedef enum NecroWorkFlag {
     NECRO_WORK_FLAG_FLIP_PAGES                     = BIT(1),
     NECRO_WORK_FLAG_CLOSE                          = BIT(2),
     NECRO_WORK_FLAG_DONT_FLIP_PAGES_BEFORE_CLOSING = BIT(6),
-    NECRO_WORK_FLAG_DESTROY_NECRO                  = BIT(7),
+    NECRO_WORK_FLAG_DESTROY_NECRO                  = BIT(7)
 } NecroWorkFlag;
 
 // Real name: `necro_work`
