@@ -19,7 +19,7 @@ typedef struct NecroWork {
     u8 field_0x05[11];
     Vec3f position;
     u8 field_0x1C;
-    u8 last_page_flipped; // Assumption
+    u8 last_page_flipped;
     u8 time_before_flipping_another_page;
     u8 pages_to_flip_before_closing;
     u8 field_0x20;

@@ -615,7 +615,7 @@ segments:
       - [0x0010E650, rodata, common/renon_shop]
       - [0x0010E8A0, rodata]
       - [0x0010E8F0, rodata]
-      - [0x0010EFC0, rodata, common/necronomicon]
+      - [0x0010EFC0, .rodata, common/necronomicon]
       - [0x0010EFD0, .rodata, common/necro_work]
       - [0x0010EFE0, .rodata, common/page_work]
       - [0x0010EFF0, rodata]
