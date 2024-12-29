@@ -3,7 +3,7 @@
 
 #include "objects/menu/gameplayMenuMgr.h"
 #include "objects/camera/modelLighting.h"
-#include "menu/sound_menu_work.h"
+#include "menu/pause_item_menu_work.h"
 #include "gfx/light.h"
 #include "item.h"
 
@@ -33,9 +33,13 @@ typedef struct ItemUseSettings {
      * This value is AND with 0xE, and then << 0x19 to obtain the actual player flag value
      * See `pauseMenu_checkIfItemCanBeUsed`
      */
-    u8 player_flag_to_change;
+    u8 player_status_to_remove;
     /**
      * For example, for Healing Kit, this value is 100 (100 health recovered)
+     *
+     * If `player_status_to_remove` is set to `ITEM_IS_CARD`, then this variable
+     * will act as the target hour the clock will go to when using the item.
+     * For example, if it's 6, then the clock will go to 6:00 when using the item.
      */
     u8 amount_to_fill;
 } ItemUseSettings;
@@ -63,7 +67,7 @@ typedef struct PauseMenu {
     };
     MfdsState* options_textbox;
     scroll_state* main_menu_options_scroll;
-    SoundMenuWork* sound_menu;
+    PauseItemMenuWork* item_menu;
     scroll_state* item_model_scroll;
     scroll_state* options_text_scroll;
     scroll_state* description_text_scroll;
@@ -71,7 +75,7 @@ typedef struct PauseMenu {
     s8 outside_item_selected_menu;
     /**
      * Similar to `outside_item_selected_menu`? Although this field doesn't seem to be read.
-     * Set to 1 when entering the menu, and to 0 when viewing an item.
+     * Set to `TRUE` when entering the menu, and to `FALSE` when viewing an item.
      */
     u8 field_0x51;
     s8 option_selection_inside_selected_item;
@@ -87,7 +91,7 @@ typedef struct PauseMenu {
     s8 target_health; // After using a health item
     s8 target_hour;   // After using a Moon / Sun card
     s8 item_use_settings_amount_to_fill;
-    s8 player_flag_to_change;
+    s8 player_status_to_remove;
     gameplayMenuMgr* gameplay_menu_mgr;
     u8 field_0x70[2];
     s8 selected_item_can_be_used;
@@ -105,8 +109,8 @@ extern void pauseMenu_calcItemSelectedMenu(PauseMenu*);
 void pauseMenu_destroy(PauseMenu*);
 extern void pauseMenu_calcQuitMenu(PauseMenu*);
 extern void pauseMenu_updateDigitalClockDisplay(PauseMenu*);
-extern SoundMenuWork*
-pauseMenu_createSoundMenuWork(PauseMenu*, u8, modelLighting*, modelLighting*, s32);
+extern PauseItemMenuWork*
+pauseMenu_createPauseItemMenuWork(PauseMenu*, u8, modelLighting*, modelLighting*, s32);
 void func_0F001BF0();
 extern void pauseMenu_createItemDescription(PauseMenu*);
 s32 getItemUseArrayEntry(s32);

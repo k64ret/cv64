@@ -111,7 +111,7 @@ void pauseMenu_createMainMenu(PauseMenu* self) {
 
 void pauseMenu_checkScrollObjExists(PauseMenu* self) {
     if ((*objectList_findFirstObjectByID)(MENU_SCROLL) == NULL) {
-        pauseMenu_createSoundMenuWork(self, 2, self->scrolls_borders_light, self->scrolls_background_light, 0);
+        pauseMenu_createPauseItemMenuWork(self, 2, self->scrolls_borders_light, self->scrolls_background_light, 0);
         (*object_curLevel_goToNextFuncAndClearTimer)(self->header.current_function, &self->header.function_info_ID);
     }
 }
@@ -122,14 +122,14 @@ void pauseMenu_calcItemList(PauseMenu* self) {
     MfdsState* textbox;
     Model* item_model;
     s32 temp[2];
-    SoundMenuWork* sound_menu;
+    PauseItemMenuWork* item_menu;
     s32 selected_item_ID_in_item_list;
     scroll_state* item_scroll;
     scroll_state* options_scroll;
 
-    sound_menu = self->sound_menu;
-    if (sound_menu != NULL) {
-        selected_item_ID_in_item_list = sound_menu->selected_item_ID_in_item_list;
+    item_menu = self->item_menu;
+    if (item_menu != NULL) {
+        selected_item_ID_in_item_list = item_menu->selected_item_ID_in_item_list;
         if (selected_item_ID_in_item_list != ITEM_ID_NOTHING) {
             if (selected_item_ID_in_item_list == 0xFF) {
                 (*object_curLevel_goToFunc)(self->header.current_function, &self->header.function_info_ID, PAUSE_MENU_CREATE_MAIN_MENU);
@@ -174,7 +174,7 @@ void pauseMenu_calcItemList(PauseMenu* self) {
 
             self->outside_item_selected_menu = FALSE;
 
-            self->selected_item_ID_in_item_list = sound_menu->selected_item_ID_in_item_list;
+            self->selected_item_ID_in_item_list = item_menu->selected_item_ID_in_item_list;
             item_model = (*createItemModel)(self->selected_item_ID_in_item_list, common_camera_HUD, "item");
             self->item_model = item_model;
             self->field_0x51 = FALSE;
@@ -325,12 +325,12 @@ void pauseMenu_calcQuitMenu(PauseMenu* self) {
 
 // TODO: Remove `NON_MATCHING` label when linking .rodata
 #ifdef NON_MATCHING
-SoundMenuWork* pauseMenu_createSoundMenuWork(PauseMenu* self, u8 ptrs_array_index, modelLighting* arg2, modelLighting* arg3, s32 arg4) {
-    SoundMenuWork* work;
+PauseItemMenuWork* pauseMenu_createPauseItemMenuWork(PauseMenu* self, u8 ptrs_array_index, modelLighting* arg2, modelLighting* arg3, s32 arg4) {
+    PauseItemMenuWork* work;
     scroll_state* scroll;
 
     if (self != NULL) {
-        (*allocStructInObjectEntryList)("sound_menu_work", self, sizeof(SoundMenuWork), ptrs_array_index);
+        (*allocStructInObjectEntryList)("sound_menu_work", self, sizeof(PauseItemMenuWork), ptrs_array_index);
         work = ((Object*) self)->alloc_data[ptrs_array_index];
         if (work != NULL) {
             work->field_0x01 = 1;
@@ -357,7 +357,7 @@ SoundMenuWork* pauseMenu_createSoundMenuWork(PauseMenu* self, u8 ptrs_array_inde
     return work;
 }
 #else
-#pragma GLOBAL_ASM("../asm/nonmatchings/overlay/pause_menu/pauseMenu_createSoundMenuWork.s")
+#pragma GLOBAL_ASM("../asm/nonmatchings/overlay/pause_menu/pauseMenu_createPauseItemMenuWork.s")
 #endif
 
 // clang-format on
