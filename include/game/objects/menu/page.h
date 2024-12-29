@@ -50,6 +50,16 @@ void page_isWorkCreated(page* self);
 void page_init(page* self);
 void page_loop(page* self);
 void page_destroy(page* self);
+page_work* pageWork_create(
+    ObjectHeader* parent,
+    FigureLight* page_light,
+    u8 flags,
+    f32 pos_X,
+    f32 pos_Y,
+    f32 pos_Z,
+    u8 flip_anim_keyframe,
+    f32 anim_speed
+);
 
 typedef void (*page_func_t)(page*);
 
