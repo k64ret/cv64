@@ -49,6 +49,15 @@ NecroWork* necroWork_create(ObjectHeader* parent, FigureLight* light, u8 flags, 
 
 typedef void (*NecroFunc)(Necronomicon*);
 
+typedef enum NecroFuncID {
+    NECRO_IS_WORK_CREATED,
+    NECRO_INIT,
+    NECRO_LOOP,
+    NECRO_CLOSE,
+    NECRO_FINISHED_CLOSING,
+    NECRO_DESTROY
+} NecroFuncID;
+
 extern const u32 NECRO_FULL_MODEL_DL;
 extern const u32 NECRO_BOOK_COVER_DL;
 
