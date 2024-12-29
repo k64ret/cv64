@@ -20,7 +20,7 @@ typedef enum page_work_flags {
     DESTROY_PAGE                     = 0x40
 } page_work_flags;
 
-typedef struct {
+typedef struct page_work {
     FigureLight* page_light;
     u8 flags;
     u8 flip_anim_keyframe;
@@ -30,7 +30,7 @@ typedef struct {
 } page_work;
 
 // ID: 0x0131
-typedef struct {
+typedef struct page {
     ObjectHeader header;
     u8 field_0x20[4];
     Model* model;

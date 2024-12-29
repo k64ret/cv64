@@ -533,8 +533,8 @@ segments:
       - [0x000C65E0, asm, common/options_controller]
       - [0x000C7160, asm, common/file_select]
       - [0x000CB5A0, asm, common/scroll]
-      - [0x000D1A20, asm, common/necronomicon]   # Handles the book seen in the Data screen
-      - [0x000D25F0, asm, common/necro_work]
+      - [0x000D1A20, c, common/necronomicon]   # Handles the book seen in the Data screen
+      - [0x000D25F0, c, common/necro_work]
       - [0x000D26A0, c, common/page]    # Handles a Necronomicon's page
       - [0x000D2A50, c, common/page_work]
       - [0x000D2B10, asm, common/mark]
@@ -585,6 +585,7 @@ segments:
       - [0x001042A0, data]
       - [0x00104550, data]
       - [0x00104660, data]
+      - [0x00104790, data, common/necronomicon]
       - [0x001047B0, .data, common/page]
       - [0x001049A0, data]
       - [0x001049C0, data]
@@ -614,8 +615,8 @@ segments:
       - [0x0010E650, rodata, common/renon_shop]
       - [0x0010E8A0, rodata]
       - [0x0010E8F0, rodata]
-      - [0x0010EFC0, rodata]
-      - [0x0010EFD0, rodata]
+      - [0x0010EFC0, rodata, common/necronomicon]
+      - [0x0010EFD0, rodata, common/necro_work]
       - [0x0010EFE0, .rodata, common/page_work]
       - [0x0010EFF0, rodata]
       - [0x0010F010, rodata]

@@ -2371,7 +2371,6 @@ fileSelect_createScroll = 0x80145c10;
 scroll_entrypoint = 0x801483b0;
 scroll_isScrollStateCreated = 0x80148420;
 scroll_destroy = 0x8014ab3c;
-necroWork_create = 0x8014f400;
 mark_entrypoint = 0x8014f920;
 mark_isMarkWorkCreated = 0x8014f990;
 mark_init = 0x8014f9c8;
@@ -3124,3 +3123,24 @@ FireSparkles_functions = 0x8009ac98;
 isSoundVolumeDecreased = 0x80013574;
 decreaseSoundVolume = 0x80013518;
 prepareSoundForPlay_defaultSettings = 0x80079d7c;
+
+// src/common/necronomicon.c =============================================================
+
+// .text
+necro_entrypoint = 0x8014e830; // type:func  segment:common
+necro_isWorkCreated = 0x8014e8a0; // type:func  segment:common
+necro_init = 0x8014e8d8; // type:func  segment:common
+necro_loop = 0x8014eb38; // type:func  segment:common
+necro_close = 0x8014ee0c; // type:func  segment:common
+necro_finishedClosing = 0x8014f19c; // type:func  segment:common
+necro_destroy = 0x8014f3d0; // type:func  segment:common
+// .data
+necro_functions = 0x801815a0;          // segment:common size:0x18
+// .rodata
+D_8018bdd0 = 0x8018bdd0;          // type:f64 segment:common
+D_8018bdd8 = 0x8018bdd8;          // type:f64 segment:common
+
+// End of src/common/necronomicon.c ======================================================
+
+necroWork_create = 0x8014f400;    // type:func  segment:common
+D_8018bde0 = 0x8018bde0;          // type:asciz segment:common
