@@ -45,6 +45,7 @@ void necro_loop(Necronomicon* self);
 void necro_close(Necronomicon* self);
 void necro_finishedClosing(Necronomicon* self);
 void necro_destroy(Necronomicon* self);
+NecroWork* necroWork_create(ObjectHeader* parent, FigureLight* light, u8 flags, s32 arg3);
 
 typedef void (*NecroFunc)(Necronomicon*);
 
