@@ -23,7 +23,7 @@ typedef struct NecroWork {
     u8 time_before_flipping_another_page;
     u8 pages_to_flip_before_closing;
     u8 field_0x20;
-    u8 field_0x21;
+    s8 field_0x21;
     u8 field_0x22[2];
 } NecroWork;
 
