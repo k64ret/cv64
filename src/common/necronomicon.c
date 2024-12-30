@@ -84,9 +84,84 @@ void necro_init(Necronomicon* self) {
 
 #pragma GLOBAL_ASM("../asm/nonmatchings/common/necronomicon/necro_loop.s")
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/common/necronomicon/necro_close.s")
-
 // clang-format on
+
+void necro_close(Necronomicon* self) {
+    s32 temp[4];
+    Model* book_cover;
+    Vec3f position;
+    NecroWork* work;
+    page_work* page;
+    u8 random_page;
+    s32 var_a1;
+    u8 i;
+
+    work       = self->work;
+    book_cover = self->book_cover;
+    var_a1     = TRUE;
+    if (work->last_page_flipped == FALSE) {
+        for (i = 1; i < 10; i++) {
+            if (self->pages[i] != NULL) {
+                var_a1 = FALSE;
+                page   = self->pages[i];
+                if (page->flags & PAGE_ANIM_END_KEYFRAME) {
+                    page = self->pages[0];
+                    page->flags &= ~ANIMATE;
+                    page->flags |= DESTROY_PAGE;
+                    self->pages[0] = self->pages[i];
+                    self->pages[i] = NULL;
+                }
+            }
+        }
+        if (var_a1) {
+            work->last_page_flipped = TRUE;
+            page                    = self->pages[0];
+            page->flags &= ~ANIMATE;
+            page->flags |= DESTROY_PAGE;
+            self->pages[0] = NULL;
+        }
+    }
+    if (book_cover->angle.yaw < 0) {
+        book_cover->angle.yaw += DEG_TO_FIXED(3);
+        if (book_cover->angle.yaw >= 0) {
+            book_cover->angle.yaw = 0;
+        }
+    } else {
+        book_cover->angle.yaw = 0;
+        if (self->pages[0] == NULL) {
+            for (i = 10; i < 13; i++) {
+                (*guRandom)();
+                random_page = (*guRandom)() % 3;
+                switch (random_page) {
+                    case 0:
+                        position.x = ((*guRandom)() % 220) - 110;
+                        position.y = ((*guRandom)() % 10) + 100;
+                        break;
+                    case 1:
+                        position.x = ((*guRandom)() % 220) - 110;
+                        position.y = (-(*guRandom)() % 10) - 100;
+                        break;
+                    case 2:
+                        position.x = ((*guRandom)() % 10) + 100;
+                        position.y = ((*guRandom)() % 220) - 110;
+                        break;
+                }
+                position.z = 80.0f;
+
+                // @bug This condition is never executed
+                if (FALSE) {
+                    work->position = position;
+                }
+                (*guRandom)();
+                (*guRandom)();
+                (*guRandom)();
+            }
+            (*object_curLevel_goToNextFuncAndClearTimer)(
+                self->header.current_function, &self->header.function_info_ID
+            );
+        }
+    }
+}
 
 void necro_finishedClosing(Necronomicon* self) {
     s32 temp[4];
