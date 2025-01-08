@@ -80,11 +80,81 @@ void necro_init(Necronomicon* self) {
     );
 }
 
-// clang-format off
+void necro_loop(Necronomicon* self) {
+    NecroWork* work;
+    page_work* page;
+    page_work* page_2;
+    u8 i;
+    s8 page_type;
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/common/necronomicon/necro_loop.s")
-
-// clang-format on
+    work = self->work;
+    if (work->flags & NECRO_WORK_FLAG_CLOSE) {
+        if (work->flags & NECRO_WORK_FLAG_DONT_FLIP_PAGES_BEFORE_CLOSING) {
+            work->pages_to_flip_before_closing = 10;
+        }
+        if (work->pages_to_flip_before_closing < 10) {
+            work->flags |= NECRO_WORK_FLAG_FLIP_PAGES;
+        } else {
+            page = self->pages[1];
+            page->flags |= NECRO_WORK_FLAG_CLOSE;
+            (*object_curLevel_goToNextFuncAndClearTimer)(
+                self->header.current_function, &self->header.function_info_ID
+            );
+        }
+    }
+    for (i = 2; i < 10; i++) {
+        if (self->pages[i] != NULL) {
+            page = self->pages[i];
+            if (page->flags & PAGE_ANIM_END_KEYFRAME) {
+                page = self->pages[0];
+                page->flags &= ~ANIMATE;
+                page->flags |= DESTROY_PAGE;
+                page_2         = self->pages[i];
+                self->pages[0] = page_2;
+                self->pages[i] = NULL;
+            }
+        } else if ((work->flags & NECRO_WORK_FLAG_FLIP_PAGES) && (work->time_before_flipping_another_page == 0)) {
+            page           = self->pages[1];
+            self->pages[i] = self->pages[1];
+            page->flags |= ANIMATE;
+            if (1) {
+            }
+            if (work->field_0x21 != 0) {
+                work->field_0x21--;
+                page_type = PAGE_1;
+            } else {
+                work->field_0x21 = (guRandom() % 3) + 1;
+                page_type        = (guRandom() % 2) + 2;
+            }
+            page =
+                (*pageWork_create)(self, work->necro_light, page_type, 0.0f, 0.0f, 2.0f, 0, 5.0f);
+            self->pages[1] = page;
+            if (page == NULL) {
+                self->header.destroy(self);
+            }
+            work->flags &= ~NECRO_WORK_FLAG_FLIP_PAGES;
+            if (work->flags & NECRO_WORK_FLAG_CLOSE) {
+                work->time_before_flipping_another_page = 10;
+                work->pages_to_flip_before_closing++;
+            } else {
+                work->time_before_flipping_another_page = 30;
+            }
+        }
+    }
+    if (work->time_before_flipping_another_page != 0) {
+        work->time_before_flipping_another_page--;
+    }
+    if (work->flags & NECRO_WORK_FLAG_DESTROY_NECRO) {
+        for (i = 0; i < 10; i++) {
+            page = self->pages[i];
+            if (page != NULL) {
+                page->flags &= ~ANIMATE;
+                page->flags |= DESTROY_PAGE;
+            }
+        }
+        GO_TO_FUNC_NOW(self, necro_functions, NECRO_DESTROY);
+    }
+}
 
 void necro_close(Necronomicon* self) {
     s32 temp[4];
