@@ -1,3 +1,9 @@
+/**
+ * @file pause_menu.c
+ *
+ * This file contains the code that handles the Pause menu.
+ */
+
 #include "objects/menu/pause_menu.h"
 #include "memory.h"
 #include "sound.h"

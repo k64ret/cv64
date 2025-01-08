@@ -60,7 +60,7 @@ void processMeter_updateTiming(OSMesgQueue* mq) {
     framerate   = osTvType == OS_TV_PAL ? 50.0 : 60.0;
     total_count = end_count - start_count;
 
-    // @bug This condition is never executed
+    // @note This condition is never executed
     if (FALSE) {
         framerate = 60.0;
         total_count -= 1;

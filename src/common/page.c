@@ -130,7 +130,7 @@ void page_init(page* self) {
     );
     (*animationInfo_animateFrame)(current_anim_info, model);
 
-    self->field_0x6C = 1;
+    self->page_flipped_once = TRUE;
     (*object_curLevel_goToNextFuncAndClearTimer)(
         self->header.current_function, &self->header.function_info_ID
     );
@@ -163,8 +163,8 @@ void page_loop(page* self) {
         // Reached the end of the animation's current keyframe
         if (anim_state == 1) {
             work->flags = work_flags | PAGE_ANIM_END_KEYFRAME;
-            if (self->field_0x6C != 0) {
-                self->field_0x6C = 0;
+            if (self->page_flipped_once) {
+                self->page_flipped_once = FALSE;
             }
         } else {
             work->flags = work_flags & ~PAGE_ANIM_END_KEYFRAME;

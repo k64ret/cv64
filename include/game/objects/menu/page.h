@@ -41,7 +41,7 @@ typedef struct page {
      * Set to `TRUE` after the page has finished flipping over once.
      * Seemingly unused otherwise.
      */
-    u32 field_0x6C;
+    u32 page_flipped_once;
     page_work* work;
 } page;
 

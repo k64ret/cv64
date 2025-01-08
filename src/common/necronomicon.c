@@ -1,3 +1,10 @@
+/**
+ * @file necronomicon.c
+ *
+ * This file contains the code that handles the Necronomicon
+ * (the book from the Data and Options menus)
+ */
+
 #include "objects/menu/necronomicon.h"
 #include "system_work.h"
 
@@ -60,6 +67,10 @@ void necro_init(Necronomicon* self) {
     book_cover->position.z = work->position.z + 51.0;
     book_cover->angle.yaw  = -DEG_TO_FIXED(172.97);
 
+    /**
+     * Create the first page as `PAGE_1`, then create a random page
+     * between `PAGE_2` and `PAGE_3`
+     */
     second_page = (*pageWork_create)(
         self, work->necro_light, ((*guRandom)() % 3) + 1, 0.0f, 0.0f, 2.0f, 0, 5.0f
     );
@@ -74,7 +85,7 @@ void necro_init(Necronomicon* self) {
         self->header.destroy(self);
     }
 
-    work->field_0x21 = (guRandom() % 3) + 1;
+    work->time_before_creating_different_page = (guRandom() % 3) + 1;
     (*object_curLevel_goToNextFuncAndClearTimer)(
         self->header.current_function, &self->header.function_info_ID
     );
@@ -88,10 +99,15 @@ void necro_loop(Necronomicon* self) {
     s8 page_type;
 
     work = self->work;
+
+    // Request the closure of the necronomicon
     if (work->flags & NECRO_WORK_FLAG_CLOSE) {
+        // Skip flipping the pages over and directly close the book
         if (work->flags & NECRO_WORK_FLAG_DONT_FLIP_PAGES_BEFORE_CLOSING) {
             work->pages_to_flip_before_closing = 10;
         }
+
+        // After flipping 10 pages, close the book
         if (work->pages_to_flip_before_closing < 10) {
             work->flags |= NECRO_WORK_FLAG_FLIP_PAGES;
         } else {
@@ -102,7 +118,9 @@ void necro_loop(Necronomicon* self) {
             );
         }
     }
+
     for (i = 2; i < 10; i++) {
+        // Destroy the page if it has finished flipping over
         if (self->pages[i] != NULL) {
             page = self->pages[i];
             if (page->flags & PAGE_ANIM_END_KEYFRAME) {
@@ -113,26 +131,34 @@ void necro_loop(Necronomicon* self) {
                 self->pages[0] = page_2;
                 self->pages[i] = NULL;
             }
+            // Create the next page when `time_before_flipping_another_page` reaches 0
         } else if ((work->flags & NECRO_WORK_FLAG_FLIP_PAGES) && (work->time_before_flipping_another_page == 0)) {
             page           = self->pages[1];
             self->pages[i] = self->pages[1];
             page->flags |= ANIMATE;
             if (1) {
             }
-            if (work->field_0x21 != 0) {
-                work->field_0x21--;
+
+            // Decide whether to the next page created is either `PAGE_1`,
+            // or randomized between `PAGE_2` and `PAGE_3`
+            if (work->time_before_creating_different_page != 0) {
+                work->time_before_creating_different_page--;
                 page_type = PAGE_1;
             } else {
-                work->field_0x21 = (guRandom() % 3) + 1;
-                page_type        = (guRandom() % 2) + 2;
+                work->time_before_creating_different_page = (guRandom() % 3) + 1;
+                page_type                                 = (guRandom() % 2) + 2;
             }
+
             page =
                 (*pageWork_create)(self, work->necro_light, page_type, 0.0f, 0.0f, 2.0f, 0, 5.0f);
             self->pages[1] = page;
             if (page == NULL) {
                 self->header.destroy(self);
             }
+
             work->flags &= ~NECRO_WORK_FLAG_FLIP_PAGES;
+
+            // Flip pages faster if the book is requested to be closed
             if (work->flags & NECRO_WORK_FLAG_CLOSE) {
                 work->time_before_flipping_another_page = 10;
                 work->pages_to_flip_before_closing++;
@@ -141,9 +167,12 @@ void necro_loop(Necronomicon* self) {
             }
         }
     }
+
     if (work->time_before_flipping_another_page != 0) {
         work->time_before_flipping_another_page--;
     }
+
+    // Destroy all pages and force despawning the necronomicon
     if (work->flags & NECRO_WORK_FLAG_DESTROY_NECRO) {
         for (i = 0; i < 10; i++) {
             page = self->pages[i];
@@ -162,18 +191,20 @@ void necro_close(Necronomicon* self) {
     Vec3f position;
     NecroWork* work;
     page_work* page;
-    u8 random_page;
-    s32 var_a1;
+    u8 random_position;
+    s32 destroy_first_page;
     u8 i;
 
-    work       = self->work;
-    book_cover = self->book_cover;
-    var_a1     = TRUE;
+    work               = self->work;
+    book_cover         = self->book_cover;
+    destroy_first_page = TRUE;
+
     if (work->last_page_flipped == FALSE) {
+        // Destroy all pages but the first one when they all finished flipping
         for (i = 1; i < 10; i++) {
             if (self->pages[i] != NULL) {
-                var_a1 = FALSE;
-                page   = self->pages[i];
+                destroy_first_page = FALSE;
+                page               = self->pages[i];
                 if (page->flags & PAGE_ANIM_END_KEYFRAME) {
                     page = self->pages[0];
                     page->flags &= ~ANIMATE;
@@ -183,7 +214,9 @@ void necro_close(Necronomicon* self) {
                 }
             }
         }
-        if (var_a1) {
+
+        // When only the first page is left, destroy it
+        if (destroy_first_page) {
             work->last_page_flipped = TRUE;
             page                    = self->pages[0];
             page->flags &= ~ANIMATE;
@@ -191,6 +224,8 @@ void necro_close(Necronomicon* self) {
             self->pages[0] = NULL;
         }
     }
+
+    // Close the book cover
     if (book_cover->angle.yaw < 0) {
         book_cover->angle.yaw += DEG_TO_FIXED(3);
         if (book_cover->angle.yaw >= 0) {
@@ -198,11 +233,18 @@ void necro_close(Necronomicon* self) {
         }
     } else {
         book_cover->angle.yaw = 0;
+
+        /**
+         * Calculate a random position for the book once it closes,
+         * likely to make it shake after it fully closes.
+
+         * This goes unused because a condition is never executed (see below)
+         */
         if (self->pages[0] == NULL) {
             for (i = 10; i < 13; i++) {
                 (*guRandom)();
-                random_page = (*guRandom)() % 3;
-                switch (random_page) {
+                random_position = (*guRandom)() % 3;
+                switch (random_position) {
                     case 0:
                         position.x = ((*guRandom)() % 220) - 110;
                         position.y = ((*guRandom)() % 10) + 100;
@@ -218,7 +260,7 @@ void necro_close(Necronomicon* self) {
                 }
                 position.z = 80.0f;
 
-                // @bug This condition is never executed
+                // @note This condition is never executed
                 if (FALSE) {
                     work->position = position;
                 }
@@ -237,32 +279,51 @@ void necro_finishedClosing(Necronomicon* self) {
     s32 temp[4];
     NecroWork* work;
     Vec3f position;
-    u8 random_page;
+    u8 random_position;
 
     work = self->work;
-    if ((work->flags & NECRO_WORK_FLAG_DONT_FLIP_PAGES_BEFORE_CLOSING) | NECRO_WORK_FLAG_01) {
-        work->field_0x20 = 8;
+
+    /**
+     * @note This condition always passes
+     */
+    if ((work->flags & NECRO_WORK_FLAG_DONT_FLIP_PAGES_BEFORE_CLOSING) | TRUE) {
+        work->necro_destroy_delay_time = 8;
     }
+
     if (work->flags & NECRO_WORK_FLAG_DESTROY_NECRO) {
         (*object_curLevel_goToNextFuncAndClearTimer)(
             self->header.current_function, &self->header.function_info_ID
         );
     }
+
     if (work->time_before_flipping_another_page != 0) {
         work->time_before_flipping_another_page--;
         return;
     }
-    if (work->field_0x20 >= 8) {
+
+    // Destroy the necronomicon when pressing the `B` or `START` buttons
+    if (work->necro_destroy_delay_time >= 8) {
         work->flags &= ~NECRO_WORK_FLAG_CLOSE;
         if (CONT_BTNS_PRESSED(CONT_0, B_BUTTON | START_BUTTON | RECENTER_BUTTON)) {
             (*object_curLevel_goToNextFuncAndClearTimer)(
                 self->header.current_function, &self->header.function_info_ID
             );
         }
+
+        /**
+     * @note This part of the code is never reached because of the condition that always passes
+     *       (see above)
+     */
     } else {
+        /**
+         * Calculate a random position for the book once it closes,
+         * likely to make it shake after it fully closes.
+
+         * This goes unused because a condition is never executed (see below)
+         */
         (*guRandom)();
-        random_page = (*guRandom)() % 3;
-        switch (random_page) {
+        random_position = (*guRandom)() % 3;
+        switch (random_position) {
             case 0:
                 position.x = ((*guRandom)() % 220) - 110;
                 position.y = ((*guRandom)() % 10) + 100;
@@ -278,14 +339,16 @@ void necro_finishedClosing(Necronomicon* self) {
         }
         position.z = 80.0f;
 
-        // @bug This condition is never executed
+        // @note This condition is never executed
         if (FALSE) {
             work->position = position;
         }
         (*guRandom)();
         (*guRandom)();
         (*guRandom)();
-        work->field_0x20++;
+        work->necro_destroy_delay_time++;
+
+        // Add an extra delay before destroying the necro, alongside `necro_destroy_delay_time`
         work->time_before_flipping_another_page = 3;
     }
 }
