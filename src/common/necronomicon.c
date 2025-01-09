@@ -37,8 +37,8 @@ void necro_init(Necronomicon* self) {
     Model* full_model;
     Model* book_cover;
     NecroWork* work = self->work;
-    page_work* second_page;
-    page_work* first_page;
+    PageWork* second_page;
+    PageWork* first_page;
 
     full_model              = (*Model_createAndSetChild)(FIG_TYPE_HUD_ELEMENT, work->necro_light);
     self->full_model        = full_model;
@@ -79,7 +79,8 @@ void necro_init(Necronomicon* self) {
         self->header.destroy(self);
     }
 
-    first_page     = (*pageWork_create)(self, work->necro_light, PAGE_1, 0.0f, 0.0f, 2.0f, 7, 5.0f);
+    first_page =
+        (*pageWork_create)(self, work->necro_light, PAGE_FLAG_PAGE_1, 0.0f, 0.0f, 2.0f, 7, 5.0f);
     self->pages[0] = first_page;
     if (first_page == NULL) {
         self->header.destroy(self);
@@ -93,8 +94,8 @@ void necro_init(Necronomicon* self) {
 
 void necro_loop(Necronomicon* self) {
     NecroWork* work;
-    page_work* page;
-    page_work* page_2;
+    PageWork* page;
+    PageWork* page_2;
     u8 i;
     s8 page_type;
 
@@ -112,7 +113,7 @@ void necro_loop(Necronomicon* self) {
             work->flags |= NECRO_WORK_FLAG_FLIP_PAGES;
         } else {
             page = self->pages[1];
-            page->flags |= ANIMATE;
+            page->flags |= PAGE_FLAG_ANIMATE;
             (*object_curLevel_goToNextFuncAndClearTimer)(
                 self->header.current_function, &self->header.function_info_ID
             );
@@ -123,10 +124,10 @@ void necro_loop(Necronomicon* self) {
         // Destroy the page if it has finished flipping over
         if (self->pages[i] != NULL) {
             page = self->pages[i];
-            if (page->flags & PAGE_ANIM_END_KEYFRAME) {
+            if (page->flags & PAGE_FLAG_ANIM_END_KEYFRAME) {
                 page = self->pages[0];
-                page->flags &= ~ANIMATE;
-                page->flags |= DESTROY_PAGE;
+                page->flags &= ~PAGE_FLAG_ANIMATE;
+                page->flags |= PAGE_FLAG_DESTROY_PAGE;
                 page_2         = self->pages[i];
                 self->pages[0] = page_2;
                 self->pages[i] = NULL;
@@ -135,15 +136,15 @@ void necro_loop(Necronomicon* self) {
         } else if ((work->flags & NECRO_WORK_FLAG_FLIP_PAGES) && (work->time_before_flipping_another_page == 0)) {
             page           = self->pages[1];
             self->pages[i] = self->pages[1];
-            page->flags |= ANIMATE;
+            page->flags |= PAGE_FLAG_ANIMATE;
             if (1) {
             }
 
-            // Decide whether to the next page created is either `PAGE_1`,
+            // Decide whether to the next page created is either `PAGE_FLAG_PAGE_1`,
             // or randomized between `PAGE_2` and `PAGE_3`
             if (work->time_before_creating_different_page != 0) {
                 work->time_before_creating_different_page--;
-                page_type = PAGE_1;
+                page_type = PAGE_FLAG_PAGE_1;
             } else {
                 work->time_before_creating_different_page = (guRandom() % 3) + 1;
                 page_type                                 = (guRandom() % 2) + 2;
@@ -177,8 +178,8 @@ void necro_loop(Necronomicon* self) {
         for (i = 0; i < 10; i++) {
             page = self->pages[i];
             if (page != NULL) {
-                page->flags &= ~ANIMATE;
-                page->flags |= DESTROY_PAGE;
+                page->flags &= ~PAGE_FLAG_ANIMATE;
+                page->flags |= PAGE_FLAG_DESTROY_PAGE;
             }
         }
         GO_TO_FUNC_NOW(self, necro_functions, NECRO_DESTROY);
@@ -190,7 +191,7 @@ void necro_close(Necronomicon* self) {
     Model* book_cover;
     Vec3f position;
     NecroWork* work;
-    page_work* page;
+    PageWork* page;
     u8 random_position;
     s32 destroy_first_page;
     u8 i;
@@ -205,10 +206,10 @@ void necro_close(Necronomicon* self) {
             if (self->pages[i] != NULL) {
                 destroy_first_page = FALSE;
                 page               = self->pages[i];
-                if (page->flags & PAGE_ANIM_END_KEYFRAME) {
+                if (page->flags & PAGE_FLAG_ANIM_END_KEYFRAME) {
                     page = self->pages[0];
-                    page->flags &= ~ANIMATE;
-                    page->flags |= DESTROY_PAGE;
+                    page->flags &= ~PAGE_FLAG_ANIMATE;
+                    page->flags |= PAGE_FLAG_DESTROY_PAGE;
                     self->pages[0] = self->pages[i];
                     self->pages[i] = NULL;
                 }
@@ -219,8 +220,8 @@ void necro_close(Necronomicon* self) {
         if (destroy_first_page) {
             work->last_page_flipped = TRUE;
             page                    = self->pages[0];
-            page->flags &= ~ANIMATE;
-            page->flags |= DESTROY_PAGE;
+            page->flags &= ~PAGE_FLAG_ANIMATE;
+            page->flags |= PAGE_FLAG_DESTROY_PAGE;
             self->pages[0] = NULL;
         }
     }

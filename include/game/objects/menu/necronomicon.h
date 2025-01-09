@@ -51,7 +51,7 @@ typedef struct Necronomicon {
     Model* full_model;
     Model* book_cover;
     u8 field_0x2C[8];
-    page_work* pages[7];
+    PageWork* pages[7];
     u8 field_0x50[32];
     NecroWork* work;
 } Necronomicon;
