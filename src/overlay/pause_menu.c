@@ -598,10 +598,10 @@ PauseItemMenuWork* pauseMenu_createPauseItemMenuWork(
         );
         work = ((Object*) self)->alloc_data[ptrs_array_index];
         if (work != NULL) {
-            work->field_0x01                    = 1;
+            work->current_page                  = 1;
             work->field_0x05                    = 0;
-            work->field_0x06                    = 0;
-            work->field_0x02                    = 0;
+            work->number_of_pages_to_advance    = 0;
+            work->highlighted_option            = 0;
             work->selected_item_ID_in_item_list = ITEM_ID_NOTHING;
 
             scroll = (*createScrollState)(

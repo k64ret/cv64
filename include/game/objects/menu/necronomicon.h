@@ -4,6 +4,8 @@
 #include "objects/menu/page.h"
 #include "bit.h"
 
+#define NECRO_NUM_PAGES(self) ARRAY_COUNT(self->pages)
+
 typedef enum NecroWorkFlag {
     NECRO_WORK_FLAG_FLIP_PAGES                     = BIT(1),
     NECRO_WORK_FLAG_CLOSE                          = BIT(2),
@@ -51,8 +53,8 @@ typedef struct Necronomicon {
     Model* full_model;
     Model* book_cover;
     u8 field_0x2C[8];
-    PageWork* pages[7];
-    u8 field_0x50[32];
+    PageWork* pages[10];
+    u8 field_0x5C[20];
     NecroWork* work;
 } Necronomicon;
 

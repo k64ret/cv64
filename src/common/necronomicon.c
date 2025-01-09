@@ -105,11 +105,11 @@ void necro_loop(Necronomicon* self) {
     if (work->flags & NECRO_WORK_FLAG_CLOSE) {
         // Skip flipping the pages over and directly close the book
         if (work->flags & NECRO_WORK_FLAG_DONT_FLIP_PAGES_BEFORE_CLOSING) {
-            work->pages_to_flip_before_closing = 10;
+            work->pages_to_flip_before_closing = NECRO_NUM_PAGES(self);
         }
 
         // After flipping 10 pages, close the book
-        if (work->pages_to_flip_before_closing < 10) {
+        if (work->pages_to_flip_before_closing < NECRO_NUM_PAGES(self)) {
             work->flags |= NECRO_WORK_FLAG_FLIP_PAGES;
         } else {
             page = self->pages[1];
@@ -120,7 +120,7 @@ void necro_loop(Necronomicon* self) {
         }
     }
 
-    for (i = 2; i < 10; i++) {
+    for (i = 2; i < NECRO_NUM_PAGES(self); i++) {
         // Destroy the page if it has finished flipping over
         if (self->pages[i] != NULL) {
             page = self->pages[i];
@@ -161,7 +161,7 @@ void necro_loop(Necronomicon* self) {
 
             // Flip pages faster if the book is requested to be closed
             if (work->flags & NECRO_WORK_FLAG_CLOSE) {
-                work->time_before_flipping_another_page = 10;
+                work->time_before_flipping_another_page = NECRO_NUM_PAGES(self);
                 work->pages_to_flip_before_closing++;
             } else {
                 work->time_before_flipping_another_page = 30;
@@ -175,7 +175,7 @@ void necro_loop(Necronomicon* self) {
 
     // Destroy all pages and force despawning the necronomicon
     if (work->flags & NECRO_WORK_FLAG_DESTROY_NECRO) {
-        for (i = 0; i < 10; i++) {
+        for (i = 0; i < NECRO_NUM_PAGES(self); i++) {
             page = self->pages[i];
             if (page != NULL) {
                 page->flags &= ~PAGE_FLAG_ANIMATE;
@@ -202,7 +202,7 @@ void necro_close(Necronomicon* self) {
 
     if (work->last_page_flipped == FALSE) {
         // Destroy all pages but the first one when they all finished flipping
-        for (i = 1; i < 10; i++) {
+        for (i = 1; i < NECRO_NUM_PAGES(self); i++) {
             if (self->pages[i] != NULL) {
                 destroy_first_page = FALSE;
                 page               = self->pages[i];

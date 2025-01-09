@@ -18,18 +18,23 @@ typedef struct ItemCursol {
  */
 typedef struct PauseItemMenuWork {
     u8 field_0x00;
-    s8 field_0x01;
-    s8 field_0x02;
-    s8 field_0x03;
-    u8 field_0x04;
+    s8 current_page;
+    /**
+     * Within the current page
+     * (i.e. first option is always 0, last option is always 4)
+     */
+    s8 highlighted_option;
+    s8 delay_before_changing_option;
+    u8 changing_pages;
     s8 field_0x05;
-    u8 field_0x06;
+    /**
+     * When switching pages, this is the number of pages to increment / decrement
+     */
+    u8 number_of_pages_to_advance;
     u8 field_0x07;
-    f32 field_0x08;
-    f32 field_0x0C;
-    MfdsState* field_0x10[5];
-    MfdsState* field_0x24;
-    MfdsState* field_0x28;
+    Vec2f item_names_scroll_speed;
+    MfdsState* item_names[6];
+    MfdsState* item_cursol_textbox;
     ItemCursol* item_cursol;
     u8 field_0x30[4];
     scroll_state* scroll;
