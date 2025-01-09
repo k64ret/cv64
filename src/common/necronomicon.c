@@ -161,7 +161,7 @@ void necro_loop(Necronomicon* self) {
 
             // Flip pages faster if the book is requested to be closed
             if (work->flags & NECRO_WORK_FLAG_CLOSE) {
-                work->time_before_flipping_another_page = NECRO_NUM_PAGES(self);
+                work->time_before_flipping_another_page = 10;
                 work->pages_to_flip_before_closing++;
             } else {
                 work->time_before_flipping_another_page = 30;
