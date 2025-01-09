@@ -2392,7 +2392,7 @@ segments:
     subsegments:
       - [0x00E557B0, c, overlay/pause_menu]
       - [0x00E57840, .data, overlay/pause_menu]
-      - [0x00E58780, rodata, overlay/pause_menu]
+      - [0x00E58780, .rodata, overlay/pause_menu]
 
   - name: ni_ovl_difficulty_and_character_select
     type: code
