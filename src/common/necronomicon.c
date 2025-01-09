@@ -112,7 +112,7 @@ void necro_loop(Necronomicon* self) {
             work->flags |= NECRO_WORK_FLAG_FLIP_PAGES;
         } else {
             page = self->pages[1];
-            page->flags |= NECRO_WORK_FLAG_CLOSE;
+            page->flags |= ANIMATE;
             (*object_curLevel_goToNextFuncAndClearTimer)(
                 self->header.current_function, &self->header.function_info_ID
             );
