@@ -285,11 +285,88 @@ void pauseMenu_createMainMenu(PauseMenu* self) {
     }
 }
 
-// clang-format off
+void pauseMenu_calcMainMenu(PauseMenu* self) {
+    s32 temp[2];
+    scroll_state* main_menu_options_scroll;
+    MfdsState* options_textbox;
+    gameplayMenuMgr* gameplay_menu_mgr;
+    Model* scroll_background_model;
+    s32 textbox_option;
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/overlay/pause_menu/pauseMenu_calcMainMenu.s")
+    options_textbox          = self->options_textbox;
+    main_menu_options_scroll = self->main_menu_options_scroll;
 
-// clang-format on
+    if (CONT_BTNS_PRESSED(CONT_0, CONT_B) &&
+        (main_menu_options_scroll->flags & SCROLL_STATE_FLAG_OPENED)) {
+        gameplay_menu_mgr =
+            (gameplayMenuMgr*) (*objectList_findFirstObjectByID)(MENU_GAMEPLAY_MENUMGR);
+        if (gameplay_menu_mgr != NULL) {
+            gameplay_menu_mgr->menu_state |= EXIT_MENU;
+        }
+        (*Fade_SetSettings)(FADE_OUT, 15, 0, 0, 0);
+        options_textbox->flags |= MFDS_FLAG_CLOSE_TEXTBOX;
+        self->main_menu_options_scroll->flags = SCROLL_STATE_FLAG_HIDE;
+        (*object_curLevel_goToFunc)(
+            self->header.current_function, &self->header.function_info_ID, PAUSE_MENU_DESTROY
+        );
+        return;
+    }
+
+    textbox_option = options_textbox->textbox_option;
+
+    if (textbox_option == TEXTBOX_OPTION_IDLE) {
+        return;
+    }
+    switch (textbox_option) {
+        case PAUSE_MENU_ITEM:
+            options_textbox->flags |= MFDS_FLAG_CLOSE_TEXTBOX;
+            self->main_menu_options_scroll->flags = SCROLL_STATE_FLAG_HIDE;
+            (*object_curLevel_goToNextFuncAndClearTimer)(
+                self->header.current_function, &self->header.function_info_ID
+            );
+            break;
+
+        case PAUSE_MENU_OPTION:
+            gameplay_menu_mgr =
+                (gameplayMenuMgr*) (*objectList_findFirstObjectByID)(MENU_GAMEPLAY_MENUMGR);
+            if (gameplay_menu_mgr != NULL) {
+                gameplay_menu_mgr->menu_state |= ENTERING_OPTION;
+            }
+            (*Fade_SetSettings)(FADE_OUT, 15, 0, 0, 0);
+            options_textbox->flags |= MFDS_FLAG_CLOSE_TEXTBOX;
+            self->main_menu_options_scroll->flags = SCROLL_STATE_FLAG_HIDE;
+            (*object_curLevel_goToFunc)(
+                self->header.current_function, &self->header.function_info_ID, PAUSE_MENU_DESTROY
+            );
+            break;
+
+        case PAUSE_MENU_QUIT:
+            scroll_background_model = self->scroll_background_model;
+            (*memory_clear)(
+                scroll_background_model->matrix, sizeof(scroll_background_model->matrix)
+            );
+            (*object_curLevel_goToFunc)(
+                self->header.current_function,
+                &self->header.function_info_ID,
+                PAUSE_MENU_CALC_QUIT_MENU
+            );
+            break;
+
+        case PAUSE_MENU_BACK:
+            gameplay_menu_mgr =
+                (gameplayMenuMgr*) (*objectList_findFirstObjectByID)(MENU_GAMEPLAY_MENUMGR);
+            if (gameplay_menu_mgr != NULL) {
+                gameplay_menu_mgr->menu_state |= EXIT_MENU;
+            }
+            options_textbox->flags |= MFDS_FLAG_CLOSE_TEXTBOX;
+            self->main_menu_options_scroll->flags = SCROLL_STATE_FLAG_HIDE;
+            (*Fade_SetSettings)(FADE_OUT, 15, 0, 0, 0);
+            (*object_curLevel_goToFunc)(
+                self->header.current_function, &self->header.function_info_ID, PAUSE_MENU_DESTROY
+            );
+            break;
+    }
+}
 
 void pauseMenu_checkScrollObjExists(PauseMenu* self) {
     if ((*objectList_findFirstObjectByID)(MENU_SCROLL) == NULL) {
@@ -717,8 +794,50 @@ void pauseMenu_updateClock(PauseMenu* self) {
     self->digital_clock_textbox->flags |= MFDS_FLAG_UPDATE_STRING;
 }
 
-// clang-format off
+s32 pauseMenu_checkIfItemCanBeUsed(PauseMenu* self) {
+    ItemUseSettings* temp_a0;
+    s32 item_amount;
+    s32 temp_a0_2;
+    s32 temp_a2_2;
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/overlay/pause_menu/pauseMenu_checkIfItemCanBeUsed.s")
-
-// clang-format on
+    item_amount = sys.SaveStruct_gameplay.items.array[self->selected_item_ID - 1];
+    if (item_amount <= 0) {
+        return -1;
+    }
+    self->item_use_settings_array_entry = getItemUseArrayEntry(self->selected_item_ID);
+    self->player_status_to_remove =
+        item_use_settings_array[self->item_use_settings_array_entry].player_status_to_remove;
+    temp_a0_2 = self->item_use_settings_array_entry;
+    self->item_use_settings_amount_to_fill =
+        item_use_settings_array[self->item_use_settings_array_entry].amount_to_fill;
+    if (temp_a0_2 < 0) {
+        return -1;
+    }
+    if (self->player_status_to_remove & 0x10) {
+        temp_a2_2 = self->player_status_to_remove & 0xE;
+        temp_a0_2 = (temp_a2_2 << 0x19) & sys.SaveStruct_gameplay.player_status;
+        if ((self->selected_item_ID == ITEM_ID_HEALING_KIT) &&
+            ((sys.SaveStruct_gameplay.life < 100) || (temp_a0_2))) {
+            return 0;
+        }
+        if ((self->item_use_settings_amount_to_fill != 0) &&
+            (sys.SaveStruct_gameplay.player_status & PLAYER_FLAG_VAMP)) {
+            return -1;
+        }
+        if ((temp_a2_2) && (temp_a0_2 == 0)) {
+            return -1;
+        }
+        if ((sys.SaveStruct_gameplay.life >= 100) &&
+            (self->item_use_settings_amount_to_fill != 0)) {
+            return -1;
+        }
+    } else if (self->player_status_to_remove & 1) {
+        if ((self->item_use_settings_amount_to_fill == sys.SaveStruct_gameplay.hour) &&
+            (sys.SaveStruct_gameplay.minute == 0) && (sys.SaveStruct_gameplay.seconds == 0)) {
+            return -1;
+        }
+    } else {
+        return -1;
+    }
+    return 0;
+}
