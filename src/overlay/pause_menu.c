@@ -657,11 +657,28 @@ void pauseMenu_calcQuitMenu(PauseMenu* self) {
     }
 }
 
-// clang-format off
+void pauseMenu_updateDigitalClockDisplay(PauseMenu* self) {
+    DigitalClock* digital_clock = self->digital_clock_text;
+    s8 first_digit;
+    s32 second_digit;
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/overlay/pause_menu/pauseMenu_updateDigitalClockDisplay.s")
+    // Hours
+    first_digit                  = sys.SaveStruct_gameplay.hour / 10;
+    digital_clock->clock_text[0] = PIXEL_HUD_0 + first_digit;
+    digital_clock->clock_text[1] = PIXEL_HUD_0 + sys.SaveStruct_gameplay.hour - (first_digit * 10);
 
-// clang-format on
+    // Colon
+    digital_clock->clock_text[2] = ASCII_TO_CV64(':');
+
+    // Minutes
+    (u8*) digital_clock += 0x0A;
+    first_digit                   = sys.SaveStruct_gameplay.minute / 10;
+    digital_clock->clock_text[-2] = PIXEL_HUD_0 + first_digit;
+    digital_clock->clock_text[-1] =
+        PIXEL_HUD_0 + sys.SaveStruct_gameplay.minute - (first_digit * 10);
+
+    digital_clock->clock_text[0] = 0;
+}
 
 PauseItemMenuWork* pauseMenu_createPauseItemMenuWork(
     PauseMenu* self, u8 ptrs_array_index, modelLighting* arg2, modelLighting* arg3, s32 arg4

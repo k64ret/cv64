@@ -18,7 +18,10 @@
  */
 #define ASCII_TO_CV64(ascii) (ascii - 0x1E)
 
-// Special control characters
+// Special characters
+#define PIXEL_HUD_0 0x68
+
+// Control characters
 #define CTRL_SET_COLOR(arg) (0xA200 | (arg & 0xFF))
 
 #define TEXT_COLOR_WHITE 0
