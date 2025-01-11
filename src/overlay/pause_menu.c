@@ -511,11 +511,192 @@ const char pauseMenu_unusedString15[] = "Sub Ok(%d)!!\n";
 const char pauseMenu_unusedString16[] = "Scroll On Status Menu\n";
 const char pauseMenu_unusedString17[] = "YS step :%d\n";
 
-// clang-format off
+void pauseMenu_calcItemSelectedMenu(PauseMenu* self) {
+    MfdsState* options_textbox;
+    MfdsState* selection_arrow_textbox;
+    scroll_state* item_model_scroll;
+    scroll_state* options_text_scroll;
+    scroll_state* description_text_scroll;
+    Model* character_portrait;
+    MfdsState* item_description;
+    s32 temp;
+    s32 temp2;
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/overlay/pause_menu/pauseMenu_calcItemSelectedMenu.s")
-
-// clang-format on
+    selection_arrow_textbox = self->selection_arrow_textbox;
+    item_model_scroll       = self->item_model_scroll;
+    options_text_scroll     = self->options_text_scroll;
+    description_text_scroll = self->description_text_scroll;
+    character_portrait      = self->character_portrait;
+    temp2                   = pauseMenu_checkIfItemCanBeUsed(self);
+    options_textbox         = self->options_textbox;
+    if (temp2) {
+        (*textbox_setMessagePtr)(
+            options_textbox,
+            GET_UNMAPPED_ADDRESS(NI_OVL_PAUSE_MENU, (*text_getMessageFromPool)(item_usage_text, 1)),
+            NULL,
+            0
+        );
+        (*textbox_setPos)(options_textbox, 153, 90, 1);
+        (*textbox_setPos)(selection_arrow_textbox, 176, 119, 1);
+    } else {
+        (*textbox_setMessagePtr)(
+            options_textbox,
+            GET_UNMAPPED_ADDRESS(NI_OVL_PAUSE_MENU, (*text_getMessageFromPool)(item_usage_text, 0)),
+            NULL,
+            0
+        );
+        (*textbox_setPos)(options_textbox, 165, 100, 1);
+    }
+    if (temp2 != self->selected_item_can_be_used) {
+        options_textbox->flags |= MFDS_FLAG_UPDATE_STRING;
+        self->selected_item_can_be_used = temp2;
+    }
+    if (options_text_scroll->flags & SCROLL_STATE_FLAG_OPENED) {
+        item_description = self->item_description;
+        if (self->outside_item_selected_menu) {
+            if (!(item_model_scroll->flags & SCROLL_STATE_FLAG_CLOSING) &&
+                !(options_text_scroll->flags & SCROLL_STATE_FLAG_CLOSING) &&
+                !(description_text_scroll->flags & SCROLL_STATE_FLAG_CLOSING)) {
+                item_model_scroll->flags       = SCROLL_STATE_FLAG_HIDE;
+                options_text_scroll->flags     = SCROLL_STATE_FLAG_HIDE;
+                description_text_scroll->flags = SCROLL_STATE_FLAG_HIDE;
+                item_description->flags |= MFDS_FLAG_CLOSE_TEXTBOX;
+                self->options_textbox->flags |= MFDS_FLAG_CLOSE_TEXTBOX;
+                selection_arrow_textbox->flags |= MFDS_FLAG_CLOSE_TEXTBOX;
+                pauseMenu_createPauseItemMenuWork(
+                    self, 2, self->scrolls_borders_light, self->scrolls_background_light, 0
+                );
+                (*object_curLevel_goToFunc)(
+                    self->header.current_function,
+                    &self->header.function_info_ID,
+                    PAUSE_MENU_CALC_ITEM_LIST
+                );
+            }
+        } else {
+            (*figure_showModelAndChildren)(character_portrait, 0);
+            if (self->delay_before_being_able_to_select_option != 0) {
+                if (self->target_health != 0) {
+                    if (sys.SaveStruct_gameplay.life >= self->target_health) {
+                        self->target_health = 0;
+                    }
+                } else {
+                    if (self->target_hour != 0) {
+                        pauseMenu_updateClock(self);
+                        return;
+                    }
+                    self->delay_before_being_able_to_select_option--;
+                }
+            } else {
+                if (temp2 == 0) {
+                    if ((*moveSelectionCursor)(U_JPAD)) {
+                        self->delay_before_being_able_to_select_option = 4;
+                        self->option_selection_inside_selected_item++;
+                    } else if ((*moveSelectionCursor)(D_JPAD)) {
+                        self->delay_before_being_able_to_select_option = 4;
+                        self->option_selection_inside_selected_item--;
+                    }
+                    if (self->option_selection_inside_selected_item >= 2) {
+                        self->option_selection_inside_selected_item = 0;
+                    }
+                    if (self->option_selection_inside_selected_item < 0) {
+                        self->option_selection_inside_selected_item = 1;
+                    }
+                    (*textbox_setPos)(
+                        selection_arrow_textbox,
+                        160,
+                        (self->option_selection_inside_selected_item * 14) + 101,
+                        1
+                    );
+                } else {
+                    self->option_selection_inside_selected_item = 1;
+                }
+                if (CONT_BTNS_PRESSED(CONT_0, A_BUTTON) &&
+                    (self->delay_before_being_able_to_select_option == 0)) {
+                    self->delay_before_being_able_to_select_option = 3;
+                    if ((self->option_selection_inside_selected_item != 0) ||
+                        CONT_BTNS_PRESSED(CONT_0, B_BUTTON)) {
+                        item_model_scroll->flags &= ~SCROLL_STATE_FLAG_OPENING;
+                        item_model_scroll->flags |= SCROLL_STATE_FLAG_CLOSING;
+                        options_text_scroll->flags &= ~SCROLL_STATE_FLAG_OPENING;
+                        options_text_scroll->flags |= SCROLL_STATE_FLAG_CLOSING;
+                        description_text_scroll->flags &= ~SCROLL_STATE_FLAG_OPENING;
+                        description_text_scroll->flags |= SCROLL_STATE_FLAG_CLOSING;
+                        (*figure_destroySelfAndChildren_2)(character_portrait, 0);
+                        self->outside_item_selected_menu = TRUE;
+                        return;
+                    }
+                    temp = sys.SaveStruct_gameplay.items.array[self->selected_item_ID - 1];
+                    if (temp > 0) {
+                        self->target_health = 0;
+                        self->target_hour   = 0;
+                        self->item_use_settings_array_entry =
+                            getItemUseArrayEntry(self->selected_item_ID);
+                        self->player_status_to_remove =
+                            item_use_settings_array[self->item_use_settings_array_entry]
+                                .player_status_to_remove;
+                        self->item_use_settings_amount_to_fill =
+                            item_use_settings_array[self->item_use_settings_array_entry]
+                                .amount_to_fill;
+                        if (self->item_use_settings_array_entry >= 0) {
+                            if ((self->player_status_to_remove & 0x10) &&
+                                ((temp2 = ((self->player_status_to_remove & 0xE) << 0x19) &
+                                      sys.SaveStruct_gameplay.player_status,
+                                  ((sys.SaveStruct_gameplay.life < 100))) ||
+                                 (temp2))) {
+                                if (temp2) {
+                                    if (sys.SaveStruct_gameplay.character == REINHARDT) {
+                                        (*prepareSoundForPlay_defaultSettings)(
+                                            SD_REINHARDT_HEALTH_RECOVERY
+                                        );
+                                    } else {
+                                        (*prepareSoundForPlay_defaultSettings)(
+                                            SD_CARRIE_HEALTH_RECOVERY
+                                        );
+                                    }
+                                }
+                                if ((self->player_status_to_remove & 4) &&
+                                    (sys.SaveStruct_gameplay.player_status & PLAYER_FLAG_VAMP)) {
+                                    sys.SaveStruct_gameplay.flags |=
+                                        SAVE_FLAG_VAMP_CURED_USING_PURIFYING;
+                                }
+                                (*HUDParams_FillPlayerHealth)(
+                                    self->item_use_settings_amount_to_fill,
+                                    (self->player_status_to_remove & 0xE) << 0x19,
+                                    FALSE
+                                );
+                                self->target_health = self->item_use_settings_amount_to_fill +
+                                    sys.SaveStruct_gameplay.life;
+                                if (self->target_health > 100) {
+                                    self->target_health = 100;
+                                }
+                                (*item_removeAmountFromInventory)(self->selected_item_ID, 1);
+                            }
+                            if ((self->player_status_to_remove & 1) &&
+                                ((self->item_use_settings_amount_to_fill !=
+                                  sys.SaveStruct_gameplay.hour) ||
+                                 (sys.SaveStruct_gameplay.minute != 0) ||
+                                 (sys.SaveStruct_gameplay.seconds != 0))) {
+                                (*play_sound)(SD_CLOCK_TICKING);
+                                self->target_hour = self->item_use_settings_amount_to_fill;
+                                (*item_removeAmountFromInventory)(self->selected_item_ID, 1);
+                            }
+                        }
+                    }
+                }
+                else if (CONT_BTNS_PRESSED(CONT_0, B_BUTTON) || (self->option_selection_inside_selected_item < 0) || (sys.SaveStruct_gameplay.items.array[self->selected_item_ID - 1] == 0)) {
+                    item_model_scroll->flags &= ~SCROLL_STATE_FLAG_OPENING;
+                    item_model_scroll->flags |= SCROLL_STATE_FLAG_CLOSING;
+                    options_text_scroll->flags &= ~SCROLL_STATE_FLAG_OPENING;
+                    options_text_scroll->flags |= SCROLL_STATE_FLAG_CLOSING;
+                    description_text_scroll->flags &= ~SCROLL_STATE_FLAG_OPENING;
+                    description_text_scroll->flags |= SCROLL_STATE_FLAG_CLOSING;
+                    (*figure_destroySelfAndChildren_2)(character_portrait, 0);
+                    self->outside_item_selected_menu = TRUE;
+                }
+            }
+        }
+    }
+}
 
 void pauseMenu_destroy(PauseMenu* self) {
     if (((*objectList_findFirstObjectByID)(MENU_SCROLL) == NULL) && ((*Fade_IsFading)() == FALSE)) {
