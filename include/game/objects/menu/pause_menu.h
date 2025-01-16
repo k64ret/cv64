@@ -8,17 +8,22 @@
 #include "item.h"
 
 /**
+ * The item in question from `item_use_settings_array` is a healing item
+ */
+#define HEALING 0x10
+/**
+ * The item in question from `item_use_settings_array` is either a sun or a moon card
+ */
+#define TIME_CARD 1
+
+/**
  * Player status to remove when using an item from `item_use_settings_array`.
  * If the argument is set to 0, the game won't remove any status.
  *
  * @note Because of the way the checks are setup, only the VAMP, POISON and STO statuses
  *       can be removed from items in the pause menu.
  */
-#define PLAYER_STATUS_TO_REMOVE(player_status) (((player_status) >> 0x19) | 0x10)
-/**
- * The item in question from `item_use_settings_array` is either a sun or a moon card
- */
-#define ITEM_IS_CARD 1
+#define PLAYER_STATUS_TO_REMOVE(player_status) (((player_status) >> 0x19) | HEALING)
 
 typedef enum PauseMenuMainOptions {
     PAUSE_MENU_ITEM   = 1,
@@ -79,8 +84,8 @@ typedef struct PauseMenu {
      */
     u8 field_0x51;
     s8 option_selection_inside_selected_item;
-    s8 selected_item_ID_in_item_list;
-    s8 selected_item_ID;
+    s8 selected_item_in_item_list;
+    s8 selected_item;
     s8 delay_before_being_able_to_select_option;
     s8 item_use_settings_array_entry;
     u8 field_0x57;
@@ -90,7 +95,10 @@ typedef struct PauseMenu {
     DigitalClock* digital_clock_text;
     s8 target_health; // After using a health item
     s8 target_hour;   // After using a Moon / Sun card
-    s8 item_use_settings_amount_to_fill;
+    union {
+        s8 item_use_settings_target_health;
+        s8 item_use_settings_target_hour;
+    };
     s8 player_status_to_remove;
     gameplayMenuMgr* gameplay_menu_mgr;
     u8 field_0x70[2];
@@ -103,7 +111,7 @@ void pauseMenu_decreaseSoundVolume(PauseMenu*);
 extern void pauseMenu_init(PauseMenu*);
 extern void pauseMenu_createMainMenu(PauseMenu*);
 extern void pauseMenu_calcMainMenu(PauseMenu*);
-void pauseMenu_checkScrollObjExists(PauseMenu*);
+void pauseMenu_createItemList(PauseMenu*);
 extern void pauseMenu_calcItemList(PauseMenu*);
 extern void pauseMenu_calcItemSelectedMenu(PauseMenu*);
 void pauseMenu_destroy(PauseMenu*);

@@ -1,7 +1,7 @@
 /**
  * @file pause_menu.c
  *
- * This file contains the code that handles the Pause menu.
+ * This file contains the code that handles the Pause menu (officially known as "Status")
  */
 
 #include "objects/menu/pause_menu.h"
@@ -38,8 +38,8 @@ ItemUseSettings item_use_settings_array[] = {
     {ITEM_ID_ROAST_CHICKEN, PLAYER_STATUS_TO_REMOVE(0), 50},
     {ITEM_ID_PURIFYING, PLAYER_STATUS_TO_REMOVE(PLAYER_FLAG_VAMP), 0},
     {ITEM_ID_CURE_AMPOULE, PLAYER_STATUS_TO_REMOVE(PLAYER_FLAG_POISON), 0},
-    {ITEM_ID_SUN_CARD, ITEM_IS_CARD, 6},
-    {ITEM_ID_MOON_CARD, ITEM_IS_CARD, 18}
+    {ITEM_ID_SUN_CARD, TIME_CARD, 6},
+    {ITEM_ID_MOON_CARD, TIME_CARD, 18}
 };
 
 s32 sound_volume_decreased = FALSE;
@@ -49,7 +49,7 @@ PauseMenuFuncs pauseMenu_functions[] = {
     pauseMenu_init,
     pauseMenu_createMainMenu,
     pauseMenu_calcMainMenu,
-    pauseMenu_checkScrollObjExists,
+    pauseMenu_createItemList,
     pauseMenu_calcItemList,
     pauseMenu_calcItemSelectedMenu,
     pauseMenu_destroy,
@@ -70,6 +70,9 @@ void pauseMenu_entrypoint(PauseMenu* self) {
     ENTER(self, pauseMenu_functions);
 }
 
+/**
+ * Decrease the sound volume when entering the menu
+ */
 void pauseMenu_decreaseSoundVolume(PauseMenu* self) {
     if (sys.file_load_array_ID == 0) {
         sound_volume_decreased = FALSE;
@@ -100,6 +103,7 @@ void pauseMenu_init(PauseMenu* self) {
             return;
         }
     }
+
     (*Camera_SetParams)(common_camera_8009B448, 3);
     common_camera_8009B448->position.x          = 0.0f;
     common_camera_8009B448->position.y          = 0.0f;
@@ -243,6 +247,7 @@ void pauseMenu_createMainMenu(PauseMenu* self) {
     }
     if (1) {
     }
+
     if ((*objectList_findFirstObjectByID)(MENU_SCROLL) == NULL) {
         scroll = (*createScrollState)(
             self,
@@ -296,6 +301,10 @@ void pauseMenu_calcMainMenu(PauseMenu* self) {
     options_textbox          = self->options_textbox;
     main_menu_options_scroll = self->main_menu_options_scroll;
 
+    /**
+     * Exit back to gameplay after pressing B
+     * (wait until the scroll is opened before being able to back out)
+     */
     if (CONT_BTNS_PRESSED(CONT_0, CONT_B) &&
         (main_menu_options_scroll->flags & SCROLL_STATE_FLAG_OPENED)) {
         gameplay_menu_mgr =
@@ -303,6 +312,7 @@ void pauseMenu_calcMainMenu(PauseMenu* self) {
         if (gameplay_menu_mgr != NULL) {
             gameplay_menu_mgr->menu_state |= EXIT_MENU;
         }
+
         (*Fade_SetSettings)(FADE_OUT, 15, 0, 0, 0);
         options_textbox->flags |= MFDS_FLAG_CLOSE_TEXTBOX;
         self->main_menu_options_scroll->flags = SCROLL_STATE_FLAG_HIDE;
@@ -318,6 +328,9 @@ void pauseMenu_calcMainMenu(PauseMenu* self) {
         return;
     }
     switch (textbox_option) {
+        /**
+         * Go to Item menu
+         */
         case PAUSE_MENU_ITEM:
             options_textbox->flags |= MFDS_FLAG_CLOSE_TEXTBOX;
             self->main_menu_options_scroll->flags = SCROLL_STATE_FLAG_HIDE;
@@ -326,12 +339,16 @@ void pauseMenu_calcMainMenu(PauseMenu* self) {
             );
             break;
 
+        /**
+         * Go to Option menu (leaving the pause menu entirely)
+         */
         case PAUSE_MENU_OPTION:
             gameplay_menu_mgr =
                 (gameplayMenuMgr*) (*objectList_findFirstObjectByID)(MENU_GAMEPLAY_MENUMGR);
             if (gameplay_menu_mgr != NULL) {
                 gameplay_menu_mgr->menu_state |= ENTERING_OPTION;
             }
+
             (*Fade_SetSettings)(FADE_OUT, 15, 0, 0, 0);
             options_textbox->flags |= MFDS_FLAG_CLOSE_TEXTBOX;
             self->main_menu_options_scroll->flags = SCROLL_STATE_FLAG_HIDE;
@@ -340,6 +357,9 @@ void pauseMenu_calcMainMenu(PauseMenu* self) {
             );
             break;
 
+        /**
+         * Go to Quit menu
+         */
         case PAUSE_MENU_QUIT:
             scroll_background_model = self->scroll_background_model;
             (*memory_clear)(
@@ -352,12 +372,16 @@ void pauseMenu_calcMainMenu(PauseMenu* self) {
             );
             break;
 
+        /**
+         * Exit back to gameplay
+         */
         case PAUSE_MENU_BACK:
             gameplay_menu_mgr =
                 (gameplayMenuMgr*) (*objectList_findFirstObjectByID)(MENU_GAMEPLAY_MENUMGR);
             if (gameplay_menu_mgr != NULL) {
                 gameplay_menu_mgr->menu_state |= EXIT_MENU;
             }
+
             options_textbox->flags |= MFDS_FLAG_CLOSE_TEXTBOX;
             self->main_menu_options_scroll->flags = SCROLL_STATE_FLAG_HIDE;
             (*Fade_SetSettings)(FADE_OUT, 15, 0, 0, 0);
@@ -368,7 +392,10 @@ void pauseMenu_calcMainMenu(PauseMenu* self) {
     }
 }
 
-void pauseMenu_checkScrollObjExists(PauseMenu* self) {
+/**
+ * Requests the creation of the Item menu
+ */
+void pauseMenu_createItemList(PauseMenu* self) {
     if ((*objectList_findFirstObjectByID)(MENU_SCROLL) == NULL) {
         pauseMenu_createPauseItemMenuWork(
             self, 2, self->scrolls_borders_light, self->scrolls_background_light, 0
@@ -384,15 +411,15 @@ void pauseMenu_calcItemList(PauseMenu* self) {
     Model* item_model;
     s32 temp[2];
     PauseItemMenuWork* item_menu;
-    s32 selected_item_ID_in_item_list;
+    s32 selected_item_in_item_list;
     scroll_state* item_scroll;
     scroll_state* options_scroll;
 
     item_menu = self->item_menu;
     if (item_menu != NULL) {
-        selected_item_ID_in_item_list = item_menu->selected_item_ID_in_item_list;
-        if (selected_item_ID_in_item_list != ITEM_ID_NOTHING) {
-            if (selected_item_ID_in_item_list == 0xFF) {
+        selected_item_in_item_list = item_menu->selected_item_in_item_list;
+        if (selected_item_in_item_list != ITEM_ID_NOTHING) {
+            if (selected_item_in_item_list == 0xFF) {
                 (*object_curLevel_goToFunc)(
                     self->header.current_function,
                     &self->header.function_info_ID,
@@ -400,7 +427,7 @@ void pauseMenu_calcItemList(PauseMenu* self) {
                 );
                 return;
             }
-            self->selected_item_ID = selected_item_ID_in_item_list;
+            self->selected_item = selected_item_in_item_list;
             pauseMenu_createItemDescription(self);
 
             item_scroll = (*createScrollState)(
@@ -480,9 +507,9 @@ void pauseMenu_calcItemList(PauseMenu* self) {
 
             self->outside_item_selected_menu = FALSE;
 
-            self->selected_item_ID_in_item_list = item_menu->selected_item_ID_in_item_list;
+            self->selected_item_in_item_list = item_menu->selected_item_in_item_list;
             item_model =
-                (*createItemModel)(self->selected_item_ID_in_item_list, common_camera_HUD, "item");
+                (*createItemModel)(self->selected_item_in_item_list, common_camera_HUD, "item");
             self->item_model                               = item_model;
             self->field_0x51                               = FALSE;
             self->delay_before_being_able_to_select_option = 0;
@@ -625,20 +652,20 @@ void pauseMenu_calcItemSelectedMenu(PauseMenu* self) {
                         self->outside_item_selected_menu = TRUE;
                         return;
                     }
-                    temp = sys.SaveStruct_gameplay.items.array[self->selected_item_ID - 1];
+                    temp = sys.SaveStruct_gameplay.items.array[self->selected_item - 1];
                     if (temp > 0) {
                         self->target_health = 0;
                         self->target_hour   = 0;
                         self->item_use_settings_array_entry =
-                            getItemUseArrayEntry(self->selected_item_ID);
+                            getItemUseArrayEntry(self->selected_item);
                         self->player_status_to_remove =
                             item_use_settings_array[self->item_use_settings_array_entry]
                                 .player_status_to_remove;
-                        self->item_use_settings_amount_to_fill =
+                        self->item_use_settings_target_health =
                             item_use_settings_array[self->item_use_settings_array_entry]
                                 .amount_to_fill;
                         if (self->item_use_settings_array_entry >= 0) {
-                            if ((self->player_status_to_remove & 0x10) &&
+                            if ((self->player_status_to_remove & HEALING) &&
                                 ((temp2 = ((self->player_status_to_remove & 0xE) << 0x19) &
                                       sys.SaveStruct_gameplay.player_status,
                                   ((sys.SaveStruct_gameplay.life < 100))) ||
@@ -660,30 +687,30 @@ void pauseMenu_calcItemSelectedMenu(PauseMenu* self) {
                                         SAVE_FLAG_VAMP_CURED_USING_PURIFYING;
                                 }
                                 (*HUDParams_FillPlayerHealth)(
-                                    self->item_use_settings_amount_to_fill,
+                                    self->item_use_settings_target_health,
                                     (self->player_status_to_remove & 0xE) << 0x19,
                                     FALSE
                                 );
-                                self->target_health = self->item_use_settings_amount_to_fill +
+                                self->target_health = self->item_use_settings_target_health +
                                     sys.SaveStruct_gameplay.life;
                                 if (self->target_health > 100) {
                                     self->target_health = 100;
                                 }
-                                (*item_removeAmountFromInventory)(self->selected_item_ID, 1);
+                                (*item_removeAmountFromInventory)(self->selected_item, 1);
                             }
-                            if ((self->player_status_to_remove & 1) &&
-                                ((self->item_use_settings_amount_to_fill !=
+                            if ((self->player_status_to_remove & TIME_CARD) &&
+                                ((self->item_use_settings_target_hour !=
                                   sys.SaveStruct_gameplay.hour) ||
                                  (sys.SaveStruct_gameplay.minute != 0) ||
                                  (sys.SaveStruct_gameplay.seconds != 0))) {
                                 (*play_sound)(SD_CLOCK_TICKING);
-                                self->target_hour = self->item_use_settings_amount_to_fill;
-                                (*item_removeAmountFromInventory)(self->selected_item_ID, 1);
+                                self->target_hour = self->item_use_settings_target_hour;
+                                (*item_removeAmountFromInventory)(self->selected_item, 1);
                             }
                         }
                     }
                 }
-                else if (CONT_BTNS_PRESSED(CONT_0, B_BUTTON) || (self->option_selection_inside_selected_item < 0) || (sys.SaveStruct_gameplay.items.array[self->selected_item_ID - 1] == 0)) {
+                else if (CONT_BTNS_PRESSED(CONT_0, B_BUTTON) || (self->option_selection_inside_selected_item < 0) || (sys.SaveStruct_gameplay.items.array[self->selected_item - 1] == 0)) {
                     item_model_scroll->flags &= ~SCROLL_STATE_FLAG_OPENING;
                     item_model_scroll->flags |= SCROLL_STATE_FLAG_CLOSING;
                     options_text_scroll->flags &= ~SCROLL_STATE_FLAG_OPENING;
@@ -700,9 +727,11 @@ void pauseMenu_calcItemSelectedMenu(PauseMenu* self) {
 
 void pauseMenu_destroy(PauseMenu* self) {
     if (((*objectList_findFirstObjectByID)(MENU_SCROLL) == NULL) && ((*Fade_IsFading)() == FALSE)) {
+        // Increase sound volume back
         if (sound_volume_decreased) {
             (*decreaseSoundVolume)(FALSE);
         }
+
         sys.background_color.integer = RGBA(0, 0, 0, 255);
         self->header.destroy(self);
     }
@@ -838,6 +867,9 @@ void pauseMenu_calcQuitMenu(PauseMenu* self) {
     }
 }
 
+/**
+ * Updates the digital clock text with the internal time values
+ */
 void pauseMenu_updateDigitalClockDisplay(PauseMenu* self) {
     DigitalClock* digital_clock = self->digital_clock_text;
     s8 first_digit;
@@ -858,9 +890,17 @@ void pauseMenu_updateDigitalClockDisplay(PauseMenu* self) {
     digital_clock->clock_text[-1] =
         PIXEL_HUD_0 + sys.SaveStruct_gameplay.minute - (first_digit * 10);
 
+    // Null terminator
     digital_clock->clock_text[0] = 0;
 }
 
+/**
+ * Creates `PauseItemMenuWork`, which contains parameters used while inside the Item menu
+ *
+ * @note The devs probably made a mistake as this struct is set to be called `sound_menu_work`,
+ *       when `sound_menu_work` in reality corresponds to the struct that contains parameters
+ *       that are used in the Options's Sound menu.
+ */
 PauseItemMenuWork* pauseMenu_createPauseItemMenuWork(
     PauseMenu* self, u8 ptrs_array_index, modelLighting* arg2, modelLighting* arg3, s32 arg4
 ) {
@@ -873,11 +913,11 @@ PauseItemMenuWork* pauseMenu_createPauseItemMenuWork(
         );
         work = ((Object*) self)->alloc_data[ptrs_array_index];
         if (work != NULL) {
-            work->current_page                  = 1;
-            work->field_0x05                    = 0;
-            work->number_of_pages_to_advance    = 0;
-            work->highlighted_option            = 0;
-            work->selected_item_ID_in_item_list = ITEM_ID_NOTHING;
+            work->current_page               = 1;
+            work->field_0x05                 = 0;
+            work->number_of_pages_to_advance = 0;
+            work->highlighted_option         = 0;
+            work->selected_item_in_item_list = ITEM_ID_NOTHING;
 
             scroll = (*createScrollState)(
                 self,
@@ -910,10 +950,16 @@ const char pauseMenu_unusedString18[] = "Sub NG(%d)!!\n";
 
 void func_0F001BF0() {}
 
+/**
+ * Creates the item description text when selecting an item
+ */
 void pauseMenu_createItemDescription(PauseMenu* self) {
     scroll_state* scroll;
     MfdsState* textbox;
 
+    /**
+     * Create and setup the text's background scroll
+     */
     scroll = (*createScrollState)(
         self,
         self->scrolls_borders_light,
@@ -933,6 +979,9 @@ void pauseMenu_createItemDescription(PauseMenu* self) {
     scroll->flags |= SCROLL_STATE_FLAG_OPENING;
     self->description_text_scroll = scroll;
 
+    /**
+     * Create and setup the item description textbox
+     */
     textbox = (*textbox_create)(
         self,
         self->scrolls_background_light,
@@ -948,7 +997,7 @@ void pauseMenu_createItemDescription(PauseMenu* self) {
     (*textbox_setMessagePtr)(
         textbox,
         (*text_getMessageFromPool)(
-            GET_UNMAPPED_ADDRESS(NI_OVL_PAUSE_MENU, &item_descriptions), self->selected_item_ID - 1
+            GET_UNMAPPED_ADDRESS(NI_OVL_PAUSE_MENU, &item_descriptions), self->selected_item - 1
         ),
         NULL,
         0
@@ -956,17 +1005,26 @@ void pauseMenu_createItemDescription(PauseMenu* self) {
     (*textbox_setScaleParameters)(textbox, 2, 2, 100.0f, 0.8f, 0.8f, TRUE, TRUE);
 }
 
-s32 getItemUseArrayEntry(s32 item_ID) {
-    s32 entry_ID;
+/**
+ * Given an item, it returns the index in `item_use_settings_array`
+ * corresponding to the entry that belongs to said item.
+ *
+ * Returns -1 if it can't be found.
+ */
+s32 getItemUseArrayEntry(s32 item) {
+    s32 entry_idx;
 
-    for (entry_ID = 0; item_use_settings_array[entry_ID].item != ITEM_ID_NOTHING; entry_ID++) {
-        if (item_ID == item_use_settings_array[entry_ID].item) {
-            return entry_ID;
+    for (entry_idx = 0; item_use_settings_array[entry_idx].item != ITEM_ID_NOTHING; entry_idx++) {
+        if (item == item_use_settings_array[entry_idx].item) {
+            return entry_idx;
         }
     }
     return -1;
 }
 
+/**
+ * Update the clock while it's spinning after using a time card
+ */
 void pauseMenu_updateClock(PauseMenu* self) {
     sys.SaveStruct_gameplay.minute += 5.0f;
     if (sys.SaveStruct_gameplay.minute >= 60) {
@@ -980,6 +1038,10 @@ void pauseMenu_updateClock(PauseMenu* self) {
                 sys.SaveStruct_gameplay.week++;
             }
         }
+
+        /**
+         * Stop the clock spin when it reaches the target hour
+         */
         if (self->target_hour == sys.SaveStruct_gameplay.hour) {
             (*play_sound)(STOP_SOUND(SD_CLOCK_TICKING));
             sys.SaveStruct_gameplay.minute  = 0;
@@ -987,55 +1049,106 @@ void pauseMenu_updateClock(PauseMenu* self) {
             self->target_hour               = 0;
         }
     }
+
+    /**
+     * Update the digital clock text with the new time values
+     */
     pauseMenu_updateDigitalClockDisplay(self);
     (*textbox_setMessagePtr)(self->digital_clock_textbox, self->digital_clock_text, NULL, 0);
     self->digital_clock_textbox->flags |= MFDS_FLAG_UPDATE_STRING;
 }
 
+/**
+ * Returns 0 if the selected item can be used. Otherwise returns -1
+ */
 s32 pauseMenu_checkIfItemCanBeUsed(PauseMenu* self) {
     ItemUseSettings* temp_a0;
     s32 item_amount;
-    s32 temp_a0_2;
-    s32 temp_a2_2;
+    s32 temp1;
+    s32 curable_statuses;
 
-    item_amount = sys.SaveStruct_gameplay.items.array[self->selected_item_ID - 1];
+    /**
+     * Don't use the item if the player doesn't have any amount of it
+     */
+    item_amount = sys.SaveStruct_gameplay.items.array[self->selected_item - 1];
     if (item_amount <= 0) {
         return -1;
     }
-    self->item_use_settings_array_entry = getItemUseArrayEntry(self->selected_item_ID);
+
+    /**
+     * Get the item usage parameters for the selected item.
+     * If the entry is invalid (-1), don't use the item
+     */
+    self->item_use_settings_array_entry = getItemUseArrayEntry(self->selected_item);
     self->player_status_to_remove =
         item_use_settings_array[self->item_use_settings_array_entry].player_status_to_remove;
-    temp_a0_2 = self->item_use_settings_array_entry;
-    self->item_use_settings_amount_to_fill =
+    temp1 = self->item_use_settings_array_entry;
+    self->item_use_settings_target_health =
         item_use_settings_array[self->item_use_settings_array_entry].amount_to_fill;
-    if (temp_a0_2 < 0) {
+    if (temp1 < 0) {
         return -1;
     }
-    if (self->player_status_to_remove & 0x10) {
-        temp_a2_2 = self->player_status_to_remove & 0xE;
-        temp_a0_2 = (temp_a2_2 << 0x19) & sys.SaveStruct_gameplay.player_status;
-        if ((self->selected_item_ID == ITEM_ID_HEALING_KIT) &&
-            ((sys.SaveStruct_gameplay.life < 100) || (temp_a0_2))) {
+
+    /**
+     * If the selected item is a healing item...
+     */
+    if (self->player_status_to_remove & HEALING) {
+        /**
+         * Get the statuses that items can cure (VAMP, POISON and STO in practice),
+         * then check if the player has that status (`temp1`)
+         */
+        curable_statuses = self->player_status_to_remove & 0xE;
+        temp1            = (curable_statuses << 0x19) & sys.SaveStruct_gameplay.player_status;
+
+        /**
+         * If the player doesn't have max health or if it has any of the curable statuses set,
+         * allow the Healing Kit to be used
+         */
+        if ((self->selected_item == ITEM_ID_HEALING_KIT) &&
+            ((sys.SaveStruct_gameplay.life < 100) || (temp1))) {
             return 0;
         }
-        if ((self->item_use_settings_amount_to_fill != 0) &&
+
+        /**
+         * Don't allow the player to use any healing item (except for the Healing Kit)
+         * if under the VAMP status
+         */
+        if ((self->item_use_settings_target_health != 0) &&
             (sys.SaveStruct_gameplay.player_status & PLAYER_FLAG_VAMP)) {
             return -1;
         }
-        if ((temp_a2_2) && (temp_a0_2 == 0)) {
+
+        /**
+         * If the selected item can cure any of the curable statuses, but the player
+         * isn't under any of those statuses,then don't allow the item to be used
+         */
+        if ((curable_statuses) && (temp1 == FALSE)) {
             return -1;
         }
-        if ((sys.SaveStruct_gameplay.life >= 100) &&
-            (self->item_use_settings_amount_to_fill != 0)) {
+
+        /**
+         * Don't use a healing item if the player already has max health
+         */
+        if ((sys.SaveStruct_gameplay.life >= 100) && (self->item_use_settings_target_health != 0)) {
             return -1;
         }
-    } else if (self->player_status_to_remove & 1) {
-        if ((self->item_use_settings_amount_to_fill == sys.SaveStruct_gameplay.hour) &&
+        /**
+     * If the selected item is a Sun or Moon card...
+     */
+    } else if (self->player_status_to_remove & TIME_CARD) {
+        /**
+         * Don't allow using a card if we're already in the target hour o'clock
+         */
+        if ((self->item_use_settings_target_hour == sys.SaveStruct_gameplay.hour) &&
             (sys.SaveStruct_gameplay.minute == 0) && (sys.SaveStruct_gameplay.seconds == 0)) {
             return -1;
         }
     } else {
         return -1;
     }
+
+    /**
+     * Allow the item to be used
+     */
     return 0;
 }

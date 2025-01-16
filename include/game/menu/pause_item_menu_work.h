@@ -38,7 +38,7 @@ typedef struct PauseItemMenuWork {
     ItemCursol* item_cursol;
     u8 field_0x30[4];
     scroll_state* scroll;
-    s32 selected_item_ID_in_item_list;
+    s32 selected_item_in_item_list;
 } PauseItemMenuWork;
 
 #endif
