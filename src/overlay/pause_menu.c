@@ -1062,7 +1062,6 @@ void pauseMenu_updateClock(PauseMenu* self) {
  * Returns 0 if the selected item can be used. Otherwise returns -1
  */
 s32 pauseMenu_checkIfItemCanBeUsed(PauseMenu* self) {
-    ItemUseSettings* temp_a0;
     s32 item_amount;
     s32 temp1;
     s32 curable_statuses;
