@@ -256,6 +256,10 @@ typedef struct MfdsNumberWork {
 typedef union MfdsStateMiscTextIds {
     /**
      * Used for displaying some menu-related strings
+     *
+     * @note When using this field to know what string to display,
+     * it won't be necessary to manually set the message pointer,
+     * so we can call `textbox_setMessagePtr` with passing a NULL string pointer.
      */
     u8 menu_text_ID;
     /**

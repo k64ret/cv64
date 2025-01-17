@@ -112,8 +112,8 @@ typedef struct PauseMenu {
     MfdsState* item_description;
     s8 outside_item_selected_menu;
     /**
-     * Similar to `outside_item_selected_menu`? Although this field doesn't seem to be read.
-     * Set to `TRUE` when entering the menu, and to `FALSE` when viewing an item.
+     * Set to `TRUE` when entering the menu, and to `FALSE` when viewing an item
+     * (right after its model is created). This field doesn't seem to be read.
      */
     u8 field_0x51;
     s8 option_selection_inside_selected_item;
@@ -128,10 +128,11 @@ typedef struct PauseMenu {
     DigitalClock* digital_clock_text;
     s8 target_health; // After using a health item
     s8 target_hour;   // After using a Moon / Sun card
-    union {
-        s8 item_use_settings_target_health;
-        s8 item_use_settings_target_hour;
-    };
+    /**
+     * Either the target health or target hour (depending on the item)
+     * obtained from `item_use_settings_array`
+     */
+    s8 item_use_settings_target_value;
     /**
      * This is a bitmaks value that represents what are the effects the
      * selected item should do when used. The format in bits is as follows:
