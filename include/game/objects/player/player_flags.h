@@ -52,7 +52,7 @@ typedef enum cv64_player_flag {
     /**
      * Unused
      */
-    PLAYER_FLAG_STO                   = BIT(22),
+    PLAYER_FLAG_STO                   = BIT(26),
     PLAYER_FLAG_VAMP                  = BIT(27),
     PLAYER_FLAG_POISON                = BIT(28),
     PLAYER_FLAG_TIRED                 = BIT(29),

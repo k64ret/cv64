@@ -666,7 +666,8 @@ void pauseMenu_calcItemSelectedMenu(PauseMenu* self) {
                                 .amount_to_fill;
                         if (self->item_use_settings_array_entry >= 0) {
                             if ((self->player_status_to_remove & HEALING) &&
-                                ((temp2 = ((self->player_status_to_remove & 0xE) << 0x19) &
+                                ((temp2 =
+                                      CURABLE_STATUS_TO_PLAYER_FLAG(self->player_status_to_remove) &
                                       sys.SaveStruct_gameplay.player_status,
                                   ((sys.SaveStruct_gameplay.life < 100))) ||
                                  (temp2))) {
@@ -681,14 +682,15 @@ void pauseMenu_calcItemSelectedMenu(PauseMenu* self) {
                                         );
                                     }
                                 }
-                                if ((self->player_status_to_remove & 4) &&
+                                if ((self->player_status_to_remove &
+                                     CURABLE_FLAG_TO_PLAYER_FLAG(PLAYER_FLAG_VAMP)) &&
                                     (sys.SaveStruct_gameplay.player_status & PLAYER_FLAG_VAMP)) {
                                     sys.SaveStruct_gameplay.flags |=
                                         SAVE_FLAG_VAMP_CURED_USING_PURIFYING;
                                 }
                                 (*HUDParams_FillPlayerHealth)(
                                     self->item_use_settings_target_health,
-                                    (self->player_status_to_remove & 0xE) << 0x19,
+                                    CURABLE_STATUS_TO_PLAYER_FLAG(self->player_status_to_remove),
                                     FALSE
                                 );
                                 self->target_health = self->item_use_settings_target_health +
@@ -1096,8 +1098,9 @@ s32 pauseMenu_checkIfItemCanBeUsed(PauseMenu* self) {
          * Get the statuses that items can cure (VAMP, POISON and STO in practice),
          * then check if the player has that status (`temp1`)
          */
-        curable_statuses = self->player_status_to_remove & 0xE;
-        temp1            = (curable_statuses << 0x19) & sys.SaveStruct_gameplay.player_status;
+        curable_statuses = MASK_CURABLE_STATUSES(self->player_status_to_remove);
+        temp1            = MASKED_CURABLE_STATUS_TO_PLAYER_FLAG(curable_statuses) &
+            sys.SaveStruct_gameplay.player_status;
 
         /**
          * If the player doesn't have max health or if it has any of the curable statuses set,

@@ -4,6 +4,7 @@
 #include "objects/menu/gameplayMenuMgr.h"
 #include "objects/camera/modelLighting.h"
 #include "menu/pause_item_menu_work.h"
+#include "objects/player/player_flags.h"
 #include "gfx/light.h"
 #include "item.h"
 
@@ -17,13 +18,34 @@
 #define TIME_CARD 1
 
 /**
- * Player status to remove when using an item from `item_use_settings_array`.
+ * Turns raw player flag values into a mask that can be used with
+ * PauseMenu's `player_status_to_remove` field to check the statuses
+ */
+#define CURABLE_FLAG_TO_PLAYER_FLAG(value) ((value) >> 0x19)
+/**
+ * Player status to remove when using a healing item from `item_use_settings_array`.
  * If the argument is set to 0, the game won't remove any status.
  *
  * @note Because of the way the checks are setup, only the VAMP, POISON and STO statuses
  *       can be removed from items in the pause menu.
  */
-#define PLAYER_STATUS_TO_REMOVE(player_status) (((player_status) >> 0x19) | HEALING)
+#define PLAYER_STATUS_TO_REMOVE(player_status)                                                     \
+    (CURABLE_FLAG_TO_PLAYER_FLAG(player_status) | HEALING)
+/**
+ * Given the value from PauseMenu's `player_status_to_remove` field, this macro checks if any of the
+ * curable statuses are set in said field
+ */
+#define MASK_CURABLE_STATUSES(value)                                                               \
+    ((value) & CURABLE_FLAG_TO_PLAYER_FLAG(PLAYER_FLAG_POISON | PLAYER_FLAG_VAMP | PLAYER_FLAG_STO))
+/**
+ * Turns a mask into a raw player flag value
+ */
+#define MASKED_CURABLE_STATUS_TO_PLAYER_FLAG(value) ((value) << 0x19)
+/**
+ * Converts a curable status from PauseMenu's `player_status_to_remove` field into a raw player flag
+ */
+#define CURABLE_STATUS_TO_PLAYER_FLAG(value)                                                       \
+    (MASKED_CURABLE_STATUS_TO_PLAYER_FLAG(MASK_CURABLE_STATUSES(value)))
 
 typedef enum PauseMenuMainOptions {
     PAUSE_MENU_ITEM   = 1,
@@ -99,6 +121,16 @@ typedef struct PauseMenu {
         s8 item_use_settings_target_health;
         s8 item_use_settings_target_hour;
     };
+    /**
+     * This is a bitmaks value that represents what are the effects the
+     * selected item should do when used. The format in bits is as follows:
+     * XXXABBBC
+     *
+     * - A: If this is set (and not C), the selected item is a healing item, which will cure the status specified by B
+     * - BBB: These bits represent a combination of three statuses to cure: POISON, VAMP and STO, respectively
+     * - C: If this is set (and not A), the selected item is a time card
+     * - X: Ignored
+     */
     s8 player_status_to_remove;
     gameplayMenuMgr* gameplay_menu_mgr;
     u8 field_0x70[2];
