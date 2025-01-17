@@ -54,6 +54,17 @@ typedef enum PauseMenuMainOptions {
     PAUSE_MENU_BACK   = 4
 } PauseMenuMainOptions;
 
+typedef enum PauseMenuQuitMiniScrollStates {
+    PAUSE_QUIT_STATE_CREATE_SCROLL,
+    PAUSE_QUIT_STATE_WAIT_FOR_SCROLL_INIT,
+    PAUSE_QUIT_STATE_CREATE_TEXTBOX,
+    PAUSE_QUIT_STATE_OPEN_SCROLL,
+    PAUSE_QUIT_STATE_IDLE,
+    PAUSE_QUIT_STATE_QUIT_GAME,
+    PAUSE_QUIT_STATE_CLOSE_QUIT_SUBMENU,
+    PAUSE_QUIT_STATE_DESTROY_SCROLL
+} PauseMenuQuitMiniScrollStates;
+
 typedef struct ItemUseSettings {
     u8 item;
     /**
@@ -124,9 +135,10 @@ typedef struct PauseMenu {
     /**
      * This is a bitmaks value that represents what are the effects the
      * selected item should do when used. The format in bits is as follows:
+     *
      * XXXABBBC
      *
-     * - A: If this is set (and not C), the selected item is a healing item, which will cure the status specified by B
+     * - A: If this is set (and not C), the selected item is a healing item, which will cure the status specified by BBB
      * - BBB: These bits represent a combination of three statuses to cure: POISON, VAMP and STO, respectively
      * - C: If this is set (and not A), the selected item is a time card
      * - X: Ignored

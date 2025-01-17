@@ -745,96 +745,119 @@ void pauseMenu_calcQuitMenu(PauseMenu* self) {
     MfdsState* textbox;
     gameplayMenuMgr* gameplay_menu_mgr;
     MfdsState* options_textbox;
-    ModelUnk68* temp_s0;
+    MiniScrollParameters* mini_scroll_params;
     miniScroll* mini_scroll;
 
     scroll_background_model = self->scroll_background_model;
     options_textbox         = self->options_textbox;
-    temp_s0                 = &scroll_background_model->field_0x68;
+    mini_scroll_params      = &scroll_background_model->mini_scroll_params;
 
-    switch (temp_s0->field_0x00) {
-        case 0:
-            mini_scroll         = (*miniScroll_create)(self, self->scrolls_borders_light, 0, 0);
-            temp_s0->field_0x0C = mini_scroll;
-            (*miniScroll_setPosition)(temp_s0->field_0x0C, -6.0f, 26.0f, 100.0f);
-            (*miniScroll_setWidth)(temp_s0->field_0x0C, 0.7f, 0.36f, 1.0f);
-            (*miniScroll_setScrollingParams)(temp_s0->field_0x0C, 50.0f, 1);
-            (*miniScroll_setState)(temp_s0->field_0x0C, MINISCROLL_STATE_OPEN);
-            temp_s0->field_0x00++;
+    switch (mini_scroll_params->state) {
+        /**
+         * Create the Quit submenu scroll
+         */
+        case PAUSE_QUIT_STATE_CREATE_SCROLL:
+            mini_scroll = (*miniScroll_create)(self, self->scrolls_borders_light, 0, 0);
+            mini_scroll_params->scroll = mini_scroll;
+            (*miniScroll_setPosition)(mini_scroll_params->scroll, -6.0f, 26.0f, 100.0f);
+            (*miniScroll_setWidth)(mini_scroll_params->scroll, 0.7f, 0.36f, 1.0f);
+            (*miniScroll_setScrollingParams)(mini_scroll_params->scroll, 50.0f, 1);
+            (*miniScroll_setState)(mini_scroll_params->scroll, MINISCROLL_STATE_OPEN);
+            mini_scroll_params->state++;
             break;
 
-        case 1:
-            temp_s0->field_0x08++;
-            if (temp_s0->field_0x08 >= 5) {
-                temp_s0->field_0x08 = 0;
-                temp_s0->field_0x00++;
+        /**
+         * Wait 5 frames for the scroll to initialize
+         */
+        case PAUSE_QUIT_STATE_WAIT_FOR_SCROLL_INIT:
+            mini_scroll_params->scroll_init_delay_timer++;
+            if (mini_scroll_params->scroll_init_delay_timer >= 5) {
+                mini_scroll_params->scroll_init_delay_timer = 0;
+                mini_scroll_params->state++;
                 break;
             }
             break;
 
-        case 2:
+        /**
+         * Create and setup the submenu's textbox
+         */
+        case PAUSE_QUIT_STATE_CREATE_TEXTBOX:
             textbox = (*textbox_create)(
                 self,
                 self->scrolls_borders_light,
                 MFDS_FLAG_OPEN_TEXTBOX | MFDS_FLAG_ALLOW_VARIABLE_SPEED
             );
-            temp_s0->field_0x10 = textbox;
+            mini_scroll_params->textbox = textbox;
             (*textbox_setDimensions)(textbox, 3, 128, 0, 0);
             (*textbox_setScaleParameters)(
-                temp_s0->field_0x10, 2, 2, 101.0f, 0.8f, 0.8f, FALSE, FALSE
+                mini_scroll_params->textbox, 2, 2, 101.0f, 0.8f, 0.8f, FALSE, FALSE
             );
             (*textbox_setMessagePtr)(
-                temp_s0->field_0x10,
+                mini_scroll_params->textbox,
                 GET_UNMAPPED_ADDRESS(NI_OVL_PAUSE_MENU, &confirmation_text),
                 NULL,
                 0
             );
-            (*textbox_setPos)(temp_s0->field_0x10, 104, 103, 0);
-            temp_s0->field_0x00++;
+            (*textbox_setPos)(mini_scroll_params->textbox, 104, 103, 0);
+            mini_scroll_params->state++;
             break;
 
-        case 3:
-            if ((*miniScroll_checkFlags)(temp_s0->field_0x0C, MINISCROLL_FLAG_OPENED)) {
+        case PAUSE_QUIT_STATE_OPEN_SCROLL:
+            if ((*miniScroll_checkFlags)(mini_scroll_params->scroll, MINISCROLL_FLAG_OPENED)) {
                 options_textbox->flags |= MINISCROLL_FLAG_CLOSED;
-                temp_s0->field_0x00++;
+                mini_scroll_params->state++;
                 break;
             }
             break;
 
-        case 4:
-            if (temp_s0->field_0x10->textbox_option != TEXTBOX_OPTION_IDLE) {
-                (*miniScroll_setState)(temp_s0->field_0x0C, MINISCROLL_STATE_CLOSE);
-                temp_s0->field_0x10->flags |= MFDS_FLAG_CLOSE_TEXTBOX;
-                switch (temp_s0->field_0x10->textbox_option - 1) {
+        case PAUSE_QUIT_STATE_IDLE:
+            if (mini_scroll_params->textbox->textbox_option != TEXTBOX_OPTION_IDLE) {
+                /**
+                 * After selecting an option, close the scroll and determine what to do next
+                 */
+                (*miniScroll_setState)(mini_scroll_params->scroll, MINISCROLL_STATE_CLOSE);
+                mini_scroll_params->textbox->flags |= MFDS_FLAG_CLOSE_TEXTBOX;
+                switch (mini_scroll_params->textbox->textbox_option - 1) {
+                    // Yes
                     case 0:
-                        temp_s0->field_0x00 = 5;
+                        mini_scroll_params->state = PAUSE_QUIT_STATE_QUIT_GAME;
                         break;
+
+                    // No
                     case 1:
-                        temp_s0->field_0x00 = 6;
+                        mini_scroll_params->state = PAUSE_QUIT_STATE_CLOSE_QUIT_SUBMENU;
                         break;
                 }
             }
             break;
 
-        case 5:
-            scroll_background_model = scroll_background_model;
+        /**
+         * Go back to the Konami / KCEK logo screen
+         */
+        case PAUSE_QUIT_STATE_QUIT_GAME:
             gameplay_menu_mgr =
                 (gameplayMenuMgr*) (*objectList_findFirstObjectByID)(MENU_GAMEPLAY_MENUMGR);
             if (gameplay_menu_mgr != NULL) {
                 gameplay_menu_mgr->menu_state |= QUIT_GAME;
             }
-            textbox = temp_s0->field_0x10;
+
+            textbox = mini_scroll_params->textbox;
             textbox->flags |= MFDS_FLAG_CLOSE_TEXTBOX;
+
             self->main_menu_options_scroll->flags = SCROLL_STATE_FLAG_HIDE;
             (*Fade_SetSettings)(FADE_OUT, 15, 0, 0, 0);
             (*player_status_init)();
-            temp_s0->field_0x04 = PAUSE_MENU_DESTROY;
-            temp_s0->field_0x00 = 7;
+
+            mini_scroll_params->after_quit_state = PAUSE_MENU_DESTROY;
+            mini_scroll_params->state            = PAUSE_QUIT_STATE_DESTROY_SCROLL;
             break;
 
-        case 6:
-            temp_s0->field_0x04 = PAUSE_MENU_CALC_MAIN_MENU;
-            textbox             = (*textbox_create)(
+        /**
+         * Close the Quit submenu and go back to the main menu
+         */
+        case PAUSE_QUIT_STATE_CLOSE_QUIT_SUBMENU:
+            mini_scroll_params->after_quit_state = PAUSE_MENU_CALC_MAIN_MENU;
+            textbox                              = (*textbox_create)(
                 self,
                 self->scrolls_borders_light,
                 MFDS_FLAG_OPEN_TEXTBOX | MFDS_FLAG_ALLOW_VARIABLE_SPEED |
@@ -853,16 +876,19 @@ void pauseMenu_calcQuitMenu(PauseMenu* self) {
             (*textbox_setMessagePtr)(
                 options_textbox, GET_UNMAPPED_ADDRESS(NI_OVL_PAUSE_MENU, &options_text), NULL, 0
             );
-            temp_s0->field_0x00 = 7;
+            mini_scroll_params->state = PAUSE_QUIT_STATE_DESTROY_SCROLL;
             break;
 
-        case 7:
-            if ((*miniScroll_checkFlags)(temp_s0->field_0x0C, MINISCROLL_FLAG_CLOSED)) {
-                (*miniScroll_editFlags)(temp_s0->field_0x0C, MINISCROLL_STATE_DESTROY, -1);
+        /**
+         * Destroy the scroll and switch the pause menu state to what was set in `after_quit_state`
+         */
+        case PAUSE_QUIT_STATE_DESTROY_SCROLL:
+            if ((*miniScroll_checkFlags)(mini_scroll_params->scroll, MINISCROLL_FLAG_CLOSED)) {
+                (*miniScroll_editFlags)(mini_scroll_params->scroll, MINISCROLL_STATE_DESTROY, -1);
                 (*object_curLevel_goToFunc)(
                     self->header.current_function,
                     &self->header.function_info_ID,
-                    temp_s0->field_0x04
+                    mini_scroll_params->after_quit_state
                 );
             }
             break;
