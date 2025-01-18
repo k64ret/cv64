@@ -1,7 +1,10 @@
 /**
  * @file pause_menu.c
  *
- * This file contains the code that handles the Pause menu (officially known as "Status")
+ * This file contains the code that handles the Pause menu (officially known as "Status").
+ *
+ * @note Some parts of the pause menu are controlled by other entities
+ *       (for example, the `scroll` handles part of the item selection logic).
  */
 
 #include "objects/menu/pause_menu.h"
@@ -32,6 +35,10 @@ u16 selection_arrow_character[] = {
 #include "objects/menu/pause_menu_arrow_selection_char.msg"
 };
 
+/**
+ * This array holds what items can be used in the item menu, and what effects they
+ * do to the player
+ */
 ItemUseSettings item_use_settings_array[] = {
     {ITEM_ID_HEALING_KIT, PLAYER_STATUS_TO_REMOVE(PLAYER_FLAG_POISON | PLAYER_FLAG_VAMP), 100},
     {ITEM_ID_ROAST_BEEF, PLAYER_STATUS_TO_REMOVE(0), 80},
@@ -92,7 +99,7 @@ void pauseMenu_init(PauseMenu* self) {
     s32 scroll_bg_model_type;
     MfdsState* textbox;
     Model* model;
-    s32 temp2[2];
+    s32 temp[2];
     gameplayMenuMgr* gameplay_menu_mgr;
 
     /**
@@ -286,7 +293,7 @@ void pauseMenu_createMainMenu(PauseMenu* self) {
         scroll->width.z = 0.44999999f;
         scroll->flags &= ~SCROLL_STATE_FLAG_CLOSING;
         scroll->flags |= SCROLL_STATE_FLAG_OPENING;
-        self->main_menu_options_scroll = scroll;
+        self->options_scroll = scroll;
 
         textbox = (*textbox_create)(
             self,
@@ -312,21 +319,20 @@ void pauseMenu_createMainMenu(PauseMenu* self) {
 
 void pauseMenu_calcMainMenu(PauseMenu* self) {
     s32 temp[2];
-    scroll_state* main_menu_options_scroll;
+    scroll_state* options_scroll;
     MfdsState* options_textbox;
     gameplayMenuMgr* gameplay_menu_mgr;
     Model* scroll_background_model;
     s32 textbox_option;
 
-    options_textbox          = self->options_textbox;
-    main_menu_options_scroll = self->main_menu_options_scroll;
+    options_textbox = self->options_textbox;
+    options_scroll  = self->options_scroll;
 
     /**
      * Exit back to gameplay after pressing B
      * (wait until the scroll is opened before being able to back out)
      */
-    if (CONT_BTNS_PRESSED(CONT_0, CONT_B) &&
-        (main_menu_options_scroll->flags & SCROLL_STATE_FLAG_OPENED)) {
+    if (CONT_BTNS_PRESSED(CONT_0, CONT_B) && (options_scroll->flags & SCROLL_STATE_FLAG_OPENED)) {
         gameplay_menu_mgr =
             (gameplayMenuMgr*) (*objectList_findFirstObjectByID)(MENU_GAMEPLAY_MENUMGR);
         if (gameplay_menu_mgr != NULL) {
@@ -335,7 +341,7 @@ void pauseMenu_calcMainMenu(PauseMenu* self) {
 
         (*Fade_SetSettings)(FADE_OUT, 15, 0, 0, 0);
         options_textbox->flags |= MFDS_FLAG_CLOSE_TEXTBOX;
-        self->main_menu_options_scroll->flags = SCROLL_STATE_FLAG_HIDE;
+        self->options_scroll->flags = SCROLL_STATE_FLAG_HIDE;
         (*object_curLevel_goToFunc)(
             self->header.current_function, &self->header.function_info_ID, PAUSE_MENU_DESTROY
         );
@@ -353,7 +359,7 @@ void pauseMenu_calcMainMenu(PauseMenu* self) {
          */
         case PAUSE_MENU_ITEM:
             options_textbox->flags |= MFDS_FLAG_CLOSE_TEXTBOX;
-            self->main_menu_options_scroll->flags = SCROLL_STATE_FLAG_HIDE;
+            self->options_scroll->flags = SCROLL_STATE_FLAG_HIDE;
             (*object_curLevel_goToNextFuncAndClearTimer)(
                 self->header.current_function, &self->header.function_info_ID
             );
@@ -371,7 +377,7 @@ void pauseMenu_calcMainMenu(PauseMenu* self) {
 
             (*Fade_SetSettings)(FADE_OUT, 15, 0, 0, 0);
             options_textbox->flags |= MFDS_FLAG_CLOSE_TEXTBOX;
-            self->main_menu_options_scroll->flags = SCROLL_STATE_FLAG_HIDE;
+            self->options_scroll->flags = SCROLL_STATE_FLAG_HIDE;
             (*object_curLevel_goToFunc)(
                 self->header.current_function, &self->header.function_info_ID, PAUSE_MENU_DESTROY
             );
@@ -403,7 +409,7 @@ void pauseMenu_calcMainMenu(PauseMenu* self) {
             }
 
             options_textbox->flags |= MFDS_FLAG_CLOSE_TEXTBOX;
-            self->main_menu_options_scroll->flags = SCROLL_STATE_FLAG_HIDE;
+            self->options_scroll->flags = SCROLL_STATE_FLAG_HIDE;
             (*Fade_SetSettings)(FADE_OUT, 15, 0, 0, 0);
             (*object_curLevel_goToFunc)(
                 self->header.current_function, &self->header.function_info_ID, PAUSE_MENU_DESTROY
@@ -579,24 +585,24 @@ void pauseMenu_calcItemSelectedMenu(PauseMenu* self) {
     MfdsState* selection_arrow_textbox;
     scroll_state* item_model_scroll;
     scroll_state* options_text_scroll;
-    scroll_state* description_text_scroll;
+    scroll_state* item_description_scroll;
     Model* item_model;
     MfdsState* item_description;
     s32 item_amount;
-    s32 temp2;
+    s32 temp;
 
     selection_arrow_textbox = self->selection_arrow_textbox;
     item_model_scroll       = self->item_model_scroll;
     options_text_scroll     = self->options_text_scroll;
-    description_text_scroll = self->description_text_scroll;
+    item_description_scroll = self->item_description_scroll;
     item_model              = self->item_model;
-    temp2                   = pauseMenu_checkIfItemCanBeUsed(self);
+    temp                    = pauseMenu_checkIfItemCanBeUsed(self);
     options_textbox         = self->options_textbox;
 
     /**
      * If the selected item cannot be used, assign the "Cannot use item" text.
      */
-    if (temp2) {
+    if (temp) {
         (*textbox_setMessagePtr)(
             options_textbox,
             GET_UNMAPPED_ADDRESS(NI_OVL_PAUSE_MENU, (*text_getMessageFromPool)(item_usage_text, 1)),
@@ -618,9 +624,9 @@ void pauseMenu_calcItemSelectedMenu(PauseMenu* self) {
         (*textbox_setPos)(options_textbox, 165, 100, 1);
     }
     // Display the options text set above
-    if (temp2 != self->selected_item_can_be_used) {
+    if (temp != self->selected_item_can_be_used) {
         options_textbox->flags |= MFDS_FLAG_UPDATE_STRING;
-        self->selected_item_can_be_used = temp2;
+        self->selected_item_can_be_used = temp;
     }
 
     if (options_text_scroll->flags & SCROLL_STATE_FLAG_OPENED) {
@@ -632,10 +638,10 @@ void pauseMenu_calcItemSelectedMenu(PauseMenu* self) {
         if (self->outside_item_selected_menu) {
             if (!(item_model_scroll->flags & SCROLL_STATE_FLAG_CLOSING) &&
                 !(options_text_scroll->flags & SCROLL_STATE_FLAG_CLOSING) &&
-                !(description_text_scroll->flags & SCROLL_STATE_FLAG_CLOSING)) {
+                !(item_description_scroll->flags & SCROLL_STATE_FLAG_CLOSING)) {
                 item_model_scroll->flags       = SCROLL_STATE_FLAG_HIDE;
                 options_text_scroll->flags     = SCROLL_STATE_FLAG_HIDE;
-                description_text_scroll->flags = SCROLL_STATE_FLAG_HIDE;
+                item_description_scroll->flags = SCROLL_STATE_FLAG_HIDE;
                 item_description->flags |= MFDS_FLAG_CLOSE_TEXTBOX;
                 self->options_textbox->flags |= MFDS_FLAG_CLOSE_TEXTBOX;
                 selection_arrow_textbox->flags |= MFDS_FLAG_CLOSE_TEXTBOX;
@@ -670,7 +676,7 @@ void pauseMenu_calcItemSelectedMenu(PauseMenu* self) {
                      * Update the clock advancing if requested (i.e. if `target_hour` != 0)
                      *
                      * @note Due to the `!= 0` check, time cards cannot be used to advance the time
-                     *       to 0:00 AM
+                     *       to 0:00
                      */
                     if (self->target_hour != 0) {
                         pauseMenu_updateClock(self);
@@ -686,7 +692,7 @@ void pauseMenu_calcItemSelectedMenu(PauseMenu* self) {
                 /**
                  * Move the selection cursor between the Yes / No options
                  */
-                if (temp2 == 0) {
+                if (temp == 0) {
                     if ((*moveSelectionCursor)(U_JPAD)) {
                         self->delay_before_being_able_to_select_option = 4;
                         self->option_selection_inside_selected_item++;
@@ -727,8 +733,8 @@ void pauseMenu_calcItemSelectedMenu(PauseMenu* self) {
                         item_model_scroll->flags |= SCROLL_STATE_FLAG_CLOSING;
                         options_text_scroll->flags &= ~SCROLL_STATE_FLAG_OPENING;
                         options_text_scroll->flags |= SCROLL_STATE_FLAG_CLOSING;
-                        description_text_scroll->flags &= ~SCROLL_STATE_FLAG_OPENING;
-                        description_text_scroll->flags |= SCROLL_STATE_FLAG_CLOSING;
+                        item_description_scroll->flags &= ~SCROLL_STATE_FLAG_OPENING;
+                        item_description_scroll->flags |= SCROLL_STATE_FLAG_CLOSING;
                         (*figure_destroySelfAndChildren_2)(item_model, 0);
                         self->outside_item_selected_menu = TRUE;
                         return;
@@ -747,29 +753,28 @@ void pauseMenu_calcItemSelectedMenu(PauseMenu* self) {
                         self->target_hour   = 0;
                         self->item_use_settings_array_entry =
                             getItemUseArrayEntry(self->selected_item);
-                        self->player_status_to_remove =
+                        self->item_effect =
                             item_use_settings_array[self->item_use_settings_array_entry]
-                                .player_status_to_remove;
+                                .item_effect;
                         self->item_use_settings_target_value =
                             item_use_settings_array[self->item_use_settings_array_entry]
-                                .amount_to_fill;
+                                .target_value;
 
                         if (self->item_use_settings_array_entry >= 0) {
                             /**
                              * If the selected item is a healing item, and we don't have max health
                              * or we have a status that can be cured, proceed to healing
                              */
-                            if ((self->player_status_to_remove & HEALING) &&
-                                ((temp2 =
-                                      CURABLE_STATUS_TO_PLAYER_FLAG(self->player_status_to_remove) &
+                            if ((self->item_effect & HEALING) &&
+                                ((temp = CURABLE_STATUS_TO_PLAYER_FLAG(self->item_effect) &
                                       sys.SaveStruct_gameplay.player_status,
                                   ((sys.SaveStruct_gameplay.life < 100))) ||
-                                 (temp2))) {
+                                 (temp))) {
 
                                 /**
                                  * Play the health recovered voice clip when curing a status
                                  */
-                                if (temp2) {
+                                if (temp) {
                                     if (sys.SaveStruct_gameplay.character == REINHARDT) {
                                         (*prepareSoundForPlay_defaultSettings)(
                                             SD_REINHARDT_HEALTH_RECOVERY
@@ -785,7 +790,7 @@ void pauseMenu_calcItemSelectedMenu(PauseMenu* self) {
                                  * Set the `SAVE_FLAG_VAMP_CURED_USING_ITEM` save flag when curing
                                  * the VAMP status
                                  */
-                                if ((self->player_status_to_remove &
+                                if ((self->item_effect &
                                      CURABLE_FLAG_TO_PLAYER_FLAG(PLAYER_FLAG_VAMP)) &&
                                     (sys.SaveStruct_gameplay.player_status & PLAYER_FLAG_VAMP)) {
                                     sys.SaveStruct_gameplay.flags |=
@@ -797,7 +802,7 @@ void pauseMenu_calcItemSelectedMenu(PauseMenu* self) {
                                  */
                                 (*HUDParams_FillPlayerHealth)(
                                     self->item_use_settings_target_value,
-                                    CURABLE_STATUS_TO_PLAYER_FLAG(self->player_status_to_remove),
+                                    CURABLE_STATUS_TO_PLAYER_FLAG(self->item_effect),
                                     FALSE
                                 );
 
@@ -816,13 +821,13 @@ void pauseMenu_calcItemSelectedMenu(PauseMenu* self) {
                             /**
                              * If using an time card...
                              */
-                            if ((self->player_status_to_remove & TIME_CARD) &&
+                            if ((self->item_effect & TIME_CARD) &&
                                 ((self->item_use_settings_target_value !=
                                   sys.SaveStruct_gameplay.hour) ||
                                  (sys.SaveStruct_gameplay.minute != 0) ||
                                  (sys.SaveStruct_gameplay.seconds != 0))) {
                                 /**
-                                 * Play the clock ticking sound and request the clock to begin aadvancing
+                                 * Play the clock ticking sound and request the clock to begin advancing
                                  */
                                 (*play_sound)(SD_CLOCK_TICKING);
                                 self->target_hour = self->item_use_settings_target_value;
@@ -842,8 +847,8 @@ void pauseMenu_calcItemSelectedMenu(PauseMenu* self) {
                     item_model_scroll->flags |= SCROLL_STATE_FLAG_CLOSING;
                     options_text_scroll->flags &= ~SCROLL_STATE_FLAG_OPENING;
                     options_text_scroll->flags |= SCROLL_STATE_FLAG_CLOSING;
-                    description_text_scroll->flags &= ~SCROLL_STATE_FLAG_OPENING;
-                    description_text_scroll->flags |= SCROLL_STATE_FLAG_CLOSING;
+                    item_description_scroll->flags &= ~SCROLL_STATE_FLAG_OPENING;
+                    item_description_scroll->flags |= SCROLL_STATE_FLAG_CLOSING;
                     (*figure_destroySelfAndChildren_2)(item_model, 0);
                     self->outside_item_selected_menu = TRUE;
                 }
@@ -969,7 +974,7 @@ void pauseMenu_calcQuitMenu(PauseMenu* self) {
             textbox = mini_scroll_params->textbox;
             textbox->flags |= MFDS_FLAG_CLOSE_TEXTBOX;
 
-            self->main_menu_options_scroll->flags = SCROLL_STATE_FLAG_HIDE;
+            self->options_scroll->flags = SCROLL_STATE_FLAG_HIDE;
             (*Fade_SetSettings)(FADE_OUT, 15, 0, 0, 0);
             (*player_status_init)();
 
@@ -1130,7 +1135,7 @@ void pauseMenu_createItemDescription(PauseMenu* self) {
     scroll->width.z = 0.33f;
     scroll->flags &= ~SCROLL_STATE_FLAG_CLOSING;
     scroll->flags |= SCROLL_STATE_FLAG_OPENING;
-    self->description_text_scroll = scroll;
+    self->item_description_scroll = scroll;
 
     /**
      * Create and setup the item description textbox
@@ -1216,8 +1221,8 @@ void pauseMenu_updateClock(PauseMenu* self) {
  */
 s32 pauseMenu_checkIfItemCanBeUsed(PauseMenu* self) {
     s32 item_amount;
-    s32 temp1;
     s32 curable_statuses;
+    s32 temp;
 
     /**
      * Don't use the item if the player doesn't have any amount of it
@@ -1232,25 +1237,24 @@ s32 pauseMenu_checkIfItemCanBeUsed(PauseMenu* self) {
      * If the entry is invalid (-1), don't use the item
      */
     self->item_use_settings_array_entry = getItemUseArrayEntry(self->selected_item);
-    self->player_status_to_remove =
-        item_use_settings_array[self->item_use_settings_array_entry].player_status_to_remove;
-    temp1 = self->item_use_settings_array_entry;
+    self->item_effect = item_use_settings_array[self->item_use_settings_array_entry].item_effect;
+    temp              = self->item_use_settings_array_entry;
     self->item_use_settings_target_value =
-        item_use_settings_array[self->item_use_settings_array_entry].amount_to_fill;
-    if (temp1 < 0) {
+        item_use_settings_array[self->item_use_settings_array_entry].target_value;
+    if (temp < 0) {
         return -1;
     }
 
     /**
      * If the selected item is a healing item...
      */
-    if (self->player_status_to_remove & HEALING) {
+    if (self->item_effect & HEALING) {
         /**
          * Get the statuses that items can cure (VAMP, POISON and STO in practice),
-         * then check if the player has that status (`temp1`)
+         * then check if the player has that status (`temp`)
          */
-        curable_statuses = MASK_CURABLE_STATUSES(self->player_status_to_remove);
-        temp1            = MASKED_CURABLE_STATUS_TO_PLAYER_FLAG(curable_statuses) &
+        curable_statuses = MASK_CURABLE_STATUSES(self->item_effect);
+        temp             = MASKED_CURABLE_STATUS_TO_PLAYER_FLAG(curable_statuses) &
             sys.SaveStruct_gameplay.player_status;
 
         /**
@@ -1258,7 +1262,7 @@ s32 pauseMenu_checkIfItemCanBeUsed(PauseMenu* self) {
          * allow the Healing Kit to be used
          */
         if ((self->selected_item == ITEM_ID_HEALING_KIT) &&
-            ((sys.SaveStruct_gameplay.life < 100) || (temp1))) {
+            ((sys.SaveStruct_gameplay.life < 100) || (temp))) {
             return 0;
         }
 
@@ -1275,7 +1279,7 @@ s32 pauseMenu_checkIfItemCanBeUsed(PauseMenu* self) {
          * If the selected item can cure any of the curable statuses, but the player
          * isn't under any of those statuses,then don't allow the item to be used
          */
-        if ((curable_statuses) && (temp1 == FALSE)) {
+        if ((curable_statuses) && (temp == FALSE)) {
             return -1;
         }
 
@@ -1288,7 +1292,7 @@ s32 pauseMenu_checkIfItemCanBeUsed(PauseMenu* self) {
         /**
      * If the selected item is a Sun or Moon card...
      */
-    } else if (self->player_status_to_remove & TIME_CARD) {
+    } else if (self->item_effect & TIME_CARD) {
         /**
          * Don't allow using a card if we're already in the target hour o'clock
          */
