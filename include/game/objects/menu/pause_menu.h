@@ -68,7 +68,7 @@ typedef enum PauseMenuQuitMiniScrollStates {
 typedef struct ItemUseSettings {
     u8 item;
     /**
-     * See PauseMenu's `time_effect` field
+     * See PauseMenu's `item_effect` field
      */
     u8 item_effect;
     /**
