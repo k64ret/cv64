@@ -669,7 +669,7 @@ void pauseMenu_calcItemSelectedMenu(PauseMenu* self) {
                     /**
                      * Update the clock advancing if requested (i.e. if `target_hour` != 0)
                      *
-                     * @note Due to the `!= 0` check, time cards cannot be used to advance the item
+                     * @note Due to the `!= 0` check, time cards cannot be used to advance the time
                      *       to 0:00 AM
                      */
                     if (self->target_hour != 0) {
