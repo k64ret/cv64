@@ -14,6 +14,7 @@ assets/*
 !assets/yml/**
 build/
 perm/
+scratch/
 
 # Ignored filetypes
 .make_options

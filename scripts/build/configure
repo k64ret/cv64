@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+#MISE description="Create the build system, and generate assembly and binaries"
+#MISE alias="c"
+#MISE depends=["build:clean"]
+
+#USAGE flag "--compress" negate="--no-compress" default="true" help="Skip compressing ROM and sha1sum check"
+#USAGE arg "<build_system>" default="Ninja" help="CMake build system strategy" {
+#USAGE   choices "Ninja" "Unix Makefiles"
+#USAGE }
+
+cmake -S . -B build -G "${usage_build_system:-Ninja}" -Dcompress="${usage_compress:-TRUE}"

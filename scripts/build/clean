@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+#MISE description="Remove all CMake files, assembly, and binaries"
+#MISE alias="cl"
 
 # Remove uncompressed ROM
 rm -f baserom_uncompressed.z64
