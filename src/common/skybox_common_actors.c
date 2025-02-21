@@ -58,7 +58,7 @@ u32* obj8015C368_dlists[] = {
     NULL
 };
 
-obj0172_func_t obj0172_functions[] = {
+obj0172Funcs obj0172_functions[] = {
     obj0172_init,
     obj0172_loop
 };
@@ -90,11 +90,13 @@ void obj0172_init(object_0172* self) {
     s32 temp;
     Model* model;
 
-    model       = Model_createAndSetChild(FIG_TYPE_0400 | FIG_TYPE_HIERARCHY_NODE, map_lights[0]);
+    model = Model_createAndSetChild(
+        FIG_TYPE_ALLOW_TRANSPARENCY_CHANGE | FIG_TYPE_HIERARCHY_NODE, map_lights[0]
+    );
     self->model = model;
     if (model) {
     }
-    actor_model_set_pos_and_angle(self, model);
+    Actor_SetPosAndAngle(self, model);
     model->assets_file = MAP_ASSETS_FILE_ID;
     model->dlist       = obj0172_dlists[sys.SaveStruct_gameplay.map];
     BITS_SET(model->flags, FIG_FLAG_APPLY_PRIMITIVE_COLOR);
@@ -126,11 +128,13 @@ void commonMoon_init(commonMoon* self) {
     s32 temp2;
     s32 temp3;
 
-    model       = Model_createAndSetChild(FIG_TYPE_0400 | FIG_TYPE_HIERARCHY_NODE, map_lights[0]);
+    model = Model_createAndSetChild(
+        FIG_TYPE_ALLOW_TRANSPARENCY_CHANGE | FIG_TYPE_HIERARCHY_NODE, map_lights[0]
+    );
     self->model = model;
     if (model) {
     }
-    actor_model_set_pos_and_angle(self, model);
+    Actor_SetPosAndAngle(self, model);
     model->assets_file = MAP_ASSETS_FILE_ID;
     model->dlist       = commonMoon_dlists[sys.SaveStruct_gameplay.map];
     BITS_SET(model->flags, FIG_FLAG_APPLY_PRIMITIVE_COLOR);
@@ -252,11 +256,13 @@ void obj8015C368_init(object_8015C368* self) {
     ActorConfig* settings = self->settings;
     Model* model;
 
-    model       = Model_createAndSetChild(FIG_TYPE_0400 | FIG_TYPE_HIERARCHY_NODE, map_lights[0]);
+    model = Model_createAndSetChild(
+        FIG_TYPE_ALLOW_TRANSPARENCY_CHANGE | FIG_TYPE_HIERARCHY_NODE, map_lights[0]
+    );
     self->model = model;
     if (model) {
     }
-    actor_model_set_pos_and_angle(self, model);
+    Actor_SetPosAndAngle(self, model);
     model->assets_file = MAP_ASSETS_FILE_ID;
     model->dlist = obj8015C368_dlists[sys.SaveStruct_gameplay.map][settings->variable_1 & 0xFF];
     BITS_SET(model->flags, FIG_FLAG_APPLY_PRIMITIVE_COLOR);

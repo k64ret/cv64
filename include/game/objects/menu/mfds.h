@@ -5,7 +5,6 @@
  * This header file contains structs that handle textboxes.
  */
 
-#include "cv64.h"
 #include "gfx/camera.h"
 #include "gfx/model.h"
 #include "gfx/graphic_container.h"
@@ -19,7 +18,10 @@
  */
 #define ASCII_TO_CV64(ascii) (ascii - 0x1E)
 
-// Special control characters
+// Special characters
+#define PIXEL_HUD_0 0x68
+
+// Control characters
 #define CTRL_SET_COLOR(arg) (0xA200 | (arg & 0xFF))
 
 #define TEXT_COLOR_WHITE 0
@@ -77,6 +79,7 @@ typedef enum MfdsStateFlag {
      */
     MFDS_FLAG_DISPLAY_LENS                    = BIT(6),
     MFDS_FLAG_ALLOC_TEXTBOX_IN_MENU_DATA_HEAP = BIT(14),
+    MFDS_FLAG_8000                            = BIT(15),
     MFDS_FLAG_GAMEPLAYMENUMGR_TEXTBOX         = BIT(16),
     /**
      * Leaves a small space on the left of the text for the red selection arrow
@@ -89,21 +92,34 @@ typedef enum MfdsStateFlag {
     /**
      * Allow updating the scale parameters from `MfdsState` struct
      */
-    MFDS_FLAG_UPDATE_SCALE         = BIT(19),
-    MFDS_FLAG_SLOW_TEXT_TRANSITION = BIT(20),
-    MFDS_FLAG_FAST_TEXT_TRANSITION = BIT(21),
-    MFDS_FLAG_400000               = BIT(22),
+    MFDS_FLAG_UPDATE_SCALE = BIT(19),
     /**
-     * Fastest speed. It also auto skips the text red advance arrow. There doesn't seem to be a
-     * valid 0x400000 flag.
+     * Forces the text speed to be 0
      */
-    MFDS_FLAG_INSTANT_TEXT_TRANSITION = (BIT(21) | BIT(22)),
-    MFDS_FLAG_UPDATE_STRING           = BIT(24),
-    MFDS_FLAG_2000000                 = BIT(25),
-    MFDS_FLAG_CLOSE_TEXTBOX           = BIT(26),
-    MFDS_FLAG_OPEN_TEXTBOX            = BIT(27),
-    MFDS_FLAG_CLOSE_LENS              = BIT(28),
-    MFDS_FLAG_OPEN_LENS               = BIT(29),
+    MFDS_FLAG_SLOW_TEXT_SPEED = BIT(20),
+    /**
+     * Allows the game to set the text speed from the `text_speed` field from `MfdsWork`.
+     * Sets the text speed to 1 by default
+     */
+    MFDS_FLAG_ALLOW_VARIABLE_SPEED = BIT(21),
+    /**
+     * Forces the text speed to be 16. `MFDS_FLAG_ALLOW_VARIABLE_SPEED`
+     * needs to be set in order for this flag to function properly.
+     *
+     * Setting this flag will also make the red textbox advance arrow to be automatically skipped.
+     */
+    MFDS_FLAG_FAST_TEXT_SPEED = BIT(22),
+    /**
+     * When set, the game will skip to the next string that should be printed.
+     * This is often used to advance text during cutscenes
+     */
+    MFDS_FLAG_AUTO_SKIP_TEXT = BIT(23),
+    MFDS_FLAG_UPDATE_STRING  = BIT(24),
+    MFDS_FLAG_2000000        = BIT(25),
+    MFDS_FLAG_CLOSE_TEXTBOX  = BIT(26),
+    MFDS_FLAG_OPEN_TEXTBOX   = BIT(27),
+    MFDS_FLAG_CLOSE_LENS     = BIT(28),
+    MFDS_FLAG_OPEN_LENS      = BIT(29),
     /**
      * The text is completely processed
      */
@@ -130,6 +146,12 @@ typedef enum MfdsStateNumberVisualFlag {
     NUMBER_VISUAL_FLAG_ADD_G_AFTER_NUMBER = BIT(5)
 } MfdsStateNumberVisualFlag;
 
+typedef enum MfdsWorkArrowState {
+    NOT_DISPLAYING_TEXTBOX_ARROW = 0,
+    DISPLAYING_TEXTBOX_ARROW     = 1,
+    TEXTBOX_ARROW_AUTO_ADVANCING = 2
+} MfdsWorkArrowState;
+
 typedef struct MfdsColorAnimData {
     u16 color;
     u16 time;
@@ -149,21 +171,30 @@ typedef struct MfdsColorAnimationState {
 // Real name: `mfds_work`
 typedef struct MfdsWork {
     u16* parsed_text_ptr;
-    u8 field_0x04[2];
+    s8 text_speed;
+    u8 field_0x05;
     s16 indentation;
-    s16 field_0x08;
+    /**
+     * For the current printing character, the first byte is the Y pos offset,
+     * and the second byte is the X pos offset
+     */
+    s16 Y_and_X_pos_offsets;
     /**
      * Timer for when a line is scrolling up to view the rest of the text
      */
     u8 scroll_timer;
     u8 palette;
-    u8 field_0x0C[2];
+    /**
+     * Index in the `MfdsTexBuffer` entries array
+     */
+    s8 current_tex_buffer_entry;
+    s8 textbox_advance_arrow_state;
     s16 time_until_auto_advance_textbox;
     u8 flags;
     u8 field_0x11;
-    Vec2 position;
-    Vec2 field_0x16;
-    u8 field_0x1A;
+    Vec2 current_position;
+    Vec2 initial_position;
+    u8 left_margin;
     u8 num_options;
     u8 current_option;
     u8 field_0x1D;
@@ -174,9 +205,21 @@ typedef struct MfdsWork {
     MfdsColorAnimationState* color_anim_state;
 } MfdsWork;
 
+typedef struct MfdsTexBufferEntry {
+    u8 field_0x00;
+    u8 field_0x01;
+    u16 text_char;
+    s16 field_0x04;
+    u8 field_0x06;
+    u8 field_0x07;
+    u8 field_0x08;
+    u8 char_tex_buffer[128]; // Raw pixels for the text char
+    u8 field_0x89;
+} MfdsTexBufferEntry;
+
 // Real name: `mfds_tex_buffer`
 typedef struct MfdsTexBuffer {
-    u16 field_0x00[5][69];
+    MfdsTexBufferEntry entries[5];
 } MfdsTexBuffer;
 
 typedef struct MfdsLtexBufferEntry {
@@ -213,6 +256,10 @@ typedef struct MfdsNumberWork {
 typedef union MfdsStateMiscTextIds {
     /**
      * Used for displaying some menu-related strings
+     *
+     * @note When using this field to know what string to display,
+     * it won't be necessary to manually set the message pointer,
+     * so we can call `textbox_setMessagePtr` with passing a NULL string pointer.
      */
     u8 menu_text_ID;
     /**
@@ -244,7 +291,7 @@ typedef struct MfdsState {
     u8 line;
     u8 field_0x31;
     u8 character_spacing;
-    u8 field_0x33;
+    u8 left_margin;
     u8 palette;
     MfdsStateMiscTextIds misc_text_IDs[5];
     u8 number_visual_flags;
@@ -268,12 +315,12 @@ typedef struct ObjMfds {
     u16 field_0x20;
     u16 field_0x22;
     u8 field_0x24[4];
-    Model* model;
+    struct Model* model;
     u8 field_0x2C[8];
     GraphicContainerHeader* mfds_double; // Real name
     void* field_0x38;
     void* field_0x3C;
-    TextboxAdvanceArrow* advance_arrow;
+    struct TextboxAdvanceArrow* advance_arrow;
     void* field_0x44;
     void* field_0x48;
     void* field_0x4C;
@@ -314,7 +361,7 @@ text_convertSignedIntegerToText(u32 number, u16* dest, u8 number_of_chars, u32 n
 extern u16* text_findCharInString(u16* text, u16 char_to_find);
 extern u16* convertUTF16ToCustomTextFormat(u16* text_buffer);
 extern void textbox_setHeightAndWidth(MfdsState* self, u32 index, u8 text_height, u8 text_width);
-extern MfdsState* map_getMessageFromPool(u16 text_ID, u8 textbox_display_time);
+extern MfdsState* gameplayCommonTextbox_getMapMessage(u16 text_ID, u8 textbox_display_time);
 
 extern MfdsColorAnimData text_color_anim_data_table[4][8];
 

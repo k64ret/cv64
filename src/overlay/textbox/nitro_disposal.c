@@ -5,6 +5,7 @@
  */
 
 #include "objects/cutscene/nitro_disposal_textbox.h"
+#include "objects/menu/gameplayMenuMgr.h"
 #include "system_work.h"
 
 // clang-format off
@@ -90,7 +91,7 @@ void cv64_ovl_nitrodisposaltxt_prepare_msg(cv64_ovl_nitrodisposaltxt_t* self) {
         self->text_ID = self->has_nitro_text_ID;
     }
 
-    message = (*map_getMessageFromPool)(self->text_ID, 0);
+    message = (*gameplayCommonTextbox_getMapMessage)(self->text_ID, 0);
     if (message == NULL)
         return;
 
@@ -127,7 +128,7 @@ void cv64_ovl_nitrodisposaltxt_yes_no(cv64_ovl_nitrodisposaltxt_t* self) {
 void cv64_ovl_nitrodisposaltxt_close(cv64_ovl_nitrodisposaltxt_t* self) {
     self->text_ID = 0;
 
-    if (!(*lensAreClosed)())
+    if (!(*gameplayCommonTextbox_lensAreClosed)())
         return;
 
     self->header.timer                  = 0;

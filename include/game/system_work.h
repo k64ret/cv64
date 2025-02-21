@@ -3,7 +3,9 @@
 
 #include "controller.h"
 #include "fade.h"
+#include "gfx/figure.h"
 #include "gfx/color.h"
+#include "gfx/misc.h"
 #include "actor.h"
 #include "math.h"
 #include "nisitenma_ichigo.h"
@@ -14,6 +16,17 @@
 #include "objects/camera/cameraMgr.h"
 #include "objects/cutscene/interactables.h"
 #include <ultra64.h>
+
+#define NUM_CHARACTERS 2
+/**
+ * Originally there were going to be two additional
+ * playable characteres: Cornell and Coller.
+ *
+ * `characterSelect_create` still sets the number of characters to 4,
+ * but the `difficulty_and_character_select` overlay has hardcoded checks
+ * to prevent more than 2 character slots to be selected.
+ */
+#define NUM_CHARACTERS_EARLY 4
 
 #define MAP_ASSETS_FILE_ID    sys.map_assets_file_IDs[0]
 #define ITEM_ASSETS_FILE_ID   sys.map_assets_file_IDs[1]
@@ -63,7 +76,7 @@ typedef struct {
     u16 fog_distance_near;
     u16 fog_distance_far;
     /**
-     * See figure_update
+     * See Figure_Update
      */
     s32 field16_0x2402c;
     Mat4f* field17_0x24030;

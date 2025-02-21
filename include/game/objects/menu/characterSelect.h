@@ -7,17 +7,7 @@
 #include "objects/menu/mark.h"
 #include "objects/menu/scroll.h"
 #include "objects/menu/miniScroll.h"
-
-#define NUM_CHARACTERS 2
-/**
- * Originally there were going to be two additional
- * playable characteres: Cornell and Coller.
- *
- * `characterSelect_create` still sets the number of characters to 4,
- * but the `difficulty_and_character_select` overlay has hardcoded checks
- * to prevent more than 2 character slots to be selected.
- */
-#define NUM_CHARACTERS_EARLY 4
+#include "system_work.h"
 
 /**
  * In early versions of the game, it was possible for character slots

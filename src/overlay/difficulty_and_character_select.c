@@ -57,13 +57,13 @@ void difficultySelect_loop(characterSelect* self) {
         return;
     }
     switch (self->inner.difficulty_select_state) {
-        // Create the scroll
+        // Create the scroll and open it
         case CREATE_SCROLL:
-            mini_scroll        = (*createMiniScroll)(self, NULL, 0, 0);
+            mini_scroll        = (*miniScroll_create)(self, NULL, 0, 0);
             inner->mini_scroll = mini_scroll;
             (*miniScroll_setPosition)(inner->mini_scroll, 0.0f, 53.0f, 80.0f);
             (*miniScroll_setWidth)(inner->mini_scroll, 1.1599999666214f, 0.689999997615814f, 1.0f);
-            (*miniScroll_setFlags)(inner->mini_scroll, MINISCROLL_FLAG_00000001);
+            (*miniScroll_setState)(inner->mini_scroll, MINISCROLL_STATE_OPEN);
             if (BITS_HAS(sys.SaveStruct_gameplay.flags, SAVE_FLAG_HARD_MODE_UNLOCKED)) {
                 inner->difficulty_select_state = CREATE_TEXT_HARD_MODE;
             } else {
@@ -75,7 +75,8 @@ void difficultySelect_loop(characterSelect* self) {
             difficulty_text = (*textbox_create)(
                 self,
                 common_camera_HUD,
-                (MFDS_FLAG_OPEN_TEXTBOX | MFDS_FLAG_400000 | MFDS_FLAG_FAST_TEXT_TRANSITION)
+                (MFDS_FLAG_OPEN_TEXTBOX | MFDS_FLAG_FAST_TEXT_SPEED | MFDS_FLAG_ALLOW_VARIABLE_SPEED
+                )
             );
             inner->difficulty_text = difficulty_text;
             (*textbox_setDimensions)(inner->difficulty_text, 5, 128, 0, 0);
@@ -98,7 +99,8 @@ void difficultySelect_loop(characterSelect* self) {
             difficulty_text = (*textbox_create)(
                 self,
                 common_camera_HUD,
-                (MFDS_FLAG_OPEN_TEXTBOX | MFDS_FLAG_400000 | MFDS_FLAG_FAST_TEXT_TRANSITION)
+                (MFDS_FLAG_OPEN_TEXTBOX | MFDS_FLAG_FAST_TEXT_SPEED | MFDS_FLAG_ALLOW_VARIABLE_SPEED
+                )
             );
             inner->difficulty_text = difficulty_text;
             (*textbox_setDimensions)(inner->difficulty_text, 5, 128, 0, 0);
@@ -118,7 +120,7 @@ void difficultySelect_loop(characterSelect* self) {
             break;
         // Wait until scroll is opened
         case WAIT_UNTIL_SCROLL_IS_OPENED:
-            if ((*miniScroll_checkFlags)(inner->mini_scroll, MINISCROLL_FLAG_08000000)) {
+            if ((*miniScroll_checkFlags)(inner->mini_scroll, MINISCROLL_FLAG_OPENED)) {
                 inner->difficulty_select_state++;
             }
             break;
@@ -151,9 +153,7 @@ void difficultySelect_loop(characterSelect* self) {
             break;
         // Exit to the character selection screen
         case EXIT:
-            (*miniScroll_setFlags)(
-                inner->mini_scroll, MINISCROLL_FLAG_00000004 | MINISCROLL_FLAG_00000001
-            );
+            (*miniScroll_setState)(inner->mini_scroll, MINISCROLL_STATE_DESTROY);
             BITS_SET(inner->difficulty_text->flags, MFDS_FLAG_CLOSE_TEXTBOX);
             inner->difficulty_select_state = CREATE_SCROLL;
             inner->difficulty_text         = NULL;
@@ -186,7 +186,7 @@ void characterSelect_init(characterSelect* self) {
 
     // Create Reinhardt's portrait
     character_portrait = (*Model_createAndSetChild)(
-        FIG_TYPE_0400 | FIG_TYPE_HUD_ELEMENT, work->scroll_elements_light
+        FIG_TYPE_ALLOW_TRANSPARENCY_CHANGE | FIG_TYPE_HUD_ELEMENT, work->scroll_elements_light
     );
     self->character_portraits[REINHARDT] = character_portrait;
     character_portrait->material_dlist   = &REINHARDT_PORTRAIT_MATERIAL_DL;
@@ -209,8 +209,9 @@ void characterSelect_init(characterSelect* self) {
     }
 
     // Create Carrie's portrait
-    character_portrait =
-        (*Model_createAndSetChild)(FIG_TYPE_0400 | FIG_TYPE_HUD_ELEMENT, character_portrait);
+    character_portrait = (*Model_createAndSetChild)(
+        FIG_TYPE_ALLOW_TRANSPARENCY_CHANGE | FIG_TYPE_HUD_ELEMENT, character_portrait
+    );
     self->character_portraits[CARRIE]  = character_portrait;
     character_portrait->material_dlist = &CARRIE_PORTRAIT_MATERIAL_DL;
     character_portrait->dlist = FIG_APPLY_VARIABLE_TEXTURE_AND_PALETTE((u32) &CARRIE_PORTRAIT_DL);
@@ -254,7 +255,7 @@ void characterSelect_init(characterSelect* self) {
     character_name = (*textbox_create)(
         self,
         work->scroll_elements_light,
-        MFDS_FLAG_OPEN_TEXTBOX | MFDS_FLAG_400000 | MFDS_FLAG_FAST_TEXT_TRANSITION |
+        MFDS_FLAG_OPEN_TEXTBOX | MFDS_FLAG_FAST_TEXT_SPEED | MFDS_FLAG_ALLOW_VARIABLE_SPEED |
             MFDS_FLAG_ALLOC_TEXTBOX_IN_MENU_DATA_HEAP | MFDS_FLAG_00000008 |
             MFDS_FLAG_MENU_TEXT_ID_PRINTS_MENU_STRING
     );
@@ -274,7 +275,7 @@ void characterSelect_init(characterSelect* self) {
     character_name = (*textbox_create)(
         self,
         work->scroll_elements_light,
-        MFDS_FLAG_OPEN_TEXTBOX | MFDS_FLAG_400000 | MFDS_FLAG_FAST_TEXT_TRANSITION |
+        MFDS_FLAG_OPEN_TEXTBOX | MFDS_FLAG_FAST_TEXT_SPEED | MFDS_FLAG_ALLOW_VARIABLE_SPEED |
             MFDS_FLAG_ALLOC_TEXTBOX_IN_MENU_DATA_HEAP | MFDS_FLAG_00000008 |
             MFDS_FLAG_MENU_TEXT_ID_PRINTS_MENU_STRING
     );

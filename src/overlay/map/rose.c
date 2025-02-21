@@ -55,11 +55,11 @@ void cv64_ovl_rose_ventilator_init(cv64_ovl_rose_ventilator_t* self) {
         BITS_SET(model->flags, FIG_FLAG_APPLY_PRIMITIVE_COLOR | FIG_FLAG_APPLY_FOG_COLOR);
         model->primitive_color.integer = sys.primitive_color.integer;
         model->fog_color.integer       = sys.background_color.integer;
-        (*Model_setMapActorModel)(model, &ROSE_VENTILATOR_DL);
+        (*Model_setMapActorModelNoCollision)(model, &ROSE_VENTILATOR_DL);
         speed_settings->current_speed = speed_settings->max_speed =
             BITS_MASK((*rand)(), 0xFFF) + 16;
         speed_settings->time_until_changing_max_speed = BITS_MASK((*rand)(), 0x1FF) + 30;
-        (*actor_model_set_pos_and_angle)(self, model);
+        (*Actor_SetPosAndAngle)(self, model);
         (*object_curLevel_goToNextFuncAndClearTimer)(
             self->header.current_function, &self->header.function_info_ID
         );
@@ -121,7 +121,7 @@ void cv64_ovl_rose_door_init(cv64_ovl_rose_door_t* self) {
     Model* model = (*Model_createAndSetChild)(FIG_TYPE_STANDALONE, map_lights[0]);
 
     self->model = model;
-    (*actor_model_set_pos_and_angle)(self, model);
+    (*Actor_SetPosAndAngle)(self, model);
     model->assets_file = MAP_ASSETS_FILE_ID;
     model->dlist       = &ROSE_DOOR_DL;
     BITS_SET(model->flags, FIG_FLAG_APPLY_PRIMITIVE_COLOR | FIG_FLAG_APPLY_FOG_COLOR);

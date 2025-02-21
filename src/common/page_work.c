@@ -1,13 +1,13 @@
 /**
  * @file page_work.c
  *
- * Contains the creation function for the `page_work` struct,
+ * Contains the creation function for the `PageWork` struct,
  * which stores data related to the `page` object.
  */
 
 #include "objects/menu/page.h"
 
-page_work* pageWork_create(
+PageWork* pageWork_create(
     ObjectHeader* parent,
     FigureLight* page_light,
     u8 flags,
@@ -17,12 +17,12 @@ page_work* pageWork_create(
     u8 flip_anim_keyframe,
     f32 anim_speed
 ) {
-    page_work* work;
-    page* page_obj;
+    PageWork* work;
+    Page* page_obj;
 
-    page_obj = (page*) (*object_create)(parent, MENU_PAGE);
+    page_obj = (Page*) (*object_create)(parent, MENU_PAGE);
     if (page_obj != NULL) {
-        (*allocStructInObjectEntryList)("page_work", page_obj, sizeof(page_work), 15);
+        (*allocStructInObjectEntryList)("page_work", page_obj, sizeof(PageWork), 15);
         work = page_obj->work;
         if (work != NULL) {
             work->page_light         = page_light;

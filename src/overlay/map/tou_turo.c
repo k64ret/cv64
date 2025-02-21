@@ -14,24 +14,31 @@
 #include "gfx/light.h"
 #include <ultra64.h>
 
-// cv64_ovl_touturo_door_func_t cv64_ovl_touturo_door_funcs[] =
-// {cv64_ovl_touturo_door_init,
-//                                                       cv64_ovl_touturo_door_loop};
-extern cv64_ovl_touturo_door_func_t cv64_ovl_touturo_door_funcs[];
+// clang-format off
 
-// const u32 cv64_ovl_touturo_door_dlists[] = {TOUTURO_DOOR_EXIT_DL,
-//                                   TOUTURO_DOOR_ENTRANCE_DL};
-extern const u32 cv64_ovl_touturo_door_dlists[];
+cv64_ovl_touturo_door_func_t cv64_ovl_touturo_door_funcs[] = {
+    cv64_ovl_touturo_door_init,
+    cv64_ovl_touturo_door_loop
+};
 
-// cv64_ovl_touturo_door_exit_func_t cv64_ovl_touturo_door_exit_funcs[] = {
-//     cv64_ovl_touturo_door_exit_check_event_flags, func_801578FC};
-extern cv64_ovl_touturo_door_exit_func_t cv64_ovl_touturo_door_exit_funcs[];
+// TODO: `extern const u32` for the dlists
+u32 cv64_ovl_touturo_door_dlists[] = {
+    0x0600A300, // TOUTURO_DOOR_EXIT_DL
+    0x0600AB00  // TOUTURO_DOOR_ENTRANCE_DL
+};
 
-// cv64_ovl_touturo_door_entrance_func_t cv64_ovl_touturo_door_entrance_funcs[]
-// = {
-//     cv64_ovl_touturo_door_entrance_check_event_flags,
-//     cv64_ovl_touturo_door_entrance_close_door, func_801578FC};
-extern cv64_ovl_touturo_door_entrance_func_t cv64_ovl_touturo_door_entrance_funcs[];
+cv64_ovl_touturo_door_exit_func_t cv64_ovl_touturo_door_exit_funcs[] = {
+    cv64_ovl_touturo_door_exit_check_event_flags,
+    StageProp_Loop
+};
+
+cv64_ovl_touturo_door_entrance_func_t cv64_ovl_touturo_door_entrance_funcs[] = {
+    cv64_ovl_touturo_door_entrance_check_event_flags,
+    cv64_ovl_touturo_door_entrance_close_door,
+    StageProp_Loop
+};
+
+// clang-format on
 
 const char cv64_ovl_touturo_unused_str[] = "ERROR P27TOBIRA : EFFECT SPAWN ERROR\n";
 
@@ -52,7 +59,7 @@ void cv64_ovl_touturo_door_init(cv64_ovl_touturo_door_t* self) {
     if (model) {
     } // Needed for matching
 
-    actor_model_set_pos_and_angle(self, model);
+    Actor_SetPosAndAngle(self, model);
     BITS_SET(model->flags, FIG_FLAG_APPLY_PRIMITIVE_COLOR | FIG_FLAG_APPLY_FOG_COLOR);
 
     model->assets_file = MAP_ASSETS_FILE_ID;
@@ -115,7 +122,7 @@ void cv64_ovl_touturo_door_entrance_check_event_flags(cv64_ovl_touturo_door_t* s
         )) {
         model->position.y = 6.0f;
         (*object_curLevel_goToFunc)(
-            self->header.current_function, &self->header.function_info_ID, TOU_TURO_FUNC_801578FC
+            self->header.current_function, &self->header.function_info_ID, TOU_TURO_STAGE_PROP_LOOP
         );
     } else {
         SET_EVENT_FLAGS(EVENT_FLAG_ID_MISC_STAGES, EVENT_FLAG_MISC_STAGES_ENTERED_ROOM_OF_CLOCKS);
@@ -128,7 +135,7 @@ void cv64_ovl_touturo_door_entrance_check_event_flags(cv64_ovl_touturo_door_t* s
 void cv64_ovl_touturo_door_entrance_close_door(cv64_ovl_touturo_door_t* self) {
     s16 i;
     f32 rand_Z_pos;
-    cv64_effect_t* effect;
+    Effect* effect;
     Model* model = self->model;
 
     model->position.y -=
@@ -142,7 +149,7 @@ void cv64_ovl_touturo_door_entrance_close_door(cv64_ovl_touturo_door_t* self) {
         for (i = 0; i < 6; i++) {
             rand_Z_pos = ((*rand_f32)() * 40.0f) - 20.0f;
 
-            effect = (*createEffectObjectUnderEffectMgr)(EFFECT_ID_1, NULL, 0);
+            effect = (*createEffectObjectUnderEffectMgr)(EFFECT_ID_01, NULL, 0);
 
             if (effect != NULL) {
                 (*effect_setMaxFrameSpeed)(effect, 3);

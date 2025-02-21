@@ -4,11 +4,11 @@
 #include "object.h"
 
 // ID: 0x20B7
-typedef struct {
+typedef struct DemonDraculaAssetsLoader {
     ObjectHeader header;
     u8 field_0x20[OBJECT_SIZE - 0x20];
-} demonDraculaAssetsLoader;
+} DemonDraculaAssetsLoader;
 
-void demonDraculaAssetsLoader_entrypoint(demonDraculaAssetsLoader* self);
+void DemonDraculaAssetsLoader_entrypoint(DemonDraculaAssetsLoader* self);
 
 #endif

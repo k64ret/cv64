@@ -7,20 +7,20 @@
 #include "window.h"
 
 // ID: 0x0128
-typedef struct {
+typedef struct ObjLens {
     ObjectHeader header;
     u8 field_0x20[4];
-    Model* model;
-    Model* lower_left_corner;
-    Model* upper_right_corner;
-    Model* lower_right_corner;
-    Model* upper_stripe;
-    Model* left_stripe;
-    Model* right_stripe;
-    Model* lower_stripe;
-    Model* lens_flash; // The flash seen in the upper right corner
-    Model* lens_background;
-    Model* lens_background_overlay; // Overlay color for the lens background
+    struct Model* model;
+    struct Model* lower_left_corner;
+    struct Model* upper_right_corner;
+    struct Model* lower_right_corner;
+    struct Model* upper_stripe;
+    struct Model* left_stripe;
+    struct Model* right_stripe;
+    struct Model* lower_stripe;
+    struct Model* lens_flash; // The flash seen in the upper right corner
+    struct Model* lens_background;
+    struct Model* lens_background_overlay; // Overlay color for the lens background
     void* field_0x50;
     void* field_0x54;
     void* field_0x58;
@@ -43,7 +43,5 @@ extern WindowWork* lens_create(
     f32 width,
     f32 closing_speed
 );
-
-extern u32 lensAreClosed(void);
 
 #endif

@@ -3,7 +3,7 @@
 
 // Textbox / option selection background window
 
-#include "cv64.h"
+#include "bit.h"
 #include "gfx/camera.h"
 #include "struct_78.h"
 #include <ultra64.h>

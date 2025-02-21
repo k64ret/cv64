@@ -125,10 +125,10 @@ segments:
       - [0x0002FA90, asm]
       - [0x000333F0, asm]
       - [0x00039330, asm]
-      - [0x0003F400, asm]
+      - [0x0003F400, c, enemy_list]
       - [0x0003F870, asm]
       - [0x000407B0, asm]
-      - [0x00041170, asm]
+      - [0x00041170, asm, atari]
       - [0x000451C0, asm]
       - [0x000458C0, asm]
       - [0x00045C80, asm]
@@ -148,7 +148,7 @@ segments:
       - [0x0004C7A0, asm]
       - [0x0004CDE0, asm]
       - [0x0004D470, asm]
-      - [0x0004DB20, asm]
+      - [0x0004DB20, c, effect/fire]
       - [0x0004DEC0, asm]
       - [0x0004F3C0, asm]
       - [0x0004F5E0, asm]
@@ -164,7 +164,7 @@ segments:
       - [0x00055890, asm]
       - [0x00055C90, asm]
       - [0x00055E70, asm]
-      - [0x00056490, asm]
+      - [0x00056490, c, effect/fire_sparkles]
       - [0x000566D0, asm]
       - [0x00056B60, asm]
       - [0x00057050, asm]
@@ -381,6 +381,12 @@ segments:
       - [0x000976C0, .data, debug]
       - [0x000976D0, data, save]
       - [0x00097710, data]
+      - [0x000991D0, .data, enemy_list]
+      - [0x00099200, data, atari]
+      - [0x0009B670, .data, effect/fire]
+      - [0x0009B680, data]
+      - [0x0009B880, .data, effect/fire_sparkles]
+      - [0x0009B8B0, data]
       - [0x0009B8D0, data, 56B60]
       - [0x0009B8E0, data, 57050]
       - [0x0009B900, data, 574C0]
@@ -416,7 +422,7 @@ segments:
       - [0x000A3430, rodata, 12900]
       - [0x000A34A0, rodata, 17A00]
       - [0x000A34F0, rodata, crash_screen_init]
-      - [0x000A3C80, rodata, debug]
+      - [0x000A3C80, .rodata, debug]
       - [0x000A3CA0, rodata, save]
       - [0x000A3D10, rodata]
       - [0x000A41E0, rodata]
@@ -477,8 +483,10 @@ segments:
       # - { start: 0x000A8420, type: bss, vram: 0x800D5E60, name: dma }
       - { start: 0x000A8420, type: bss, vram: 0x800D5F20, name: 19630 }
       - { start: 0x000A8420, type: bss, vram: 0x800D5F40, name: crash_screen_init }
-      - { start: 0x000A8420, type: bss, vram: 0x800D7120, name: debug }
+      - { start: 0x000A8420, type: .bss, vram: 0x800D7120, name: debug }
       - { start: 0x000A8420, type: bss, vram: 0x800D7150, name: controller_pak }
+      - { start: 0x000A8420, type: .bss, vram: 0x800D7FC0, name: enemy_list }
+      - { start: 0x000A8420, type: bss, vram: 0x800D8150, name: atari }
       - { start: 0x000A8420, type: .bss, vram: 0x800DD0D0, name: effect_manager }
       - { start: 0x000A8420, type: bss, vram: 0x800DD0E0 }  # Used in `func_80066400`
       - { start: 0x000A8420, type: bss, vram: 0x801229B0, name: libultra/io/motor }
@@ -508,15 +516,15 @@ segments:
       - [0x000AE120, asm, common/textbox_object]
       - [0x000AFD00, asm, common/textbox]
       - [0x000B5720, asm, common/lens]
-      - [0x000B9900, asm, common/gameplay_menu_mgr]
+      - [0x000B9900, c, common/gameplay_menu_mgr]
       - [0x000BA6F0, asm, common/hud]
       - [0x000BC530, c, common/hud_params]  # HUD_params is an struct associated to the HUD object
       - [0x000BC6D0, asm, common/renon_shop]
       - [0x000BDFE0, asm]
       - [0x000BE4B0, c, common/menu_alloc_struct]  # Contains functions for allocating menu-related structs
-      - [0x000BE740, asm, common/gameplay_menu_mgr_textbox]
+      - [0x000BE740, c, common/gameplay_common_textbox]
       - [0x000BEF40, asm, common/item]   # Contains item / inventory handling code, as well as code for handling displaying these
-      - [0x000BFFB0, asm, common/mini_scroll]
+      - [0x000BFFB0, c, common/mini_scroll_setup]
       - [0x000C0120, asm]   # Contains some functions for creating and managing `GameNoteErrorHandler`
       - [0x000C01A0, asm, common/distortion]
       - [0x000C2770, asm]   # Contains object 0x0167's code
@@ -525,8 +533,8 @@ segments:
       - [0x000C65E0, asm, common/options_controller]
       - [0x000C7160, asm, common/file_select]
       - [0x000CB5A0, asm, common/scroll]
-      - [0x000D1A20, asm, common/necronomicon]   # Handles the book seen in the Data screen
-      - [0x000D25F0, asm, common/necro_work]
+      - [0x000D1A20, c, common/necronomicon]   # Handles the book seen in the Data screen
+      - [0x000D25F0, c, common/necro_work]
       - [0x000D26A0, c, common/page]    # Handles a Necronomicon's page
       - [0x000D2A50, c, common/page_work]
       - [0x000D2B10, asm, common/mark]
@@ -549,7 +557,7 @@ segments:
       - [0x000E3290, asm, common/lever]
       - [0x000E3820, asm, common/river_water]   # Contains code for the river water seen in Forest of Silence
       - [0x000E3CA0, asm]
-      - [0x000E41F0, asm]
+      - [0x000E41F0, c, common/object_017C]
       - [0x000E4350, asm]
       - [0x000E4DC0, asm, common/elevator]
       - [0x000E5980, asm]
@@ -567,15 +575,17 @@ segments:
       - [0x000EFAD0, .data, common/stage_select]
       - [0x000EFC70, data]
       - [0x000F0290, data]
-      - [0x00103650, data, common/gameplay_menu_mgr]
+      - [0x00103650, .data, common/gameplay_menu_mgr]
       - [0x00103680, data, common/hud]
       - [0x00103720, data, common/renon_shop]
-      - [0x00103E10, data]
+      - [0x00103E10, .data, common/gameplay_common_textbox]
+      - [0x00103F00, data, common/distortion]
       - [0x001040F0, data]
       - [0x00104190, data]
       - [0x001042A0, data]
       - [0x00104550, data]
       - [0x00104660, data]
+      - [0x00104790, .data, common/necronomicon]
       - [0x001047B0, .data, common/page]
       - [0x001049A0, data]
       - [0x001049C0, data]
@@ -588,6 +598,8 @@ segments:
       - [0x0010A660, data]
       - [0x0010A730, data]
       - [0x0010A800, data]
+      - [0x0010BAD0, .data, common/object_017C]
+      - [0x0010BB60, data]
       - [0x0010D8E0, data]
       - [0x0010D900, data]
       - [0x0010DC60, data]
@@ -603,8 +615,8 @@ segments:
       - [0x0010E650, rodata, common/renon_shop]
       - [0x0010E8A0, rodata]
       - [0x0010E8F0, rodata]
-      - [0x0010EFC0, rodata]
-      - [0x0010EFD0, rodata]
+      - [0x0010EFC0, .rodata, common/necronomicon]
+      - [0x0010EFD0, .rodata, common/necro_work]
       - [0x0010EFE0, .rodata, common/page_work]
       - [0x0010EFF0, rodata]
       - [0x0010F010, rodata]
@@ -622,7 +634,7 @@ segments:
       - [0x0010FA20, rodata]
       - [0x0010FA60, rodata]
       - [0x0010FB60, rodata]
-      - { start: 0x0010FC40, type: bss, vram: 0x8018CA50, name: common/gameplay_menu_mgr }
+      - { start: 0x0010FC40, type: .bss, vram: 0x8018CA50, name: common/gameplay_menu_mgr }
       - { start: 0x0010FC40, type: bss, vram: 0x8018CA60, name: common/file_select }
       - { start: 0x0010FC40, type: bss, vram: 0x8018CA80, name: common/map_manager }
       - { start: 0x0010FC40, type: bss, vram: 0x8018CDF0, name: D6C30 }
@@ -869,8 +881,8 @@ segments:
     vram: 0x8018EB10
     exclusive_ram_id: ovl_map_objects
     subsegments:
-      - [0x006C2F20, asm, overlay/map/bekkan_1f]
-      - [0x006C32E0, data, overlay/map/bekkan_1f]
+      - [0x006C2F20, c, overlay/map/bekkan_1f]
+      - [0x006C32E0, .data, overlay/map/bekkan_1f]
 
   - name: BEKKAN_2F # Annex 2F
     type: code
@@ -1100,7 +1112,7 @@ segments:
     exclusive_ram_id: ovl_map_objects
     subsegments:
       - [0x006F1B80, c, overlay/map/tou_turo]
-      - [0x006F2160, data, overlay/map/tou_turo]
+      - [0x006F2160, .data, overlay/map/tou_turo]
       - [0x006F2190, .rodata, overlay/map/tou_turo]
 
   - name: ENDING # Ending
@@ -1502,7 +1514,7 @@ segments:
     vram: 0x06000000
     exclusive_ram_id: nisitenma_ichigo_assets
 
-  - name: ni_7940E2
+  - name: ni_common_gameplay_effects
     type: bin
     # start: 0x007940E2
     start: 0x0080FA80
@@ -2180,14 +2192,14 @@ segments:
     vram: 0x0F000000
     exclusive_ram_id: nisitenma_ichigo_overlays
 
-  - name: ni_ovl_demonDraculaAssetsLoader
+  - name: ni_ovl_demon_dracula_assets_loader
     type: code
     # start: 0x00AD7B1C
     start: 0x00DA6B60
     vram: 0x0F000000
     exclusive_ram_id: nisitenma_ichigo_overlays
     subsegments:
-      - [0x00DA6B60, c, overlay/demonDraculaAssetsLoader]
+      - [0x00DA6B60, c, overlay/demon_dracula_assets_loader]
 
   - name: ni_AD7B28
     type: bin
@@ -2301,14 +2313,14 @@ segments:
     vram: 0x0F000000
     exclusive_ram_id: nisitenma_ichigo_overlays
 
-  - name: ni_B48BE0
+  - name: ni_gondola_pathway_data_loader
     type: bin
     # start: 0x00B48BE0
     start: 0x00E40A30
     vram: 0x0F000000
     exclusive_ram_id: nisitenma_ichigo_overlays
 
-  - name: ni_ovl_scroll
+  - name: ni_ovl_mini_scroll
     type: bin
     # start: 0x00B4F7DC
     start: 0x00E4DD00
@@ -2372,11 +2384,15 @@ segments:
       - [0x00E557A0, .data, overlay/credits_manager]
 
   - name: ni_ovl_pause_menu
-    type: bin
+    type: code
     # start: 0x00B543C0
     start: 0x00E557B0
     vram: 0x0F000000
     exclusive_ram_id: nisitenma_ichigo_overlays
+    subsegments:
+      - [0x00E557B0, c, overlay/pause_menu]
+      - [0x00E57840, .data, overlay/pause_menu]
+      - [0x00E58780, .rodata, overlay/pause_menu]
 
   - name: ni_ovl_difficulty_and_character_select
     type: code
@@ -2436,11 +2452,15 @@ segments:
     exclusive_ram_id: nisitenma_ichigo_overlays
 
   - name: ni_ovl_entrance_map_name_display
-    type: bin
+    type: code
     # start: 0x00B5ADC8
     start: 0x00E60300
     vram: 0x0F000000
     exclusive_ram_id: nisitenma_ichigo_overlays
+    subsegments:
+      - [0x00E60300, c, overlay/entrance_map_name_display]
+      - [0x00E60A70, .data, overlay/entrance_map_name_display]
+      - [0x00E60DA0, .rodata, overlay/entrance_map_name_display]
 
   - name: ni_B5B5D0
     type: bin

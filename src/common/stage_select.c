@@ -89,7 +89,7 @@ void StageSelect_initGraphics(StageSelect* self) {
         textbox_array[self->text_ID] = (*textbox_create)(
             self,
             common_camera_8009B444,
-            (MFDS_FLAG_OPEN_TEXTBOX | MFDS_FLAG_400000 | MFDS_FLAG_FAST_TEXT_TRANSITION)
+            (MFDS_FLAG_OPEN_TEXTBOX | MFDS_FLAG_FAST_TEXT_SPEED | MFDS_FLAG_ALLOW_VARIABLE_SPEED)
         );
 
         if (textbox_array[self->text_ID] == 0)

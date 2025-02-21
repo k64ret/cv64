@@ -62,6 +62,7 @@ void func_80011880(Vec3f* dest, Vec3f* src, Mat4f* mtx);
 void func_80011914_12514(Vec3f* dest, Vec3f* src, Vec3f* rotation, s32 angle);
 void func_80011984_12584(Vec3f* arg0, Vec3f* arg1, Vec3f* arg2);
 void func_800119F0_125F0(Vec3f* arg0, Vec3f* arg1, Vec3f* arg2, Vec3f* arg3);
+extern void vec3f_substractFloats(f32*, f32*, f32*);
 
 f32 f32_trunc(f32 value);
 f32 f32_simple_round_nearest(f32 value);

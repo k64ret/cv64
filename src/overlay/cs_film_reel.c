@@ -60,8 +60,6 @@ void CSFilmReel_CheckInitialConditions(CSFilmReel* self) {
  * related to `CSFILMREEL_TEXTURE`. Otherwise, the function matches.
  */
 #ifdef NON_MATCHING
-    #pragma GLOBAL_ASM("../asm/nonmatchings/overlay/cs_film_reel/CSFilmReel_Init.s")
-#else
 void CSFilmReel_Init(CSFilmReel* self) {
     CSFilmReelData* data;
     CSFilmReelGraphicContainer* graphic_container;
@@ -149,6 +147,8 @@ void CSFilmReel_Init(CSFilmReel* self) {
         self->header.current_function, &self->header.function_info_ID
     );
 }
+#else
+    #pragma GLOBAL_ASM("../asm/nonmatchings/overlay/cs_film_reel/CSFilmReel_Init.s")
 #endif
 
 void CSFilmReel_Loop(CSFilmReel* self) {

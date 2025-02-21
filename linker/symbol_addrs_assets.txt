@@ -31,6 +31,21 @@ CSFILMREEL_TEXTURE = 0x06000000;  // segment:ni_cs_film_reel rom:0xC6D9B0 define
 CSFILMREEL_DL = 0x06000240;       // segment:ni_cs_film_reel
 CSFILMREEL_MATERIAL_DL = 0x06000258; // segment:ni_cs_film_reel
 
+BEKKAN_1F_SQUARE_DL = 0x0601c2d0;  // segment:NI_ASSETS_BEKKAN_1F
+BEKKAN_1F_CHANDELIER_PENDANT_DL = 0x0601d208;  // segment:NI_ASSETS_BEKKAN_1F
+BEKKAN_1F_CHANDELIER_DECORATION_DL = 0x0601e428;  // segment:NI_ASSETS_BEKKAN_1F
+
+FIRE_DLIST = 0x06031F28;  // segment:ni_common_gameplay_effects
+FIRE_SPARKLES_DLIST = 0x06031E40;  // segment:ni_common_gameplay_effects
+
+PAUSE_SCROLL_BG_MODEL_DL = 0x060060D8;  // segment:ni_pause_menu
+PAUSE_CHARACTER_PORTRAIT_MATERIAL_DL = 0x06011F80;  // segment:ni_pause_menu
+PAUSE_CHARACTER_PORTRAIT_REINHARDT_DL = 0x06013988;  // segment:ni_pause_menu
+PAUSE_CHARACTER_PORTRAIT_CARRIE_DL = 0x06015360;  // segment:ni_pause_menu
+
+NECRO_FULL_MODEL_DL = 0x0600bb38;  // segment:ni_necronomicon_book
+NECRO_BOOK_COVER_DL = 0x0600b390;  // segment:ni_necronomicon_book
+
 // test_grid_txt   = 0x06000000; // segment:NI_ASSETS_TEST_GRID
 // test_grid_tlut  = 0x06000800; // segment:NI_ASSETS_TEST_GRID
 // test_grid_vtx   = 0x06000820; // segment:NI_ASSETS_TEST_GRID rom:0x00BD96E0 size:0x780

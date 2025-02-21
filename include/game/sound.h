@@ -33,6 +33,9 @@ extern u16 getCurrentBGM();
 extern u8 resetCurrentBGM();
 extern u32 setPreviousBGM();
 extern s32 audioControlFadeOutType_setType(u32 type);
+extern u8 isSoundVolumeDecreased();
+extern void decreaseSoundVolume(u8 decrease);
+extern void prepareSoundForPlay_defaultSettings(u32 sound_ID);
 
 // Sound IDs (officially referred to as "sound codes")
 #define SD_INVALID 0x000
@@ -72,10 +75,13 @@ extern s32 audioControlFadeOutType_setType(u32 type);
 #define SD_LIBRARY_PIECE_SET                 0x1A0
 #define SD_RENON_BRIEFCASE_SPIN_1            0x21A
 #define SD_RENON_BRIEFCASE_SPIN_2            0x21B
+#define SD_REINHARDT_HEALTH_RECOVERY         0x257
+#define SD_CARRIE_HEALTH_RECOVERY            0x258
 #define SD_ROSE_DOOR_CLOSE                   0x27B
 #define SD_ROSE_DOOR_CLOSING                 0x29B
 #define SD_CARRIE_BLESSING                   0x2E4
 #define SD_REINHARDT_BLESSING                0x2E5
 #define SD_2E9                               0x2E9
+#define SD_CLOCK_TICKING                     0x2DC
 
 #endif

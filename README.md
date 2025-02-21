@@ -75,13 +75,13 @@ or [Windows](#windows).
 You can build the Docker image as follows.
 
 ```sh
-docker build . -t c64
+docker build . -t cv64
 ```
 
 And then, you can interactively spin up a docker container.
 
 ```sh
-docker run --rm -ti -v $(pwd):/c64 c64
+docker run --rm -ti -v $(pwd):/cv64 cv64
 ```
 
 #### Linux (Debian/Ubuntu offshoots)
@@ -116,7 +116,7 @@ cmake -S . -B build -G "Ninja"
 ```
 
 > [!TIP]
-> Or run `mise run c` if you are already using [mise][mise]
+> Or run `mise run build:configure` if you are already using [mise][mise]
 
 The above snippet produces a Ninja-based build system under the hood. This seems
 to be faster than Make, but if you still prefer Make over Ninja, you can run the
@@ -126,11 +126,15 @@ following...
 cmake -S . -B build -G "Unix Makefiles"
 ```
 
+If you need to debug non-matching compressed files by skipping the compression
+step and not checking the ROM's checksum, you can use the following...
+
+```sh
+cmake -S . -B build -G "Ninja" -Dcompress=FALSE
+```
+
 > [!TIP]
-> You can also use `mise run cdec` if you are already using [mise][mise],
-> or `cmake -S . -B build -Dcompress=FALSE` to skip compressing files
-> and checking the ROM's sha1sum.
-> This is only useful for debugging non-matching compressed files at the moment.
+> Or run `mise run build:configure --no-compress` if you are already using [mise][mise]
 
 Afterwards, to build the project, run the following...
 
@@ -139,18 +143,18 @@ cmake --build build
 ```
 
 > [!TIP]
-> Or run `mise run b` if you are already using [mise][mise]
+> Or run `mise run build` if you are already using [mise][mise]
 
 ### Cleaning
 
 Run the following to clean up the build artifacts.
 
 ```sh
-./scripts/clean
+./scripts/build/clean
 ```
 
 > [!TIP]
-> Or run `mise run cl` if you are already using [mise][mise]
+> Or run `mise run build:clean` if you are already using [mise][mise]
 
 ### Context generation
 
@@ -159,15 +163,11 @@ or [decomp.me](https://decomp.me/).
 This will contain all headers within a given source file
 
 ```sh
-python3 ./tools/m2ctx.py <your_C_file>
+python tools/m2ctx.py <c_file>
 ```
 
 > [!TIP]
-> Or run `mise run ctx <your_C_file>` if you are already using [mise][mise].
-
-[mise]: https://github.com/jdx/mise
-[research-spreadsheets]: https://docs.google.com/spreadsheets/d/1nzh_nFf26oVZy6uWeNYiYGXAto6Yz3xypZwWqwJBBJQ/edit#gid=74717405
-[lzkn64]: https://github.com/fluvian/lzkn64
+> Or run `mise run m2ctx <c_file>` if you are already using [mise][mise].
 
 ### Using permuter
 
@@ -175,28 +175,32 @@ You can use permuter to assist on matching functions that are close to completio
 but are problematic to work with, such as when there registers are allocated differently
 or when instructions are placed in a different order than the target assembly.
 
-1. Go to a scratch from [decomp.me](decomp.me) and click `Export`,
-   which saves a ZIP file named the same as the function in that scratch.
-   Ensure the ZIP file is placed in `~/Downloads`.
+1. Go to a scratch from [decomp.me](decomp.me) and copy the URL slug of the function
+   you are working with. This looks like `https://decomp.me/scratch/<scratch_slug>`.
 
 2. From the root of the repo, run:
 
-   ```
-   ./scripts/perm putFunctionNameHere
+   ```sh
+   ./scripts/permuter/prepare <scratch_slug>
    ```
 
-   This will create a directory called `perm` in the root of the project.
+   This will create a scratch directory called `scratch/<scratch_slug>` from the
+   root of the project.
 
 > [!TIP]
-> Or run `mise r pp putFunctionNameHere` if you are already using [mise][mise].
+> Or run `mise run permuter:prepare <scratch_slug>` if you are already using [mise][mise].
 
 3. From the root of the repo, run:
 
    ```sh
-   python tools/decomp-permuter/permuter.py perm
+   python tools/decomp-permuter/permuter.py scratch/<scratch_slug>
    ```
 
    Add the `-j` option to utilize multiple cores, followed by the number of cores.
 
 > [!TIP]
-> Or run `mise r p perm` if you are already using [mise][mise].
+> Or run `mise run permuter <scratch_slug>` if you are already using [mise][mise].
+
+[mise]: https://github.com/jdx/mise
+[research-spreadsheets]: https://docs.google.com/spreadsheets/d/1nzh_nFf26oVZy6uWeNYiYGXAto6Yz3xypZwWqwJBBJQ/edit#gid=74717405
+[lzkn64]: https://github.com/fluvian/lzkn64

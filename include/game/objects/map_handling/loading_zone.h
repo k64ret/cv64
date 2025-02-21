@@ -3,7 +3,7 @@
 
 #include "object.h"
 #include "gfx/color.h"
-#include "actor_settings.h"
+#include "actor_config.h"
 
 typedef struct {
     Vec3 trigger_position;

@@ -6,7 +6,22 @@
 #include "map_actor_model.h"
 #include "math.h"
 #include "nisitenma_ichigo.h"
+#include "objects/menu/miniScroll.h"
+#include "objects/menu/mfds.h"
 #include <ultra64.h>
+
+/**
+ * This is used sometimes to store variables related to the
+ * usage of a mini scroll
+ */
+typedef struct MiniScrollParameters {
+    s32 state;
+    s32 after_quit_state; // Where to go (for example, what menu) after the scroll is destroyed
+    u32 scroll_init_delay_timer;
+    struct miniScroll* scroll;
+    struct MfdsState* textbox;
+    u8 field_0x14[44];
+} MiniScrollParameters;
 
 typedef struct Model {
     s16 type;
@@ -38,7 +53,10 @@ typedef struct Model {
     Angle field41_0x52;
     Vec3f size;
     MapActorModel* map_actor_model;
-    Mat4f matrix;
+    union {
+        Mat4f matrix;
+        MiniScrollParameters mini_scroll_params;
+    };
 } Model;
 
 typedef struct actorPositionalData {
@@ -48,7 +66,7 @@ typedef struct actorPositionalData {
 
 extern void Model_setPosVec3s(Model* self, Vec3* position);
 extern void Model_copyPositionalData(Model*, actorPositionalData*);
-extern void Model_setMapActorModel(Model*, u32*);
+extern void Model_setMapActorModelNoCollision(Model*, u32*);
 extern Model* Model_createAndSetChild(u32 type, void* parent);
 extern Model* Model_createNextNode(u32 parent_type, void* parent);
 extern Model* Model_buildHierarchy(u32 type, Model* self, Hierarchy* mdl_hierarchy);

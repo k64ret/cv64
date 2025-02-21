@@ -1,7 +1,8 @@
 #ifndef GRAPHIC_CONTAINER_H
 #define GRAPHIC_CONTAINER_H
 
-#include "cv64.h"
+#include "gfx/misc.h"
+#include <ultra64.h>
 
 typedef struct GraphicContainerHeader {
     void* field_0x00;

@@ -452,11 +452,11 @@ u32 getMapEventFlagID(s16 stage_ID) {
  * two text spots: one that is used to enable the trigger that opens the grating
  * and another one that is used to tell that the grating has been opened already.
  *
- * `castleWallGratingMechanism_textSpotsActorSettings` contains the actor settings
+ * `castleWallGratingMechanism_textSpotsActorConfig` contains the actor config
  * that has the information such as the position and the text IDs that correspond to each
  * text spot.
  *
- * While the function implies that `castleWallGratingMechanism_textSpotsActorSettings` has
+ * While the function implies that `castleWallGratingMechanism_textSpotsActorConfig` has
  * various entries, only one is present in the final game, so this will only work properly
  * when `index` is 0, as any other value will read out of bounds.
  */
@@ -464,16 +464,16 @@ void spawnCastleWallGratingMechanismTextboxes(s16 index) {
     Interactable* text_spot;
 
     // Spawn trigger text spot
-    if (castleWallGratingMechanism_textSpotsActorSettings[index][1] != NULL) {
+    if (castleWallGratingMechanism_textSpotsActorConfig[index][1] != NULL) {
         text_spot =
             (Interactable*) (*object_createAndSetChild)(ptr_cutsceneMgr, CUTSCENE_INTERACTABLES);
-        text_spot->settings = castleWallGratingMechanism_textSpotsActorSettings[index][1];
+        text_spot->settings = castleWallGratingMechanism_textSpotsActorConfig[index][1];
     }
     // Spawn "grating already opened" text spot
-    if (castleWallGratingMechanism_textSpotsActorSettings[index][2] != NULL) {
+    if (castleWallGratingMechanism_textSpotsActorConfig[index][2] != NULL) {
         text_spot =
             (Interactable*) (*object_createAndSetChild)(ptr_cutsceneMgr, CUTSCENE_INTERACTABLES);
-        text_spot->settings = castleWallGratingMechanism_textSpotsActorSettings[index][2];
+        text_spot->settings = castleWallGratingMechanism_textSpotsActorConfig[index][2];
     }
 }
 

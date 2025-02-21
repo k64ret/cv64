@@ -1,13 +1,12 @@
 #ifndef ACTOR_H
 #define ACTOR_H
 
-#include "gfx/model.h"
 #include "object.h"
+#include "gfx/model.h"
 #include "atari.h"
 #include "objects/camera/modelLighting.h"
 #include "animation.h"
-#include "actor_settings.h"
-#include <ultra64.h>
+#include "actor_config.h"
 
 // For "axis" argument from `checkIfOutsideEntityIsInsideMainEntityRadius`
 #define AXIS_X   BIT(0)
@@ -32,12 +31,11 @@ typedef struct Actor {
     ActorConfig* settings;
 } Actor;
 
-extern void actor_model_set_pos(Actor* actor, Model* actor_model);
-extern void actor_model_set_pos_and_angle(Actor* actor, Model* actor_model);
+extern void Actor_SetPos(Actor* actor, Model* actor_model);
+extern void Actor_SetPosAndAngle(Actor* actor, Model* actor_model);
 extern s32 actor_playerOutsideActorSpawnRadius(
     Actor* actor, f32 actor_pos_X, f32 actor_pos_Y, f32 actor_pos_Z
 );
-extern void func_801578FC(Actor* actor);
 extern u32 checkIfOutsideEntityIsInsideMainEntityRadius(
     Model* player_model, Model* actor_model, f32 actor_spawn_radius, u32 axis
 );
@@ -45,5 +43,8 @@ extern u8 Actor_getPosAndVariable1(Actor* actor, Vec3f* position, u16* variable_
 extern void Actor_updateAnimParamsWhenDiffRotationPtrs(
     actorVisualData* visualdata, void* translation_data, void* rotation_data, f32 speed
 );
+
+extern void StageProp_Loop(Actor* self);
+extern void StageProp_Destroy(Actor* self);
 
 #endif

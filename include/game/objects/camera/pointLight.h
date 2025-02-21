@@ -3,7 +3,7 @@
 
 #include "object.h"
 #include "gfx/model.h"
-#include "actor_settings.h"
+#include "actor_config.h"
 
 typedef struct {
     u8 field_0x00[8];

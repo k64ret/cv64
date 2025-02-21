@@ -42,6 +42,21 @@ cv64_ovl_konamilogo_funcs           = 0x801D0160; // segment:konami_kcek_logos s
 // End of src/overlay/konami_kcek_logos.c ======================================
 
 
+// src/overlay/map/bekkan_1f.c =============================================
+// .text
+Bekkan1FSquare_Entrypoint      = 0x8018eb10; // type:func segment:BEKKAN_1F
+Bekkan1FSquare_Init = 0x8018eb80; // type:func segment:BEKKAN_1F
+Bekkan1FSquare_PauseTransformations            = 0x8018ec28; // type:func segment:BEKKAN_1F
+Bekkan1FSquare_Loop         = 0x8018ec7c; // type:func segment:BEKKAN_1F
+DecorativeChandelier_Entrypoint            = 0x8018ece4; // type:func segment:BEKKAN_1F
+DecorativeChandelier_Init        = 0x8018ed54; // type:func segment:BEKKAN_1F
+DecorativeChandelier_PauseTransformations    = 0x8018ee8c; // type:func segment:BEKKAN_1F
+// .data
+Bekkan1FSquare_functions           = 0x8018eed0; // segment:BEKKAN_1F size:0x0C
+DecorativeChandelier_functions           = 0x8018eedc; // segment:BEKKAN_1F size:0x10
+// End of src/overlay/map/bekkan_1f.c ======================================
+
+
 // src/overlay/map/rose.c ======================================================
 // .text
 cv64_ovl_rose_ventilator_entrypoint   = 0x8018EB10; // type:func segment:ROSE
@@ -358,3 +373,95 @@ Death_UpdateAnimParamsCutscene = 0x0F00EB78; // type:func segment:ni_ovl_death
 Death_AnimateFrameCutscene     = 0x0F00EBFC; // type:func segment:ni_ovl_death
 Death_CreateMultipleScythes    = 0x0F00D298; // type:func segment:ni_ovl_death
 // End of src/overlay/death.c ==================================================
+
+// src/overlay/entrance_map_name_display.c ==================================================
+// .text
+entranceMapNameDisplay_entrypoint             = 0x0F000000; // type:func segment:ni_ovl_entrance_map_name_display
+entranceMapNameDisplay_init = 0x0F000070; // type:func segment:ni_ovl_entrance_map_name_display
+entranceMapNameDisplay_show                   = 0x0F000308; // type:func segment:ni_ovl_entrance_map_name_display
+entranceMapNameDisplay_idle                   = 0x0F0005E4; // type:func segment:ni_ovl_entrance_map_name_display
+entranceMapNameDisplay_hide                = 0x0F0006A4; // type:func segment:ni_ovl_entrance_map_name_display
+entranceMapNameDisplay_destroy                   = 0x0F000740; // type:func segment:ni_ovl_entrance_map_name_display
+// .data
+entranceMapNameDisplay_mapNames = 0x0F000770; // segment:ni_ovl_entrance_map_name_display size:0x184
+entranceMapNameDisplay_mapList = 0x0F0008F8; // segment:ni_ovl_entrance_map_name_display size:0x38
+entranceMapNameDisplay_mapNamesWidth = 0x0F000930; // segment:ni_ovl_entrance_map_name_display size:0x20
+entranceMapNameDisplay_bgModelDlists = 0x0F000950; // segment:ni_ovl_entrance_map_name_display size:0x38
+entranceMapNameDisplay_bgModelVertices = 0x0F0009D0; // segment:ni_ovl_entrance_map_name_display size:0x40
+entranceMapNameDisplay_bgModelMaterial1 = 0x0F000A10; // segment:ni_ovl_entrance_map_name_display size:0x58
+entranceMapNameDisplay_bgModelMaterial2 = 0x0F000A68; // segment:ni_ovl_entrance_map_name_display size:0x18
+entranceMapNameDisplay_functions = 0x0F000A80; // segment:ni_ovl_entrance_map_name_display size:0x14
+// .rodata
+D_0F000AA0              = 0x0F000AA0; // type:f64 segment:ni_ovl_entrance_map_name_display
+D_0F000AA8              = 0x0F000AA8; // type:f64 segment:ni_ovl_entrance_map_name_display
+// End of src/overlay/entrance_map_name_display.c ===========================================
+
+// src/overlay/pause_menu.c ==================================================
+// .text
+pauseMenu_entrypoint            = 0x0F000000; // type:func segment:ni_ovl_pause_menu
+pauseMenu_decreaseSoundVolume            = 0x0F000070; // type:func segment:ni_ovl_pause_menu
+pauseMenu_init            = 0x0F0000E4; // type:func segment:ni_ovl_pause_menu
+pauseMenu_createMainMenu            = 0x0F0005E8; // type:func segment:ni_ovl_pause_menu
+pauseMenu_calcMainMenu            = 0x0F000798; // type:func segment:ni_ovl_pause_menu
+pauseMenu_checkScrollObjExists            = 0x0F000A18; // type:func segment:ni_ovl_pause_menu
+pauseMenu_calcItemList            = 0x0F000A7C; // type:func segment:ni_ovl_pause_menu
+pauseMenu_calcItemSelectedMenu            = 0x0F000E4C; // type:func segment:ni_ovl_pause_menu
+pauseMenu_destroy            = 0x0F0014DC; // type:func segment:ni_ovl_pause_menu
+pauseMenu_calcQuitMenu            = 0x0F00155C; // type:func segment:ni_ovl_pause_menu
+pauseMenu_updateDigitalClockDisplay            = 0x0F0019F4; // type:func segment:ni_ovl_pause_menu
+pauseMenu_createPauseItemMenuWork            = 0x0F001AC8; // type:func segment:ni_ovl_pause_menu
+func_0F001BF0            = 0x0F001BF0; // type:func segment:ni_ovl_pause_menu
+pauseMenu_createItemDescription            = 0x0F001BF8; // type:func segment:ni_ovl_pause_menu
+getItemUseArrayEntry            = 0x0F001DA0; // type:func segment:ni_ovl_pause_menu
+pauseMenu_updateClock            = 0x0F001DEC; // type:func segment:ni_ovl_pause_menu
+pauseMenu_checkIfItemCanBeUsed            = 0x0F001F0C; // type:func segment:ni_ovl_pause_menu
+// .data
+item_descriptions = 0x0F002090; // segment:ni_ovl_pause_menu size:0xE0C
+options_text = 0x0F002E9C; // segment:ni_ovl_pause_menu size:0x3C
+item_usage_text = 0x0F002ED8; // segment:ni_ovl_pause_menu size:0x5C
+confirmation_text = 0x0F002F34; // segment:ni_ovl_pause_menu size:0x38
+selection_arrow_character = 0x0F002F6C; // segment:ni_ovl_pause_menu size:0x04
+item_use_settings_array = 0x0F002F70; // segment:ni_ovl_pause_menu size:0x18
+sound_volume_decreased = 0x0F002F88; // type:s32 segment:ni_ovl_pause_menu
+pauseMenu_functions = 0x0F002F8C; // segment:ni_ovl_pause_menu size:0x28
+character_portraits = 0x0F002FB4; // segment:ni_ovl_pause_menu size:0x08
+D_0F002FBC = 0x0F002FBC; // segment:ni_ovl_pause_menu size:0x08
+// .rodata
+pauseMenu_unusedString1 = 0x0F002FD0; // type:asciz segment:ni_ovl_pause_menu
+pauseMenu_DigitalClockString = 0x0F002FE4; // type:asciz segment:ni_ovl_pause_menu
+pauseMenu_unusedString2  = 0x0F002FF4; // type:asciz segment:ni_ovl_pause_menu
+pauseMenu_unusedString3  = 0x0F003004; // type:asciz segment:ni_ovl_pause_menu
+pauseMenu_unusedString4  = 0x0F00302C; // type:asciz segment:ni_ovl_pause_menu
+pauseMenu_unusedString5  = 0x0F003044; // type:asciz segment:ni_ovl_pause_menu
+pauseMenu_unusedString6  = 0x0F00305C; // type:asciz segment:ni_ovl_pause_menu
+pauseMenu_unusedString7  = 0x0F00306C; // type:asciz segment:ni_ovl_pause_menu
+pauseMenu_unusedString8  = 0x0F003080; // type:asciz segment:ni_ovl_pause_menu
+pauseMenu_ItemString     = 0x0F00308C; // type:asciz segment:ni_ovl_pause_menu
+pauseMenu_unusedString9  = 0x0F003094; // type:asciz segment:ni_ovl_pause_menu
+pauseMenu_unusedString10 = 0x0F0030A4; // type:asciz segment:ni_ovl_pause_menu
+pauseMenu_unusedString11 = 0x0F0030C0; // type:asciz segment:ni_ovl_pause_menu
+pauseMenu_unusedString12 = 0x0F0030D8; // type:asciz segment:ni_ovl_pause_menu
+pauseMenu_unusedString13 = 0x0F0030F4; // type:asciz segment:ni_ovl_pause_menu
+pauseMenu_unusedString14 = 0x0F003110; // type:asciz segment:ni_ovl_pause_menu
+pauseMenu_unusedString15 = 0x0F003128; // type:asciz segment:ni_ovl_pause_menu
+pauseMenu_unusedString16 = 0x0F003138; // type:asciz segment:ni_ovl_pause_menu
+pauseMenu_unusedString17 = 0x0F003150; // type:asciz segment:ni_ovl_pause_menu
+pauseMenu_PauseItemMenuWorkString = 0x0F003160; // type:asciz segment:ni_ovl_pause_menu
+pauseMenu_unusedString18 = 0x0F003170; // type:asciz segment:ni_ovl_pause_menu
+D_0F003180 = 0x0F003180; // type:f32 segment:ni_ovl_pause_menu
+D_0F003184 = 0x0F003184; // type:f32 segment:ni_ovl_pause_menu
+D_0F003188 = 0x0F003188; // type:f32 segment:ni_ovl_pause_menu
+D_0F00318C = 0x0F00318C; // type:f32 segment:ni_ovl_pause_menu
+D_0F003190 = 0x0F003190; // type:f32 segment:ni_ovl_pause_menu
+D_0F003194 = 0x0F003194; // type:f32 segment:ni_ovl_pause_menu
+D_0F003198 = 0x0F003198; // type:f32 segment:ni_ovl_pause_menu
+D_0F00319C = 0x0F00319C; // type:f32 segment:ni_ovl_pause_menu
+D_0F0031A0 = 0x0F0031A0; // type:f32 segment:ni_ovl_pause_menu
+D_0F0031A4 = 0x0F0031A4; // type:f32 segment:ni_ovl_pause_menu
+D_0F0031A8 = 0x0F0031A8; // type:f32 segment:ni_ovl_pause_menu
+D_0F0031AC = 0x0F0031AC; // type:jtbl_label segment:ni_ovl_pause_menu size:0x20
+D_0F0031CC = 0x0F0031CC; // type:f32 segment:ni_ovl_pause_menu
+D_0F0031D0 = 0x0F0031D0; // type:f32 segment:ni_ovl_pause_menu
+D_0F0031D4 = 0x0F0031D4; // type:f32 segment:ni_ovl_pause_menu
+D_0F0031D8 = 0x0F0031D8; // type:f32 segment:ni_ovl_pause_menu
+// End of src/overlay/pause_menu.c ===========================================

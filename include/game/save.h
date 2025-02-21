@@ -101,6 +101,7 @@ enum SaveFlag {
     SAVE_FLAG_CARRIE_GOOD_ENDING         = BIT(18),
     SAVE_FLAG_REINDHART_BAD_ENDING       = BIT(19),
     SAVE_FLAG_CARRIE_BAD_ENDING          = BIT(20),
+    SAVE_FLAG_VAMP_CURED_USING_ITEM      = BIT(29),
     SAVE_FLAG_COSTUME_IS_BEING_USED      = BIT(30),
     SAVE_FLAG_CAN_EXPLODE_ON_JUMPING     = BIT(31)
 };
@@ -168,5 +169,7 @@ typedef struct SaveData {
     s32 field83_0xd8;
     u32 gold_spent_on_Renon;
 } SaveData; // Size = 0xE0
+
+extern void initSave_BeginningOfStageState();
 
 #endif

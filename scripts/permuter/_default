@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+#MISE description="Run decomp-permuter on the given scratch slug"
+#MISE alias="p"
+
+#USAGE flag "-j --jobs <jobs>" help="Number of own threads to use"
+#USAGE arg "<scratch_slug>" help="decomp.me scratch URL slug"
+
+if [ ! -d "./scratch/$usage_scratch_slug" ]; then
+  ./scripts/permuter/prepare $usage_scratch_slug
+fi
+
+python tools/decomp-permuter/permuter.py \
+  -j "${usage_jobs:-1}" \
+  "./scratch/$usage_scratch_slug"

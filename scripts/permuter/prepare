@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+#MISE description="Prepare a directory for running decomp-permuter"
+#MISE alias="pp"
+#MISE tools.jq="1.7"
+
+#USAGE arg "<scratch_slug>" help="decomp.me scratch URL slug"
+
+usage_scratch_slug=${1:?[Please specify the decomp.me scratch URL slug.]}
+
+perm_dir="./scratch/$usage_scratch_slug"
+func_name=$(curl -Ls "https://decomp.me/api/scratch/$usage_scratch_slug" | jq -r .name)
+archive_file="$perm_dir/${func_name}.zip"
+
+rm -rf $perm_dir && mkdir -p $perm_dir
+
+cp tools/settings_sample.toml $perm_dir/settings.toml && \
+  sed -i "s/CHANGEME/$func_name/g" $perm_dir/settings.toml
+
+cp tools/compile_sample.sh $perm_dir/compile.sh
+
+curl -Ls -o $archive_file "https://decomp.me/api/scratch/$usage_scratch_slug/export" && \
+  unzip -q $archive_file -d $perm_dir && \
+  rm $archive_file && \
+  mv $perm_dir/{code,base}.c && \
+  mv $perm_dir/ctx.{c,h} && \
+  echo -e "#include \"./ctx.h\"\n\n$(cat $perm_dir/base.c)" > $perm_dir/base.c

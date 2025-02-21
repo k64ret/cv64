@@ -13,14 +13,16 @@
 #define FIG_ARRAY_MAX 512
 
 // Types
-#define FIG_TYPE_STANDALONE         0x0004 // Assumption
-#define FIG_TYPE_MAP_PIECE          0x0008
-#define FIG_TYPE_HUD_ELEMENT        0x0010
-#define FIG_TYPE_HIERARCHY_NODE     0x0040 // "offset", according to leftover strings
-#define FIG_TYPE_LIGHT              0x0080
-#define FIG_TYPE_CAMERA_ORTHO       0x0100
-#define FIG_TYPE_CAMERA_PERSPECTIVE 0x0200
-#define FIG_TYPE_0400               0x0400
+#define FIG_TYPE_STANDALONE  0x0004 // Assumption
+#define FIG_TYPE_MAP_PIECE   0x0008
+#define FIG_TYPE_HUD_ELEMENT 0x0010
+#define FIG_TYPE_DONT_ANIMATE                                                                      \
+    0x0020 // Don't animate through the usual rotation / translation system
+#define FIG_TYPE_HIERARCHY_NODE            0x0040 // "offset", according to leftover strings
+#define FIG_TYPE_LIGHT                     0x0080
+#define FIG_TYPE_CAMERA_ORTHO              0x0100
+#define FIG_TYPE_CAMERA_PERSPECTIVE        0x0200
+#define FIG_TYPE_ALLOW_TRANSPARENCY_CHANGE 0x0400
 #define FIG_TYPE_CAMERA_CUTSCENE                                                                   \
     0x0800 // Also assigned to the Player's mirrored copy in the Villa's mirror \
            // room
@@ -38,10 +40,17 @@
 #define FIG_FLAG_APPLY_BLEND_COLOR       0x0200
 #define FIG_FLAG_APPLY_ENVIRONMENT_COLOR 0x0400
 #define FIG_FLAG_APPLY_PRIMITIVE_COLOR   0x0800
+/**
+ * If this flag is set, all transformations, such as position, size, rotation, etc, changes won't be updated
+ */
+#define FIG_FLAG_PAUSE_TRANSFORMATIONS 0x4000
 
 // Misc. flags that aren't part of the set above
 #define FIG_VARIABLE_TEXTURE_AND_PALETTE              0x40000000
 #define FIG_APPLY_VARIABLE_TEXTURE_AND_PALETTE(dlist) (FIG_VARIABLE_TEXTURE_AND_PALETTE | (dlist))
+
+// The figure is invisible and / or inactive
+#define FIG_IS_HIDDEN(fig) (fig->type < 0)
 
 typedef struct FigureHeader {
     s16 type;
@@ -62,10 +71,13 @@ typedef struct Figure {
 
 extern FigureHeader* fig_allocate(s16 type);
 extern void clearAllFigs();
+extern void Figure_Update();
+extern void Figure_UpdateMatrices();
 extern void figure_showModelAndChildren(FigureHeader*, u16);
 extern void figure_hideSelfAndChildren(FigureHeader*, u16);
 extern FigureHeader* figure_setChild(FigureHeader* new_child, FigureHeader* self);
 extern FigureHeader* Figure_SetSibling(FigureHeader* new_sibling, FigureHeader* self);
+extern void figure_destroySelfAndChildren_2(FigureHeader*, u16);
 
 extern Figure figures_array[FIG_ARRAY_MAX];
 
