@@ -5,12 +5,12 @@
 
 typedef struct ElevatorInner {
     Vec3f moving_endpoint;
-    f32 initial_height;
     f32 height;
     f32 speed;
+    f32 initial_height;
     s16 player_inside_elevator;
     s16 top_idle_time;
-    u8 field_0x50[20];
+    u8 field_0x1C[20];
 } ElevatorInner;
 
 // ID: 0x01C9
@@ -22,7 +22,7 @@ typedef struct Elevator {
     ElevatorInner inner;
     moveActorFunction move_actor_function;
     MapActorModel* map_actor_model;
-    u8 field_0x6C[4];
+    s32 field_0x6C;
     ActorConfig* settings;
 } Elevator;
 
@@ -49,7 +49,7 @@ typedef enum ElevatorMainFuncId {
     ELEVATOR_MAIN_ASCENDING,
     ELEVATOR_MAIN_TOP_IDLE,
     ELEVATOR_MAIN_DESCENDING,
-    ELEVATOR_MAIN_BOTTOM_IDLE_INSIDE_ELEVATOR,
+    ELEVATOR_MAIN_BOTTOM_IDLE_INSIDE_ELEVATOR
 } ElevatorMainFuncId;
 
 extern const u32 HONMARU_1F_ELEVATOR_DL;

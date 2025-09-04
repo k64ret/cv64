@@ -133,6 +133,11 @@
  * These flags are used by map-specific objects to track events temporarily
  * while inside the map
  */
+// HONMARU 1F
+#define HONMARU_1F_FLAG_PLAYER_IS_INSIDE_ELEVATOR  1
+#define HONMARU_1F_FLAG_ELEVATOR_IS_AT_THE_BOTTOM  4
+#define HONMARU_1F_FLAG_PLAYER_IS_OUTSIDE_ELEVATOR 8
+
 // HONMARU 5F
 #define HONMARU_5F_FLAG_PLAYER_IS_INSIDE_ELEVATOR 1
 

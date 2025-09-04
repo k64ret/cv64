@@ -144,7 +144,7 @@ typedef struct atari_base_work {
     s16 field_0x94;
     s16 field_0x96;
     u8 field_0x98[4];
-} atari_base_work_t;
+} atari_base_work;
 
 typedef struct atari_only_work {
     u16 flags;
@@ -205,10 +205,10 @@ typedef struct atari_only_work {
 } atari_only_work_t;
 
 extern void atari_work_table_init(void);
-extern atari_base_work_t* atariBaseWork_create(Model* attached_bone);
+extern atari_base_work* atariBaseWork_create(Model* attached_bone);
 extern atari_data_work_t* atariDataWork_create(Model* attached_bone, u16 param_2);
 extern atari_only_work_t* atariOnlyWork_create(Model* attached_bone, u16 function, u16 param_3);
 extern u32
-atariBaseWork_attachCollider(atari_base_work_t* self, atari_data_work_t* collider, u32 param_3);
+atariBaseWork_attachCollider(atari_base_work* self, atari_data_work_t* collider, u32 param_3);
 
 #endif
