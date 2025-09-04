@@ -6,7 +6,7 @@
 #include "gfx/model.h"
 #include <ultra64.h>
 
-typedef enum atari_work_flag {
+typedef enum cv64_atari_work_flag {
     ATARI_WORK_DONT_UPDATE_POSITIONAL_DATA            = 0x20,
     ATARI_WORK_UPDATE_ATTACKER_TARGET_POSITIONAL_DATA = 0x40,
     ATARI_WORK_INFLICT_DAMAGE                         = 0x100,
@@ -14,9 +14,9 @@ typedef enum atari_work_flag {
     ATARI_WORK_TYPE_DATA                              = 0x1000,
     ATARI_WORK_TYPE_BASE                              = 0x2000,
     ATARI_WORK_DESTROY                                = 0x8000
-} atari_work_flag_t;
+} cv64_atari_work_flag_t;
 
-typedef enum atari_work_damage_kind {
+typedef enum cv64_atari_work_damage_kind {
     /**
      * Red sparkles
      */
@@ -48,13 +48,13 @@ typedef enum atari_work_damage_kind {
      * Spreads the damage effect throught the whole body
      */
     DAMAGE_KIND_CREATE_SPARKLES_ON_EVERY_ATARI_DATA = 0x8000
-} atari_work_damage_kind_t;
+} cv64_atari_work_damage_kind_t;
 
-typedef struct atari_data_work {
+typedef struct cv64_atari_data_work {
     /**
      * The lowest 3-bits are a function ID in the array at 0x80098600
      */
-    u16 flags;
+    s16 flags;
     s16 damage_type;
     /**
      * Seems to only be used for deciding whether or not
@@ -74,7 +74,7 @@ typedef struct atari_data_work {
     /**
      * The "atari_base" struct it's attached to
      */
-    struct atari_data_work* atari_work[2];
+    struct cv64_atari_data_work* atari_work[2];
     f32 field_0x38;
     f32 field_0x3C;
     Vec3f position;
@@ -82,7 +82,7 @@ typedef struct atari_data_work {
     Vec3f field_0x58;
     f32 field_0x64;
     Model* field_0x68;
-    struct atari_data_work* collider_attacker;
+    struct cv64_atari_data_work* collider_attacker;
     Vec3f damage_effect_position;
     Vec3f damage_effect_scale;
     f32 field_0x88;
@@ -92,10 +92,10 @@ typedef struct atari_data_work {
     s16 field_0x94;
     s16 field_0x96;
     u8 field_0x98[4];
-} atari_data_work_t;
+} cv64_atari_data_work_t;
 
-typedef struct atari_base_work {
-    u16 flags;
+typedef struct cv64_atari_base_work {
+    s16 flags;
     s16 damage_type;
     /**
      * Seems to only be used for deciding whether or not
@@ -109,11 +109,11 @@ typedef struct atari_base_work {
     u8 field_0x0D;
     s16 push_back_divisor;
     Vec3f push_back_force;
-    atari_data_work_t* attacker_atari_data;
+    cv64_atari_data_work_t* attacker_atari_data;
     /**
      * Associated colider that was hit by attacker_atari_data
      */
-    atari_data_work_t* collider_hit;
+    cv64_atari_data_work_t* collider_hit;
     Vec3f damage_effect_pos;
     Vec3f damage_effect_scale;
     /**
@@ -132,8 +132,8 @@ typedef struct atari_base_work {
     s32 field_0x50;
     u32 hit_target_flags;
     Model* attached_model;
-    atari_data_work_t* field_0x5C[4];
-    atari_data_work_t* field_0x6C[4];
+    cv64_atari_data_work_t* field_0x5C[4];
+    cv64_atari_data_work_t* field_0x6C[4];
     s32 field_0x7C;
     u8 field_0x80;
     u8 field_0x81[3];
@@ -144,10 +144,10 @@ typedef struct atari_base_work {
     s16 field_0x94;
     s16 field_0x96;
     u8 field_0x98[4];
-} atari_base_work;
+} cv64_atari_base_work_t;
 
-typedef struct atari_only_work {
-    u16 flags;
+typedef struct cv64_atari_only_work {
+    s16 flags;
     s16 damage_type;
     /**
      * Seems to only be used for deciding whether or not to draw the damage effect.
@@ -161,7 +161,7 @@ typedef struct atari_only_work {
     u8 on_hit_SFX_set_slot;
     s16 field_0x0E;
     Vec3f push_back_on_collider_contact;
-    atari_data_work_t* collider_hit;
+    cv64_atari_data_work_t* collider_hit;
     Vec3f damage_effect_position;
     Vec3f damage_effect_scale;
     f32 field_0x38;
@@ -202,13 +202,15 @@ typedef struct atari_only_work {
     u8 field_0x99;
     u8 field_0x9A;
     u8 field_0x9B;
-} atari_only_work_t;
+} cv64_atari_only_work_t;
 
 extern void atari_work_table_init(void);
-extern atari_base_work* atariBaseWork_create(Model* attached_bone);
-extern atari_data_work_t* atariDataWork_create(Model* attached_bone, u16 param_2);
-extern atari_only_work_t* atariOnlyWork_create(Model* attached_bone, u16 function, u16 param_3);
-extern u32
-atariBaseWork_attachCollider(atari_base_work* self, atari_data_work_t* collider, u32 param_3);
+extern cv64_atari_base_work_t* atariBaseWork_create(Model* attached_bone);
+extern cv64_atari_data_work_t* atariDataWork_create(Model* attached_bone, u16 param_2);
+extern cv64_atari_only_work_t*
+atariOnlyWork_create(Model* attached_bone, u16 function, u16 param_3);
+extern u32 atariBaseWork_attachCollider(
+    ataricv64_atari_work_t* self, ataricv64_atari_work_t* collider, u32 param_3
+);
 
 #endif

@@ -10,7 +10,6 @@ typedef struct ElevatorDoorInner {
     f32 speed;
     s16 field_0x10;
     s16 player_inside_elevator;
-    s16 top_idle_time;
     u8 field_0x14[32];
 } ElevatorDoorInner;
 
@@ -49,7 +48,8 @@ typedef enum ElevatorDoorMainFuncId {
     ELEVATOR_DOOR_MAIN_ASCENDING,
     ELEVATOR_DOOR_MAIN_TOP_IDLE,
     ELEVATOR_DOOR_MAIN_DESCENDING,
-    ELEVATOR_DOOR_MAIN_BOTTOM_IDLE_INSIDE_ELEVATOR_DOOR
+    ELEVATOR_DOOR_MAIN_BOTTOM_IDLE_INSIDE_ELEVATOR_DOOR,
+    ELEVATOR_DOOR_MAIN_CLOSED
 } ElevatorDoorMainFuncId;
 
 extern const u32 HONMARU_1F_ELEVATOR_DOOR_DL;
