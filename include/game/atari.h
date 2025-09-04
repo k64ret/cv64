@@ -63,7 +63,7 @@ typedef struct cv64_atari_data_work {
     s16 ignored_damage_type;
     s16 damage;
     s16 max_damage_received;
-    s16 field_0x0A;
+    u16 interaction_flags;
     s16 damage_sound_ID;
     s16 field_0x0E;
     u8 field_0x10[2];
@@ -104,7 +104,7 @@ typedef struct cv64_atari_base_work {
     s16 ignored_damage_type;
     s16 field_0x06;
     s16 health;
-    s16 field_0x0A;
+    u16 interaction_flags;
     u8 field_0x0C;
     u8 field_0x0D;
     s16 push_back_divisor;
@@ -156,7 +156,7 @@ typedef struct cv64_atari_only_work {
     s16 ignored_damage_type;
     s16 damage;
     s16 max_damage_received;
-    s16 field_0x0A;
+    u16 interaction_flags;
     u8 field_0x0C;
     u8 on_hit_SFX_set_slot;
     s16 field_0x0E;
