@@ -59,16 +59,16 @@ DecorativeChandelier_functions           = 0x8018eedc; // segment:BEKKAN_1F size
 
 // src/overlay/map/honmaru_1f.c =============================================
 // .text
-Elevator_Entrypoint         = 0x8018eb10; // type:func segment:HONMARU_1F
-Elevator_Init            = 0x8018eb80; // type:func segment:HONMARU_1F
-Elevator_Main        = 0x8018ed14; // type:func segment:HONMARU_1F
-Elevator_Main_BottomIdleOutsideElevator    = 0x8018ee64; // type:func segment:HONMARU_1F
-Elevator_Main_Ascending    = 0x8018ef08; // type:func segment:HONMARU_1F
-Elevator_Main_TopIdle    = 0x8018effc; // type:func segment:HONMARU_1F
-Elevator_Main_Descending    = 0x8018f078; // type:func segment:HONMARU_1F
-Elevator_Main_BottomIdleInsideElevator    = 0x8018f16c; // type:func segment:HONMARU_1F
-Elevator_MoveActor    = 0x8018f1bc; // type:func segment:HONMARU_1F
-Elevator_IsPlayerInsideElevator    = 0x8018f1ec; // type:func segment:HONMARU_1F
+Elevator1F_Entrypoint         = 0x8018eb10; // type:func segment:HONMARU_1F
+Elevator1F_Init            = 0x8018eb80; // type:func segment:HONMARU_1F
+Elevator1F_Main        = 0x8018ed14; // type:func segment:HONMARU_1F
+Elevator1F_Main_BottomIdleOutsideElevator    = 0x8018ee64; // type:func segment:HONMARU_1F
+Elevator1F_Main_Ascending    = 0x8018ef08; // type:func segment:HONMARU_1F
+Elevator1F_Main_TopIdle    = 0x8018effc; // type:func segment:HONMARU_1F
+Elevator1F_Main_Descending    = 0x8018f078; // type:func segment:HONMARU_1F
+Elevator1F_Main_BottomIdleInsideElevator    = 0x8018f16c; // type:func segment:HONMARU_1F
+Elevator1F_MoveActor    = 0x8018f1bc; // type:func segment:HONMARU_1F
+Elevator1F_IsPlayerInsideElevator    = 0x8018f1ec; // type:func segment:HONMARU_1F
 ElevatorDoor_Entrypoint    = 0x8018f2dc; // type:func segment:HONMARU_1F
 ElevatorDoor_Init    = 0x8018f34c; // type:func segment:HONMARU_1F
 ElevatorDoor_Main    = 0x8018f5ac; // type:func segment:HONMARU_1F
@@ -100,9 +100,9 @@ BleedingStatueBloodSpot_Main_SpillingBlood = 0x80190544; // type:func segment:HO
 BleedingStatueBloodSpot_Main_IdleBlood = 0x80190598; // type:func segment:HONMARU_1F
 ElevatorSwitchEffectSpawner_Entrypoint = 0x801905a0; // type:func segment:HONMARU_1F
 // .data
-Elevator_BoundingBox           = 0x801906a0; // segment:HONMARU_1F size:0x18
-Elevator_functions           = 0x801906b8; // segment:HONMARU_1F size:0x08
-Elevator_main_functions           = 0x801906c0; // segment:HONMARU_1F size:0x14
+Elevator1F_BoundingBox           = 0x801906a0; // segment:HONMARU_1F size:0x18
+Elevator1F_functions           = 0x801906b8; // segment:HONMARU_1F size:0x08
+Elevator1F_main_functions           = 0x801906c0; // segment:HONMARU_1F size:0x14
 ElevatorDoor_functions           = 0x801906d4; // segment:HONMARU_1F size:0x08
 ElevatorDoor_main_functions           = 0x801906dc; // segment:HONMARU_1F size:0x18
 BleedingStatue_functions           = 0x801906f4; // segment:HONMARU_1F size:0x08

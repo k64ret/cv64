@@ -26,16 +26,16 @@ typedef struct Elevator {
     ActorConfig* settings;
 } Elevator;
 
-void Elevator_Entrypoint(Elevator* self);
-void Elevator_Init(Elevator* self);
-void Elevator_Main(Elevator* self);
-void Elevator_Main_BottomIdleOutsideElevator(Elevator* self);
-void Elevator_Main_Ascending(Elevator* self);
-void Elevator_Main_TopIdle(Elevator* self);
-void Elevator_Main_Descending(Elevator* self);
-void Elevator_Main_BottomIdleInsideElevator(Elevator* self);
-s32 Elevator_MoveActor(Elevator* self, Model* actor_model);
-s32 Elevator_IsPlayerInsideElevator(Model* model, Vec3f bounding_box[]);
+void Elevator1F_Entrypoint(Elevator* self);
+void Elevator1F_Init(Elevator* self);
+void Elevator1F_Main(Elevator* self);
+void Elevator1F_Main_BottomIdleOutsideElevator(Elevator* self);
+void Elevator1F_Main_Ascending(Elevator* self);
+void Elevator1F_Main_TopIdle(Elevator* self);
+void Elevator1F_Main_Descending(Elevator* self);
+void Elevator1F_Main_BottomIdleInsideElevator(Elevator* self);
+s32 Elevator1F_MoveActor(Elevator* self, Model* actor_model);
+s32 Elevator1F_IsPlayerInsideElevator(Model* model, Vec3f bounding_box[]);
 
 typedef void (*ElevatorFunc)(Elevator*);
 

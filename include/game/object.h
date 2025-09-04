@@ -15,6 +15,9 @@ typedef enum ObjectExecFlag {
     OBJ_EXEC_FLAG_TOP          = 0x8000
 } ObjectExecFlag;
 
+typedef void (*ObjectFunc)(void* self);
+typedef void (*ObjectDestroyFunc)(void* self);
+
 typedef union ObjectFuncInfo {
     struct {
         /**
@@ -162,9 +165,6 @@ GraphicContainerHeader* allocGraphicContainerInObjectEntryList(
 extern Object objects_array[OBJECT_ARRAY_MAX];
 extern u16 objects_number_of_instances_per_object[OBJECT_NUM_MAX];
 extern ObjectFileInfo* objects_file_info[OBJECT_NUM_MAX];
-
-typedef void (*ObjectFunc)(ObjectHeader* self);
-typedef void (*ObjectDestroyFunc)(ObjectHeader* self);
 
 extern ObjectFunc Objects_functions[OBJECT_NUM_MAX];
 extern Object* object_list_free_slot;
