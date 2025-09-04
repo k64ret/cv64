@@ -3,7 +3,6 @@
 
 #include "actor.h"
 
-// ID: 0x01C7
 typedef struct ElevatorInner {
     Vec3f moving_endpoint;
     f32 initial_height;
@@ -14,12 +13,12 @@ typedef struct ElevatorInner {
     u8 field_0x50[20];
 } ElevatorInner;
 
+// ID: 0x01C9
 typedef struct Elevator {
     ObjectHeader header;
     u8 field_0x20[4];
     Model* model;
-    Model* chain_model;
-    u8 field_0x2C[8];
+    u8 field_0x28[12];
     ElevatorInner inner;
     moveActorFunction move_actor_function;
     MapActorModel* map_actor_model;

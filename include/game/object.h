@@ -42,7 +42,7 @@ typedef struct ObjectHeader {
     /**
      * Real name: `OBJ_destruct`
      */
-    void (*destroy)(void*);
+    ObjectDestroyFunc destroy;
     struct ObjectHeader* parent;
     struct ObjectHeader* next;
     struct ObjectHeader* child;
@@ -164,6 +164,7 @@ extern u16 objects_number_of_instances_per_object[OBJECT_NUM_MAX];
 extern ObjectFileInfo* objects_file_info[OBJECT_NUM_MAX];
 
 typedef void (*ObjectFunc)(ObjectHeader* self);
+typedef void (*ObjectDestroyFunc)(ObjectHeader* self);
 
 extern ObjectFunc Objects_functions[OBJECT_NUM_MAX];
 extern Object* object_list_free_slot;

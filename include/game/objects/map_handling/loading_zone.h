@@ -28,7 +28,7 @@ typedef struct {
     Vec3f position;
     s16 field_0x40;
     u8 field_0x42[2];
-    void (*obj_destroy_function)(void*);
+    ObjectDestroyFunc obj_destroy_function;
     s32 camera_mode;
     /**
      * Used after closing the Easy Mode Ending text to warp to the Konami Logo game state

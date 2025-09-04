@@ -1,0 +1,71 @@
+#ifndef HONMARU_1F_BLEEDING_STATUE_H
+#define HONMARU_1F_BLEEDING_STATUE_H
+
+#include "actor.h"
+
+// ID: 0x01C8
+typedef struct BleedingStatue {
+    ObjectHeader header;
+    u8 field_0x20[4];
+    Model* model;
+    u8 field_0x28[72];
+    ActorConfig* settings;
+} BleedingStatue;
+
+void BleedingStatue_Entrypoint(BleedingStatue* self);
+void BleedingStatue_Init(BleedingStatue* self);
+void BleedingStatue_Main(BleedingStatue* self);
+void BleedingStatue_Main_Idle(BleedingStatue* self);
+void BleedingStatue_Main_InCutscene(BleedingStatue* self);
+void BleedingStatue_Main_AfterCutscene(BleedingStatue* self);
+
+typedef void (*BleedingStatueFunc)(BleedingStatue*);
+
+extern const u32 HONMARU_1F_BLEEDING_STATUE_DL;
+
+// ID: 0x01CB
+typedef struct BleedingStatueBlood {
+    ObjectHeader header;
+    u8 field_0x20[4];
+    Model* model;
+    u8 field_0x28[16];
+    u32 blend_color_transparency;
+    u32 field_0x3C[48];
+    s32 should_spill_blood;
+    ActorConfig* settings;
+} BleedingStatueBlood;
+
+void BleedingStatueBlood_Entrypoint(BleedingStatueBlood* self);
+void BleedingStatueBlood_Init(BleedingStatueBlood* self);
+void BleedingStatueBlood_Main(BleedingStatueBlood* self);
+void BleedingStatueBlood_Main_Idle(BleedingStatueBlood* self);
+void BleedingStatueBlood_Main_InCutscene(BleedingStatueBlood* self);
+void BleedingStatueBlood_Main_AfterCutscene(BleedingStatueBlood* self);
+
+typedef void (*BleedingStatueBloodFunc)(BleedingStatueBlood*);
+
+extern const u32 HONMARU_1F_BLEEDING_STATUE_BLOOD_DL;
+
+// ID: 0x01CC
+typedef struct BleedingStatueBloodSpotSpot {
+    ObjectHeader header;
+    u8 field_0x20[4];
+    Model* model;
+    u8 field_0x28[16];
+    u32 blend_color_transparency;
+    u32 field_0x3C[52];
+    ActorConfig* settings;
+} BleedingStatueBloodSpot;
+
+void BleedingStatueBloodSpot_Entrypoint(BleedingStatueBloodSpot* self);
+void BleedingStatueBloodSpot_Init(BleedingStatueBloodSpot* self);
+void BleedingStatueBloodSpot_Main(BleedingStatueBloodSpot* self);
+void BleedingStatueBloodSpot_Main_Idle(BleedingStatueBloodSpot* self);
+void BleedingStatueBloodSpot_Main_InCutscene(BleedingStatueBloodSpot* self);
+void BleedingStatueBloodSpot_Main_AfterCutscene(BleedingStatueBloodSpot* self);
+
+typedef void (*BleedingStatueBloodSpotFunc)(BleedingStatueBloodSpot*);
+
+extern const u32 HONMARU_1F_BLEEDING_STATUE_BLOOD_SPOT_DL;
+
+#endif

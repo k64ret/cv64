@@ -75,7 +75,7 @@ typedef struct EffectInfo {
     PointLight* light;
     Model* attached_bone;
     u8 field_0x14[4];
-    void (*object_destroy_function)(void*);
+    ObjectDestroyFunc obj_destroy_function;
 } EffectInfo;
 
 typedef struct EffectPositionalInfo {
