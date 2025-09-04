@@ -35,7 +35,7 @@ typedef struct {
     s32 sound_ID;
 } struct_21;
 
-// ID 0x016F
+// ID: 0x016F
 typedef struct {
     ObjectHeader header;
     u8 field_0x20[4];

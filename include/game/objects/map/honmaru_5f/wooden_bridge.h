@@ -3,7 +3,7 @@
 
 #include "actor.h"
 
-// ID 0x01D9
+// ID: 0x01D9
 typedef struct WoodenBridge {
     ObjectHeader header;
     u8 field_0x20[4];

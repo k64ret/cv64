@@ -3,7 +3,7 @@
 
 #include "actor.h"
 
-// ID 0x01DA
+// ID: 0x01DA
 typedef struct ElevatorInner {
     Vec3f moving_endpoint;
     f32 initial_height;

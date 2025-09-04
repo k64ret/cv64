@@ -3,7 +3,7 @@
 
 #include "actor.h"
 
-// ID 0x0173
+// ID: 0x0173
 typedef struct {
     ObjectHeader header;
     u8 field_0x20[4];

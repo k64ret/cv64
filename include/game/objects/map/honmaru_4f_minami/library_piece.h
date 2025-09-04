@@ -7,7 +7,7 @@
 #define YELLOW_PIECE 1
 #define RED_PIECE    2
 
-// ID 0x01D6
+// ID: 0x01D6
 typedef struct {
     ObjectHeader header;
     u8 field_0x20[4];

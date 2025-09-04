@@ -3,7 +3,7 @@
 
 #include "actor.h"
 
-// ID 0x01AE
+// ID: 0x01AE
 typedef struct DecorativeChandelier {
     ObjectHeader header;
     u8 field_0x20[4];

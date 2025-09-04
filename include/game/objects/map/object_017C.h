@@ -8,7 +8,7 @@
  *             where we can get the model's dlist address.
  */
 
-// ID 0x017C
+// ID: 0x017C
 typedef struct {
     ObjectHeader header;
     u8 field_0x20[4];
