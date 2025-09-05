@@ -530,7 +530,9 @@ void BleedingStatue_Init(BleedingStatue* self) {
         model->texture = model->palette = 1;
 
         (*object_nextLevel_goToFunc)(
-            self->header.current_function, &self->header.function_info_ID, 2
+            self->header.current_function,
+            &self->header.function_info_ID,
+            BLEEDING_STATUE_MAIN_AFTER_CUTSCENE
         );
     } else {
         model->texture = model->palette = 0;
