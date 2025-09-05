@@ -86,5 +86,6 @@ extern void prepareSoundForPlay_defaultSettings(u32 sound_ID);
 #define SD_REINHARDT_BLESSING                0x2E5
 #define SD_2E9                               0x2E9
 #define SD_CLOCK_TICKING                     0x2DC
+#define SD_HONMARU_1F_STATUE_BLEEDING        0x2A7
 
 #endif

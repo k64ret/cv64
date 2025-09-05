@@ -34,14 +34,19 @@ typedef enum BleedingStatueMainFuncId {
 
 extern const u32 HONMARU_1F_BLEEDING_STATUE_DL;
 
+typedef struct BleedingStatueBloodInner {
+    u8 field_0x00[4];
+    s32 blend_color_transparency;
+    u8 field_0x08[48];
+} BleedingStatueBloodInner;
+
 // ID: 0x01CB
 typedef struct BleedingStatueBlood {
     ObjectHeader header;
     u8 field_0x20[4];
     Model* model;
-    u8 field_0x28[16];
-    u32 blend_color_transparency;
-    u32 field_0x3C[48];
+    u8 field_0x28[12];
+    BleedingStatueBloodInner inner;
     s32 should_spill_blood;
     ActorConfig* settings;
 } BleedingStatueBlood;
@@ -49,9 +54,9 @@ typedef struct BleedingStatueBlood {
 void BleedingStatueBlood_Entrypoint(BleedingStatueBlood* self);
 void BleedingStatueBlood_Init(BleedingStatueBlood* self);
 void BleedingStatueBlood_Main(BleedingStatueBlood* self);
-void BleedingStatueBlood_Main_Idle(BleedingStatueBlood* self);
-void BleedingStatueBlood_Main_InCutscene(BleedingStatueBlood* self);
-void BleedingStatueBlood_Main_AfterCutscene(BleedingStatueBlood* self);
+void BleedingStatueBlood_Main_NoBlood(BleedingStatueBlood* self);
+void BleedingStatueBlood_Main_SpillingBlood(BleedingStatueBlood* self);
+void BleedingStatueBlood_Main_IdleBlood(BleedingStatueBlood* self);
 
 typedef void (*BleedingStatueBloodFunc)(BleedingStatueBlood*);
 
@@ -61,9 +66,9 @@ typedef enum BleedingStatueFuncId {
 } BleedingStatueFuncId;
 
 typedef enum BleedingStatueMainFuncId {
-    BLEEDING_STATUE_BLOOD_MAIN_IDLE,
-    BLEEDING_STATUE_BLOOD_MAIN_IN_CUTSCENE,
-    BLEEDING_STATUE_BLOOD_MAIN_AFTER_CUTSCENE
+    BLEEDING_STATUE_BLOOD_MAIN_NO_BLOOD,
+    BLEEDING_STATUE_BLOOD_MAIN_SPILLING_BLOOD,
+    BLEEDING_STATUE_BLOOD_MAIN_IDLE_BLOOD
 } BleedingStatueMainFuncId;
 
 extern const u32 HONMARU_1F_BLEEDING_STATUE_BLOOD_DL;
@@ -74,8 +79,8 @@ typedef struct BleedingStatueBloodSpotSpot {
     u8 field_0x20[4];
     Model* model;
     u8 field_0x28[16];
-    u32 blend_color_transparency;
-    u32 field_0x3C[52];
+    s32 blend_color_transparency;
+    u8 field_0x3C[52];
     ActorConfig* settings;
 } BleedingStatueBloodSpot;
 
