@@ -43,19 +43,20 @@ void cv64_ovl_rose_ventilator_entrypoint(cv64_ovl_rose_ventilator_t* self) {
 void cv64_ovl_rose_ventilator_init(cv64_ovl_rose_ventilator_t* self) {
     cv64_ovl_rose_ventilator_cfg_t* speed_settings = &self->speed_settings;
     Model* model = (*Model_createAndSetChild)(FIG_TYPE_STANDALONE, map_lights[0]);
-    u32 unused;
+    u32* dlist;
 
     if (model == NULL) {
         // VENTILATOR : Can't allocate F3D.\n
         self->header.destroy(self);
     } else {
         self->model        = model;
-        model->dlist       = &ROSE_VENTILATOR_DL;
+        dlist              = &ROSE_VENTILATOR_DL;
+        model->dlist       = dlist;
         model->assets_file = MAP_ASSETS_FILE_ID;
         BITS_SET(model->flags, FIG_FLAG_APPLY_PRIMITIVE_COLOR | FIG_FLAG_APPLY_FOG_COLOR);
         model->primitive_color.integer = sys.primitive_color.integer;
         model->fog_color.integer       = sys.background_color.integer;
-        (*Model_setMapActorModelNoCollision)(model, ROSE_VENTILATOR_DL);
+        (*Model_setMapActorModelNoCollision)(model, dlist);
         speed_settings->current_speed = speed_settings->max_speed =
             BITS_MASK((*rand)(), 0xFFF) + 16;
         speed_settings->time_until_changing_max_speed = BITS_MASK((*rand)(), 0x1FF) + 30;

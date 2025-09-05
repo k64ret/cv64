@@ -24,7 +24,7 @@
 // clang-format off
 
 Vec3f Elevator1F_BoundingBox[2] = {
-    {-15.0f, -0.0f, -15.0f},
+    {-15.0f, 0.0f, -15.0f},
     {15.0f, 30.0f, 15.0f}
 };
 
@@ -68,7 +68,8 @@ BleedingStatueFunc BleedingStatue_main_functions[] = {
 
 BleedingStatueBloodFunc BleedingStatueBlood_functions[] = {
     BleedingStatueBlood_Init,
-    BleedingStatueBlood_Main
+    BleedingStatueBlood_Main,
+    BleedingStatueBlood_Destroy
 };
 
 BleedingStatueBloodFunc BleedingStatueBlood_main_functions[] = {
@@ -324,10 +325,10 @@ void ElevatorDoor_Init(ElevatorDoor* self) {
     atari_base        = inner->atari_base;
 
     if (atari_base != NULL) {
-        BITS_UNSET(atari_base->field_0x0A, (0x0400 | 0x0200));
-        BITS_SET(atari_base->field_0x0A, 0x0400);
-        BITS_UNSET(atari_base->field_0x0A, (0x0002 | 0x0001));
-        BITS_SET(atari_base->field_0x0A, (0x0002 | 0x0001));
+        BITS_UNSET(atari_base->interaction_flags, (0x0400 | 0x0200));
+        BITS_SET(atari_base->interaction_flags, 0x0400);
+        BITS_UNSET(atari_base->interaction_flags, (0x0002 | 0x0001));
+        BITS_SET(atari_base->interaction_flags, (0x0002 | 0x0001));
 
         for (i = 0; i < 3; i++) {
             collider = (*atariDataWork_create)(model, 1);
@@ -412,7 +413,7 @@ void ElevatorDoor_Main_Opening(ElevatorDoor* self) {
     ElevatorDoorInner* inner = &self->inner;
 
     if (inner->speed < 0.9) {
-        inner->speed += 0.03;
+        inner->speed += 0.030000000000000002;
     }
 
     inner->slide_length -= inner->speed;
@@ -455,7 +456,7 @@ void ElevatorDoor_Main_Closing(ElevatorDoor* self) {
     ElevatorDoorInner* inner = &self->inner;
 
     if (inner->speed < 0.9) {
-        inner->speed += 0.03;
+        inner->speed += 0.030000000000000002;
     }
 
     inner->slide_length += inner->speed;
@@ -604,7 +605,7 @@ void BleedingStatueBlood_Entrypoint(BleedingStatueBlood* self) {
 
 void BleedingStatueBlood_Init(BleedingStatueBlood* self) {
     BleedingStatueBloodInner* inner = &self->inner;
-    u32 dlist;
+    u32* dlist;
     Model* model = self->model;
     s32 temp;
 
@@ -623,7 +624,7 @@ void BleedingStatueBlood_Init(BleedingStatueBlood* self) {
     model->position.x += -0.25;
 
     model->assets_file = MAP_ASSETS_FILE_ID;
-    dlist              = (u32) &HONMARU_1F_BLEEDING_STATUE_BLOOD_DL;
+    dlist              = &HONMARU_1F_BLEEDING_STATUE_BLOOD_DL;
     model->dlist       = dlist;
     BITS_SET(
         model->flags,
@@ -708,7 +709,7 @@ void BleedingStatueBloodSpot_Entrypoint(BleedingStatueBloodSpot* self) {
 
 void BleedingStatueBloodSpot_Init(BleedingStatueBloodSpot* self) {
     BleedingStatueBloodSpotInner* inner = &self->inner;
-    u32 dlist;
+    u32* dlist;
     Model* model = self->model;
     s32 temp;
 
@@ -723,7 +724,7 @@ void BleedingStatueBloodSpot_Init(BleedingStatueBloodSpot* self) {
     model->position.y += 0.25;
 
     model->assets_file = MAP_ASSETS_FILE_ID;
-    dlist              = (u32) &HONMARU_1F_BLEEDING_STATUE_BLOOD_SPOT_DL;
+    dlist              = &HONMARU_1F_BLEEDING_STATUE_BLOOD_SPOT_DL;
     model->dlist       = dlist;
     BITS_SET(
         model->flags,

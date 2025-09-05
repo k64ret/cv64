@@ -210,5 +210,6 @@ extern atari_data_work* atariDataWork_create(Model* attached_bone, u16 param_2);
 extern atari_only_work* atariOnlyWork_create(Model* attached_bone, u16 function, u16 param_3);
 extern u32
 atariBaseWork_attachCollider(atari_base_work* self, atari_data_work* collider, u32 param_3);
+extern void atariWork_markForDeletion(atari_base_work* self);
 
 #endif

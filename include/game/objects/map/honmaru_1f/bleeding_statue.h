@@ -57,12 +57,14 @@ void BleedingStatueBlood_Main(BleedingStatueBlood* self);
 void BleedingStatueBlood_Main_NoBlood(BleedingStatueBlood* self);
 void BleedingStatueBlood_Main_SpillingBlood(BleedingStatueBlood* self);
 void BleedingStatueBlood_Main_IdleBlood(BleedingStatueBlood* self);
+void BleedingStatueBlood_Destroy(BleedingStatueBlood* self);
 
 typedef void (*BleedingStatueBloodFunc)(BleedingStatueBlood*);
 
 typedef enum BleedingStatueBloodFuncId {
     BLEEDING_STATUE_BLOOD_INIT,
-    BLEEDING_STATUE_BLOOD_MAIN
+    BLEEDING_STATUE_BLOOD_MAIN,
+    BLEEDING_STATUE_BLOOD_DESTROY
 } BleedingStatueBloodFuncId;
 
 typedef enum BleedingStatueBloodMainFuncId {

@@ -102,7 +102,7 @@ void Elevator_Init(Elevator* self) {
     ElevatorInner* inner = &self->inner;
     Model* model;
     Model* chain_model;
-    u32 chain_model_dl;
+    u32* chain_model_dl;
 
     // Cabin model
     self->model = (*Model_createAndSetChild)(FIG_TYPE_STANDALONE, map_lights[0]);
@@ -121,7 +121,7 @@ void Elevator_Init(Elevator* self) {
     if (chain_model) {
     }
     self->chain_model = chain_model;
-    chain_model_dl    = (u32) &HONMARU_5F_ELEVATOR_CHAIN_DL;
+    chain_model_dl    = &HONMARU_5F_ELEVATOR_CHAIN_DL;
     (*Actor_SetPosAndAngle)(self, chain_model);
     chain_model->assets_file = MAP_ASSETS_FILE_ID;
     chain_model->dlist       = chain_model_dl;

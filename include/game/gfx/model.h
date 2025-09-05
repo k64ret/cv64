@@ -53,7 +53,7 @@ typedef struct actorPositionalData {
 extern void Model_setPosVec3s(Model* self, Vec3* position);
 extern void Model_copyPositionalData(Model*, actorPositionalData*);
 extern void Model_copyPosToVec3f(Model*, Vec3f*);
-extern void Model_setMapActorModelNoCollision(Model*, u32);
+extern void Model_setMapActorModelNoCollision(Model*, u32*);
 extern Model* Model_createAndSetChild(u32 type, void* parent);
 extern Model* Model_createNextNode(u32 parent_type, void* parent);
 extern Model* Model_buildHierarchy(u32 type, Model* self, Hierarchy* mdl_hierarchy);
