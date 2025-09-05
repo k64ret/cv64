@@ -609,7 +609,9 @@ void BleedingStatueBlood_Init(BleedingStatueBlood* self) {
     Model* model = self->model;
     s32 temp;
 
-    if (CHECK_EVENT_FLAGS(EVENT_FLAG_ID_CASTLE_CENTER_1F_2F, 8)) {
+    if (CHECK_EVENT_FLAGS(
+            EVENT_FLAG_ID_CASTLE_CENTER_1F_2F, EVENT_FLAG_CASTLE_CENTER_1F_2F_00000008
+        )) {
         self->header.destroy(self);
         return;
     }
