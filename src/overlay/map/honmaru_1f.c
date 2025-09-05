@@ -493,3 +493,87 @@ void ElevatorDoor_Destroy(ElevatorDoor* self) {
     (*atariWork_markForDeletion)(inner->atari_base);
     inner->obj_destroy_function(self);
 }
+
+void BleedingStatue_Entrypoint(BleedingStatue* self) {
+    ENTER(self, BleedingStatue_functions);
+}
+
+// https://decomp.me/scratch/muDHq
+#ifdef NON_MATCHING
+void BleedingStatue_Init(BleedingStatue* self) {
+    Model* model = self->model;
+    u32 dlist;
+    u32* dlist_virtual;
+
+    self->model = (*Model_createAndSetChild)(FIG_TYPE_STANDALONE, map_lights[0]);
+    model       = self->model;
+    if (model) {
+    }
+    (*Actor_SetPosAndAngle)(self, model);
+    model->assets_file = MAP_ASSETS_FILE_ID;
+    dlist              = (u32) &HONMARU_1F_BLEEDING_STATUE_DL;
+    model->dlist       = FIG_APPLY_VARIABLE_TEXTURE_AND_PALETTE(dlist);
+    BITS_SET(model->flags, FIG_FLAG_APPLY_FOG_COLOR | FIG_FLAG_APPLY_PRIMITIVE_COLOR);
+    model->primitive_color.integer = sys.primitive_color.integer;
+    model->fog_color.integer       = sys.background_color.integer;
+    dlist_virtual = (u32*) NisitenmaIchigoFiles_segmentToVirtual(dlist, MAP_ASSETS_FILE_ID);
+    (*Model_setMapActorModelNoCollision)(model, *dlist_virtual);
+
+    (*object_curLevel_goToNextFuncAndClearTimer)(
+        self->header.current_function, &self->header.function_info_ID
+    );
+
+    if (CHECK_EVENT_FLAGS(
+            EVENT_FLAG_ID_CASTLE_CENTER_1F_2F,
+            EVENT_FLAG_CASTLE_CENTER_1F_2F_BLEEDING_STATUE_CUTSCENE_ACTIVATED
+        )) {
+        model->texture = model->palette = 1;
+
+        (*object_nextLevel_goToFunc)(
+            self->header.current_function, &self->header.function_info_ID, 2
+        );
+    } else {
+        model->texture = model->palette = 0;
+    }
+}
+#else
+    #pragma GLOBAL_ASM("../asm/nonmatchings/overlay/map/honmaru_1f/BleedingStatue_Init.s")
+#endif
+
+void BleedingStatue_Main(BleedingStatue* self) {
+    Model* model = self->model;
+
+    if ((*actor_playerOutsideActorSpawnRadius)(
+            self, model->position.x, model->position.y, model->position.z
+        )) {
+        self->header.destroy(self);
+        return;
+    }
+
+    model->primitive_color.integer = sys.primitive_color.integer;
+    model->fog_color.integer       = sys.background_color.integer;
+
+    ENTER(self, BleedingStatue_main_functions);
+}
+
+void BleedingStatue_Main_Idle(BleedingStatue* self) {
+    if (BITS_HAS(sys.cutscene_flags, CUTSCENE_FLAG_PLAYING)) {
+        (*object_curLevel_goToNextFuncAndClearTimer)(
+            self->header.current_function, &self->header.function_info_ID
+        );
+    }
+}
+
+void BleedingStatue_Main_InCutscene(BleedingStatue* self) {
+    Model* model = self->model;
+
+    if (!BITS_HAS(sys.cutscene_flags, CUTSCENE_FLAG_PLAYING)) {
+        model->texture = model->palette = 1;
+
+        (*object_curLevel_goToFunc)(
+            self->header.current_function, &self->header.function_info_ID, BLEEDING_STATUE_MAIN_IDLE
+        );
+    }
+}
+
+void BleedingStatue_Main_AfterCutscene(BleedingStatue* self) {}
