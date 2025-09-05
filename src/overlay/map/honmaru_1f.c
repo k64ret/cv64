@@ -40,6 +40,20 @@ ElevatorFunc Elevator1F_main_functions[] = {
     Elevator1F_Main_BottomIdleInsideElevator
 };
 
+ElevatorDoorFunc ElevatorDoor_functions[] = {
+    ElevatorDoor_Init,
+    ElevatorDoor_Main
+};
+
+ElevatorDoorFunc ElevatorDoor_main_functions[] = {
+    ElevatorDoor_Main_DeactivatedClosed,
+    ElevatorDoor_Main_Opening,
+    ElevatorDoor_Main_IsPlayerOutOfElevator,
+    ElevatorDoor_Main_Opened,
+    ElevatorDoor_Main_Closing,
+    ElevatorDoor_Main_Closed
+};
+
 // clang-format on
 
 void Elevator1F_Entrypoint(Elevator* self) {
@@ -241,4 +255,230 @@ s32 Elevator1F_IsPlayerInsideElevator(Model* model, Vec3f bounding_box[]) {
         return FALSE;
     }
     return TRUE;
+}
+
+void ElevatorDoor_Entrypoint(ElevatorDoor* self) {
+    ENTER(self, ElevatorDoor_functions);
+}
+
+// https://decomp.me/scratch/HQsfY
+#ifdef NON_MATCHING
+void ElevatorDoor_Init(ElevatorDoor* self) {
+    ElevatorDoorInner* inner = &self->inner;
+    Model* model;
+    atari_base_work* atari_base;
+    atari_data_work* collider;
+    s32 i;
+    s32 temp;
+
+    self->model = (*Model_createAndSetChild)(FIG_TYPE_STANDALONE, map_lights[0]);
+    model       = self->model;
+    if (model) {
+    }
+    (*Actor_SetPosAndAngle)(self, model);
+    model->assets_file = MAP_ASSETS_FILE_ID;
+    model->dlist       = (u32) &HONMARU_1F_ELEVATOR_DOOR_DL;
+    BITS_SET(model->flags, FIG_FLAG_APPLY_FOG_COLOR | FIG_FLAG_APPLY_PRIMITIVE_COLOR);
+    model->primitive_color.integer = sys.primitive_color.integer;
+    model->fog_color.integer       = sys.background_color.integer;
+    BITS_SET(self->header.ID, OBJ_FLAG_ENABLE_COLLISION);
+
+    model->map_actor_model = (*getMapActorModelEntryFromArray)(model->dlist, model->assets_file);
+    self->map_actor_model  = model->map_actor_model;
+
+    inner->atari_base = (*atariBaseWork_create)(model);
+    atari_base        = inner->atari_base;
+
+    if (atari_base != NULL) {
+        BITS_UNSET(atari_base->field_0x0A, (0x0400 | 0x0200));
+        BITS_SET(atari_base->field_0x0A, 0x0400);
+        BITS_UNSET(atari_base->field_0x0A, (0x0002 | 0x0001));
+        BITS_SET(atari_base->field_0x0A, (0x0002 | 0x0001));
+
+        for (i = 0; i < 3; i++) {
+            collider = (*atariDataWork_create)(model, 1);
+            (*atariBaseWork_attachCollider)(atari_base, collider, 8);
+            collider->direction.pitch = 0;
+            collider->direction.yaw   = 0;
+            collider->direction.roll  = 0;
+            collider->center_point.x  = 0.0f;
+            collider->center_point.y  = 0.0f;
+            collider->center_point.z  = (((f32) i) * -25.0) + -25.0;
+            collider->size.x          = 25.0f;
+            collider->size.y          = 270.0f;
+        }
+
+        BITS_UNSET(inner->atari_base->flags, ATARI_WORK_ENABLE_PUSH_BACK_FORCE);
+        inner->obj_destroy_function = self->header.destroy;
+        self->header.destroy        = ElevatorDoor_Destroy;
+    }
+
+    self->field_0x6C = 0;
+
+    (*object_curLevel_goToNextFuncAndClearTimer)(
+        self->header.current_function, &self->header.function_info_ID
+    );
+
+    if (sys.SaveStruct_gameplay.spawn == 2) {
+        (*object_nextLevel_goToFunc)(
+            self->header.current_function, &self->header.function_info_ID, ELEVATOR_DOOR_MAIN_CLOSED
+        );
+    }
+}
+#else
+    #pragma GLOBAL_ASM("../asm/nonmatchings/overlay/map/honmaru_1f/ElevatorDoor_Init.s")
+#endif
+
+void ElevatorDoor_Main(ElevatorDoor* self) {
+    ElevatorDoorInner* inner = &self->inner;
+    Model* model             = self->model;
+
+    if ((*actor_playerOutsideActorSpawnRadius)(
+            (Actor*) self, model->position.x, model->position.y, model->position.z
+        )) {
+        self->header.destroy(self);
+        return;
+    }
+
+    model->primitive_color.integer = sys.primitive_color.integer;
+    model->fog_color.integer       = sys.background_color.integer;
+
+    ENTER(self, ElevatorDoor_main_functions);
+
+    if (BITS_HAS(map_misc_event_flags, HONMARU_1F_FLAG_PLAYER_IS_INSIDE_ELEVATOR)) {
+        inner->player_inside_elevator = TRUE;
+    } else {
+        inner->player_inside_elevator = FALSE;
+    }
+}
+
+void ElevatorDoor_Main_DeactivatedClosed(ElevatorDoor* self) {
+    ElevatorDoorInner* inner = &self->inner;
+    Model* model             = self->model;
+
+    if (CHECK_EVENT_FLAGS(
+            EVENT_FLAG_ID_CASTLE_CENTER_1F_2F, EVENT_FLAG_CASTLE_CENTER_1F_2F_ELEVATOR_ACTIVATED
+        )) {
+        BITS_UNSET(map_misc_event_flags, HONMARU_1F_FLAG_ELEVATOR_DOOR_IS_CLOSED);
+        BITS_UNSET(self->header.ID, OBJ_FLAG_ENABLE_COLLISION);
+        BITS_SET(inner->atari_base->flags, ATARI_WORK_ENABLE_PUSH_BACK_FORCE);
+        inner->player_inside_elevator = FALSE;
+        inner->slide_length           = 27.0f;
+        inner->speed                  = 0.0f;
+
+        (*play_sound_in_position)(SD_HONMARU_1F_DOOR_CLOSE, &model->position);
+        (*object_curLevel_goToNextFuncAndClearTimer)(
+            self->header.current_function, &self->header.function_info_ID
+        );
+    }
+}
+
+void ElevatorDoor_Main_Opening(ElevatorDoor* self) {
+    Model* model             = self->model;
+    ElevatorDoorInner* inner = &self->inner;
+
+    if (inner->speed < 0.9) {
+        inner->speed += 0.03;
+    }
+
+    inner->slide_length -= inner->speed;
+    if (inner->slide_length < 1.0) {
+        BITS_UNSET(inner->atari_base->flags, ATARI_WORK_ENABLE_PUSH_BACK_FORCE);
+        inner->field_0x10   = 60;
+        inner->slide_length = 1.0f;
+        inner->speed        = 0.0f;
+        (*object_curLevel_goToNextFuncAndClearTimer)(
+            self->header.current_function, &self->header.function_info_ID
+        );
+    }
+
+    model->size.z = (inner->slide_length / 27.0) / 10.0;
+}
+
+void ElevatorDoor_Main_IsPlayerOutOfElevator(ElevatorDoor* self) {
+    if (BITS_HAS(map_misc_event_flags, HONMARU_1F_FLAG_PLAYER_IS_OUTSIDE_ELEVATOR)) {
+        (*object_curLevel_goToNextFuncAndClearTimer)(
+            self->header.current_function, &self->header.function_info_ID
+        );
+    }
+}
+
+void ElevatorDoor_Main_Opened(ElevatorDoor* self) {
+    ElevatorDoorInner* inner = &self->inner;
+    Model* model             = self->model;
+
+    if (inner->player_inside_elevator == TRUE) {
+        (*play_sound_in_position)(SD_HONMARU_1F_DOOR_CLOSE, &model->position);
+        BITS_SET(inner->atari_base->flags, ATARI_WORK_ENABLE_PUSH_BACK_FORCE);
+        (*object_curLevel_goToNextFuncAndClearTimer)(
+            self->header.current_function, &self->header.function_info_ID
+        );
+    }
+}
+
+void ElevatorDoor_Main_Closing(ElevatorDoor* self) {
+    Model* model             = self->model;
+    ElevatorDoorInner* inner = &self->inner;
+
+    if (inner->speed < 0.9) {
+        inner->speed += 0.03;
+    }
+
+    inner->slide_length += inner->speed;
+    if (inner->slide_length > 27.0) {
+        BITS_SET(self->header.ID, OBJ_FLAG_ENABLE_COLLISION);
+        BITS_UNSET(inner->atari_base->flags, ATARI_WORK_ENABLE_PUSH_BACK_FORCE);
+        inner->slide_length = 27.0f;
+        inner->speed        = 0.0f;
+
+        if (BITS_HAS(map_misc_event_flags, HONMARU_1F_FLAG_PLAYER_IS_INSIDE_ELEVATOR)) {
+            BITS_SET(map_misc_event_flags, HONMARU_1F_FLAG_ELEVATOR_DOOR_IS_CLOSED);
+
+            (*object_curLevel_goToNextFuncAndClearTimer)(
+                self->header.current_function, &self->header.function_info_ID
+            );
+        } else {
+            (*play_sound_in_position)(SD_HONMARU_1F_DOOR_CLOSE, &model->position);
+            BITS_UNSET(map_misc_event_flags, HONMARU_1F_FLAG_ELEVATOR_DOOR_IS_CLOSED);
+            BITS_UNSET(self->header.ID, OBJ_FLAG_ENABLE_COLLISION);
+            BITS_SET(inner->atari_base->flags, ATARI_WORK_ENABLE_PUSH_BACK_FORCE);
+            inner->slide_length = 27.0f;
+            inner->speed        = 0.0f;
+
+            (*object_curLevel_goToFunc)(
+                self->header.current_function,
+                &self->header.function_info_ID,
+                ELEVATOR_DOOR_MAIN_OPENING
+            );
+        }
+    }
+
+    model->size.z = (inner->slide_length / 27.0) / 10.0;
+}
+
+void ElevatorDoor_Main_Closed(ElevatorDoor* self) {
+    Model* model             = self->model;
+    ElevatorDoorInner* inner = &self->inner;
+
+    if (BITS_HAS(map_misc_event_flags, HONMARU_1F_FLAG_ELEVATOR_IS_AT_THE_BOTTOM)) {
+        BITS_UNSET(map_misc_event_flags, HONMARU_1F_FLAG_ELEVATOR_DOOR_IS_CLOSED);
+        BITS_UNSET(self->header.ID, OBJ_FLAG_ENABLE_COLLISION);
+        BITS_SET(inner->atari_base->flags, ATARI_WORK_ENABLE_PUSH_BACK_FORCE);
+        inner->slide_length = 27.0f;
+        inner->speed        = 0.0f;
+        (*play_sound_in_position)(SD_HONMARU_1F_DOOR_CLOSE, &model->position);
+
+        (*object_curLevel_goToFunc)(
+            self->header.current_function,
+            &self->header.function_info_ID,
+            ELEVATOR_DOOR_MAIN_OPENING
+        );
+    }
+}
+
+void ElevatorDoor_Destroy(ElevatorDoor* self) {
+    ElevatorDoorInner* inner = &self->inner;
+
+    (*atariWork_markForDeletion)(inner->atari_base);
+    inner->obj_destroy_function(self);
 }

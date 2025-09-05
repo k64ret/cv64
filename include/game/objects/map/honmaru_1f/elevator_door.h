@@ -28,13 +28,13 @@ typedef struct ElevatorDoor {
 void ElevatorDoor_Entrypoint(ElevatorDoor* self);
 void ElevatorDoor_Init(ElevatorDoor* self);
 void ElevatorDoor_Main(ElevatorDoor* self);
-void ElevatorDoor_Main_BottomIdleOutsideElevatorDoor(ElevatorDoor* self);
-void ElevatorDoor_Main_Ascending(ElevatorDoor* self);
-void ElevatorDoor_Main_TopIdle(ElevatorDoor* self);
-void ElevatorDoor_Main_Descending(ElevatorDoor* self);
-void ElevatorDoor_Main_BottomIdleInsideElevatorDoor(ElevatorDoor* self);
-s32 ElevatorDoor_MoveActor(ElevatorDoor* self, Model* actor_model);
-s32 ElevatorDoor_IsPlayerInsideElevatorDoor(Model* model, Vec3f bounding_box[]);
+void ElevatorDoor_Main_DeactivatedClosed(ElevatorDoor* self);
+void ElevatorDoor_Main_Opening(ElevatorDoor* self);
+void ElevatorDoor_Main_IsPlayerOutOfElevator(ElevatorDoor* self);
+void ElevatorDoor_Main_Opened(ElevatorDoor* self);
+void ElevatorDoor_Main_Closing(ElevatorDoor* self);
+void ElevatorDoor_Main_Closed(ElevatorDoor* self);
+void ElevatorDoor_Destroy(ElevatorDoor* self);
 
 typedef void (*ElevatorDoorFunc)(ElevatorDoor*);
 
@@ -44,11 +44,11 @@ typedef enum ElevatorDoorFuncId {
 } ElevatorDoorFuncId;
 
 typedef enum ElevatorDoorMainFuncId {
-    ELEVATOR_DOOR_MAIN_BOTTOM_IDLE_OUTSIDE_ELEVATOR_DOOR,
-    ELEVATOR_DOOR_MAIN_ASCENDING,
-    ELEVATOR_DOOR_MAIN_TOP_IDLE,
-    ELEVATOR_DOOR_MAIN_DESCENDING,
-    ELEVATOR_DOOR_MAIN_BOTTOM_IDLE_INSIDE_ELEVATOR_DOOR,
+    ELEVATOR_DOOR_MAIN_DEACTIVATED_CLOSED,
+    ELEVATOR_DOOR_MAIN_OPENING,
+    ELEVATOR_DOOR_MAIN_IS_PLAYER_OUT_OF_ELEVATOR,
+    ELEVATOR_DOOR_MAIN_OPENED,
+    ELEVATOR_DOOR_MAIN_CLOSING,
     ELEVATOR_DOOR_MAIN_CLOSED
 } ElevatorDoorMainFuncId;
 
