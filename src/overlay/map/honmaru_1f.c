@@ -296,8 +296,6 @@ void ElevatorDoor_Entrypoint(ElevatorDoor* self) {
     ENTER(self, ElevatorDoor_functions);
 }
 
-// https://decomp.me/scratch/HQsfY
-#ifdef NON_MATCHING
 void ElevatorDoor_Init(ElevatorDoor* self) {
     ElevatorDoorInner* inner = &self->inner;
     Model* model;
@@ -339,8 +337,10 @@ void ElevatorDoor_Init(ElevatorDoor* self) {
             collider->center_point.x  = 0.0f;
             collider->center_point.y  = 0.0f;
             collider->center_point.z  = (((f32) i) * -25.0) + -25.0;
-            collider->size.x          = 25.0f;
-            collider->size.y          = 270.0f;
+            if (1) {
+            }
+            collider->size.x = 25.0f;
+            collider->size.y = 270.0f;
         }
 
         BITS_UNSET(inner->atari_base->flags, ATARI_WORK_ENABLE_PUSH_BACK_FORCE);
@@ -360,9 +360,6 @@ void ElevatorDoor_Init(ElevatorDoor* self) {
         );
     }
 }
-#else
-    #pragma GLOBAL_ASM("../asm/nonmatchings/overlay/map/honmaru_1f/ElevatorDoor_Init.s")
-#endif
 
 void ElevatorDoor_Main(ElevatorDoor* self) {
     ElevatorDoorInner* inner = &self->inner;
