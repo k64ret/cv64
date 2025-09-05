@@ -76,6 +76,17 @@ BleedingStatueBloodFunc BleedingStatueBlood_main_functions[] = {
     BleedingStatueBlood_Main_IdleBlood
 };
 
+BleedingStatueBloodSpotFunc BleedingStatueBloodSpot_functions[] = {
+    BleedingStatueBloodSpot_Init,
+    BleedingStatueBloodSpot_Main
+};
+
+BleedingStatueBloodSpotFunc BleedingStatueBloodSpot_main_functions[] = {
+    BleedingStatueBloodSpot_Main_NoBlood,
+    BleedingStatueBloodSpot_Main_SpillingBlood,
+    BleedingStatueBloodSpot_Main_IdleBlood
+};
+
 // clang-format on
 
 void Elevator1F_Entrypoint(Elevator* self) {
@@ -689,3 +700,93 @@ void BleedingStatueBlood_Main_IdleBlood(BleedingStatueBlood* self) {}
 void BleedingStatueBlood_Destroy(BleedingStatueBlood* self) {
     self->header.destroy(self);
 }
+
+void BleedingStatueBloodSpot_Entrypoint(BleedingStatueBloodSpot* self) {
+    ENTER(self, BleedingStatueBloodSpot_functions);
+}
+
+void BleedingStatueBloodSpot_Init(BleedingStatueBloodSpot* self) {
+    BleedingStatueBloodSpotInner* inner = &self->inner;
+    u32 dlist;
+    Model* model = self->model;
+    s32 temp;
+
+    model = (*Model_createAndSetChild)(
+        FIG_TYPE_ALLOW_TRANSPARENCY_CHANGE | FIG_TYPE_STANDALONE, map_lights[0]
+    );
+    self->model = model;
+    if (model) {
+    }
+    (*Actor_SetPosAndAngle)(self, model);
+    model->position.x += -0.75;
+    model->position.y += 0.25;
+
+    model->assets_file = MAP_ASSETS_FILE_ID;
+    dlist              = (u32) &HONMARU_1F_BLEEDING_STATUE_BLOOD_SPOT_DL;
+    model->dlist       = dlist;
+    BITS_SET(
+        model->flags,
+        FIG_FLAG_APPLY_FOG_COLOR | FIG_FLAG_APPLY_BLEND_COLOR | FIG_FLAG_APPLY_PRIMITIVE_COLOR
+    );
+    model->blend_color.integer     = RGBA(0, 0, 0, 255);
+    model->primitive_color.integer = RGBA(63, 0, 0, 0);
+    model->fog_color.integer       = RGBA(0, 0, 0, 191);
+    (*Model_setMapActorModelNoCollision)(model, dlist);
+
+    (*object_curLevel_goToNextFuncAndClearTimer)(
+        self->header.current_function, &self->header.function_info_ID
+    );
+
+    if (CHECK_EVENT_FLAGS(EVENT_FLAG_ID_CASTLE_CENTER_1F_2F, 1)) {
+        inner->blend_color_transparency = 0x80000;
+        (*object_nextLevel_goToFunc)(
+            self->header.current_function,
+            &self->header.function_info_ID,
+            BLEEDING_STATUE_BLOOD_SPOT_MAIN_IDLE_BLOOD
+        );
+    } else {
+        inner->blend_color_transparency = 0xFF0000;
+        BITS_UNSET(map_misc_event_flags, HONMARU_1F_FLAG_STATUE_FINISHED_BLEEDING);
+    }
+}
+
+void BleedingStatueBloodSpot_Main(BleedingStatueBloodSpot* self) {
+    Model* model                        = self->model;
+    BleedingStatueBloodSpotInner* inner = &self->inner;
+
+    if ((*actor_playerOutsideActorSpawnRadius)(
+            self, model->position.x, model->position.y, model->position.z
+        )) {
+        self->header.destroy(self);
+        return;
+    }
+
+    ENTER(self, BleedingStatueBloodSpot_main_functions);
+
+    model->blend_color.integer = (s32) inner->blend_color_transparency >> 0x10;
+}
+
+void BleedingStatueBloodSpot_Main_NoBlood(BleedingStatueBloodSpot* self) {
+    BleedingStatueBloodSpotInner* inner = &self->inner;
+
+    if (BITS_HAS(map_misc_event_flags, HONMARU_1F_FLAG_STATUE_FINISHED_BLEEDING)) {
+        inner->blend_color_transparency = 0xFF0000;
+        (*object_curLevel_goToNextFuncAndClearTimer)(
+            self->header.current_function, &self->header.function_info_ID
+        );
+    }
+}
+
+void BleedingStatueBloodSpot_Main_SpillingBlood(BleedingStatueBloodSpot* self) {
+    BleedingStatueBloodSpotInner* inner = &self->inner;
+
+    inner->blend_color_transparency -= 0xD999;
+    if (inner->blend_color_transparency < 0x80000) {
+        inner->blend_color_transparency = 0x80000;
+        (*object_curLevel_goToNextFuncAndClearTimer)(
+            self->header.current_function, &self->header.function_info_ID
+        );
+    }
+}
+
+void BleedingStatueBloodSpot_Main_IdleBlood(BleedingStatueBloodSpot* self) {}

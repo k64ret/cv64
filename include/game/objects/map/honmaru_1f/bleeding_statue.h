@@ -60,49 +60,54 @@ void BleedingStatueBlood_Main_IdleBlood(BleedingStatueBlood* self);
 
 typedef void (*BleedingStatueBloodFunc)(BleedingStatueBlood*);
 
-typedef enum BleedingStatueFuncId {
+typedef enum BleedingStatueBloodFuncId {
     BLEEDING_STATUE_BLOOD_INIT,
     BLEEDING_STATUE_BLOOD_MAIN
-} BleedingStatueFuncId;
+} BleedingStatueBloodFuncId;
 
-typedef enum BleedingStatueMainFuncId {
+typedef enum BleedingStatueBloodMainFuncId {
     BLEEDING_STATUE_BLOOD_MAIN_NO_BLOOD,
     BLEEDING_STATUE_BLOOD_MAIN_SPILLING_BLOOD,
     BLEEDING_STATUE_BLOOD_MAIN_IDLE_BLOOD
-} BleedingStatueMainFuncId;
+} BleedingStatueBloodMainFuncId;
 
 extern const u32 HONMARU_1F_BLEEDING_STATUE_BLOOD_DL;
 
+typedef struct BleedingStatueBloodSpotInner {
+    u8 field_0x00[4];
+    s32 blend_color_transparency;
+    u8 field_0x08[52];
+} BleedingStatueBloodSpotInner;
+
 // ID: 0x01CC
-typedef struct BleedingStatueBloodSpotSpot {
+typedef struct BleedingStatueBloodSpot {
     ObjectHeader header;
     u8 field_0x20[4];
     Model* model;
-    u8 field_0x28[16];
-    s32 blend_color_transparency;
-    u8 field_0x3C[52];
+    u8 field_0x28[12];
+    BleedingStatueBloodSpotInner inner;
     ActorConfig* settings;
 } BleedingStatueBloodSpot;
 
 void BleedingStatueBloodSpot_Entrypoint(BleedingStatueBloodSpot* self);
 void BleedingStatueBloodSpot_Init(BleedingStatueBloodSpot* self);
 void BleedingStatueBloodSpot_Main(BleedingStatueBloodSpot* self);
-void BleedingStatueBloodSpot_Main_Idle(BleedingStatueBloodSpot* self);
-void BleedingStatueBloodSpot_Main_InCutscene(BleedingStatueBloodSpot* self);
-void BleedingStatueBloodSpot_Main_AfterCutscene(BleedingStatueBloodSpot* self);
+void BleedingStatueBloodSpot_Main_NoBlood(BleedingStatueBloodSpot* self);
+void BleedingStatueBloodSpot_Main_SpillingBlood(BleedingStatueBloodSpot* self);
+void BleedingStatueBloodSpot_Main_IdleBlood(BleedingStatueBloodSpot* self);
 
 typedef void (*BleedingStatueBloodSpotFunc)(BleedingStatueBloodSpot*);
 
-typedef enum BleedingStatueFuncId {
+typedef enum BleedingStatueBloodSpotFuncId {
     BLEEDING_STATUE_BLOOD_SPOT_INIT,
     BLEEDING_STATUE_BLOOD_SPOT_MAIN
-} BleedingStatueFuncId;
+} BleedingStatueBloodSpotFuncId;
 
-typedef enum BleedingStatueMainFuncId {
-    BLEEDING_STATUE_BLOOD_SPOT_MAIN_IDLE,
-    BLEEDING_STATUE_BLOOD_SPOT_MAIN_IN_CUTSCENE,
-    BLEEDING_STATUE_BLOOD_SPOT_MAIN_AFTER_CUTSCENE
-} BleedingStatueMainFuncId;
+typedef enum BleedingStatueBloodSpotMainFuncId {
+    BLEEDING_STATUE_BLOOD_SPOT_MAIN_NO_BLOOD,
+    BLEEDING_STATUE_BLOOD_SPOT_MAIN_SPILLING_BLOOD,
+    BLEEDING_STATUE_BLOOD_SPOT_MAIN_IDLE_BLOOD
+} BleedingStatueBloodSpotMainFuncId;
 
 extern const u32 HONMARU_1F_BLEEDING_STATUE_BLOOD_SPOT_DL;
 
