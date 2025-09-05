@@ -17,6 +17,7 @@
 #include "objects/map/honmaru_1f/bleeding_statue.h"
 #include "objects/map/honmaru_1f/elevator_switch_effect_spawner.h"
 #include "event_flags.h"
+#include "random.h"
 #include "sound.h"
 #include "system_work.h"
 
@@ -790,3 +791,28 @@ void BleedingStatueBloodSpot_Main_SpillingBlood(BleedingStatueBloodSpot* self) {
 }
 
 void BleedingStatueBloodSpot_Main_IdleBlood(BleedingStatueBloodSpot* self) {}
+
+void ElevatorSwitchEffectSpawner_Entrypoint(ElevatorSwitchEffectSpawner* self) {
+    Effect* effect;
+    ActorConfig* settings = self->settings;
+
+    if (self->time_before_spawning_effect < 0) {
+        effect = (Effect*) (*createEffectObjectUnderEffectMgr)(
+            EFFECT_ID_PICKABLE_ITEM_FLASH, common_camera_effects, 0
+        );
+        if (effect != NULL) {
+            (*effect_setPosition)(
+                effect,
+                settings->position.x,
+                settings->position.y,
+                settings->position.z,
+                POSITION_EQUAL_TO_VISUAL_INFO
+            );
+        }
+
+        self->time_before_spawning_effect = (((*rand_f32)() * 5.0) + 3.0) * 30.0;
+        return;
+    }
+
+    self->time_before_spawning_effect--;
+}

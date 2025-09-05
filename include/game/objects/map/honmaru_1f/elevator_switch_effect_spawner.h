@@ -14,6 +14,4 @@ typedef struct ElevatorSwitchEffectSpawner {
 
 void ElevatorSwitchEffectSpawner_Entrypoint(ElevatorSwitchEffectSpawner* self);
 
-typedef void (*ElevatorSwitchEffectSpawnerFunc)(ElevatorSwitchEffectSpawner*);
-
 #endif
