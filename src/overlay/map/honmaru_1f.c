@@ -498,8 +498,6 @@ void BleedingStatue_Entrypoint(BleedingStatue* self) {
     ENTER(self, BleedingStatue_functions);
 }
 
-// https://decomp.me/scratch/muDHq
-#ifdef NON_MATCHING
 void BleedingStatue_Init(BleedingStatue* self) {
     Model* model = self->model;
     u32 dlist;
@@ -511,8 +509,8 @@ void BleedingStatue_Init(BleedingStatue* self) {
     }
     (*Actor_SetPosAndAngle)(self, model);
     model->assets_file = MAP_ASSETS_FILE_ID;
-    dlist              = (u32) &HONMARU_1F_BLEEDING_STATUE_DL;
-    model->dlist       = FIG_APPLY_VARIABLE_TEXTURE_AND_PALETTE(dlist);
+    dlist        = FIG_APPLY_VARIABLE_TEXTURE_AND_PALETTE((u32) &HONMARU_1F_BLEEDING_STATUE_DL);
+    model->dlist = dlist;
     BITS_SET(model->flags, FIG_FLAG_APPLY_FOG_COLOR | FIG_FLAG_APPLY_PRIMITIVE_COLOR);
     model->primitive_color.integer = sys.primitive_color.integer;
     model->fog_color.integer       = sys.background_color.integer;
@@ -538,9 +536,6 @@ void BleedingStatue_Init(BleedingStatue* self) {
         model->texture = model->palette = 0;
     }
 }
-#else
-    #pragma GLOBAL_ASM("../asm/nonmatchings/overlay/map/honmaru_1f/BleedingStatue_Init.s")
-#endif
 
 void BleedingStatue_Main(BleedingStatue* self) {
     Model* model = self->model;
