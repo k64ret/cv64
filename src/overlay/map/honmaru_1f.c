@@ -54,6 +54,17 @@ ElevatorDoorFunc ElevatorDoor_main_functions[] = {
     ElevatorDoor_Main_Closed
 };
 
+BleedingStatueFunc BleedingStatue_functions[] = {
+    BleedingStatue_Init,
+    BleedingStatue_Main
+};
+
+BleedingStatueFunc BleedingStatue_main_functions[] = {
+    BleedingStatue_Main_Idle,
+    BleedingStatue_Main_InCutscene,
+    BleedingStatue_Main_AfterCutscene
+};
+
 // clang-format on
 
 void Elevator1F_Entrypoint(Elevator* self) {

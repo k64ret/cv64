@@ -49,7 +49,7 @@ void Bekkan1FSquare_Init(Bekkan1FSquare* self) {
     model->dlist       = &BEKKAN_1F_SQUARE_DL;
     BITS_SET(model->flags, FIG_FLAG_APPLY_PRIMITIVE_COLOR);
     model->primitive_color.integer = sys.background_color.integer;
-    (*Model_setMapActorModelNoCollision)(model, &BEKKAN_1F_SQUARE_DL);
+    (*Model_setMapActorModelNoCollision)(model, BEKKAN_1F_SQUARE_DL);
 
     (*object_curLevel_goToNextFuncAndClearTimer)(
         self->header.current_function, &self->header.function_info_ID
@@ -102,7 +102,7 @@ void DecorativeChandelier_Init(DecorativeChandelier* self) {
     BITS_SET(model->flags, FIG_FLAG_APPLY_PRIMITIVE_COLOR | FIG_FLAG_APPLY_FOG_COLOR);
     model->primitive_color.integer = sys.primitive_color.integer;
     model->fog_color.integer       = sys.background_color.integer;
-    (*Model_setMapActorModelNoCollision)(model, &BEKKAN_1F_CHANDELIER_DECORATION_DL);
+    (*Model_setMapActorModelNoCollision)(model, BEKKAN_1F_CHANDELIER_DECORATION_DL);
 
     // Prepare pendant model
     model         = (*Model_createAndSetChild)(FIG_TYPE_STANDALONE, map_lights[0]);
@@ -116,7 +116,7 @@ void DecorativeChandelier_Init(DecorativeChandelier* self) {
     );
     model->primitive_color.integer = sys.primitive_color.integer;
     model->fog_color.integer       = sys.background_color.integer;
-    (*Model_setMapActorModelNoCollision)(model, &BEKKAN_1F_CHANDELIER_PENDANT_DL);
+    (*Model_setMapActorModelNoCollision)(model, BEKKAN_1F_CHANDELIER_PENDANT_DL);
 
     (*object_curLevel_goToNextFuncAndClearTimer)(
         self->header.current_function, &self->header.function_info_ID

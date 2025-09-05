@@ -21,6 +21,17 @@ void BleedingStatue_Main_AfterCutscene(BleedingStatue* self);
 
 typedef void (*BleedingStatueFunc)(BleedingStatue*);
 
+typedef enum BleedingStatueFuncId {
+    BLEEDING_STATUE_INIT,
+    BLEEDING_STATUE_MAIN
+} BleedingStatueFuncId;
+
+typedef enum BleedingStatueMainFuncId {
+    BLEEDING_STATUE_MAIN_IDLE,
+    BLEEDING_STATUE_MAIN_IN_CUTSCENE,
+    BLEEDING_STATUE_MAIN_AFTER_CUTSCENE
+} BleedingStatueMainFuncId;
+
 extern const u32 HONMARU_1F_BLEEDING_STATUE_DL;
 
 // ID: 0x01CB
@@ -44,6 +55,17 @@ void BleedingStatueBlood_Main_AfterCutscene(BleedingStatueBlood* self);
 
 typedef void (*BleedingStatueBloodFunc)(BleedingStatueBlood*);
 
+typedef enum BleedingStatueFuncId {
+    BLEEDING_STATUE_BLOOD_INIT,
+    BLEEDING_STATUE_BLOOD_MAIN
+} BleedingStatueFuncId;
+
+typedef enum BleedingStatueMainFuncId {
+    BLEEDING_STATUE_BLOOD_MAIN_IDLE,
+    BLEEDING_STATUE_BLOOD_MAIN_IN_CUTSCENE,
+    BLEEDING_STATUE_BLOOD_MAIN_AFTER_CUTSCENE
+} BleedingStatueMainFuncId;
+
 extern const u32 HONMARU_1F_BLEEDING_STATUE_BLOOD_DL;
 
 // ID: 0x01CC
@@ -65,6 +87,17 @@ void BleedingStatueBloodSpot_Main_InCutscene(BleedingStatueBloodSpot* self);
 void BleedingStatueBloodSpot_Main_AfterCutscene(BleedingStatueBloodSpot* self);
 
 typedef void (*BleedingStatueBloodSpotFunc)(BleedingStatueBloodSpot*);
+
+typedef enum BleedingStatueFuncId {
+    BLEEDING_STATUE_BLOOD_SPOT_INIT,
+    BLEEDING_STATUE_BLOOD_SPOT_MAIN
+} BleedingStatueFuncId;
+
+typedef enum BleedingStatueMainFuncId {
+    BLEEDING_STATUE_BLOOD_SPOT_MAIN_IDLE,
+    BLEEDING_STATUE_BLOOD_SPOT_MAIN_IN_CUTSCENE,
+    BLEEDING_STATUE_BLOOD_SPOT_MAIN_AFTER_CUTSCENE
+} BleedingStatueMainFuncId;
 
 extern const u32 HONMARU_1F_BLEEDING_STATUE_BLOOD_SPOT_DL;
 

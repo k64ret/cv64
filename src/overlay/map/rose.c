@@ -55,7 +55,7 @@ void cv64_ovl_rose_ventilator_init(cv64_ovl_rose_ventilator_t* self) {
         BITS_SET(model->flags, FIG_FLAG_APPLY_PRIMITIVE_COLOR | FIG_FLAG_APPLY_FOG_COLOR);
         model->primitive_color.integer = sys.primitive_color.integer;
         model->fog_color.integer       = sys.background_color.integer;
-        (*Model_setMapActorModelNoCollision)(model, &ROSE_VENTILATOR_DL);
+        (*Model_setMapActorModelNoCollision)(model, ROSE_VENTILATOR_DL);
         speed_settings->current_speed = speed_settings->max_speed =
             BITS_MASK((*rand)(), 0xFFF) + 16;
         speed_settings->time_until_changing_max_speed = BITS_MASK((*rand)(), 0x1FF) + 30;
