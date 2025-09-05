@@ -177,7 +177,7 @@ void Elevator1F_Main_BottomIdleOutsideElevator(Elevator* self) {
     ElevatorInner* inner = &self->inner;
     s32 temp;
 
-    if (!BITS_HAS(map_misc_event_flags, 2)) {
+    if (!BITS_HAS(map_misc_event_flags, HONMARU_1F_FLAG_ELEVATOR_DOOR_IS_CLOSED)) {
         return;
     }
 
@@ -645,7 +645,10 @@ void BleedingStatueBlood_Init(BleedingStatueBlood* self) {
         self->header.current_function, &self->header.function_info_ID
     );
 
-    if (CHECK_EVENT_FLAGS(EVENT_FLAG_ID_CASTLE_CENTER_1F_2F, 1)) {
+    if (CHECK_EVENT_FLAGS(
+            EVENT_FLAG_ID_CASTLE_CENTER_1F_2F,
+            EVENT_FLAG_CASTLE_CENTER_1F_2F_BLEEDING_STATUE_CUTSCENE_ACTIVATED
+        )) {
         inner->blend_color_transparency = 0x80000;
         (*object_nextLevel_goToFunc)(
             self->header.current_function,
@@ -741,7 +744,10 @@ void BleedingStatueBloodSpot_Init(BleedingStatueBloodSpot* self) {
         self->header.current_function, &self->header.function_info_ID
     );
 
-    if (CHECK_EVENT_FLAGS(EVENT_FLAG_ID_CASTLE_CENTER_1F_2F, 1)) {
+    if (CHECK_EVENT_FLAGS(
+            EVENT_FLAG_ID_CASTLE_CENTER_1F_2F,
+            EVENT_FLAG_CASTLE_CENTER_1F_2F_BLEEDING_STATUE_CUTSCENE_ACTIVATED
+        )) {
         inner->blend_color_transparency = 0x80000;
         (*object_nextLevel_goToFunc)(
             self->header.current_function,
