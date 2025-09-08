@@ -177,7 +177,7 @@ void Elevator1F_Main_BottomIdleOutsideElevator(Elevator* self) {
     ElevatorInner* inner = &self->inner;
     s32 temp;
 
-    if (!BITS_HAS(map_misc_event_flags, HONMARU_1F_FLAG_ELEVATOR_DOOR_IS_CLOSED)) {
+    if (BITS_NOT_HAS(map_misc_event_flags, HONMARU_1F_FLAG_ELEVATOR_DOOR_IS_CLOSED)) {
         return;
     }
 
@@ -585,7 +585,7 @@ void BleedingStatue_Main_Idle(BleedingStatue* self) {
 void BleedingStatue_Main_InCutscene(BleedingStatue* self) {
     Model* model = self->model;
 
-    if (!BITS_HAS(sys.cutscene_flags, CUTSCENE_FLAG_PLAYING)) {
+    if (BITS_NOT_HAS(sys.cutscene_flags, CUTSCENE_FLAG_PLAYING)) {
         model->texture = model->palette = 1;
 
         (*object_curLevel_goToFunc)(
