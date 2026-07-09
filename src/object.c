@@ -351,15 +351,15 @@ Object* func_80001BE4_27E4(ObjectID object_ID, Object* arg1) {
     }
 }
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/object/func_80001CA0_28A0.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/object/func_80001CA0_28A0.s")
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/object/func_80001DD4_29D4.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/object/func_80001DD4_29D4.s")
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/object/func_80001EB4_2AB4.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/object/func_80001EB4_2AB4.s")
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/object/findNextMapObjectInstance.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/object/findNextMapObjectInstance.s")
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/object/findFirstMapObjectInstance.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/object/findFirstMapObjectInstance.s")
 
 /**
  * This function either:
@@ -516,7 +516,7 @@ void object_execute(ObjectHeader* self) {
     }
 }
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/object/func_80002570_3170.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/object/func_80002570_3170.s")
 
 /**
  * Destroys the object and all of its children
@@ -568,6 +568,6 @@ void object_destroyChildrenAndModelInfo(ObjectHeader* self) {
  */
 void GameStateMgr_destroy(GameStateMgr* self) {}
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/object/func_800027BC_33BC.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/object/func_800027BC_33BC.s")
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/object/func_8000287C_347C.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/object/func_8000287C_347C.s")

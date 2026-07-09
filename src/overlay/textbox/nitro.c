@@ -23,7 +23,7 @@ cv64_ovl_nitrotxt_func_t cv64_ovl_nitrotxt_funcs[] = {
 
 const char cv64_ovl_nitrotxt_unused_str[] = "OK\n";
 
-static s32 cannot_collect_nitro(void);
+s32 cannot_collect_nitro(void);
 
 void cv64_ovl_nitrotxt_entrypoint(cv64_ovl_nitrotxt_t* self) {
     ENTER(self, cv64_ovl_nitrotxt_funcs);

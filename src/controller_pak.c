@@ -12,7 +12,7 @@ extern OSPfs pfs[MAXCONTROLLERS];
 extern OSPfs D_800D72F0_A85C0[MAXCONTROLLERS];
 extern u8 contpak_uninserted[MAXCONTROLLERS];
 
-static s32 check_inserted_err(u8 cont_no);
+s32 check_inserted_err(u8 cont_no);
 
 /**
  * Iterates through each controller checking if they have a controller pak inserted

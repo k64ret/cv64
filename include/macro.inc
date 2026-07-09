@@ -1,37 +1,67 @@
-# #ifndef VERSION_CN
-#    .set gp=64
-# #endif
+# This file is used by modern gas.
+# Defines the expected assembly macros
 
-# .equ K0BASE, 0x80000000
-# .equ K1BASE, 0xA0000000
-# .equ K2BASE, 0xC0000000
+# Evaluate this file only once in case it's included more than once
+.ifndef _MACRO_INC_GUARD
+.internal _MACRO_INC_GUARD
+.set _MACRO_INC_GUARD, 1
 
-# .macro glabel label
-#     .global \label
-#     .balign 4
-#     \label:
-# .endm
-
-.macro glabel label
-    .global \label
+# A function symbol.
+.macro glabel label, visibility=global
+    .\visibility \label
     .type \label, @function
     \label:
+        .ent \label
 .endm
 
-.macro dlabel label
-    .global \label
-    \label:
+# The end of a function symbol.
+.macro endlabel label
+    .size \label, . - \label
+    .end \label
 .endm
 
-.macro jlabel label
-    .global \label
+# An alternative entry to a function.
+.macro alabel label, visibility=global
+    .\visibility \label
     .type \label, @function
     \label:
+        .aent \label
 .endm
 
-# .macro .word32 x
-#     .word \x
-# .endm
+# A label referenced by an error handler table.
+.macro ehlabel label, visibility=global
+    .\visibility \label
+    \label:
+.endm
+
+
+# A label referenced by a jumptable.
+.macro jlabel label, visibility=global
+    .\visibility \label
+    \label:
+.endm
+
+
+# A data symbol.
+.macro dlabel label, visibility=global
+    .\visibility \label
+    .type \label, @object
+    \label:
+.endm
+
+# End of a data symbol.
+.macro enddlabel label
+    .size \label, . - \label
+.endm
+
+
+# Label to signal the symbol haven't been matched yet.
+.macro nonmatching label, size=1
+    .global \label\().NON_MATCHING
+    .type \label\().NON_MATCHING, @object
+    .size \label\().NON_MATCHING, \size
+    \label\().NON_MATCHING:
+.endm
 
 # COP0 register aliases
 
@@ -68,7 +98,7 @@
 .set ErrorEPC,      $30
 .set Reserved31,    $31
 
-# Float register aliases (o32 ABI, odd ones are rarely used)
+# Float register aliases
 
 .set $fv0,          $f0
 .set $fv0f,         $f1
@@ -102,3 +132,5 @@
 .set $fs4f,         $f29
 .set $fs5,          $f30
 .set $fs5f,         $f31
+
+.endif

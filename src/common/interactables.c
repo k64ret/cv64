@@ -36,7 +36,7 @@ InteractableFunc interactable_funcs[] = {
     Interactable_Destroy
 };
 
-static void Interactable_stopInteraction(Interactable* self);
+void Interactable_stopInteraction(Interactable* self);
 
 void Interactable_Entrypoint(Interactable* self) {
     ENTER(self, interactable_funcs);

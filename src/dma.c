@@ -15,7 +15,7 @@ void DMA_InitCart(void) {
     gCartHandle = osCartRomInit();
 }
 
-static void DMA_readWrite(OSPiHandle* piHandle, s32 direction, void* dest, void* src, s32 len) {
+void DMA_readWrite(OSPiHandle* piHandle, s32 direction, void* dest, void* src, s32 len) {
     if (direction == OS_READ) {
         osWritebackDCache(dest, len);
         osInvalDCache(dest, len);

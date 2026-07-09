@@ -21,7 +21,7 @@ cv64_ovl_mandragoratxt_func_t cv64_ovl_mandragoratxt_funcs[] = {
 
 // clang-format on
 
-static s32 cannot_collect_mandragora(void);
+s32 cannot_collect_mandragora(void);
 
 void cv64_ovl_mandragoratxt_entrypoint(cv64_ovl_mandragoratxt_t* self) {
     ENTER(self, cv64_ovl_mandragoratxt_funcs);

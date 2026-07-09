@@ -11,9 +11,9 @@
 #include "object.h"
 #include "system_work.h"
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/memory/memory_clear.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/memory/memory_clear.s")
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/memory/memory_copy.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/memory/memory_copy.s")
 
 void heap_init(
     HeapKind kind, HeapBlockHeader* first_block_ptr, s32 heap_size, u32 additional_flags
@@ -116,7 +116,7 @@ void* heap_alloc(HeapKind kind, u32 size) {
     return NULL;
 }
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/memory/heap_allocWithAlignment.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/memory/heap_allocWithAlignment.s")
 
 s32 heapBlock_updateBlockMaxSize(void* data, u32 size) {
     HeapBlockHeader* current_block_header =
@@ -181,29 +181,29 @@ void GraphicContainer_Free(void* ptr) {
     ((HeapBlockHeader*) temp)->flags = HEAP_BLOCK_FREE;
 }
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/memory/func_800010A0_1CA0.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/memory/func_800010A0_1CA0.s")
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/memory/func_800010C8_1CC8.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/memory/func_800010C8_1CC8.s")
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/memory/func_80001110_1D10.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/memory/func_80001110_1D10.s")
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/memory/func_80001148_1D48.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/memory/func_80001148_1D48.s")
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/memory/func_800011AC_1DAC.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/memory/func_800011AC_1DAC.s")
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/memory/func_800011DC_1DDC.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/memory/func_800011DC_1DDC.s")
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/memory/func_80001228_1E28.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/memory/func_80001228_1E28.s")
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/memory/func_80001260_1E60.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/memory/func_80001260_1E60.s")
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/memory/func_800012C0_1EC0.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/memory/func_800012C0_1EC0.s")
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/memory/func_800012D8_1ED8.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/memory/func_800012D8_1ED8.s")
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/memory/func_800012F4_1EF4.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/memory/func_800012F4_1EF4.s")
 
-#pragma GLOBAL_ASM("../asm/nonmatchings/memory/func_80001338_1F38.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/memory/func_80001338_1F38.s")
 
 void object_curLevel_goToNextFunc(ObjectFuncInfo current_functionInfo[], s16* function_info_ID) {
     u16* functionInfo_entry;

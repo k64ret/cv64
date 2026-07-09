@@ -30,8 +30,8 @@ void cv64_ovl_librarypuzzletxt_entrypoint(cv64_ovl_librarypuzzletxt_t* self) {
     ENTER(self, cv64_ovl_librarypuzzletxt_funcs);
 }
 
-static void print_selected_options(u16*, u16);
-static s32 select_next_option(s32*, u16*, u16*);
+void print_selected_options(u16*, u16);
+s32 select_next_option(s32*, u16*, u16*);
 
 void cv64_ovl_librarypuzzletxt_init(cv64_ovl_librarypuzzletxt_t* self) {
     ActorConfig* settings = self->settings;

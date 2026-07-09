@@ -94,7 +94,7 @@ void Fire_Init(Fire* self) {
     );
 }
 #else
-    #pragma GLOBAL_ASM("../asm/nonmatchings/effect/fire/Fire_Init.s")
+    #pragma GLOBAL_ASM("asm/nonmatchings/effect/fire/Fire_Init.s")
 #endif
 
 // https://decomp.me/scratch/sMEKL
@@ -126,7 +126,7 @@ void Fire_Loop(Fire* self) {
     }
 }
 #else
-    #pragma GLOBAL_ASM("../asm/nonmatchings/effect/fire/Fire_Loop.s")
+    #pragma GLOBAL_ASM("asm/nonmatchings/effect/fire/Fire_Loop.s")
 #endif
 
 void Fire_Destroy(Fire* self) {

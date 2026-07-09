@@ -20,9 +20,14 @@ options:
     - linker/symbol_addrs_makerom.txt
     - linker/symbol_addrs_overlays.txt
     - linker/symbol_addrs_assets.txt
+  reloc_addrs_path:
+    - linker/reloc_addrs.txt
   disassemble_all: false
   migrate_rodata_to_functions: false
   find_file_boundaries: true
+  asm_path: asm
+  src_path: src
+  nonmatchings_path: nonmatchings
   header_encoding: ASCII
   generated_c_preamble: |
     #include "cv64.h"
@@ -1942,81 +1947,114 @@ segments:
     exclusive_ram_id: nisitenma_ichigo_assets_smiley_face
 
   - name: ni_ovl_cerberus
-    type: bin
+    type: code
     # start: 0x00A1560C
     start: 0x00C95BA0
     vram: 0x0F000000
     exclusive_ram_id: nisitenma_ichigo_overlays
+    subsegments:
+      - [0x00C95BA0, asm, overlay/cerberus]
+      - [0x00C9C9E0, data, overlay/cerberus]
 
   - name: ni_ovl_white_dragon
-    type: bin
+    type: code
     # start: 0x00A20348
     start: 0x00CA39F0
     vram: 0x0F000000
     exclusive_ram_id: nisitenma_ichigo_overlays
+    subsegments:
+      - [0x00CA39F0, asm, overlay/white_dragon]
+      - [0x00CA8E00, data, overlay/white_dragon]
 
   - name: ni_ovl_gardener
-    type: bin
+    type: code
     # start: 0x00A253B6
     start: 0x00CAD050
     vram: 0x0F000000
     exclusive_ram_id: nisitenma_ichigo_overlays
+    subsegments:
+      - [0x00CAD050, asm, overlay/gardener]
+      - [0x00CAFFD0, data, overlay/gardener]
 
   - name: ni_ovl_stone_dog
-    type: bin
+    type: code
     # start: 0x00A2945C
     start: 0x00CB2650
     vram: 0x0F000000
     exclusive_ram_id: nisitenma_ichigo_overlays
+    subsegments:
+      - [0x00CB2650, asm, overlay/stone_dog]
+      - [0x00CB6D00, data, overlay/stone_dog]
 
   - name: ni_ovl_malus
-    type: bin
+    type: code
     # start: 0x00A2DE52
     start: 0x00CB8C00
     vram: 0x0F000000
     exclusive_ram_id: nisitenma_ichigo_overlays
+    subsegments:
+      - [0x00CB8C00, asm, overlay/malus]
+      - [0x00CBAE40, data, overlay/malus]
 
   - name: ni_ovl_behemoth
-    type: bin
+    type: code
     # start: 0x00A31B06
     start: 0x00CC00B0
     vram: 0x0F000000
     exclusive_ram_id: nisitenma_ichigo_overlays
+    subsegments:
+      - [0x00CC00B0, asm, overlay/behemoth]
+      - [0x00CD0800, data, overlay/behemoth]
 
   - name: ni_ovl_weretiger
-    type: bin
+    type: code
     # start: 0x00A41292
     start: 0x00CD6550
     vram: 0x0F000000
     exclusive_ram_id: nisitenma_ichigo_overlays
+    subsegments:
+      - [0x00CD6550, asm, overlay/weretiger]
+      - [0x00CDC3F0, data, overlay/weretiger]
 
   - name: ni_ovl_werewolf
-    type: bin
+    type: code
     # start: 0x00A45FFA
     start: 0x00CDCB40
     vram: 0x0F000000
     exclusive_ram_id: nisitenma_ichigo_overlays
+    subsegments:
+      - [0x00CDCB40, asm, overlay/werewolf]
+      - [0x00CE3780, data, overlay/werewolf]
 
   - name: ni_ovl_hell_knight
-    type: bin
+    type: code
     # start: 0x00A4C58C
     start: 0x00CE4C30
     vram: 0x0F000000
     exclusive_ram_id: nisitenma_ichigo_overlays
+    subsegments:
+      - [0x00CE4C30, asm, overlay/hell_knight]
+      - [0x00CE8BB0, data, overlay/hell_knight]
 
   - name: ni_ovl_ghost
-    type: bin
+    type: code
     # start: 0x00A52788
     start: 0x00CECE90
     vram: 0x0F000000
     exclusive_ram_id: nisitenma_ichigo_overlays
+    subsegments:
+      - [0x00CECE90, asm, overlay/ghost]
+      - [0x00CEF860, data, overlay/ghost]
 
   - name: ni_ovl_iceman
-    type: bin
+    type: code
     # start: 0x00A54ABA
     start: 0x00CEFC10
     vram: 0x0F000000
     exclusive_ram_id: nisitenma_ichigo_overlays
+    subsegments:
+      - [0x00CEFC10, asm, overlay/iceman]
+      - [0x00CF4D00, data, overlay/iceman]
 
   - name: ni_ovl_icemanAssetsLoader
     type: code
@@ -2039,158 +2077,224 @@ segments:
       - [0x00CF6470, .data, overlay/opening_bat]
 
   - name: ni_ovl_flying_skull
-    type: bin
+    type: code
     # start: 0x00A59542
     start: 0x00CF64F0
     vram: 0x0F000000
     exclusive_ram_id: nisitenma_ichigo_overlays
+    subsegments:
+      - [0x00CF64F0, asm, overlay/flying_skull]
+      - [0x00CF8E20, data, overlay/flying_skull]
 
   - name: ni_ovl_bat
-    type: bin
+    type: code
     # start: 0x00A5B666
     start: 0x00CF8F50
     vram: 0x0F000000
     exclusive_ram_id: nisitenma_ichigo_overlays
+    subsegments:
+      - [0x00CF8F50, asm, overlay/bat]
+      - [0x00CFC250, data, overlay/bat]
 
   - name: ni_ovl_medusa_head
-    type: bin
+    type: code
     # start: 0x00A5E06C
     start: 0x00CFC360
     vram: 0x0F000000
     exclusive_ram_id: nisitenma_ichigo_overlays
+    subsegments:
+      - [0x00CFC360, asm, overlay/medusa_head]
+      - [0x00CFDC30, data, overlay/medusa_head]
 
   - name: ni_ovl_pillar_of_bones
-    type: bin
+    type: code
     # start: 0x00A5F57E
     start: 0x00CFDD90
     vram: 0x0F000000
     exclusive_ram_id: nisitenma_ichigo_overlays
+    subsegments:
+      - [0x00CFDD90, asm, overlay/pillar_of_bones]
+      - [0x00D01A90, data, overlay/pillar_of_bones]
 
   - name: ni_ovl_vampires
-    type: bin
+    type: code
     # start: 0x00A62486
     start: 0x00D01E00
     vram: 0x0F000000
     exclusive_ram_id: nisitenma_ichigo_overlays
+    subsegments:
+      - [0x00D01E00, asm, overlay/vampires]
+      - [0x00D1E5E0, data, overlay/vampires]
 
   - name: ni_ovl_vincent_npc
-    type: bin
+    type: code
     # start: 0x00A7A708
     start: 0x00D235F0
     vram: 0x0F000000
     exclusive_ram_id: nisitenma_ichigo_overlays
+    subsegments:
+      - [0x00D235F0, asm, overlay/vincent_npc]
+      - [0x00D25410, data, overlay/vincent_npc]
 
-  - name: ni_A7C0FE
-    type: bin
+  - name: ni_ovl_A7C0FE
+    type: code
     # start: 0x00A7C0FE
     start: 0x00D25CA0
     vram: 0x0F000000
     exclusive_ram_id: nisitenma_ichigo_overlays
+    subsegments:
+      - [0x00D25CA0, asm, overlay/A7C0FE]
+      - [0x00D267F0, data, overlay/A7C0FE]
 
-  - name: ni_A7C8C4
-    type: bin
+  - name: ni_ovl_A7C8C4
+    type: code
     # start: 0x00A7C8C4
     start: 0x00D26970
     vram: 0x0F000000
     exclusive_ram_id: nisitenma_ichigo_overlays
+    subsegments:
+      - [0x00D26970, asm, overlay/A7C8C4]
+      - [0x00D27EF0, data, overlay/A7C8C4]
 
-  - name: ni_A7D81A
-    type: bin
+  - name: ni_ovl_A7D81A
+    type: code
     # start: 0x00A7D81A
     start: 0x00D281A0
     vram: 0x0F000000
     exclusive_ram_id: nisitenma_ichigo_overlays
+    subsegments:
+      - [0x00D281A0, asm, overlay/A7D81A]
+      - [0x00D28550, data, overlay/A7D81A]
 
-  - name: ni_A7DBB0
-    type: bin
+  - name: ni_ovl_A7DBB0
+    type: code
     # start: 0x00A7DBB0
     start: 0x00D28600
     vram: 0x0F000000
     exclusive_ram_id: nisitenma_ichigo_overlays
+    subsegments:
+      - [0x00D28600, asm, overlay/A7DBB0]
+      - [0x00D28E00, data, overlay/A7DBB0]
 
-  - name: ni_A7E2DA
-    type: bin
+  - name: ni_ovl_A7E2DA
+    type: code
     # start: 0x00A7E2DA
     start: 0x00D28FE0
     vram: 0x0F000000
     exclusive_ram_id: nisitenma_ichigo_overlays
+    subsegments:
+      - [0x00D28FE0, asm, overlay/A7E2DA]
+      - [0x00D29290, data, overlay/A7E2DA]
 
   - name: ni_ovl_spider_centaur
-    type: bin
+    type: code
     # start: 0x00A7E37A
     start: 0x00D292A0
     vram: 0x0F000000
     exclusive_ram_id: nisitenma_ichigo_overlays
+    subsegments:
+      - [0x00D292A0, asm, overlay/spider_centaur]
+      - [0x00D30B60, data, overlay/spider_centaur]
 
   - name: ni_ovl_heavy_lizard_man
-    type: bin
+    type: code
     # start: 0x00A86CA6
     start: 0x00D35E60
     vram: 0x0F000000
     exclusive_ram_id: nisitenma_ichigo_overlays
+    subsegments:
+      - [0x00D35E60, asm, overlay/heavy_lizard_man]
+      - [0x00D405C0, data, overlay/heavy_lizard_man]
 
   - name: ni_ovl_skeleton_warrior
-    type: bin
+    type: code
     # start: 0x00A92912
     start: 0x00D46850
     vram: 0x0F000000
     exclusive_ram_id: nisitenma_ichigo_overlays
+    subsegments:
+      - [0x00D46850, asm, overlay/skeleton_warrior]
+      - [0x00D51E70, data, overlay/skeleton_warrior]
 
   - name: ni_ovl_king_skeleton
-    type: bin
+    type: code
     # start: 0x00A9B874
     start: 0x00D53570
     vram: 0x0F000000
     exclusive_ram_id: nisitenma_ichigo_overlays
+    subsegments:
+      - [0x00D53570, asm, overlay/king_skeleton]
+      - [0x00D59010, data, overlay/king_skeleton]
 
   - name: ni_ovl_skeleton_biker
-    type: bin
+    type: code
     # start: 0x00AA39BA
     start: 0x00D5DC90
     vram: 0x0F000000
     exclusive_ram_id: nisitenma_ichigo_overlays
+    subsegments:
+      - [0x00D5DC90, asm, overlay/skeleton_biker]
+      - [0x00D63310, data, overlay/skeleton_biker]
 
   - name: ni_ovl_true_dracula
-    type: bin
+    type: code
     # start: 0x00AA8B64
     start: 0x00D65290
     vram: 0x0F000000
     exclusive_ram_id: nisitenma_ichigo_overlays
+    subsegments:
+      - [0x00D65290, asm, overlay/true_dracula]
+      - [0x00D6D120, data, overlay/true_dracula]
 
-  - name: ni_AB029E
-    type: bin
+  - name: ni_ovl_AB029E
+    type: code
     # start: 0x00AB029E
     start: 0x00D6F6D0
     vram: 0x0F000000
     exclusive_ram_id: nisitenma_ichigo_overlays
+    subsegments:
+      - [0x00D6F6D0, asm, overlay/AB029E]
+      - [0x00D70C00, data, overlay/AB029E]
 
-  - name: ni_AB10D4
-    type: bin
+  - name: ni_ovl_AB10D4
+    type: code
     # start: 0x00AB10D4
     start: 0x00D70CA0
     vram: 0x0F000000
     exclusive_ram_id: nisitenma_ichigo_overlays
+    subsegments:
+      - [0x00D70CA0, asm, overlay/AB10D4]
+      - [0x00D77A60, data, overlay/AB10D4]
 
   - name: ni_ovl_cutscene_02
-    type: bin
+    type: code
     # start: 0x00AB6C90
     start: 0x00D780E0
     vram: 0x0F000000
     exclusive_ram_id: nisitenma_ichigo_overlays
+    subsegments:
+      - [0x00D780E0, asm, overlay/cutscene_02]
+      - [0x00D795E0, data, overlay/cutscene_02]
 
   - name: ni_ovl_malus_horse
-    type: bin
+    type: code
     # start: 0x00ABAB3E
     start: 0x00D7E960
     vram: 0x0F000000
     exclusive_ram_id: nisitenma_ichigo_overlays
+    subsegments:
+      - [0x00D7E960, asm, overlay/malus_horse]
+      - [0x00D7EFA0, data, overlay/malus_horse]
 
   - name: ni_ovl_demon_dracula
-    type: bin
+    type: code
     # start: 0x00ABD154
     start: 0x00D81D90
     vram: 0x0F000000
     exclusive_ram_id: nisitenma_ichigo_overlays
+    subsegments:
+      - [0x00D81D90, asm, overlay/demon_dracula]
+      - [0x00D8B390, data, overlay/demon_dracula]
 
   - name: ni_ovl_demon_dracula_assets_loader
     type: code
@@ -2201,166 +2305,235 @@ segments:
     subsegments:
       - [0x00DA6B60, c, overlay/demon_dracula_assets_loader]
 
-  - name: ni_AD7B28
-    type: bin
+  - name: ni_ovl_AD7B28
+    type: code
     # start: 0x00AD7B28
     start: 0x00DA6B70
     vram: 0x0F000000
     exclusive_ram_id: nisitenma_ichigo_overlays
+    subsegments:
+      - [0x00DA6B70, asm, overlay/AD7B28]
+      - [0x00DB1690, data, overlay/AD7B28]
 
-  - name: ni_AE04FC
-    type: bin
+  - name: ni_ovl_AE04FC
+    type: code
     # start: 0x00AE04FC
     start: 0x00DB1C90
     vram: 0x0F000000
     exclusive_ram_id: nisitenma_ichigo_overlays
+    subsegments:
+      - [0x00DB1C90, asm, overlay/AE04FC]
+      - [0x00DB8DB0, data, overlay/AE04FC]
 
   - name: ni_ovl_gilles_de_rais_boss
-    type: bin
+    type: code
     # start: 0x00AE615A
     start: 0x00DB91F0
     vram: 0x0F000000
     exclusive_ram_id: nisitenma_ichigo_overlays
+    subsegments:
+      - [0x00DB91F0, asm, overlay/gilles_de_rais_boss]
+      - [0x00DC5670, data, overlay/gilles_de_rais_boss]
 
-  - name: ni_AF1332
-    type: bin
+  - name: ni_ovl_AF1332
+    type: code
     # start: 0x00AF1332
     start: 0x00DCA500
     vram: 0x0F000000
     exclusive_ram_id: nisitenma_ichigo_overlays
+    subsegments:
+      - [0x00DCA500, asm, overlay/AF1332]
+      - [0x00DCB460, data, overlay/AF1332]
 
   - name: ni_ovl_demon_renon
-    type: bin
+    type: code
     # start: 0x00AF3D12
     start: 0x00DCE070
     vram: 0x0F000000
     exclusive_ram_id: nisitenma_ichigo_overlays
+    subsegments:
+      - [0x00DCE070, asm, overlay/demon_renon]
+      - [0x00DE0330, data, overlay/demon_renon]
 
   - name: ni_ovl_death
-    type: bin
+    type: code
     # start: 0x00B04E80
     start: 0x00DE5760
     vram: 0x0F000000
     exclusive_ram_id: nisitenma_ichigo_overlays
+    subsegments:
+      - [0x00DE5760, asm, overlay/death]
+      - [0x00DFA790, data, overlay/death]
 
-  - name: ni_B175D4
-    type: bin
+  - name: ni_ovl_B175D4
+    type: code
     # start: 0x00B175D4
     start: 0x00E00200
     vram: 0x0F000000
     exclusive_ram_id: nisitenma_ichigo_overlays
+    subsegments:
+      - [0x00E00200, asm, overlay/B175D4]
+      - [0x00E04E70, data, overlay/B175D4]
 
   - name: ni_ovl_rosa_boss
-    type: bin
+    type: code
     # start: 0x00B1B050
     start: 0x00E05600
     vram: 0x0F000000
     exclusive_ram_id: nisitenma_ichigo_overlays
+    subsegments:
+      - [0x00E05600, asm, overlay/rosa_boss]
+      - [0x00E0FCC0, data, overlay/rosa_boss]
 
   - name: ni_ovl_camilla_boss
-    type: bin
+    type: code
     # start: 0x00B27886
     start: 0x00E166E0
     vram: 0x0F000000
     exclusive_ram_id: nisitenma_ichigo_overlays
+    subsegments:
+      - [0x00E166E0, asm, overlay/camilla_boss]
+      - [0x00E20850, data, overlay/camilla_boss]
 
   - name: ni_ovl_actrise_boss
-    type: bin
+    type: code
     # start: 0x00B31224
     start: 0x00E22AA0
     vram: 0x0F000000
     exclusive_ram_id: nisitenma_ichigo_overlays
+    subsegments:
+      - [0x00E22AA0, asm, overlay/actrise_boss]
+      - [0x00E2CE90, data, overlay/actrise_boss]
 
-  - name: ni_B3A734
-    type: bin
+  - name: ni_ovl_B3A734
+    type: code
     # start: 0x00B3A734
     start: 0x00E2EB00
     vram: 0x0F000000
     exclusive_ram_id: nisitenma_ichigo_overlays
+    subsegments:
+      - [0x00E2EB00, asm, overlay/B3A734]
+      - [0x00E38B90, data, overlay/B3A734]
 
-  - name: ni_B42D50
-    type: bin
+  - name: ni_ovl_B42D50
+    type: code
     # start: 0x00B42D50
     start: 0x00E395E0
     vram: 0x0F000000
     exclusive_ram_id: nisitenma_ichigo_overlays
+    subsegments:
+      - [0x00E395E0, asm, overlay/B42D50]
+      - [0x00E3B2C0, data, overlay/B42D50]
 
-  - name: ni_B44694
-    type: bin
+  - name: ni_ovl_B44694
+    type: code
     # start: 0x00B44694
     start: 0x00E3B5B0
     vram: 0x0F000000
     exclusive_ram_id: nisitenma_ichigo_overlays
+    subsegments:
+      - [0x00E3B5B0, asm, overlay/B44694]
+      - [0x00E3B990, data, overlay/B44694]
 
-  - name: ni_B449CE
-    type: bin
+  - name: ni_ovl_B449CE
+    type: code
     # start: 0x00B449CE
     start: 0x00E3BA60
     vram: 0x0F000000
     exclusive_ram_id: nisitenma_ichigo_overlays
+    subsegments:
+      - [0x00E3BA60, asm, overlay/B449CE]
+      - [0x00E3EAF0, data, overlay/B449CE]
 
-  - name: ni_B47542
-    type: bin
+  - name: ni_ovl_B47542
+    type: code
     # start: 0x00B47542
     start: 0x00E3ED50
     vram: 0x0F000000
     exclusive_ram_id: nisitenma_ichigo_overlays
+    subsegments:
+      - [0x00E3ED50, asm, overlay/B47542]
+      - [0x00E3FE10, data, overlay/B47542]
 
   - name: ni_ovl_hell_knight_static
-    type: bin
+    type: code
     # start: 0x00B484B2
     start: 0x00E40080
     vram: 0x0F000000
     exclusive_ram_id: nisitenma_ichigo_overlays
+    subsegments:
+      - [0x00E40080, asm, overlay/hell_knight_static]
+      - [0x00E40880, data, overlay/hell_knight_static]
 
-  - name: ni_gondola_pathway_data_loader
-    type: bin
+  - name: ni_ovl_gondola_pathway_data_loader
+    type: code
     # start: 0x00B48BE0
     start: 0x00E40A30
     vram: 0x0F000000
     exclusive_ram_id: nisitenma_ichigo_overlays
+    subsegments:
+      - [0x00E40A30, asm, overlay/gondola_pathway_data_loader]
+      - [0x00E40A40, data, overlay/gondola_pathway_data_loader]
 
   - name: ni_ovl_mini_scroll
-    type: bin
+    type: code
     # start: 0x00B4F7DC
     start: 0x00E4DD00
     vram: 0x0F000000
     exclusive_ram_id: nisitenma_ichigo_overlays
+    subsegments:
+      - [0x00E4DD00, asm, overlay/mini_scroll]
+      - [0x00E4EFF0, data, overlay/mini_scroll]
 
-  - name: ni_B50812
-    type: bin
+  - name: ni_ovl_B50812
+    type: code
     # start: 0x00B50812
     start: 0x00E4F320
     vram: 0x0F000000
     exclusive_ram_id: nisitenma_ichigo_overlays
+    subsegments:
+      - [0x00E4F320, asm, overlay/B50812]
+      - [0x00E4FBE0, data, overlay/B50812]
 
-  - name: ni_B5140E
-    type: bin
+  - name: ni_ovl_B5140E
+    type: code
     # start: 0x00B5140E
     start: 0x00E509C0
     vram: 0x0F000000
     exclusive_ram_id: nisitenma_ichigo_overlays
+    subsegments:
+      - [0x00E509C0, asm, overlay/B5140E]
+      - [0x00E50D00, data, overlay/B5140E]
 
   - name: ni_ovl_title_screen
-    type: bin
+    type: code
     # start: 0x00B5166E
     start: 0x00E50D40
     vram: 0x0F000000
     exclusive_ram_id: nisitenma_ichigo_overlays
+    subsegments:
+      - [0x00E50D40, asm, overlay/title_screen]
+      - [0x00E526A0, data, overlay/title_screen]
 
-  - name: ni_B528BA
-    type: bin
+  - name: ni_ovl_B528BA
+    type: code
     # start: 0x00B528BA
     start: 0x00E52700
     vram: 0x0F000000
     exclusive_ram_id: nisitenma_ichigo_overlays
+    subsegments:
+      - [0x00E52700, asm, overlay/B528BA]
+      - [0x00E52BE0, data, overlay/B528BA]
 
-  - name: ni_B52BE4
-    type: bin
+  - name: ni_ovl_B52BE4
+    type: code
     # start: 0x00B52BE4
     start: 0x00E52C10
     vram: 0x0F000000
     exclusive_ram_id: nisitenma_ichigo_overlays
+    subsegments:
+      - [0x00E52C10, asm, overlay/B52BE4]
+      - [0x00E530E0, data, overlay/B52BE4]
 
   - name: ni_ovl_title_demo
     type: code
@@ -2406,32 +2579,44 @@ segments:
       - [0x00E59CA0, .rodata, overlay/difficulty_and_character_select]
 
   - name: ni_ovl_game_over
-    type: bin
+    type: code
     # start: 0x00B57480
     start: 0x00E59CF0
     vram: 0x0F000000
     exclusive_ram_id: nisitenma_ichigo_overlays
+    subsegments:
+      - [0x00E59CF0, asm, overlay/game_over]
+      - [0x00E5BAB0, data, overlay/game_over]
 
   - name: ni_ovl_save_game_results
-    type: bin
+    type: code
     # start: 0x00B5892A
     start: 0x00E5C1D0
     vram: 0x0F000000
     exclusive_ram_id: nisitenma_ichigo_overlays
+    subsegments:
+      - [0x00E5C1D0, asm, overlay/save_game_results]
+      - [0x00E5C650, data, overlay/save_game_results]
 
-  - name: ni_B59058
-    type: bin
+  - name: ni_ovl_B59058
+    type: code
     # start: 0x00B59058
     start: 0x00E5CF30
     vram: 0x0F000000
     exclusive_ram_id: nisitenma_ichigo_overlays
+    subsegments:
+      - [0x00E5CF30, asm, overlay/B59058]
+      - [0x00E5D4B0, data, overlay/B59058]
 
   - name: ni_ovl_save_game
-    type: bin
+    type: code
     # start: 0x00B594F2
     start: 0x00E5D4D0
     vram: 0x0F000000
     exclusive_ram_id: nisitenma_ichigo_overlays
+    subsegments:
+      - [0x00E5D4D0, asm, overlay/save_game]
+      - [0x00E5ECE0, data, overlay/save_game]
 
   - name: ni_ovl_textbox_advance_arrow
     type: code
@@ -2445,11 +2630,14 @@ segments:
       - [0x00E5F640, .rodata, overlay/textbox_advance_arrow]
 
   - name: ni_ovl_button_config
-    type: bin
+    type: code
     # start: 0x00B5A448
     start: 0x00E5F660
     vram: 0x0F000000
     exclusive_ram_id: nisitenma_ichigo_overlays
+    subsegments:
+      - [0x00E5F660, asm, overlay/button_config]
+      - [0x00E60110, data, overlay/button_config]
 
   - name: ni_ovl_entrance_map_name_display
     type: code
@@ -2462,12 +2650,15 @@ segments:
       - [0x00E60A70, .data, overlay/entrance_map_name_display]
       - [0x00E60DA0, .rodata, overlay/entrance_map_name_display]
 
-  - name: ni_B5B5D0
-    type: bin
+  - name: ni_ovl_B5B5D0
+    type: code
     # start: 0x00B5B5D0
     start: 0x00E60DB0
     vram: 0x0F000000
     exclusive_ram_id: nisitenma_ichigo_overlays
+    subsegments:
+      - [0x00E60DB0, asm, overlay/B5B5D0]
+      - [0x00E61270, data, overlay/B5B5D0]
 
   - name: ni_ovl_renon_briefcase
     type: code
@@ -2511,11 +2702,14 @@ segments:
       - [0x00E62B90, .data, overlay/textbox/library_puzzle]
 
   - name: ni_ovl_nitro_mandragora_display
-    type: bin
+    type: code
     # start: 0x00B5CDDA
     start: 0x00E62BB0
     vram: 0x0E000000
     exclusive_ram_id: nisitenma_ichigo_cutscenes
+    subsegments:
+      - [0x00E62BB0, asm, overlay/nitro_mandragora_display]
+      - [0x00E63060, data, overlay/nitro_mandragora_display]
 
   - name: ni_ovl_mandragora_textbox
     type: code
@@ -2548,7 +2742,7 @@ segments:
       - [0x00E639F0, c, overlay/textbox/nitro_disposal]
       - [0x00E63DF0, .data, overlay/textbox/nitro_disposal]
 
-  - name: ni_explosive_wall_spot
+  - name: ni_ovl_explosive_wall_spot
     type: code
     # start: 0x00B5DBAE
     start: 0x00E63E10
@@ -2579,305 +2773,434 @@ segments:
       - [0x00E65450, .data, overlay/cs_film_reel]
 
   - name: ni_ovl_cutscene_01
-    type: bin
+    type: code
     # start: 0x00B5EA7E
     start: 0x00E65460
     vram: 0x0E000000
     exclusive_ram_id: nisitenma_ichigo_cutscenes
+    subsegments:
+      - [0x00E65460, asm, overlay/cutscene_01]
+      - [0x00E6B0D0, data, overlay/cutscene_01]
 
   - name: ni_ovl_cutscene_03
-    type: bin
+    type: code
     # start: 0x00B625C0
     start: 0x00E6B870
     vram: 0x0E000000
     exclusive_ram_id: nisitenma_ichigo_cutscenes
+    subsegments:
+      - [0x00E6B870, asm, overlay/cutscene_03]
+      - [0x00E6C740, data, overlay/cutscene_03]
 
   - name: ni_ovl_cutscene_04
-    type: bin
+    type: code
     # start: 0x00B63994
     start: 0x00E6D130
     vram: 0x0E000000
     exclusive_ram_id: nisitenma_ichigo_cutscenes
+    subsegments:
+      - [0x00E6D130, asm, overlay/cutscene_04]
+      - [0x00E6DB30, data, overlay/cutscene_04]
 
   - name: ni_ovl_cutscene_05
-    type: bin
+    type: code
     # start: 0x00B64CCA
     start: 0x00E6E790
     vram: 0x0E000000
     exclusive_ram_id: nisitenma_ichigo_cutscenes
+    subsegments:
+      - [0x00E6E790, asm, overlay/cutscene_05]
+      - [0x00E6F980, data, overlay/cutscene_05]
 
   - name: ni_ovl_cutscene_06
-    type: bin
+    type: code
     # start: 0x00B65D52
     start: 0x00E6FDA0
     vram: 0x0E000000
     exclusive_ram_id: nisitenma_ichigo_cutscenes
+    subsegments:
+      - [0x00E6FDA0, asm, overlay/cutscene_06]
+      - [0x00E70E80, data, overlay/cutscene_06]
 
   - name: ni_ovl_cutscene_07
-    type: bin
+    type: code
     # start: 0x00B66CFC
     start: 0x00E71150
     vram: 0x0E000000
     exclusive_ram_id: nisitenma_ichigo_cutscenes
+    subsegments:
+      - [0x00E71150, asm, overlay/cutscene_07]
+      - [0x00E71D70, data, overlay/cutscene_07]
 
   - name: ni_ovl_cutscene_08
-    type: bin
+    type: code
     # start: 0x00B67660
     start: 0x00E71F00
     vram: 0x0E000000
     exclusive_ram_id: nisitenma_ichigo_cutscenes
+    subsegments:
+      - [0x00E71F00, asm, overlay/cutscene_08]
+      - [0x00E72790, data, overlay/cutscene_08]
 
   - name: ni_ovl_cutscene_09
-    type: bin
+    type: code
     # start: 0x00B67EF2
     start: 0x00E72A20
     vram: 0x0E000000
     exclusive_ram_id: nisitenma_ichigo_cutscenes
+    subsegments:
+      - [0x00E72A20, asm, overlay/cutscene_09]
+      - [0x00E73770, data, overlay/cutscene_09]
 
   - name: ni_ovl_cutscene_0A
-    type: bin
+    type: code
     # start: 0x00B68BF8
     start: 0x00E739E0
     vram: 0x0E000000
     exclusive_ram_id: nisitenma_ichigo_cutscenes
+    subsegments:
+      - [0x00E739E0, asm, overlay/cutscene_0A]
+      - [0x00E74F50, data, overlay/cutscene_0A]
 
   - name: ni_ovl_cutscene_0B
-    type: bin
+    type: code
     # start: 0x00B6A4E0
     start: 0x00E759D0
     vram: 0x0E000000
     exclusive_ram_id: nisitenma_ichigo_cutscenes
+    subsegments:
+      - [0x00E759D0, asm, overlay/cutscene_0B]
+      - [0x00E76780, data, overlay/cutscene_0B]
 
   - name: ni_ovl_cutscene_0C
-    type: bin
+    type: code
     # start: 0x00B6B610
     start: 0x00E77290
     vram: 0x0E000000
     exclusive_ram_id: nisitenma_ichigo_cutscenes
+    subsegments:
+      - [0x00E77290, asm, overlay/cutscene_0C]
+      - [0x00E787F0, data, overlay/cutscene_0C]
 
   - name: ni_ovl_cutscene_0D
-    type: bin
+    type: code
     # start: 0x00B6D082
     start: 0x00E79940
     vram: 0x0E000000
     exclusive_ram_id: nisitenma_ichigo_cutscenes
+    subsegments:
+      - [0x00E79940, asm, overlay/cutscene_0D]
+      - [0x00E7B480, data, overlay/cutscene_0D]
 
   - name: ni_ovl_cutscene_0E
-    type: bin
+    type: code
     # start: 0x00B6FF42
     start: 0x00E7D4D0
     vram: 0x0E000000
     exclusive_ram_id: nisitenma_ichigo_cutscenes
+    subsegments:
+      - [0x00E7D4D0, asm, overlay/cutscene_0E]
+      - [0x00E7E8A0, data, overlay/cutscene_0E]
 
   - name: ni_ovl_cutscene_0F
-    type: bin
+    type: code
     # start: 0x00B71334
     start: 0x00E7F650
     vram: 0x0E000000
     exclusive_ram_id: nisitenma_ichigo_cutscenes
+    subsegments:
+      - [0x00E7F650, asm, overlay/cutscene_0F]
+      - [0x00E80710, data, overlay/cutscene_0F]
 
   - name: ni_ovl_cutscene_10
-    type: bin
+    type: code
     # start: 0x00B723FC
     start: 0x00E80C90
     vram: 0x0E000000
     exclusive_ram_id: nisitenma_ichigo_cutscenes
+    subsegments:
+      - [0x00E80C90, asm, overlay/cutscene_10]
+      - [0x00E82570, data, overlay/cutscene_10]
 
   - name: ni_ovl_cutscene_11
-    type: bin
+    type: code
     # start: 0x00B73F66
     start: 0x00E830F0
     vram: 0x0E000000
     exclusive_ram_id: nisitenma_ichigo_cutscenes
+    subsegments:
+      - [0x00E830F0, asm, overlay/cutscene_11]
+      - [0x00E84910, data, overlay/cutscene_11]
 
   - name: ni_ovl_cutscene_12
-    type: bin
+    type: code
     # start: 0x00B7534C
     start: 0x00E84AE0
     vram: 0x0E000000
     exclusive_ram_id: nisitenma_ichigo_cutscenes
+    subsegments:
+      - [0x00E84AE0, asm, overlay/cutscene_12]
+      - [0x00E85410, data, overlay/cutscene_12]
 
   - name: ni_ovl_cutscene_13
-    type: bin
+    type: code
     # start: 0x00B75C54
     start: 0x00E85760
     vram: 0x0E000000
     exclusive_ram_id: nisitenma_ichigo_cutscenes
+    subsegments:
+      - [0x00E85760, asm, overlay/cutscene_13]
+      - [0x00E87410, data, overlay/cutscene_13]
 
   - name: ni_ovl_cutscene_14
-    type: bin
+    type: code
     # start: 0x00B776DC
     start: 0x00E87900
     vram: 0x0E000000
     exclusive_ram_id: nisitenma_ichigo_cutscenes
+    subsegments:
+      - [0x00E87900, asm, overlay/cutscene_14]
+      - [0x00E8A4F0, data, overlay/cutscene_14]
 
   - name: ni_ovl_cutscene_15
-    type: bin
+    type: code
     # start: 0x00B79BFA
     start: 0x00E8AB10
     vram: 0x0E000000
     exclusive_ram_id: nisitenma_ichigo_cutscenes
+    subsegments:
+      - [0x00E8AB10, asm, overlay/cutscene_15]
+      - [0x00E8C5E0, data, overlay/cutscene_15]
 
   - name: ni_ovl_cutscene_16
-    type: bin
+    type: code
     # start: 0x00B7B1FE
     start: 0x00E8C9C0
     vram: 0x0E000000
     exclusive_ram_id: nisitenma_ichigo_cutscenes
+    subsegments:
+      - [0x00E8C9C0, asm, overlay/cutscene_16]
+      - [0x00E8DB80, data, overlay/cutscene_16]
 
   - name: ni_ovl_cutscene_17
-    type: bin
+    type: code
     # start: 0x00B7C486
     start: 0x00E8E980
     vram: 0x0E000000
     exclusive_ram_id: nisitenma_ichigo_cutscenes
+    subsegments:
+      - [0x00E8E980, asm, overlay/cutscene_17]
+      - [0x00E90680, data, overlay/cutscene_17]
 
   - name: ni_ovl_cutscene_18
-    type: bin
+    type: code
     # start: 0x00B7DC7E
     start: 0x00E90DA0
     vram: 0x0E000000
     exclusive_ram_id: nisitenma_ichigo_cutscenes
+    subsegments:
+      - [0x00E90DA0, asm, overlay/cutscene_18]
+      - [0x00E91820, data, overlay/cutscene_18]
 
   - name: ni_ovl_cutscene_19
-    type: bin
+    type: code
     # start: 0x00B7E698
     start: 0x00E91A70
     vram: 0x0E000000
     exclusive_ram_id: nisitenma_ichigo_cutscenes
+    subsegments:
+      - [0x00E91A70, asm, overlay/cutscene_19]
+      - [0x00E93170, data, overlay/cutscene_19]
 
   - name: ni_ovl_cutscene_1A
-    type: bin
+    type: code
     # start: 0x00B7FBE8
     start: 0x00E93800
     vram: 0x0E000000
     exclusive_ram_id: nisitenma_ichigo_cutscenes
+    subsegments:
+      - [0x00E93800, asm, overlay/cutscene_1A]
+      - [0x00E94040, data, overlay/cutscene_1A]
 
   - name: ni_ovl_cutscene_1B
-    type: bin
+    type: code
     # start: 0x00B8031A
     start: 0x00E94170
     vram: 0x0E000000
     exclusive_ram_id: nisitenma_ichigo_cutscenes
+    subsegments:
+      - [0x00E94170, asm, overlay/cutscene_1B]
+      - [0x00E95E30, data, overlay/cutscene_1B]
 
   - name: ni_ovl_cutscene_1C
-    type: bin
+    type: code
     # start: 0x00B82134
     start: 0x00E96D50
     vram: 0x0E000000
     exclusive_ram_id: nisitenma_ichigo_cutscenes
+    subsegments:
+      - [0x00E96D50, asm, overlay/cutscene_1C]
+      - [0x00E97DB0, data, overlay/cutscene_1C]
 
   - name: ni_ovl_cutscene_1E
-    type: bin
+    type: code
     # start: 0x00B8324E
     start: 0x00E98490
     vram: 0x0E000000
     exclusive_ram_id: nisitenma_ichigo_cutscenes
+    subsegments:
+      - [0x00E98490, asm, overlay/cutscene_1E]
+      - [0x00E990C0, data, overlay/cutscene_1E]
 
   - name: ni_ovl_cutscene_1F
-    type: bin
+    type: code
     # start: 0x00B83E5C
     start: 0x00E995F0
     vram: 0x0E000000
     exclusive_ram_id: nisitenma_ichigo_cutscenes
+    subsegments:
+      - [0x00E995F0, asm, overlay/cutscene_1F]
+      - [0x00E9A5C0, data, overlay/cutscene_1F]
 
   - name: ni_ovl_cutscene_21
-    type: bin
+    type: code
     # start: 0x00B84D3E
     start: 0x00E9A950
     vram: 0x0E000000
     exclusive_ram_id: nisitenma_ichigo_cutscenes
+    subsegments:
+      - [0x00E9A950, asm, overlay/cutscene_21]
+      - [0x00E9C8C0, data, overlay/cutscene_21]
 
   - name: ni_ovl_cutscene_22
-    type: bin
+    type: code
     # start: 0x00B86EBC
     start: 0x00E9DB10
     vram: 0x0E000000
     exclusive_ram_id: nisitenma_ichigo_cutscenes
+    subsegments:
+      - [0x00E9DB10, asm, overlay/cutscene_22]
+      - [0x00EA1150, data, overlay/cutscene_22]
 
   - name: ni_ovl_cutscene_23
-    type: bin
+    type: code
     # start: 0x00B8A5F0
     start: 0x00EA2660
     vram: 0x0E000000
     exclusive_ram_id: nisitenma_ichigo_cutscenes
+    subsegments:
+      - [0x00EA2660, asm, overlay/cutscene_23]
+      - [0x00EA40A0, data, overlay/cutscene_23]
 
   - name: ni_ovl_cutscene_24
-    type: bin
+    type: code
     # start: 0x00B8BD92
     start: 0x00EA4460
     vram: 0x0E000000
     exclusive_ram_id: nisitenma_ichigo_cutscenes
+    subsegments:
+      - [0x00EA4460, asm, overlay/cutscene_24]
+      - [0x00EA5460, data, overlay/cutscene_24]
 
   - name: ni_ovl_cutscene_25
-    type: bin
+    type: code
     # start: 0x00B8CC7A
     start: 0x00EA5830
     vram: 0x0E000000
     exclusive_ram_id: nisitenma_ichigo_cutscenes
+    subsegments:
+      - [0x00EA5830, asm, overlay/cutscene_25]
+      - [0x00EA67D0, data, overlay/cutscene_25]
 
   - name: ni_ovl_cutscene_26
-    type: bin
+    type: code
     # start: 0x00B8E04C
     start: 0x00EA76E0
     vram: 0x0E000000
     exclusive_ram_id: nisitenma_ichigo_cutscenes
+    subsegments:
+      - [0x00EA76E0, asm, overlay/cutscene_26]
+      - [0x00EABB20, data, overlay/cutscene_26]
 
   - name: ni_ovl_cutscene_27
-    type: bin
+    type: code
     # start: 0x00B91A06
     start: 0x00EAC470
     vram: 0x0E000000
     exclusive_ram_id: nisitenma_ichigo_cutscenes
+    subsegments:
+      - [0x00EAC470, asm, overlay/cutscene_27]
+      - [0x00EAF6C0, data, overlay/cutscene_27]
 
   - name: ni_ovl_cutscene_28
-    type: bin
+    type: code
     # start: 0x00B94830
     start: 0x00EAFBF0
     vram: 0x0E000000
     exclusive_ram_id: nisitenma_ichigo_cutscenes
+    subsegments:
+      - [0x00EAFBF0, asm, overlay/cutscene_28]
+      - [0x00EB0420, data, overlay/cutscene_28]
 
   - name: ni_ovl_cutscene_29
-    type: bin
+    type: code
     # start: 0x00B94FB0
     start: 0x00EB04C0
     vram: 0x0E000000
     exclusive_ram_id: nisitenma_ichigo_cutscenes
+    subsegments:
+      - [0x00EB04C0, asm, overlay/cutscene_29]
+      - [0x00EB0A50, data, overlay/cutscene_29]
 
   - name: ni_ovl_cutscene_2A
-    type: bin
+    type: code
     # start: 0x00B954FA
     start: 0x00EB0B10
     vram: 0x0E000000
     exclusive_ram_id: nisitenma_ichigo_cutscenes
+    subsegments:
+      - [0x00EB0B10, asm, overlay/cutscene_2A]
+      - [0x00EB17D0, data, overlay/cutscene_2A]
 
   - name: ni_ovl_cutscene_2B
-    type: bin
+    type: code
     # start: 0x00B963CA
     start: 0x00EB2010
     vram: 0x0E000000
     exclusive_ram_id: nisitenma_ichigo_cutscenes
+    subsegments:
+      - [0x00EB2010, asm, overlay/cutscene_2B]
+      - [0x00EB3300, data, overlay/cutscene_2B]
 
   - name: ni_ovl_cutscene_2C
-    type: bin
+    type: code
     # start: 0x00B97AE4
     start: 0x00EB3DB0
     vram: 0x0E000000
     exclusive_ram_id: nisitenma_ichigo_cutscenes
+    subsegments:
+      - [0x00EB3DB0, asm, overlay/cutscene_2C]
+      - [0x00EB5530, data, overlay/cutscene_2C]
 
   - name: ni_ovl_cutscene_2D
-    type: bin
+    type: code
     # start: 0x00B9A01A
     start: 0x00EB6D10
     vram: 0x0E000000
     exclusive_ram_id: nisitenma_ichigo_cutscenes
+    subsegments:
+      - [0x00EB6D10, asm, overlay/cutscene_2D]
+      - [0x00EB8B60, data, overlay/cutscene_2D]
 
   - name: ni_ovl_cutscene_2E
-    type: bin
+    type: code
     # start: 0x00B9C88A
     start: 0x00EBA860
     vram: 0x0E000000
     exclusive_ram_id: nisitenma_ichigo_cutscenes
+    subsegments:
+      - [0x00EBA860, asm, overlay/cutscene_2E]
+      - [0x00EBD060, data, overlay/cutscene_2E]
 
   - name: ni_ovl_cutscene_32
     type: code
@@ -2891,25 +3214,34 @@ segments:
       - [0x00EC0280, .rodata, overlay/cutscene/demo50/demo50]
 
   - name: ni_ovl_cutscene_33
-    type: bin
+    type: code
     # start: 0x00BA044A
     start: 0x00EC0340
     vram: 0x0E000000
     exclusive_ram_id: nisitenma_ichigo_cutscenes
+    subsegments:
+      - [0x00EC0340, asm, overlay/cutscene_33]
+      - [0x00EC1470, data, overlay/cutscene_33]
 
   - name: ni_ovl_cutscene_34
-    type: bin
+    type: code
     # start: 0x00BA1698
     start: 0x00EC1B50
     vram: 0x0E000000
     exclusive_ram_id: nisitenma_ichigo_cutscenes
+    subsegments:
+      - [0x00EC1B50, asm, overlay/cutscene_34]
+      - [0x00EC2E80, data, overlay/cutscene_34]
 
   - name: ni_ovl_cutscene_35
-    type: bin
+    type: code
     # start: 0x00BA2848
     start: 0x00EC31E0
     vram: 0x0E000000
     exclusive_ram_id: nisitenma_ichigo_cutscenes
+    subsegments:
+      - [0x00EC31E0, asm, overlay/cutscene_35]
+      - [0x00EC3840, data, overlay/cutscene_35]
 
   - name: ni_ovl_cutscene_3C
     type: code
@@ -2923,81 +3255,116 @@ segments:
       - [0x00EC4AE0, .rodata, overlay/cutscene/demo60/demo60]
 
   - name: ni_ovl_cutscene_3D
-    type: bin
+    type: code
     # start: 0x00BA3DF4
     start: 0x00EC4C30
     vram: 0x0E000000
     exclusive_ram_id: nisitenma_ichigo_cutscenes
+    subsegments:
+      - [0x00EC4C30, asm, overlay/cutscene_3D]
+      - [0x00EC6380, data, overlay/cutscene_3D]
 
   - name: ni_ovl_cutscene_3E
-    type: bin
+    type: code
     # start: 0x00BA5B38
     start: 0x00EC74B0
     vram: 0x0E000000
     exclusive_ram_id: nisitenma_ichigo_cutscenes
+    subsegments:
+      - [0x00EC74B0, asm, overlay/cutscene_3E]
+      - [0x00EC8290, data, overlay/cutscene_3E]
 
   - name: ni_ovl_cutscene_3F
-    type: bin
+    type: code
     # start: 0x00BA6A4A
     start: 0x00EC8940
     vram: 0x0E000000
     exclusive_ram_id: nisitenma_ichigo_cutscenes
+    subsegments:
+      - [0x00EC8940, asm, overlay/cutscene_3F]
+      - [0x00ECA1D0, data, overlay/cutscene_3F]
 
   - name: ni_ovl_cutscene_44
-    type: bin
+    type: code
     # start: 0x00BA83A2
     start: 0x00ECACC0
     vram: 0x0E000000
     exclusive_ram_id: nisitenma_ichigo_cutscenes
+    subsegments:
+      - [0x00ECACC0, asm, overlay/cutscene_44]
+      - [0x00ECC490, data, overlay/cutscene_44]
 
   - name: ni_ovl_cutscene_45
-    type: bin
+    type: code
     # start: 0x00BAB4F4
     start: 0x00ECFA00
     vram: 0x0E000000
     exclusive_ram_id: nisitenma_ichigo_cutscenes
+    subsegments:
+      - [0x00ECFA00, asm, overlay/cutscene_45]
+      - [0x00ED0A20, data, overlay/cutscene_45]
 
   - name: ni_ovl_cutscene_52
-    type: bin
+    type: code
     # start: 0x00BAC4A2
     start: 0x00ED0E40
     vram: 0x0E000000
     exclusive_ram_id: nisitenma_ichigo_cutscenes
+    subsegments:
+      - [0x00ED0E40, asm, overlay/cutscene_53]
+      - [0x00ED1A80, data, overlay/cutscene_53]
 
   - name: ni_ovl_cutscene_54
-    type: bin
+    type: code
     # start: 0x00BAD290
     start: 0x00ED2280
     vram: 0x0E000000
     exclusive_ram_id: nisitenma_ichigo_cutscenes
+    subsegments:
+      - [0x00ED2280, asm, overlay/cutscene_54]
+      - [0x00ED3460, data, overlay/cutscene_54]
 
   - name: ni_ovl_cutscene_55
-    type: bin
+    type: code
     # start: 0x00BAE680
     start: 0x00ED3FD0
     vram: 0x0E000000
     exclusive_ram_id: nisitenma_ichigo_cutscenes
+    subsegments:
+      - [0x00ED3FD0, asm, overlay/cutscene_55]
+      - [0x00ED4E60, data, overlay/cutscene_55]
 
   - name: ni_ovl_cutscene_56
-    type: bin
+    type: code
     # start: 0x00BAF718
     start: 0x00ED54C0
     vram: 0x0E000000
     exclusive_ram_id: nisitenma_ichigo_cutscenes
+    subsegments:
+      - [0x00ED54C0, asm, overlay/cutscene_56]
+      - [0x00ED6190, data, overlay/cutscene_56]
 
   - name: ni_ovl_cutscene_57
-    type: bin
+    type: code
     # start: 0x00BB0712
     start: 0x00ED6BA0
     vram: 0x0E000000
     exclusive_ram_id: nisitenma_ichigo_cutscenes
+    subsegments:
+      - [0x00ED6BA0, asm, overlay/cutscene_57]
+      - [0x00ED77F0, data, overlay/cutscene_57]
 
   - name: ni_ovl_cutscene_63
-    type: bin
+    type: code
     # start: 0x00BB1352
     start: 0x00ED7B80
     vram: 0x0E000000
     exclusive_ram_id: nisitenma_ichigo_cutscenes
+    subsegments:
+      - [0x00ED7B80, asm, overlay/cutscene_63]
+      - [0x00ED8DF0, data, overlay/cutscene_63]
+      - [0x00EDA570, rodata, overlay/cutscene_63]
+
   # End of compressed files
 
   # - [0x00BB2D88] # Padding start
