@@ -3,6 +3,7 @@
  */
 
 #include "cv64.h"
+#include "gfx/model.h"
 #include "system_work.h"
 
 // Reads a rectangular block of pixels from the active framebuffer into `dest`
@@ -53,7 +54,7 @@ s32 menuButton_selectNextOption(s32* option, s16* selection_delay_timer, s16 num
 
     ret = 0;
     if (moveSelectionCursor(CONT_UP)) {
-        *option -= 1;
+        *option--;
 
         if (*option < 0) {
             ret = -1;
@@ -67,7 +68,7 @@ s32 menuButton_selectNextOption(s32* option, s16* selection_delay_timer, s16 num
     }
 
     if (moveSelectionCursor(CONT_DOWN)) {
-        *option += 1;
+        *option++;
 
         if (*option >= num_options) {
             ret = 1;

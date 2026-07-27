@@ -71,7 +71,8 @@ typedef enum MenuID {
 } MenuID;
 
 extern void end_master_display_list(void);
-extern s32 menuButton_selectNextOption(s32* option, s16* param_2, s16 number_of_options);
+s32 menuButton_selectNextOption(s32* option, s16* selection_delay_timer, s16 num_options);
+u32 moveSelectionCursor(u32 button);
 extern void func_800010A0_1CA0(void);
 extern void func_8001248C_1308C(void);
 extern void func_8000C6D0(void);
@@ -91,8 +92,9 @@ extern void player_status_init(void);
 #define ARRAY_START(arr)        &arr[0]                             // Get start address of array
 #define ARRAY_END(arr)          &arr[ARRAY_COUNT(arr)]              // Get end address of array
 
-#define SCREEN_WIDTH  320
-#define SCREEN_HEIGHT 240
+#define SCREEN_WIDTH     320
+#define SCREEN_HEIGHT    240
+#define NUM_FRAMEBUFFERS 3
 
 // Text IDs for Forest of Silence
 #define FOREST_LOCKED_DOOR 1
@@ -182,5 +184,7 @@ extern void player_status_init(void);
     )
 
 extern const u32 MENU_RED_BACKGROUND_DL;
+
+extern u16 gFramebuffers[NUM_FRAMEBUFFERS][SCREEN_WIDTH * SCREEN_HEIGHT];
 
 #endif // CV64_H

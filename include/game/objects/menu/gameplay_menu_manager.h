@@ -65,7 +65,6 @@ void GameplayMenuManager_outsideMenuLoop(GameplayMenuManager* self);
 void GameplayMenuManager_initMenu(GameplayMenuManager* self);
 void GameplayMenuManager_insideMenuLoop(GameplayMenuManager* self);
 void GameplayMenuManager_exitMenu(GameplayMenuManager* self);
-u32 moveSelectionCursor(u32 button);
 
 MfdsState* GameplayCommonTextbox_getIfClosed(void);
 MfdsState* GameplayCommonTextbox_close(void);

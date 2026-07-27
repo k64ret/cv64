@@ -1644,6 +1644,17 @@ D_8018BDF0      = 0x8018BDF0; // type:asciz segment:common size:0x0A
 // End of src/common/page_work.c ===============================================
 
 
+// src/common/BDFE0.c ======================================================
+
+// .text
+copyFramebufferRect         = 0x8013ADF0;  // type:func segment:common
+menuButton_selectNextOption = 0x8013B00C;  // type:func segment:common
+Model_moveWithController    = 0x8013B108;  // type:func segment:common
+Model_copyPositionalParams  = 0x8013B270;  // type:func segment:common
+
+// End of src/common/BDFE0.c ===============================================
+
+
 // src/common/skybox_common_actors.c ===========================================
 
 // .text
@@ -2333,7 +2344,6 @@ renonShop_calcItemList = 0x80139f1c;
 renonShop_calcBuyScreen = 0x8013a4f4;
 renonShop_displayTextWhenLeavingBuyScreen = 0x8013aa18;
 renonShop_destroy = 0x8013ab84;
-menuButton_selectNextOption = 0x8013b00c;
 allocStruct = 0x8013b2c0;
 getNumberOfItemsInRenonShop = 0x8013c598;
 createScrollState = 0x8013cc20;
