@@ -394,12 +394,12 @@ void characterSelect_selectOption(characterSelect* self) {
         if (work->current_character_option == work->previous_character_option) {
             // Moving the lens to the left
             if ((work->current_character_option == work->previous_character_option) &&
-                (CONT_BTNS_PRESSED(CONT_0, L_JPAD) || (sys.controllers[0].joy_x < -25))) {
+                (CONT_BTNS_PRESSED(CONT_0, L_JPAD) || (CONT_JOY_X(CONT_0) < -25))) {
                 work->current_character_option--;
             }
             // Moving the lens to the right
             if ((work->current_character_option == work->previous_character_option) &&
-                (CONT_BTNS_PRESSED(CONT_0, R_JPAD) || (sys.controllers[0].joy_x >= 26))) {
+                (CONT_BTNS_PRESSED(CONT_0, R_JPAD) || (CONT_JOY_X(CONT_0) >= 26))) {
                 work->current_character_option++;
             }
             characterSelect_determineCharacterToSelect(
@@ -409,7 +409,7 @@ void characterSelect_selectOption(characterSelect* self) {
             if (CONT_BTNS_PRESSED(CONT_0, A_BUTTON) ||
                 CONT_BTNS_PRESSED(CONT_0, (START_BUTTON | RECENTER_BUTTON))) {
                 // Apply alternate costume if moving up + if the appropiate Special jewels were obtained
-                if (CONT_BTNS_PRESSED(CONT_0, U_JPAD) || (sys.controllers[0].joy_y >= 26)) {
+                if (CONT_BTNS_PRESSED(CONT_0, U_JPAD) || (CONT_JOY_Y(CONT_0) >= 26)) {
                     // Make sure the player has finished the game before trying to assign the alternate costume
                     if (((BITS_HAS(
                               sys.SaveStruct_gameplay.flags, SAVE_FLAG_REINDHART_GOOD_ENDING

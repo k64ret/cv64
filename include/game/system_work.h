@@ -228,5 +228,7 @@ extern system_work sys;
          (GET_CONTROLLER(2).btns_pressed) | (GET_CONTROLLER(3).btns_pressed)),                     \
         (buttons)                                                                                  \
     )
+#define CONT_JOY_X(controller_id) (GET_CONTROLLER(controller_id).joy_x)
+#define CONT_JOY_Y(controller_id) (GET_CONTROLLER(controller_id).joy_y)
 
 #endif

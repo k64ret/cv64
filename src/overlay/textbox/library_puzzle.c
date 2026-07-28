@@ -462,7 +462,7 @@ s32 select_next_option(
      * `*selected_options_IDs & (1 << (*highlighted_option))` makes sure
      * to skip selecting the already-selected options
      */
-    if ((CONT_BTNS_PRESSED(CONT_0, L_JPAD)) || (sys.controllers[0].joy_x < -25)) {
+    if ((CONT_BTNS_PRESSED(CONT_0, L_JPAD)) || (CONT_JOY_X(CONT_0) < -25)) {
         if (*selection_delay_timer == 0) {
             *selection_delay_timer = LIBRARY_PUZZLE_SELECTION_DELAY;
             do {
@@ -474,7 +474,7 @@ s32 select_next_option(
         } else {
             (*selection_delay_timer)--;
         }
-    } else if ((CONT_BTNS_PRESSED(CONT_0, R_JPAD)) || (sys.controllers[0].joy_x >= 26)) {
+    } else if ((CONT_BTNS_PRESSED(CONT_0, R_JPAD)) || (CONT_JOY_X(CONT_0) >= 26)) {
         if (*selection_delay_timer == 0) {
             *selection_delay_timer = LIBRARY_PUZZLE_SELECTION_DELAY;
             do {

@@ -529,16 +529,16 @@ u32 moveSelectionCursor(u32 button) {
         /**
          * Check for the joystick directional inputs
          */
-        if (GET_CONTROLLER(CONT_0).joy_y > 40) {
+        if (CONT_JOY_Y(CONT_0) > 40) {
             BITS_SET(selection_input, U_JPAD);
         }
-        if (GET_CONTROLLER(CONT_0).joy_y < -40) {
+        if (CONT_JOY_Y(CONT_0) < -40) {
             BITS_SET(selection_input, D_JPAD);
         }
-        if (GET_CONTROLLER(CONT_0).joy_x > 40) {
+        if (CONT_JOY_X(CONT_0) > 40) {
             BITS_SET(selection_input, R_JPAD);
         }
-        if (GET_CONTROLLER(CONT_0).joy_x < -40) {
+        if (CONT_JOY_X(CONT_0) < -40) {
             BITS_SET(selection_input, L_JPAD);
         }
 
