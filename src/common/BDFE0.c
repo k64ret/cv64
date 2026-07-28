@@ -31,8 +31,6 @@ void copyFramebufferRect(s32 arg0, s16 left, s16 top, s16 right, s16 bottom, u16
     }
 }
 
-// https://decomp.me/scratch/viWnX
-#ifdef NON_MATCHING
 /**
  * Returns:
  *  0:  No movement happened
@@ -52,9 +50,8 @@ s32 menuButton_selectNextOption(s32* option, s16* selection_delay_timer, s16 num
         roll_over = TRUE;
     }
 
-    ret = 0;
     if (moveSelectionCursor(CONT_UP)) {
-        *option--;
+        *option -= 1;
 
         if (*option < 0) {
             ret = -1;
@@ -67,8 +64,11 @@ s32 menuButton_selectNextOption(s32* option, s16* selection_delay_timer, s16 num
         }
     }
 
+    if (ret) {
+    }
+
     if (moveSelectionCursor(CONT_DOWN)) {
-        *option++;
+        *option += 1;
 
         if (*option >= num_options) {
             ret = 1;
@@ -83,9 +83,6 @@ s32 menuButton_selectNextOption(s32* option, s16* selection_delay_timer, s16 num
 
     return ret;
 }
-#else
-    #pragma GLOBAL_ASM("../asm/nonmatchings/common/BDFE0/menuButton_selectNextOption.s")
-#endif
 
 void Model_moveWithController(u8 cont_number, Model* model) {
     if (CONT_BTNS_HELD(cont_number, Z_TRIG)) {
