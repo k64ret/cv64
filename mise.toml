@@ -1,10 +1,13 @@
+[settings]
+lockfile = true
+
 [tools]
-clangd = '20.1'
-cmake = '3.28'
-make = '4.4'
-ninja = '1.12'
-python = '3.11'
-usage = '2.0'
+cmake = "latest"
+"github:clangd/clangd" = "latest"
+make = "latest"
+ninja = "latest"
+python = "latest"
+usage = "latest"
 
 [task_config]
 includes = ['scripts']
