@@ -2,7 +2,7 @@
 lockfile = true
 
 [tools]
-cmake = "latest"
+cmake = "3"
 "github:clangd/clangd" = "latest"
 "github:simonlindholm/asm-processor" = "latest"
 make = "latest"

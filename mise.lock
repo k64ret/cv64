@@ -71,9 +71,9 @@ url = "https://conda.anaconda.org/conda-forge/win-64/ucrt-10.0.26100.0-h57928b3_
 checksum = "sha256:3005729dce6f3d3f5ec91dfc49fc75a0095f9cd23bab49efb899657297ac91a5"
 
 [[tools.cmake]]
-version = "4.4.3"
+version = "3.28.1"
 backend = "asdf:cmake"
-specifiers = ["latest"]
+specifiers = ["3"]
 
 [[tools."github:clangd/clangd"]]
 version = "22.1.6"
