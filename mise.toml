@@ -4,9 +4,11 @@ lockfile = true
 [tools]
 cmake = "latest"
 "github:clangd/clangd" = "latest"
+"github:simonlindholm/asm-processor" = "latest"
 make = "latest"
 ninja = "latest"
 python = "latest"
+"pipx:splat64" = { version = "latest", extras = "mips" }
 usage = "latest"
 
 [task_config]

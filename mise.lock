@@ -115,6 +115,46 @@ checksum = "sha256:ce54f16e0b4fd76d450eeda9664420b195360b73febcfe40e661108fa57f2
 url = "https://github.com/clangd/clangd/releases/download/22.1.6/clangd-windows-22.1.6.zip"
 url_api = "https://api.github.com/repos/clangd/clangd/releases/assets/432519407"
 
+[[tools."github:simonlindholm/asm-processor"]]
+version = "1.0.1"
+backend = "github:simonlindholm/asm-processor"
+specifiers = ["latest"]
+
+[tools."github:simonlindholm/asm-processor"."platforms.linux-arm64"]
+checksum = "sha256:8d2fcf12dafaae642de38e424032f3be78222a086993b8384612466aa0d0c5c8"
+url = "https://github.com/simonlindholm/asm-processor/releases/download/1.0.1/asm-processor-aarch64-unknown-linux-gnu.tar.xz"
+url_api = "https://api.github.com/repos/simonlindholm/asm-processor/releases/assets/287807868"
+
+[tools."github:simonlindholm/asm-processor"."platforms.linux-arm64-musl"]
+checksum = "sha256:8d2fcf12dafaae642de38e424032f3be78222a086993b8384612466aa0d0c5c8"
+url = "https://github.com/simonlindholm/asm-processor/releases/download/1.0.1/asm-processor-aarch64-unknown-linux-gnu.tar.xz"
+url_api = "https://api.github.com/repos/simonlindholm/asm-processor/releases/assets/287807868"
+
+[tools."github:simonlindholm/asm-processor"."platforms.linux-x64"]
+checksum = "sha256:9385a83c5f85a76777755d054c19f95c5dd8db4477822c7c6b41cd5dedf9e8e7"
+url = "https://github.com/simonlindholm/asm-processor/releases/download/1.0.1/asm-processor-x86_64-unknown-linux-gnu.tar.xz"
+url_api = "https://api.github.com/repos/simonlindholm/asm-processor/releases/assets/287807878"
+
+[tools."github:simonlindholm/asm-processor"."platforms.linux-x64-musl"]
+checksum = "sha256:9385a83c5f85a76777755d054c19f95c5dd8db4477822c7c6b41cd5dedf9e8e7"
+url = "https://github.com/simonlindholm/asm-processor/releases/download/1.0.1/asm-processor-x86_64-unknown-linux-gnu.tar.xz"
+url_api = "https://api.github.com/repos/simonlindholm/asm-processor/releases/assets/287807878"
+
+[tools."github:simonlindholm/asm-processor"."platforms.macos-arm64"]
+checksum = "sha256:4c28a3f40502325d0ac284024b8aba24021595886982969e685d12f4ccb406f4"
+url = "https://github.com/simonlindholm/asm-processor/releases/download/1.0.1/asm-processor-aarch64-apple-darwin.tar.xz"
+url_api = "https://api.github.com/repos/simonlindholm/asm-processor/releases/assets/287807869"
+
+[tools."github:simonlindholm/asm-processor"."platforms.macos-x64"]
+checksum = "sha256:07f2985603d3da4d8822cfd5fb9101a7cb6ca357c48e521e014ccb82d97a4c2b"
+url = "https://github.com/simonlindholm/asm-processor/releases/download/1.0.1/asm-processor-x86_64-apple-darwin.tar.xz"
+url_api = "https://api.github.com/repos/simonlindholm/asm-processor/releases/assets/287807872"
+
+[tools."github:simonlindholm/asm-processor"."platforms.windows-x64"]
+checksum = "sha256:21a80e7af7fce8a58df554142300eb7a0ed98b5ed590d57a2f9a0044daa5e218"
+url = "https://github.com/simonlindholm/asm-processor/releases/download/1.0.1/asm-processor-x86_64-pc-windows-msvc.zip"
+url_api = "https://api.github.com/repos/simonlindholm/asm-processor/releases/assets/287807874"
+
 [[tools.jq]]
 version = "1.7"
 backend = "aqua:jqlang/jq"
@@ -263,6 +303,14 @@ checksum = "sha256:07fc8261b42b20e71d1720b39068c2e14ffcee6396b76fb7a795fb460b78d
 url = "https://github.com/ninja-build/ninja/releases/download/v1.13.2/ninja-win.zip"
 url_api = "https://api.github.com/repos/ninja-build/ninja/releases/assets/318863577"
 
+[[tools."pipx:splat64"]]
+version = "0.50.0"
+backend = "pipx:splat64"
+specifiers = ["latest"]
+
+[tools."pipx:splat64".options]
+extras = "mips"
+
 [[tools.python]]
 version = "3.14.7"
 backend = "core:python"
@@ -312,33 +360,40 @@ specifiers = ["latest"]
 checksum = "sha256:d4b65dfac2073007bb77cc8d9248900b59d4388eaaa73eb6137c8faba0ff030f"
 url = "https://github.com/jdx/usage/releases/download/v6.9.1/usage-aarch64-unknown-linux-gnu.tar.gz"
 url_api = "https://api.github.com/repos/jdx/usage/releases/assets/563242995"
+signer = "sigstore-oidc:https://github.com/jdx/usage/.github/workflows/publish-cli.yml"
 
 [tools.usage."platforms.linux-arm64-musl"]
 checksum = "sha256:313143922a8ce05214ef4b55b9ae0f7ff5585da966bba65224c7bab3428c5aef"
 url = "https://github.com/jdx/usage/releases/download/v6.9.1/usage-aarch64-unknown-linux-musl.tar.gz"
 url_api = "https://api.github.com/repos/jdx/usage/releases/assets/563244504"
+signer = "sigstore-oidc:https://github.com/jdx/usage/.github/workflows/publish-cli.yml"
 
 [tools.usage."platforms.linux-x64"]
 checksum = "sha256:8e1cafb10fe2ddee8c18076c09dea4c89ee2d25ac2c0ec5158fda5b8d4e02222"
 url = "https://github.com/jdx/usage/releases/download/v6.9.1/usage-x86_64-unknown-linux-gnu.tar.gz"
 url_api = "https://api.github.com/repos/jdx/usage/releases/assets/563244013"
+signer = "sigstore-oidc:https://github.com/jdx/usage/.github/workflows/publish-cli.yml"
 
 [tools.usage."platforms.linux-x64-musl"]
 checksum = "sha256:3132b763f01e3cd346ebfedeff2e4e78f9a098eec1f3754b6db4ccfcda79aaf2"
 url = "https://github.com/jdx/usage/releases/download/v6.9.1/usage-x86_64-unknown-linux-musl.tar.gz"
 url_api = "https://api.github.com/repos/jdx/usage/releases/assets/563244740"
+signer = "sigstore-oidc:https://github.com/jdx/usage/.github/workflows/publish-cli.yml"
 
 [tools.usage."platforms.macos-arm64"]
 checksum = "sha256:ddbb2c29ec16aca2cb44e0b0f64ba204b603ec50ed773ffda3db723e9aae73fe"
 url = "https://github.com/jdx/usage/releases/download/v6.9.1/usage-universal-apple-darwin.tar.gz"
 url_api = "https://api.github.com/repos/jdx/usage/releases/assets/563246662"
+signer = "sigstore-oidc:https://github.com/jdx/usage/.github/workflows/publish-cli.yml"
 
 [tools.usage."platforms.macos-x64"]
 checksum = "sha256:ddbb2c29ec16aca2cb44e0b0f64ba204b603ec50ed773ffda3db723e9aae73fe"
 url = "https://github.com/jdx/usage/releases/download/v6.9.1/usage-universal-apple-darwin.tar.gz"
 url_api = "https://api.github.com/repos/jdx/usage/releases/assets/563246662"
+signer = "sigstore-oidc:https://github.com/jdx/usage/.github/workflows/publish-cli.yml"
 
 [tools.usage."platforms.windows-x64"]
 checksum = "sha256:932008a3f68f0b72fb2012443980d04b01029af9ba2d31a5af0601a76e7e5870"
 url = "https://github.com/jdx/usage/releases/download/v6.9.1/usage-x86_64-pc-windows-msvc.zip"
 url_api = "https://api.github.com/repos/jdx/usage/releases/assets/563249888"
+signer = "sigstore-oidc:https://github.com/jdx/usage/.github/workflows/publish-cli.yml"
