@@ -30,6 +30,19 @@ project(
 include(cmake/PreventInSourceBuilds.cmake)
 include(cmake/CreateBinaryObjects.cmake)
 
+include(Splat)
+
+find_program(SPLAT_EXECUTABLE NAMES splat REQUIRED)
+
+splat_add_target(
+  splat
+  EXECUTABLE
+  "${SPLAT_EXECUTABLE}"
+  CONFIG
+  "${SPLAT_CONFIG}"
+  ROM
+  "${BASEROM_UNCOMPRESSED}")
+
 # set(GENERATED_ASM_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/asm/header.s ${CMAKE_CURRENT_SOURCE_DIR}/asm/1000.s
 # ${CMAKE_CURRENT_SOURCE_DIR}/asm/1370.s ${CMAKE_CURRENT_SOURCE_DIR}/asm/data/90920.data.s
 # ${CMAKE_CURRENT_SOURCE_DIR}/asm/data/A8420.bss.s) set(C_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/src/gamestate.c)
@@ -40,6 +53,8 @@ include(cmake/CreateBinaryObjects.cmake)
 # ${CMAKE_BINARY_DIR}/splat.log COMMENT "Split ${BASEROM}" VERBATIM)
 
 add_executable(${TARGET} ${BIN_OBJECTS})
+
+add_dependencies(${TARGET} splat)
 
 add_subdirectory(asm)
 add_subdirectory(src)

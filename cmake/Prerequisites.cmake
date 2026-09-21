@@ -8,7 +8,8 @@ if(Python_FOUND)
     OUTPUT_FILE ${CMAKE_BINARY_DIR}/pip.log)
 
   # Install pre-commit hooks
-  execute_process(COMMAND pre-commit install WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
+
+  # execute_process(COMMAND pre-commit install WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
 
   # Decompress baserom
   execute_process(
@@ -22,10 +23,9 @@ if(Python_FOUND)
   execute_process(COMMAND ${CMAKE_COMMAND} --build ${TOOLS_DIR}/Torch/build WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
 
   # Run Splat
-  execute_process(
-    COMMAND ${Python_EXECUTABLE} -m splat split --verbose ${SPLAT_CONFIG}
-    OUTPUT_FILE ${CMAKE_BINARY_DIR}/splat.log
-    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
+
+  # execute_process(COMMAND ${Python_EXECUTABLE} -m splat split --verbose ${SPLAT_CONFIG} OUTPUT_FILE
+  # ${CMAKE_BINARY_DIR}/splat.log WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
 
   # Run Torch Extract assets as source code files
   execute_process(

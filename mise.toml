@@ -8,7 +8,7 @@ cmake = "3"
 make = "latest"
 ninja = "latest"
 python = "latest"
-"pipx:splat64" = { version = "latest", extras = "mips" }
+"pipx:splat64" = { version = "0.40", extras = "mips" }
 usage = "latest"
 
 [task_config]

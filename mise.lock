@@ -304,9 +304,9 @@ url = "https://github.com/ninja-build/ninja/releases/download/v1.13.2/ninja-win.
 url_api = "https://api.github.com/repos/ninja-build/ninja/releases/assets/318863577"
 
 [[tools."pipx:splat64"]]
-version = "0.50.0"
+version = "0.40.1"
 backend = "pipx:splat64"
-specifiers = ["latest"]
+specifiers = ["0.40"]
 
 [tools."pipx:splat64".options]
 extras = "mips"
